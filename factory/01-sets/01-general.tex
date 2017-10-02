@@ -1,0 +1,341 @@
+\documentclass[12pt,a4paper]{article}
+
+% == FOR DOC AND TESTS - START == %
+
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{enumitem}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+
+\usepackage{pgffor}
+\usepackage{xstring}
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+% Technical IDs
+\newwrite\tempfile
+
+\immediate\openout\tempfile=x-\jobname.macros-x.txt
+
+\AtEndDocument{\immediate\closeout\tempfile}
+
+\newcommand\IDconstant[1]{%
+    \immediate\write\tempfile{constant@#1}%
+}
+
+\makeatletter
+	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
+	
+    \newcommand\@IDmacroNoStar[3]{%
+        \texttt{%
+        	\textbackslash#1%
+        	\IfStrEq{#2}{0}{}{%
+        		\,\,[#2 Option%
+				\IfStrEq{#2}{1}{}{s}]%
+			}%
+    	    \,\,(#3 Argument%
+				\IfStrEq{#3}{1}{}{s})%
+	   	}
+        \immediate\write\tempfile{macro@#1@#2@#3}%
+    }
+
+    \newcommand\@IDmacroStar[2]{%
+        \@IDmacroNoStar{#1}{0}{#2}%
+    }
+
+	\newcommand\@IDoptarg[2]{%
+    	\vspace{0.5em}
+		--- \texttt{#1 \##2:}%
+	}
+
+	\newcommand\IDoption[1]{%
+    	\@IDoptarg{Option}{#1}%
+	}
+
+	\newcommand\IDarg[1]{%
+    	\@IDoptarg{Argument}{#1}%
+	}
+\makeatother
+
+% == FOR DOC AND TESTS - END == %
+
+
+% == EXTRAS == %
+
+\newcommand\ascii{\texttt{ASCII}}
+
+
+% == PACKAGES USED == %
+
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{yhmath}
+
+\usepackage{graphicx}
+\usepackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Source for mathpzc : page 68 de ''The Comprehensive LATEX Symbol List''
+
+% Only the upper case letters
+
+\newcommand\probaset[1]{
+	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+		\mathcal{#1}
+	}{%
+		\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+	}
+}
+
+% With ''mathscr'', we only have the upper case letters.
+% So we use the following trick for lower case letters.
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand\geoset[1]{
+	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+		\mathscr{#1}
+	}{%
+		\IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
+			\mathpzc{#1}
+		}{%
+			\PackageError{lymath}{Command << fieldset >> only accepts single h, k or upper case letter}%
+		}
+	}
+}
+
+% Only the upper case letters and also h and k.
+%
+% With ''\mathbb'', there are only the upper case letters.
+
+\newcommand\fieldset[1]{
+	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
+		\mathds{#1}
+	}{%
+		\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
+	}
+}
+
+\newcommand\setpos{\text{\bf{\tiny+}}}
+\newcommand\setneg{\vphantom{\setpos}-}
+\newcommand\setstar{\text{*}}
+
+
+\makeatletter
+	\newcommand\specialset{\@ifstar{\@specialsetStared}{\@specialsetUnstared}}
+
+	\newcommand\@specialsetUnstared[2]{
+		\IfEqCase{#2}{
+			{s}{ #1^{\setstar} }
+			{n}{ #1^{\phantom{\setstar}}_{\setneg} }
+			{p}{ #1^{\phantom{\setstar}}_{\setpos} }
+			{sn}{ #1^{\setstar}_{\setneg} }
+			{sp}{ #1^{\setstar}_{\setpos} }
+		}
+	}
+
+	\newcommand\@specialsetStared[2]{
+		\IfEqCase{#2}{
+			{s}{ #1_{\neq 0} }
+			{n}{ #1_{\le 0} }
+			{p}{ #1_{\ge 0} }
+			{sn}{ #1_{< 0} }
+			{sp}{ #1_{> 0} }
+		}
+	}
+\makeatother
+
+% The empty set
+
+\newcommand\nullset{\ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}}
+
+% List of classical sets
+
+\newcommand\NN{\ensuremath{\fieldset{N}}}
+\newcommand\NNs{\ensuremath{\specialset{\NN}{s}}}
+
+\newcommand\ZZ{\ensuremath{\fieldset{Z}}}
+\newcommand\ZZp{\ensuremath{\specialset{\ZZ}{p}}}
+\newcommand\ZZn{\ensuremath{\specialset{\ZZ}{n}}}
+\newcommand\ZZs{\ensuremath{\specialset{\ZZ}{s}}}
+\newcommand\ZZsn{\ensuremath{\specialset{\ZZ}{sn}}}
+\newcommand\ZZsp{\ensuremath{\specialset{\ZZ}{sp}}}
+
+\newcommand\DD{\ensuremath{\fieldset{D}}}
+\newcommand\DDp{\ensuremath{\specialset{\DD}{p}}}
+\newcommand\DDn{\ensuremath{\specialset{\DD}{n}}}
+\newcommand\DDs{\ensuremath{\specialset{\DD}{s}}}
+\newcommand\DDsn{\ensuremath{\specialset{\DD}{sn}}}
+\newcommand\DDsp{\ensuremath{\specialset{\DD}{sp}}}
+
+\newcommand\QQ{\ensuremath{\fieldset{Q}}}
+\newcommand\QQp{\ensuremath{\specialset{\QQ}{p}}}
+\newcommand\QQn{\ensuremath{\specialset{\QQ}{n}}}
+\newcommand\QQs{\ensuremath{\specialset{\QQ}{s}}}
+\newcommand\QQsn{\ensuremath{\specialset{\QQ}{sn}}}
+\newcommand\QQsp{\ensuremath{\specialset{\QQ}{sp}}}
+
+\newcommand\RR{\ensuremath{\fieldset{R}}}
+\newcommand\RRp{\ensuremath{\specialset{\RR}{p}}}
+\newcommand\RRn{\ensuremath{\specialset{\RR}{n}}}
+\newcommand\RRs{\ensuremath{\specialset{\RR}{s}}}
+\newcommand\RRsn{\ensuremath{\specialset{\RR}{sn}}}
+\newcommand\RRsp{\ensuremath{\specialset{\RR}{sp}}}
+
+\newcommand\CC{\ensuremath{\fieldset{C}}}
+\newcommand\CCs{\ensuremath{\specialset{\CC}{s}}}
+
+\newcommand\HH{\ensuremath{\fieldset{H}}}
+\newcommand\HHs{\ensuremath{\specialset{\HH}{s}}}
+
+\newcommand\OO{\ensuremath{\fieldset{O}}}
+\newcommand\OOs{\ensuremath{\specialset{\OO}{s}}}
+
+
+
+\begin{document}
+
+\section{Different kind of sets}
+
+    \subsection{Sets for geometry}
+
+		\subsubsection{Example of use}
+
+\begin{tcblisting}{}
+You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$
+but you can't write things like \verb+$\geoset{ABC}$+.
+\end{tcblisting}
+
+
+		\subsubsection{Technical IDs}
+
+\IDmacro*{geoset}{1}
+
+\IDarg{1} one single \ascii{} letter indicating a geometrical set.
+
+
+
+    \subsection{Sets for probability}
+
+		\subsubsection{Example of use}
+
+\begin{tcblisting}{}
+You can semantically write $\probaset{E}$ and $\probaset{G}$
+but you can't write things like \verb+$\probaset{ABC}$+.
+\end{tcblisting}
+
+
+		\subsubsection{Technical IDs}
+
+\IDmacro*{probaset}{1}
+
+\IDarg{1} one single \ascii{} upper letter indicating a probabilistic set.
+
+
+
+    \subsection{Sets for rings and fields theory}
+
+		\subsubsection{Example of use}
+
+\begin{tcblisting}{}
+You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ 
+and $\fieldset{k}$ but you can't write things like \verb+$\fieldset{ABC}$+.
+\end{tcblisting}
+
+
+		\subsubsection{Technical IDs}
+
+\IDmacro*{fieldset}{1}
+
+\IDarg{1} either one of the letters \texttt{h} and \texttt{k}, or one single \ascii{} upper letter indicating a field or ring like set.
+
+
+
+    \subsection{Classical sets}
+
+\begin{tcblisting}{}
+You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
+$\HH$ and $\OO$.
+\end{tcblisting}
+
+
+
+    \subsection{Classical sets with suffixes}
+
+\begin{tcblisting}{}
+It is easy to type $\RRn$, $\RRp$, $\RRs$, $\RRsn$ and $\RRsp$.
+\end{tcblisting}
+
+
+We have used suffixes \verb+n+ for \verb+Negative+, \verb+p+ for \verb+Positive+, and \verb+s+ for \verb+Star+ with the additional composite suffixes \verb+sn+ et \verb+sp+.
+
+\medskip
+
+Note that you can't use \verb+$\CCn$+ for $\specialset{\CC}{n}$ because the set $\CC$ doesn't have any standard powerful ordered structure. Take a look at the next section to see how to write $\specialset{\CC}{n}$ if you need it.
+
+\medskip
+
+The following table shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+
+% == Table of suffixes - START == %
+\newcommand\xx{\phantom{$\times$}}
+\begin{table}[h]
+    \caption{Suffixes}
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c|c}
+  & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
+\hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
+\hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+\hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+\hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+\hline \verb+R+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+\hline \verb+C+ & \xx & \xx & $\times$ & \xx & \xx \\
+\hline \verb+H+ & \xx & \xx & $\times$ & \xx & \xx \\
+\hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
+        \end{tabular}
+    \end{center}
+    \label{default}
+\end{table}
+% == Table of suffixes - END == %
+
+
+
+    \subsection{Suffixes on demand}
+
+		\subsubsection{Example of use}
+
+\begin{tcblisting}{}
+You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$. 
+There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
+\end{tcblisting}
+
+
+		\subsubsection{Technical IDs}
+
+\IDmacro*{specialset}{2}
+
+\IDmacro*{specialset*}{2}
+
+\IDarg{1} the set to be "suffixed".
+
+\IDarg{2} one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+
+\end{document}

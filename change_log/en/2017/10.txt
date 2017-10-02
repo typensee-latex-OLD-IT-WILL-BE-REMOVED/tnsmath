@@ -1,0 +1,5 @@
+==========
+2017-10-02
+==========
+
+**First version version::``0.0.0-beta`` of ¨lymath:** the aim of this ¨latex package is to ease the writings of low level mathematical formulas by using semantic macros.

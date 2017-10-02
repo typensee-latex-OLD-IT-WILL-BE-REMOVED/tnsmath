@@ -1,0 +1,169 @@
+#! /usr/bin/env python3
+
+from mistool.os_use import PPath
+from mistool.string_use import between, joinand
+from orpyste.data import ReadBlock
+
+THIS_DIR = PPath( __file__ ).parent
+TEX_FILE = THIS_DIR / '01-general.tex'
+
+DECO = " "*4
+
+
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
+
+SUFFIXES = {
+    '+': "p",
+    '-': "n",
+    '*': "s"
+}
+
+def latex_classical(setdef):
+    setname, *suffixes = setdef[::1]
+    latexname          = setname*2
+
+    latexdef = [
+        f"\\newcommand\\{latexname}{{\\ensuremath{{\\fieldset{{{setname}}}}}}}"
+    ]
+
+    latexsuffixes = [SUFFIXES[s] for s in suffixes]
+
+    if 's' in latexsuffixes:
+        for sign in "np":
+            if sign in latexsuffixes:
+                latexsuffixes.append(f's{sign}')
+
+    for onesuf in latexsuffixes:
+        latexdef.append(
+            f"\\newcommand\\{latexname}{onesuf}{{\\ensuremath{{\\specialset{{\\{latexname}}}{{{onesuf}}}}}}}"
+        )
+
+    latexdef = "\n".join(latexdef)
+
+    return latexdef
+
+
+# -------------------------- #
+# -- THE CONSTANTS TO ADD -- #
+# -------------------------- #
+
+with ReadBlock(
+    content = THIS_DIR / "general.peuf",
+    mode    = "verbatim"
+) as data:
+    config = {
+        k: " ".join(v).split()
+        for k, v in data.mydict("std mini").items()
+    }
+
+classicalsets = config["classical-sets"]
+
+
+# ------------------------------ #
+# -- LATEX TEMPLATE TO UPDATE -- #
+# ------------------------------ #
+
+with open(
+    file     = TEX_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as docfile:
+    template = docfile.read()
+
+
+# --------------------- #
+# -- UPDATING MACROS -- #
+# --------------------- #
+
+text_start, _, text_end = between(
+    text = template,
+    seps = [
+        "% List of classical sets",
+        r"\begin{document}"
+    ],
+    keepseps = True
+)
+
+alldefs = []
+
+for setdef in classicalsets:
+    alldefs.append(latex_classical(setdef))
+
+alldefs = "\n\n".join(alldefs)
+alldefs = f"\n\n{alldefs}\n\n\n\n"
+
+template = text_start + alldefs + text_end
+
+
+# ----------------------- #
+# -- TABLE OF SUFFIXES -- #
+# ----------------------- #
+
+text_start, _, text_end = between(
+    text = template,
+    seps = [
+        "% == Table of suffixes - START == %",
+        "% == Table of suffixes - END == %"
+    ],
+    keepseps = True
+)
+
+suffix_header = [x for x in "n p s sn sp".split()]
+sexiffus      = {v: k for k,v in SUFFIXES.items()}
+
+table_header = "  & {0} \\\\".format(
+    " & ".join(
+        f"\\verb+{s}+" for s in suffix_header
+    )
+)
+
+table_lines = []
+
+for onesetdef in classicalsets:
+    cells = [f"\\verb+{onesetdef[0]}+"]
+
+    for s in suffix_header:
+        hassuffix = True
+
+        for char in s:
+            if sexiffus[char] not in onesetdef:
+                hassuffix = False
+                break
+
+        if hassuffix:
+            cells.append(r'$\times$')
+
+        else:
+            cells.append('\\xx')
+
+    table_lines.append(" & ".join(cells) + r' \\')
+
+table_lines = r'\hline '  + '\n\\hline '.join(table_lines)
+
+
+latextable = f"""
+\\newcommand\\xx{{\\phantom{{$\\times$}}}}
+\\begin{{table}}[h]
+    \\caption{{Suffixes}}
+    \\begin{{center}}
+        \\begin{{tabular}}{{c|c|c|c|c|c}}
+{table_header}
+{table_lines}
+        \\end{{tabular}}
+    \\end{{center}}
+    \\label{{default}}
+\\end{{table}}
+"""
+
+
+text = text_start + latextable + text_end
+
+
+with open(
+    file     = TEX_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(text)

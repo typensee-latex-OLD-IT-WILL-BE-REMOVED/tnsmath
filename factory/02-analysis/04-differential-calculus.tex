@@ -1,0 +1,266 @@
+\documentclass[12pt,a4paper]{article}
+
+% == FOR DOC AND TESTS - START == %
+
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{enumitem}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+
+\usepackage{pgffor}
+\usepackage{xstring}
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+% Technical IDs
+\newwrite\tempfile
+
+\immediate\openout\tempfile=x-\jobname.macros-x.txt
+
+\AtEndDocument{\immediate\closeout\tempfile}
+
+\newcommand\IDconstant[1]{%
+    \immediate\write\tempfile{constant@#1}%
+}
+
+\makeatletter
+	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
+	
+    \newcommand\@IDmacroNoStar[3]{%
+        \texttt{%
+        	\textbackslash#1%
+        	\IfStrEq{#2}{0}{}{%
+        		\,\,[#2 Option%
+				\IfStrEq{#2}{1}{}{s}]%
+			}%
+    	    \,\,(#3 Argument%
+				\IfStrEq{#3}{1}{}{s})%
+	   	}
+        \immediate\write\tempfile{macro@#1@#2@#3}%
+    }
+
+    \newcommand\@IDmacroStar[2]{%
+        \@IDmacroNoStar{#1}{0}{#2}%
+    }
+
+	\newcommand\@IDoptarg[2]{%
+    	\vspace{0.5em}
+		--- \texttt{#1 \##2:}%
+	}
+
+	\newcommand\IDoption[1]{%
+    	\@IDoptarg{Option}{#1}%
+	}
+
+	\newcommand\IDarg[1]{%
+    	\@IDoptarg{Argument}{#1}%
+	}
+\makeatother
+
+% == FOR DOC AND TESTS - END == %
+
+
+% == PACKAGES USED == %
+
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Sources :
+%    * http://forum.mathematex.net/latex-f6/en-tete-de-ds-t12933.html#p124908
+%    * http://forum.mathematex.net/latex-f6/derivee-avec-un-d-droit-et-espace-t12932.html#p124930
+%    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
+%    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
+
+\noexpandarg % This is necessary so as to '' \derfrac[3]{\cos}{x} ''  works.
+
+\makeatletter
+% dd, partial and pp usefull operators
+    \newcommand{\@diffOpe}[3]{%
+        #3%
+        \IfStrEq{#1}{0}{}{^{#1}\!}%
+        \IfBeginWith{#2}{f}{\!}{}%
+        \hspace{0.07em}#2%
+    }
+
+    \DeclareRobustCommand\@dder{
+        \mathop{}\mathopen{}\mathrm{d}
+    }
+
+    \newcommand\dd[2][0]{\@diffOpe{#1}{#2}{\@dder}}
+
+    \let\original@partial\partial
+    \renewcommand{\partial}{%
+        \original@partial\mathopen{}%
+    }
+
+    \newcommand\pp[2][0]{\@diffOpe{#1}{#2}{\partial}}
+
+% Power writing of total derivate
+    \newcommand\derpow[2][\relax]{
+        \IfStrEq{#1}{\relax}{
+            #2^{\left( 1 \right)}
+        }{
+            #2^{\left( #1 \right)}
+        }
+    }
+
+% Fractional writing of total derivate
+    \newcommand\derfrac[3][\relax]{
+        \IfStrEq{#1}{\relax}{
+            \frac{\dd{#2}}{\dd{#3}}
+        }{
+            \frac{\dd[#1]{#2}}{\dd{#3}^{#1}}
+        }
+    }
+
+% Subscript writing of partial derivate
+    \newcommand\@bracketIt[1]{(#1)}
+
+    \newcommand\partialsub[2]{
+% The following command works because xstring traits {...} like a single character.
+        \StrSubstitute{#2}{^}{\@bracketIt}[\@index]
+        \partial%
+        ^{\vphantom{\prime}}%
+        _{\expandafter\StrSubstitute\expandafter{\@index}{//}{\,}}%
+        #1%
+    }
+
+% Prime writing of partial derivate
+    \newcommand\partialprime[2]{
+% The following command works because xstring traits {...} like a single character.
+        \StrSubstitute{#2}{^}{\@bracketIt}[\@index]%
+        #1%
+        ^{\prime}%
+        _{\expandafter\StrSubstitute\expandafter{\@index}{//}{\,}}
+    }
+
+% Fractional writing of partial derivate
+    \newcommand\partialfrac[3][0]{%
+        \frac{%
+            \pp[#1]{#2}%
+        }{%
+            \StrSubstitute{\partial#3}{//}{\, \partial}[\@deno]%
+            \expandafter\StrSubstitute\expandafter{\@deno}{\partial\cdots}{\,\cdots{}\,\partial}
+        }
+    }
+\makeatother
+
+
+\begin{document}
+
+\section{Differential calculus}
+
+    \subsection{\texorpdfstring{The $\pp{}$ and $\dd{}$ operators}%
+                               {The "rounded d" and "straight d" operators}}
+
+        \subsubsection{Example of use}
+
+\begin{tcblisting}{}
+You can write $\dd{x}$ and $\pp{t}$, but also $ \dd[5]{x}$ et $\pp[n]{x}$.
+\end{tcblisting}
+
+
+        \subsubsection{Technical IDs}
+
+\IDmacro{dd}{1}{1}
+
+\IDmacro{pp}{1}{1}
+
+\IDoption{1} if used, this argument will be the exponent of the symbol $\pp{}$ or $\dd{}$.
+
+\IDarg{1} the variable of differentiation at the right of the symbol $\pp{}$ or $\dd{}$.
+
+
+
+    \subsection{Total derivation}
+
+        \subsubsection{Example of use}
+
+\begin{tcblisting}{}
+$\displaystyle cos' a = \derpow{\cos} (a) = \derfrac{\cos}{x} (a)$
+and
+$\displaystyle cos''' a = \derpow[3]{\cos} (a) = \derfrac[3]{\cos}{x} (a)$
+\end{tcblisting}
+
+
+        \subsubsection{Technical IDs}
+
+\IDmacro{derpow}{1}{1}
+
+\IDoption{1} if used, this argument will be the exponent of derivation put inside braces.
+
+\IDarg{1} the function to be differenciated.
+
+
+\bigskip
+
+
+\IDmacro{derfrac}{1}{2}
+
+\IDoption{1} if used, the exponent of derivation.
+
+\IDarg{1} the function to be differenciated.
+
+\IDarg{2} the variable used for the derivation.
+
+
+
+    \subsection{Partial derivation}
+
+        \subsubsection{Example of use}
+
+\begin{tcblisting}{}
+$\displaystyle \partialfrac{f}{x} (a;b)
+             = \partialsub{f}{x} (a;b)
+             = \partialprime{f}{x} (a;b)$
+
+\medskip
+
+$\displaystyle \partialfrac[3]{G}{f^{2} // v} (a;b)
+             = \partialfrac{G}{f^{2} // v} (a;b)
+             = \partialsub{G}{f^{2} // v} (a;b)
+             = \partialprime{G}{f^{2} // v} (a;b)$
+\end{tcblisting}
+
+
+        \subsubsection{Technical IDs}
+
+\IDmacro{partialfrac}{1}{2}
+
+\IDoption{1} if used, the exponent of $\pp$ associated to the function differenciated.
+
+\IDarg{1} the function to be partially differenciated.
+
+\IDarg{2} the variables used for the partial derivation. The syntax is particular : for example, \verb+x // y^3 // ...+ indicates regarding to the variables $x$ one time, $y$ three times... and so on.
+
+
+\bigskip
+
+
+\IDmacro*{partialsub}{2}
+
+\IDmacro*{partialprime}{2}
+
+\IDarg{1} the function to be partially differenciated.
+
+\IDarg{2} the variables used for the partial derivation. The syntax is particular : for example, \verb+x // y^3 // ...+ indicates regarding to the variables $x$ one time, $y$ three times... and so on.
+
+\end{document}

@@ -1,0 +1,209 @@
+\documentclass[12pt,a4paper]{article}
+
+% == FOR DOC AND TESTS - START == %
+
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{enumitem}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+
+\usepackage{pgffor}
+\usepackage{xstring}
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+% Technical IDs
+\newwrite\tempfile
+
+\immediate\openout\tempfile=x-\jobname.macros-x.txt
+
+\AtEndDocument{\immediate\closeout\tempfile}
+
+\newcommand\IDconstant[1]{%
+    \immediate\write\tempfile{constant@#1}%
+}
+
+\makeatletter
+	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
+	
+    \newcommand\@IDmacroNoStar[3]{%
+        \texttt{%
+        	\textbackslash#1%
+        	\IfStrEq{#2}{0}{}{%
+        		\,\,[#2 Option%
+				\IfStrEq{#2}{1}{}{s}]%
+			}%
+    	    \,\,(#3 Argument%
+				\IfStrEq{#3}{1}{}{s})%
+	   	}
+        \immediate\write\tempfile{macro@#1@#2@#3}%
+    }
+
+    \newcommand\@IDmacroStar[2]{%
+        \@IDmacroNoStar{#1}{0}{#2}%
+    }
+
+	\newcommand\@IDoptarg[2]{%
+    	\vspace{0.5em}
+		--- \texttt{#1 \##2:}%
+	}
+
+	\newcommand\IDoption[1]{%
+    	\@IDoptarg{Option}{#1}%
+	}
+
+	\newcommand\IDarg[1]{%
+    	\@IDoptarg{Argument}{#1}%
+	}
+\makeatother
+
+% == FOR DOC AND TESTS - END == %
+
+
+% == EXTRAS == %
+
+\newcommand\dd[1]{d#1} % This operator is defined properly in "differential.tex"
+
+
+% == PACKAGES USED == %
+
+\usepackage{amsmath}
+\usepackage{relsize}
+
+% == DEFINITIONS == %
+
+% Source for minimizing spaces betwteen consecutive integrals :
+%    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
+
+% Consecutive integrals
+
+\makeatletter
+    \let\original@int\int
+    \DeclareRobustCommand{\int}{%
+        \original@int\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
+    }
+
+    \def\operator@followup#1{%
+        \@ifnextchar{^}{\operator@followup@sup{#1}}%
+            {\operator@followup@nosup{#1}}%
+    }
+
+    \def\operator@followup@sup#1^#2{%
+        \@ifnextchar{_}{\operator@followup@sup@sub{#1}^{#2}}%
+            {\operator@followup@sup@nosub{#1}^{#2}}%
+    }
+
+    \def\operator@followup@sup@sub#1^#2_#3{%
+        \operator@followup@{#1}{#2}{#3}%
+    }
+
+    \def\operator@followup@sup@nosub#1^#2{%
+        \operator@followup@{#1}{#2}{}%
+    }
+
+    \def\operator@followup@nosup#1{%
+        \@ifnextchar{_}{\operator@followup@nosup@sub{#1}}
+            {\operator@followup@nosup@nosub{#1}}%
+    }
+
+    \def\operator@followup@nosup@sub#1_#2{%
+        \@ifnextchar{^}{\operator@followup@nosup@sub@sup{#1}_{#2}}
+            {\operator@followup@nosup@sub@nosup{#1}_{#2}}%
+    }
+
+    \def\operator@followup@nosup@sub@sup#1_#2^#3{%
+        \operator@followup@{#1}{#3}{#2}%
+    }
+
+    \def\operator@followup@nosup@sub@nosup#1_#2{%
+        \operator@followup@{#1}{}{#2}%
+    }
+
+    \def\operator@followup@nosup@nosub#1{%
+        \operator@followup@{#1}{}{}%
+    }
+
+    \def\operator@followup@#1#2#3{%
+        ^{#2}_{#3}#1%
+    }
+
+% The hook calculator
+
+    \newcommand\hook{\@ifstar{\@hookStar}{\@hookNoStar}}
+
+    \newcommand\@hookNoStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+
+    \newcommand\@hookStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Integral calculus}
+
+    \subsection{The hook operator}
+
+		\subsubsection{Example of use}
+
+\begin{tcblisting}{}
+By definition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$
+where $\hook{F(x)}{a}{b} = \hook*{F(x)}{a}{b} = F(b) - F(a)$.
+\end{tcblisting}
+
+
+		\subsubsection{Technical IDs}
+
+\IDmacro*{hook}{3}
+
+\IDarg{1} the content inside the hooks.
+
+\IDarg{2} the lower bound displayed as an index.
+
+\IDarg{3} the upper bound displayed as an exponent.
+
+
+\bigskip
+
+
+\IDmacro*{hook*}{3}
+
+\IDarg{1} the content before the vertical line $\vert$ .
+
+\IDarg{2} the lower bound displayed as an index.
+
+\IDarg{3} the upper bound displayed as an exponent.
+
+
+
+    \subsection{Several integrals}
+
+The package minimizes spacings between consecutive symbols of integration. Here is an example.
+
+\begin{tcblisting}{}
+$\displaystyle \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
+= \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
+\end{tcblisting}
+
+The default behavior is the following one :
+\makeatletter
+    $\displaystyle \original@int \original@int \original@int F(x;y;z) \dd{x} \dd{y} \dd{z}
+    = \original@int_{a}^{b} \original@int_{c}^{d} \original@int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$.
+\makeatother
+
+\end{document}
