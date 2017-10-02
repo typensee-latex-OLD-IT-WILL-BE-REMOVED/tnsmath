@@ -8,7 +8,9 @@ What about this package  ?
 What about this first version `0.0.0-beta` ?
 ============================================
 
-All informations are inside the PDF named `lymath-doc.pdf`.
+All informations are inside the PDF named `lymath-doc.pdf` inside the folder `lymath`.
+
+The only thing needed to use the package is the folder `lymath`.
 
 
 I beg your pardon for my english...
