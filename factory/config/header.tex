@@ -15,16 +15,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -57,7 +67,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -72,11 +84,20 @@
 
 \begin{document}
 
+\begin{remark}
+	Just on remark...
+\end{remark}
+
+
 \IDmacro{test}{1}{1}
 
 \IDmacro{test}{2}{2}
 
 \IDmacro*{test}{3}
+
+\IDoption{} about the only option...
+
+\IDarg{} about the only argument...
 
 \IDoption{1} about the 1st option...
 

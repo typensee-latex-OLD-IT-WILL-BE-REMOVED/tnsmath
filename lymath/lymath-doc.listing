@@ -1,4 +1,0 @@
-Let's see how to use the symbol $\bigtheta{}$.
-
-$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that
-$n \geqslant n_0$ implies $m g(n) \leqslant f(n) \leqslant M g(n)$.

@@ -55,15 +55,15 @@ text_end    = r"\begin{document}" + text_end
 
 text_auto = [
     r"""
-    \newcommand\ct[1]{{%
-        \IfStrEqCase{{#1}}{{%
-            {0}
-        }}[\text{{\textbf{{#1}}}}]
-    }}
+\newcommand\ct[1]{{%
+    \IfStrEqCase{{#1}}{{%
+        {0}
+    }}[\text{{\textbf{{#1}}}}]
+}}
 
 % Classical constants
     """.format(
-        ("\n" + DECO*3).join(
+        ("\n" + DECO*2).join(
             r"{{{0}}}{{\up{0}}}%".format(gletter)
             for gletter in constants["greek"]
         )
@@ -72,10 +72,7 @@ text_auto = [
 
 for ct in constants["greek"] + constants["roman"]:
     text_auto.append(
-        "{0}\\newcommand\{1[0]}{1}{{\ct{{{1}}}}}".format(
-            DECO,
-            ct
-        )
+        "\\newcommand\{0[0]}{0}{{\ct{{{0}}}}}".format(ct)
     )
 
 text_auto.append("\n"*3)

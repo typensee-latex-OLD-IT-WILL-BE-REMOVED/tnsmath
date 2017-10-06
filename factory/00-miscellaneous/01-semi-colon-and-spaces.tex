@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%

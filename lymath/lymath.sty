@@ -7,7 +7,9 @@
 \usepackage[francais]{babel}
 \usepackage{bm}
 \usepackage{dsfont}
+\usepackage[f]{esvect}
 \usepackage{graphicx}
+\usepackage{ifmtarg}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
 \usepackage{relsize}
@@ -53,72 +55,76 @@
 
 % Source for mathpzc : page 68 de ''The Comprehensive LATEX Symbol List''
 
+
 % Only the upper case letters
 
-\newcommand\probaset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
-		\mathcal{#1}
-	}{%
-		\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+\makeatletter
+
+	\newcommand\probaset[1]{
+    	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        	\mathcal{#1}
+    	}{%
+        	\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+    	}
 	}
-}
 
 % With ''mathscr'', we only have the upper case letters.
 % So we use the following trick for lower case letters.
 
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+	\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
-\newcommand\geoset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
-		\mathscr{#1}
-	}{%
-		\IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
-			\mathpzc{#1}
-		}{%
-			\PackageError{lymath}{Command << fieldset >> only accepts single h, k or upper case letter}%
-		}
+	\newcommand\geoset[1]{
+	    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        	\mathscr{#1}
+    	}{%
+	        \IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
+        	    \mathpzc{#1}
+    	    }{%
+	            \PackageError{lymath}{Command << fieldset >> only accepts single h, k or upper case letter}%
+        	}
+    	}
 	}
-}
+
 
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
 
-\newcommand\fieldset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
-		\mathds{#1}
-	}{%
-		\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
-	}
-}
-
-\newcommand\setpos{\text{\bf{\tiny+}}}
-\newcommand\setneg{\vphantom{\setpos}-}
-\newcommand\setstar{\text{*}}
-
-
-\makeatletter
-	\newcommand\specialset{\@ifstar{\@specialsetStared}{\@specialsetUnstared}}
-
-	\newcommand\@specialsetUnstared[2]{
-		\IfEqCase{#2}{
-			{s}{ #1^{\setstar} }
-			{n}{ #1^{\phantom{\setstar}}_{\setneg} }
-			{p}{ #1^{\phantom{\setstar}}_{\setpos} }
-			{sn}{ #1^{\setstar}_{\setneg} }
-			{sp}{ #1^{\setstar}_{\setpos} }
-		}
+	\newcommand\fieldset[1]{
+    	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
+    	    \mathds{#1}
+    	}{%
+        	\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
+    	}
 	}
 
-	\newcommand\@specialsetStared[2]{
-		\IfEqCase{#2}{
-			{s}{ #1_{\neq 0} }
-			{n}{ #1_{\le 0} }
-			{p}{ #1_{\ge 0} }
-			{sn}{ #1_{< 0} }
-			{sp}{ #1_{> 0} }
-		}
-	}
+
+	\newcommand\setpos{\text{\bf{\tiny+}}}
+	\newcommand\setneg{\vphantom{\setpos}-}
+	\newcommand\setstar{\text{*}}
+
+
+    \newcommand\specialset{\@ifstar{\@specialsetStar}{\@specialsetNoStar}}
+
+    \newcommand\@specialsetNoStar[2]{
+        \IfEqCase{#2}{
+            {s}{ #1^{\setstar} }
+            {n}{ #1^{\phantom{\setstar}}_{\setneg} }
+            {p}{ #1^{\phantom{\setstar}}_{\setpos} }
+            {sn}{ #1^{\setstar}_{\setneg} }
+            {sp}{ #1^{\setstar}_{\setpos} }
+        }
+    }
+
+    \newcommand\@specialsetStar[2]{
+        \IfEqCase{#2}{
+            {s}{ #1_{\neq 0} }
+            {n}{ #1_{\le 0} }
+            {p}{ #1_{\ge 0} }
+            {sn}{ #1_{< 0} }
+            {sp}{ #1_{> 0} }
+        }
+    }
 \makeatother
 
 % The empty set
@@ -173,7 +179,9 @@
 % ---------------------- %
 
 \makeatletter
-    \newcommand\@interToolNoStar[4]{\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4 }}
+    \newcommand\@interToolNoStar[4]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+	}
 
     \newcommand\@interToolStar[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
  
@@ -232,6 +240,8 @@
 
 % Macros for intervals - END
 
+\makeatother
+
 
 % -------------------------- %
 % -- ANALYSIS - CONSTANTS -- %
@@ -239,23 +249,23 @@
 
 % User's constants
 
-    \newcommand\ct[1]{%
-        \IfStrEqCase{#1}{%
-            {gamma}{\upgamma}%
-            {pi}{\uppi}%
-            {tau}{\uptau}%
-        }[\text{\textbf{#1}}]
-    }
+\newcommand\ct[1]{%
+    \IfStrEqCase{#1}{%
+        {gamma}{\upgamma}%
+        {pi}{\uppi}%
+        {tau}{\uptau}%
+    }[\text{\textbf{#1}}]
+}
 
 % Classical constants
     
-    \newcommand\ggamma{\ct{gamma}}
-    \newcommand\ppi{\ct{pi}}
-    \newcommand\ttau{\ct{tau}}
-    \newcommand\ee{\ct{e}}
-    \newcommand\ii{\ct{i}}
-    \newcommand\jj{\ct{j}}
-    \newcommand\kk{\ct{k}}
+\newcommand\ggamma{\ct{gamma}}
+\newcommand\ppi{\ct{pi}}
+\newcommand\ttau{\ct{tau}}
+\newcommand\ee{\ct{e}}
+\newcommand\ii{\ct{i}}
+\newcommand\jj{\ct{j}}
+\newcommand\kk{\ct{k}}
 
 
 % -------------------------- %
@@ -282,23 +292,23 @@
 
 % Classical functions
 
-    \DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
-    \DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
-    \DeclareMathMacro{\ch}{\operatorname{ch}}
-    \DeclareMathMacro{\sh}{\operatorname{sh}}
-    \DeclareMathMacro{\th}{\operatorname{th}}
-    \DeclareMathMacro{\ach}{\operatorname{ach}}
-    \DeclareMathMacro{\ash}{\operatorname{ash}}
-    \DeclareMathMacro{\ath}{\operatorname{ath}}
-    \DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
-    \DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
-    \DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
-    \DeclareMathMacro{\acos}{\operatorname{acos}}
-    \DeclareMathMacro{\asin}{\operatorname{asin}}
-    \DeclareMathMacro{\atan}{\operatorname{atan}}
+\DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
+\DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
+\DeclareMathMacro{\ch}{\operatorname{ch}}
+\DeclareMathMacro{\sh}{\operatorname{sh}}
+\DeclareMathMacro{\th}{\operatorname{th}}
+\DeclareMathMacro{\ach}{\operatorname{ach}}
+\DeclareMathMacro{\ash}{\operatorname{ash}}
+\DeclareMathMacro{\ath}{\operatorname{ath}}
+\DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
+\DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
+\DeclareMathMacro{\acos}{\operatorname{acos}}
+\DeclareMathMacro{\asin}{\operatorname{asin}}
+\DeclareMathMacro{\atan}{\operatorname{atan}}
 
-    \newcommand\expb[1]{\exp_{#1}}
-    \newcommand\logb[1]{\log_{#1}}
+\newcommand\expb[1]{\exp_{#1}}
+\newcommand\logb[1]{\log_{#1}}
 
 
 % -------------------------- %
@@ -368,6 +378,18 @@
         }
     }
 
+% Subscript writing of total derivate
+    \newcommand\dersub[3][\relax]{
+% The following command works because xstring traits {...} like a single character.
+        \dd%
+        \IfStrEq{#1}{\relax}{%
+        	^{\vphantom{\prime}}%
+        }{%
+	        ^{#1}%
+	    }%
+	    _{#3} #2%
+    }
+
 % Subscript writing of partial derivate
     \newcommand\@bracketIt[1]{(#1)}
 
@@ -405,7 +427,7 @@
 % -- ANALYSIS - INTEGRAL CALCULUS -- %
 % ---------------------------------- %
 
-% Source for minimizing spaces betwteen consecutive integrals :
+% Source for minimizing spaces between consecutive integrals :
 %    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
 
 % Consecutive integrals
@@ -461,12 +483,14 @@
     }
 
 % The hook calculator
-
     \newcommand\hook{\@ifstar{\@hookStar}{\@hookNoStar}}
+    \newcommand\@hookNoStar[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
+    \newcommand\@hookStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-    \newcommand\@hookNoStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+    \newcommand\vhook{\@ifstar{\@vhookStar}{\@vhookNoStar}}
+    \newcommand\@vhookNoStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+    \newcommand\@vhookStar[3]{\left. #1 \right\rvert_{#2}^{#3}}
 
-    \newcommand\@hookStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
 \makeatother
 
 
@@ -524,5 +548,151 @@
                 \operatorname{\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}}\left(#1\right)%
             }
         \fi
+    }
+\makeatother
+
+
+% ---------------------- %
+% -- GEOMETRY - POINT -- %
+% ---------------------- %
+
+\newcommand\pt[1]{\mathrm{#1}}
+
+
+% ----------------------- %
+% -- GEOMETRY - VECTOR -- %
+% ----------------------- %
+
+\makeatletter
+	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
+	\newcommand*\@vectStared[1]{\vv*{#1}}
+	\newcommand*\@vectUnstared[1]{\vv{#1}}
+\makeatother
+
+
+% ---------------------- %
+% -- GEOMETRY - ANGLE -- %
+% ---------------------- %
+
+% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
+
+\makeatletter
+	\newcommand\anglein{\@ifstar{\@angleinStar}{\@angleinNoStar}}
+	\newcommand*\@angleinStar[2]{\widehat{#1}\vphantom{#1}_{#2}}
+	\newcommand*\@angleinNoStar[1]{\widehat{#1}}
+\makeatother
+
+%\newcommand\angleVect[2]{\left( #1 ; #2\right)} % STYLE
+
+
+% -------------------- %
+% -- GEOMETRY - ARC -- %
+% -------------------- %
+
+\makeatletter
+	\newcommand\arc{\@ifstar{\@arcStared}{\@arcUnstared}}
+	\newcommand*\@arcStared[2]{\wideparen{#1}\vphantom{#1}_{#2}}
+	\newcommand*\@arcUnstared[1]{\wideparen{#1}}
+\makeatother
+
+
+% ------------------------------------- %
+% -- ARITHMETIC - CONTINUED FRACTION -- %
+% ------------------------------------- %
+
+% Sources :
+%    * https://groups.google.com/forum/?hl=fr&fromgroups#!topic/fr.comp.text.tex/UrUZiurKwm0
+%    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
+%    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
+
+\makeatletter
+% Operator
+	\newcommand\contfracope{%
+		\operatornamewithlimits{%
+			\mathchoice{% * Display style
+				\vcenter{\hbox{\huge $\mathcal{K}$}}%
+			}{%           * Text style
+				\vcenter{\hbox{\Large $\mathcal{K}$}}%
+			}{%           * Script style
+				\mathrm{\mathcal{K}}%
+			}{%           * Script script style
+				\mathrm{\mathcal{K}}%
+			}
+		}
+	}
+
+% Single continued fraction (useful ?)
+	\newcommand\singlecontfrac[2]{%
+		\begin{array}{@{}c@{}}%
+			\multicolumn{1}{c|}{#1}%
+			\\%
+			\hline%
+			\multicolumn{1}{|c}{#2}%
+		\end{array}%
+	}
+
+% Standard continued fraction
+	\newcommand\contfrac{\@ifstar{\@contfracStar}{\@contfracNoStar}}
+	
+	\newcommand\@contfracNoStar[1]{%
+		\@contfracNoStarRecu@#1//\@nil%
+	}
+	\def\@contfracNoStarRecu@#1//#2\@nil{%
+		\@ifmtarg{#2}{%
+			#1%
+		}{%
+			#1 + \cfrac{1}{\@contfracNoStarRecu@#2\@nil}%
+		}%
+	}	
+
+	\newcommand\@contfracStar[1]{%
+		\@contfracStarBefore@#1//\@nil%
+	}
+	\def\@contfracStarBefore@#1//#2\@nil{%
+    	\@ifmtarg{#2}{%
+        	#1%
+        }{%
+        	#1 \@contfracStarRecu@#2\@nil%
+        }%
+    }
+    \def\@contfracStarRecu@#1//#2\@nil{%
+    	\@ifmtarg{#2}{%
+        	+ \singlecontfrac{1}{#1}%
+        }{%
+        	+ \singlecontfrac{1}{#1} \@contfracStarRecu@#2\@nil%
+        }%
+    }
+
+% Generalized continued fraction
+	\newcommand\contfracgene{\@ifstar{\@contfracgeneStar}{\@contfracgeneNoStar}}
+	
+	\newcommand\@contfracgeneNoStar[1]{%
+		\@contfracgeneNoStarRecu@#1////\@nil%
+	}
+	\def\@contfracgeneNoStarRecu@#1//#2//#3\@nil{%
+		\@ifmtarg{#2}{%
+			#1%
+		}{%
+			#1 + \cfrac{#2}{\@contfracgeneNoStarRecu@#3\@nil}%
+		}%
+	}
+	
+
+	\newcommand\@contfracgeneStar[1]{%
+		\@contfracgeneStarBefore@#1//\@nil%
+	}
+	\def\@contfracgeneStarBefore@#1//#2\@nil{%
+    	\@ifmtarg{#2}{%
+        	#1%
+        }{%
+        	#1 \@contfracgeneStarRecu@#2\@nil%
+        }%
+    }	
+    \def\@contfracgeneStarRecu@#1//#2//#3\@nil{%
+        \@ifmtarg{#3}{%
+            + \singlecontfrac{#1}{#2}%
+        }{%
+            + \singlecontfrac{#1}{#2} \@contfracgeneStarRecu@#3\@nil%
+        }%
     }
 \makeatother

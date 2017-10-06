@@ -115,11 +115,12 @@ for interkind, defs in config.items():
         ]
 
         fortexdoc += [
-            "\n\\medskip\n\n",
+            "\n\n\\bigskip\n\n",
+            "\n",
             texdoc(prefix, suffix)
         ]
 
-    fortexdoc  = "".join(fortexdoc)
+    fortexdoc  = "".join(fortexdoc[1:])
     macrosdefs = "".join(macrosdefs)
 
     interkind = interkind.replace('-', ' ')

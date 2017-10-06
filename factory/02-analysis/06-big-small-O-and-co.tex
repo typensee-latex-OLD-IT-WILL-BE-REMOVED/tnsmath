@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -151,63 +163,69 @@
     \subsection{\texorpdfstring{The $\bigO{}$ and $\smallO{}$ notations}%
                                {The "big O" and "small O" notations}}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 Let's see how to use the symbols $\bigO{}$ and $\smallO{}$ created by Landau.
+
+\medskip
 
 You can write $\bigO{x} \neq \smallO{x}$ and $e^{t + \smallO{t}} = e^{\bigO{t}}$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{bigO}{1}
 
 \IDmacro*{smallO}{1}
 
-\IDarg{1} the content inside the braces after the symbol $\bigO{}$ or $\smallO{}$.
+\IDarg{} the content inside the braces after the symbol $\bigO{}$ or $\smallO{}$.
 
 
 
-    \subsection{\texorpdfstring{The \textOmega{} notation}%
+    \subsection{\texorpdfstring{The $\bigomega{}$ notation}%
                                {The "big Omega" notation}}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 Let's see how to use the symbol $\bigomega{}$ created by Hardy and Littlewood.
+
+\medskip
 
 $f(n) = \bigomega{g(n)}$ means: $\exists (m, n_0)$ such that
 $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{bigomega}{1}
 
-\IDarg{1} the content inside the braces after the symbol $\bigomega{}$.
+\IDarg{} the content inside the braces after the symbol $\bigomega{}$.
 
 
 
-    \subsection{\texorpdfstring{The \textTheta{} notation}%
+    \subsection{\texorpdfstring{The $\bigtheta{}$ notation}%
                                {The "big Theta" notation}}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 Let's see how to use the symbol $\bigtheta{}$.
+
+\medskip
 
 $f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that
 $n \geqslant n_0$ implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{bigtheta}{1}
 
-\IDarg{1} the content inside the braces after the symbol $\bigtheta{}$.
+\IDarg{} the content inside the braces after the symbol $\bigtheta{}$.
 
 \end{document}

@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -95,72 +107,76 @@
 
 % Source for mathpzc : page 68 de ''The Comprehensive LATEX Symbol List''
 
+
 % Only the upper case letters
 
-\newcommand\probaset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
-		\mathcal{#1}
-	}{%
-		\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+\makeatletter
+
+	\newcommand\probaset[1]{
+    	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        	\mathcal{#1}
+    	}{%
+        	\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+    	}
 	}
-}
 
 % With ''mathscr'', we only have the upper case letters.
 % So we use the following trick for lower case letters.
 
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+	\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
-\newcommand\geoset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
-		\mathscr{#1}
-	}{%
-		\IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
-			\mathpzc{#1}
-		}{%
-			\PackageError{lymath}{Command << fieldset >> only accepts single h, k or upper case letter}%
-		}
+	\newcommand\geoset[1]{
+	    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        	\mathscr{#1}
+    	}{%
+	        \IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
+        	    \mathpzc{#1}
+    	    }{%
+	            \PackageError{lymath}{Command << fieldset >> only accepts single h, k or upper case letter}%
+        	}
+    	}
 	}
-}
+
 
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
 
-\newcommand\fieldset[1]{
-	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
-		\mathds{#1}
-	}{%
-		\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
-	}
-}
-
-\newcommand\setpos{\text{\bf{\tiny+}}}
-\newcommand\setneg{\vphantom{\setpos}-}
-\newcommand\setstar{\text{*}}
-
-
-\makeatletter
-	\newcommand\specialset{\@ifstar{\@specialsetStared}{\@specialsetUnstared}}
-
-	\newcommand\@specialsetUnstared[2]{
-		\IfEqCase{#2}{
-			{s}{ #1^{\setstar} }
-			{n}{ #1^{\phantom{\setstar}}_{\setneg} }
-			{p}{ #1^{\phantom{\setstar}}_{\setpos} }
-			{sn}{ #1^{\setstar}_{\setneg} }
-			{sp}{ #1^{\setstar}_{\setpos} }
-		}
+	\newcommand\fieldset[1]{
+    	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
+    	    \mathds{#1}
+    	}{%
+        	\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
+    	}
 	}
 
-	\newcommand\@specialsetStared[2]{
-		\IfEqCase{#2}{
-			{s}{ #1_{\neq 0} }
-			{n}{ #1_{\le 0} }
-			{p}{ #1_{\ge 0} }
-			{sn}{ #1_{< 0} }
-			{sp}{ #1_{> 0} }
-		}
-	}
+
+	\newcommand\setpos{\text{\bf{\tiny+}}}
+	\newcommand\setneg{\vphantom{\setpos}-}
+	\newcommand\setstar{\text{*}}
+
+
+    \newcommand\specialset{\@ifstar{\@specialsetStar}{\@specialsetNoStar}}
+
+    \newcommand\@specialsetNoStar[2]{
+        \IfEqCase{#2}{
+            {s}{ #1^{\setstar} }
+            {n}{ #1^{\phantom{\setstar}}_{\setneg} }
+            {p}{ #1^{\phantom{\setstar}}_{\setpos} }
+            {sn}{ #1^{\setstar}_{\setneg} }
+            {sp}{ #1^{\setstar}_{\setpos} }
+        }
+    }
+
+    \newcommand\@specialsetStar[2]{
+        \IfEqCase{#2}{
+            {s}{ #1_{\neq 0} }
+            {n}{ #1_{\le 0} }
+            {p}{ #1_{\ge 0} }
+            {sn}{ #1_{< 0} }
+            {sp}{ #1_{> 0} }
+        }
+    }
 \makeatother
 
 % The empty set
@@ -217,25 +233,25 @@
 
     \subsection{Sets for geometry}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$
+You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$, 
 but you can't write things like \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{geoset}{1}
 
-\IDarg{1} one single \ascii{} letter indicating a geometrical set.
+\IDarg{} one single \ascii{} letter indicating a geometrical set.
 
 
 
     \subsection{Sets for probability}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 You can semantically write $\probaset{E}$ and $\probaset{G}$
@@ -243,29 +259,29 @@ but you can't write things like \verb+$\probaset{ABC}$+.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{probaset}{1}
 
-\IDarg{1} one single \ascii{} upper letter indicating a probabilistic set.
+\IDarg{} one single \ascii{} upper letter indicating a probabilistic set.
 
 
 
     \subsection{Sets for rings and fields theory}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ 
-and $\fieldset{k}$ but you can't write things like \verb+$\fieldset{ABC}$+.
+and $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{fieldset}{1}
 
-\IDarg{1} either one of the letters \texttt{h} and \texttt{k}, or one single \ascii{} upper letter indicating a field or ring like set.
+\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single \ascii{} upper letter indicating a field or ring like set.
 
 
 
@@ -320,7 +336,7 @@ The following table shows when you can add one of the suffixes \verb+n+, \verb+p
 
     \subsection{Suffixes on demand}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$. 
@@ -328,7 +344,7 @@ There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{specialset}{2}
 

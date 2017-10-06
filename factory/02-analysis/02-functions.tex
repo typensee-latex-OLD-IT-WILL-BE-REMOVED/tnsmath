@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -102,23 +114,23 @@
 
 % Classical functions
 
-    \DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
-    \DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
-    \DeclareMathMacro{\ch}{\operatorname{ch}}
-    \DeclareMathMacro{\sh}{\operatorname{sh}}
-    \DeclareMathMacro{\th}{\operatorname{th}}
-    \DeclareMathMacro{\ach}{\operatorname{ach}}
-    \DeclareMathMacro{\ash}{\operatorname{ash}}
-    \DeclareMathMacro{\ath}{\operatorname{ath}}
-    \DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
-    \DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
-    \DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
-    \DeclareMathMacro{\acos}{\operatorname{acos}}
-    \DeclareMathMacro{\asin}{\operatorname{asin}}
-    \DeclareMathMacro{\atan}{\operatorname{atan}}
+\DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
+\DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
+\DeclareMathMacro{\ch}{\operatorname{ch}}
+\DeclareMathMacro{\sh}{\operatorname{sh}}
+\DeclareMathMacro{\th}{\operatorname{th}}
+\DeclareMathMacro{\ach}{\operatorname{ach}}
+\DeclareMathMacro{\ash}{\operatorname{ash}}
+\DeclareMathMacro{\ath}{\operatorname{ath}}
+\DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
+\DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
+\DeclareMathMacro{\acos}{\operatorname{acos}}
+\DeclareMathMacro{\asin}{\operatorname{asin}}
+\DeclareMathMacro{\atan}{\operatorname{atan}}
 
-    \newcommand\expb[1]{\exp_{#1}}
-    \newcommand\logb[1]{\log_{#1}}
+\newcommand\expb[1]{\exp_{#1}}
+\newcommand\logb[1]{\log_{#1}}
 
 
 
@@ -154,23 +166,9 @@ All the following macros don't have any parameter.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     \subsection{Functions with parameters}
 
-		\subsubsection{The complete list}
+        \subsubsection{The complete list}
 
 All the following macros have at least one parameter.
 
@@ -184,12 +182,12 @@ All the following macros have at least one parameter.
 \end{tabular*}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{expb}{1}
 
 \IDmacro*{logb}{1}
 
-\IDarg{1} the base of the exponential or the logarithm
+\IDarg{} the base of the exponential or the logarithm
 
 \end{document}

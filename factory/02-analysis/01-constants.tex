@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -90,23 +102,23 @@
 
 % User's constants
 
-    \newcommand\ct[1]{%
-        \IfStrEqCase{#1}{%
-            {gamma}{\upgamma}%
-            {pi}{\uppi}%
-            {tau}{\uptau}%
-        }[\text{\textbf{#1}}]
-    }
+\newcommand\ct[1]{%
+    \IfStrEqCase{#1}{%
+        {gamma}{\upgamma}%
+        {pi}{\uppi}%
+        {tau}{\uptau}%
+    }[\text{\textbf{#1}}]
+}
 
 % Classical constants
     
-    \newcommand\ggamma{\ct{gamma}}
-    \newcommand\ppi{\ct{pi}}
-    \newcommand\ttau{\ct{tau}}
-    \newcommand\ee{\ct{e}}
-    \newcommand\ii{\ct{i}}
-    \newcommand\jj{\ct{j}}
-    \newcommand\kk{\ct{k}}
+\newcommand\ggamma{\ct{gamma}}
+\newcommand\ppi{\ct{pi}}
+\newcommand\ttau{\ct{tau}}
+\newcommand\ee{\ct{e}}
+\newcommand\ii{\ct{i}}
+\newcommand\jj{\ct{j}}
+\newcommand\kk{\ct{k}}
 
 
 
@@ -116,8 +128,8 @@
 
     \subsection{Classical constants}
 
-		\subsubsection{Complete list}
-		
+        \subsubsection{Complete list}
+       
 % List of classical constants
 
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
@@ -128,15 +140,15 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 \end{tcblisting}
 
 
-		\subsubsection{Remark}
-
-Take care that \verb+{\Large $\ppi \neq \pi$}+ produces {\Large $\ppi \neq \pi$}. As you can see, the symbols are not the same. Indeed, this is true for all the greek constants.
+\begin{remark}
+	Take care that \verb+{\Large $\ppi \neq \pi$}+ produces {\Large $\ppi \neq \pi$}. As you can see, the symbols are not the same. Indeed, this is true for all the greek constants.
+\end{remark}
 
 
 
     \subsection{User's latine constants}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 It is easy to write $\ct{a} x^2 + \ct{b} x + \ct{c}$ instead of $a x^2 + b x + c$
@@ -144,10 +156,10 @@ such as to stress the fact that $\ct{a}$, $\ct{b}$ and $\ct{c}$ are constants.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 \IDmacro*{ct}{1}
 
-\IDarg{1} a latine text, and not a formula, indicated one constant.
+\IDarg{} a latine text, and not a formula, indicated one constant.
 
 \end{document}

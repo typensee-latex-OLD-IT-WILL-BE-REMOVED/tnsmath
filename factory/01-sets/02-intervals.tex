@@ -21,16 +21,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -63,7 +73,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -89,7 +101,9 @@
 % == DEFINITIONS == %
 
 \makeatletter
-    \newcommand\@interToolNoStar[4]{\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4 }}
+    \newcommand\@interToolNoStar[4]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+	}
 
     \newcommand\@interToolStar[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
  
@@ -148,6 +162,7 @@
 
 % Macros for intervals - END
 
+\makeatother
 
 
 \begin{document}
@@ -156,16 +171,19 @@
 
     \subsection{Real intervals - French (?) notation}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use \#1}
 
 \begin{tcblisting}{}
 In $\intervalOC{a}{b} = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro
 used solves a spacing problem, and that the delimiters are a little bigger.
 
 % The syntax refers to O-pened and C-losed but CC and OO are reduced to C and O.
+\end{tcblisting}
 
-\medskip
 
+        \subsubsection{Example of use \#2}
+
+\begin{tcblisting}{}
 You can use the star version of a macro if you want the delimiters to stretch 
 vertically.
 
@@ -175,15 +193,15 @@ $\displaystyle \intervalC{ \frac{1}{2} }{ 1^{2^{3}} }
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
-\medskip
+
+\bigskip
+
 
 % Docs for french real intervals - START
-
-\medskip
 
 \IDmacro*{intervalCO}{2}
 
@@ -193,7 +211,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 \IDarg{2} upper bound $b$ of the interval $\intervalCO{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{intervalC}{2}
 
@@ -203,7 +223,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 \IDarg{2} upper bound $b$ of the interval $\intervalC{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{intervalO}{2}
 
@@ -213,7 +235,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 \IDarg{2} upper bound $b$ of the interval $\intervalO{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{intervalOC}{2}
 
@@ -229,7 +253,7 @@ For all the macros above, the star version produces intervals with delimiters th
 
     \subsection{Real intervals - American notation}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 A semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and an opened one
@@ -239,15 +263,15 @@ $\intervalP{a}{b} = (a ; b)$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
 
 For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
-\medskip
+
+\bigskip
+
 
 % Docs for american real intervals - START
-
-\medskip
 
 \IDmacro*{intervalCP}{2}
 
@@ -257,7 +281,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 \IDarg{2} upper bound $b$ of the interval $\intervalCP{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{intervalP}{2}
 
@@ -267,7 +293,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 \IDarg{2} upper bound $b$ of the interval $\intervalP{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{intervalPC}{2}
 
@@ -283,7 +311,7 @@ For all the macros above, the star version produces intervals with delimiters th
 
     \subsection{Discrete intervals of integers}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
 By definition, $\ZintervalC{-1}{4} = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$. So we also have
@@ -293,11 +321,15 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Technical IDs}
+
+For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+
+
+\bigskip
+
 
 % Docs for discrete intervals - START
-
-\medskip
 
 \IDmacro*{ZintervalCO}{2}
 
@@ -307,7 +339,9 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 
 \IDarg{2} upper bound $b$ of the interval $\ZintervalCO{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{ZintervalC}{2}
 
@@ -317,7 +351,9 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 
 \IDarg{2} upper bound $b$ of the interval $\ZintervalC{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{ZintervalO}{2}
 
@@ -327,7 +363,9 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 
 \IDarg{2} upper bound $b$ of the interval $\ZintervalO{a}{b}$.
 
-\medskip
+
+\bigskip
+
 
 \IDmacro*{ZintervalOC}{2}
 

@@ -89,65 +89,45 @@
 
 % == PACKAGES USED == %
 
-\usepackage{mathtools}
+\usepackage[f]{esvect}
 
 
 % == DEFINITIONS == %
 
-\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
-
-\newcommand\hypergeo[3]{%
-    \suprageo{#1}{#2}{#3}{}{}%
-}
-
-\newcommand\seqplus[3]{%
-    \suprageo{#1}{}{#2}{#3}{}%
-}
-
+\makeatletter
+	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
+	\newcommand*\@vectStared[1]{\vv*{#1}}
+	\newcommand*\@vectUnstared[1]{\vv{#1}}
+\makeatother
 
 
 \begin{document}
 
-\section{Extended notations for special sequences}
+\section{Vectors}
 
-        \subsubsection{Example of use}
+	\subsection{Example of use}
 
 \begin{tcblisting}{}
-Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$
-and crazy men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
+Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
+$\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
 
-\IDmacro*{seqplus}{2}
+	\subsection{Technical IDs}
 
-\IDarg{1} the right exponent like expression.
+\IDmacro*{vect}{1}
 
-\IDarg{2} the right indice.
-
-
-\bigskip
-
-
-\IDmacro*{hypergeo}{2}
-
-\IDarg{1} the left indice.
-
-\IDarg{2} the right indice.
+\IDarg{} one text indicating the name of a vector.
 
 
 \bigskip
 
 
-\IDmacro*{suprageo}{4}
+\IDmacro*{vect*}{2}
 
-\IDarg{1} the left indice.
+\IDarg{1} one text indicating $up$ in the name $\vect*{up}{down}$ of a vector.
 
-\IDarg{2} the right indice.
-
-\IDarg{3} the right exponent.
-
-\IDarg{4} the left exponent.
+\IDarg{2} one text indicating $down$ in the name $\vect*{up}{down}$ of a vector.
 
 \end{document}

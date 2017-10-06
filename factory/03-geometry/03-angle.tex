@@ -89,65 +89,49 @@
 
 % == PACKAGES USED == %
 
-\usepackage{mathtools}
+\usepackage{yhmath}
 
 
 % == DEFINITIONS == %
 
-\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
+% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
 
-\newcommand\hypergeo[3]{%
-    \suprageo{#1}{#2}{#3}{}{}%
-}
+\makeatletter
+	\newcommand\anglein{\@ifstar{\@angleinStar}{\@angleinNoStar}}
+	\newcommand*\@angleinStar[2]{\widehat{#1}\vphantom{#1}_{#2}}
+	\newcommand*\@angleinNoStar[1]{\widehat{#1}}
+\makeatother
 
-\newcommand\seqplus[3]{%
-    \suprageo{#1}{}{#2}{#3}{}%
-}
-
+%\newcommand\angleVect[2]{\left( #1 ; #2\right)} % STYLE
 
 
 \begin{document}
 
-\section{Extended notations for special sequences}
+\section{Inner angles}
 
-        \subsubsection{Example of use}
+	\subsection{Example of use}
 
 \begin{tcblisting}{}
-Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$
-and crazy men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
+Here is one inner angle $\anglein{ABCDEF}$ using a lot of letters, and you can 
+write $\anglein*{A}{rot}$ instead of $\anglein{A_{rot}}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
 
-\IDmacro*{seqplus}{2}
+	\subsection{Technical IDs}
 
-\IDarg{1} the right exponent like expression.
+\IDmacro*{anglein}{1}
 
-\IDarg{2} the right indice.
-
-
-\bigskip
-
-
-\IDmacro*{hypergeo}{2}
-
-\IDarg{1} the left indice.
-
-\IDarg{2} the right indice.
+\IDarg{} one text indicating the name of an inner angle.
 
 
 \bigskip
 
 
-\IDmacro*{suprageo}{4}
+\IDmacro*{anglein*}{2}
 
-\IDarg{1} the left indice.
+\IDarg{1} one text indicating $up$ in the name $\anglein*{up}{down}$ of an inner angle.
 
-\IDarg{2} the right indice.
-
-\IDarg{3} the right exponent.
-
-\IDarg{4} the left exponent.
+\IDarg{2} one text indicating $down$ in the name $\anglein*{up}{down}$ of an inner angle.
 
 \end{document}

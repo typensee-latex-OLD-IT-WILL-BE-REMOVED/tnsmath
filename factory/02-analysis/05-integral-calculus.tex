@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -87,7 +99,7 @@
 
 % == DEFINITIONS == %
 
-% Source for minimizing spaces betwteen consecutive integrals :
+% Source for minimizing spaces between consecutive integrals :
 %    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
 
 % Consecutive integrals
@@ -143,12 +155,14 @@
     }
 
 % The hook calculator
-
     \newcommand\hook{\@ifstar{\@hookStar}{\@hookNoStar}}
+    \newcommand\@hookNoStar[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
+    \newcommand\@hookStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-    \newcommand\@hookNoStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+    \newcommand\vhook{\@ifstar{\@vhookStar}{\@vhookNoStar}}
+    \newcommand\@vhookNoStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+    \newcommand\@vhookStar[3]{\left. #1 \right\rvert_{#2}^{#3}}
 
-    \newcommand\@hookStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
 \makeatother
 
 
@@ -157,19 +171,30 @@
 
 \section{Integral calculus}
 
-    \subsection{The hook operator}
+    \subsection{The hook operator - 1st version}
 
-		\subsubsection{Example of use}
+        \subsubsection{Example of use \#1}
 
 \begin{tcblisting}{}
-By definition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$
-where $\hook{F(x)}{a}{b} = \hook*{F(x)}{a}{b} = F(b) - F(a)$.
+By definition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ where
+$\hook{F(x)}{a}{b} = F(b) - F(a)$.
 \end{tcblisting}
 
 
-		\subsubsection{Technical IDs}
+        \subsubsection{Example of use \#2}
+
+\begin{tcblisting}{}
+With the star version, the hooks stretch vertically like in
+$\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b} 
+             = \hook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+\end{tcblisting}
+
+
+        \subsubsection{Technical IDs}
 
 \IDmacro*{hook}{3}
+
+\IDmacro*{hook*}{3}
 
 \IDarg{1} the content inside the hooks.
 
@@ -178,10 +203,30 @@ where $\hook{F(x)}{a}{b} = \hook*{F(x)}{a}{b} = F(b) - F(a)$.
 \IDarg{3} the upper bound displayed as an exponent.
 
 
-\bigskip
+
+    \subsection{The hook operator - 2nd version}
+
+        \subsubsection{Example of use \#1}
+
+\begin{tcblisting}{}
+You can use $\vhook{F(x)}{a}{b}$ instead of $\hook{F(x)}{a}{b}$.
+\end{tcblisting}
 
 
-\IDmacro*{hook*}{3}
+        \subsubsection{Example of use \#2}
+
+\begin{tcblisting}{}
+With the star version, the left rule stretches vertically like in
+$\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b} 
+             = \vhook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+\end{tcblisting}
+
+
+        \subsubsection{Technical IDs}
+
+\IDmacro*{vhook}{3}
+
+\IDmacro*{vhook*}{3}
 
 \IDarg{1} the content before the vertical line $\vert$ .
 
@@ -200,10 +245,13 @@ $\displaystyle \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
 = \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
 \end{tcblisting}
 
-The default behavior is the following one :
-\makeatletter
-    $\displaystyle \original@int \original@int \original@int F(x;y;z) \dd{x} \dd{y} \dd{z}
-    = \original@int_{a}^{b} \original@int_{c}^{d} \original@int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$.
-\makeatother
+
+\begin{remark}
+	By default, \LaTeX{} prints
+	\makeatletter
+    	$\displaystyle \original@int \original@int \original@int F(x;y;z) \dd{x} \dd{y} \dd{z}
+    	= \original@int_{a}^{b} \original@int_{c}^{d} \original@int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$.
+	\makeatother
+\end{remark}
 
 \end{document}

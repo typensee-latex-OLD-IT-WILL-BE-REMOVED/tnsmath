@@ -63,12 +63,12 @@ text_start, _, text_end = between(
 
 text_auto = [
     "\n",
-    DECO + ("\n" + DECO).join(
+    "\n".join(
         r"\DeclareMathMacro{{\{0}}}{{\operatorname{{{0}}}}}".format(name)
         for name in functions['no-parameter']
     ),
     "",
-    DECO + ("\n" + DECO).join(
+    "\n".join(
         r"\newcommand\{0}[{1[nbparam]}]{{{1[latex]}}}".format(
             name,
             infos
@@ -127,6 +127,8 @@ text_auto += r"""
 {0}
 \end{{tabular*}}
 """.format(text_table)
+
+text_auto = text_auto.rstrip()
 
 template = text_start + text_auto + text_end
 

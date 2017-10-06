@@ -5,6 +5,31 @@ What about this package  ?
 
 
 
+What is new in this version `0.0.1-beta` ?
+============================================
+
+
+**Arithmetic:** macros for continued fractions added.
+
+
+**Geometry:** some macros for geometry added.
+
+
+**Integral calculus:** major changes.
+
+  1) The macros ``hook*`` now gives a formatting with hooks that stretch vertically.
+
+  2) The macros ``vhook`` is when you want to have a vertical line instead of hooks.
+
+  3) The macros ``vhook*`` gives a formatting with the vertical line that stretchs vertically.
+
+
+**Differential calculus:** one new macro ``dersub`` wich is similar to ``partialsub``.
+
+
+**Background changes:** now ``\IDarg{}`` writes ``Argument:``, and ``\IDoption{}`` prints ``Option:`.
+
+
 What about this first version `0.0.0-beta` ?
 ============================================
 

@@ -96,7 +96,7 @@ for subdir in THIS_DIR.walk("dir::"):
             file     = latexfile,
             encoding = "utf-8"
         ) as filetoupdate:
-            _, packages, after = between(
+            search = between(
                 text = filetoupdate.read(),
                 seps = [
                     "% == PACKAGES USED == %",
@@ -105,7 +105,13 @@ for subdir in THIS_DIR.walk("dir::"):
                 keepseps = True
             )
 
-            ALL_PACKAGES += [x.strip() for x in packages.strip().split("\n")]
+            if search is not None:
+                _, packages, after = search
+
+                ALL_PACKAGES += [
+                    x.strip()
+                    for x in packages.strip().split("\n")
+                ]
 
             _, definitions, _ = between(
                 text = after,

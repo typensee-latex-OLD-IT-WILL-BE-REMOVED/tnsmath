@@ -18,16 +18,26 @@
 
 \usepackage{enumitem}
 
+\usepackage{amsthm}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{listings}
 
 \usepackage{pgffor}
 \usepackage{xstring}
 
+
+% MISC
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
 % Technical IDs
+
 \newwrite\tempfile
 
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
@@ -60,7 +70,9 @@
 
 	\newcommand\@IDoptarg[2]{%
     	\vspace{0.5em}
-		--- \texttt{#1 \##2:}%
+		--- \texttt{#1%
+			\IfStrEq{#2}{}{:}{\,\##2:}%
+		}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -131,6 +143,18 @@
         }
     }
 
+% Subscript writing of total derivate
+    \newcommand\dersub[3][\relax]{
+% The following command works because xstring traits {...} like a single character.
+        \dd%
+        \IfStrEq{#1}{\relax}{%
+        	^{\vphantom{\prime}}%
+        }{%
+	        ^{#1}%
+	    }%
+	    _{#3} #2%
+    }
+
 % Subscript writing of partial derivate
     \newcommand\@bracketIt[1]{(#1)}
 
@@ -174,7 +198,7 @@
         \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-You can write $\dd{x}$ and $\pp{t}$, but also $ \dd[5]{x}$ et $\pp[n]{x}$.
+You can write $\dd{x}$ and $\pp{t}$ and also $ \dd[5]{x}$ or $\pp[n]{x}$.
 \end{tcblisting}
 
 
@@ -184,20 +208,33 @@ You can write $\dd{x}$ and $\pp{t}$, but also $ \dd[5]{x}$ et $\pp[n]{x}$.
 
 \IDmacro{pp}{1}{1}
 
-\IDoption{1} if used, this argument will be the exponent of the symbol $\pp{}$ or $\dd{}$.
+\IDoption{} if used, this argument will be the exponent of the symbol $\pp{}$ or $\dd{}$.
 
-\IDarg{1} the variable of differentiation at the right of the symbol $\pp{}$ or $\dd{}$.
+\IDarg{} the variable of differentiation at the right of the symbol $\pp{}$ or $\dd{}$.
 
 
 
     \subsection{Total derivation}
 
-        \subsubsection{Example of use}
+        \subsubsection{Example of use \#1}
 
 \begin{tcblisting}{}
-$\displaystyle cos' a = \derpow{\cos} (a) = \derfrac{\cos}{x} (a)$
+$\displaystyle f'(a)
+             = \derpow{f} (a) 
+             = \derfrac{f}{x} (a)
+             = \dersub{f}{x} (a)$
+\end{tcblisting}
+
+
+        \subsubsection{Example of use \#2}
+
+\begin{tcblisting}{}
+$\displaystyle f'''(a)
+             = \derpow[3]{f} (a)
+             = \derfrac[3]{f}{x} (a)
+             = \dersub[3]{f}{x} (a)$
 and
-$\displaystyle cos''' a = \derpow[3]{\cos} (a) = \derfrac[3]{\cos}{x} (a)$
+$\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 \end{tcblisting}
 
 
@@ -205,9 +242,9 @@ $\displaystyle cos''' a = \derpow[3]{\cos} (a) = \derfrac[3]{\cos}{x} (a)$
 
 \IDmacro{derpow}{1}{1}
 
-\IDoption{1} if used, this argument will be the exponent of derivation put inside braces.
+\IDoption{} if used, this argument will be the exponent of derivation put inside braces.
 
-\IDarg{1} the function to be differenciated.
+\IDarg{} the function to be differenciated.
 
 
 \bigskip
@@ -215,7 +252,9 @@ $\displaystyle cos''' a = \derpow[3]{\cos} (a) = \derfrac[3]{\cos}{x} (a)$
 
 \IDmacro{derfrac}{1}{2}
 
-\IDoption{1} if used, the exponent of derivation.
+\IDmacro{dersub}{1}{2}
+
+\IDoption{} if used, the exponent of derivation.
 
 \IDarg{1} the function to be differenciated.
 
@@ -225,15 +264,18 @@ $\displaystyle cos''' a = \derpow[3]{\cos} (a) = \derfrac[3]{\cos}{x} (a)$
 
     \subsection{Partial derivation}
 
-        \subsubsection{Example of use}
+        \subsubsection{Example of use \#1}
 
 \begin{tcblisting}{}
 $\displaystyle \partialfrac{f}{x} (a;b)
              = \partialsub{f}{x} (a;b)
              = \partialprime{f}{x} (a;b)$
+\end{tcblisting}
 
-\medskip
 
+        \subsubsection{Example of use \#2}
+
+\begin{tcblisting}{}
 $\displaystyle \partialfrac[3]{G}{f^{2} // v} (a;b)
              = \partialfrac{G}{f^{2} // v} (a;b)
              = \partialsub{G}{f^{2} // v} (a;b)
@@ -245,7 +287,7 @@ $\displaystyle \partialfrac[3]{G}{f^{2} // v} (a;b)
 
 \IDmacro{partialfrac}{1}{2}
 
-\IDoption{1} if used, the exponent of $\pp$ associated to the function differenciated.
+\IDoption{} if used, the exponent of $\pp$ associated to the function differenciated.
 
 \IDarg{1} the function to be partially differenciated.
 
