@@ -4,15 +4,19 @@ What about this package  ?
 **ly-math**, which is a contraction of **lycée** and **math**, has been built to allow the writings of more semantical LaTeX documents at a very low level of mathematics.
 
 
+What is new in this version `0.0.2-beta` ?
+============================================
+
+**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` wich use an operator like notation.
+
 
 What is new in this version `0.0.1-beta` ?
 ============================================
 
+**Arithmetic:** macros for continued fractions.
 
-**Arithmetic:** macros for continued fractions added.
 
-
-**Geometry:** some macros for geometry added.
+**Geometry:** some macros for geometry.
 
 
 **Integral calculus:** major changes.
@@ -27,7 +31,7 @@ What is new in this version `0.0.1-beta` ?
 **Differential calculus:** one new macro ``dersub`` wich is similar to ``partialsub``.
 
 
-**Background changes:** now ``\IDarg{}`` writes ``Argument:``, and ``\IDoption{}`` prints ``Option:`.
+**Background changes:** now ``\IDarg{}`` writes ``Argument:``, and ``\IDoption{}`` prints ``Option:``.
 
 
 What about this first version `0.0.0-beta` ?

@@ -5,7 +5,7 @@
 **New minor version version::``0.0.2-beta`` of ¨lymath:** see the changes below.
 
 
-**Differential calculus:** there a now star versions of ``derfrac`` and ``partialfrac`` uses a kind of operator notation.
+**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` wich use an operator like notation.
 
 
 **Improvment of the docummentation:** a small introduction has been added.
