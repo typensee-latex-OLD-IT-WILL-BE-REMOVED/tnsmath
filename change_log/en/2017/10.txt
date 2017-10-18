@@ -1,14 +1,38 @@
 ==========
+2017-10-18
+==========
+
+**New minor version version::``0.0.2-beta`` of ¨lymath:** see the changes below.
+
+
+**Differential calculus:** there a now star versions of ``derfrac`` and ``partialfrac`` uses a kind of operator notation.
+
+
+**Improvment of the docummentation:** a small introduction has been added.
+
+
+==========
+2017-10-07
+==========
+
+**Minor changes.**
+
+    1) The space around semi-colons in math formulas is done only when the package ``babel`` is loaded with the option ``francais``.
+
+    2) ``\RequirePackage`` is used instead of ``\usepackage``. That's better !
+
+
+==========
 2017-10-06
 ==========
 
 **New minor version version::``0.0.1-beta`` of ¨lymath:** see the changes below.
 
 
-**Arithmetic:** macros for continued fractions added.
+**Arithmetic:** macros for continued fractions.
 
 
-**Geometry:** some macros for geometry added.
+**Geometry:** some macros for geometry.
 
 
 **Integral calculus:** major changes.
@@ -23,7 +47,7 @@
 **Differential calculus:** one new macro ``dersub`` wich is similar to ``partialsub``.
 
 
-**Background changes:** now ``\IDarg{}`` writes ``Argument:``, and ``\IDoption{}`` prints ``Option:`` (no number prints).
+**Background changes:** now ``\IDarg{}`` writes ``Argument:``, and ``\IDoption{}`` prints ``Option:``.
 
 
 ==========

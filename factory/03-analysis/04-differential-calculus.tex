@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -135,12 +151,18 @@
     }
 
 % Fractional writing of total derivate
-    \newcommand\derfrac[3][\relax]{
+	\newcommand\derfrac{\@ifstar{\@derfracStar}{\@derfracNoStar}}
+
+    \newcommand\@derfracNoStar[3][\relax]{
         \IfStrEq{#1}{\relax}{
             \frac{\dd{#2}}{\dd{#3}}
         }{
             \frac{\dd[#1]{#2}}{\dd{#3}^{#1}}
         }
+    }
+
+    \newcommand\@derfracStar[3][\relax]{
+    	\@derfracNoStar[#1]{}{#3} #2
     }
 
 % Subscript writing of total derivate
@@ -177,13 +199,19 @@
     }
 
 % Fractional writing of partial derivate
-    \newcommand\partialfrac[3][0]{%
+	\newcommand\partialfrac{\@ifstar{\@partialfracStar}{\@partialfracNoStar}}
+
+    \newcommand\@partialfracNoStar[3][0]{%
         \frac{%
             \pp[#1]{#2}%
         }{%
             \StrSubstitute{\partial#3}{//}{\, \partial}[\@deno]%
             \expandafter\StrSubstitute\expandafter{\@deno}{\partial\cdots}{\,\cdots{}\,\partial}
         }
+    }
+
+    \newcommand\@partialfracStar[3][\relax]{
+    	\@partialfracNoStar[#1]{}{#3} #2
     }
 \makeatother
 
@@ -238,6 +266,15 @@ $\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 \end{tcblisting}
 
 
+        \subsubsection{Example of use \#3}
+
+\begin{tcblisting}{}
+If $\displaystyle f(x) = \frac{1}{x^2+3}$, then we can write :
+$\displaystyle \derpow[3]{f} (a)
+             = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
+\end{tcblisting}
+
+
         \subsubsection{Technical IDs}
 
 \IDmacro{derpow}{1}{1}
@@ -251,6 +288,8 @@ $\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 
 
 \IDmacro{derfrac}{1}{2}
+
+\IDmacro{derfrac*}{1}{2}
 
 \IDmacro{dersub}{1}{2}
 
@@ -276,16 +315,27 @@ $\displaystyle \partialfrac{f}{x} (a;b)
         \subsubsection{Example of use \#2}
 
 \begin{tcblisting}{}
-$\displaystyle \partialfrac[3]{G}{f^{2} // v} (a;b)
-             = \partialfrac{G}{f^{2} // v} (a;b)
-             = \partialsub{G}{f^{2} // v} (a;b)
-             = \partialprime{G}{f^{2} // v} (a;b)$
+$\displaystyle \partialfrac[3]{G}{f^2 // v} (a;b)
+             = \partialfrac{G}{f^2 // v} (a;b)
+             = \partialsub{G}{f^2 // v} (a;b)
+             = \partialprime{G}{f^2 // v} (a;b)$
+\end{tcblisting}
+
+
+        \subsubsection{Example of use \#3}
+
+\begin{tcblisting}{}
+If $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$, then we can study
+$\displaystyle \partialfrac[9]{f}{x^4 // y^5}
+             = \partialfrac*[9]{\left( \frac{cos(x y)}{x^2+y^2} \right)}{x^4 // y^5}$.
 \end{tcblisting}
 
 
         \subsubsection{Technical IDs}
 
 \IDmacro{partialfrac}{1}{2}
+
+\IDmacro{partialfrac*}{1}{2}
 
 \IDoption{} if used, the exponent of $\pp$ associated to the function differenciated.
 

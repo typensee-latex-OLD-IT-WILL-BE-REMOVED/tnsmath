@@ -10,6 +10,8 @@
     urlcolor=black
 }
 
+\usepackage{ifplatform}
+
 \usepackage{lymath}
 
 \usepackage{amssymb}
@@ -78,8 +80,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -88,11 +92,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -106,21 +124,41 @@
 
 \begin{document}
 
-\title{\texttt{lymath} package:\\semantic low level math formulas}
+\title{\texttt{lymath} package:\\semantic low level math formulas\\{\footnotesize (developped and tested on \macosxname{})}}
 \author{Christophe BAL}
-\date{}
+\date{2017-10-18}
 
 \maketitle
+
+
+\section{Introduction}
+
+
+
+The package \verb+lymath+ is a set of semantic macros to write elementary mathematic formulas. Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
+
+\begin{tcblisting}{listing only}
+% Without lyxam
+
+Knowing that $\frac{df}{dx} = 4 cos(x^2)$, we have: 
+$\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
+
+% With lyxam
+
+Knowing that $\derfrac{f}{x} = 4 cos(x^2)$, we have: 
+$\int_a^b cos(x^2) dx = \hook{\frac{1){4} f(x)}{a}{b}$.
+\end{tcblisting}
 
 
 \section{Miscellaneous}
 
 
 
-\subsection{Semi-colon and spacing}
+\subsection{Semi-colon and spacing with the french option of \texttt{babel}}
 
 \begin{tcblisting}{}
-Same spacing around the semi-colon in $A(x;y)$. So cute !
+Only \textbf{if you use \texttt{babel} with the option \texttt{francais}}, then
+you will see the same spacing around the semi-colon in $A(x;y)$. Que c'est beau !
 \end{tcblisting}
 
 
@@ -135,12 +173,12 @@ Same spacing around the semi-colon in $A(x;y)$. So cute !
         \paragraph{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$, 
-but you can't write things like \verb+$\geoset{ABC}$+.
+You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$ but you can
+not write things like \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{geoset}{1}
 
@@ -153,16 +191,16 @@ but you can't write things like \verb+$\geoset{ABC}$+.
         \paragraph{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\probaset{E}$ and $\probaset{G}$
-but you can't write things like \verb+$\probaset{ABC}$+.
+You can semantically write $\probaset{E}$ and $\probaset{G}$ but you can not write
+things like \verb+$\probaset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{probaset}{1}
 
-\IDarg{} one single \ascii{} upper letter indicating a probabilistic set.
+\IDarg{} one single upper \ascii{} upper letter indicating a probabilistic set.
 
 
 
@@ -171,24 +209,24 @@ but you can't write things like \verb+$\probaset{ABC}$+.
         \paragraph{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ 
-and $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
+You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ and
+$\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{fieldset}{1}
 
-\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single \ascii{} upper letter indicating a field or ring like set.
+\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} upper letter indicating a field or ring like set.
 
 
 
     \subsubsection{Classical sets}
 
 \begin{tcblisting}{}
-You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-$\HH$ and $\OO$.
+You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$, $\HH$
+and $\OO$.
 \end{tcblisting}
 
 
@@ -503,7 +541,7 @@ such as to stress the fact that $\ct{a}$, $\ct{b}$ and $\ct{c}$ are constants.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{ct}{1}
 
@@ -574,8 +612,8 @@ All the following macros have at least one parameter.
         \paragraph{Example of use}
 
 \begin{tcblisting}{}
-Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$
-and crazy men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
+Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
+-wo-men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
 \end{tcblisting}
 
 
@@ -662,6 +700,15 @@ $\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 \end{tcblisting}
 
 
+        \paragraph{Example of use \#3}
+
+\begin{tcblisting}{}
+If $\displaystyle f(x) = \frac{1}{x^2+3}$, then we can write :
+$\displaystyle \derpow[3]{f} (a)
+             = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
+\end{tcblisting}
+
+
         \paragraph{Technical IDs}
 
 \IDmacro{derpow}{1}{1}
@@ -675,6 +722,8 @@ $\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 
 
 \IDmacro{derfrac}{1}{2}
+
+\IDmacro{derfrac*}{1}{2}
 
 \IDmacro{dersub}{1}{2}
 
@@ -700,16 +749,27 @@ $\displaystyle \partialfrac{f}{x} (a;b)
         \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
-$\displaystyle \partialfrac[3]{G}{f^{2} // v} (a;b)
-             = \partialfrac{G}{f^{2} // v} (a;b)
-             = \partialsub{G}{f^{2} // v} (a;b)
-             = \partialprime{G}{f^{2} // v} (a;b)$
+$\displaystyle \partialfrac[3]{G}{f^2 // v} (a;b)
+             = \partialfrac{G}{f^2 // v} (a;b)
+             = \partialsub{G}{f^2 // v} (a;b)
+             = \partialprime{G}{f^2 // v} (a;b)$
+\end{tcblisting}
+
+
+        \paragraph{Example of use \#3}
+
+\begin{tcblisting}{}
+If $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$, then we can study
+$\displaystyle \partialfrac[9]{f}{x^4 // y^5}
+             = \partialfrac*[9]{\left( \frac{cos(x y)}{x^2+y^2} \right)}{x^4 // y^5}$.
 \end{tcblisting}
 
 
         \paragraph{Technical IDs}
 
 \IDmacro{partialfrac}{1}{2}
+
+\IDmacro{partialfrac*}{1}{2}
 
 \IDoption{} if used, the exponent of $\pp$ associated to the function differenciated.
 
@@ -861,7 +921,7 @@ $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{bigomega}{1}
 
@@ -879,12 +939,12 @@ Let's see how to use the symbol $\bigtheta{}$.
 
 \medskip
 
-$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that
-$n \geqslant n_0$ implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
+$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$ 
+implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{bigtheta}{1}
 
@@ -905,7 +965,7 @@ We can call $\pt{I}$ the middle of $[\pt{A}\pt{B}]$.
 
 
 
-	\subsubsection{Technical IDs}
+	\subsubsection{Technical ID}
 
 \IDmacro*{pt}{1}
 
@@ -1066,7 +1126,7 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+        \paragraph{Technical ID}
 
 \IDmacro*{singlecontfrac}{2}
 

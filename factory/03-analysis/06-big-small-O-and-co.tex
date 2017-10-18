@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -199,7 +215,7 @@ $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+        \subsubsection{Technical ID}
 
 \IDmacro*{bigomega}{1}
 
@@ -217,12 +233,12 @@ Let's see how to use the symbol $\bigtheta{}$.
 
 \medskip
 
-$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that
-$n \geqslant n_0$ implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
+$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$ 
+implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+        \subsubsection{Technical ID}
 
 \IDmacro*{bigtheta}{1}
 

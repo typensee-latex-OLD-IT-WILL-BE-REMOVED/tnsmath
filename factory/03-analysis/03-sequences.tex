@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -89,45 +105,65 @@
 
 % == PACKAGES USED == %
 
-\usepackage{yhmath}
+\usepackage{mathtools}
 
 
 % == DEFINITIONS == %
 
-\makeatletter
-	\newcommand\arc{\@ifstar{\@arcStared}{\@arcUnstared}}
-	\newcommand*\@arcStared[2]{\wideparen{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@arcUnstared[1]{\wideparen{#1}}
-\makeatother
+\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
+
+\newcommand\hypergeo[3]{%
+    \suprageo{#1}{#2}{#3}{}{}%
+}
+
+\newcommand\seqplus[3]{%
+    \suprageo{#1}{}{#2}{#3}{}%
+}
+
 
 
 \begin{document}
 
-\section{Circular arcs}
+\section{Extended notations for special sequences}
 
-	\subsection{Example of use}
+        \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write 
-$\arc*{A}{rot}$ instead of $\arc{A_{rot}}$.
+Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
+-wo-men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
 \end{tcblisting}
 
 
+        \subsubsection{Technical IDs}
 
-	\subsection{Technical IDs}
+\IDmacro*{seqplus}{2}
 
-\IDmacro*{arc}{1}
+\IDarg{1} the right exponent like expression.
 
-\IDarg{} one text indicating the name of a circular arc.
+\IDarg{2} the right indice.
 
 
 \bigskip
 
 
-\IDmacro*{arc*}{2}
+\IDmacro*{hypergeo}{2}
 
-\IDarg{1} one text indicating $up$ in the name $\arc*{up}{down}$ of a circular arc.
+\IDarg{1} the left indice.
 
-\IDarg{2} one text indicating $down$ in the name $\arc*{up}{down}$ of a circular arc.
+\IDarg{2} the right indice.
+
+
+\bigskip
+
+
+\IDmacro*{suprageo}{4}
+
+\IDarg{1} the left indice.
+
+\IDarg{2} the right indice.
+
+\IDarg{3} the right exponent.
+
+\IDarg{4} the left exponent.
 
 \end{document}

@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -236,12 +252,12 @@
         \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$, 
-but you can't write things like \verb+$\geoset{ABC}$+.
+You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$ but you can
+not write things like \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+        \subsubsection{Technical ID}
 
 \IDmacro*{geoset}{1}
 
@@ -254,16 +270,16 @@ but you can't write things like \verb+$\geoset{ABC}$+.
         \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\probaset{E}$ and $\probaset{G}$
-but you can't write things like \verb+$\probaset{ABC}$+.
+You can semantically write $\probaset{E}$ and $\probaset{G}$ but you can not write
+things like \verb+$\probaset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+        \subsubsection{Technical ID}
 
 \IDmacro*{probaset}{1}
 
-\IDarg{} one single \ascii{} upper letter indicating a probabilistic set.
+\IDarg{} one single upper \ascii{} upper letter indicating a probabilistic set.
 
 
 
@@ -272,24 +288,24 @@ but you can't write things like \verb+$\probaset{ABC}$+.
         \subsubsection{Example of use}
 
 \begin{tcblisting}{}
-You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ 
-and $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
+You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ and
+$\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+        \subsubsection{Technical ID}
 
 \IDmacro*{fieldset}{1}
 
-\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single \ascii{} upper letter indicating a field or ring like set.
+\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} upper letter indicating a field or ring like set.
 
 
 
     \subsection{Classical sets}
 
 \begin{tcblisting}{}
-You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-$\HH$ and $\OO$.
+You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$, $\HH$
+and $\OO$.
 \end{tcblisting}
 
 

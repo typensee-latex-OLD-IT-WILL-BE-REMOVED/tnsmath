@@ -64,7 +64,7 @@ def organize_packages(packages):
         else:
             options = ""
 
-        packages_ok.append(f"\\usepackage{options}{{{onename}}}")
+        packages_ok.append(f"\\RequirePackage{options}{{{onename}}}")
 
 
     print(f"{DECO}* Declaration of packages organized.")
@@ -121,28 +121,29 @@ for subdir in THIS_DIR.walk("dir::"):
                 ]
             )
 
-            definitions = definitions.split("\n")
+            if definitions.strip():
+                definitions = definitions.split("\n")
 
-            for i in [0, -1]:
-                while not definitions[i].strip():
-                    definitions.pop(i)
+                for i in [0, -1]:
+                    while not definitions[i].strip():
+                        definitions.pop(i)
 
-            section = relative_path.stem
-            section = section.split("-", 1)
-            section = section[1]
-            section = section.replace("-", " ")
-            section = latexfile.parent.name.split("-", 1)[1] + " - " + section
+                section = relative_path.stem
+                section = section.split("-", 1)
+                section = section[1]
+                section = section.replace("-", " ")
+                section = latexfile.parent.name.split("-", 1)[1] + " - " + section
 
-            definitions = """
+                definitions = """
 {0}
 
 {1}
-            """.format(
-                MYFRAME(section.upper()),
-                "\n".join(definitions)
-            ).strip()
+                """.format(
+                    MYFRAME(section.upper()),
+                    "\n".join(definitions)
+                ).strip()
 
-            ALL_MACROS.append(definitions)
+                ALL_MACROS.append(definitions)
 
 
 # --------------------------------- #

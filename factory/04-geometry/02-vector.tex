@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -89,49 +105,45 @@
 
 % == PACKAGES USED == %
 
-\usepackage{yhmath}
+\usepackage[f]{esvect}
 
 
 % == DEFINITIONS == %
 
-% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
-
 \makeatletter
-	\newcommand\anglein{\@ifstar{\@angleinStar}{\@angleinNoStar}}
-	\newcommand*\@angleinStar[2]{\widehat{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@angleinNoStar[1]{\widehat{#1}}
+	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
+	\newcommand*\@vectStared[1]{\vv*{#1}}
+	\newcommand*\@vectUnstared[1]{\vv{#1}}
 \makeatother
-
-%\newcommand\angleVect[2]{\left( #1 ; #2\right)} % STYLE
 
 
 \begin{document}
 
-\section{Inner angles}
+\section{Vectors}
 
 	\subsection{Example of use}
 
 \begin{tcblisting}{}
-Here is one inner angle $\anglein{ABCDEF}$ using a lot of letters, and you can 
-write $\anglein*{A}{rot}$ instead of $\anglein{A_{rot}}$.
+Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
+$\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
 \end{tcblisting}
 
 
 
 	\subsection{Technical IDs}
 
-\IDmacro*{anglein}{1}
+\IDmacro*{vect}{1}
 
-\IDarg{} one text indicating the name of an inner angle.
+\IDarg{} one text indicating the name of a vector.
 
 
 \bigskip
 
 
-\IDmacro*{anglein*}{2}
+\IDmacro*{vect*}{2}
 
-\IDarg{1} one text indicating $up$ in the name $\anglein*{up}{down}$ of an inner angle.
+\IDarg{1} one text indicating $up$ in the name $\vect*{up}{down}$ of a vector.
 
-\IDarg{2} one text indicating $down$ in the name $\anglein*{up}{down}$ of an inner angle.
+\IDarg{2} one text indicating $down$ in the name $\vect*{up}{down}$ of a vector.
 
 \end{document}

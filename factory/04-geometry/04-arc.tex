@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -89,43 +105,45 @@
 
 % == PACKAGES USED == %
 
-\usepackage[francais]{babel}
+\usepackage{yhmath}
 
 
 % == DEFINITIONS == %
 
-% Sources :
-%    * http://forum.mathematex.net/latex-f6/espacement-autour-des-points-virgules-en-mode-maths-t8379.html#p83226
-%    * http://forum.mathematex.net/latex-f6/espace-autour-d-un-point-virgule-en-mode-maths-t12323.html#p119334
-
-% This command is adapted from the one given in the following link fro factorial :
-% http://www.math.bme.hu/latex/magyar_pre_tug2004.pdf#page=28
-
 \makeatletter
-    \def\fixmathspacing#1#2#3{%
-        \def#1{#3}%
-        \expandafter\addto\csname \expandafter
-        \ifx\csname mathoptions@on\endcsname\relax% detect nath.sty
-            check@mathfonts%
-        \else
-            mathoptions@on%
-        \fi
-        \endcsname{%
-            \catcode`#212 \mathcode`#2"8000
-            \begingroup\lccode`~`#2\lowercase{\endgroup\def~}{#1}
-        }
-    }
+	\newcommand\arc{\@ifstar{\@arcStared}{\@arcUnstared}}
+	\newcommand*\@arcStared[2]{\wideparen{#1}\vphantom{#1}_{#2}}
+	\newcommand*\@arcUnstared[1]{\wideparen{#1}}
 \makeatother
-
-\fixmathspacing{\fixedsemicolon}{;}{\mathclose{}\mathpunct{}\mathpunct{\mathchar"603B}}
 
 
 \begin{document}
 
-\section{Semi-colon and spacing}
+\section{Circular arcs}
+
+	\subsection{Example of use}
 
 \begin{tcblisting}{}
-Same spacing around the semi-colon in $A(x;y)$. So cute !
+Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write 
+$\arc*{A}{rot}$ instead of $\arc{A_{rot}}$.
 \end{tcblisting}
+
+
+
+	\subsection{Technical IDs}
+
+\IDmacro*{arc}{1}
+
+\IDarg{} one text indicating the name of a circular arc.
+
+
+\bigskip
+
+
+\IDmacro*{arc*}{2}
+
+\IDarg{1} one text indicating $up$ in the name $\arc*{up}{down}$ of a circular arc.
+
+\IDarg{2} one text indicating $down$ in the name $\arc*{up}{down}$ of a circular arc.
 
 \end{document}

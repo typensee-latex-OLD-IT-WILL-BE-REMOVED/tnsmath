@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -89,45 +105,28 @@
 
 % == PACKAGES USED == %
 
-\usepackage[f]{esvect}
-
 
 % == DEFINITIONS == %
 
-\makeatletter
-	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
-	\newcommand*\@vectStared[1]{\vv*{#1}}
-	\newcommand*\@vectUnstared[1]{\vv{#1}}
-\makeatother
+\newcommand\pt[1]{\mathrm{#1}}
 
 
 \begin{document}
 
-\section{Vectors}
+\section{Points}
 
 	\subsection{Example of use}
 
 \begin{tcblisting}{}
-Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
-$\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
+We can call $\pt{I}$ the middle of $[\pt{A}\pt{B}]$.
 \end{tcblisting}
 
 
 
-	\subsection{Technical IDs}
+	\subsection{Technical ID}
 
-\IDmacro*{vect}{1}
+\IDmacro*{pt}{1}
 
-\IDarg{} one text indicating the name of a vector.
-
-
-\bigskip
-
-
-\IDmacro*{vect*}{2}
-
-\IDarg{1} one text indicating $up$ in the name $\vect*{up}{down}$ of a vector.
-
-\IDarg{2} one text indicating $down$ in the name $\vect*{up}{down}$ of a vector.
+\IDarg{} one text indicating the name of a point.
 
 \end{document}

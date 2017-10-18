@@ -58,8 +58,10 @@
         		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
-    	    \,\,(#3 Argument%
+    	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
 				\IfStrEq{#3}{1}{}{s})%
+			}
 	   	}
         \immediate\write\tempfile{macro@#1@#2@#3}%
     }
@@ -68,11 +70,25 @@
         \@IDmacroNoStar{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
+	
+	\newcommand\@IDoptargStar[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
-			\IfStrEq{#2}{}{:}{\,\##2:}%
+			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
+	}
+
+	\newcommand\@IDoptargNoStar[2]{%
+    	\IfStrEq{#2}{}{%
+			\@IDoptargStar{#1}{}%
+		}{%
+			\@IDoptargStar{#1}{\##2}%
+		}%
+	}
+
+	\newcommand\IDkey[1]{%
+    	\@IDoptarg*{Option}{{\itshape "#1"}}%
 	}
 
 	\newcommand\IDoption[1]{%
@@ -86,68 +102,27 @@
 
 % == FOR DOC AND TESTS - END == %
 
+% == EXTRA == %
 
 % == PACKAGES USED == %
 
-\usepackage{mathtools}
-
-
 % == DEFINITIONS == %
-
-\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
-
-\newcommand\hypergeo[3]{%
-    \suprageo{#1}{#2}{#3}{}{}%
-}
-
-\newcommand\seqplus[3]{%
-    \suprageo{#1}{}{#2}{#3}{}%
-}
-
 
 
 \begin{document}
 
-\section{Extended notations for special sequences}
+The package \verb+lymath+ is a set of semantic macros to write elementary mathematic formulas. Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
 
-        \subsubsection{Example of use}
+\begin{tcblisting}{listing only}
+% Without lyxam
 
-\begin{tcblisting}{}
-Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$
-and crazy men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
+Knowing that $\frac{df}{dx} = 4 cos(x^2)$, we have: 
+$\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
+
+% With lyxam
+
+Knowing that $\derfrac{f}{x} = 4 cos(x^2)$, we have: 
+$\int_a^b cos(x^2) dx = \hook{\frac{1){4} f(x)}{a}{b}$.
 \end{tcblisting}
-
-
-        \subsubsection{Technical IDs}
-
-\IDmacro*{seqplus}{2}
-
-\IDarg{1} the right exponent like expression.
-
-\IDarg{2} the right indice.
-
-
-\bigskip
-
-
-\IDmacro*{hypergeo}{2}
-
-\IDarg{1} the left indice.
-
-\IDarg{2} the right indice.
-
-
-\bigskip
-
-
-\IDmacro*{suprageo}{4}
-
-\IDarg{1} the left indice.
-
-\IDarg{2} the right indice.
-
-\IDarg{3} the right exponent.
-
-\IDarg{4} the left exponent.
 
 \end{document}

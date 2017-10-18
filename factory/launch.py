@@ -1,3 +1,5 @@
+# gestion de [en] et [fr]
+
 #!/usr/bin/env python3
 
 # --------------------- #
