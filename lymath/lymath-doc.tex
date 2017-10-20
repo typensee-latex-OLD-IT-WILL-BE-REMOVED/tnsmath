@@ -126,7 +126,7 @@
 
 \title{\texttt{lymath} package:\\semantic low level math formulas\\{\footnotesize (developped and tested on \macosxname{})}}
 \author{Christophe BAL}
-\date{2017-10-18}
+\date{2017-10-20}
 
 \maketitle
 
@@ -135,19 +135,28 @@
 
 
 
-The package \verb+lymath+ is a set of semantic macros to write elementary mathematic formulas. Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
+\LaTeX{} is a great tool for writing mathematics, maybe it is the best, but the power of \LaTeX{} allows very poor semantic writings.
+The modest purpose of the package \verb+lymath+ is to give some semantic macros to write elementary mathematic formulas.
+Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
 
 \begin{tcblisting}{listing only}
 % Without lyxam
 
-Knowing that $\frac{df}{dx} = 4 cos(x^2)$, we have: 
+Knowing that $\frac{df}{dx}(x) = 4 cos(x^2)$ on $[a ; b]$, we have: 
 $\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
 
 % With lyxam
 
-Knowing that $\derfrac{f}{x} = 4 cos(x^2)$, we have: 
-$\int_a^b cos(x^2) dx = \hook{\frac{1){4} f(x)}{a}{b}$.
+Knowing that $\derfrac{f}{x}(x) = 4 cos(x^2)$ on $\intervalC{a}{b}$, we have: 
+$\int_a^b cos(x^2) \dd{x} = \hook{\frac{1){4} f(x)}{a}{b}$.
 \end{tcblisting}
+
+Even if some commands are longest to write than direct \LaTeX{} commands, there are two benefits.
+\begin{enumerate}
+	\item The formatting inside your document is consistent.
+
+	\item \verb+lymath+ resolves some "complex" problems automatically for you.
+\end{enumerate}
 
 
 \section{Miscellaneous}
@@ -218,7 +227,7 @@ $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 
 \IDmacro*{fieldset}{1}
 
-\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} upper letter indicating a field or ring like set.
+\IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} letter indicating a field or ring like set.
 
 
 
@@ -545,7 +554,7 @@ such as to stress the fact that $\ct{a}$, $\ct{b}$ and $\ct{c}$ are constants.
 
 \IDmacro*{ct}{1}
 
-\IDarg{} a latine text, and not a formula, indicated one constant.
+\IDarg{} a latine text, and not a formula, indicating one constant.
 
 
 
@@ -808,7 +817,7 @@ $\hook{F(x)}{a}{b} = F(b) - F(a)$.
 
 \begin{tcblisting}{}
 With the star version, the hooks stretch vertically like in
-$\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b} 
+$\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b}
              = \hook{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 
@@ -839,8 +848,8 @@ You can use $\vhook{F(x)}{a}{b}$ instead of $\hook{F(x)}{a}{b}$.
         \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
-With the star version, the left rule stretches vertically like in
-$\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b} 
+With the star version, the rule at the right stretches vertically like in
+$\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}
              = \vhook{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 

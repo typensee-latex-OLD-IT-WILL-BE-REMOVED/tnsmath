@@ -111,18 +111,27 @@
 
 \begin{document}
 
-The package \verb+lymath+ is a set of semantic macros to write elementary mathematic formulas. Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
+\LaTeX{} is a great tool for writing mathematics, maybe it is the best, but the power of \LaTeX{} allows very poor semantic writings.
+The modest purpose of the package \verb+lymath+ is to give some semantic macros to write elementary mathematic formulas.
+Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
 
 \begin{tcblisting}{listing only}
 % Without lyxam
 
-Knowing that $\frac{df}{dx} = 4 cos(x^2)$, we have: 
+Knowing that $\frac{df}{dx}(x) = 4 cos(x^2)$ on $[a ; b]$, we have: 
 $\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
 
 % With lyxam
 
-Knowing that $\derfrac{f}{x} = 4 cos(x^2)$, we have: 
-$\int_a^b cos(x^2) dx = \hook{\frac{1){4} f(x)}{a}{b}$.
+Knowing that $\derfrac{f}{x}(x) = 4 cos(x^2)$ on $\intervalC{a}{b}$, we have: 
+$\int_a^b cos(x^2) \dd{x} = \hook{\frac{1){4} f(x)}{a}{b}$.
 \end{tcblisting}
+
+Even if some commands are longest to write than direct \LaTeX{} commands, there are two benefits.
+\begin{enumerate}
+	\item The formatting inside your document is consistent.
+
+	\item \verb+lymath+ resolves some "complex" problems automatically for you.
+\end{enumerate}
 
 \end{document}
