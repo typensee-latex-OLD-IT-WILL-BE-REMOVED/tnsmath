@@ -1,14 +1,21 @@
 ==========
+2017-10-21
+==========
+
+**PDF documentation updated:** major changes will now appear in the PDF documentation.
+
+
+==========
 2017-10-18
 ==========
 
 **New minor version version::``0.0.2-beta`` of ¨lymath:** see the changes below.
 
 
-**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` wich use an operator like notation.
+**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` which use an operator like notation.
 
 
-**Improvment of the docummentation:** a small introduction has been added.
+**Improvement of the docummentation:** a small introduction has been added.
 
 
 ==========

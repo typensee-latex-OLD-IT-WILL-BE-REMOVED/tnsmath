@@ -1,0 +1,62 @@
+\documentclass[12pt,a4paper]{article}
+
+% == FOR DOC AND TESTS - START == %
+
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{enumitem}
+
+\usepackage{amsthm}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+
+\usepackage{pgffor}
+\usepackage{xstring}
+
+
+% MISC
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
+% Technical IDs
+
+% == FOR DOC AND TESTS - END == %
+
+% == EXTRA == %
+
+% == PACKAGES USED == %
+
+% == DEFINITIONS == %
+
+
+\begin{document}
+
+\begin{description}
+	\item[2017-10-21] Major changes are now added in this PDF documentation.
+
+	\item[2017-10-18] New minor version \verb+0.0.2-beta+ : for differential calculus, two new star versions of \verb+\derfrac+ and \verb+\partialfrac+ which use an operator like notation.
+
+	\item[2017-10-06] New minor version \verb+0.0.1-beta+ : additional tools for arithmetic, geometry, integral calculus and differential calculus.
+
+	\item[2017-10-02] First version of the package.
+\end{description}
+
+\end{document}
