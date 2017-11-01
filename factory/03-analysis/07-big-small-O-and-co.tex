@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -174,23 +179,28 @@
 
 \begin{document}
 
-\section{Asymptotic comparisons of sequences and functions}
+% \section{Analysis}
 
-    \subsection{\texorpdfstring{The $\bigO{}$ and $\smallO{}$ notations}%
+    \subsection{Asymptotic comparisons of sequences and functions}
+
+        \subsubsection{\texorpdfstring{The $\bigO{}$ and $\smallO{}$ notations}%
                                {The "big O" and "small O" notations}}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbols $\bigO{}$ and $\smallO{}$ created by Landau.
+You can use the symbols $\bigO{}$ and $\smallO{}$ created by Landau.
+\end{tcblisting}
 
-\medskip
 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
 You can write $\bigO{x} \neq \smallO{x}$ and $e^{t + \smallO{t}} = e^{\bigO{t}}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{bigO}{1}
 
@@ -200,22 +210,25 @@ You can write $\bigO{x} \neq \smallO{x}$ and $e^{t + \smallO{t}} = e^{\bigO{t}}$
 
 
 
-    \subsection{\texorpdfstring{The $\bigomega{}$ notation}%
+        \subsubsection{\texorpdfstring{The $\bigomega{}$ notation}%
                                {The "big Omega" notation}}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbol $\bigomega{}$ created by Hardy and Littlewood.
+You can use the symbol $\bigomega{}$ created by Hardy and Littlewood.
+\end{tcblisting}
 
-\medskip
 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
 $f(n) = \bigomega{g(n)}$ means: $\exists (m, n_0)$ such that
 $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{bigomega}{1}
 
@@ -223,22 +236,25 @@ $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 
 
 
-    \subsection{\texorpdfstring{The $\bigtheta{}$ notation}%
+        \subsubsection{\texorpdfstring{The $\bigtheta{}$ notation}%
                                {The "big Theta" notation}}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbol $\bigtheta{}$.
+Here is the last symbol $\bigtheta{}$ that can be helpful.
+\end{tcblisting}
 
-\medskip
 
-$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$ 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$
 implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{bigtheta}{1}
 

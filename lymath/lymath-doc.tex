@@ -57,6 +57,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -71,9 +76,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -85,27 +90,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -131,21 +136,21 @@
 \maketitle
 
 
+
+
 \section{Introduction}
-
-
 
 \LaTeX{} is a great tool for writing mathematics, maybe it is the best, but the power of \LaTeX{} allows very poor semantic writings.
 The modest purpose of the package \verb+lymath+ is to give some semantic macros to write elementary mathematic formulas.
 Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
 
 \begin{tcblisting}{listing only}
-% Without lyxam
+% Without lymath
 
 Knowing that $\frac{df}{dx}(x) = 4 cos(x^2)$ on $[a ; b]$, we have: 
 $\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
 
-% With lyxam
+% With lymath
 
 Knowing that $\derfrac{f}{x}(x) = 4 cos(x^2)$ on $\intervalC{a}{b}$, we have: 
 $\int_a^b cos(x^2) \dd{x} = \hook{\frac{1){4} f(x)}{a}{b}$.
@@ -159,11 +164,9 @@ Even if some commands are longest to write than direct \LaTeX{} commands, there 
 \end{enumerate}
 
 
-\section{Miscellaneous}
 
 
-
-\subsection{Semi-colon and spacing with the french option of \texttt{babel}}
+\section{Semi-colon and spacing with the french option of \texttt{babel}}
 
 \begin{tcblisting}{}
 Only \textbf{if you use \texttt{babel} with the option \texttt{francais}}, then
@@ -171,15 +174,43 @@ you will see the same spacing around the semi-colon in $A(x;y)$. Que c'est beau 
 \end{tcblisting}
 
 
+
+
 \section{Sets}
 
+    \subsection{Different kind of sets}
+
+        \subsubsection{Sets vs braces}
+
+            \paragraph{Example of use \#1}
+
+\begin{tcblisting}{}
+A set of beautiful numbers : $\geneset{1 ; 3 ; 5}$ .
+\end{tcblisting}
 
 
-\subsection{Different kind of sets}
+            \paragraph{Example of use \#2}
 
-    \subsubsection{Sets for geometry}
+\begin{tcblisting}{}
+Choose your team :
+$\displaystyle \geneset{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
+or 
+$\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
+\end{tcblisting}
 
-        \paragraph{Example of use}
+
+            \paragraph{Technical IDs}
+
+\IDmacro*{geneset}{1}
+
+\IDmacro*{geneset*}{1}
+
+\IDarg{} the definition of the set.
+
+
+        \subsubsection{Sets for geometry}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$ but you can
@@ -187,17 +218,32 @@ not write things like \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\geoset*{C}{1}$, $\geoset*{C}{2}$, \dots
+\end{tcblisting}
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{geoset}{1}
 
 \IDarg{} one single \ascii{} letter indicating a geometrical set.
 
 
+\bigskip
 
-    \subsubsection{Sets for probability}
 
-        \paragraph{Example of use}
+\IDmacro*{geoset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\geoset{U}$ in the name $\geoset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\geoset*{U}{d}$ of a geometrical set.
+
+
+        \subsubsection{Sets for probability}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\probaset{E}$ and $\probaset{G}$ but you can not write
@@ -205,17 +251,34 @@ things like \verb+$\probaset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\probaset*{E}{1}$, $\probaset*{E}{2}$, \dots
+\end{tcblisting}
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{probaset}{1}
 
 \IDarg{} one single upper \ascii{} upper letter indicating a probabilistic set.
 
 
+\bigskip
 
-    \subsubsection{Sets for rings and fields theory}
 
-        \paragraph{Example of use}
+\IDmacro*{probaset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\probaset{U}$ in the name $\probaset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\probaset*{U}{d}$ of a geometrical set.
+
+
+
+        \subsubsection{Sets for rings and fields theory}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ and
@@ -223,15 +286,32 @@ $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\fieldset*{k}{1}$, $\fieldset*{k}{2}$, \dots
+\end{tcblisting}
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{fieldset}{1}
 
 \IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} letter indicating a field or ring like set.
 
 
+\bigskip
 
-    \subsubsection{Classical sets}
+
+\IDmacro*{fieldset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\fieldset{U}$ in the name $\fieldset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\fieldset*{U}{d}$ of a geometrical set.
+
+
+
+        \subsubsection{Classical sets}
 
 \begin{tcblisting}{}
 You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$, $\HH$
@@ -240,14 +320,14 @@ and $\OO$.
 
 
 
-    \subsubsection{Classical sets with suffixes}
+        \subsubsection{Classical sets with suffixes}
 
 \begin{tcblisting}{}
 It is easy to type $\RRn$, $\RRp$, $\RRs$, $\RRsn$ and $\RRsp$.
 \end{tcblisting}
 
 
-We have used suffixes \verb+n+ for \verb+Negative+, \verb+p+ for \verb+Positive+, and \verb+s+ for \verb+Star+ with the additional composite suffixes \verb+sn+ et \verb+sp+.
+We have used suffixes \verb+n+ for \verb+Negative+, \verb+p+ for \verb+Positive+, and \verb+s+ for \verb+@star+ with the additional composite suffixes \verb+sn+ et \verb+sp+.
 
 \medskip
 
@@ -255,7 +335,9 @@ Note that you can't use \verb+$\CCn$+ for $\specialset{\CC}{n}$ because the set 
 
 \medskip
 
-The following table shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+\begin{remark}
+	The table \ref{table:suffixes-sets} on page \pageref{table:suffixes-sets} shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+\end{remark}
 
 % == Table of suffixes - START == %
 \newcommand\xx{\phantom{$\times$}}
@@ -274,23 +356,23 @@ The following table shows when you can add one of the suffixes \verb+n+, \verb+p
 \hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
         \end{tabular}
     \end{center}
-    \label{default}
+    \label{table:suffixes-sets}
 \end{table}
 % == Table of suffixes - END == %
 
 
 
-    \subsubsection{Suffixes on demand}
+        \subsubsection{Suffixes on demand}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$. 
+You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$.
 There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{specialset}{2}
 
@@ -303,35 +385,36 @@ There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
 
 
 
-\subsection{Intervals}
+% \section{Sets}
 
-    \subsubsection{Real intervals - French (?) notation}
+    \subsection{Intervals}
 
-        \paragraph{Example of use \#1}
+        \subsubsection{Real intervals - French (?) notation}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-In $\intervalOC{a}{b} = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro
-used solves a spacing problem, and that the delimiters are a little bigger.
+In $I = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro used solves
+a spacing problem.
 
 % The syntax refers to O-pened and C-losed but CC and OO are reduced to C and O.
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+The delimiters automatically stretches vertically, but you can use the @star version of a macro if you don't want this feature. In that case, the delimiters are a little bigger than traditional hooks. Here is an example.
 
 \begin{tcblisting}{}
-You can use the star version of a macro if you want the delimiters to stretch 
-vertically.
-
 $\displaystyle \intervalC{ \frac{1}{2} }{ 1^{2^{3}} }
-             = [ \frac{1}{2} ; 1^{2^{3}} ] 
+             = [ \frac{1}{2} ; 1^{2^{3}} ]
              = \intervalC*{ \frac{1}{2} }{ 1^{2^{3}} }$
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip
@@ -387,21 +470,21 @@ For all the macros above, the star version produces intervals with delimiters th
 
 
 
-    \subsubsection{Real intervals - American notation}
+        \subsubsection{Real intervals - American notation}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-A semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and an opened one
-$\intervalP{a}{b} = (a ; b)$.
+In America, we write a semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and
+an opened one $\intervalP{a}{b} = (a ; b)$.
 
 % The syntax refers to P-arenthesis.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip
@@ -445,9 +528,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 
 
-    \subsubsection{Discrete intervals of integers}
+        \subsubsection{Discrete intervals of integers}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 By definition, $\ZintervalC{-1}{4} = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$. So we also have
@@ -457,9 +540,9 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip
@@ -514,15 +597,15 @@ For all the macros above, the star version produces intervals with delimiters th
 % Docs for discrete intervals - END
 
 
+
+
 \section{Analysis}
 
+    \subsection{Constants}
 
+        \subsubsection{Classical constants}
 
-\subsection{Constants}
-
-    \subsubsection{Classical constants}
-
-        \paragraph{Complete list}
+            \paragraph{Complete list}
        
 % List of classical constants
 
@@ -540,9 +623,9 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 
 
 
-    \subsubsection{User's latine constants}
+        \subsubsection{User's latine constants}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 It is easy to write $\ct{a} x^2 + \ct{b} x + \ct{c}$ instead of $a x^2 + b x + c$
@@ -550,7 +633,7 @@ such as to stress the fact that $\ct{a}$, $\ct{b}$ and $\ct{c}$ are constants.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{ct}{1}
 
@@ -559,17 +642,47 @@ such as to stress the fact that $\ct{a}$, $\ct{b}$ and $\ct{c}$ are constants.
 
 
 
-\subsection{Special functions}
+% \section{Analysis}
 
-    \subsubsection{Some examples of use}
+    \subsection{Absolute value function}
+
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-Some additional special functions :
+It is easy to write $\abs{2}$ or $\displaystyle \abs{\frac{3}{5}}$ or even
+$\displaystyle \abs*{\frac{3}{5}}$ if you prefer or need little vertical rules.
+\end{tcblisting}
+
+
+\begin{remark}
+	The \LaTeX{} code comes directly from this post: \url{https://tex.stackexchange.com/a/43009/6880}.
+\end{remark}
+
+
+            \paragraph{Technical IDs}
+
+\IDmacro*{abs}{1}
+
+\IDmacro*{abs*}{1}
+
+\IDarg{} the number on which we apply the absolute value function 
+
+
+
+
+% \section{Analysis}
+
+    \subsection{Special named functions}
+
+        \subsubsection{Some examples of use}
+
+\begin{tcblisting}{}
+Some additional special named functions :
 $\ch x \neq ch x$, $\ppcm(x;y)$, $\lg x =\logb{2} x$ and $\expb{6} y$.
 \end{tcblisting}
 
 
-    \subsubsection{Functions without parameter}
+        \subsubsection{Named functions without parameter}
 
 All the following macros don't have any parameter.
 
@@ -589,9 +702,9 @@ All the following macros don't have any parameter.
 
 
 
-    \subsubsection{Functions with parameters}
+        \subsubsection{Named functions with parameters}
 
-        \paragraph{The complete list}
+            \paragraph{The complete list}
 
 All the following macros have at least one parameter.
 
@@ -605,7 +718,7 @@ All the following macros have at least one parameter.
 \end{tabular*}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{expb}{1}
 
@@ -616,9 +729,11 @@ All the following macros have at least one parameter.
 
 
 
-\subsection{Extended notations for special sequences}
+% \section{Analysis}
 
-        \paragraph{Example of use}
+    \subsection{Extended notations for special sequences}
+
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
@@ -626,7 +741,7 @@ Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{seqplus}{2}
 
@@ -661,19 +776,21 @@ Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
 
 
 
-\subsection{Differential calculus}
+% \section{Analysis}
 
-    \subsubsection{\texorpdfstring{The $\pp{}$ and $\dd{}$ operators}%
+    \subsection{Differential calculus}
+
+        \subsubsection{\texorpdfstring{The $\pp{}$ and $\dd{}$ operators}%
                                {The "rounded d" and "straight d" operators}}
 
-        \paragraph{Example of use}
+           \paragraph{Example of use}
 
 \begin{tcblisting}{}
 You can write $\dd{x}$ and $\pp{t}$ and also $ \dd[5]{x}$ or $\pp[n]{x}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+           \paragraph{Technical IDs}
 
 \IDmacro{dd}{1}{1}
 
@@ -685,19 +802,19 @@ You can write $\dd{x}$ and $\pp{t}$ and also $ \dd[5]{x}$ or $\pp[n]{x}$.
 
 
 
-    \subsubsection{Total derivation}
+        \subsubsection{Total derivation}
 
-        \paragraph{Example of use \#1}
+           \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 $\displaystyle f'(a)
-             = \derpow{f} (a) 
+             = \derpow{f} (a)
              = \derfrac{f}{x} (a)
              = \dersub{f}{x} (a)$
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#2}
+           \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
 $\displaystyle f'''(a)
@@ -709,7 +826,7 @@ $\displaystyle \cos''' a = \derfrac[3]{\cos}{x} (a)$.
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#3}
+           \paragraph{Example of use \#3}
 
 \begin{tcblisting}{}
 If $\displaystyle f(x) = \frac{1}{x^2+3}$, then we can write :
@@ -718,7 +835,7 @@ $\displaystyle \derpow[3]{f} (a)
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+           \paragraph{Technical IDs}
 
 \IDmacro{derpow}{1}{1}
 
@@ -744,9 +861,9 @@ $\displaystyle \derpow[3]{f} (a)
 
 
 
-    \subsubsection{Partial derivation}
+        \subsubsection{Partial derivation}
 
-        \paragraph{Example of use \#1}
+           \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 $\displaystyle \partialfrac{f}{x} (a;b)
@@ -755,7 +872,7 @@ $\displaystyle \partialfrac{f}{x} (a;b)
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#2}
+           \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
 $\displaystyle \partialfrac[3]{G}{f^2 // v} (a;b)
@@ -765,7 +882,7 @@ $\displaystyle \partialfrac[3]{G}{f^2 // v} (a;b)
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#3}
+           \paragraph{Example of use \#3}
 
 \begin{tcblisting}{}
 If $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$, then we can study
@@ -774,7 +891,7 @@ $\displaystyle \partialfrac[2]{f}{x // y}
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+           \paragraph{Technical IDs}
 
 \IDmacro{partialfrac}{1}{2}
 
@@ -801,11 +918,13 @@ $\displaystyle \partialfrac[2]{f}{x // y}
 
 
 
-\subsection{Integral calculus}
+% \section{Analysis}
 
-    \subsubsection{The hook operator - 1st version}
+    \subsection{Integral calculus}
 
-        \paragraph{Example of use \#1}
+        \subsubsection{The hook operator - 1st version}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 By definition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ where
@@ -813,16 +932,17 @@ $\hook{F(x)}{a}{b} = F(b) - F(a)$.
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+By default, the hooks stretch vertically, but if you don't want this you just have to use the @star version as in the example below.
 
 \begin{tcblisting}{}
-With the star version, the hooks stretch vertically like in
-$\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \hook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+$\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{hook}{3}
 
@@ -836,25 +956,26 @@ $\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-    \subsubsection{The hook operator - 2nd version}
+        \subsubsection{The hook operator - 2nd version}
 
-        \paragraph{Example of use \#1}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can use $\vhook{F(x)}{a}{b}$ instead of $\hook{F(x)}{a}{b}$.
 \end{tcblisting}
 
 
-        \paragraph{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+Like with first version of the hook operator, you can use a @star version to not have the default behavior of vertical stretch. Here is an example.
 
 \begin{tcblisting}{}
-With the star version, the rule at the right stretches vertically like in
-$\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \vhook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+$\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{vhook}{3}
 
@@ -868,7 +989,7 @@ $\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-    \subsubsection{Several integrals}
+        \subsubsection{Several integrals}
 
 The package minimizes spacings between consecutive symbols of integration. Here is an example.
 
@@ -889,23 +1010,28 @@ $\displaystyle \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
 
 
 
-\subsection{Asymptotic comparisons of sequences and functions}
+% \section{Analysis}
 
-    \subsubsection{\texorpdfstring{The $\bigO{}$ and $\smallO{}$ notations}%
+    \subsection{Asymptotic comparisons of sequences and functions}
+
+        \subsubsection{\texorpdfstring{The $\bigO{}$ and $\smallO{}$ notations}%
                                {The "big O" and "small O" notations}}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbols $\bigO{}$ and $\smallO{}$ created by Landau.
+You can use the symbols $\bigO{}$ and $\smallO{}$ created by Landau.
+\end{tcblisting}
 
-\medskip
 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
 You can write $\bigO{x} \neq \smallO{x}$ and $e^{t + \smallO{t}} = e^{\bigO{t}}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{bigO}{1}
 
@@ -915,22 +1041,25 @@ You can write $\bigO{x} \neq \smallO{x}$ and $e^{t + \smallO{t}} = e^{\bigO{t}}$
 
 
 
-    \subsubsection{\texorpdfstring{The $\bigomega{}$ notation}%
+        \subsubsection{\texorpdfstring{The $\bigomega{}$ notation}%
                                {The "big Omega" notation}}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbol $\bigomega{}$ created by Hardy and Littlewood.
+You can use the symbol $\bigomega{}$ created by Hardy and Littlewood.
+\end{tcblisting}
 
-\medskip
 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
 $f(n) = \bigomega{g(n)}$ means: $\exists (m, n_0)$ such that
 $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{bigomega}{1}
 
@@ -938,54 +1067,80 @@ $n \geqslant n_0$ implies $f(n) \geqslant m g(n)$.
 
 
 
-    \subsubsection{\texorpdfstring{The $\bigtheta{}$ notation}%
+        \subsubsection{\texorpdfstring{The $\bigtheta{}$ notation}%
                                {The "big Theta" notation}}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Let's see how to use the symbol $\bigtheta{}$.
+Here is the last symbol $\bigtheta{}$ that can be helpful.
+\end{tcblisting}
 
-\medskip
 
-$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$ 
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+$f(n) = \bigtheta{g(n)}$ means: $\exists (m, M, n_0)$ such that $n \geqslant n_0$
 implies $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{bigtheta}{1}
 
 \IDarg{} the content inside the braces after the symbol $\bigtheta{}$.
 
 
+
+
 \section{Geometry}
 
+    \subsection{Points}
 
-
-\subsection{Points}
-
-	\subsubsection{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-We can call $\pt{I}$ the middle of $[\pt{A}\pt{B}]$.
+$\gpt{I}$ indicates a point named "I".
 \end{tcblisting}
 
 
+\begin{remark}
+    \verb+\gpt+ is for "\textbf{g}eometric \textbf{p}oin\textbf{t}". This name has been chosen so as to avoid a conflict with \verb+lyxam+ another project of the author of \verb+lymath+. 
+\end{remark}
 
-	\subsubsection{Technical ID}
 
-\IDmacro*{pt}{1}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+A list of points : $\gpt*{I}{1}$, $\gpt*{I}{2}$, \dots
+\end{tcblisting}
+
+
+            \paragraph{Technical ID}
+
+\IDmacro*{gpt}{1} where \verb+gpt = G-eometric P-oin-T+
 
 \IDarg{} one text indicating the name of a point.
 
 
+\bigskip
 
 
-\subsection{Vectors}
+\IDmacro*{gpt*}{2}
 
-	\subsubsection{Example of use}
+\IDarg{1} one text indicating $\gpt{Up}$ in the name $\gpt*{Up}{down}$ of a point.
+
+\IDarg{2} one text indicating $down$ in the name $\gpt*{Up}{down}$ of a point.
+
+
+
+
+% \section{Geometry}
+
+    \subsection{Writing vectors}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
@@ -993,8 +1148,16 @@ $\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
 \end{tcblisting}
 
 
+            \paragraph{Example of use \#2}
 
-	\subsubsection{Technical IDs}
+\begin{tcblisting}{}
+You can also simply write $\vect{i}$ and $\vect*{j}{2}$ without points below the
+arrows only for vectors named "i" or "j".
+\end{tcblisting}
+
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{vect}{1}
 
@@ -1013,18 +1176,56 @@ $\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
 
 
 
-\subsection{Inner angles}
+% \section{Analysis}
 
-	\subsubsection{Example of use}
+    \subsection{Norm of a vector}
+
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-Here is one inner angle $\anglein{ABCDEF}$ using a lot of letters, and you can 
+Let's write $\norm{\vect{i}}$, $\displaystyle \norm{\frac{2}{7} \vect*{e}{k}}$, or
+$\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ with little vertical rules.
+\end{tcblisting}
+
+
+\begin{remark}
+	The \LaTeX{} code comes directly from this post: \url{https://tex.stackexchange.com/a/43009/6880}.
+\end{remark}
+
+
+            \paragraph{Technical IDs}
+
+\IDmacro*{norm}{1}
+
+\IDmacro*{norm*}{1}
+
+\IDarg{} the vector on which we apply the norm
+
+
+
+
+% \section{Geometry}
+
+    \subsection{Inner angles}
+
+            \paragraph{Example of use \#1}
+
+\begin{tcblisting}{}
+Here is one inner angle $\anglein{ABCDEF}$ using a lot of letters, and you can
 write $\anglein*{A}{rot}$ instead of $\anglein{A_{rot}}$.
 \end{tcblisting}
 
 
+            \paragraph{Example of use \#2}
 
-	\subsubsection{Technical IDs}
+\begin{tcblisting}{}
+You can also simply write $\anglein{i}$ and $\anglein*{j}{2}$ without points below
+the angle symbol only for inner angles named "i" or "j".
+\end{tcblisting}
+
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{anglein}{1}
 
@@ -1043,18 +1244,28 @@ write $\anglein*{A}{rot}$ instead of $\anglein{A_{rot}}$.
 
 
 
-\subsection{Circular arcs}
+% \section{Geometry}
 
-	\subsubsection{Example of use}
+    \subsection{Circular arcs}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write 
+Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write
 $\arc*{A}{rot}$ instead of $\arc{A_{rot}}$.
 \end{tcblisting}
 
 
+            \paragraph{Example of use \#2}
 
-	\subsubsection{Technical IDs}
+\begin{tcblisting}{}
+You can also simply write $\arc{i}$ and $\arc*{j}{2}$ without points below the arc
+only for arcs named "i" or "j".
+\end{tcblisting}
+
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{arc}{1}
 
@@ -1071,19 +1282,137 @@ $\arc*{A}{rot}$ instead of $\arc{A_{rot}}$.
 \IDarg{2} one text indicating $down$ in the name $\arc*{up}{down}$ of a circular arc.
 
 
-\section{Arithmetic}
 
 
+% \section{Geometry}
+%
+    \subsection{Naming axes}
 
-\subsection{Continued fractions}
-
-	\subsubsection{Standard continued fractions}
-
-        \paragraph{Example of use}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-It is easy to write what is just after where the inline notation seems to have been 
-introduced by Alfred Pringsheim (the left notation is always space consuming for a 
+In a plane, three points $\gpt{O}$, $\gpt{I}$ and $\gpt{J}$ not aligned define
+a cartesian system of coordinates $\axis{\gpt{O} // \gpt{I} // \gpt{J}}$.
+
+% We give more efficient ways to name axies in some particular cases.
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+$\displaystyle \axis{\gpt{O} // \frac{7}{3} \vect{i} // \vect{j}}$
+or
+$\displaystyle \axis*{\gpt{O} // \frac{7}{3} \vect{i} // \vect{j}}$
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#3}
+
+\begin{tcblisting}{}
+% You must at least use two "pieces" separated by //, but there is no maximum !
+
+$\axis{\gpt{O} // \vect*{i}{1} // \vect*{i}{2} // \vect*{i}{3} // \dots
+// \vect*{i}{9}// \vect*{i}{10}}$
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#4 - No star version here}
+
+\begin{tcblisting}{}
+$\gpaxis{O // I // J // K}$ is just the same than
+$\axis{\gpt{O} // \gpt{I} // \gpt{J} // \gpt{K}}$.
+
+% The prefix "gp" is for "geometric point".
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#5 - No star version here}
+
+\begin{tcblisting}{}
+$\vaxis{\gpt{O} // i // j}$ is just the same than
+$\axis{\gpt{O} // \vect{i} // \vect{j}}$.
+
+% The prefix "v" is for "vector".
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#6 - No star version here}
+
+\begin{tcblisting}{}
+$\gpvaxis{O // i // j}$ is just the same than
+$\axis{\gpt{O} // \vect{i} // \vect{j}}$.
+
+% The prefix "gpv" adds the features of the prefixes "gp" and "v".
+\end{tcblisting}
+
+
+
+            \paragraph{Technical IDs}
+
+\IDmacro*{axis}{1}
+
+\IDmacro*{axis*}{1}
+
+\IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
+
+\begin{itemize}[topsep=0pt]
+	\item The first one is the origin of the cartesian system of coordinates.
+	
+	\item Then there are points or vectors which "define" each axis.
+\end{itemize}
+
+
+\bigskip
+
+\IDmacro*{gpaxis}{1} where \verb+gp = G-eometric P-oint+
+
+\IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
+
+\begin{itemize}[topsep=0pt]
+	\item The first one is the origin of the cartesian system of coordinates on which the macro \verb+\gpt+ will be automatically applied.
+	
+	\item Then there are points which "define" each axis, and on each of this points the macro \verb+\gpt+ will be automatically applied.
+\end{itemize}
+
+
+\bigskip
+
+\IDmacro*{vaxis}{1} where \verb+v = V-ector+
+
+\IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
+
+\begin{itemize}[topsep=0pt]
+	\item The first one is the origin of the cartesian system of coordinates.
+	
+	\item Then there are vectors which "define" each axis, and on each of this vectors the macro \verb+\vect+ will be automatically applied.
+\end{itemize}
+
+
+\bigskip
+
+\IDmacro*{gpvaxis}{3} where \verb&gpv = gp + v&
+
+\IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
+
+\begin{itemize}[topsep=0pt]
+	\item The first one is the origin of the cartesian system of coordinates on which the macro \verb+\vect+ will be automatically applied.
+	
+	\item Then there are vectors which "define" each axis, and on each of this vectors the macro \verb+\vect+ will be automatically applied.
+\end{itemize}
+
+
+
+
+\section{Continued fractions}
+
+	\subsection{Standard continued fractions}
+
+            \paragraph{Example of use}
+
+\begin{tcblisting}{}
+It is easy to write what is just after where the inline notation seems to have been
+introduced by Alfred Pringsheim (the left notation is always space consuming for a
 better readability).
 
 $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
@@ -1091,7 +1420,7 @@ $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{contfrac}{1}
 
@@ -1102,9 +1431,9 @@ $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 
 
 
-	\subsubsection{Generalized continued fractions}
+	\subsection{Generalized continued fractions}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 You can use similar notations for generalized continued fractions :
@@ -1114,7 +1443,7 @@ $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
 \end{tcblisting}
 
 
-        \paragraph{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{contfracgene}{1}
 
@@ -1124,9 +1453,9 @@ $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
 
 
 
-	\subsubsection{Single like continued fraction}
+	\subsection{Single like continued fraction}
 
-        \paragraph{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
@@ -1135,7 +1464,7 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
 \end{tcblisting}
 
 
-        \paragraph{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -1145,10 +1474,10 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
 
 
 
-    \subsubsection{\texorpdfstring{The $\contfracope$ operator}%
+    \subsection{\texorpdfstring{The $\contfracope$ operator}%
                                {The K operator}}
 
-        \paragraph{Example of use \#1}
+            \paragraph{Example of use \#1}
 
 \IDconstant{contfracope}
 
@@ -1167,7 +1496,7 @@ fraction" in german.
 \end{remark}
 
 
-        \paragraph{Example of use \#2}
+            \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
 $\displaystyle
@@ -1176,16 +1505,22 @@ $\displaystyle
 \end{tcblisting}
 
 
+
+
 \section{Change log}
 
-
+All the changes are described inside the folders \verb+change_log+ : see the sources of \verb+lymath+ on \verb+github+. Here we just give a very short history of \verb+lymath+.
 
 \begin{description}
-	\item[2017-10-21] Major changes are now added in this PDF documentation.
+	\setlength\itemsep{1em}
 
-	\item[2017-10-18] New minor version \verb+0.0.2-beta+ : for differential calculus, two new star versions of \verb+\derfrac+ and \verb+\partialfrac+ which use an operator like notation.
+	\item[2017-11-01] New minor version \verb+0.1.0-beta+ : changes and additional tools for sets, functions and geometry.
 
-	\item[2017-10-06] New minor version \verb+0.0.1-beta+ : additional tools for arithmetic, geometry, integral calculus and differential calculus.
+	\item[2017-10-21] Little history of \verb+lymath+ will be indicated from now in this PDF documentation.
+
+	\item[2017-10-18] New patch version \verb+0.0.2-beta+ : additional tools for differential calculus.
+
+	\item[2017-10-06] New patch version \verb+0.0.1-beta+ : additional tools for arithmetic, geometry, integral calculus and differential calculus.
 
 	\item[2017-10-02] First version of the package.
 \end{description}

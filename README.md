@@ -4,14 +4,42 @@ What about this package  ?
 **ly-math**, which is a contraction of **lycée** and **math**, has been built to allow the writings of more semantical LaTeX documents at a very low level of mathematics.
 
 
-What is new in this version `0.0.2-beta` ?
-============================================
+What is new in this version `0.1.0-beta` ?
+==========================================
 
-**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` wich use an operator like notation.
+**Sets**: several changes have been done.
+
+  1) ``\geoset*``, ``\probaset*`` and ``\fieldset*`` allow the use of subscript.
+
+  2) One new macro ``\geneset`` for general sets inside braces.
+
+
+**Functions:** two new macros ``\abs`` and ``\abs*`` for absolute values.
+
+
+**Geometry:** several changes have been done.
+
+  1) ``\pt`` becomes ``\gpt`` such as to avoid a conflict with \verb+lyxam+ another project of the author of \verb+lymath+.
+
+  2) ``\gpt*`` allow subscripting.
+
+  3) ``\vect`` and ``\vect*`` will not print the point above "i" and "j" when this letters are the "main" name of the vector.
+  A similar feature has been added for the macros ``\anglein``, ``\arc`` and their star versions.
+
+  4) Two new macros ``\norm`` and ``\norm*`` for norms of vectors.
+
+  5) Two new macros ``\axis`` and ``\axis*`` for writing names of axes in a cartesian system of coordinates.
+  There are also ``\gpaxis``, ``\vaxis`` and ``\gpvaxis`` which in day to day writing can be helpful.
+
+
+What is new in this version `0.0.2-beta` ?
+==========================================
+
+**Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` wich uses an operator like notation.
 
 
 What is new in this version `0.0.1-beta` ?
-============================================
+==========================================
 
 **Arithmetic:** macros for continued fractions.
 

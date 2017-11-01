@@ -9,7 +9,7 @@
 2017-10-18
 ==========
 
-**New minor version version::``0.0.2-beta`` of ¨lymath:** see the changes below.
+**New patch version version::``0.0.2-beta`` of ¨lymath:** see the changes below.
 
 
 **Differential calculus:** there are new star versions of ``derfrac`` and ``partialfrac`` which use an operator like notation.
@@ -33,7 +33,7 @@
 2017-10-06
 ==========
 
-**New minor version version::``0.0.1-beta`` of ¨lymath:** see the changes below.
+**New patch version version::``0.0.1-beta`` of ¨lymath:** see the changes below.
 
 
 **Arithmetic:** macros for continued fractions.

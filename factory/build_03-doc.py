@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from mistool.latex_use import Build
+from mistool.latex_use import Build, clean as latexclean
 from mistool.os_use import cd, PPath, runthis
 from mistool.string_use import between, case, joinand, MultiReplace
 from mistool.term_use import ALL_FRAMES, withframe
@@ -29,31 +29,11 @@ PYFORMAT = MultiReplace({
 # ----------------------- #
 
 DECO = " "*4
-RULE = "-"*30
 
 MYFRAME = lambda x: withframe(
     text  = x,
     frame = ALL_FRAMES['latex_pretty']
 )
-
-SECTIONS = """
-section
-subsection
-subsubsection
-paragraph
-""".strip()
-
-SECTIONS = [
-    f"\\{seccmd}" for seccmd in SECTIONS.split("\n")[::-1]
-]
-
-def uplevelsections(source):
-    global SECTIONS
-
-    for i, seccmd in enumerate(SECTIONS[1:]):
-         source = source.replace(seccmd, SECTIONS[i])
-
-    return source
 
 
 # ------------ #
@@ -89,12 +69,6 @@ for subdir in THIS_DIR.walk("dir::"):
     ] or subdir_name[:2] == "x-":
         continue
 
-    sectionname = subdir_name.split("-", 1)[1]
-    sectionname = sectionname.replace("-", " ")
-    sectionname = case(sectionname, "sentence")
-
-    CONTENTS.append(f"\\section{{{sectionname}}}\n")
-
     for latexfile in subdir.walk("file::**.tex"):
         with latexfile.open(
             mode     = "r",
@@ -107,8 +81,6 @@ for subdir in THIS_DIR.walk("dir::"):
                     r"\end{document}"
                 ]
             )
-
-            content = uplevelsections(content)
 
             CONTENTS.append(content)
 
@@ -142,17 +114,24 @@ with DOC_PATH.open(
 # -- COMPILE THE DOC FILE -- #
 # -------------------------- #
 
+nbrepeat = 3
+
 print(
-    f"{DECO}* Compilation of << {DOC_PATH.name} >> started.",
-    RULE,
+    f"{DECO}* Compilations of << {DOC_PATH.name} >> started : {nbrepeat} times.",
     sep = "\n"
 )
 
-builder = Build(DOC_PATH, 3)
+builder = Build(
+    ppath      = DOC_PATH,
+    repeat     = nbrepeat,
+    showoutput = False
+)
 builder.pdf()
 
 print(
-    RULE,
     f"{DECO}* Compilation of << {DOC_PATH.name} >> finished.",
+    f"{DECO}* Cleaning extra files.",
     sep = "\n"
 )
+
+latexclean(DOC_PATH)

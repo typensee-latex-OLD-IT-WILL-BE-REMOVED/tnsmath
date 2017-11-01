@@ -13,14 +13,15 @@
 \RequirePackage{mathtools}
 \RequirePackage{relsize}
 \RequirePackage{stmaryrd}
+\RequirePackage{trimspaces}
 \RequirePackage[Symbolsmallscale]{upgreek}
 \RequirePackage{xstring}
 \RequirePackage{yhmath}
 
 
-% ------------------------------------------- %
-% -- MISCELLANEOUS - SEMI COLON AND SPACES -- %
-% ------------------------------------------- %
+% ---------------------------------- %
+% -- MISC - SEMI COLON AND SPACES -- %
+% ---------------------------------- %
 
 % Sources :
 %    * http://forum.mathematex.net/latex-f6/espacement-autour-des-points-virgules-en-mode-maths-t8379.html#p83226
@@ -54,27 +55,39 @@
 % -- SETS - GENERAL -- %
 % -------------------- %
 
-% Source for mathpzc : page 68 de ''The Comprehensive LATEX Symbol List''
-
-
-% Only the upper case letters
-
 \makeatletter
+% General sets
+    \newcommand\geneset{\@ifstar{\@geneset@star}{\@geneset@no@star}}
+    \newcommand\@geneset@no@star[1]{\ensuremath{\@interval@tool@no@star{\{}{#1}{}{}{\}}}}
+    \newcommand\@geneset@star[1]{\ensuremath{\@interval@tool@star{\{}{#1}{}{}{\}}}}
 
-	\newcommand\probaset[1]{
+% Probabilistic sets
+	\newcommand\probaset{\@ifstar{\@probaset@star}{\@probaset@no@star}}
+	
+	\newcommand\@probaset@no@star[1]{
     	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
         	\mathcal{#1}
     	}{%
         	\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
     	}
 	}
+	
+	\newcommand\@probaset@star[2]{%
+		\@probaset@no@star{#1}_{#2}
+	}
 
+% Geometric sets
+%
 % With ''mathscr'', we only have the upper case letters.
 % So we use the following trick for lower case letters.
-
+%
+% Source:
+%    * page 68 de ''The Comprehensive LATEX Symbol List''
 	\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
-	\newcommand\geoset[1]{
+	\newcommand\geoset{\@ifstar{\@geoset@star}{\@geoset@no@star}}
+	
+	\newcommand\@geoset@no@star[1]{
 	    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
         	\mathscr{#1}
     	}{%
@@ -85,39 +98,48 @@
         	}
     	}
 	}
+	
+	\newcommand\@geoset@star[2]{%
+		\@geoset@no@star{#1}_{#2}
+	}
 
-
+% Field like sets
+%
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
-
-	\newcommand\fieldset[1]{
+	\newcommand\fieldset{\@ifstar{\@fieldset@star}{\@fieldset@no@star}}
+	
+	\newcommand\@fieldset@no@star[1]{
     	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
     	    \mathds{#1}
     	}{%
         	\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
     	}
 	}
+	
+	\newcommand\@fieldset@star[2]{%
+		\@fieldset@no@star{#1}_{#2}
+	}
 
-
+% Tools for classical sets
 	\newcommand\setpos{\text{\bf{\tiny+}}}
 	\newcommand\setneg{\vphantom{\setpos}-}
-	\newcommand\setstar{\text{*}}
+	\newcommand\set@star{\text{*}}
 
+    \newcommand\specialset{\@ifstar{\@specialset@star}{\@specialset@no@star}}
 
-    \newcommand\specialset{\@ifstar{\@specialsetStar}{\@specialsetNoStar}}
-
-    \newcommand\@specialsetNoStar[2]{
+    \newcommand\@specialset@no@star[2]{
         \IfEqCase{#2}{
-            {s}{ #1^{\setstar} }
-            {n}{ #1^{\phantom{\setstar}}_{\setneg} }
-            {p}{ #1^{\phantom{\setstar}}_{\setpos} }
-            {sn}{ #1^{\setstar}_{\setneg} }
-            {sp}{ #1^{\setstar}_{\setpos} }
+            {s}{ #1^{\set@star} }
+            {n}{ #1^{\phantom{\set@star}}_{\setneg} }
+            {p}{ #1^{\phantom{\set@star}}_{\setpos} }
+            {sn}{ #1^{\set@star}_{\setneg} }
+            {sp}{ #1^{\set@star}_{\setpos} }
         }
     }
 
-    \newcommand\@specialsetStar[2]{
+    \newcommand\@specialset@star[2]{
         \IfEqCase{#2}{
             {s}{ #1_{\neq 0} }
             {n}{ #1_{\le 0} }
@@ -129,8 +151,9 @@
 \makeatother
 
 % The empty set
-
-\newcommand\nullset{\ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}}
+\newcommand\nullset{%
+	\ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}%
+}
 
 % List of classical sets
 
@@ -180,64 +203,64 @@
 % ---------------------- %
 
 \makeatletter
-    \newcommand\@interToolNoStar[4]{%
-    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+    \newcommand\@interval@tool@star[5]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
 	}
 
-    \newcommand\@interToolStar[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
- 
-   
+    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+
+
 % Macros for intervals - START
 
 % Macros for french real intervals
 
-    \newcommand\intervalCO{\@ifstar{\@intervalCOStar}{\@intervalCONoStar}}
-    \newcommand\@intervalCONoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{[}}}
-    \newcommand\@intervalCOStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{[}}}
+    \newcommand\intervalCO{\@ifstar{\@intervalCO@star}{\@intervalCO@no@star}}
+    \newcommand\@intervalCO@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{[}}}
+    \newcommand\@intervalCO@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{[}}}
 
-    \newcommand\intervalC{\@ifstar{\@intervalCStar}{\@intervalCNoStar}}
-    \newcommand\@intervalCNoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{]}}}
-    \newcommand\@intervalCStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{]}}}
+    \newcommand\intervalC{\@ifstar{\@intervalC@star}{\@intervalC@no@star}}
+    \newcommand\@intervalC@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalC@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{]}}}
 
-    \newcommand\intervalO{\@ifstar{\@intervalOStar}{\@intervalONoStar}}
-    \newcommand\@intervalONoStar[2]{\ensuremath{\@interToolNoStar{]}{#1}{#2}{[}}}
-    \newcommand\@intervalOStar[2]{\ensuremath{\@interToolStar{]}{#1}{#2}{[}}}
+    \newcommand\intervalO{\@ifstar{\@intervalO@star}{\@intervalO@no@star}}
+    \newcommand\@intervalO@no@star[2]{\ensuremath{\@interval@tool@no@star{]}{#1}{;}{#2}{[}}}
+    \newcommand\@intervalO@star[2]{\ensuremath{\@interval@tool@star{]}{#1}{;}{#2}{[}}}
 
-    \newcommand\intervalOC{\@ifstar{\@intervalOCStar}{\@intervalOCNoStar}}
-    \newcommand\@intervalOCNoStar[2]{\ensuremath{\@interToolNoStar{]}{#1}{#2}{]}}}
-    \newcommand\@intervalOCStar[2]{\ensuremath{\@interToolStar{]}{#1}{#2}{]}}}
+    \newcommand\intervalOC{\@ifstar{\@intervalOC@star}{\@intervalOC@no@star}}
+    \newcommand\@intervalOC@no@star[2]{\ensuremath{\@interval@tool@no@star{]}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalOC@star[2]{\ensuremath{\@interval@tool@star{]}{#1}{;}{#2}{]}}}
 
 % Macros for american real intervals
 
-    \newcommand\intervalCP{\@ifstar{\@intervalCPStar}{\@intervalCPNoStar}}
-    \newcommand\@intervalCPNoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{)}}}
-    \newcommand\@intervalCPStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{)}}}
+    \newcommand\intervalCP{\@ifstar{\@intervalCP@star}{\@intervalCP@no@star}}
+    \newcommand\@intervalCP@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{)}}}
+    \newcommand\@intervalCP@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{)}}}
 
-    \newcommand\intervalP{\@ifstar{\@intervalPStar}{\@intervalPNoStar}}
-    \newcommand\@intervalPNoStar[2]{\ensuremath{\@interToolNoStar{(}{#1}{#2}{)}}}
-    \newcommand\@intervalPStar[2]{\ensuremath{\@interToolStar{(}{#1}{#2}{)}}}
+    \newcommand\intervalP{\@ifstar{\@intervalP@star}{\@intervalP@no@star}}
+    \newcommand\@intervalP@no@star[2]{\ensuremath{\@interval@tool@no@star{(}{#1}{;}{#2}{)}}}
+    \newcommand\@intervalP@star[2]{\ensuremath{\@interval@tool@star{(}{#1}{;}{#2}{)}}}
 
-    \newcommand\intervalPC{\@ifstar{\@intervalPCStar}{\@intervalPCNoStar}}
-    \newcommand\@intervalPCNoStar[2]{\ensuremath{\@interToolNoStar{(}{#1}{#2}{]}}}
-    \newcommand\@intervalPCStar[2]{\ensuremath{\@interToolStar{(}{#1}{#2}{]}}}
+    \newcommand\intervalPC{\@ifstar{\@intervalPC@star}{\@intervalPC@no@star}}
+    \newcommand\@intervalPC@no@star[2]{\ensuremath{\@interval@tool@no@star{(}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalPC@star[2]{\ensuremath{\@interval@tool@star{(}{#1}{;}{#2}{]}}}
 
 % Macros for discrete intervals
 
-    \newcommand\ZintervalCO{\@ifstar{\@ZintervalCOStar}{\@ZintervalCONoStar}}
-    \newcommand\@ZintervalCONoStar[2]{\ensuremath{\@interToolNoStar{\llbracket}{#1}{#2}{\llbracket}}}
-    \newcommand\@ZintervalCOStar[2]{\ensuremath{\@interToolStar{\llbracket}{#1}{#2}{\llbracket}}}
+    \newcommand\ZintervalCO{\@ifstar{\@ZintervalCO@star}{\@ZintervalCO@no@star}}
+    \newcommand\@ZintervalCO@no@star[2]{\ensuremath{\@interval@tool@no@star{\llbracket}{#1}{;}{#2}{\llbracket}}}
+    \newcommand\@ZintervalCO@star[2]{\ensuremath{\@interval@tool@star{\llbracket}{#1}{;}{#2}{\llbracket}}}
 
-    \newcommand\ZintervalC{\@ifstar{\@ZintervalCStar}{\@ZintervalCNoStar}}
-    \newcommand\@ZintervalCNoStar[2]{\ensuremath{\@interToolNoStar{\llbracket}{#1}{#2}{\rrbracket}}}
-    \newcommand\@ZintervalCStar[2]{\ensuremath{\@interToolStar{\llbracket}{#1}{#2}{\rrbracket}}}
+    \newcommand\ZintervalC{\@ifstar{\@ZintervalC@star}{\@ZintervalC@no@star}}
+    \newcommand\@ZintervalC@no@star[2]{\ensuremath{\@interval@tool@no@star{\llbracket}{#1}{;}{#2}{\rrbracket}}}
+    \newcommand\@ZintervalC@star[2]{\ensuremath{\@interval@tool@star{\llbracket}{#1}{;}{#2}{\rrbracket}}}
 
-    \newcommand\ZintervalO{\@ifstar{\@ZintervalOStar}{\@ZintervalONoStar}}
-    \newcommand\@ZintervalONoStar[2]{\ensuremath{\@interToolNoStar{\rrbracket}{#1}{#2}{\llbracket}}}
-    \newcommand\@ZintervalOStar[2]{\ensuremath{\@interToolStar{\rrbracket}{#1}{#2}{\llbracket}}}
+    \newcommand\ZintervalO{\@ifstar{\@ZintervalO@star}{\@ZintervalO@no@star}}
+    \newcommand\@ZintervalO@no@star[2]{\ensuremath{\@interval@tool@no@star{\rrbracket}{#1}{;}{#2}{\llbracket}}}
+    \newcommand\@ZintervalO@star[2]{\ensuremath{\@interval@tool@star{\rrbracket}{#1}{;}{#2}{\llbracket}}}
 
-    \newcommand\ZintervalOC{\@ifstar{\@ZintervalOCStar}{\@ZintervalOCNoStar}}
-    \newcommand\@ZintervalOCNoStar[2]{\ensuremath{\@interToolNoStar{\rrbracket}{#1}{#2}{\rrbracket}}}
-    \newcommand\@ZintervalOCStar[2]{\ensuremath{\@interToolStar{\rrbracket}{#1}{#2}{\rrbracket}}}
+    \newcommand\ZintervalOC{\@ifstar{\@ZintervalOC@star}{\@ZintervalOC@no@star}}
+    \newcommand\@ZintervalOC@no@star[2]{\ensuremath{\@interval@tool@no@star{\rrbracket}{#1}{;}{#2}{\rrbracket}}}
+    \newcommand\@ZintervalOC@star[2]{\ensuremath{\@interval@tool@star{\rrbracket}{#1}{;}{#2}{\rrbracket}}}
 
 % Macros for intervals - END
 
@@ -269,9 +292,24 @@
 \newcommand\kk{\ct{k}}
 
 
-% -------------------------- %
-% -- ANALYSIS - FUNCTIONS -- %
-% -------------------------- %
+% ----------------------------- %
+% -- ANALYSIS - ABS FUNCTION -- %
+% ----------------------------- %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+	\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+	\makeatletter
+		\let\@old@abs\abs
+		\def\abs{\@ifstar{\@old@abs}{\@old@abs*}}
+	\makeatother
+
+
+% -------------------------------- %
+% -- ANALYSIS - NAMED FUNCTIONS -- %
+% -------------------------------- %
 
 % Source for DeclareMathMacro :
 %    * http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
@@ -371,9 +409,9 @@
     }
 
 % Fractional writing of total derivate
-	\newcommand\derfrac{\@ifstar{\@derfracStar}{\@derfracNoStar}}
+	\newcommand\derfrac{\@ifstar{\@derfrac@star}{\@derfrac@no@star}}
 
-    \newcommand\@derfracNoStar[3][\relax]{
+    \newcommand\@derfrac@no@star[3][\relax]{
         \IfStrEq{#1}{\relax}{
             \frac{\dd{#2}}{\dd{#3}}
         }{
@@ -381,8 +419,8 @@
         }
     }
 
-    \newcommand\@derfracStar[3][\relax]{
-    	\@derfracNoStar[#1]{}{#3} #2
+    \newcommand\@derfrac@star[3][\relax]{
+    	\@derfrac@no@star[#1]{}{#3} #2
     }
 
 % Subscript writing of total derivate
@@ -419,9 +457,9 @@
     }
 
 % Fractional writing of partial derivate
-	\newcommand\partialfrac{\@ifstar{\@partialfracStar}{\@partialfracNoStar}}
+	\newcommand\partialfrac{\@ifstar{\@partialfrac@star}{\@partialfrac@no@star}}
 
-    \newcommand\@partialfracNoStar[3][0]{%
+    \newcommand\@partialfrac@no@star[3][0]{%
         \frac{%
             \pp[#1]{#2}%
         }{%
@@ -430,8 +468,8 @@
         }
     }
 
-    \newcommand\@partialfracStar[3][\relax]{
-    	\@partialfracNoStar[#1]{}{#3} #2
+    \newcommand\@partialfrac@star[3][\relax]{
+    	\@partialfrac@no@star[#1]{}{#3} #2
     }
 \makeatother
 
@@ -496,13 +534,13 @@
     }
 
 % The hook calculator
-    \newcommand\hook{\@ifstar{\@hookStar}{\@hookNoStar}}
-    \newcommand\@hookNoStar[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
-    \newcommand\@hookStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+    \newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
+    \newcommand\@hook@star[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
+    \newcommand\@hook@no@star[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-    \newcommand\vhook{\@ifstar{\@vhookStar}{\@vhookNoStar}}
-    \newcommand\@vhookNoStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
-    \newcommand\@vhookStar[3]{\left. #1 \right\rvert_{#2}^{#3}}
+    \newcommand\vhook{\@ifstar{\@vhook@star}{\@vhook@no@star}}
+    \newcommand\@vhook@star[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+    \newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}
 
 \makeatother
 
@@ -569,7 +607,15 @@
 % -- GEOMETRY - POINT -- %
 % ---------------------- %
 
-\newcommand\pt[1]{\mathrm{#1}}
+\makeatletter
+	\newcommand\gpt{\@ifstar{\@gpt@star}{\@gpt@no@star}}
+	
+	\newcommand\@gpt@no@star[1]{\mathrm{#1}}
+	
+	\newcommand\@gpt@star[2]{%
+		\@gpt@no@star{#1}_{#2}
+	}
+\makeatother
 
 
 % ----------------------- %
@@ -577,10 +623,37 @@
 % ----------------------- %
 
 \makeatletter
-	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
-	\newcommand*\@vectStared[1]{\vv*{#1}}
-	\newcommand*\@vectUnstared[1]{\vv{#1}}
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
 \makeatother
+
+
+% ---------------------------- %
+% -- GEOMETRY - VECTOR NORM -- %
+% ---------------------------- %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+	\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+	\makeatletter
+		\let\@old@norm\norm
+		\def\norm{\@ifstar{\@old@norm}{\@old@norm*}}
+	\makeatother
 
 
 % ---------------------- %
@@ -590,9 +663,9 @@
 % Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
 
 \makeatletter
-	\newcommand\anglein{\@ifstar{\@angleinStar}{\@angleinNoStar}}
-	\newcommand*\@angleinStar[2]{\widehat{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@angleinNoStar[1]{\widehat{#1}}
+	\newcommand\anglein{\@ifstar{\@anglein@star}{\@anglein@no@star}}
+	\newcommand*\@anglein@star[2]{\widehat{\@no@point{#1}}\vphantom{#1}_{#2}}
+	\newcommand*\@anglein@no@star[1]{\widehat{\@no@point{#1}}}
 \makeatother
 
 %\newcommand\angleVect[2]{\left( #1 ; #2\right)} % STYLE
@@ -603,10 +676,83 @@
 % -------------------- %
 
 \makeatletter
-	\newcommand\arc{\@ifstar{\@arcStared}{\@arcUnstared}}
-	\newcommand*\@arcStared[2]{\wideparen{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@arcUnstared[1]{\wideparen{#1}}
+	\newcommand\arc{\@ifstar{\@arc@star}{\@arc@no@star}}
+	\newcommand*\@arc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
+	\newcommand*\@arc@no@star[1]{\wideparen{\@no@point{#1}}}
 \makeatother
+
+
+% --------------------- %
+% -- GEOMETRY - AXIS -- %
+% --------------------- %
+
+% Sources : see the sources of the macros for continued fractions. 
+
+\makeatletter
+% General naming of axis
+	\def\@axis@comafy@#1//#2\@nil{%
+		\@ifmtarg{#2}{%
+			#1%
+		}{%
+			#1 , \@axis@comafy@#2\@nil%
+		}%
+	}
+
+	\newcommand\axis{\@ifstar{\@axis@star}{\@axis@no@star}}
+
+    \newcommand\@axis@no@star[1]{%
+		\@axis@no@star@splitter@#1//\@nil%
+	}
+	\def\@axis@no@star@splitter@#1//#2\@nil{%
+		\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axis@comafy@#2\@nil}{)}}%
+	}
+
+    \newcommand\@axis@star[1]{%
+		\@axis@star@splitter@#1//\@nil%
+	}
+	\def\@axis@star@splitter@#1//#2\@nil{%
+		\ensuremath{\@interval@tool@star{(}{#1}{;}{\@axis@comafy@#2\@nil}{)}}%
+	}
+
+% Geometric points for naming some axes
+	\def\@axis@comafy@gptify@#1//#2\@nil{%
+		\@ifmtarg{#2}{%
+			\gpt{#1}%
+		}{%
+			\gpt{#1} , \@axis@comafy@gptify@#2\@nil%
+		}%
+	}
+
+    \newcommand\gpaxis[1]{%
+		\@gpaxis@splitter@#1//\@nil%
+	}
+	\def\@gpaxis@splitter@#1//#2\@nil{%
+		\ensuremath{\@interval@tool@no@star{(}{\gpt{#1}}{;}{\@axis@comafy@gptify@#2\@nil}{)}}%
+	}
+
+% Vectors for naming some axes
+	\def\@axis@comafy@vectify@#1//#2\@nil{%
+		\@ifmtarg{#2}{%
+			\vect{\trim@spaces{#1}}%
+		}{%
+			\vect{\trim@spaces{#1}} , \@axis@comafy@vectify@#2\@nil%
+		}%
+	}
+
+    \newcommand\vaxis[1]{%
+		\@vaxis@splitter@#1//\@nil%
+	}
+	\def\@vaxis@splitter@#1//#2\@nil{%
+		\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axis@comafy@vectify@#2\@nil}{)}}%
+	}
+
+% Geometric points and vectors for naming some axes
+    \newcommand\gpvaxis[1]{%
+		\@gpvaxis@splitter@#1//\@nil%
+	}
+	\def\@gpvaxis@splitter@#1//#2\@nil{%
+		\ensuremath{\@interval@tool@no@star{(}{\gpt{#1}}{;}{\@axis@comafy@vectify@#2\@nil}{)}}%
+	}
 
 
 % ------------------------------------- %
@@ -645,67 +791,67 @@
 	}
 
 % Standard continued fraction
-	\newcommand\contfrac{\@ifstar{\@contfracStar}{\@contfracNoStar}}
-	
-	\newcommand\@contfracNoStar[1]{%
-		\@contfracNoStarRecu@#1//\@nil%
+	\newcommand\contfrac{\@ifstar{\@contfrac@star}{\@contfrac@no@star}}
+
+	\newcommand\@contfrac@no@star[1]{%
+		\@contfrac@no@star@recu@#1//\@nil%
 	}
-	\def\@contfracNoStarRecu@#1//#2\@nil{%
+	\def\@contfrac@no@star@recu@#1//#2\@nil{%
 		\@ifmtarg{#2}{%
 			#1%
 		}{%
-			#1 + \cfrac{1}{\@contfracNoStarRecu@#2\@nil}%
+			#1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
 		}%
-	}	
-
-	\newcommand\@contfracStar[1]{%
-		\@contfracStarBefore@#1//\@nil%
 	}
-	\def\@contfracStarBefore@#1//#2\@nil{%
+
+	\newcommand\@contfrac@star[1]{%
+		\@contfrac@star@before@#1//\@nil%
+	}
+	\def\@contfrac@star@before@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	#1%
         }{%
-        	#1 \@contfracStarRecu@#2\@nil%
+        	#1 \@contfrac@star@recu@#2\@nil%
         }%
     }
-    \def\@contfracStarRecu@#1//#2\@nil{%
+    \def\@contfrac@star@recu@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	+ \singlecontfrac{1}{#1}%
         }{%
-        	+ \singlecontfrac{1}{#1} \@contfracStarRecu@#2\@nil%
+        	+ \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
         }%
     }
 
 % Generalized continued fraction
-	\newcommand\contfracgene{\@ifstar{\@contfracgeneStar}{\@contfracgeneNoStar}}
-	
-	\newcommand\@contfracgeneNoStar[1]{%
-		\@contfracgeneNoStarRecu@#1////\@nil%
+	\newcommand\contfracgene{\@ifstar{\@contfracgene@star}{\@contfracgene@no@star}}
+
+	\newcommand\@contfracgene@no@star[1]{%
+		\@contfracgene@no@star@recu@#1////\@nil%
 	}
-	\def\@contfracgeneNoStarRecu@#1//#2//#3\@nil{%
+	\def\@contfracgene@no@star@recu@#1//#2//#3\@nil{%
 		\@ifmtarg{#2}{%
 			#1%
 		}{%
-			#1 + \cfrac{#2}{\@contfracgeneNoStarRecu@#3\@nil}%
+			#1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
 		}%
 	}
-	
 
-	\newcommand\@contfracgeneStar[1]{%
-		\@contfracgeneStarBefore@#1//\@nil%
+
+	\newcommand\@contfracgene@star[1]{%
+		\@contfracgene@star@before@#1//\@nil%
 	}
-	\def\@contfracgeneStarBefore@#1//#2\@nil{%
+	\def\@contfracgene@star@before@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	#1%
         }{%
-        	#1 \@contfracgeneStarRecu@#2\@nil%
+        	#1 \@contfracgene@star@recu@#2\@nil%
         }%
-    }	
-    \def\@contfracgeneStarRecu@#1//#2//#3\@nil{%
+    }
+    \def\@contfracgene@star@recu@#1//#2//#3\@nil{%
         \@ifmtarg{#3}{%
             + \singlecontfrac{#1}{#2}%
         }{%
-            + \singlecontfrac{#1}{#2} \@contfracgeneStarRecu@#3\@nil%
+            + \singlecontfrac{#1}{#2} \@contfracgene@star@recu@#3\@nil%
         }%
     }
 \makeatother

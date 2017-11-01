@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -143,67 +148,67 @@
 	}
 
 % Standard continued fraction
-	\newcommand\contfrac{\@ifstar{\@contfracStar}{\@contfracNoStar}}
-	
-	\newcommand\@contfracNoStar[1]{%
-		\@contfracNoStarRecu@#1//\@nil%
+	\newcommand\contfrac{\@ifstar{\@contfrac@star}{\@contfrac@no@star}}
+
+	\newcommand\@contfrac@no@star[1]{%
+		\@contfrac@no@star@recu@#1//\@nil%
 	}
-	\def\@contfracNoStarRecu@#1//#2\@nil{%
+	\def\@contfrac@no@star@recu@#1//#2\@nil{%
 		\@ifmtarg{#2}{%
 			#1%
 		}{%
-			#1 + \cfrac{1}{\@contfracNoStarRecu@#2\@nil}%
+			#1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
 		}%
-	}	
-
-	\newcommand\@contfracStar[1]{%
-		\@contfracStarBefore@#1//\@nil%
 	}
-	\def\@contfracStarBefore@#1//#2\@nil{%
+
+	\newcommand\@contfrac@star[1]{%
+		\@contfrac@star@before@#1//\@nil%
+	}
+	\def\@contfrac@star@before@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	#1%
         }{%
-        	#1 \@contfracStarRecu@#2\@nil%
+        	#1 \@contfrac@star@recu@#2\@nil%
         }%
     }
-    \def\@contfracStarRecu@#1//#2\@nil{%
+    \def\@contfrac@star@recu@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	+ \singlecontfrac{1}{#1}%
         }{%
-        	+ \singlecontfrac{1}{#1} \@contfracStarRecu@#2\@nil%
+        	+ \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
         }%
     }
 
 % Generalized continued fraction
-	\newcommand\contfracgene{\@ifstar{\@contfracgeneStar}{\@contfracgeneNoStar}}
-	
-	\newcommand\@contfracgeneNoStar[1]{%
-		\@contfracgeneNoStarRecu@#1////\@nil%
+	\newcommand\contfracgene{\@ifstar{\@contfracgene@star}{\@contfracgene@no@star}}
+
+	\newcommand\@contfracgene@no@star[1]{%
+		\@contfracgene@no@star@recu@#1////\@nil%
 	}
-	\def\@contfracgeneNoStarRecu@#1//#2//#3\@nil{%
+	\def\@contfracgene@no@star@recu@#1//#2//#3\@nil{%
 		\@ifmtarg{#2}{%
 			#1%
 		}{%
-			#1 + \cfrac{#2}{\@contfracgeneNoStarRecu@#3\@nil}%
+			#1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
 		}%
 	}
-	
 
-	\newcommand\@contfracgeneStar[1]{%
-		\@contfracgeneStarBefore@#1//\@nil%
+
+	\newcommand\@contfracgene@star[1]{%
+		\@contfracgene@star@before@#1//\@nil%
 	}
-	\def\@contfracgeneStarBefore@#1//#2\@nil{%
+	\def\@contfracgene@star@before@#1//#2\@nil{%
     	\@ifmtarg{#2}{%
         	#1%
         }{%
-        	#1 \@contfracgeneStarRecu@#2\@nil%
+        	#1 \@contfracgene@star@recu@#2\@nil%
         }%
-    }	
-    \def\@contfracgeneStarRecu@#1//#2//#3\@nil{%
+    }
+    \def\@contfracgene@star@recu@#1//#2//#3\@nil{%
         \@ifmtarg{#3}{%
             + \singlecontfrac{#1}{#2}%
         }{%
-            + \singlecontfrac{#1}{#2} \@contfracgeneStarRecu@#3\@nil%
+            + \singlecontfrac{#1}{#2} \@contfracgene@star@recu@#3\@nil%
         }%
     }
 \makeatother
@@ -215,11 +220,11 @@
 
 	\subsection{Standard continued fractions}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-It is easy to write what is just after where the inline notation seems to have been 
-introduced by Alfred Pringsheim (the left notation is always space consuming for a 
+It is easy to write what is just after where the inline notation seems to have been
+introduced by Alfred Pringsheim (the left notation is always space consuming for a
 better readability).
 
 $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
@@ -227,7 +232,7 @@ $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{contfrac}{1}
 
@@ -240,7 +245,7 @@ $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 
 	\subsection{Generalized continued fractions}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 You can use similar notations for generalized continued fractions :
@@ -250,7 +255,7 @@ $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{contfracgene}{1}
 
@@ -262,7 +267,7 @@ $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
 
 	\subsection{Single like continued fraction}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
@@ -271,7 +276,7 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Technical ID}
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -284,7 +289,7 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
     \subsection{\texorpdfstring{The $\contfracope$ operator}%
                                {The K operator}}
 
-        \subsubsection{Example of use \#1}
+            \paragraph{Example of use \#1}
 
 \IDconstant{contfracope}
 
@@ -303,7 +308,7 @@ fraction" in german.
 \end{remark}
 
 
-        \subsubsection{Example of use \#2}
+            \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
 $\displaystyle

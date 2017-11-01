@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -105,49 +110,67 @@
 
 % == PACKAGES USED == %
 
-\usepackage{yhmath}
+\usepackage{mathtools}
 
 
 % == DEFINITIONS == %
 
-% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
+\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
 
-\makeatletter
-	\newcommand\anglein{\@ifstar{\@angleinStar}{\@angleinNoStar}}
-	\newcommand*\@angleinStar[2]{\widehat{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@angleinNoStar[1]{\widehat{#1}}
-\makeatother
+\newcommand\hypergeo[3]{%
+    \suprageo{#1}{#2}{#3}{}{}%
+}
 
-%\newcommand\angleVect[2]{\left( #1 ; #2\right)} % STYLE
+\newcommand\seqplus[3]{%
+    \suprageo{#1}{}{#2}{#3}{}%
+}
+
 
 
 \begin{document}
 
-\section{Inner angles}
+% \section{Analysis}
 
-	\subsection{Example of use}
+    \subsection{Extended notations for special sequences}
+
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-Here is one inner angle $\anglein{ABCDEF}$ using a lot of letters, and you can 
-write $\anglein*{A}{rot}$ instead of $\anglein{A_{rot}}$.
+Sometimes we need to write $\seqplus{F}{1}{2}$ or $\hypergeo{F}{1}{2}$ and crazy
+-wo-men really (?) love $\suprageo{F}{1}{2}{3}{4}$.
 \end{tcblisting}
 
 
+            \paragraph{Technical IDs}
 
-	\subsection{Technical IDs}
+\IDmacro*{seqplus}{2}
 
-\IDmacro*{anglein}{1}
+\IDarg{1} the right exponent like expression.
 
-\IDarg{} one text indicating the name of an inner angle.
+\IDarg{2} the right indice.
 
 
 \bigskip
 
 
-\IDmacro*{anglein*}{2}
+\IDmacro*{hypergeo}{2}
 
-\IDarg{1} one text indicating $up$ in the name $\anglein*{up}{down}$ of an inner angle.
+\IDarg{1} the left indice.
 
-\IDarg{2} one text indicating $down$ in the name $\anglein*{up}{down}$ of an inner angle.
+\IDarg{2} the right indice.
+
+
+\bigskip
+
+
+\IDmacro*{suprageo}{4}
+
+\IDarg{1} the left indice.
+
+\IDarg{2} the right indice.
+
+\IDarg{3} the right exponent.
+
+\IDarg{4} the left exponent.
 
 \end{document}

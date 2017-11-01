@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -102,48 +107,31 @@
 
 % == FOR DOC AND TESTS - END == %
 
+% == EXTRA == %
 
 % == PACKAGES USED == %
 
-\usepackage[f]{esvect}
-
-
 % == DEFINITIONS == %
-
-\makeatletter
-	\newcommand\vect{\@ifstar{\@vectStared}{\@vectUnstared}}
-	\newcommand*\@vectStared[1]{\vv*{#1}}
-	\newcommand*\@vectUnstared[1]{\vv{#1}}
-\makeatother
 
 
 \begin{document}
 
-\section{Vectors}
+\section{Change log}
 
-	\subsection{Example of use}
+All the changes are described inside the folders \verb+change_log+ : see the sources of \verb+lymath+ on \verb+github+. Here we just give a very short history of \verb+lymath+.
 
-\begin{tcblisting}{}
-Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
-$\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
-\end{tcblisting}
+\begin{description}
+	\setlength\itemsep{1em}
 
+	\item[2017-11-01] New minor version \verb+0.1.0-beta+ : changes and additional tools for sets, functions and geometry.
 
+	\item[2017-10-21] Little history of \verb+lymath+ will be indicated from now in this PDF documentation.
 
-	\subsection{Technical IDs}
+	\item[2017-10-18] New patch version \verb+0.0.2-beta+ : additional tools for differential calculus.
 
-\IDmacro*{vect}{1}
+	\item[2017-10-06] New patch version \verb+0.0.1-beta+ : additional tools for arithmetic, geometry, integral calculus and differential calculus.
 
-\IDarg{} one text indicating the name of a vector.
-
-
-\bigskip
-
-
-\IDmacro*{vect*}{2}
-
-\IDarg{1} one text indicating $up$ in the name $\vect*{up}{down}$ of a vector.
-
-\IDarg{2} one text indicating $down$ in the name $\vect*{up}{down}$ of a vector.
+	\item[2017-10-02] First version of the package.
+\end{description}
 
 \end{document}

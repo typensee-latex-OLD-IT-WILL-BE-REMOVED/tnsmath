@@ -38,6 +38,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -52,9 +57,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -66,27 +71,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -117,64 +122,64 @@
 % == DEFINITIONS == %
 
 \makeatletter
-    \newcommand\@interToolNoStar[4]{%
-    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+    \newcommand\@interval@tool@star[5]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
 	}
 
-    \newcommand\@interToolStar[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
- 
-   
+    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+
+
 % Macros for intervals - START
 
 % Macros for french real intervals
 
-    \newcommand\intervalCO{\@ifstar{\@intervalCOStar}{\@intervalCONoStar}}
-    \newcommand\@intervalCONoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{[}}}
-    \newcommand\@intervalCOStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{[}}}
+    \newcommand\intervalCO{\@ifstar{\@intervalCO@star}{\@intervalCO@no@star}}
+    \newcommand\@intervalCO@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{[}}}
+    \newcommand\@intervalCO@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{[}}}
 
-    \newcommand\intervalC{\@ifstar{\@intervalCStar}{\@intervalCNoStar}}
-    \newcommand\@intervalCNoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{]}}}
-    \newcommand\@intervalCStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{]}}}
+    \newcommand\intervalC{\@ifstar{\@intervalC@star}{\@intervalC@no@star}}
+    \newcommand\@intervalC@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalC@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{]}}}
 
-    \newcommand\intervalO{\@ifstar{\@intervalOStar}{\@intervalONoStar}}
-    \newcommand\@intervalONoStar[2]{\ensuremath{\@interToolNoStar{]}{#1}{#2}{[}}}
-    \newcommand\@intervalOStar[2]{\ensuremath{\@interToolStar{]}{#1}{#2}{[}}}
+    \newcommand\intervalO{\@ifstar{\@intervalO@star}{\@intervalO@no@star}}
+    \newcommand\@intervalO@no@star[2]{\ensuremath{\@interval@tool@no@star{]}{#1}{;}{#2}{[}}}
+    \newcommand\@intervalO@star[2]{\ensuremath{\@interval@tool@star{]}{#1}{;}{#2}{[}}}
 
-    \newcommand\intervalOC{\@ifstar{\@intervalOCStar}{\@intervalOCNoStar}}
-    \newcommand\@intervalOCNoStar[2]{\ensuremath{\@interToolNoStar{]}{#1}{#2}{]}}}
-    \newcommand\@intervalOCStar[2]{\ensuremath{\@interToolStar{]}{#1}{#2}{]}}}
+    \newcommand\intervalOC{\@ifstar{\@intervalOC@star}{\@intervalOC@no@star}}
+    \newcommand\@intervalOC@no@star[2]{\ensuremath{\@interval@tool@no@star{]}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalOC@star[2]{\ensuremath{\@interval@tool@star{]}{#1}{;}{#2}{]}}}
 
 % Macros for american real intervals
 
-    \newcommand\intervalCP{\@ifstar{\@intervalCPStar}{\@intervalCPNoStar}}
-    \newcommand\@intervalCPNoStar[2]{\ensuremath{\@interToolNoStar{[}{#1}{#2}{)}}}
-    \newcommand\@intervalCPStar[2]{\ensuremath{\@interToolStar{[}{#1}{#2}{)}}}
+    \newcommand\intervalCP{\@ifstar{\@intervalCP@star}{\@intervalCP@no@star}}
+    \newcommand\@intervalCP@no@star[2]{\ensuremath{\@interval@tool@no@star{[}{#1}{;}{#2}{)}}}
+    \newcommand\@intervalCP@star[2]{\ensuremath{\@interval@tool@star{[}{#1}{;}{#2}{)}}}
 
-    \newcommand\intervalP{\@ifstar{\@intervalPStar}{\@intervalPNoStar}}
-    \newcommand\@intervalPNoStar[2]{\ensuremath{\@interToolNoStar{(}{#1}{#2}{)}}}
-    \newcommand\@intervalPStar[2]{\ensuremath{\@interToolStar{(}{#1}{#2}{)}}}
+    \newcommand\intervalP{\@ifstar{\@intervalP@star}{\@intervalP@no@star}}
+    \newcommand\@intervalP@no@star[2]{\ensuremath{\@interval@tool@no@star{(}{#1}{;}{#2}{)}}}
+    \newcommand\@intervalP@star[2]{\ensuremath{\@interval@tool@star{(}{#1}{;}{#2}{)}}}
 
-    \newcommand\intervalPC{\@ifstar{\@intervalPCStar}{\@intervalPCNoStar}}
-    \newcommand\@intervalPCNoStar[2]{\ensuremath{\@interToolNoStar{(}{#1}{#2}{]}}}
-    \newcommand\@intervalPCStar[2]{\ensuremath{\@interToolStar{(}{#1}{#2}{]}}}
+    \newcommand\intervalPC{\@ifstar{\@intervalPC@star}{\@intervalPC@no@star}}
+    \newcommand\@intervalPC@no@star[2]{\ensuremath{\@interval@tool@no@star{(}{#1}{;}{#2}{]}}}
+    \newcommand\@intervalPC@star[2]{\ensuremath{\@interval@tool@star{(}{#1}{;}{#2}{]}}}
 
 % Macros for discrete intervals
 
-    \newcommand\ZintervalCO{\@ifstar{\@ZintervalCOStar}{\@ZintervalCONoStar}}
-    \newcommand\@ZintervalCONoStar[2]{\ensuremath{\@interToolNoStar{\llbracket}{#1}{#2}{\llbracket}}}
-    \newcommand\@ZintervalCOStar[2]{\ensuremath{\@interToolStar{\llbracket}{#1}{#2}{\llbracket}}}
+    \newcommand\ZintervalCO{\@ifstar{\@ZintervalCO@star}{\@ZintervalCO@no@star}}
+    \newcommand\@ZintervalCO@no@star[2]{\ensuremath{\@interval@tool@no@star{\llbracket}{#1}{;}{#2}{\llbracket}}}
+    \newcommand\@ZintervalCO@star[2]{\ensuremath{\@interval@tool@star{\llbracket}{#1}{;}{#2}{\llbracket}}}
 
-    \newcommand\ZintervalC{\@ifstar{\@ZintervalCStar}{\@ZintervalCNoStar}}
-    \newcommand\@ZintervalCNoStar[2]{\ensuremath{\@interToolNoStar{\llbracket}{#1}{#2}{\rrbracket}}}
-    \newcommand\@ZintervalCStar[2]{\ensuremath{\@interToolStar{\llbracket}{#1}{#2}{\rrbracket}}}
+    \newcommand\ZintervalC{\@ifstar{\@ZintervalC@star}{\@ZintervalC@no@star}}
+    \newcommand\@ZintervalC@no@star[2]{\ensuremath{\@interval@tool@no@star{\llbracket}{#1}{;}{#2}{\rrbracket}}}
+    \newcommand\@ZintervalC@star[2]{\ensuremath{\@interval@tool@star{\llbracket}{#1}{;}{#2}{\rrbracket}}}
 
-    \newcommand\ZintervalO{\@ifstar{\@ZintervalOStar}{\@ZintervalONoStar}}
-    \newcommand\@ZintervalONoStar[2]{\ensuremath{\@interToolNoStar{\rrbracket}{#1}{#2}{\llbracket}}}
-    \newcommand\@ZintervalOStar[2]{\ensuremath{\@interToolStar{\rrbracket}{#1}{#2}{\llbracket}}}
+    \newcommand\ZintervalO{\@ifstar{\@ZintervalO@star}{\@ZintervalO@no@star}}
+    \newcommand\@ZintervalO@no@star[2]{\ensuremath{\@interval@tool@no@star{\rrbracket}{#1}{;}{#2}{\llbracket}}}
+    \newcommand\@ZintervalO@star[2]{\ensuremath{\@interval@tool@star{\rrbracket}{#1}{;}{#2}{\llbracket}}}
 
-    \newcommand\ZintervalOC{\@ifstar{\@ZintervalOCStar}{\@ZintervalOCNoStar}}
-    \newcommand\@ZintervalOCNoStar[2]{\ensuremath{\@interToolNoStar{\rrbracket}{#1}{#2}{\rrbracket}}}
-    \newcommand\@ZintervalOCStar[2]{\ensuremath{\@interToolStar{\rrbracket}{#1}{#2}{\rrbracket}}}
+    \newcommand\ZintervalOC{\@ifstar{\@ZintervalOC@star}{\@ZintervalOC@no@star}}
+    \newcommand\@ZintervalOC@no@star[2]{\ensuremath{\@interval@tool@no@star{\rrbracket}{#1}{;}{#2}{\rrbracket}}}
+    \newcommand\@ZintervalOC@star[2]{\ensuremath{\@interval@tool@star{\rrbracket}{#1}{;}{#2}{\rrbracket}}}
 
 % Macros for intervals - END
 
@@ -183,35 +188,36 @@
 
 \begin{document}
 
-\section{Intervals}
+% \section{Sets}
 
-    \subsection{Real intervals - French (?) notation}
+    \subsection{Intervals}
 
-        \subsubsection{Example of use \#1}
+        \subsubsection{Real intervals - French (?) notation}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-In $\intervalOC{a}{b} = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro
-used solves a spacing problem, and that the delimiters are a little bigger.
+In $I = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro used solves
+a spacing problem.
 
 % The syntax refers to O-pened and C-losed but CC and OO are reduced to C and O.
 \end{tcblisting}
 
 
-        \subsubsection{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+The delimiters automatically stretches vertically, but you can use the @star version of a macro if you don't want this feature. In that case, the delimiters are a little bigger than traditional hooks. Here is an example.
 
 \begin{tcblisting}{}
-You can use the star version of a macro if you want the delimiters to stretch 
-vertically.
-
 $\displaystyle \intervalC{ \frac{1}{2} }{ 1^{2^{3}} }
-             = [ \frac{1}{2} ; 1^{2^{3}} ] 
+             = [ \frac{1}{2} ; 1^{2^{3}} ]
              = \intervalC*{ \frac{1}{2} }{ 1^{2^{3}} }$
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip
@@ -267,21 +273,21 @@ For all the macros above, the star version produces intervals with delimiters th
 
 
 
-    \subsection{Real intervals - American notation}
+        \subsubsection{Real intervals - American notation}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-A semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and an opened one
-$\intervalP{a}{b} = (a ; b)$.
+In America, we write a semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and
+an opened one $\intervalP{a}{b} = (a ; b)$.
 
 % The syntax refers to P-arenthesis.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip
@@ -325,9 +331,9 @@ For all the macros above, the star version produces intervals with delimiters th
 
 
 
-    \subsection{Discrete intervals of integers}
+        \subsubsection{Discrete intervals of integers}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
 By definition, $\ZintervalC{-1}{4} = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$. So we also have
@@ -337,9 +343,9 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
-For all the macros above, the star version produces intervals with delimiters that fit vertically with the bounds of the interval.
+For all the macros above, the @star version produces intervals with delimiters that fit vertically with the bounds of the interval.
 
 
 \bigskip

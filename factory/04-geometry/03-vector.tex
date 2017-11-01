@@ -110,58 +110,67 @@
 
 % == PACKAGES USED == %
 
+\usepackage[f]{esvect}
+
 
 % == DEFINITIONS == %
+
 \makeatletter
-	\newcommand\gpt{\@ifstar{\@gpt@star}{\@gpt@no@star}}
-	
-	\newcommand\@gpt@no@star[1]{\mathrm{#1}}
-	
-	\newcommand\@gpt@star[2]{%
-		\@gpt@no@star{#1}_{#2}
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
 	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
 \makeatother
 
 
 \begin{document}
 
-\section{Geometry}
+% \section{Geometry}
 
-    \subsection{Points}
+    \subsection{Writing vectors}
 
             \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-$\gpt{I}$ indicates a point named "I".
+Here is one vector $\vect{ABCDEF}$ using a lot of letters and you can write
+$\vect*{e}{rot}$ instead of $\vect{e_{rot}}$.
 \end{tcblisting}
-
-
-\begin{remark}
-    \verb+\gpt+ is for "\textbf{g}eometric \textbf{p}oin\textbf{t}". This name has been chosen so as to avoid a conflict with \verb+lyxam+ another project of the author of \verb+lymath+. 
-\end{remark}
 
 
             \paragraph{Example of use \#2}
 
 \begin{tcblisting}{}
-A list of points : $\gpt*{I}{1}$, $\gpt*{I}{2}$, \dots
+You can also simply write $\vect{i}$ and $\vect*{j}{2}$ without points below the
+arrows only for vectors named "i" or "j".
 \end{tcblisting}
 
 
-            \paragraph{Technical ID}
 
-\IDmacro*{gpt}{1} where \verb+gpt = G-eometric P-oin-T+
+            \paragraph{Technical IDs}
 
-\IDarg{} one text indicating the name of a point.
+\IDmacro*{vect}{1}
+
+\IDarg{} one text indicating the name of a vector.
 
 
 \bigskip
 
 
-\IDmacro*{gpt*}{2}
+\IDmacro*{vect*}{2}
 
-\IDarg{1} one text indicating $\gpt{Up}$ in the name $\gpt*{Up}{down}$ of a point.
+\IDarg{1} one text indicating $up$ in the name $\vect*{up}{down}$ of a vector.
 
-\IDarg{2} one text indicating $down$ in the name $\gpt*{Up}{down}$ of a point.
+\IDarg{2} one text indicating $down$ in the name $\vect*{up}{down}$ of a vector.
 
 \end{document}

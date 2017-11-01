@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -105,7 +110,15 @@
 
 % == EXTRAS == %
 
-\newcommand\dd[1]{d#1} % This operator is defined properly in "differential.tex"
+\makeatletter
+    \newcommand\@interval@tool@star[4]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+	}
+
+    \newcommand\@interval@tool@no@star[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
+\makeatother
+    
+\newcommand\dd[1]{d#1}
 
 
 % == PACKAGES USED == %
@@ -171,13 +184,13 @@
     }
 
 % The hook calculator
-    \newcommand\hook{\@ifstar{\@hookStar}{\@hookNoStar}}
-    \newcommand\@hookNoStar[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
-    \newcommand\@hookStar[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+    \newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
+    \newcommand\@hook@star[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
+    \newcommand\@hook@no@star[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-    \newcommand\vhook{\@ifstar{\@vhookStar}{\@vhookNoStar}}
-    \newcommand\@vhookNoStar[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
-    \newcommand\@vhookStar[3]{\left. #1 \right\rvert_{#2}^{#3}}
+    \newcommand\vhook{\@ifstar{\@vhook@star}{\@vhook@no@star}}
+    \newcommand\@vhook@star[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+    \newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}
 
 \makeatother
 
@@ -185,11 +198,13 @@
 
 \begin{document}
 
-\section{Integral calculus}
+% \section{Analysis}
 
-    \subsection{The hook operator - 1st version}
+    \subsection{Integral calculus}
 
-        \subsubsection{Example of use \#1}
+        \subsubsection{The hook operator - 1st version}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 By definition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ where
@@ -197,16 +212,17 @@ $\hook{F(x)}{a}{b} = F(b) - F(a)$.
 \end{tcblisting}
 
 
-        \subsubsection{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+By default, the hooks stretch vertically, but if you don't want this you just have to use the @star version as in the example below.
 
 \begin{tcblisting}{}
-With the star version, the hooks stretch vertically like in
-$\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \hook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+$\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{hook}{3}
 
@@ -220,25 +236,26 @@ $\displaystyle \hook*{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-    \subsection{The hook operator - 2nd version}
+        \subsubsection{The hook operator - 2nd version}
 
-        \subsubsection{Example of use \#1}
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can use $\vhook{F(x)}{a}{b}$ instead of $\hook{F(x)}{a}{b}$.
 \end{tcblisting}
 
 
-        \subsubsection{Example of use \#2}
+            \paragraph{Example of use \#2}
+
+Like with first version of the hook operator, you can use a @star version to not have the default behavior of vertical stretch. Here is an example.
 
 \begin{tcblisting}{}
-With the star version, the rule at the right stretches vertically like in
-$\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \vhook{\frac{x - 1}{5 + x^2}}{a}{b}$.
+$\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{vhook}{3}
 
@@ -252,7 +269,7 @@ $\displaystyle \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-    \subsection{Several integrals}
+        \subsubsection{Several integrals}
 
 The package minimizes spacings between consecutive symbols of integration. Here is an example.
 

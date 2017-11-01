@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -103,6 +108,23 @@
 % == FOR DOC AND TESTS - END == %
 
 
+% == EXTRA == %
+
+\makeatletter
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+\makeatother
+
+
 % == PACKAGES USED == %
 
 \usepackage{yhmath}
@@ -111,26 +133,36 @@
 % == DEFINITIONS == %
 
 \makeatletter
-	\newcommand\arc{\@ifstar{\@arcStared}{\@arcUnstared}}
-	\newcommand*\@arcStared[2]{\wideparen{#1}\vphantom{#1}_{#2}}
-	\newcommand*\@arcUnstared[1]{\wideparen{#1}}
+	\newcommand\arc{\@ifstar{\@arc@star}{\@arc@no@star}}
+	\newcommand*\@arc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
+	\newcommand*\@arc@no@star[1]{\wideparen{\@no@point{#1}}}
 \makeatother
 
 
 \begin{document}
 
-\section{Circular arcs}
+% \section{Geometry}
 
-	\subsection{Example of use}
+    \subsection{Circular arcs}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
-Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write 
+Here is one arc $\arc{ABCDEF}$ using a lot of letters, and you can write
 $\arc*{A}{rot}$ instead of $\arc{A_{rot}}$.
 \end{tcblisting}
 
 
+            \paragraph{Example of use \#2}
 
-	\subsection{Technical IDs}
+\begin{tcblisting}{}
+You can also simply write $\arc{i}$ and $\arc*{j}{2}$ without points below the arc
+only for arcs named "i" or "j".
+\end{tcblisting}
+
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{arc}{1}
 

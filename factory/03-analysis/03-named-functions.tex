@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -152,17 +157,19 @@
 
 \begin{document}
 
-\section{Special functions}
+% \section{Analysis}
 
-    \subsection{Some examples of use}
+    \subsection{Special named functions}
+
+        \subsubsection{Some examples of use}
 
 \begin{tcblisting}{}
-Some additional special functions :
+Some additional special named functions :
 $\ch x \neq ch x$, $\ppcm(x;y)$, $\lg x =\logb{2} x$ and $\expb{6} y$.
 \end{tcblisting}
 
 
-    \subsection{Functions without parameter}
+        \subsubsection{Named functions without parameter}
 
 All the following macros don't have any parameter.
 
@@ -182,9 +189,9 @@ All the following macros don't have any parameter.
 
 
 
-    \subsection{Functions with parameters}
+        \subsubsection{Named functions with parameters}
 
-        \subsubsection{The complete list}
+            \paragraph{The complete list}
 
 All the following macros have at least one parameter.
 
@@ -198,7 +205,7 @@ All the following macros have at least one parameter.
 \end{tabular*}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{expb}{1}
 

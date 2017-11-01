@@ -5,7 +5,7 @@ from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
 THIS_DIR = PPath( __file__ ).parent
-TEX_FILE = THIS_DIR / '02-functions.tex'
+TEX_FILE = THIS_DIR / '03-named-functions.tex'
 
 DECO = " "*4
 

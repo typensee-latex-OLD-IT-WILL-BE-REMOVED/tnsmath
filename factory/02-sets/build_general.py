@@ -153,7 +153,7 @@ latextable = f"""
 {table_lines}
         \\end{{tabular}}
     \\end{{center}}
-    \\label{{default}}
+    \\label{{table:suffixes-sets}}
 \\end{{table}}
 """
 

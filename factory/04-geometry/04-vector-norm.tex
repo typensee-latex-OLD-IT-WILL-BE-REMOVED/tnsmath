@@ -108,60 +108,71 @@
 % == FOR DOC AND TESTS - END == %
 
 
-% == PACKAGES USED == %
+% == EXTRA == %
 
+\usepackage[f]{esvect}
 
-% == DEFINITIONS == %
 \makeatletter
-	\newcommand\gpt{\@ifstar{\@gpt@star}{\@gpt@no@star}}
-	
-	\newcommand\@gpt@no@star[1]{\mathrm{#1}}
-	
-	\newcommand\@gpt@star[2]{%
-		\@gpt@no@star{#1}_{#2}
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
 	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
 \makeatother
 
 
+% == PACKAGES USED == %
+
+\usepackage{mathtools}
+
+
+% == DEFINITIONS == %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+	\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+	\makeatletter
+		\let\@old@norm\norm
+		\def\norm{\@ifstar{\@old@norm}{\@old@norm*}}
+	\makeatother
+
 \begin{document}
 
-\section{Geometry}
+% \section{Analysis}
 
-    \subsection{Points}
+    \subsection{Norm of a vector}
 
-            \paragraph{Example of use \#1}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-$\gpt{I}$ indicates a point named "I".
+Let's write $\norm{\vect{i}}$, $\displaystyle \norm{\frac{2}{7} \vect*{e}{k}}$, or
+$\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ with little vertical rules.
 \end{tcblisting}
 
 
 \begin{remark}
-    \verb+\gpt+ is for "\textbf{g}eometric \textbf{p}oin\textbf{t}". This name has been chosen so as to avoid a conflict with \verb+lyxam+ another project of the author of \verb+lymath+. 
+	The \LaTeX{} code comes directly from this post: \url{https://tex.stackexchange.com/a/43009/6880}.
 \end{remark}
 
 
-            \paragraph{Example of use \#2}
+            \paragraph{Technical IDs}
 
-\begin{tcblisting}{}
-A list of points : $\gpt*{I}{1}$, $\gpt*{I}{2}$, \dots
-\end{tcblisting}
+\IDmacro*{norm}{1}
 
+\IDmacro*{norm*}{1}
 
-            \paragraph{Technical ID}
-
-\IDmacro*{gpt}{1} where \verb+gpt = G-eometric P-oin-T+
-
-\IDarg{} one text indicating the name of a point.
-
-
-\bigskip
-
-
-\IDmacro*{gpt*}{2}
-
-\IDarg{1} one text indicating $\gpt{Up}$ in the name $\gpt*{Up}{down}$ of a point.
-
-\IDarg{2} one text indicating $down$ in the name $\gpt*{Up}{down}$ of a point.
+\IDarg{} the vector on which we apply the norm
 
 \end{document}

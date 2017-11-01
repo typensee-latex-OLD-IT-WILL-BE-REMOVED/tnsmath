@@ -35,6 +35,11 @@
 \theoremstyle{definition}
 \newtheorem*{remark}{Remark}
 
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
 
 % Technical IDs
 
@@ -49,9 +54,9 @@
 }
 
 \makeatletter
-	\newcommand\IDmacro{\@ifstar{\@IDmacroStar}{\@IDmacroNoStar}}
-	
-    \newcommand\@IDmacroNoStar[3]{%
+	\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+    \newcommand\@IDmacro@no@star[3]{%
         \texttt{%
         	\textbackslash#1%
         	\IfStrEq{#2}{0}{}{%
@@ -63,27 +68,27 @@
 				\IfStrEq{#3}{1}{}{s})%
 			}
 	   	}
-        \immediate\write\tempfile{macro@#1@#2@#3}%
+        \immediate\write\tempfile{macro,#1,#2,#3}%
     }
 
-    \newcommand\@IDmacroStar[2]{%
-        \@IDmacroNoStar{#1}{0}{#2}%
+    \newcommand\@IDmacro@star[2]{%
+        \@IDmacro@no@star{#1}{0}{#2}%
     }
 
-	\newcommand\@IDoptarg{\@ifstar{\@IDoptargStar}{\@IDoptargNoStar}}
-	
-	\newcommand\@IDoptargStar[2]{%
+	\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+	\newcommand\@IDoptarg@star[2]{%
     	\vspace{0.5em}
 		--- \texttt{#1%
 			\IfStrEq{#2}{}{:}{\,#2:}%
 		}%
 	}
 
-	\newcommand\@IDoptargNoStar[2]{%
+	\newcommand\@IDoptarg@no@star[2]{%
     	\IfStrEq{#2}{}{%
-			\@IDoptargStar{#1}{}%
+			\@IDoptarg@star{#1}{}%
 		}{%
-			\@IDoptargStar{#1}{\##2}%
+			\@IDoptarg@star{#1}{\##2}%
 		}%
 	}
 
@@ -105,6 +110,17 @@
 
 % == EXTRAS == %
 
+\usepackage{relsize}
+%\usepackage{yhmath}
+
+\makeatletter
+    \newcommand\@interval@tool@star[5]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
+	}
+
+    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+\makeatother
+    
 \newcommand\ascii{\texttt{ASCII}}
 
 
@@ -121,27 +137,39 @@
 
 % == DEFINITIONS == %
 
-% Source for mathpzc : page 68 de ''The Comprehensive LATEX Symbol List''
-
-
-% Only the upper case letters
-
 \makeatletter
+% General sets
+    \newcommand\geneset{\@ifstar{\@geneset@star}{\@geneset@no@star}}
+    \newcommand\@geneset@no@star[1]{\ensuremath{\@interval@tool@no@star{\{}{#1}{}{}{\}}}}
+    \newcommand\@geneset@star[1]{\ensuremath{\@interval@tool@star{\{}{#1}{}{}{\}}}}
 
-	\newcommand\probaset[1]{
+% Probabilistic sets
+	\newcommand\probaset{\@ifstar{\@probaset@star}{\@probaset@no@star}}
+	
+	\newcommand\@probaset@no@star[1]{
     	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
         	\mathcal{#1}
     	}{%
         	\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
     	}
 	}
+	
+	\newcommand\@probaset@star[2]{%
+		\@probaset@no@star{#1}_{#2}
+	}
 
+% Geometric sets
+%
 % With ''mathscr'', we only have the upper case letters.
 % So we use the following trick for lower case letters.
-
+%
+% Source:
+%    * page 68 de ''The Comprehensive LATEX Symbol List''
 	\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
-	\newcommand\geoset[1]{
+	\newcommand\geoset{\@ifstar{\@geoset@star}{\@geoset@no@star}}
+	
+	\newcommand\@geoset@no@star[1]{
 	    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
         	\mathscr{#1}
     	}{%
@@ -152,39 +180,48 @@
         	}
     	}
 	}
+	
+	\newcommand\@geoset@star[2]{%
+		\@geoset@no@star{#1}_{#2}
+	}
 
-
+% Field like sets
+%
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
-
-	\newcommand\fieldset[1]{
+	\newcommand\fieldset{\@ifstar{\@fieldset@star}{\@fieldset@no@star}}
+	
+	\newcommand\@fieldset@no@star[1]{
     	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
     	    \mathds{#1}
     	}{%
         	\PackageError{lymath}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
     	}
 	}
+	
+	\newcommand\@fieldset@star[2]{%
+		\@fieldset@no@star{#1}_{#2}
+	}
 
-
+% Tools for classical sets
 	\newcommand\setpos{\text{\bf{\tiny+}}}
 	\newcommand\setneg{\vphantom{\setpos}-}
-	\newcommand\setstar{\text{*}}
+	\newcommand\set@star{\text{*}}
 
+    \newcommand\specialset{\@ifstar{\@specialset@star}{\@specialset@no@star}}
 
-    \newcommand\specialset{\@ifstar{\@specialsetStar}{\@specialsetNoStar}}
-
-    \newcommand\@specialsetNoStar[2]{
+    \newcommand\@specialset@no@star[2]{
         \IfEqCase{#2}{
-            {s}{ #1^{\setstar} }
-            {n}{ #1^{\phantom{\setstar}}_{\setneg} }
-            {p}{ #1^{\phantom{\setstar}}_{\setpos} }
-            {sn}{ #1^{\setstar}_{\setneg} }
-            {sp}{ #1^{\setstar}_{\setpos} }
+            {s}{ #1^{\set@star} }
+            {n}{ #1^{\phantom{\set@star}}_{\setneg} }
+            {p}{ #1^{\phantom{\set@star}}_{\setpos} }
+            {sn}{ #1^{\set@star}_{\setneg} }
+            {sp}{ #1^{\set@star}_{\setpos} }
         }
     }
 
-    \newcommand\@specialsetStar[2]{
+    \newcommand\@specialset@star[2]{
         \IfEqCase{#2}{
             {s}{ #1_{\neq 0} }
             {n}{ #1_{\le 0} }
@@ -196,8 +233,9 @@
 \makeatother
 
 % The empty set
-
-\newcommand\nullset{\ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}}
+\newcommand\nullset{%
+	\ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}%
+}
 
 % List of classical sets
 
@@ -245,11 +283,41 @@
 
 \begin{document}
 
-\section{Different kind of sets}
+\section{Sets}
 
-    \subsection{Sets for geometry}
+    \subsection{Different kind of sets}
 
-        \subsubsection{Example of use}
+        \subsubsection{Sets vs braces}
+
+            \paragraph{Example of use \#1}
+
+\begin{tcblisting}{}
+A set of beautiful numbers : $\geneset{1 ; 3 ; 5}$ .
+\end{tcblisting}
+
+
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Choose your team :
+$\displaystyle \geneset{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
+or 
+$\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
+\end{tcblisting}
+
+
+            \paragraph{Technical IDs}
+
+\IDmacro*{geneset}{1}
+
+\IDmacro*{geneset*}{1}
+
+\IDarg{} the definition of the set.
+
+
+        \subsubsection{Sets for geometry}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\geoset{C}$, $\geoset{D}$ and $\geoset{d}$ but you can
@@ -257,17 +325,32 @@ not write things like \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\geoset*{C}{1}$, $\geoset*{C}{2}$, \dots
+\end{tcblisting}
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{geoset}{1}
 
 \IDarg{} one single \ascii{} letter indicating a geometrical set.
 
 
+\bigskip
 
-    \subsection{Sets for probability}
 
-        \subsubsection{Example of use}
+\IDmacro*{geoset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\geoset{U}$ in the name $\geoset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\geoset*{U}{d}$ of a geometrical set.
+
+
+        \subsubsection{Sets for probability}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\probaset{E}$ and $\probaset{G}$ but you can not write
@@ -275,17 +358,34 @@ things like \verb+$\probaset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\probaset*{E}{1}$, $\probaset*{E}{2}$, \dots
+\end{tcblisting}
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{probaset}{1}
 
 \IDarg{} one single upper \ascii{} upper letter indicating a probabilistic set.
 
 
+\bigskip
 
-    \subsection{Sets for rings and fields theory}
 
-        \subsubsection{Example of use}
+\IDmacro*{probaset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\probaset{U}$ in the name $\probaset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\probaset*{U}{d}$ of a geometrical set.
+
+
+
+        \subsubsection{Sets for rings and fields theory}
+
+            \paragraph{Example of use \#1}
 
 \begin{tcblisting}{}
 You can semantically write $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ and
@@ -293,15 +393,32 @@ $\fieldset{k}$, but you can't write things like \verb+$\fieldset{ABC}$+.
 \end{tcblisting}
 
 
-        \subsubsection{Technical ID}
+            \paragraph{Example of use \#2}
+
+\begin{tcblisting}{}
+Subscripts can be used like in $\fieldset*{k}{1}$, $\fieldset*{k}{2}$, \dots
+\end{tcblisting}
+
+
+            \paragraph{Technical IDs}
 
 \IDmacro*{fieldset}{1}
 
 \IDarg{} either one of the letters \texttt{h} and \texttt{k}, or one single upper \ascii{} letter indicating a field or ring like set.
 
 
+\bigskip
 
-    \subsection{Classical sets}
+
+\IDmacro*{fieldset*}{2}
+
+\IDarg{1} one single \ascii{} letter indicating $\fieldset{U}$ in the name $\fieldset*{U}{d}$ of a geometrical set.
+
+\IDarg{2} one text indicating $d$ in the name $\fieldset*{U}{d}$ of a geometrical set.
+
+
+
+        \subsubsection{Classical sets}
 
 \begin{tcblisting}{}
 You can directly use $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$, $\HH$
@@ -310,14 +427,14 @@ and $\OO$.
 
 
 
-    \subsection{Classical sets with suffixes}
+        \subsubsection{Classical sets with suffixes}
 
 \begin{tcblisting}{}
 It is easy to type $\RRn$, $\RRp$, $\RRs$, $\RRsn$ and $\RRsp$.
 \end{tcblisting}
 
 
-We have used suffixes \verb+n+ for \verb+Negative+, \verb+p+ for \verb+Positive+, and \verb+s+ for \verb+Star+ with the additional composite suffixes \verb+sn+ et \verb+sp+.
+We have used suffixes \verb+n+ for \verb+Negative+, \verb+p+ for \verb+Positive+, and \verb+s+ for \verb+@star+ with the additional composite suffixes \verb+sn+ et \verb+sp+.
 
 \medskip
 
@@ -325,7 +442,9 @@ Note that you can't use \verb+$\CCn$+ for $\specialset{\CC}{n}$ because the set 
 
 \medskip
 
-The following table shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+\begin{remark}
+	The table \ref{table:suffixes-sets} on page \pageref{table:suffixes-sets} shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+\end{remark}
 
 % == Table of suffixes - START == %
 \newcommand\xx{\phantom{$\times$}}
@@ -344,23 +463,23 @@ The following table shows when you can add one of the suffixes \verb+n+, \verb+p
 \hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
         \end{tabular}
     \end{center}
-    \label{default}
+    \label{table:suffixes-sets}
 \end{table}
 % == Table of suffixes - END == %
 
 
 
-    \subsection{Suffixes on demand}
+        \subsubsection{Suffixes on demand}
 
-        \subsubsection{Example of use}
+            \paragraph{Example of use}
 
 \begin{tcblisting}{}
-You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$. 
+You can indeed write things like $\specialset{\CC}{n}$ or $\specialset{\HH}{sp}$.
 There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
 \end{tcblisting}
 
 
-        \subsubsection{Technical IDs}
+            \paragraph{Technical IDs}
 
 \IDmacro*{specialset}{2}
 
