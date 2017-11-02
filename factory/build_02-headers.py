@@ -33,7 +33,7 @@ for subdir in THIS_DIR.walk("dir::"):
         continue
 
     for latexfile in subdir.walk("file::**.tex"):
-        print("   * Updating << {0} >>".format(latexfile - THIS_DIR))
+        print(f"{DECO}* Updating << {latexfile - THIS_DIR} >>")
 
         with open(
             file     = latexfile,

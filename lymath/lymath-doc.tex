@@ -48,6 +48,8 @@
 \usepackage{pgffor}
 \usepackage{xstring}
 
+\usepackage{varioref}
+
 
 % MISC
 
@@ -348,7 +350,7 @@ Note that you can't use \verb+$\CCn$+ for $\specialset{\CC}{n}$ because the set 
 \medskip
 
 \begin{remark}
-	The table \ref{table:suffixes-sets} on page \pageref{table:suffixes-sets} shows when you can add one of the suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ and \verb+sp+.
+	The table \ref{table:suffixes-sets}, see\vpageref{table:suffixes-sets}, shows allowed associations between classical sets and suffixes.
 \end{remark}
 
 % == Table of suffixes - START == %
@@ -624,7 +626,7 @@ For all the macros above, the @star version produces intervals with delimiters t
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
 
 \begin{tcblisting}{}
-List of all classical constants where $\ttau = \frac{\ppi}{2}$ is the youngest one:
+List of all classical constants where $\ttau = 2 \ppi$ is the youngest one:
 $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 \end{tcblisting}
 
@@ -934,7 +936,7 @@ $\displaystyle \partialfrac[2]{f}{x // y}
 
     \subsection{Integral calculus}
 
-        \subsubsection{The hook operator - 1st version}
+        \subsubsection{The hook operator - 1\textsuperscript{st} version}
 
             \paragraph{Example of use \#1}
 
@@ -968,7 +970,7 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-        \subsubsection{The hook operator - 2nd version}
+        \subsubsection{The hook operator - 2\textsuperscript{nd} version}
 
             \paragraph{Example of use \#1}
 
@@ -1306,7 +1308,7 @@ only for arcs named "i" or "j".
 In a plane, three points $\gpt{O}$, $\gpt{I}$ and $\gpt{J}$ not aligned define
 a cartesian system of coordinates $\axis{\gpt{O} // \gpt{I} // \gpt{J}}$.
 
-% We give more efficient ways to name axies in some particular cases.
+% We will give more efficient ways to name axies in some particular cases.
 \end{tcblisting}
 
 

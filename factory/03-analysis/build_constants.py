@@ -105,7 +105,7 @@ text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
 text_auto += r"""
 
 \begin{{tcblisting}}{{}}
-List of all classical constants where $\ttau = \frac{{\ppi}}{{2}}$ is the youngest one:
+List of all classical constants where $\ttau = 2 \ppi$ is the youngest one:
 {0}.
 \end{{tcblisting}}""".format(
     joinand([
