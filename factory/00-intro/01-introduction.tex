@@ -122,19 +122,23 @@
 
 \LaTeX{} is a great tool for writing mathematics, maybe it is the best, but the power of \LaTeX{} allows very poor semantic writings.
 The modest purpose of the package \verb+lymath+ is to give some semantic macros to write elementary mathematic formulas.
-Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
+Let's consider the following standard \LaTeX{} code
 
 \begin{tcblisting}{listing only}
-% Without lymath
-
 Knowing that $\frac{df}{dx}(x) = 4 cos(x^2)$ on $[a ; b]$, we have: 
+
 $\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
+\end{tcblisting}
 
-% With lymath
 
+With \verb+lymath+, you can write the following code.
+
+\begin{tcblisting}{listing only}
 Knowing that $\derfrac{f}{x}(x) = 4 cos(x^2)$ on $\intervalC{a}{b}$, we have: 
+
 $\int_a^b cos(x^2) \dd{x} = \hook{\frac{1){4} f(x)}{a}{b}$.
 \end{tcblisting}
+
 
 Even if some commands are longest to write than direct \LaTeX{} commands, there are two benefits.
 \begin{enumerate}

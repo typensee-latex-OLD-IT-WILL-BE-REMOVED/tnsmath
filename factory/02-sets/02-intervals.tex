@@ -112,6 +112,7 @@
 
 % == FOR DOC AND TESTS - END == %
 
+\usepackage{dsfont}
 
 
 % == PACKAGES USED == %
@@ -198,11 +199,11 @@
 
             \paragraph{Example of use \#1}
 
+In this example, the syntax refers to \textbf{O}-pened and \textbf{C}-losed, and we will see that \textbf{CC} and \textbf{OO} are reduced to \textbf{C} and \textbf{O}.
+
 \begin{tcblisting}{}
 In $I = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro used solves
 a spacing problem.
-
-% The syntax refers to O-pened and C-losed but CC and OO are reduced to C and O.
 \end{tcblisting}
 
 
@@ -279,11 +280,11 @@ For all the macros above, the @star version produces intervals with delimiters t
 
             \paragraph{Example of use}
 
+In this example, the syntax refers to \textbf{P}-arenthesis.
+
 \begin{tcblisting}{}
 In America, we write a semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and
 an opened one $\intervalP{a}{b} = (a ; b)$.
-
-% The syntax refers to P-arenthesis.
 \end{tcblisting}
 
 
@@ -337,11 +338,11 @@ For all the macros above, the @star version produces intervals with delimiters t
 
             \paragraph{Example of use}
 
+In this example, the syntax refers to $\mathds{Z}$ the set of integers.
+
 \begin{tcblisting}{}
 By definition, $\ZintervalC{-1}{4} = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$. So we also have
 $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
-
-% The syntax refers to Z the set of integers.
 \end{tcblisting}
 
 

@@ -53,6 +53,13 @@
 
 % MISC
 
+\tcbset{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue% 
+}
+
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
 
@@ -131,9 +138,12 @@
 
 \begin{document}
 
-\title{\texttt{lymath} package:\\semantic low level math formulas\\{\footnotesize (developped and tested on \macosxname{})}}
+\title{%
+	\texttt{lymath} package:\\semantic low level math formulas\\%
+	{\footnotesize Sources available on \url{https://github.com/bc-latex/ly-math}.}\\%
+	{\footnotesize Version \texttt{0.1.0-beta} developped and tested on \macosxname{}.}}
 \author{Christophe BAL}
-\date{2017-11-01}
+\date{2017-11-02}
 
 \maketitle
 
@@ -156,19 +166,23 @@
 
 \LaTeX{} is a great tool for writing mathematics, maybe it is the best, but the power of \LaTeX{} allows very poor semantic writings.
 The modest purpose of the package \verb+lymath+ is to give some semantic macros to write elementary mathematic formulas.
-Here is an example of \LaTeX{} code that you can use with \verb+lymath+.
+Let's consider the following standard \LaTeX{} code
 
 \begin{tcblisting}{listing only}
-% Without lymath
-
 Knowing that $\frac{df}{dx}(x) = 4 cos(x^2)$ on $[a ; b]$, we have: 
+
 $\int_a^b cos(x^2) dx = \left[ \frac{1){4} f(x) \right]_a^b$.
+\end{tcblisting}
 
-% With lymath
 
+With \verb+lymath+, you can write the following code.
+
+\begin{tcblisting}{listing only}
 Knowing that $\derfrac{f}{x}(x) = 4 cos(x^2)$ on $\intervalC{a}{b}$, we have: 
+
 $\int_a^b cos(x^2) \dd{x} = \hook{\frac{1){4} f(x)}{a}{b}$.
 \end{tcblisting}
+
 
 Even if some commands are longest to write than direct \LaTeX{} commands, there are two benefits.
 \begin{enumerate}
@@ -182,10 +196,8 @@ Even if some commands are longest to write than direct \LaTeX{} commands, there 
 
 \section{Semi-colon and spacing with the french option of \texttt{babel}}
 
-\begin{tcblisting}{}
 Only \textbf{if you use \texttt{babel} with the option \texttt{francais}}, then
 you will see the same spacing around the semi-colon in $A(x;y)$. Que c'est beau !
-\end{tcblisting}
 
 
 
@@ -350,7 +362,7 @@ Note that you can't use \verb+$\CCn$+ for $\specialset{\CC}{n}$ because the set 
 \medskip
 
 \begin{remark}
-	The table \ref{table:suffixes-sets}, see\vpageref{table:suffixes-sets}, shows allowed associations between classical sets and suffixes.
+	The table \ref{table:suffixes-sets}, see\vpageref{table:suffixes-sets}, shows legal associations between classical sets and suffixes.
 \end{remark}
 
 % == Table of suffixes - START == %
@@ -407,11 +419,11 @@ There is also $\specialset*{\probaset{P}}{n}$ with another formatting.
 
             \paragraph{Example of use \#1}
 
+In this example, the syntax refers to \textbf{O}-pened and \textbf{C}-losed, and we will see that \textbf{CC} and \textbf{OO} are reduced to \textbf{C} and \textbf{O}.
+
 \begin{tcblisting}{}
 In $I = ]a ; b] = \intervalOC{a}{b}$, you can see that the macro used solves
 a spacing problem.
-
-% The syntax refers to O-pened and C-losed but CC and OO are reduced to C and O.
 \end{tcblisting}
 
 
@@ -488,11 +500,11 @@ For all the macros above, the @star version produces intervals with delimiters t
 
             \paragraph{Example of use}
 
+In this example, the syntax refers to \textbf{P}-arenthesis.
+
 \begin{tcblisting}{}
 In America, we write a semi-closed interval $\intervalPC{a}{b} = (a ; b]$ and
 an opened one $\intervalP{a}{b} = (a ; b)$.
-
-% The syntax refers to P-arenthesis.
 \end{tcblisting}
 
 
@@ -546,11 +558,11 @@ For all the macros above, the @star version produces intervals with delimiters t
 
             \paragraph{Example of use}
 
+In this example, the syntax refers to $\mathds{Z}$ the set of integers.
+
 \begin{tcblisting}{}
 By definition, $\ZintervalC{-1}{4} = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$. So we also have
 $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
-
-% The syntax refers to Z the set of integers.
 \end{tcblisting}
 
 
@@ -1304,11 +1316,11 @@ only for arcs named "i" or "j".
 
             \paragraph{Example of use \#1}
 
+This example is not the best way to do as we will see later.
+
 \begin{tcblisting}{}
 In a plane, three points $\gpt{O}$, $\gpt{I}$ and $\gpt{J}$ not aligned define
 a cartesian system of coordinates $\axis{\gpt{O} // \gpt{I} // \gpt{J}}$.
-
-% We will give more efficient ways to name axies in some particular cases.
 \end{tcblisting}
 
 
@@ -1323,9 +1335,9 @@ $\displaystyle \axis*{\gpt{O} // \frac{7}{3} \vect{i} // \vect{j}}$
 
             \paragraph{Example of use \#3}
 
-\begin{tcblisting}{}
-% You must at least use two "pieces" separated by //, but there is no maximum !
+Here you must at least use two "pieces" separated by \verb+//+ but there is no maximum !
 
+\begin{tcblisting}{}
 $\axis{\gpt{O} // \vect*{i}{1} // \vect*{i}{2} // \vect*{i}{3} // \dots
 // \vect*{i}{9}// \vect*{i}{10}}$
 \end{tcblisting}
@@ -1333,31 +1345,31 @@ $\axis{\gpt{O} // \vect*{i}{1} // \vect*{i}{2} // \vect*{i}{3} // \dots
 
             \paragraph{Example of use \#4 - No star version here}
 
+In this example, the prefix \verb+gp+ is for \textbf{g}-eometric \textbf{p}-oint.
+
 \begin{tcblisting}{}
 $\gpaxis{O // I // J // K}$ is just the same than
 $\axis{\gpt{O} // \gpt{I} // \gpt{J} // \gpt{K}}$.
-
-% The prefix "gp" is for "geometric point".
 \end{tcblisting}
 
 
             \paragraph{Example of use \#5 - No star version here}
 
+In this example, the prefix \verb+v+ is for \textbf{v}-ector.
+
 \begin{tcblisting}{}
 $\vaxis{\gpt{O} // i // j}$ is just the same than
 $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
-
-% The prefix "v" is for "vector".
 \end{tcblisting}
 
 
             \paragraph{Example of use \#6 - No star version here}
 
+In this example, the prefix \verb+gpv+ adds the features of the prefixes \verb+gp+ and \verb+v+.
+
 \begin{tcblisting}{}
 $\gpvaxis{O // i // j}$ is just the same than
 $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
-
-% The prefix "gpv" adds the features of the prefixes "gp" and "v".
 \end{tcblisting}
 
 
@@ -1379,7 +1391,7 @@ $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
 
 \bigskip
 
-\IDmacro*{gpaxis}{1} where \verb+gp = G-eometric P-oint+
+\IDmacro*{gpaxis}{1} where \verb+gp = g-eometric p-oint+
 
 \IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
 
@@ -1392,7 +1404,7 @@ $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
 
 \bigskip
 
-\IDmacro*{vaxis}{1} where \verb+v = V-ector+
+\IDmacro*{vaxis}{1} where \verb+v = v-ector+
 
 \IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
 
@@ -1424,11 +1436,9 @@ $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
 
             \paragraph{Example of use}
 
-\begin{tcblisting}{}
-It is easy to write what is just after where the inline notation seems to have been
-introduced by Alfred Pringsheim (the left notation is always space consuming for a
-better readability).
+In the example, the inline notation seems to have been introduced by Alfred Pringsheim. The left notation is always space consuming for a better readability.
 
+\begin{tcblisting}{}
 $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 = \contfrac*{u_0 // u_1 // u_2 // \dots // u_n}$
 \end{tcblisting}
@@ -1449,9 +1459,9 @@ $ \contfrac{u_0 // u_1 // u_2 // \dots // u_n}
 
             \paragraph{Example of use}
 
-\begin{tcblisting}{}
-You can use similar notations for generalized continued fractions :
+Here is how to write generalized continued fractions.
 
+\begin{tcblisting}{}
 $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
              = \contfracgene*{a // b // c // d // e // f // \dots // y // z}$
 \end{tcblisting}
@@ -1471,10 +1481,10 @@ $\displaystyle \contfracgene{a // b // c // d // e // f // \dots // y // z}
 
             \paragraph{Example of use}
 
+The existence of the macro below just comes from its use internally.
+
 \begin{tcblisting}{}
 Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
-
-% The existence of this macro just comes from its use internally.
 \end{tcblisting}
 
 
@@ -1495,9 +1505,9 @@ Crazy men really (?) need to write things like $\singlecontfrac{a}{b}$.
 
 \IDconstant{contfracope}
 
-\begin{tcblisting}{}
-The following notation is very closed to the one used by Carl Friedrich Gauss:
+The following notation is very closed to the one used by Carl Friedrich Gauss.
 
+\begin{tcblisting}{}
 $\displaystyle
   \contfracope_{k=1}^{n} (b_k:c_k)
 = \cfrac{b_1}{\contfracgene{c_1 // b_2 // c_2 // b_3 // \dots // b_n // c_n}}$
@@ -1536,7 +1546,7 @@ All the changes are described inside the folders \verb+change_log+ : see the sou
 
 	\item[2017-10-06] New patch version \verb+0.0.1-beta+ : additional tools for arithmetic, geometry, integral calculus and differential calculus.
 
-	\item[2017-10-02] First version of the package.
+	\item[2017-10-02] First version \verb+0.0.0-beta+ of the package.
 \end{description}
 
 

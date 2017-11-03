@@ -232,11 +232,11 @@
 
             \paragraph{Example of use \#1}
 
+This example is not the best way to do as we will see later.
+
 \begin{tcblisting}{}
 In a plane, three points $\gpt{O}$, $\gpt{I}$ and $\gpt{J}$ not aligned define
 a cartesian system of coordinates $\axis{\gpt{O} // \gpt{I} // \gpt{J}}$.
-
-% We will give more efficient ways to name axies in some particular cases.
 \end{tcblisting}
 
 
@@ -251,9 +251,9 @@ $\displaystyle \axis*{\gpt{O} // \frac{7}{3} \vect{i} // \vect{j}}$
 
             \paragraph{Example of use \#3}
 
-\begin{tcblisting}{}
-% You must at least use two "pieces" separated by //, but there is no maximum !
+Here you must at least use two "pieces" separated by \verb+//+ but there is no maximum !
 
+\begin{tcblisting}{}
 $\axis{\gpt{O} // \vect*{i}{1} // \vect*{i}{2} // \vect*{i}{3} // \dots
 // \vect*{i}{9}// \vect*{i}{10}}$
 \end{tcblisting}
@@ -261,31 +261,31 @@ $\axis{\gpt{O} // \vect*{i}{1} // \vect*{i}{2} // \vect*{i}{3} // \dots
 
             \paragraph{Example of use \#4 - No star version here}
 
+In this example, the prefix \verb+gp+ is for \textbf{g}-eometric \textbf{p}-oint.
+
 \begin{tcblisting}{}
 $\gpaxis{O // I // J // K}$ is just the same than
 $\axis{\gpt{O} // \gpt{I} // \gpt{J} // \gpt{K}}$.
-
-% The prefix "gp" is for "geometric point".
 \end{tcblisting}
 
 
             \paragraph{Example of use \#5 - No star version here}
 
+In this example, the prefix \verb+v+ is for \textbf{v}-ector.
+
 \begin{tcblisting}{}
 $\vaxis{\gpt{O} // i // j}$ is just the same than
 $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
-
-% The prefix "v" is for "vector".
 \end{tcblisting}
 
 
             \paragraph{Example of use \#6 - No star version here}
 
+In this example, the prefix \verb+gpv+ adds the features of the prefixes \verb+gp+ and \verb+v+.
+
 \begin{tcblisting}{}
 $\gpvaxis{O // i // j}$ is just the same than
 $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
-
-% The prefix "gpv" adds the features of the prefixes "gp" and "v".
 \end{tcblisting}
 
 
@@ -307,7 +307,7 @@ $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
 
 \bigskip
 
-\IDmacro*{gpaxis}{1} where \verb+gp = G-eometric P-oint+
+\IDmacro*{gpaxis}{1} where \verb+gp = g-eometric p-oint+
 
 \IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
 
@@ -320,7 +320,7 @@ $\axis{\gpt{O} // \vect{i} // \vect{j}}$.
 
 \bigskip
 
-\IDmacro*{vaxis}{1} where \verb+v = V-ector+
+\IDmacro*{vaxis}{1} where \verb+v = v-ector+
 
 \IDarg{} the argument is made of formulas separated by \verb+//+ with the following meanings.
 
