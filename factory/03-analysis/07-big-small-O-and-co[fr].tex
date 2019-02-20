@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{07-big-small-O-and-co}
+\makeatother
+
+
+% == EXTRAS == %
+
+\usepackage{amssymb}
+\usepackage{textgreek}
+
+
+
+\begin{document}
+
+% \section{Analysis}
+
+    \subsection{Comparaison asymptotique de suites et de fonctions}
+
+        \subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
+                               {Les notations "grand O" et "petit O"}}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez utiliser les symboles $\bigO{}$ et $\smallO{}$ créés par Landau.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO{t}}$.
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{bigO}{1}
+
+\IDmacro*{smallO}{1}
+
+\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
+
+
+
+        \subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
+                               {La notation "grand Omega"}}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez utiliser le symbole $\bigomega{}$ créé par Hardy et Littlewood.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+$f(n) = \bigomega{g(n)}$ signifie :
+$\exists (m, n_0)$ tel que $n \geqslant n_0$ implique $f(n) \geqslant m g(n)$.
+\end{tcblisting}
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro*{bigomega}{1}
+
+\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigomega{}$.
+
+
+
+        \subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
+                               {La notation "grand Theta"}}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Voici le dernier symbole $\bigtheta{}$ qui peut rendre service.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+$f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $n \geqslant n_0$
+implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
+\end{tcblisting}
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro*{bigtheta}{1}
+
+\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigtheta{}$.
+
+\end{document}

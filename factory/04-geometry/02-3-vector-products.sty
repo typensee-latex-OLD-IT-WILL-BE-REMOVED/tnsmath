@@ -1,0 +1,27 @@
+% == PACKAGES USED == %
+
+
+% == DEFINITIONS == %
+
+\newcommand\dotprod[2]{%
+	#1 \cdot #2%
+}
+
+
+\newcommand\adotprod{\@ifstar{\@adotprod@star}{\@adotprod@no@star}}
+
+\newcommand\@adotprod@star[2]{%
+	\ensuremath{\langle \, #1 \mid #2 \, \rangle}%
+}
+
+\newcommand\@adotprod@no@star[2]{%
+	\ensuremath{\left\langle \, #1 \, \left| \,  \vphantom{#1} #2 \right. \, \right\rangle}%
+}
+
+
+\newcommand\crossprod[2]{%
+	#1 \wedge #2%
+}
+
+
+

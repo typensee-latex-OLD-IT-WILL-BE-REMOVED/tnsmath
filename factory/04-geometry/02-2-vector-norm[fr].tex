@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{02-2-vector-norm}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+
+\makeatletter
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+%    \subsection{Vecteurs}
+
+		\subsubsection{Norme}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+Nous pouvons écrire $\norm{\vect{i}}$, $\displaystyle \norm{\frac{2}{7} \vect*{e}{k}}$, 
+ou $\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ avec de petites barres verticales.
+\end{tcblisting}
+
+
+\begin{remark}
+	Le code \LaTeX{} vient directement de ce message : \url{https://tex.stackexchange.com/a/43009/6880}.
+\end{remark}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{norm}{1}
+
+\IDmacro*{norm*}{1}
+
+\IDarg{} le vecteur sur lequel appliquer la norme.
+
+\end{document}

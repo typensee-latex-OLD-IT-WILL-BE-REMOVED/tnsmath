@@ -7,14 +7,14 @@ from mistool.string_use import between, joinand
 from mistool.term_use import ALL_FRAMES, withframe
 from orpyste.data import ReadBlock
 
-THIS_DIR = PPath( __file__ ).parent
-
-STY_PATH = THIS_DIR.parent / "lymath" / "lymath.sty"
-
-
 # ----------------------- #
 # -- TOOLS & CONSTANTS -- #
 # ----------------------- #
+
+THIS_DIR = PPath( __file__ ).parent
+
+STY_PATH   = THIS_DIR.parent / "lymath" / "lymath.sty"
+
 
 DECO = " "*4
 
@@ -22,6 +22,30 @@ MYFRAME = lambda x: withframe(
     text  = x,
     frame = ALL_FRAMES['latex_pretty']
 )
+
+
+def path2title(onepath):
+    onepath = relative_path.stem.replace('-', ' ').upper()
+
+    while onepath[0] in " 0123456789":
+        onepath = onepath[1:]
+
+    return onepath
+
+
+def cleansource(text):
+    if text.strip():
+        text = text.split("\n")
+
+        for i in [0, -1]:
+            while not text[i].strip():
+                text.pop(i)
+
+    else:
+        text = []
+
+    return "\n".join(text)
+
 
 def organize_packages(packages):
     global DECO
@@ -76,9 +100,11 @@ def organize_packages(packages):
 # -- NEW THINGS -- #
 # ---------------- #
 
-ALL_PACKAGES = []
-ALL_MACROS   = []
+ALL_PACKAGES       = []
+ALL_MACROS         = []
+ALL_LOCAL_SETTINGS = []
 
+paths_found = []
 for subdir in THIS_DIR.walk("dir::"):
     subdir_name = str(subdir.name)
 
@@ -87,63 +113,52 @@ for subdir in THIS_DIR.walk("dir::"):
     ] or subdir_name[:2] == "x-":
         continue
 
-    for latexfile in subdir.walk("file::**.tex"):
-        relative_path = latexfile - THIS_DIR
+    for latexfile in subdir.walk("file::*.sty"):
+        paths_found.append(latexfile)
 
-        print(f"{DECO}* Analyzing << {relative_path} >>")
 
-        with open(
-            file     = latexfile,
-            encoding = "utf-8"
-        ) as filetoupdate:
-            search = between(
-                text = filetoupdate.read(),
-                seps = [
-                    "% == PACKAGES USED == %",
-                    "% == DEFINITIONS == %"
-                ],
-                keepseps = True
-            )
+paths_found.sort()
 
-            if search is not None:
-                _, packages, after = search
+for latexfile in paths_found:
+    relative_path = latexfile - THIS_DIR
+    parentname    = latexfile.parent.name
 
-                ALL_PACKAGES += [
-                    x.strip()
-                    for x in packages.strip().split("\n")
-                ]
+    print(f"{DECO}* Analyzing << {relative_path} >>")
 
-            _, definitions, _ = between(
-                text = after,
-                seps = [
-                    "% == DEFINITIONS == %",
-                    r"\begin{document}"
-                ]
-            )
+    with open(
+        file     = latexfile,
+        encoding = "utf-8"
+    ) as filetoupdate:
+        _, packages, definitions = between(
+            text = filetoupdate.read(),
+            seps = [
+                "% == PACKAGES USED == %",
+                "% == DEFINITIONS == %"
+            ],
+            keepseps = False
+        )
 
-            if definitions.strip():
-                definitions = definitions.split("\n")
+    ALL_PACKAGES += [
+        x.strip()
+        for x in packages.strip().split("\n")
+    ]
 
-                for i in [0, -1]:
-                    while not definitions[i].strip():
-                        definitions.pop(i)
 
-                section = relative_path.stem
-                section = section.split("-", 1)
-                section = section[1]
-                section = section.replace("-", " ")
-                section = latexfile.parent.name.split("-", 1)[1] + " - " + section
+    definitions = cleansource(definitions)
 
-                definitions = """
-{0}
 
-{1}
-                """.format(
-                    MYFRAME(section.upper()),
-                    "\n".join(definitions)
-                ).strip()
+    if definitions.strip():
+        if ALL_MACROS:
+            ALL_MACROS.append("\n")
 
-                ALL_MACROS.append(definitions)
+        ALL_MACROS += [
+            MYFRAME(path2title(relative_path.stem)),
+            "",
+            definitions
+        ]
+
+
+ALL_MACROS = "\n".join(ALL_MACROS)
 
 
 # --------------------------------- #
@@ -153,21 +168,26 @@ for subdir in THIS_DIR.walk("dir::"):
 ALL_PACKAGES = organize_packages(ALL_PACKAGES)
 
 
-# ------------------------- #
-# -- UPDATE THE STY FILE -- #
-# ------------------------- #
+# ------------------------------ #
+# -- UPDATE THE MAIN STY FILE -- #
+# ------------------------------ #
 
-ALL_PACKAGES = [MYFRAME("PACKAGES REQUIRED"), ""] + ALL_PACKAGES
 ALL_PACKAGES = "\n".join(ALL_PACKAGES)
 
-ALL_MACROS = "\n\n\n".join(ALL_MACROS)
+source = f"""{MYFRAME("PACKAGES REQUIRED")}
+
+{ALL_PACKAGES}
+
+
+{ALL_MACROS}
+"""
 
 STY_PATH.create("file")
 
 with STY_PATH.open(
     mode     = "w",
     encoding = "utf-8"
-) as source:
-    source.write(f"{ALL_PACKAGES}\n\n\n{ALL_MACROS}")
+) as lyxam:
+    lyxam.write(source)
 
 print(f"{DECO}* Update of << {STY_PATH.name} >> done.")

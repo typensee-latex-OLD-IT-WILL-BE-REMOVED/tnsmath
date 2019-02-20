@@ -1,0 +1,83 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+
+	\usepackage{01-polynomial-and-co}
+\makeatother
+
+
+\newcommand\ZZ{ZZ}
+\newcommand\QQ{QQ}
+\newcommand\RR{RR}
+\newcommand\CC{CC}
+
+
+
+\begin{document}
+
+\section{Algèbre}
+
+	\subsection{Polynômes, séries formelles et compagnie}
+
+        \subsubsection{Polynômes}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+$\polyset{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
+$X$, et $\polyset{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
+en les variables $X$ , $Y$ et $Z$.
+\end{tcblisting}
+
+
+
+        \subsubsection{Fractions polynômiales}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+$\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent 
+d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
+\end{tcblisting}
+
+
+
+        \subsubsection{Séries formelles}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+$\serieset{\CC}{X}$ et $\serieset{\CC}{T | O | P}$ permettent de travailler avec des
+séries formelles à coefficients complexes.
+\end{tcblisting}
+
+
+
+        \subsubsection{Corps des fractions de séries formelles}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+$\seriefracset{\ZZ}{X}$ et $\seriefracset{\ZZ}{Z | T | O | P}$ permettent de travailler
+avec des fractions de séries formelles à coefficients entiers.
+\end{tcblisting}
+
+
+
+        \subsubsection{Toutes les fiches techniques}
+
+\IDmacro*{polyset}{2}
+
+\IDmacro*{polyfracset}{2}
+
+\IDmacro*{serieset}{2}
+
+\IDmacro*{seriefracset}{2}
+
+\IDarg{1} l'ensemble auquel les coefficients appartiennent.
+
+\IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
+
+\end{document}

@@ -1,0 +1,31 @@
+% == PACKAGES USED == %
+
+\RequirePackage[Symbolsmallscale]{upgreek}
+\RequirePackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Constants - START
+
+% User's constants
+
+\newcommand\ct[1]{%
+    \IfStrEqCase{#1}{%
+        {gamma}{\upgamma}%
+        {pi}{\uppi}%
+        {tau}{\uptau}%
+    }[\text{\textbf{#1}}]
+}
+
+% Classical constants
+    
+\newcommand\ggamma{\ct{gamma}}
+\newcommand\ppi{\ct{pi}}
+\newcommand\ttau{\ct{tau}}
+\newcommand\ee{\ct{e}}
+\newcommand\ii{\ct{i}}
+\newcommand\jj{\ct{j}}
+\newcommand\kk{\ct{k}}
+
+% Constants - END

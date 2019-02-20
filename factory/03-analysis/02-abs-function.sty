@@ -1,0 +1,14 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+
+
+% == DEFINITIONS == %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+\let\@old@abs\abs
+\def\abs{\@ifstar{\@old@abs}{\@old@abs*}}

@@ -8,7 +8,8 @@ from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
 THIS_DIR = PPath( __file__ ).parent
-TEX_FILE = THIS_DIR / '02-intervals.tex'
+STY_FILE = THIS_DIR / '02-intervals.sty'
+TEX_FILE = THIS_DIR / '02-intervals[fr].tex'
 
 DECO = " "*4
 
@@ -67,10 +68,10 @@ def parse(subconfig):
 def texmacro(prefix, suffix, delimstart, delimend):
     macroname = f"{prefix}interval{suffix}"
 
-    return DECO + f"""
-    \\newcommand\\{macroname}{{\\@ifstar{{\\@{macroname}@star}}{{\\@{macroname}@no@star}}}}
-    \\newcommand\\@{macroname}@no@star[2]{{\\ensuremath{{\\@interTool@no@star{{{delimstart}}}{{#1}}{{;}}{{#2}}{{{delimend}}}}}}}
-    \\newcommand\\@{macroname}@star[2]{{\\ensuremath{{\\@interToolStar{{{delimstart}}}{{#1}}{{;}}{{#2}}{{{delimend}}}}}}}
+    return f"""
+\\newcommand\\{macroname}{{\\@ifstar{{\\@{macroname}@star}}{{\\@{macroname}@no@star}}}}
+\\newcommand\\@{macroname}@no@star[2]{{\\ensuremath{{\\@interval@tool@no@star{{{delimstart}}}{{#1}}{{\lymathsep}}{{#2}}{{{delimend}}}}}}}
+\\newcommand\\@{macroname}@star[2]{{\\ensuremath{{\\@interval@tool@star{{{delimstart}}}{{#1}}{{\lymathsep}}{{#2}}{{{delimend}}}}}}}
     """.strip() + "\n"
 
 def texdoc(prefix, suffix):
@@ -81,9 +82,9 @@ def texdoc(prefix, suffix):
 
 \\IDmacro*{{{macroname}*}}{{2}}
 
-\\IDarg{{1}} lower bound $a$ of the interval $\\{macroname}{{a}}{{b}}$.
+\\IDarg{{1}} borne inférieure $a$ de l'intervalle $\\{macroname}{{a}}{{b}}$.
 
-\\IDarg{{2}} upper bound $b$ of the interval $\\{macroname}{{a}}{{b}}$.
+\\IDarg{{2}} borne supérieure $b$ de l'intervalle $\\{macroname}{{a}}{{b}}$.
     """.strip() + "\n"
 
 
@@ -96,7 +97,16 @@ with open(
     mode     = 'r',
     encoding = 'utf-8'
 ) as docfile:
-    template = docfile.read()
+    template_tex = docfile.read()
+
+
+with open(
+    file     = STY_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as styfile:
+    template_sty = styfile.read()
+
 
 with ReadBlock(
     content = THIS_DIR / "intervals.peuf",
@@ -126,7 +136,7 @@ for interkind, defs in config.items():
     interkind = interkind.replace('-', ' ')
 
     text_start, _, text_end = between(
-        text = template,
+        text = template_sty,
         seps = [
             f"% Macros for {interkind} intervals",
             "% Macros for"
@@ -134,8 +144,11 @@ for interkind, defs in config.items():
         keepseps = True
     )
 
+    template_sty = text_start + "\n" + macrosdefs \
+                 + "\n" + text_end
+
     text_start, _, text_end = between(
-        text = template,
+        text = template_tex,
         seps = [
             f"% Docs for {interkind} intervals - START",
             f"% Docs for {interkind} intervals - END",
@@ -143,12 +156,24 @@ for interkind, defs in config.items():
         keepseps = True
     )
 
-    template = text_start + "\n" + fortexdoc + "\n" + text_end
+    template_tex = text_start + "\n" + fortexdoc \
+                 + "\n" + text_end
 
+
+# -------------------------- #
+# -- UPDATES OF THE FILES -- #
+# -------------------------- #
 
 with open(
     file     = TEX_FILE,
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(template)
+    docfile.write(template_tex)
+
+with open(
+    file     = STY_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(template_sty)

@@ -25,7 +25,10 @@ for pattern in [
     "file::**build_*.py",
     "file::build_*.py"
 ]:
-    for onepath in THIS_DIR.walk(pattern):
+    allpaths = [onepath for onepath in THIS_DIR.walk(pattern)]
+    allpaths.sort()
+
+    for onepath in allpaths:
         print('+ Launching "{0}"'.format(onepath - THIS_DIR))
 
         runthis(

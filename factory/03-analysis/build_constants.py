@@ -5,7 +5,8 @@ from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
 THIS_DIR = PPath( __file__ ).parent
-TEX_FILE = THIS_DIR / '01-constants.tex'
+STY_FILE = THIS_DIR / '01-constants.sty'
+TEX_FILE = THIS_DIR / '01-constants[fr].tex'
 
 DECO = " "*4
 
@@ -31,11 +32,19 @@ allconstants = constants["greek"] + constants["roman"]
 # ------------------------------ #
 
 with open(
+    file     = STY_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as styfile:
+    template_sty = styfile.read()
+
+
+with open(
     file     = TEX_FILE,
     mode     = 'r',
     encoding = 'utf-8'
 ) as docfile:
-    template = docfile.read()
+    template_tex = docfile.read()
 
 
 # --------------------- #
@@ -43,15 +52,16 @@ with open(
 # --------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_sty,
     seps = [
-        "% User's constants",
-        r"\begin{document}"
-    ]
+        "% Constants - START",
+        "% Constants - END"
+    ],
+    keepseps = True
 )
 
-text_start += "% User's constants\n"
-text_end    = r"\begin{document}" + text_end
+text_start += "\n\n% User's constants\n"
+text_end = text_end.lstrip()
 
 text_auto = [
     r"""
@@ -75,11 +85,11 @@ for ct in constants["greek"] + constants["roman"]:
         "\\newcommand\{0[0]}{0}{{\ct{{{0}}}}}".format(ct)
     )
 
-text_auto.append("\n"*3)
+text_auto.append("\n")
 
 text_auto = "\n".join(text_auto)
 
-template = text_start + text_auto + text_end
+template_sty = text_start + text_auto + text_end
 
 
 # ------------------------------- #
@@ -87,16 +97,15 @@ template = text_start + text_auto + text_end
 # ------------------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_tex,
     seps = [
-        "% List of classical constants",
-        r"\end{tcblisting}"
-    ]
+        "% List of classical constants - START",
+        "% List of classical constants - END",
+    ],
+    keepseps = True
 )
 
-text_start += "% List of classical constants\n"
-
-text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
+text_auto = "\n\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
     ", ".join(
         "{0[0]}{0}".format(x) for x in allconstants
     )
@@ -105,20 +114,33 @@ text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
 text_auto += r"""
 
 \begin{{tcblisting}}{{}}
-List of all classical constants where $\ttau = 2 \ppi$ is the youngest one:
+Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
 {0}.
-\end{{tcblisting}}""".format(
+\end{{tcblisting}}
+
+""".format(
     joinand([
         "$\{0[0]}{0}$".format(c) for c in allconstants
     ])
 )
 
-text = text_start + text_auto + text_end
+template_tex = text_start + text_auto + text_end
 
+
+# -------------------------- #
+# -- UPDATES OF THE FILES -- #
+# -------------------------- #
 
 with open(
     file     = TEX_FILE,
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(text)
+    docfile.write(template_tex)
+
+with open(
+    file     = STY_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(template_sty)

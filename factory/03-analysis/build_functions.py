@@ -5,7 +5,8 @@ from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
 THIS_DIR = PPath( __file__ ).parent
-TEX_FILE = THIS_DIR / '03-named-functions.tex'
+STY_FILE = THIS_DIR / '03-named-functions.sty'
+TEX_FILE = THIS_DIR / '03-named-functions[fr].tex'
 
 DECO = " "*4
 
@@ -41,11 +42,19 @@ with ReadBlock(
 # ------------------------------ #
 
 with open(
+    file     = STY_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as styfile:
+    template_sty = styfile.read()
+
+
+with open(
     file     = TEX_FILE,
     mode     = 'r',
     encoding = 'utf-8'
 ) as docfile:
-    template = docfile.read()
+    template_tex = docfile.read()
 
 
 # --------------------- #
@@ -53,10 +62,10 @@ with open(
 # --------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_sty,
     seps = [
-        "% Classical functions",
-        r"\begin{document}"
+        "% Classical functions - START",
+        "% Classical functions - END"
     ],
     keepseps = True
 )
@@ -77,11 +86,11 @@ text_auto = [
     )
 ]
 
-text_auto.append("\n"*3)
+text_auto.append("\n")
 
 text_auto = "\n".join(text_auto)
 
-template = text_start + text_auto + text_end
+template_sty = text_start + text_auto + text_end
 
 
 # ----------------------------------------------- #
@@ -89,14 +98,15 @@ template = text_start + text_auto + text_end
 # ----------------------------------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_tex,
     seps = [
-        "% List of functions without parameter",
-        r"\end{tabular*}"
-    ]
+        "% List of functions without parameter - START",
+        "% List of functions without parameter - END"
+    ],
+    keepseps = True
 )
 
-text_start += "% List of functions without parameter\n"
+text_start += "\n"
 
 text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
     ", ".join(functions['no-parameter'])
@@ -104,9 +114,11 @@ text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
 
 text_table = []
 
-for i in range(0, len(functions['no-parameter']), 4):
-    sublist = functions['no-parameter'][i:i+4]
-    sublist += ['']*(4 - len(sublist))
+tablewidth = 3
+
+for i in range(0, len(functions['no-parameter']), tablewidth):
+    sublist = functions['no-parameter'][i:i + tablewidth]
+    sublist += ['']*(tablewidth - len(sublist))
 
     text_table.append(
         " & ".join(
@@ -120,17 +132,13 @@ text_table = DECO + ("\n" + DECO).join(text_table)
 
 text_auto += r"""
 
-\medskip
-
-\begin{{tabular*}}{{\textwidth}}%
-                {{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
+\begin{{tabular*}}{{\textwidth}}{{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
 {0}
 \end{{tabular*}}
+
 """.format(text_table)
 
-text_auto = text_auto.rstrip()
-
-template = text_start + text_auto + text_end
+template_tex = text_start + text_auto + text_end
 
 
 # --------------------------------------------- #
@@ -138,14 +146,15 @@ template = text_start + text_auto + text_end
 # --------------------------------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_tex,
     seps = [
-        "% List of functions with parameters",
-        r"\end{tabular*}"
-    ]
+        "% List of functions with parameters - START",
+        "% List of functions with parameters - END"
+    ],
+    keepseps = True
 )
 
-text_start += "% List of functions with parameters\n"
+text_start += "\n"
 
 text_table = []
 
@@ -161,7 +170,7 @@ for name, infos in functions['parameter'].items():
         plurial = ""
 
     paramfuncs.append(
-        r"\verb+\{0}+ \, ({1} parameter{2})".format(
+        r"\verb+\{0}+ \, ({1} paramètre{2})".format(
             name,
             nbparam,
             plurial
@@ -179,22 +188,33 @@ for i in range(0, len(paramfuncs), 4):
 text_table = DECO + ("\n" + DECO).join(text_table)
 
 text_auto = r"""
-\medskip
-
-\begin{{tabular*}}{{\textwidth}}%
-                {{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
+\begin{{tabular*}}{{\textwidth}}{{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
 {0}
-\end{{tabular*}}""".format(text_table)
+\end{{tabular*}}
 
-text = text_start + text_auto + text_end
+""".format(text_table)
+
+template_tex = text_start + text_auto + text_end
 # text_auto = "\n\\foreach \k in {{{0}}}{{\IDmacro{{\k}}}}".format(
 #     ", ".join(functions['parameter'])
-# )
 
+
+
+
+# -------------------------- #
+# -- UPDATES OF THE FILES -- #
+# -------------------------- #
 
 with open(
     file     = TEX_FILE,
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(text)
+    docfile.write(template_tex)
+
+with open(
+    file     = STY_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(template_sty)

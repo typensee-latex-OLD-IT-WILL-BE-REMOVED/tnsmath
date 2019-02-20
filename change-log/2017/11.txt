@@ -1,0 +1,44 @@
+==========
+2017-11-01
+==========
+
+**New minor version version::``0.1.0-beta`` of ¨lymath:** see all the changes below.
+
+
+**Sets**: several changes have been done.
+
+    1) The macros ``\geoset``, ``\probaset`` and ``\fieldset`` have now star versions that allow the use of subscript.
+
+    2) One new macro ``\geneset`` helps the writing of general sets inside braces.
+
+
+**Functions:** one new macro ``\abs`` and its star verion allow to write absolute values.
+
+
+**Geometry:** several changes have been done.
+
+    1) ``\pt`` becomes ``\gpt`` such as to avoid a conflict with \verb+lyxam+ another project of the author of \verb+lymath+.
+
+    2) The macros ``\gpt`` has now a star version such as to allow subscripting.
+
+    3) The macros ``\vect`` and ``\vect*`` will not print the point above "i" and "j" when this letters are the "main" name of the vector.
+
+    A similar feature has been added for the macros ``\anglein``, ``\arc`` and their star versions.
+
+    4) One new macro ``\norm`` and its star verion allow to write norms of vectors.
+
+    5) One new macro ``\axis`` and its star verion helps in writing names of axes in a cartesian system of coordinates.
+
+    There are also ``\gpaxis``, ``\vaxis`` and ``\gpvaxis`` which in day to day writing can be helpful.
+
+
+**Internal major changes:** here are the changes.
+
+    1) We use everywhere suffixes ``@star`` and ``@no@star`` for definitions of star and no star versions of a macro.
+
+    2) Standardization of the use of star versions: when this means something, a star version of a macro will allways be the one using less spaces. This implies the switch of behavior for all the following macros :
+
+        * `\interval..` and its star version `\interval..*`.
+        * `\Zinterval..` and `\Zinterval..*`
+        * `\hook` and `\hook*`
+        * `\vhook` and `\vhook*`

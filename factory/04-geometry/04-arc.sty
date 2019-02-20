@@ -1,0 +1,10 @@
+% == PACKAGES USED == %
+
+\RequirePackage{yhmath}
+
+
+% == DEFINITIONS == %
+
+\newcommand\arc{\@ifstar{\@arc@star}{\@arc@no@star}}
+\newcommand*\@arc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
+\newcommand*\@arc@no@star[1]{\wideparen{\@no@point{#1}}}

@@ -1,0 +1,61 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+\RequirePackage{relsize}
+\RequirePackage{xparse}
+
+
+% == DEFINITIONS == %
+
+\@ifpackagewith{babel}{french}{
+    \newcommand\lymathsep{;}
+}{
+	\newcommand\lymathsep{,}
+}
+
+
+\newcommand\@extra@phantom{%
+	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
+}
+
+\newcommand\@interval@tool@star[5]{%
+	\ensuremath{ \left#1 \@extra@phantom \right. \!\! #2 #3 #4 \left. \@extra@phantom \!\! \right#5}%
+}
+
+\newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+
+
+% Source : the following lines come directly for the following post
+%
+%    * https://tex.stackexchange.com/a/475291/6880
+
+\ExplSyntaxOn
+% General purpose macro for defining other macros
+	\NewDocumentCommand{\makemultiargument}{mmmmm}{
+		\lymath_multiarg:nnnnn { #1 } { #2 } { #3 } { #4 } { #5 }
+	}
+
+% Allocate a private variable
+	\seq_new:N \l__lymath_generic_seq
+
+% The internal version of the general purpose macro
+	\cs_new_protected:Nn \lymath_multiarg:nnnnn{
+		% #1 = separator
+		% #2 = multiargument
+		% #3 = code before
+		% #4 = code between
+		% #5 = code after
+		% A group allows nesting
+		\group_begin:
+ 		% Split the multiargument into parts
+		\seq_set_split:Nnn \l__lymath_generic_seq { #1 } { #2 }
+		% Execute the <code before>
+	  	#3 	
+		% Deliver the items, with the chosen material between them
+	  	\seq_use:Nn \l__lymath_generic_seq { #4 }
+  		% Execute the <code after>
+  		#5
+  		% End the group started at the beginning
+  		\group_end:
+	}
+\ExplSyntaxOff

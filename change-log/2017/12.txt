@@ -1,0 +1,12 @@
+==========
+2017-12-04
+==========
+
+**Geometry:** ``\gpt`` becomes ``\pt`` because there is no more conflict with ``lyxam`` another project of the author of ``lymath``.
+
+
+==========
+2017-12-03
+==========
+
+**Stopping to write an english documentation :** the author of the package will only write a french documentation such as to practice more sport.

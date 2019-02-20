@@ -1,0 +1,233 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{01-general-sets}
+\makeatother
+
+
+\usepackage{relsize}
+
+\makeatletter
+    \newcommand\@interval@tool@star[5]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
+	}
+
+    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Ensembles}
+
+    \subsection{Différents types d'ensembles}
+
+        \subsubsection{Ensembles versus accolades}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Un ensemble de beaux nombres : $\geneset{1 ; 3 ; 5}$ .
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Choisissez votre camp :
+$\displaystyle \geneset{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
+ou 
+$\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{geneset}{1}
+
+\IDmacro*{geneset*}{1}
+
+\IDarg{} la définition de l'ensemble.
+
+
+        \subsubsection{Ensembles pour la géométrie}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez écrire sémantiquement $\geoset{C}$, $\geoset{D}$ et $\geoset{d}$ mais pas
+taper \verb+$\geoset{ABC}$+.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{geoset}{1}
+
+\IDarg{} un seul caractère \ascii{} indiquant un ensemble géométrique.
+
+
+\bigskip
+
+
+\IDmacro*{geoset*}{2}
+
+\IDarg{1} un seul caractère \ascii{} indiquant $\geoset{U}$ dans le nom $\geoset*{U}{d}$ d'un ensemble géométrique.
+
+\IDarg{2} un texte donnant $d$ dans le nom $\geoset*{U}{d}$ d'un ensemble géométrique.
+
+
+        \subsubsection{Ensembles probabilistes}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez écrire sémantiquement $\probaset{E}$ et $\probaset{G}$ mais pas taper
+\verb+$\probaset{ABC}$+.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{probaset}{1}
+
+\IDarg{} un seul caractère \ascii{} majuscule indiquant un ensemble probabiliste.
+
+
+\bigskip
+
+
+\IDmacro*{probaset*}{2}
+
+\IDarg{1} un seul caractère \ascii{} majuscule indiquant $\probaset{U}$ dans le nom $\probaset*{U}{d}$ d'un ensemble probabiliste.
+
+\IDarg{2} un texte donnant $d$ dans le nom $\probaset*{U}{d}$ d'un ensemble probabiliste.
+
+
+
+        \subsubsection{Ensembles de type anneau ou corps}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez écrire sémantiquement $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ et
+$\fieldset{k}$ mais pas taper \verb+$\fieldset{ABC}$+.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{fieldset}{1}
+
+\IDarg{} soit l'une des lettres  \texttt{h} et \texttt{k}, soit un seul caractère \ascii{} majuscule indiquant un ensemble de type anneau ou corps.
+
+
+\bigskip
+
+
+\IDmacro*{fieldset*}{2}
+
+\IDarg{1} un seul caractère \ascii{} indiquant $\fieldset{U}$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+
+\IDarg{2} un texte donnant $d$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+
+
+
+        \subsubsection{Ensembles classiques}
+
+\begin{tcblisting}{}
+Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
+$\HH$ et $\OO$.
+\end{tcblisting}
+
+
+
+        \subsubsection{Ensembles classiques suffixés}
+
+\begin{tcblisting}{}
+Il est facile de taper $\RRn$, $\RRp$, $\RRs$, $\RRsn$ et $\RRsp$.
+\end{tcblisting}
+
+
+Nous avons utilisé les suffixes \verb+n+ pour \verb+Negatif+, \verb+p+ pour \verb+Positif+, et \verb+s+ pour \verb+star+, soit "étoile" en anglais. Il y a aussi les suffixes composites \verb+sn+ et \verb+sp+.
+
+\medskip
+
+Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car l'ensemble $\CC$ ne possède pas de structure ordonnée standard. Jetez un oeil à la section suivante pour apprendre à taper $\specialset{\CC}{n}$ si vous en avez besoin. L'interdiction est ici purement sémantique !
+
+\medskip
+
+\begin{remark}
+	La table \ref{table:suffixes-sets} \vpageref{table:suffixes-sets} montre les associations autorisées entre ensembles classiques et suffixes.
+\end{remark}
+
+% == Table of suffixes - START == %
+
+\newcommand\xx{\phantom{$\times$}}
+\begin{table}[h]
+    \caption{Suffixes}
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c|c}
+              & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
+            \hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+R+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+C+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+H+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
+        \end{tabular}
+    \end{center}
+    \label{table:suffixes-sets}
+\end{table}
+
+% == Table of suffixes - END == %
+
+
+
+        \subsubsection{Des suffixes à la carte}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+Il est tout de même possible d'écrire $\specialset{\CC}{n}$ ou $\specialset{\HH}{sp}$.
+Il y a aussi $\specialset*{\probaset{P}}{n}$ avec une autre mise en forme.
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{specialset}{2}
+
+\IDmacro*{specialset*}{2}
+
+\IDarg{1} l'ensemble à "suffixer".
+
+\IDarg{2} l'un des suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ ou \verb+sp+.
+
+\end{document}

@@ -5,7 +5,8 @@ from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
 THIS_DIR = PPath( __file__ ).parent
-TEX_FILE = THIS_DIR / '01-general.tex'
+STY_FILE = THIS_DIR / '01-general-sets.sty'
+TEX_FILE = THIS_DIR / '01-general-sets[fr].tex'
 
 DECO = " "*4
 
@@ -61,16 +62,24 @@ with ReadBlock(
 classicalsets = config["classical-sets"]
 
 
-# ------------------------------ #
-# -- LATEX TEMPLATE TO UPDATE -- #
-# ------------------------------ #
+# ------------------------- #
+# -- TEMPLATES TO UPDATE -- #
+# ------------------------- #
+
+with open(
+    file     = STY_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as styfile:
+    template_sty = styfile.read()
+
 
 with open(
     file     = TEX_FILE,
     mode     = 'r',
     encoding = 'utf-8'
 ) as docfile:
-    template = docfile.read()
+    template_tex = docfile.read()
 
 
 # --------------------- #
@@ -78,10 +87,10 @@ with open(
 # --------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_sty,
     seps = [
-        "% List of classical sets",
-        r"\begin{document}"
+        "% List of classical sets - START",
+        "% List of classical sets - END"
     ],
     keepseps = True
 )
@@ -92,9 +101,9 @@ for setdef in classicalsets:
     alldefs.append(latex_classical(setdef))
 
 alldefs = "\n\n".join(alldefs)
-alldefs = f"\n\n{alldefs}\n\n\n\n"
+alldefs = f"\n\n{alldefs}\n\n"
 
-template = text_start + alldefs + text_end
+template_sty = text_start + alldefs + text_end
 
 
 # ----------------------- #
@@ -102,7 +111,7 @@ template = text_start + alldefs + text_end
 # ----------------------- #
 
 text_start, _, text_end = between(
-    text = template,
+    text = template_tex,
     seps = [
         "% == Table of suffixes - START == %",
         "% == Table of suffixes - END == %"
@@ -113,7 +122,7 @@ text_start, _, text_end = between(
 suffix_header = [x for x in "n p s sn sp".split()]
 sexiffus      = {v: k for k,v in SUFFIXES.items()}
 
-table_header = "  & {0} \\\\".format(
+table_header = DECO*3 + "  & {0} \\\\".format(
     " & ".join(
         f"\\verb+{s}+" for s in suffix_header
     )
@@ -140,10 +149,12 @@ for onesetdef in classicalsets:
 
     table_lines.append(" & ".join(cells) + r' \\')
 
-table_lines = r'\hline '  + '\n\\hline '.join(table_lines)
+table_lines = f'{DECO*3}\\hline ' \
+            + f'\n{DECO*3}\\hline '.join(table_lines)
 
 
 latextable = f"""
+
 \\newcommand\\xx{{\\phantom{{$\\times$}}}}
 \\begin{{table}}[h]
     \\caption{{Suffixes}}
@@ -155,15 +166,26 @@ latextable = f"""
     \\end{{center}}
     \\label{{table:suffixes-sets}}
 \\end{{table}}
+
 """
 
+template_tex = text_start + latextable + text_end
 
-text = text_start + latextable + text_end
 
+# -------------------------- #
+# -- UPDATES OF THE FILES -- #
+# -------------------------- #
 
 with open(
     file     = TEX_FILE,
     mode     = 'w',
     encoding = 'utf-8'
 ) as docfile:
-    docfile.write(text)
+    docfile.write(template_tex)
+
+with open(
+    file     = STY_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(template_sty)

@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\section{Introduction}
+
+\LaTeX{} est un excellent langage, pour ne pas dire le meilleur, pour rédiger des documents contenant des formules mathématiques.
+Malheureusement toute la puissance de \LaTeX{} permet d'écrire des codes très peu sémantiques.
+Le modeste but du package \verb+lymath+ est de fournir quelques macros sémantiques pour la rédaction de formules mathématiques élémentaires. Considérons le code \LaTeX{} suivant.
+
+\begin{tcblisting}{listing only}
+Sachant que $\frac{df}{dx}(x) = 4 cos(x^2)$ sur $[a ; b]$ , nous avons :
+
+$\int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
+\end{tcblisting}
+
+
+Avec \verb+lymath+, vous pouvez écrire le code suivant.
+
+\begin{tcblisting}{listing only}
+Sachant que $\derfrac{f}{x}(x) = 4 cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
+
+$\int_a^b cos(x^2) \dd{x} = \hook{\frac{1}{4} f(x)}{a}{b}$.
+\end{tcblisting}
+
+
+Même si certaines commandes sont plus longues à écrire que ce que permet \LaTeX{}, il y a trois avantages à utiliser des commandes sémantiques.
+\begin{enumerate}
+	\item La mise en forme dans votre document sera consistante.
+
+	\item Il est facile de changer une mise en forme sur l'ensemble d'un document.
+
+	\item \verb+lymath+ résout certains problèmes "complexes" pour vous.
+\end{enumerate}
+
+
+
+\section{Comment lire cette documentation ?}
+
+Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes. Les exemples se présentent comme ci-dessous \textit{(un code \LaTeX{} suivi de sa mise en forme)}.
+
+\begin{tcblisting}{}
+Sachant que $\displaystyle \frac{df}{dx}(x) = 4 cos(x^2)$ sur $[a ; b]$ , nous avons :
+$\displaystyle \int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
+\end{tcblisting}
+
+
+
+\section{Versions étoilées}
+
+Généralement les versions étoilés proposent des mises en forme faisant un peu moins de travail qua la macro non étoilé \textit{(il y a quelques exceptions)}. Par exemple une macro utilisant des parenthèses extensibles aura une version étoilé qui n'utilisera que des parenthèses non extensibles.
+
+
+
+\section{A propos des arguments \LaTeX, une convention à connaître}
+
+\verb+lymath+ propose des macros avec un \textbf{nombre fixé d'arguments}. Dans ce cas, la syntaxe \LaTeX{} est gardée comme dans \verb+\derfrac{f}{x}+ .
+
+\medskip
+
+Par contre, pour les macros avec un \textbf{nombre variable d'arguments}, la convention sera toujours d'utiliser un seul argument, au sens \LaTeX{}, dont le contenu sera formé de morceaux séparés par des traits verticaux \verb+|+ comme dans \verb+\coord{3 | -4 | 0}+ où l'unique argument \verb+3 | -4 | 0+ contient les trois morceaux \verb+3+ , \verb+-4+ et \verb+0+ .
+
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+\usepackage{04-arc}
+
+
+\makeatletter
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+    \subsection{Arcs circulaires}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Voici un arc $\arc{ABCDEF}$ utilisant beaucoup de lettres, et vous pouvez écrire
+$\arc*{A}{rot}$ à la place de $\arc{A_{rot}}$.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+$\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
+\end{tcblisting}
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{arc}{1}
+
+\IDarg{} un texte donnant le nom d'un arc circulaire.
+
+
+\bigskip
+
+
+\IDmacro*{arc*}{2}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\arc*{up}{down}$ d'un arc circulaire.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\arc*{up}{down}$ d'un arc circulaire.
+
+\end{document}

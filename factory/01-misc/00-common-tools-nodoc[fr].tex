@@ -1,0 +1,32 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{babel}
+
+\usepackage{00-common-tools}
+
+\usepackage{amsmath}
+
+
+% separator: |; before: \begin{pmatrix}; between: \\, after: \end{pmatrix}
+\newcommand{\vcoord}[1]{%
+  \makemultiargument{|}{#1}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+ }
+
+% separator: +; before: ((; between: -, after: ))
+\newcommand{\minify}[1]{%
+  \makemultiargument{+}{#1}{((}{-}{))}%
+ }
+
+\begin{document}
+
+$\vcoord{3 | \vcoord{-4 | -3 } | 0}$ 
+
+\bigskip
+
+$\minify{1 + \minify{4 + 3} + 0}$ 
+
+\bigskip
+
+Séparateur$\quad \rightarrow \quad \lymathsep$ 
+
+\end{document}

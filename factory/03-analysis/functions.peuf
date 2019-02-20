@@ -1,13 +1,17 @@
 no-parameter::
-    pgcd  ppcm
-    ch  sh  th
-    ach  ash  ath
-    arccosh  arcsinh  arctanh
-    acos  asin  atan
+    ch sh th
+
+    ach ash ath
+
+    arccosh arcsinh arctanh
+
+    acos asin atan
+
+    pgcd ppcm
+
 
 parameter::
-// Nb parameter ; LaTeX code
-    expb = 1 ;
-           \exp_{#1}
-    logb = 1 ;
-           \log_{#1}
+// Specifications :
+// nb parameter ; LaTeX code
+    expb = 1 ; \exp_{#1}
+    logb = 1 ; \log_{#1}

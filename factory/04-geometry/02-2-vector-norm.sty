@@ -1,0 +1,15 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+
+
+% == DEFINITIONS == %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+
+\let\@old@norm\norm
+\def\norm{\@ifstar{\@old@norm}{\@old@norm*}}

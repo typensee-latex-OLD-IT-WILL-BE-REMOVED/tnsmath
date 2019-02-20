@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{01-constants}
+\makeatother
+
+
+% == EXTRAS == %
+
+\usepackage{amsmath}
+
+
+
+\begin{document}
+
+\section{Analyse}
+
+    \subsection{Constantes}
+
+        \subsubsection{Constantes classiques}
+
+            \paragraph{La liste complète}
+       
+% List of classical constants - START
+
+\foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
+
+\begin{tcblisting}{}
+Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
+$\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
+\end{tcblisting}
+
+% List of classical constants - END
+
+
+\begin{remark}
+	Faites attention car \verb+{\Large $\ppi \neq \pi$}+ produit {\Large $\ppi \neq \pi$}. Comme vous le constatez, les symboles ne sont pas identiques. Ceci est vraie pour toutes les constantes grecques.
+\end{remark}
+
+
+
+        \subsubsection{Constantes latines personnelles}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+Il est aisé d'écrire $\ct{a} x^2 + \ct{b} x + \ct{c}$ au lieu de $a x^2 + b x + c$
+afin de souligner que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
+\end{tcblisting}
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro*{ct}{1}
+
+\IDarg{} un texte utilisant l'alphabet latin.
+
+\end{document}

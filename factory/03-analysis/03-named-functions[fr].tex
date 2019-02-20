@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{03-named-functions}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Analysis}
+
+    \subsection{Fonctions nommées spéciales}
+
+        \subsubsection{Un exemple d'utilisation}
+
+\begin{tcblisting}{}
+Quelques fonctions nommées supplémentaires (voir la liste ecomplète ci-dessous) :
+$\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x =\logb{2} x$ and $\expb{6} y$.
+\end{tcblisting}
+
+
+        \subsubsection{Fonctions nommées sans paramètre}
+
+Toutes les macros suivantes n'ont aucun paramètre.
+
+\medskip
+
+% List of functions without parameter - START
+
+\foreach \k in {ch, sh, th, ach, ash, ath, arccosh, arcsinh, arctanh, acos, asin, atan, pgcd, ppcm}{\IDconstant{\k}}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
+    \verb+\ch+ & \verb+\sh+ & \verb+\th+\\
+    \verb+\ach+ & \verb+\ash+ & \verb+\ath+\\
+    \verb+\arccosh+ & \verb+\arcsinh+ & \verb+\arctanh+\\
+    \verb+\acos+ & \verb+\asin+ & \verb+\atan+\\
+    \verb+\pgcd+ & \verb+\ppcm+ & \\
+\end{tabular*}
+
+% List of functions without parameter - END
+
+
+
+        \subsubsection{Fonctions nommées avec un paramètre}
+
+            \paragraph{La liste complète}
+
+Toutes les macros suivantes ont un seul paramètre.
+
+\medskip
+
+% List of functions with parameters - START
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
+    \verb+\expb+ \, (1 paramètre) & \verb+\logb+ \, (1 paramètre) &  & \\
+\end{tabular*}
+
+% List of functions with parameters - END
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{expb}{1}
+
+\IDmacro*{logb}{1}
+
+\IDarg{} la base de l'exponentielle ou du logarithme.
+
+\end{document}

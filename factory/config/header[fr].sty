@@ -1,0 +1,114 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ucs}
+
+\usepackage[french]{babel,varioref}
+
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{amsthm}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8}
+
+\usepackage{ifplatform}
+
+\usepackage{pgffor}
+\usepackage{xstring}
+
+
+% MISC
+
+\tcbset{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue% 
+}
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+\newcommand\ascii{\texttt{ASCII}}
+
+
+% Technical IDs
+
+\newwrite\tempfile
+
+\immediate\openout\tempfile=x-\jobname.macros-x.txt
+
+\AtEndDocument{\immediate\closeout\tempfile}
+
+\newcommand\IDconstant[1]{%
+    \immediate\write\tempfile{constant@#1}%
+}
+
+\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
+
+\newcommand\@IDmacro@no@star[3]{%
+    \texttt{%
+    	\textbackslash#1%
+    	\IfStrEq{#2}{0}{}{%
+    		\,\,[#2 Option%
+				\IfStrEq{#2}{1}{}{s}]%
+			}%
+	    \IfStrEq{#3}{}{}{%
+	    		\,\,(#3 Argument%
+				\IfStrEq{#3}{1}{}{s})%
+			}
+	   	}
+    \immediate\write\tempfile{macro,#1,#2,#3}%
+}
+
+\newcommand\@IDmacro@star[2]{%
+    \@IDmacro@no@star{#1}{0}{#2}%
+}
+
+\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
+
+\newcommand\@IDoptarg@star[2]{%
+	\vspace{0.5em}
+	\textbf{---} \texttt{#1%
+		\IfStrEq{#2}{}{:}{\,#2:}%
+	}%
+}
+
+\newcommand\@IDoptarg@no@star[2]{%
+	\IfStrEq{#2}{}{%
+		\@IDoptarg@star{#1}{}%
+	}{%
+		\@IDoptarg@star{#1}{#2}%
+	}%
+}
+
+\newcommand\IDkey[1]{%
+	\@IDoptarg*{Option}{{\itshape "#1"}}%
+}
+
+\newcommand\IDoption[1]{%
+	\@IDoptarg{Option}{#1}%
+}
+
+\newcommand\IDarg[1]{%
+	\@IDoptarg{Argument}{#1}%
+}

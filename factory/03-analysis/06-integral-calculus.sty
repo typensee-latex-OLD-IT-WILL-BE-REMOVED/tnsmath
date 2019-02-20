@@ -1,0 +1,69 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+\RequirePackage{relsize}
+
+% == DEFINITIONS == %
+
+% Source for minimizing spaces between consecutive integrals :
+%    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
+
+% Consecutive integrals
+
+\let\original@int\int
+\DeclareRobustCommand{\int}{%
+    \original@int\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
+}
+
+\def\operator@followup#1{%
+    \@ifnextchar{^}{\operator@followup@sup{#1}}%
+        {\operator@followup@nosup{#1}}%
+}
+
+\def\operator@followup@sup#1^#2{%
+    \@ifnextchar{_}{\operator@followup@sup@sub{#1}^{#2}}%
+        {\operator@followup@sup@nosub{#1}^{#2}}%
+}
+
+\def\operator@followup@sup@sub#1^#2_#3{%
+    \operator@followup@{#1}{#2}{#3}%
+}
+
+\def\operator@followup@sup@nosub#1^#2{%
+    \operator@followup@{#1}{#2}{}%
+}
+
+\def\operator@followup@nosup#1{%
+    \@ifnextchar{_}{\operator@followup@nosup@sub{#1}}
+        {\operator@followup@nosup@nosub{#1}}%
+}
+
+\def\operator@followup@nosup@sub#1_#2{%
+    \@ifnextchar{^}{\operator@followup@nosup@sub@sup{#1}_{#2}}
+        {\operator@followup@nosup@sub@nosup{#1}_{#2}}%
+}
+
+\def\operator@followup@nosup@sub@sup#1_#2^#3{%
+    \operator@followup@{#1}{#3}{#2}%
+}
+
+\def\operator@followup@nosup@sub@nosup#1_#2{%
+    \operator@followup@{#1}{}{#2}%
+}
+
+\def\operator@followup@nosup@nosub#1{%
+    \operator@followup@{#1}{}{}%
+}
+
+\def\operator@followup@#1#2#3{%
+    ^{#2}_{#3}#1%
+}
+
+% The hook calculator
+\newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
+\newcommand\@hook@star[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
+\newcommand\@hook@no@star[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
+
+\newcommand\vhook{\@ifstar{\@vhook@star}{\@vhook@no@star}}
+\newcommand\@vhook@star[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
+\newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}

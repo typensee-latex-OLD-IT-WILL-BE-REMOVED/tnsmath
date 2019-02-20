@@ -1,0 +1,15 @@
+% == PACKAGES USED == %
+
+
+% == DEFINITIONS == %
+
+\newcommand\angleorient{\@ifstar{\@angleorient@star}{\@angleorient@no@star}}
+
+\newcommand\@angleorient@star[2]{%
+	\@interval@tool@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
+}
+
+\newcommand\@angleorient@no@star[2]{%
+	\@interval@tool@no@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
+}
+

@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{01-point}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Géométrie}
+
+    \subsection{Points}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+$\pt{I}$ indique un point nommé "I".
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{pt}{1}
+
+\IDarg{} un texte donnant le nom d'un point.
+
+
+\bigskip
+
+
+\IDmacro*{pt*}{2}
+
+\IDarg{1} un texte indiquant $\pt{UP}$ dans le nom $\pt*{UP}{down}$ d'un point.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\pt*{UP}{down}$ d'un point.
+
+\end{document}

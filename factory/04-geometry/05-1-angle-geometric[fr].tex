@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{05-1-angle-geometric}
+\makeatother
+
+
+% == EXTRA == %
+
+\makeatletter
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+    \subsection{Angles}
+    
+		\subsubsection{Angles géométriques intérieurs}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Voici un angle géométrique intérieur $\anglein{ABCDEF}$ avec un long nom, et vous 
+pouvez écrire $\anglein*{A}{rot}$ au lieu de $\anglein{A_{rot}}$.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Vous pouvez aussi écrire $\anglein{i}$ and $\anglein*{j}{2}$ sans point.
+\end{tcblisting}
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{anglein}{1}
+
+\IDarg{} un texte donnant le nom d'un angle intérieur.
+
+
+\bigskip
+
+
+\IDmacro*{anglein*}{2}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
+
+\end{document}

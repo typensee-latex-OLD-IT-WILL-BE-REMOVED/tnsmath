@@ -1,0 +1,50 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{02-1-vector}
+\makeatother
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+    \subsection{Vecteurs}
+
+		\subsubsection{Les écrire}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Voici un vecteur $\vect{ABCDEF}$ avec beaucoup de lettres et vous pouvez écrire
+$\vect*{e}{rot}$ au lieu de $\vect{e_{rot}}$.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+\begin{tcblisting}{}
+Vous pouvez écrire $\vect{i}$ and $\vect*{j}{2}$ sans point.
+\end{tcblisting}
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{vect}{1}
+
+\IDarg{} un texte donnant le nom d'un vecteur.
+
+
+\bigskip
+
+
+\IDmacro*{vect*}{2}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\vect*{up}{down}$ d'un vecteur.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
+
+\end{document}

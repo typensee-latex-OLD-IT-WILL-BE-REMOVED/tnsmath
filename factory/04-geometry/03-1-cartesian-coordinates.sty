@@ -1,0 +1,37 @@
+% == PACKAGES USED == %
+
+\RequirePackage{nicematrix}
+
+
+% == DEFINITIONS == %
+
+\newcommand\coord{\@ifstar{\@coord@star}{\@coord@no@star}}
+
+% ARG 1 = Separator: |
+% ARG 2 = All parts: what the user types !
+% ARG 3 = Before   : nothing here
+% ARG 4 = Between  : ;
+% ARG 5 = After    : nothing here
+\newcommand\@coord@no@star[1]{%
+	\left( \,%
+		\makemultiargument{|}{#1}{}{\lymathsep}{}%
+	 \, \right)%
+}
+
+\newcommand\@coord@star[1]{%
+	( \,%
+		\makemultiargument{|}{#1}{}{\lymathsep}{}%
+	\, )%
+}
+
+
+\newcommand\vcoord{\@ifstar{\@vcoord@star}{\@vcoord@no@star}}
+
+\newcommand\@vcoord@no@star[1]{%
+	\makemultiargument{|}{#1}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+}
+
+\newcommand\@vcoord@star[1]{%
+	\makemultiargument{|}{#1}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+}
+

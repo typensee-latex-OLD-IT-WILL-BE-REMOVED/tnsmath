@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\newpage
+
+\section{Historique}
+
+Tous les changements sont décrits en anglais uniquement dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+. Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+
+\begin{description}[leftmargin=1em]
+	\setlength\itemsep{1em}
+
+	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+ dont voici les principaux changements.
+	\begin{itemize}
+		\item L'usage de \verb+//+ pour les macros-commandes avec un nombre quelconque d'arguments a été remplacé par celui de \verb+|+.
+
+		\item En géométrie, il y a diverses nouveautés.
+		\begin{itemize}
+			\item Ajout de l'écriture de coordonnées, de produits scalaires et de produits vectoriels.
+
+			\item \verb+\axis+ a été correctement traduit en \verb+\axes+.
+
+			\item Les macros \verb+\gpaxis+ et \verb+\gpvaxis+ deviennent \verb+\paxes+ et \verb+\pvaxes+ pour être cohérent avec \verb+\pt+ qui a remplacé l'ancien \verb+\gpt+.
+		\end{itemize}
+
+		\item En analyse, ajout de la macro commande étoilée \verb+\derpow*+ pour la gestion automatique des primes d'une dérivée.
+
+		\item Une nouvelle section "algèbre" propose des macros pour écrire des ensembles de polynômes, de fractions polynomiales, de séries fromelles et aussi de fractions de séries formelles.
+
+		\item Redéfinition de \verb+\frac+ et \verb+\dfrac+ pour obtenir des traits de fraction un peu plus longs.
+
+		\item Ajout de \verb+\lymathsep+ qui définit globalement le séparateur d'arguments à l'impression.
+	\end{itemize}
+
+
+	\item[2017-11-01] Nouvelle version mineure \verb+0.1.0-beta+ : pour les ensembles, les fonctions et la géométrie, il y a eu des changements et l'ajout de nouveaux outils.
+
+
+	\item[2017-10-21] Historique court de \verb+lymath+ ajouté au présent document.
+
+
+	\item[2017-10-18] Nouvelle version "patchée" \verb+0.0.2-beta+ : de nouveaux outils pour le calcul différentiel.
+
+
+	\item[2017-10-06] Nouvelle version "patchée" \verb+0.0.1-beta+ : de nouveaux outils pour l'arithmétique, la géométrie, le calcul intégral et le calcul différentiel.
+
+
+	\item[2017-10-02] Première version \verb+0.0.0-beta+ du package.
+\end{description}
+
+\end{document}

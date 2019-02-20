@@ -1,0 +1,44 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+
+
+% == DEFINITIONS == %
+
+% Source for DeclareMathMacro :
+%    * http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
+
+% One useful tool
+
+\newcommand\DeclareMathMacro[2]{%
+    \expandafter\let\csname original@\expandafter\@gobble\string#1\endcsname=#1
+    \expandafter\def\csname\expandafter\@gobble\string#1\endcsname{%
+        \relax%
+        \ifmmode#2%
+        \else%
+            \csname original@\expandafter\@gobble\string#1\expandafter\endcsname%
+        \fi%
+    }%
+}
+
+% Classical functions - START
+
+\DeclareMathMacro{\ch}{\operatorname{ch}}
+\DeclareMathMacro{\sh}{\operatorname{sh}}
+\DeclareMathMacro{\th}{\operatorname{th}}
+\DeclareMathMacro{\ach}{\operatorname{ach}}
+\DeclareMathMacro{\ash}{\operatorname{ash}}
+\DeclareMathMacro{\ath}{\operatorname{ath}}
+\DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
+\DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
+\DeclareMathMacro{\acos}{\operatorname{acos}}
+\DeclareMathMacro{\asin}{\operatorname{asin}}
+\DeclareMathMacro{\atan}{\operatorname{atan}}
+\DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
+\DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
+
+\newcommand\expb[1]{\exp_{#1}}
+\newcommand\logb[1]{\log_{#1}}
+
+% Classical functions - END

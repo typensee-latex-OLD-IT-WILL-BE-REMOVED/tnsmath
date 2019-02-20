@@ -1,0 +1,116 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{06-integral-calculus}
+\makeatother
+
+
+% == EXTRAS == %
+
+\makeatletter
+    \newcommand\@interval@tool@star[4]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 ; #3 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#4}%
+	}
+
+    \newcommand\@interval@tool@no@star[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
+\makeatother
+    
+\newcommand\dd[1]{d#1}
+
+
+
+\begin{document}
+
+% \section{Analysis}
+
+    \subsection{Calcul intégral}
+
+        \subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Par définition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ où
+$\hook{F(x)}{a}{b} = F(b) - F(a)$.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+Par défaut, les crochets s'étirent verticalement si besoin, mais si cela vous dérange, vous pouvez faire appel à la version étoilée de la macro comme dans l'exemple suivant
+
+\begin{tcblisting}{}
+$\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{hook}{3}
+
+\IDmacro*{hook*}{3}
+
+\IDarg{1} le contenu entre les crochets.
+
+\IDarg{2} la borne inférieure affichée en indice.
+
+\IDarg{3} la borne supérieure affichée en exposant.
+
+
+
+        \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
+
+            \paragraph{Exemple d'utilisation 1}
+
+\begin{tcblisting}{}
+Vous pouvez utiliser $\vhook{F(x)}{a}{b}$ au lieu de $\hook{F(x)}{a}{b}$.
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 2}
+
+Tout comme avec la première version de l'opérateur crochet, vous pouvez utiliser une version étoilée pour empêcher l'étirement verticalement du trait vertical. Voici un exemple.
+
+\begin{tcblisting}{}
+$\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
+             = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{vhook}{3}
+
+\IDmacro*{vhook*}{3}
+
+\IDarg{1} le contenu avant le trait vertical.
+
+\IDarg{2} la borne inférieure affichée en indice.
+
+\IDarg{3} la borne supérieure affichée en exposant.
+
+
+
+        \subsubsection{Intégrales multiples}
+
+Le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
+
+\begin{tcblisting}{}
+$\displaystyle
+  \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
+= \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
+\end{tcblisting}
+
+
+\begin{remark}
+	Par défaut, \LaTeX{} affiche
+	\makeatletter
+    	$\displaystyle \original@int \original@int \original@int F(x;y;z) \dd{x} \dd{y} \dd{z}
+    	= \original@int_{a}^{b} \original@int_{c}^{d} \original@int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$.
+	\makeatother
+\end{remark}
+
+\end{document}

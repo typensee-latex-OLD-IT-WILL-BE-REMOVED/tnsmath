@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{05-2-angle-oriented}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+	\newcommand\lymathsep{;}
+	
+    \newcommand\@interval@tool@star[5]{%
+    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
+	}
+
+    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
+    
+    \newcommand\pt[1]{\mathrm{#1}}
+
+	\newcommand\@no@point[1]{%
+		\IfStrEq{#1}{i}{%
+			\imath%
+		}{%
+			\IfStrEq{#1}{j}{%
+				\jmath%
+			}{%
+				#1
+			}%
+		}%
+	}
+	
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+%    \subsection{Angles}
+    
+		\subsubsection{Angles orientés de vecteurs}
+
+            \paragraph{Exemple d'utilisation}
+
+\begin{tcblisting}{}
+En mathématique, il est d'usage de noter les angles orientés via
+$\displaystyle \angleorient{\frac{1}{2} \vect{i}}{\vect{j}}$
+ou
+$\displaystyle \angleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
+\end{tcblisting}
+
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro*{angleorient}{2}
+
+\IDarg{1} le premier vecteur.
+
+\IDarg{2} le second vecteur.
+
+\end{document}
