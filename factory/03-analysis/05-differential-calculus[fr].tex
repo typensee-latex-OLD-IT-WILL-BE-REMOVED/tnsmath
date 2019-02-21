@@ -20,7 +20,7 @@
            \paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
-Vous pouvez écrire $\dd{x}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
+Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
 \end{tcblisting}
 
 
@@ -53,9 +53,8 @@ $\displaystyle \derpow*{f} (a) = \derpow{f} (a)
 $\displaystyle \derpow*[3]{f}(a) = \derpow[3]{f} (a)
                                  = \derfrac[3]{f}{x} (a)
                                  = \dersub[3]{f}{x} (a)$
-et
-$\displaystyle \derpow*[10]{\cos} a = \derfrac[10]{\cos}{x} (a)$ avec beaucoup trop
-de primes à gauche.
+et $\displaystyle \derpow*[10]{\cos} a = \derfrac[10]{\cos}{x} (a)$ avec beaucoup trop
+de primes à gauche (mais le compte y est).
 \end{tcblisting}
 
 
@@ -63,7 +62,7 @@ de primes à gauche.
 
 \begin{tcblisting}{}
 Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
-   $\displaystyle \derpow[3]{f} (a)
+   $\displaystyle \derpow[3]{f} (a) 
                 = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
 \end{tcblisting}
 

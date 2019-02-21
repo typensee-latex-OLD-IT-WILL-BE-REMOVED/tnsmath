@@ -5,9 +5,9 @@ from pathlib import Path
 # -- TOOLS & CONSTANTS -- #
 # ----------------------- #
 
-LYXAM_DIR    = Path(__file__).parent.parent
-ABOUT_README = LYXAM_DIR / 'about' / 'readme' / 'main.md'
-README       = LYXAM_DIR / 'README.md'
+LYMATH_DIR   = Path(__file__).parent.parent
+ABOUT_README = LYMATH_DIR / 'about' / 'readme' / 'main.md'
+README       = LYMATH_DIR / 'README.md'
 
 
 # ------------------------ #

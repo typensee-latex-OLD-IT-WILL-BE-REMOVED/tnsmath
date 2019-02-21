@@ -7,13 +7,13 @@
 
 \newcommand\coord{\@ifstar{\@coord@star}{\@coord@no@star}}
 
+\newcommand\@coord@no@star[1]{%
+	\left( \,%
 % ARG 1 = Separator: |
 % ARG 2 = All parts: what the user types !
 % ARG 3 = Before   : nothing here
 % ARG 4 = Between  : ;
 % ARG 5 = After    : nothing here
-\newcommand\@coord@no@star[1]{%
-	\left( \,%
 		\makemultiargument{|}{#1}{}{\lymathsep}{}%
 	 \, \right)%
 }

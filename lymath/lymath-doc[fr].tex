@@ -865,7 +865,7 @@ le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
            \paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
-Vous pouvez écrire $\dd{x}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
+Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
 \end{tcblisting}
 
 
@@ -898,9 +898,8 @@ $\displaystyle \derpow*{f} (a) = \derpow{f} (a)
 $\displaystyle \derpow*[3]{f}(a) = \derpow[3]{f} (a)
                                  = \derfrac[3]{f}{x} (a)
                                  = \dersub[3]{f}{x} (a)$
-et
-$\displaystyle \derpow*[10]{\cos} a = \derfrac[10]{\cos}{x} (a)$ avec beaucoup trop
-de primes à gauche.
+et $\displaystyle \derpow*[10]{\cos} a = \derfrac[10]{\cos}{x} (a)$ avec beaucoup trop
+de primes à gauche (mais le compte y est).
 \end{tcblisting}
 
 
@@ -908,7 +907,7 @@ de primes à gauche.
 
 \begin{tcblisting}{}
 Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
-   $\displaystyle \derpow[3]{f} (a)
+   $\displaystyle \derpow[3]{f} (a) 
                 = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
 \end{tcblisting}
 
@@ -1728,9 +1727,9 @@ $\displaystyle
 
 	\subsection{Polynômes, séries formelles et compagnie}
 
-        \subsubsection{Polynômes}
+        \subsubsection{Polynômes et fractions polynômiales}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation 1 : Polynômes}
 
 \begin{tcblisting}{}
 $\polyset{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
@@ -1740,9 +1739,7 @@ en les variables $X$ , $Y$ et $Z$.
 
 
 
-        \subsubsection{Fractions polynômiales}
-
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
 
 \begin{tcblisting}{}
 $\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent 
@@ -1751,9 +1748,9 @@ d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 
 
 
-        \subsubsection{Séries formelles}
+        \subsubsection{Séries formelles et leurs corps de fractions}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation 1 : Séries formelles}
 
 \begin{tcblisting}{}
 $\serieset{\CC}{X}$ et $\serieset{\CC}{T | O | P}$ permettent de travailler avec des
@@ -1762,9 +1759,7 @@ séries formelles à coefficients complexes.
 
 
 
-        \subsubsection{Corps des fractions de séries formelles}
-
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
 
 \begin{tcblisting}{}
 $\seriefracset{\ZZ}{X}$ et $\seriefracset{\ZZ}{Z | T | O | P}$ permettent de travailler

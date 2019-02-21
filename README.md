@@ -23,6 +23,9 @@ Changes in this version `0.2.0-beta`
 **One regression repaired:** when the option ``french`` of ``babel`` was activated, auto spacing around semi-colon was broken.
 
 
+**One big bug fixed :** in the code for differential calculus the option ``\noexpandarg`` of ``xstring`` created a bug with the use of ``lyxam``. The way the code works now avoids this kind of problem.
+
+
 **One major change in the interface:** for macros using unbounded numbers of arguments, the use ``//`` has been replaced by the use of ``|``.
 
 
