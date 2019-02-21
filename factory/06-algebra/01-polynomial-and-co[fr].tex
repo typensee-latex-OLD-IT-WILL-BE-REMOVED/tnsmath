@@ -66,6 +66,28 @@ avec des fractions de séries formelles à coefficients entiers.
 
 
 
+        \subsubsection{Polynômes de Laurent et séries formelles de Laurent}
+
+            \paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
+
+\begin{tcblisting}{}
+$\polylaurentset{\RR}{X} = \polyset{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
+réels de Laurent en $X$. On propose de généraliser comme suit (notation non standard) :
+$\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+\end{tcblisting}
+
+
+
+            \paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
+
+\begin{tcblisting}{}
+$\serielaurentset{\QQ}{X} = \serieset{\QQ}{X | X^{-1}}$ est l'ensemble des séries 
+formelles rationnelles de Laurent en $X$. On généralise via, notation non standard,
+$\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+\end{tcblisting}
+
+
+
         \subsubsection{Toutes les fiches techniques}
 
 \IDmacro*{polyset}{2}
@@ -75,6 +97,10 @@ avec des fractions de séries formelles à coefficients entiers.
 \IDmacro*{serieset}{2}
 
 \IDmacro*{seriefracset}{2}
+
+\IDmacro*{polylaurentset}{2}
+
+\IDmacro*{serielaurentset}{2}
 
 \IDarg{1} l'ensemble auquel les coefficients appartiennent.
 

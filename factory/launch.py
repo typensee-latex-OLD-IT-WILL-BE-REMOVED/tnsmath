@@ -22,14 +22,23 @@ THIS_DIR  = THIS_FILE.parent
 # -------------------------------------- #
 
 for pattern in [
-    "file::**build_*.py",
-    "file::build_*.py"
+    "file::**build-*.py",
+    "file::build-*.py"
 ]:
     allpaths = [onepath for onepath in THIS_DIR.walk(pattern)]
     allpaths.sort()
 
     for onepath in allpaths:
-        print('+ Launching "{0}"'.format(onepath - THIS_DIR))
+        filename = (onepath - THIS_DIR).stem
+
+        if filename[7].isdigit():
+            comment = ""
+
+        else:
+            comment = "  [this is a sub builder]"
+
+        print(f'+ Launching "{filename}"{comment}')
+
 
         runthis(
             cmd        = 'python "{0}"'.format(onepath),

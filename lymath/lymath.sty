@@ -1016,6 +1016,7 @@
 	}
 }
 
+
 \newcommand\polyset[2]{%
 	\@special@algebra@set{#1}{#2}{[}{]}{1}%
 }
@@ -1033,4 +1034,13 @@
 
 \newcommand\seriefracset[2]{%
 	\@special@algebra@set{#1}{#2}{(}{)}{2}%
+}
+
+
+\newcommand\polylaurentset[2]{%
+	\@special@algebra@set{#1}{#2}{\{}{\}}{1}%
+}
+
+\newcommand\serielaurentset[2]{%
+	\@special@algebra@set{#1}{#2}{\{}{\}}{2}%
 }
