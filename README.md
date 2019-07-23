@@ -17,36 +17,10 @@ English is not my native language, so be nice if you notice misunderstandings, m
 
 
 
-Changes in this version `0.3.0-beta`
+Changes in this version `0.2.0-beta`
 ====================================
 
-**New minor version ``0.3.0-beta`` of ¨lymath:** see all the changes below.
-
-
-**New macro ``\lymathsubsep``:** this defines the separators of arguments for a second level. By default it is a semi-colon but if this will be a coma if the option ``french`` of ``babel`` is activated.
-
-
-**Logic and fundations:** here are the new features in this new section.
-
-1. Different kind of equal signs are available.
-
-2. The macro ``\explain`` allows to explain efficiently formal reasonning or calculus.
-
-
-**Sets:** here are the new features.
-
-1. ``\fieldset`` has been renamed ``\algeset``.
-
-2. One new classical set added : ``\PP`` indicates the set of prime numbers.
-
-
-**Geometry:** here are the new features.
-
-1. The macro ``\hangleorient`` writes oriented angles of vectors using a hat.
-
-2. The macros ``\vangleorient`` and ``\vhangleorient`` are shortcuts to not use ``\vect`` when writing oriented angles of vectors without or with a hat.
-
-3. The macros ``\vdotprod``, ``\vadotprod`` and ``\vcroosprod`` are shortcuts to not use ``\vect`` when writing dot and cross products.
+#????????????
 
 
 
