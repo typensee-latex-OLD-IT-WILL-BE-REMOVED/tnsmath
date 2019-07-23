@@ -2,20 +2,13 @@
 
 \makeatletter
 	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
 
 	\usepackage{01-general-sets}
 \makeatother
 
 
 \usepackage{relsize}
-
-\makeatletter
-    \newcommand\@interval@tool@star[5]{%
-    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
-	}
-
-    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
-\makeatother
 
 
 
@@ -122,26 +115,26 @@ Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 
 
 
-        \subsubsection{Ensembles de type anneau ou corps}
+        \subsubsection{Ensembles pour l'algèbre générale}
 
             \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Vous pouvez écrire sémantiquement $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ et
-$\fieldset{k}$ mais pas taper \verb+$\fieldset{ABC}$+.
+Vous pouvez écrire sémantiquement $\algeset{A}$, $\algeset{K}$, $\algeset{h}$ et
+$\algeset{k}$ mais pas taper \verb+$\algeset{ABC}$+.
 \end{tcblisting}
 
 
             \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
+Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
 \end{tcblisting}
 
 
             \paragraph{Fiches techniques}
 
-\IDmacro*{fieldset}{1}
+\IDmacro*{algeset}{1}
 
 \IDarg{} soit l'une des lettres  \texttt{h} et \texttt{k}, soit un seul caractère \ascii{} majuscule indiquant un ensemble de type anneau ou corps.
 
@@ -149,11 +142,11 @@ Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
 \bigskip
 
 
-\IDmacro*{fieldset*}{2}
+\IDmacro*{algeset*}{2}
 
-\IDarg{1} un seul caractère \ascii{} indiquant $\fieldset{U}$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{1} un seul caractère \ascii{} indiquant $\algeset{U}$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
 
-\IDarg{2} un texte donnant $d$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{2} un texte donnant $d$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
 
 
 
@@ -161,7 +154,8 @@ Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-$\HH$ et $\OO$.
+mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions et
+enfin $\OO$ pour les octonions.
 \end{tcblisting}
 
 
@@ -194,6 +188,7 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
             \hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+P+ & \xx & \xx & \xx & \xx & \xx \\
             \hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
             \hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
             \hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\

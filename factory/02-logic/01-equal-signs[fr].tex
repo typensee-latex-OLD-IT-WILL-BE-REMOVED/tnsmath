@@ -1,0 +1,48 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+
+	\usepackage{01-equal-signs}
+\makeatother
+
+\newcommand\RR{RR}
+
+
+\begin{document}
+
+\section{Logique et fondements}
+
+    \subsection{Différents types d'égalités}
+    
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
+
+        \subsubsection{Définir quelque chose}
+
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon.
+
+\begin{tcblisting}{}
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ .
+On peut utiliser une écriture plus symbolique : $f(x) \eqdef* x^3 + 1$.
+\end{tcblisting}
+
+
+        \subsubsection{Indiquer une identité}
+
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqid+ qui vaut \emph{\og id \fg} si l'option \verb+french+ de \verb+babel+ est choisie ou non.
+
+\begin{tcblisting}{}
+$\forall (a ; b) \in \RR^2$, nous avons : $(a + b)^2 \eqid a^2 + b^2 + 2 a b$ .
+On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
+\end{tcblisting}
+
+
+        \subsubsection{Une égalité à vérifier}
+
+\begin{tcblisting}{}
+Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+\end{tcblisting}
+
+
+\end{document}

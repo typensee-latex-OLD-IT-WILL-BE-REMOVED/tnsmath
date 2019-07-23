@@ -13,7 +13,7 @@
 	\@ifmtarg{#2}{%
 		#1%
 	}{%
-		#1 , \@axes@comafy@#2\@nil%
+		#1 \lymathsubsep{} \@axes@comafy@#2\@nil%
 	}%
 }
 
@@ -23,14 +23,14 @@
 	\@axes@no@star@splitter@#1|\@nil%
 }
 \def\@axes@no@star@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axes@comafy@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{#1}{\lymathsep{}}{\@axes@comafy@#2\@nil}{)}}%
 }
 
 \newcommand\@axes@star[1]{%
 	\@axes@star@splitter@#1|\@nil%
 }
 \def\@axes@star@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@star{(}{#1}{;}{\@axes@comafy@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@star{(}{#1}{\lymathsep{}}{\@axes@comafy@#2\@nil}{)}}%
 }
 
 % Geometric points for naming some axes
@@ -38,7 +38,7 @@
 	\@ifmtarg{#2}{%
 		\pt{#1}%
 	}{%
-		\pt{#1} , \@axes@comafy@gptify@#2\@nil%
+		\pt{#1} \lymathsubsep{} \@axes@comafy@gptify@#2\@nil%
 	}%
 }
 
@@ -46,7 +46,7 @@
 	\@paxes@splitter@#1|\@nil%
 }
 \def\@paxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{;}{\@axes@comafy@gptify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{\lymathsep{}}{\@axes@comafy@gptify@#2\@nil}{)}}%
 }
 
 % Vectors for naming some axes
@@ -54,7 +54,7 @@
 	\@ifmtarg{#2}{%
 		\vect{\trim@spaces{#1}}%
 	}{%
-		\vect{\trim@spaces{#1}} , \@axes@comafy@vectify@#2\@nil%
+		\vect{\trim@spaces{#1}} \lymathsubsep{} \@axes@comafy@vectify@#2\@nil%
 	}%
 }
 
@@ -62,7 +62,7 @@
 	\@vaxes@splitter@#1|\@nil%
 }
 \def\@vaxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axes@comafy@vectify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{#1}{\lymathsep{}}{\@axes@comafy@vectify@#2\@nil}{)}}%
 }
 
 % Geometric points and vectors for naming some axes
@@ -70,5 +70,5 @@
 	\@pvaxes@splitter@#1|\@nil%
 }
 \def\@pvaxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{;}{\@axes@comafy@vectify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{\lymathsep{}}{\@axes@comafy@vectify@#2\@nil}{)}}%
 }

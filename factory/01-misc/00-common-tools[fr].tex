@@ -9,8 +9,13 @@
 
 \begin{document}
 
-\section{Un séparateur d'arguments par défaut}
+\section{Deux séparateurs d'arguments par défaut}
 
-La macro \verb+\lymathsep+ définit le séparateur d'arguments dans les formules écrites. Cette documentation utilisant l'option \verb+french+ de \verb+babel+, la valeur de \verb+\lymathsep+ est \fbox{\,\lymathsep$\vphantom{F}$\,} . Sans ce choix, la valeur de \verb+\lymathsep+ sera \fbox{\,,$\vphantom{F}$\,} .
+La macro \verb+\lymathsep+ définit le séparateur d'arguments de premier niveau, et \verb+\lymathsubsep+ celui des arguments de deuxième niveau.
+Cette documentation utilisant l'option \verb+french+ de \verb+babel+, la valeur de 
+\verb+\lymathsep+ est \fbox{\,\lymathsep$\vphantom{F}$\,} 
+et celle de
+\verb+\lymathsubsep+ est \fbox{\,\lymathsubsep$\vphantom{F}$\,} .
+Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \fbox{\,\lymathsubsep$\vphantom{F}$\,} et \fbox{\,\lymathsep$\vphantom{F}$\,} respectivement.
 
 \end{document}

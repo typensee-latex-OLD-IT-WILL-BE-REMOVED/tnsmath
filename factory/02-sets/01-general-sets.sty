@@ -58,14 +58,14 @@
 	\@geoset@no@star{#1}_{#2}
 }
 
-% Field like sets
+% Sets for algebra
 %
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
-\newcommand\fieldset{\@ifstar{\@fieldset@star}{\@fieldset@no@star}}
+\newcommand\algeset{\@ifstar{\@algeset@star}{\@algeset@no@star}}
 
-\newcommand\@fieldset@no@star[1]{
+\newcommand\@algeset@no@star[1]{
 	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
 	    \mathds{#1}
 	}{%
@@ -73,8 +73,8 @@
 	}
 }
 
-\newcommand\@fieldset@star[2]{%
-	\@fieldset@no@star{#1}_{#2}
+\newcommand\@algeset@star[2]{%
+	\@algeset@no@star{#1}_{#2}
 }
 
 % Tools for classical sets
@@ -111,44 +111,46 @@
 
 % List of classical sets - START
 
-\newcommand\NN{\ensuremath{\fieldset{N}}}
+\newcommand\NN{\ensuremath{\algeset{N}}}
 \newcommand\NNs{\ensuremath{\specialset{\NN}{s}}}
 
-\newcommand\ZZ{\ensuremath{\fieldset{Z}}}
+\newcommand\PP{\ensuremath{\algeset{P}}}
+
+\newcommand\ZZ{\ensuremath{\algeset{Z}}}
 \newcommand\ZZp{\ensuremath{\specialset{\ZZ}{p}}}
 \newcommand\ZZn{\ensuremath{\specialset{\ZZ}{n}}}
 \newcommand\ZZs{\ensuremath{\specialset{\ZZ}{s}}}
 \newcommand\ZZsn{\ensuremath{\specialset{\ZZ}{sn}}}
 \newcommand\ZZsp{\ensuremath{\specialset{\ZZ}{sp}}}
 
-\newcommand\DD{\ensuremath{\fieldset{D}}}
+\newcommand\DD{\ensuremath{\algeset{D}}}
 \newcommand\DDp{\ensuremath{\specialset{\DD}{p}}}
 \newcommand\DDn{\ensuremath{\specialset{\DD}{n}}}
 \newcommand\DDs{\ensuremath{\specialset{\DD}{s}}}
 \newcommand\DDsn{\ensuremath{\specialset{\DD}{sn}}}
 \newcommand\DDsp{\ensuremath{\specialset{\DD}{sp}}}
 
-\newcommand\QQ{\ensuremath{\fieldset{Q}}}
+\newcommand\QQ{\ensuremath{\algeset{Q}}}
 \newcommand\QQp{\ensuremath{\specialset{\QQ}{p}}}
 \newcommand\QQn{\ensuremath{\specialset{\QQ}{n}}}
 \newcommand\QQs{\ensuremath{\specialset{\QQ}{s}}}
 \newcommand\QQsn{\ensuremath{\specialset{\QQ}{sn}}}
 \newcommand\QQsp{\ensuremath{\specialset{\QQ}{sp}}}
 
-\newcommand\RR{\ensuremath{\fieldset{R}}}
+\newcommand\RR{\ensuremath{\algeset{R}}}
 \newcommand\RRp{\ensuremath{\specialset{\RR}{p}}}
 \newcommand\RRn{\ensuremath{\specialset{\RR}{n}}}
 \newcommand\RRs{\ensuremath{\specialset{\RR}{s}}}
 \newcommand\RRsn{\ensuremath{\specialset{\RR}{sn}}}
 \newcommand\RRsp{\ensuremath{\specialset{\RR}{sp}}}
 
-\newcommand\CC{\ensuremath{\fieldset{C}}}
+\newcommand\CC{\ensuremath{\algeset{C}}}
 \newcommand\CCs{\ensuremath{\specialset{\CC}{s}}}
 
-\newcommand\HH{\ensuremath{\fieldset{H}}}
+\newcommand\HH{\ensuremath{\algeset{H}}}
 \newcommand\HHs{\ensuremath{\specialset{\HH}{s}}}
 
-\newcommand\OO{\ensuremath{\fieldset{O}}}
+\newcommand\OO{\ensuremath{\algeset{O}}}
 \newcommand\OOs{\ensuremath{\specialset{\OO}{s}}}
 
 % List of classical sets - END

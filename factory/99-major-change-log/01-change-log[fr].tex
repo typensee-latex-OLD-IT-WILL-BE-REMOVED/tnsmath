@@ -16,6 +16,33 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
 
+% --------------- %
+
+	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+ dont voici les principaux changements.
+	\begin{itemize}
+		\item Une nouvelle section \emph{\og Logique et fondements \fg} a été ajoutée.
+		\begin{itemize}
+			\item Trois types de signes $=$ décorés sont proposés : voir les macros \verb+\eqdef+ , \verb+\eqid+ et \verb+\eqtest+.
+
+			\item Via la macro \verb+\explain+, il devient facile d'expliquer des étapes de raisonnement ou des calculs.
+		\end{itemize}
+
+		\item Pour les ensembles, la macro \verb+\fieldset+ a été renommé \verb+\algeset+ et la macro \verb+\PP+ permet d'indiquer l'ensemble des nombres premiers.
+
+		\item En géométrie, il y a quelques nouveautés.
+		\begin{itemize}
+			\item La macro \verb+\hangleorient+ permet l'écriture d'angles orientés avec un chapeau en plus.
+
+			\item Les macros \verb+\vangleorient+ et \verb+\vhangleorient+ évite d'avoir à utiliser \verb+\vect+ lorsque l'on a juste des vecturs simples nommés et non coefficientés.
+
+			\item De même pour les macros \verb+\vdotprod+, \verb+\vadotprod+ et \verb+\vcroosprod+.
+		\end{itemize}
+
+		\item Ajout de \verb+\lymathsubsep+ qui définit le séparateur des arguments de second niveau.
+	\end{itemize}
+
+% --------------- %
+
 	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+ dont voici les principaux changements.
 	\begin{itemize}
 		\item L'usage de \verb+//+ pour les macros-commandes avec un nombre quelconque d'arguments a été remplacé par celui de \verb+|+.
@@ -35,21 +62,26 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 		\item Redéfinition de \verb+\frac+ et \verb+\dfrac+ pour obtenir des traits de fraction un peu plus longs.
 
-		\item Ajout de \verb+\lymathsep+ qui définit globalement le séparateur d'arguments à l'impression.
+		\item Ajout de \verb+\lymathsep+ qui définit le séparateur d'arguments.
 	\end{itemize}
 
+% --------------- %
 
 	\item[2017-11-01] Nouvelle version mineure \verb+0.1.0-beta+ : pour les ensembles, les fonctions et la géométrie, il y a eu des changements et l'ajout de nouveaux outils.
 
+% --------------- %
 
 	\item[2017-10-21] Historique court de \verb+lymath+ ajouté au présent document.
 
+% --------------- %
 
 	\item[2017-10-18] Nouvelle version "patchée" \verb+0.0.2-beta+ : de nouveaux outils pour le calcul différentiel.
 
+% --------------- %
 
 	\item[2017-10-06] Nouvelle version "patchée" \verb+0.0.1-beta+ : de nouveaux outils pour l'arithmétique, la géométrie, le calcul intégral et le calcul différentiel.
 
+% --------------- %
 
 	\item[2017-10-02] Première version \verb+0.0.0-beta+ du package.
 \end{description}

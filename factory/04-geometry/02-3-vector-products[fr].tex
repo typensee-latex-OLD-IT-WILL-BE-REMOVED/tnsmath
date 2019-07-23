@@ -2,14 +2,11 @@
 
 \makeatletter
 	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
 
 	\usepackage{02-3-vector-products}
 \makeatother
 
-
-% == EXTRA == %
-
-\usepackage[f]{esvect}
 
 % == EXTRA == %
 
@@ -20,12 +17,6 @@
 
 
 \makeatletter
-    \newcommand\@interval@tool@star[5]{%
-    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
-	}
-
-    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
-    
     \newcommand\pt[1]{\mathrm{#1}}
 
 	\newcommand\@no@point[1]{%
@@ -53,25 +44,22 @@
 
 %    \subsection{Vecteurs}
 
-		\subsubsection{Produit scalaire}
+		\subsubsection{Produit scalaire -- Écriture minimaliste}
 
-            \paragraph{Exemple d'utilisation 1}
+            \paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est usage d'écrire un produit scalaire avec un point via
-$\dotprod{\vect{i}}{\vect{j}}$ .
+$\dotprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
-Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle.
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
 
 \begin{tcblisting}{}
-Les physiciens pourront utiliser
-$\displaystyle \adotprod{\frac{1}{2} \vect{i}}{\vect{j}}$
-ou
-$\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
+On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
 \end{tcblisting}
 
 
@@ -79,20 +67,55 @@ $\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 \IDmacro*{dotprod}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
 \bigskip
+
+
+\IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+
+
+
+		\subsubsection{Produit scalaire -- Écriture \og physicienne \fg}
+
+Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle, et  \verb+v+ pour \textbf{v}-ector.
+
+\begin{tcblisting}{}
+Les physiciens pourront utiliser
+$\displaystyle \adotprod{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \vadotprod{i}{j}$
+ou
+$\displaystyle \vadotprod*{i}{j}$ .
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
 
 \IDmacro*{adotprod}{2} où \quad \verb&a = a-ngle&
 
 \IDmacro*{adotprod*}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
 
@@ -100,10 +123,17 @@ $\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 		\subsubsection{Produit vectoriel}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
-Un produit vectoriel peut s'écrire via $\crossprod{\vect{i}}{\vect{j}}$ .
+Un produit vectoriel peut s'écrire via $\crossprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
+
+\begin{tcblisting}{}
+Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
 \end{tcblisting}
 
 
@@ -111,8 +141,18 @@ Un produit vectoriel peut s'écrire via $\crossprod{\vect{i}}{\vect{j}}$ .
 
 \IDmacro*{crossprod}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 \end{document}

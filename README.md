@@ -4,12 +4,53 @@ About this package
 **ly-math**, which is a contraction of **lycée** and **math**, has been built to allow the writings of more semantical LaTeX documents at a low level of mathematics.
 
 
+Only one french documentation is proposed but it contains a lot of examples of use : see the PDF file named `lymath-doc[fr].pdf` inside the folder `lymath`.
+
+The only thing needed to use is the standalone package ``lymath.sty`` inside the folder `lymath`.
+
+
+
 I beg your pardon for my english...
 ===================================
 
 English is not my native language, so be nice if you notice misunderstandings, misspellings or grammatical errors in my documents and my codes.
 
 
+
+Changes in this version `0.3.0-beta`
+====================================
+
+**New minor version ``0.3.0-beta`` of ¨lymath:** see all the changes below.
+
+
+**New macro ``\lymathsubsep``:** this defines the separators of arguments for a second level. By default it is a semi-colon but if this will be a coma if the option ``french`` of ``babel`` is activated.
+
+
+**Logic and fundations:** here are the new features in this new section.
+
+1. Different kind of equal signs are available.
+
+2. The macro ``\explain`` allows to explain efficiently formal reasonning or calculus.
+
+
+**Sets:** here are the new features.
+
+1. ``\fieldset`` has been renamed ``\algeset``.
+
+2. One new classical set added : ``\PP`` indicates the set of prime numbers.
+
+
+**Geometry:** here are the new features.
+
+1. The macro ``\hangleorient`` writes oriented angles of vectors using a hat.
+
+2. The macros ``\vangleorient`` and ``\vhangleorient`` are shortcuts to not use ``\vect`` when writing oriented angles of vectors without or with a hat.
+
+3. The macros ``\vdotprod``, ``\vadotprod`` and ``\vcroosprod`` are shortcuts to not use ``\vect`` when writing dot and cross products.
+
+
+
+<!--
 
 Changes in this version `0.2.0-beta`
 ====================================
@@ -48,19 +89,20 @@ Changes in this version `0.2.0-beta`
 
 4. The macro ``\crossprod`` is for cross products of 3D vectors.
 
-5. The use of ``axis`` has been by the better translation ``axes``.
+5. The use of ``axis`` has been replaced by the better translation ``axes``.
 
 6. ``\gpt`` becomes ``\pt`` because there is no more conflict with ``lyxam`` another project of the author of ``lymath``.
 
 7. ``\gpaxis`` and ``\gpvaxis`` have been renamed ``\paxes`` and ``\pvaxes`` because of the two new features above.
 
 
-**Algebra:**  you can write sets of polynomials, or of formal series with their fractional fields, and alos the polynomials and formal series of Laurent.
+**Algebra:**  you can write sets of polynomials, or of formal series with their fractional fields, and also sets of the polynomials and formal series of Laurent.
 
 
-**Internal changes in the factory:** a deep cleaning has been acheived.
+**Internal changes in the factory:** a deep cleaning has been achieved.
 
 
+<!--
 Changes in this version `0.1.0-beta`
 ====================================
 
@@ -125,3 +167,7 @@ About this first version `0.0.0-beta`
 All informations are inside the PDF named `lymath-doc.pdf` inside the folder `lymath`.
 
 The only thing needed to use the package is the folder `lymath`.
+
+
+
+-->

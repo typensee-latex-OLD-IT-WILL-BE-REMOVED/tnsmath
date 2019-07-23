@@ -7,6 +7,10 @@
 	#1 \cdot #2%
 }
 
+\newcommand\vdotprod[2]{%
+	\@apply@macro@two@args{\dotprod}{\vect}{#1}{#2}%
+}
+
 
 \newcommand\adotprod{\@ifstar{\@adotprod@star}{\@adotprod@no@star}}
 
@@ -19,8 +23,23 @@
 }
 
 
+\newcommand\vadotprod{\@ifstar{\@vadotprod@star}{\@vadotprod@no@star}}
+
+\newcommand\@vadotprod@star[2]{%
+	\@apply@macro@two@args{\@adotprod@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@vadotprod@no@star[2]{%
+	\@apply@macro@two@args{\@adotprod@no@star}{\vect}{#1}{#2}%
+}
+
+
 \newcommand\crossprod[2]{%
 	#1 \wedge #2%
+}
+
+\newcommand\vcrossprod[2]{%
+	\@apply@macro@two@args{\crossprod}{\vect}{#1}{#2}%
 }
 
 

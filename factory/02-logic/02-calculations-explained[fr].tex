@@ -1,0 +1,89 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+
+	\usepackage{02-calculations-explained}
+\makeatother
+
+
+\newcommand\RRp{RR+}
+
+
+\begin{document}
+
+%\section{Logique et fondements}
+
+    \subsection{Détailler un raisonnment}
+    
+	    \paragraph{Un exemple sur une petite étape}
+    
+La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
+
+\begin{tcblisting}{}
+$0 \leq a < b$
+
+$\explain{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+
+$a^2 \leq b^2$
+\end{tcblisting}
+
+Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version étoilée comme suit.
+
+\begin{tcblisting}{}
+$0 \leq a < b$
+
+$\explain*{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+
+$a^2 \leq b^2$
+\end{tcblisting}
+	
+
+\verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
+\begin{itemize}
+	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+	
+	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
+	
+	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.	
+\end{itemize}
+
+
+	
+	    \paragraph{Détailler des calculs}
+    
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul. 
+
+\begin{tcblisting}{}
+\begin{flalign*}
+	& (a + b)^2
+	&&\\
+	& \explain{=}{On utilise $x^2 = x \cdot x$.}
+	&&\\
+	& (a + b) (a + b)
+	&&\\
+	& \explain{=}{Double développement depuis la parenthèse gauche.}
+	&&\\
+	& a^2 + a b + b a + b^2
+	&&\\
+	& \explain{=}{Commutativité du produit.}
+	&&\\
+	& a^2 + 2 a b + b^2
+	&&\\
+\end{flalign*}
+\end{tcblisting}
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{explain}{2}
+
+\IDmacro*{explain*}{2}
+
+\IDarg{1} un symnole.
+
+\IDarg{2} une courte explication.
+
+\end{document}

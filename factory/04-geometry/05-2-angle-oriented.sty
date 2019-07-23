@@ -13,3 +13,38 @@
 	\@interval@tool@no@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
 }
 
+
+\newcommand\vangleorient{\@ifstar{\@vangleorient@star}{\@vangleorient@no@star}}
+
+\newcommand\@vangleorient@star[2]{%
+	\@apply@macro@two@args{\@angleorient@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@vangleorient@no@star[2]{%
+	\@apply@macro@two@args{\@angleorient@no@star}{\vect}{#1}{#2}%
+}
+
+
+\newcommand\hangleorient{\@ifstar{\@hangleorient@star}{\@hangleorient@no@star}}
+
+\newcommand\@hangleorient@star[2]{%
+	\widehat{\@angleorient@star{#1}{#2}}%
+}
+
+\newcommand\@hangleorient@no@star[2]{%
+	\widehat{\@angleorient@no@star{#1}{#2}}%
+}
+
+
+\newcommand\hvangleorient{\@ifstar{\@hvangleorient@star}{\@hvangleorient@no@star}}
+
+\newcommand\@hvangleorient@star[2]{%
+	\@apply@macro@two@args{\@hangleorient@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@hvangleorient@no@star[2]{%
+	\@apply@macro@two@args{\@hangleorient@no@star}{\vect}{#1}{#2}%
+}
+
+
+

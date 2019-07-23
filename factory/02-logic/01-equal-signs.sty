@@ -1,0 +1,32 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+
+
+% == DEFINITIONS == %
+
+\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
+
+\newcommand\@eqdef@star{%
+	\coloneqq%
+}
+
+\newcommand\@eqdef@no@star{%
+	\stackrel{\text{\texteqdef}}{=}%
+}
+
+
+\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+
+\newcommand\@eqid@star{%
+	\rightleftharpoons%
+}
+
+\newcommand\@eqid@no@star{%
+	\stackrel{\text{\texteqid}}{=}%
+}
+
+
+\newcommand\eqtest{%
+	\stackrel{\text{?}}{=}%
+}

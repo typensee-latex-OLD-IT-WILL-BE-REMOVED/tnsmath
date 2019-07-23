@@ -10,12 +10,17 @@
 % separator: |; before: \begin{pmatrix}; between: \\, after: \end{pmatrix}
 \newcommand{\vcoord}[1]{%
   \makemultiargument{|}{#1}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
- }
+}
 
 % separator: +; before: ((; between: -, after: ))
 \newcommand{\minify}[1]{%
   \makemultiargument{+}{#1}{((}{-}{))}%
- }
+}
+
+\NewDocumentCommand{\boxify}{m}{%
+  \makemultiargument{+}{#1}{(\,}{-}{\,)}[\fbox{##1}]%
+}
+
 
 \begin{document}
 
@@ -24,6 +29,10 @@ $\vcoord{3 | \vcoord{-4 | -3 } | 0}$
 \bigskip
 
 $\minify{1 + \minify{4 + 3} + 0}$ 
+
+\bigskip
+
+$\boxify{1 + \boxify{4 + 3} + 0}$ 
 
 \bigskip
 

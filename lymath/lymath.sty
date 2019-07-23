@@ -26,12 +26,39 @@
 % -- COMMON TOOLS -- %
 % ------------------ %
 
+% Settable texts
 \@ifpackagewith{babel}{french}{
     \newcommand\lymathsep{;}
+    \newcommand\lymathsubsep{,}
+    \newcommand\texteqdef{déf}
+    \newcommand\texteqid{id}
 }{
 	\newcommand\lymathsep{,}
+	\newcommand\lymathsubsep{;}
+    \newcommand\texteqdef{déf}
+    \newcommand\texteqid{id}
 }
 
+
+\newcommand\textexplainleft{\{}
+\newcommand\textexplainright{\}}
+\newcommand\textexplainspacebefore{\qquad}
+\newcommand\textexplainspacein{\qquad}
+
+
+% Tools - Apply same macro to all arguments
+
+% #1        : main macro
+% #2        : macro to apply to arguments
+% #3 and #4 : the two arguments
+\newcommand\@apply@macro@two@args[4]{%
+	#1{#2{#3}}{#2{#4}}%
+}
+
+
+
+
+% Tools - Intervals
 
 \newcommand\@extra@phantom{%
 	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
@@ -44,40 +71,48 @@
 \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
 
 
+% Tools - Multi-arguments
+%
 % Source : the following lines come directly for the following post
 %
 %    * https://tex.stackexchange.com/a/475291/6880
 
 \ExplSyntaxOn
 % General purpose macro for defining other macros
-	\NewDocumentCommand{\makemultiargument}{mmmmm}{
-		\lymath_multiarg:nnnnn { #1 } { #2 } { #3 } { #4 } { #5 }
+	\NewDocumentCommand{\makemultiargument}{mmmmmo}{
+		\lymath_multiarg:nnnnnn{#1}{#2}{#3}{#4}{#5}{#6}
 	}
-
+ 
 % Allocate a private variable
 	\seq_new:N \l__lymath_generic_seq
 
 % The internal version of the general purpose macro
-	\cs_new_protected:Nn \lymath_multiarg:nnnnn{
+	\cs_new_protected:Nn \lymath_multiarg:nnnnnn{
 		% #1 = separator
 		% #2 = multiargument
 		% #3 = code before
-		% #4 = code between
-		% #5 = code after
-		% #6 = macro tp apply to each items
+	  	% #4 = code between
+	  	% #5 = code after
+	  	% #6 = ornament to items
+
 		% A group allows nesting
 		\group_begin:
- 		% Split the multiargument into parts
+	 	% Split the multiargument into parts
 		\seq_set_split:Nnn \l__lymath_generic_seq { #1 } { #2 }
+		% Apply the ornament to the items
+	  	\tl_if_novalue:nF { #6 }{
+	    	\seq_set_eq:NN \l__lymath_temp_seq \l__lymath_generic_seq
+	    	\seq_set_map:NNn \l__lymath_generic_seq \l__lymath_generic_seq { #6 }
+	   	}
 		% Execute the <code before>
-	  	#3 	
+	  	#3
 		% Deliver the items, with the chosen material between them
 	  	\seq_use:Nn \l__lymath_generic_seq { #4 }
   		% Execute the <code after>
-  		#5
+	 	#5
   		% End the group started at the beginning
-  		\group_end:
-	}
+	  	\group_end:
+	}	
 \ExplSyntaxOff
 
 
@@ -120,6 +155,55 @@
 
 	\fixmathspacing{\fixedsemicolon}{;}{\mathclose{}\mathpunct{}\mathpunct{\mathchar"603B}}
 }{}
+
+
+% ----------------- %
+% -- EQUAL SIGNS -- %
+% ----------------- %
+
+\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
+
+\newcommand\@eqdef@star{%
+	\coloneqq%
+}
+
+\newcommand\@eqdef@no@star{%
+	\stackrel{\text{\texteqdef}}{=}%
+}
+
+
+\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+
+\newcommand\@eqid@star{%
+	\rightleftharpoons%
+}
+
+\newcommand\@eqid@no@star{%
+	\stackrel{\text{\texteqid}}{=}%
+}
+
+
+\newcommand\eqtest{%
+	\stackrel{\text{?}}{=}%
+}
+
+
+% ---------------------------- %
+% -- CALCULATIONS EXPLAINED -- %
+% ---------------------------- %
+
+% #1 : an operator
+% #2 : an explanation
+
+\newcommand\explain{\@ifstar{\@explain@star}{\@explain@no@star}}
+
+\newcommand\@explain@star[2]{%
+	\textexplainspacebefore \@explain@no@star{#1}{#2}%
+}
+
+\newcommand\@explain@no@star[2]{%
+	#1 {} \textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}%
+}
 
 
 % ------------------ %
@@ -173,14 +257,14 @@
 	\@geoset@no@star{#1}_{#2}
 }
 
-% Field like sets
+% Sets for algebra
 %
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
-\newcommand\fieldset{\@ifstar{\@fieldset@star}{\@fieldset@no@star}}
+\newcommand\algeset{\@ifstar{\@algeset@star}{\@algeset@no@star}}
 
-\newcommand\@fieldset@no@star[1]{
+\newcommand\@algeset@no@star[1]{
 	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
 	    \mathds{#1}
 	}{%
@@ -188,8 +272,8 @@
 	}
 }
 
-\newcommand\@fieldset@star[2]{%
-	\@fieldset@no@star{#1}_{#2}
+\newcommand\@algeset@star[2]{%
+	\@algeset@no@star{#1}_{#2}
 }
 
 % Tools for classical sets
@@ -226,44 +310,46 @@
 
 % List of classical sets - START
 
-\newcommand\NN{\ensuremath{\fieldset{N}}}
+\newcommand\NN{\ensuremath{\algeset{N}}}
 \newcommand\NNs{\ensuremath{\specialset{\NN}{s}}}
 
-\newcommand\ZZ{\ensuremath{\fieldset{Z}}}
+\newcommand\PP{\ensuremath{\algeset{P}}}
+
+\newcommand\ZZ{\ensuremath{\algeset{Z}}}
 \newcommand\ZZp{\ensuremath{\specialset{\ZZ}{p}}}
 \newcommand\ZZn{\ensuremath{\specialset{\ZZ}{n}}}
 \newcommand\ZZs{\ensuremath{\specialset{\ZZ}{s}}}
 \newcommand\ZZsn{\ensuremath{\specialset{\ZZ}{sn}}}
 \newcommand\ZZsp{\ensuremath{\specialset{\ZZ}{sp}}}
 
-\newcommand\DD{\ensuremath{\fieldset{D}}}
+\newcommand\DD{\ensuremath{\algeset{D}}}
 \newcommand\DDp{\ensuremath{\specialset{\DD}{p}}}
 \newcommand\DDn{\ensuremath{\specialset{\DD}{n}}}
 \newcommand\DDs{\ensuremath{\specialset{\DD}{s}}}
 \newcommand\DDsn{\ensuremath{\specialset{\DD}{sn}}}
 \newcommand\DDsp{\ensuremath{\specialset{\DD}{sp}}}
 
-\newcommand\QQ{\ensuremath{\fieldset{Q}}}
+\newcommand\QQ{\ensuremath{\algeset{Q}}}
 \newcommand\QQp{\ensuremath{\specialset{\QQ}{p}}}
 \newcommand\QQn{\ensuremath{\specialset{\QQ}{n}}}
 \newcommand\QQs{\ensuremath{\specialset{\QQ}{s}}}
 \newcommand\QQsn{\ensuremath{\specialset{\QQ}{sn}}}
 \newcommand\QQsp{\ensuremath{\specialset{\QQ}{sp}}}
 
-\newcommand\RR{\ensuremath{\fieldset{R}}}
+\newcommand\RR{\ensuremath{\algeset{R}}}
 \newcommand\RRp{\ensuremath{\specialset{\RR}{p}}}
 \newcommand\RRn{\ensuremath{\specialset{\RR}{n}}}
 \newcommand\RRs{\ensuremath{\specialset{\RR}{s}}}
 \newcommand\RRsn{\ensuremath{\specialset{\RR}{sn}}}
 \newcommand\RRsp{\ensuremath{\specialset{\RR}{sp}}}
 
-\newcommand\CC{\ensuremath{\fieldset{C}}}
+\newcommand\CC{\ensuremath{\algeset{C}}}
 \newcommand\CCs{\ensuremath{\specialset{\CC}{s}}}
 
-\newcommand\HH{\ensuremath{\fieldset{H}}}
+\newcommand\HH{\ensuremath{\algeset{H}}}
 \newcommand\HHs{\ensuremath{\specialset{\HH}{s}}}
 
-\newcommand\OO{\ensuremath{\fieldset{O}}}
+\newcommand\OO{\ensuremath{\algeset{O}}}
 \newcommand\OOs{\ensuremath{\specialset{\OO}{s}}}
 
 % List of classical sets - END
@@ -529,6 +615,7 @@
     \expandarg
 }
 
+
 % Prime writing of partial derivate
 \newcommand\partialprime[2]{
 % The following command works because xstring traits {...} like a single character.
@@ -740,6 +827,10 @@
 	#1 \cdot #2%
 }
 
+\newcommand\vdotprod[2]{%
+	\@apply@macro@two@args{\dotprod}{\vect}{#1}{#2}%
+}
+
 
 \newcommand\adotprod{\@ifstar{\@adotprod@star}{\@adotprod@no@star}}
 
@@ -752,8 +843,23 @@
 }
 
 
+\newcommand\vadotprod{\@ifstar{\@vadotprod@star}{\@vadotprod@no@star}}
+
+\newcommand\@vadotprod@star[2]{%
+	\@apply@macro@two@args{\@adotprod@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@vadotprod@no@star[2]{%
+	\@apply@macro@two@args{\@adotprod@no@star}{\vect}{#1}{#2}%
+}
+
+
 \newcommand\crossprod[2]{%
 	#1 \wedge #2%
+}
+
+\newcommand\vcrossprod[2]{%
+	\@apply@macro@two@args{\crossprod}{\vect}{#1}{#2}%
 }
 
 
@@ -765,11 +871,12 @@
 
 \newcommand\@coord@no@star[1]{%
 	\left( \,%
-% ARG 1 = Separator: |
-% ARG 2 = All parts: what the user types !
-% ARG 3 = Before   : nothing here
-% ARG 4 = Between  : ;
-% ARG 5 = After    : nothing here
+% ARG 1  = Separator: |
+% ARG 2  = All parts: what the user types !
+% ARG 3  = Before   : nothing here
+% ARG 4  = Between  : ;
+% ARG 5  = After    : nothing here
+% OPTION = Ornament : macro to apply to each item
 		\makemultiargument{|}{#1}{}{\lymathsep}{}%
 	 \, \right)%
 }
@@ -803,7 +910,7 @@
 	\@ifmtarg{#2}{%
 		#1%
 	}{%
-		#1 , \@axes@comafy@#2\@nil%
+		#1 \lymathsubsep{} \@axes@comafy@#2\@nil%
 	}%
 }
 
@@ -813,14 +920,14 @@
 	\@axes@no@star@splitter@#1|\@nil%
 }
 \def\@axes@no@star@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axes@comafy@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{#1}{\lymathsep{}}{\@axes@comafy@#2\@nil}{)}}%
 }
 
 \newcommand\@axes@star[1]{%
 	\@axes@star@splitter@#1|\@nil%
 }
 \def\@axes@star@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@star{(}{#1}{;}{\@axes@comafy@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@star{(}{#1}{\lymathsep{}}{\@axes@comafy@#2\@nil}{)}}%
 }
 
 % Geometric points for naming some axes
@@ -828,7 +935,7 @@
 	\@ifmtarg{#2}{%
 		\pt{#1}%
 	}{%
-		\pt{#1} , \@axes@comafy@gptify@#2\@nil%
+		\pt{#1} \lymathsubsep{} \@axes@comafy@gptify@#2\@nil%
 	}%
 }
 
@@ -836,7 +943,7 @@
 	\@paxes@splitter@#1|\@nil%
 }
 \def\@paxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{;}{\@axes@comafy@gptify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{\lymathsep{}}{\@axes@comafy@gptify@#2\@nil}{)}}%
 }
 
 % Vectors for naming some axes
@@ -844,7 +951,7 @@
 	\@ifmtarg{#2}{%
 		\vect{\trim@spaces{#1}}%
 	}{%
-		\vect{\trim@spaces{#1}} , \@axes@comafy@vectify@#2\@nil%
+		\vect{\trim@spaces{#1}} \lymathsubsep{} \@axes@comafy@vectify@#2\@nil%
 	}%
 }
 
@@ -852,7 +959,7 @@
 	\@vaxes@splitter@#1|\@nil%
 }
 \def\@vaxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{#1}{;}{\@axes@comafy@vectify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{#1}{\lymathsep{}}{\@axes@comafy@vectify@#2\@nil}{)}}%
 }
 
 % Geometric points and vectors for naming some axes
@@ -860,7 +967,7 @@
 	\@pvaxes@splitter@#1|\@nil%
 }
 \def\@pvaxes@splitter@#1|#2\@nil{%
-	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{;}{\@axes@comafy@vectify@#2\@nil}{)}}%
+	\ensuremath{\@interval@tool@no@star{(}{\pt{#1}}{\lymathsep{}}{\@axes@comafy@vectify@#2\@nil}{)}}%
 }
 
 
@@ -896,6 +1003,39 @@
 
 \newcommand\@angleorient@no@star[2]{%
 	\@interval@tool@no@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
+}
+
+
+\newcommand\vangleorient{\@ifstar{\@vangleorient@star}{\@vangleorient@no@star}}
+
+\newcommand\@vangleorient@star[2]{%
+	\@apply@macro@two@args{\@angleorient@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@vangleorient@no@star[2]{%
+	\@apply@macro@two@args{\@angleorient@no@star}{\vect}{#1}{#2}%
+}
+
+
+\newcommand\hangleorient{\@ifstar{\@hangleorient@star}{\@hangleorient@no@star}}
+
+\newcommand\@hangleorient@star[2]{%
+	\widehat{\@angleorient@star{#1}{#2}}%
+}
+
+\newcommand\@hangleorient@no@star[2]{%
+	\widehat{\@angleorient@no@star{#1}{#2}}%
+}
+
+
+\newcommand\hvangleorient{\@ifstar{\@hvangleorient@star}{\@hvangleorient@no@star}}
+
+\newcommand\@hvangleorient@star[2]{%
+	\@apply@macro@two@args{\@hangleorient@star}{\vect}{#1}{#2}%
+}
+
+\newcommand\@hvangleorient@no@star[2]{%
+	\@apply@macro@two@args{\@hangleorient@no@star}{\vect}{#1}{#2}%
 }
 
 

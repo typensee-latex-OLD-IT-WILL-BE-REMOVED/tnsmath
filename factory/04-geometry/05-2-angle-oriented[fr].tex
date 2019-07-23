@@ -2,10 +2,10 @@
 
 \makeatletter
 	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
 
 	\usepackage{05-2-angle-oriented}
 \makeatother
-
 
 % == EXTRA == %
 
@@ -16,14 +16,6 @@
 
 
 \makeatletter
-	\newcommand\lymathsep{;}
-	
-    \newcommand\@interval@tool@star[5]{%
-    	\ensuremath{ \left#1 \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #2 #3 #4 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right#5}%
-	}
-
-    \newcommand\@interval@tool@no@star[5]{\ensuremath{ \left#1 #2 #3 #4 \right#5}}
-    
     \newcommand\pt[1]{\mathrm{#1}}
 
 	\newcommand\@no@point[1]{%
@@ -53,7 +45,7 @@
     
 		\subsubsection{Angles orientés de vecteurs}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Sans chapeau - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est d'usage de noter les angles orientés via
@@ -64,12 +56,53 @@ $\displaystyle \angleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 
 
+            \paragraph{Sans chapeau - Version courte mais restrictive}
+
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+\begin{tcblisting}{}
+Avec des noms de vecteurs utilisant juste des lettres, on peut juste taper
+$\displaystyle \vangleorient{i}{j}$
+ou
+$\displaystyle \vangleorient*{i}{j}$ (la seconde écriture n'apporte rien de nouveau).
+\end{tcblisting}
+
+
+
+            \paragraph{Avec un chapeau}
+
+Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-at, et \verb+v+ pour \textbf{v}-ector.
+
+\begin{tcblisting}{}
+Si vous préférez les angles orientés avec un chapeau, tapez les alors via
+$\displaystyle \hangleorient{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \hangleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \hvangleorient{i}{j}$
+ou
+$\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien de neuf).
+\end{tcblisting}
+
+
+
             \paragraph{Fiche technique}
 
 \IDmacro*{angleorient}{2}
 
-\IDarg{1} le premier vecteur.
+\IDmacro*{hangleorient}{2}  où \quad \verb+h = h-at+
 
-\IDarg{2} le second vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vangleorient}{2} où \quad \verb+v = v-ector+
+
+\IDmacro*{hvangleorient}{2} où \quad \verb+h = h-at+ et \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 \end{document}

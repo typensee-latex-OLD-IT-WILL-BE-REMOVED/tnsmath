@@ -1,4 +1,5 @@
-\documentclass[12pt,a4paper]{scrartcl}
+%\documentclass[12pt,a4paper]{scrartcl}
+\documentclass[12pt,a4paper]{article}
 
 \makeatletter % Technical doc - START
 
@@ -132,10 +133,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.2.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.3.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-02-21}
+\date{2019-07-23}
 
 \maketitle
 
@@ -197,10 +198,9 @@ $\displaystyle \int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
 \end{tcblisting}
 
 
-
 \section{Versions étoilées}
 
-Généralement les versions étoilés proposent des mises en forme faisant un peu moins de travail qua la macro non étoilé \textit{(il y a quelques exceptions)}. Par exemple une macro utilisant des parenthèses extensibles aura une version étoilé qui n'utilisera que des parenthèses non extensibles.
+Généralement les versions étoilées proposent des mises en forme faisant un peu moins de travail que la version non étoilée \textit{(il y a tout de même quelques exceptions)}. Par exemple une macro utilisant des parenthèses extensibles aura sa version étoilée qui n'utilisera que des parenthèses non extensibles.
 
 
 
@@ -215,9 +215,14 @@ Par contre, pour les macros avec un \textbf{nombre variable d'arguments}, la con
 
 
 
-\section{Un séparateur d'arguments par défaut}
+\section{Deux séparateurs d'arguments par défaut}
 
-La macro \verb+\lymathsep+ définit le séparateur d'arguments dans les formules écrites. Cette documentation utilisant l'option \verb+french+ de \verb+babel+, la valeur de \verb+\lymathsep+ est \fbox{\,\lymathsep$\vphantom{F}$\,} . Sans ce choix, la valeur de \verb+\lymathsep+ sera \fbox{\,,$\vphantom{F}$\,} .
+La macro \verb+\lymathsep+ définit le séparateur d'arguments de premier niveau, et \verb+\lymathsubsep+ celui des arguments de deuxième niveau.
+Cette documentation utilisant l'option \verb+french+ de \verb+babel+, la valeur de 
+\verb+\lymathsep+ est \fbox{\,\lymathsep$\vphantom{F}$\,} 
+et celle de
+\verb+\lymathsubsep+ est \fbox{\,\lymathsubsep$\vphantom{F}$\,} .
+Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \fbox{\,\lymathsubsep$\vphantom{F}$\,} et \fbox{\,\lymathsep$\vphantom{F}$\,} respectivement.
 
 
 
@@ -239,7 +244,119 @@ Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 
 	\subsection{Espace et point-virgule avec l'option \texttt{french} de \texttt{babel}}
 
-Seulement \textbf{si vous utilisez \texttt{babel} avec l'option \texttt{french}}, comme c'est le cas dans cette documentation, alors vous verrez le même espacement autour du point-virgule dans $A(x;y)$. Que c'est beau !
+\textbf{Seulement si vous utilisez \texttt{babel} avec l'option \texttt{french}}, comme c'est le cas dans cette documentation, alors vous verrez le même espacement autour du point-virgule dans $A(x;y)$. Que c'est beau !
+
+
+
+
+\section{Logique et fondements}
+
+    \subsection{Différents types d'égalités}
+    
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
+
+        \subsubsection{Définir quelque chose}
+
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon.
+
+\begin{tcblisting}{}
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ .
+On peut utiliser une écriture plus symbolique : $f(x) \eqdef* x^3 + 1$.
+\end{tcblisting}
+
+
+        \subsubsection{Indiquer une identité}
+
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqid+ qui vaut \emph{\og id \fg} si l'option \verb+french+ de \verb+babel+ est choisie ou non.
+
+\begin{tcblisting}{}
+$\forall (a ; b) \in \RR^2$, nous avons : $(a + b)^2 \eqid a^2 + b^2 + 2 a b$ .
+On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
+\end{tcblisting}
+
+
+        \subsubsection{Une égalité à vérifier}
+
+\begin{tcblisting}{}
+Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+\end{tcblisting}
+
+
+
+
+
+%\section{Logique et fondements}
+
+    \subsection{Détailler un raisonnment}
+    
+	    \paragraph{Un exemple sur une petite étape}
+    
+La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
+
+\begin{tcblisting}{}
+$0 \leq a < b$
+
+$\explain{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+
+$a^2 \leq b^2$
+\end{tcblisting}
+
+Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version étoilée comme suit.
+
+\begin{tcblisting}{}
+$0 \leq a < b$
+
+$\explain*{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+
+$a^2 \leq b^2$
+\end{tcblisting}
+	
+
+\verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
+\begin{itemize}
+	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+	
+	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
+	
+	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.	
+\end{itemize}
+
+
+	
+	    \paragraph{Détailler des calculs}
+    
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul. 
+
+\begin{tcblisting}{}
+\begin{flalign*}
+	& (a + b)^2
+	&&\\
+	& \explain{=}{On utilise $x^2 = x \cdot x$.}
+	&&\\
+	& (a + b) (a + b)
+	&&\\
+	& \explain{=}{Double développement depuis la parenthèse gauche.}
+	&&\\
+	& a^2 + a b + b a + b^2
+	&&\\
+	& \explain{=}{Commutativité du produit.}
+	&&\\
+	& a^2 + 2 a b + b^2
+	&&\\
+\end{flalign*}
+\end{tcblisting}
+
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{explain}{2}
+
+\IDmacro*{explain*}{2}
+
+\IDarg{1} un symnole.
+
+\IDarg{2} une courte explication.
 
 
 
@@ -345,26 +462,26 @@ Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 
 
 
-        \subsubsection{Ensembles de type anneau ou corps}
+        \subsubsection{Ensembles pour l'algèbre générale}
 
             \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Vous pouvez écrire sémantiquement $\fieldset{A}$, $\fieldset{K}$, $\fieldset{h}$ et
-$\fieldset{k}$ mais pas taper \verb+$\fieldset{ABC}$+.
+Vous pouvez écrire sémantiquement $\algeset{A}$, $\algeset{K}$, $\algeset{h}$ et
+$\algeset{k}$ mais pas taper \verb+$\algeset{ABC}$+.
 \end{tcblisting}
 
 
             \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
+Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
 \end{tcblisting}
 
 
             \paragraph{Fiches techniques}
 
-\IDmacro*{fieldset}{1}
+\IDmacro*{algeset}{1}
 
 \IDarg{} soit l'une des lettres  \texttt{h} et \texttt{k}, soit un seul caractère \ascii{} majuscule indiquant un ensemble de type anneau ou corps.
 
@@ -372,11 +489,11 @@ Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
 \bigskip
 
 
-\IDmacro*{fieldset*}{2}
+\IDmacro*{algeset*}{2}
 
-\IDarg{1} un seul caractère \ascii{} indiquant $\fieldset{U}$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{1} un seul caractère \ascii{} indiquant $\algeset{U}$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
 
-\IDarg{2} un texte donnant $d$ dans le nom $\fieldset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{2} un texte donnant $d$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
 
 
 
@@ -384,7 +501,8 @@ Pour les indices, utilisez $\fieldset*{k}{1}$, $\fieldset*{k}{2}$ \dots
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-$\HH$ et $\OO$.
+mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions et
+enfin $\OO$ pour les octonions.
 \end{tcblisting}
 
 
@@ -417,6 +535,7 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
             \hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+P+ & \xx & \xx & \xx & \xx & \xx \\
             \hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
             \hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
             \hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
@@ -1286,25 +1405,22 @@ ou $\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ avec de petites barres verti
 
 %    \subsection{Vecteurs}
 
-		\subsubsection{Produit scalaire}
+		\subsubsection{Produit scalaire -- Écriture minimaliste}
 
-            \paragraph{Exemple d'utilisation 1}
+            \paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est usage d'écrire un produit scalaire avec un point via
-$\dotprod{\vect{i}}{\vect{j}}$ .
+$\dotprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
-Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle.
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
 
 \begin{tcblisting}{}
-Les physiciens pourront utiliser
-$\displaystyle \adotprod{\frac{1}{2} \vect{i}}{\vect{j}}$
-ou
-$\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
+On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
 \end{tcblisting}
 
 
@@ -1312,20 +1428,55 @@ $\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 \IDmacro*{dotprod}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
 \bigskip
+
+
+\IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+
+
+
+		\subsubsection{Produit scalaire -- Écriture \og physicienne \fg}
+
+Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle, et  \verb+v+ pour \textbf{v}-ector.
+
+\begin{tcblisting}{}
+Les physiciens pourront utiliser
+$\displaystyle \adotprod{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \vadotprod{i}{j}$
+ou
+$\displaystyle \vadotprod*{i}{j}$ .
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
 
 \IDmacro*{adotprod}{2} où \quad \verb&a = a-ngle&
 
 \IDmacro*{adotprod*}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
 
@@ -1333,10 +1484,17 @@ $\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 		\subsubsection{Produit vectoriel}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
-Un produit vectoriel peut s'écrire via $\crossprod{\vect{i}}{\vect{j}}$ .
+Un produit vectoriel peut s'écrire via $\crossprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
+
+\begin{tcblisting}{}
+Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
 \end{tcblisting}
 
 
@@ -1344,9 +1502,19 @@ Un produit vectoriel peut s'écrire via $\crossprod{\vect{i}}{\vect{j}}$ .
 
 \IDmacro*{crossprod}{2}
 
-\IDarg{1} le premier vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
 
-\IDarg{2} le second vecteur.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
 
@@ -1601,7 +1769,7 @@ Vous pouvez aussi écrire $\anglein{i}$ and $\anglein*{j}{2}$ sans point.
     
 		\subsubsection{Angles orientés de vecteurs}
 
-            \paragraph{Exemple d'utilisation}
+            \paragraph{Sans chapeau - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est d'usage de noter les angles orientés via
@@ -1612,13 +1780,54 @@ $\displaystyle \angleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 
 
+            \paragraph{Sans chapeau - Version courte mais restrictive}
+
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+\begin{tcblisting}{}
+Avec des noms de vecteurs utilisant juste des lettres, on peut juste taper
+$\displaystyle \vangleorient{i}{j}$
+ou
+$\displaystyle \vangleorient*{i}{j}$ (la seconde écriture n'apporte rien de nouveau).
+\end{tcblisting}
+
+
+
+            \paragraph{Avec un chapeau}
+
+Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-at, et \verb+v+ pour \textbf{v}-ector.
+
+\begin{tcblisting}{}
+Si vous préférez les angles orientés avec un chapeau, tapez les alors via
+$\displaystyle \hangleorient{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \hangleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
+$\displaystyle \hvangleorient{i}{j}$
+ou
+$\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien de neuf).
+\end{tcblisting}
+
+
+
             \paragraph{Fiche technique}
 
 \IDmacro*{angleorient}{2}
 
-\IDarg{1} le premier vecteur.
+\IDmacro*{hangleorient}{2}  où \quad \verb+h = h-at+
 
-\IDarg{2} le second vecteur.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+
+\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+
+
+\bigskip
+
+
+\IDmacro*{vangleorient}{2} où \quad \verb+v = v-ector+
+
+\IDmacro*{hvangleorient}{2} où \quad \verb+h = h-at+ et \verb+v = v-ector+
+
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+
+\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
 
@@ -1811,6 +2020,16 @@ $\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-
 
 
 
+%\section{Algèbre}
+
+	\subsection{Matrices}
+
+        \subsubsection{???}
+
+
+
+
+
 \newpage
 
 \section{Historique}
@@ -1819,6 +2038,33 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
+
+% --------------- %
+
+	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+ dont voici les principaux changements.
+	\begin{itemize}
+		\item Une nouvelle section \emph{\og Logique et fondements \fg} a été ajoutée.
+		\begin{itemize}
+			\item Trois types de signes $=$ décorés sont proposés : voir les macros \verb+\eqdef+ , \verb+\eqid+ et \verb+\eqtest+.
+
+			\item Via la macro \verb+\explain+, il devient facile d'expliquer des étapes de raisonnement ou de cacul.
+		\end{itemize}
+
+		\item Pour les ensembles, la macro \verb+\fieldset+ a été renommé \verb+\algeset+ et la macro \verb+\PP+ permet d'indiquer l'ensemble des nombres premiers.
+
+		\item En géométrie, il y a quelques nouveautés.
+		\begin{itemize}
+			\item La macro \verb+\hangleorient+ permet l'écriture d'angles orientés avec un chapeau en plus.
+
+			\item Les macros \verb+\vangleorient+ et \verb+\vhangleorient+ évite d'avoir à utiliser \verb+\vect+ lorsque l'on a juste des vecturs simples nommés et non coefficientés.
+
+			\item De même pour les macros \verb+\vdotprod+, \verb+\vadotprod+ et \verb+\vcroosprod+.
+		\end{itemize}
+
+		\item Ajout de \verb+\lymathsubsep+ qui définit le séparateur des arguments de second niveau.
+	\end{itemize}
+
+% --------------- %
 
 	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+ dont voici les principaux changements.
 	\begin{itemize}
@@ -1839,21 +2085,26 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 		\item Redéfinition de \verb+\frac+ et \verb+\dfrac+ pour obtenir des traits de fraction un peu plus longs.
 
-		\item Ajout de \verb+\lymathsep+ qui définit globalement le séparateur d'arguments à l'impression.
+		\item Ajout de \verb+\lymathsep+ qui définit le séparateur d'arguments.
 	\end{itemize}
 
+% --------------- %
 
 	\item[2017-11-01] Nouvelle version mineure \verb+0.1.0-beta+ : pour les ensembles, les fonctions et la géométrie, il y a eu des changements et l'ajout de nouveaux outils.
 
+% --------------- %
 
 	\item[2017-10-21] Historique court de \verb+lymath+ ajouté au présent document.
 
+% --------------- %
 
 	\item[2017-10-18] Nouvelle version "patchée" \verb+0.0.2-beta+ : de nouveaux outils pour le calcul différentiel.
 
+% --------------- %
 
 	\item[2017-10-06] Nouvelle version "patchée" \verb+0.0.1-beta+ : de nouveaux outils pour l'arithmétique, la géométrie, le calcul intégral et le calcul différentiel.
 
+% --------------- %
 
 	\item[2017-10-02] Première version \verb+0.0.0-beta+ du package.
 \end{description}

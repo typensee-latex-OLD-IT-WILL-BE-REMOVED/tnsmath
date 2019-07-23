@@ -1,0 +1,20 @@
+% == PACKAGES USED == %
+
+
+\RequirePackage{amsmath}
+
+
+% == DEFINITIONS == %
+
+% #1 : an operator
+% #2 : an explanation
+
+\newcommand\explain{\@ifstar{\@explain@star}{\@explain@no@star}}
+
+\newcommand\@explain@star[2]{%
+	\textexplainspacebefore \@explain@no@star{#1}{#2}%
+}
+
+\newcommand\@explain@no@star[2]{%
+	#1 {} \textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}%
+}
