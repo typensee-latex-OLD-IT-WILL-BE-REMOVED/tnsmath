@@ -1,0 +1,79 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+
+
+% == DEFINITIONS == %
+
+% Standard equtions
+
+\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
+
+\newcommand\@eqdef@star{%
+	\coloneqq%
+}
+
+\newcommand\@eqdef@no@star{%
+	\stackrel{\text{\texteqdef}}{=}%
+}
+
+
+\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+
+\newcommand\@eqid@star{%
+	\rightleftharpoons%
+}
+
+\newcommand\@eqid@no@star{%
+	\stackrel{\text{\texteqid}}{=}%
+}
+
+
+\newcommand\eqtest{\@ifstar{\@eqtest@star}{\@eqtest@no@star}}
+
+\newcommand\@eqtest@star{%
+	= =%
+}
+
+\newcommand\@eqtest@no@star{%{%
+	\stackrel{\text{?}}{=}%
+}
+
+
+% Standard inequations
+
+\newcommand\leqtest{%
+	\stackrel{\text{?}}{\leq}%
+}
+
+\newcommand\leqhyp{%
+	\stackrel{\text{\textineqhyp}}{\leq}%
+}
+
+
+\newcommand\lesstest{%
+	\stackrel{\text{?}}{<}%
+}
+
+\newcommand\lesshyp{%
+	\stackrel{\text{\textineqhyp}}{<}%
+}
+
+
+\newcommand\geqtest{%
+	\stackrel{\text{?}}{\geq}%
+}
+
+\newcommand\geqhyp{%
+	\stackrel{\text{\textineqhyp}}{\geq}%
+}
+
+
+\newcommand\greattest{%
+	\stackrel{\text{?}}{>}%
+}
+
+\newcommand\greathyp{%
+	\stackrel{\text{\textineqhyp}}{>}%
+}
+

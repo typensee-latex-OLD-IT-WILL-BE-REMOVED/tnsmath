@@ -251,7 +251,7 @@ Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 
 \section{Logique et fondements}
 
-    \subsection{Différents types d'égalités}
+    \subsection{Différents types d'égalités \og standard \fg}
     
 D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
 
@@ -278,10 +278,27 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
         \subsubsection{Une égalité à vérifier}
 
 \begin{tcblisting}{}
-Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ? Pour l'algorithmique, 
+on dispose d'une écriture standard : $(a + b)^3 \eqtest* a^3 + b^3 + 3 a b$ .
+
 \end{tcblisting}
 
 
+Le package \verb+lyalgo+ téléchargeable à l'adresse \url{https://github.com/bc-latex/ly-algo} propose quelques outils pour faciliter la saisie d'algorithmes. Ce package charge automatiquement \verb+lymath+.
+
+
+
+    \subsection{Différents types d'inéquations}
+    
+Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg pour voir ce que vous avez à votre disposition.
+
+\begin{tcblisting}{}
+A-t-on $x \leqtest x^2$ ou $x \lesstest x^2$ ? A moins que ce ne soit $x \geqtest x^2$
+ou $x \greattest x^2$.
+
+On peut supposer $x \leqhyp 1$ , $1 \lesshyp x$ ou $1 \greathyp x \geqhyp 0$.
+
+\end{tcblisting}
 
 
 
@@ -2028,6 +2045,15 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
+
+% --------------- %
+
+	\item[2019-09-02] Voici les principaux changements.
+	\begin{itemize}
+		\item Ajout de \verb+\eqtest*+ pour des contextes algorithmiques.
+		
+		\item Différents types de signes d'égalités pour des cas de test ou d'hypothèse.
+	\end{itemize}
 
 % --------------- %
 

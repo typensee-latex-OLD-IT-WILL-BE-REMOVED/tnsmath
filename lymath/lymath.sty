@@ -32,11 +32,13 @@
     \newcommand\lymathsubsep{,}
     \newcommand\texteqdef{déf}
     \newcommand\texteqid{id}
+    \newcommand\textineqhyp{hyp}
 }{
 	\newcommand\lymathsep{,}
 	\newcommand\lymathsubsep{;}
-    \newcommand\texteqdef{déf}
+    \newcommand\texteqdef{def}
     \newcommand\texteqid{id}
+    \newcommand\textineqhyp{hyp}
 }
 
 
@@ -157,9 +159,11 @@
 }{}
 
 
-% ----------------- %
-% -- EQUAL SIGNS -- %
-% ----------------- %
+% ---------------------- %
+% -- EQUAL SIGNS N CO -- %
+% ---------------------- %
+
+% Standard equtions
 
 \newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 
@@ -183,8 +187,52 @@
 }
 
 
-\newcommand\eqtest{%
+\newcommand\eqtest{\@ifstar{\@eqtest@star}{\@eqtest@no@star}}
+
+\newcommand\@eqtest@star{%
+	= =%
+}
+
+\newcommand\@eqtest@no@star{%{%
 	\stackrel{\text{?}}{=}%
+}
+
+
+% Standard inequations
+
+\newcommand\leqtest{%
+	\stackrel{\text{?}}{\leq}%
+}
+
+\newcommand\leqhyp{%
+	\stackrel{\text{\textineqhyp}}{\leq}%
+}
+
+
+\newcommand\lesstest{%
+	\stackrel{\text{?}}{<}%
+}
+
+\newcommand\lesshyp{%
+	\stackrel{\text{\textineqhyp}}{<}%
+}
+
+
+\newcommand\geqtest{%
+	\stackrel{\text{?}}{\geq}%
+}
+
+\newcommand\geqhyp{%
+	\stackrel{\text{\textineqhyp}}{\geq}%
+}
+
+
+\newcommand\greattest{%
+	\stackrel{\text{?}}{>}%
+}
+
+\newcommand\greathyp{%
+	\stackrel{\text{\textineqhyp}}{>}%
 }
 
 

@@ -4,7 +4,7 @@
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
 
-	\usepackage{01-equal-signs}
+	\usepackage{01-equal-signs-n-co}
 \makeatother
 
 \newcommand\RR{RR}
@@ -14,7 +14,7 @@
 
 \section{Logique et fondements}
 
-    \subsection{Différents types d'égalités}
+    \subsection{Différents types d'égalités \og standard \fg}
     
 D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
 
@@ -41,8 +41,25 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
         \subsubsection{Une égalité à vérifier}
 
 \begin{tcblisting}{}
-Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ? Pour l'algorithmique, 
+on dispose d'une écriture standard : $(a + b)^3 \eqtest* a^3 + b^3 + 3 a b$ .
+
 \end{tcblisting}
 
 
+Le package \verb+lyalgo+ téléchargeable à l'adresse \url{https://github.com/bc-latex/ly-algo} propose quelques outils pour faciliter la saisie d'algorithmes. Ce package charge automatiquement \verb+lymath+.
+
+
+
+    \subsection{Différents types d'inéquations}
+    
+Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg pour voir ce que vous avez à votre disposition.
+
+\begin{tcblisting}{}
+A-t-on $x \leqtest x^2$ ou $x \lesstest x^2$ ? A moins que ce ne soit $x \geqtest x^2$
+ou $x \greattest x^2$.
+
+On peut supposer $x \leqhyp 1$ , $1 \lesshyp x$ ou $1 \greathyp x \geqhyp 0$.
+
+\end{tcblisting}
 \end{document}
