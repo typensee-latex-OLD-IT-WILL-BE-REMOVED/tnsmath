@@ -2,8 +2,4 @@
 2019-09-02
 ==========
 
-**Logic and fundations:** here are the new feature.
-
-    1) `\eqtest*` prints a double sign equal for a symbolic version in testing equalities.
-
-    2) Different kinds of inequality signs such as to stress a test to be done or an hypothesis.
+**Logic and fundations:** different kinds of inequality and not equal signs such as to stress a test to be done, a condition or an hypothesis.

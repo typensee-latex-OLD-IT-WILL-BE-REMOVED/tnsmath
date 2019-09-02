@@ -38,28 +38,29 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
 \end{tcblisting}
 
 
-        \subsubsection{Une égalité à vérifier}
+        \subsubsection{Une égalité à vérifier ou non}
 
 \begin{tcblisting}{}
-Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ? Pour l'algorithmique, 
-on dispose d'une écriture standard : $(a + b)^3 \eqtest* a^3 + b^3 + 3 a b$ .
+Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+
+A-t-on $x \neqtest 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
+
+Une condition $x \neqcond 0$ ou une hypothèse à faire $x \neqhyp 0$ ?
 
 \end{tcblisting}
-
-
-Le package \verb+lyalgo+ téléchargeable à l'adresse \url{https://github.com/bc-latex/ly-algo} propose quelques outils pour faciliter la saisie d'algorithmes. Ce package charge automatiquement \verb+lymath+.
 
 
 
     \subsection{Différents types d'inéquations}
     
-Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg pour voir ce que vous avez à votre disposition.
+Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
 
 \begin{tcblisting}{}
-A-t-on $x \leqtest x^2$ ou $x \lesstest x^2$ ? A moins que ce ne soit $x \geqtest x^2$
-ou $x \greattest x^2$.
+A-t-on $x \leqtest x^2$ ou $x \ltest x^2$ ?
 
-On peut supposer $x \leqhyp 1$ , $1 \lesshyp x$ ou $1 \greathyp x \geqhyp 0$.
+A moins que ce ne soit $x \geqtest x^2$ ou $x \gtest x^2$ qu'il faille vérifier.
+
+On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 
 \end{tcblisting}
 \end{document}

@@ -5,7 +5,10 @@
 
 % == DEFINITIONS == %
 
-% Standard equtions
+% Source
+%    * https://tex.stackexchange.com/a/506745/6880
+
+% Standard (none) equations
 
 \newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 
@@ -14,7 +17,7 @@
 }
 
 \newcommand\@eqdef@no@star{%
-	\stackrel{\text{\texteqdef}}{=}%
+	\mathrel{\overset{\mathrm{\text{\texteqdef}}}{=}}%
 }
 
 
@@ -25,18 +28,25 @@
 }
 
 \newcommand\@eqid@no@star{%
-	\stackrel{\text{\texteqid}}{=}%
+	\mathrel{\overset{\mathrm{\text{\texteqid}}}{=}}%
 }
 
 
-\newcommand\eqtest{\@ifstar{\@eqtest@star}{\@eqtest@no@star}}
-
-\newcommand\@eqtest@star{%
-	= =%
+\newcommand\eqtest{%
+	\mathrel{\overset{\mathrm{?}}{=}}%
 }
 
-\newcommand\@eqtest@no@star{%{%
-	\stackrel{\text{?}}{=}%
+
+\newcommand\neqtest{
+	\mathrel{\overset{\mathrm{?}}{\neq}}%
+}
+
+\newcommand\neqhyp{%
+	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\neq}}%
+}
+
+\newcommand\neqcond{%
+	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{\neq}}%
 }
 
 
@@ -47,33 +57,49 @@
 }
 
 \newcommand\leqhyp{%
-	\stackrel{\text{\textineqhyp}}{\leq}%
+	\stackrel{\text{\text{\textineqhyp}}}{\leq}%
+}
+
+\newcommand\leqcond{%
+	\stackrel{\text{\text{\textineqcond}}}{\leq}%
 }
 
 
-\newcommand\lesstest{%
-	\stackrel{\text{?}}{<}%
+\newcommand\ltest{%
+	\mathrel{\overset{\mathrm{?}}{{<}\vphantom{\leq}}}%
 }
 
-\newcommand\lesshyp{%
-	\stackrel{\text{\textineqhyp}}{<}%
+\newcommand\lhyp{%
+	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{<}\vphantom{\leq}}}%
+}
+
+\newcommand\lcond{%
+	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{<}\vphantom{\leq}}}%
 }
 
 
 \newcommand\geqtest{%
-	\stackrel{\text{?}}{\geq}%
+	\mathrel{\overset{\mathrm{?}}{\geq}}%
 }
 
 \newcommand\geqhyp{%
-	\stackrel{\text{\textineqhyp}}{\geq}%
+	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\geq}}%
+}
+
+\newcommand\geqcond{%
+	\stackrel{\text{\text{\textineqcond}}}{\geq}%
 }
 
 
-\newcommand\greattest{%
-	\stackrel{\text{?}}{>}%
+\newcommand\gtest{%
+	\mathrel{\overset{\mathrm{?}}{{>}\vphantom{\leq}}}
 }
 
-\newcommand\greathyp{%
-	\stackrel{\text{\textineqhyp}}{>}%
+\newcommand\ghyp{%
+	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{>}\vphantom{\leq}}}
+}
+
+\newcommand\gcond{%
+	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{>}\vphantom{\leq}}}
 }
 
