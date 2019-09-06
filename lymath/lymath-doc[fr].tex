@@ -133,10 +133,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.3.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-07-23}
+\date{2019-09-06}
 
 \maketitle
 
@@ -1229,6 +1229,50 @@ $\displaystyle
 
 % \section{Analysis}
 
+    \subsection{Tableaux de variation et de signe}
+
+            \paragraph{Comment ça marche ?}
+
+Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible. Nous vous demandons donc de vous reporter à la documentation de \verb+tkz-tab+ pour savoir comment s'y prendre.
+
+
+            \paragraph{Un exemple de tableaux de signes}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+\tkzTabInit{$x$ / 1 , $\cos(x)$ / 1}{$0$, $\frac{\pi}{2}$, $\pi$}
+\tkzTabLine{, +, z, -, }
+\end{tikzpicture}
+\end{tcblisting}
+
+
+            \paragraph{Un exemple de tableaux de variation}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+    \tkzTabInit{$x$ / 1 , $f(x)$ / 1.5}{$-\infty$, $p$, $+\infty$}
+    \tkzTabVar{+/ , -/ $f(p)$, +/ }
+\end{tikzpicture}
+\end{tcblisting}
+
+
+            \paragraph{Un exemple de tableaux de variation avec une dérivée}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+    \tkzTabInit{$x$ / 1 , $\cos(x)$ / 1, $\sin(x)$ / 1.5}{$0$, $\frac{\pi}{2}$, $\pi$}
+    \tkzTabLine{, +, z, -, }
+    \tkzTabVar{-/ 0, +/ 1, -/ 0}
+\end{tikzpicture}
+\end{tcblisting}
+
+
+
+
+
+
+% \section{Analysis}
+
     \subsection{Comparaison asymptotique de suites et de fonctions}
 
         \subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
@@ -2038,6 +2082,56 @@ $\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-
 
 
 
+%\section{Algèbre}
+
+    \subsection{Matrices}
+
+            \paragraph{Comment ça marche ?}
+
+Tout le boulot est fait par le package \verb+nicematrix+ auquel on impose l'option \verb+transparent+. Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre.
+
+
+            \paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\begin{pmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{pmatrix}$
+\end{tcblisting}
+
+
+            \paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\begin{pNiceMatrix}[name=mymatrix]
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9
+\end{pNiceMatrix}$
+
+\tikz[remember picture,overlay]
+\draw (mymatrix-2-2) circle (2mm) ;
+\end{tcblisting}
+
+
+            \paragraph{Exemple 3 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\left(
+    \begin{NiceArray}{CCCC:C}
+        1  & 2  & 3  & 4  & 5  \\
+        6  & 7  & 8  & 9  & 10 \\
+        11 & 12 & 13 & 14 &15
+    \end{NiceArray}
+\right)$
+\end{tcblisting}$
+
+
+
+
 \newpage
 
 \section{Historique}
@@ -2049,9 +2143,13 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 % --------------- %
 
-	\item[2019-09-02] Voici les principaux changements.
+	\item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+ dont voici les principaux changements.
 	\begin{itemize}
 		\item Dans \emph{\og Logique et fondements \fg}, différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
+
+		\item Intégration du package \verb+tkz-tab+ pour rédiger des tableaux de variations et de signes.
+
+		\item Intégration du package \verb+nicematrix+ pour écrire des matrices.
 	\end{itemize}
 
 % --------------- %

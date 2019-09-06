@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+
+    \usepackage{07-tables}
+\makeatother
+
+
+\begin{document}
+
+% \section{Analysis}
+
+    \subsection{Tableaux de variation et de signe}
+
+            \paragraph{Comment ça marche ?}
+
+Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible. Nous vous demandons donc de vous reporter à la documentation de \verb+tkz-tab+ pour savoir comment s'y prendre.
+
+
+            \paragraph{Un exemple de tableaux de signes}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+\tkzTabInit{$x$ / 1 , $\cos(x)$ / 1}{$0$, $\frac{\pi}{2}$, $\pi$}
+\tkzTabLine{, +, z, -, }
+\end{tikzpicture}
+\end{tcblisting}
+
+
+            \paragraph{Un exemple de tableaux de variation}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+    \tkzTabInit{$x$ / 1 , $f(x)$ / 1.5}{$-\infty$, $p$, $+\infty$}
+    \tkzTabVar{+/ , -/ $f(p)$, +/ }
+\end{tikzpicture}
+\end{tcblisting}
+
+
+            \paragraph{Un exemple de tableaux de variation avec une dérivée}
+
+\begin{tcblisting}{}
+\begin{tikzpicture}
+    \tkzTabInit{$x$ / 1 , $\cos(x)$ / 1, $\sin(x)$ / 1.5}{$0$, $\frac{\pi}{2}$, $\pi$}
+    \tkzTabLine{, +, z, -, }
+    \tkzTabVar{-/ 0, +/ 1, -/ 0}
+\end{tikzpicture}
+\end{tcblisting}
+
+
+
+\end{document}

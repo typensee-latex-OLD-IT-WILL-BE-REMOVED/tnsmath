@@ -1,0 +1,61 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{02-matrices}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Algèbre}
+
+    \subsection{Matrices}
+
+            \paragraph{Comment ça marche ?}
+
+Tout le boulot est fait par le package \verb+nicematrix+ auquel on impose l'option \verb+transparent+. Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre.
+
+
+            \paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\begin{pmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{pmatrix}$
+\end{tcblisting}
+
+
+            \paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\begin{pNiceMatrix}[name=mymatrix]
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9
+\end{pNiceMatrix}$
+
+\tikz[remember picture,overlay]
+\draw (mymatrix-2-2) circle (2mm) ;
+\end{tcblisting}
+
+
+            \paragraph{Exemple 3 tiré de la documentation de \texttt{nicematrix}}
+
+\begin{tcblisting}{}
+$\left(
+    \begin{NiceArray}{CCCC:C}
+        1  & 2  & 3  & 4  & 5  \\
+        6  & 7  & 8  & 9  & 10 \\
+        11 & 12 & 13 & 14 &15
+    \end{NiceArray}
+\right)$
+\end{tcblisting}$
+
+\end{document}

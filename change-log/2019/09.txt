@@ -1,4 +1,11 @@
 ==========
+2019-09-06
+==========
+
+**New minor version version::``0.4.0-beta`` of ¨lymath:** we have just added the packages `tkz-tab` and `nicematrix` with special settings.
+
+
+==========
 2019-09-02
 ==========
 

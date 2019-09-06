@@ -15,6 +15,7 @@
 \RequirePackage{nicematrix}
 \RequirePackage{relsize}
 \RequirePackage{stmaryrd}
+\RequirePackage{tkz-tab}
 \RequirePackage{trimspaces}
 \RequirePackage[Symbolsmallscale]{upgreek}
 \RequirePackage{xparse}
@@ -791,6 +792,15 @@
 \newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}
 
 
+% ------------ %
+% -- TABLES -- %
+% ------------ %
+
+% Better style for arrowhead !
+
+\tkzTabSetup[arrowstyle = triangle 60]
+
+
 % ------------------------ %
 % -- BIG SMALL O AND CO -- %
 % ------------------------ %
@@ -1271,3 +1281,10 @@
 \newcommand\serielaurentset[2]{%
 	\@special@algebra@set{#1}{#2}{\{}{\}}{2}%
 }
+
+
+% -------------- %
+% -- MATRICES -- %
+% -------------- %
+
+\NiceMatrixOptions{transparent}
