@@ -1,4 +1,11 @@
 ==========
+2019-09-19
+==========
+
+**Logic and fundations:** the macros `\eqhyp` and `\eqcond` was not added. This missing has been repaired.
+
+
+==========
 2019-09-06
 ==========
 
