@@ -132,6 +132,18 @@
 \renewcommand\dfrac[2]{\stddfrac{\, #1 \,}{\, #2 \,}}
 
 
+% ----------------- %
+% -- SPACES SQRT -- %
+% ----------------- %
+
+\let\stdsqrt\sqrt
+\renewcommand\sqrt[2][]{%
+	\if\relax\detokenize{#1}\relax\stdsqrt{#2\,}%
+	\else\stdsqrt[\!\!#1\,\,\,]{#2\,}%
+	\fi%
+}
+
+
 % ----------------------- %
 % -- SPACES SEMI COLON -- %
 % ----------------------- %

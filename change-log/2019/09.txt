@@ -1,4 +1,11 @@
 ==========
+2019-09-26
+==========
+
+**Automatic spacings:** extra spaces are automatically added when using ``\sqrt``.
+
+
+==========
 2019-09-19
 ==========
 

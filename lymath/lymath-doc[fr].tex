@@ -136,7 +136,7 @@
 {\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-09-06}
+\date{2019-09-26}
 
 \maketitle
 
@@ -235,6 +235,20 @@ Si vous utilisez \verb+\frac+ ou \verb+\dfrac+ alors de petits espaces sont auto
 
 \begin{tcblisting}{}
 Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
+\end{tcblisting}
+
+
+
+
+%\section{Quelques gestions d'espaces}
+
+	\subsection{Espace et racines n\iemes{} d'un réel}
+
+\verb+\sqrt+ a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \verb+\stdsqrt+ . Voici un exemple.
+
+
+\begin{tcblisting}{}
+Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
 \end{tcblisting}
 
 
@@ -2140,6 +2154,7 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
+
 
 % --------------- %
 
