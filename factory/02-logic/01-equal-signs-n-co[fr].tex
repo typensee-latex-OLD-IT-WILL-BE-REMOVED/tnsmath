@@ -16,15 +16,18 @@
 
     \subsection{Différents types d'égalités \og standard \fg}
     
-D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou inégalité. Voici ce qui est proposé.
 
         \subsubsection{Définir quelque chose}
 
-Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon.
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon
+\footnote{
+	Le symbole peu courant $\eqdef**$ est utilisé par le langage B qui permet de spécifier et prouver certains programmes.
+}.
 
 \begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ .
-On peut utiliser une écriture plus symbolique : $f(x) \eqdef* x^3 + 1$.
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures 
+symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
 \end{tcblisting}
 
 
@@ -43,15 +46,16 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
 \begin{tcblisting}{}
 Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
 
-A-t-on $x \neqtest 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
+A-t-on $x \neqhyp 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
 
-Une condition $x \neqcond 0$ ou $x \eqcond 0$, et une hypothèse à faire $x \neqhyp 0$
-ou $x \eqhyp 0$ ?
+Comme $x$ doit être non nul, je sait que $x \neqcond 0$.
+
+Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 \end{tcblisting}
 
 
 
-    \subsection{Différents types d'inéquations}
+	    \subsubsection{Différents types d'inéquations}
     
 Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
 

@@ -12,25 +12,44 @@
 
 \section{Historique}
 
-Tous les changements sont décrits en anglais uniquement dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+. Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+.
 
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
 
 
- 
-% --------------- %
-
-%	\item[2019-????]  Nouvelle version mineure \verb+0.5.0-beta+ dont voici les principaux changements.
-%	\begin{itemize}
-%		\item Redéfinition de \verb+\sqrt+ pour un meilleur espacement.
-
-%		\item new math operator \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+
-%	\end{itemize}
 
 % --------------- %
 
-	\item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+ dont voici les principaux changements.
+	\item[2019-09-27]  Nouvelle version mineure \verb+0.5.0-beta+.
+	\begin{itemize}
+		\item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
+
+		\item En arithmétique, ajout des opérateurs \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+.
+
+		\item En géométrie, une nouvelle macro et un opérateur modifié.
+		\begin{itemize}
+			\item \verb+\pts+ permet d'indiquer plusieurs points.
+
+			\item \verb+\parallel+ utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+		\end{itemize}
+
+		\item En logique, il y a les nouveautés suivantes.
+		\begin{itemize}
+			\item La version doublement étoilée \verb+\eqdef**+ donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+
+			\item Ajout de \verb+\liesimp+ comme alias de \verb+\Longleftarrow+.
+
+			\item Les macros \verb+\vimplies+, \verb+\viff+ et \verb+\vliesimp+ sont des versions verticales de \verb+\implies+, \verb+\iff+ et \verb+\liesimp+.
+
+			\item Comme pour les égalités, il existe les macros \verb+\impliestest+, \verb+\iffhyp+ ... etc.
+		\end{itemize}
+	\end{itemize}
+
+% --------------- %
+
+	\item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+.
 	\begin{itemize}
 		\item Dans \emph{\og Logique et fondements \fg}, différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
 
@@ -41,7 +60,7 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 % --------------- %
 
-	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+ dont voici les principaux changements.
+	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+.
 	\begin{itemize}
 		\item Une nouvelle section \emph{\og Logique et fondements \fg} a été ajoutée.
 		\begin{itemize}
@@ -66,7 +85,7 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 % --------------- %
 
-	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+ dont voici les principaux changements.
+	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+.
 	\begin{itemize}
 		\item L'usage de \verb+//+ pour les macros-commandes avec un nombre quelconque d'arguments a été remplacé par celui de \verb+|+.
 

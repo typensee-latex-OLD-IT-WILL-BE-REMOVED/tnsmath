@@ -133,7 +133,7 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
 \date{2019-09-27}
@@ -242,13 +242,31 @@ Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 
 %\section{Quelques gestions d'espaces}
 
-	\subsection{Espace et racines n\iemes{} d'un réel}
+	\subsection{Espace et racines n-ièmes d'un réel}
 
 \verb+\sqrt+ a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \verb+\stdsqrt+ . Voici un exemple.
 
 
 \begin{tcblisting}{}
 Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
+\end{tcblisting}
+
+
+
+
+%\section{Quelques gestions d'espaces}
+
+	\subsection{Sommes et produits en mode ligne}
+
+Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=1}^{n}$ et non $\dsum_{k=1}^{n}$ sauf si l'on utilise la commande \verb+\displaystyle+.
+Les macros \verb+\dsum+ et \verb+\dprod+ permettent de se passer de \verb+\displaystyle+.
+Voici un exemple.
+
+
+\begin{tcblisting}{}
+$\dsum_{k=1}^{n} 2^k = \sum_{k=1}^{n} 2^k = 2^{n+1} - 1$
+
+$\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 \end{tcblisting}
 
 
@@ -267,15 +285,18 @@ Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
 
     \subsection{Différents types d'égalités \og standard \fg}
     
-D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité. Voici ce qui est proposé.
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou inégalité. Voici ce qui est proposé.
 
         \subsubsection{Définir quelque chose}
 
-Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon.
+Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon
+\footnote{
+	Le symbole peu courant $\eqdef**$ est utilisé par le langage B qui permet de spécifier et prouver certains programmes.
+}.
 
 \begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ .
-On peut utiliser une écriture plus symbolique : $f(x) \eqdef* x^3 + 1$.
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures 
+symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
 \end{tcblisting}
 
 
@@ -294,15 +315,16 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
 \begin{tcblisting}{}
 Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
 
-A-t-on $x \neqtest 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
+A-t-on $x \neqhyp 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
 
-Une condition $x \neqcond 0$ ou $x \eqcond 0$, et une hypothèse à faire $x \neqhyp 0$
-ou $x \eqhyp 0$ ?
+Comme $x$ doit être non nul, je sait que $x \neqcond 0$.
+
+Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 \end{tcblisting}
 
 
 
-    \subsection{Différents types d'inéquations}
+	    \subsubsection{Différents types d'inéquations}
     
 Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
 
@@ -319,7 +341,46 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 
 %\section{Logique et fondements}
 
-    \subsection{Détailler un raisonnment}
+    \subsection{Équivalences et implications}
+
+	    \subsubsection{Des symboles supplémentaires}
+
+En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, le verlan de \verb+\implies+ pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
+
+\begin{tcblisting}{}
+Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
+\end{tcblisting}
+
+
+Tout comme pour les égalités, il existe des versions de type test, hypothèse et condition.
+
+\begin{tcblisting}{}
+Équivalences : $A \ifftest B \iffhyp C \iffcond D$
+
+Implications directes : $A \impliestest B \implieshyp C \impliescond D$
+
+Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
+\end{tcblisting}
+
+
+    	\subsubsection{Équivalences et implications verticales}
+
+Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales des symboles d'équivalence et d'implication. Voici comment les obtenir.
+
+\begin{tcblisting}{}
+\begin{tabular}{ccc}
+    $A$       &   $B$           &   $C$         \\
+    $\viff$   &   $\vimplies$   &   $\vliesimp$ \\
+    $D$       &   $E$           &   $F$
+\end{tabular}
+\end{tcblisting}
+
+
+
+
+%\section{Logique et fondements}
+
+    \subsection{Détailler un raisonnment} \label{explain-proof}
     
 	    \paragraph{Un exemple sur une petite étape}
     
@@ -328,7 +389,7 @@ La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le 
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
@@ -338,7 +399,7 @@ Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version �
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain*{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
@@ -1371,7 +1432,9 @@ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
 
 \section{Géométrie}
 
-    \subsection{Points}
+    \subsection{Points et lignes}
+
+	    \subsubsection{Points}
 
             \paragraph{Exemple d'utilisation 1}
 
@@ -1384,6 +1447,13 @@ $\pt{I}$ indique un point nommé "I".
 
 \begin{tcblisting}{}
 Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 3}
+
+\begin{tcblisting}{}
+Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 \end{tcblisting}
 
 
@@ -1402,6 +1472,24 @@ Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
 \IDarg{1} un texte indiquant $\pt{UP}$ dans le nom $\pt*{UP}{down}$ d'un point.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\pt*{UP}{down}$ d'un point.
+
+
+\bigskip
+
+
+\IDmacro*{pts}{1}
+
+\IDarg{} un texte indiquant des noms de points non indicés.
+
+
+
+	    \subsubsection{Droites}
+	    
+L'opérateur \verb+\parallel+ utilise des obliques au lieu de barres verticales comme le montre l'exemple qui suit.
+
+\begin{tcblisting}{}
+$(\pts{AB}) \parallel (\pts{CD})$ au lieu de $(\pts{AB}) \stdparallel (\pts{CD})$
+\end{tcblisting}
 
 
 
@@ -1908,16 +1996,16 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 
 
 
-\section{Opérateurs arithmétiques}
+\section{Arithmétiques}
 
-%	\subsection{$a$ divise $b$}
+	\subsection{Opérateurs de base}
 
 Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+ ont été ajoutés comme alias de \verb+\mid+, \verb+\nmid+ et \verb+\bmod+ respectivement qui sont proposés par le package \verb+amssymb+.
 
 \begin{tcblisting}{}
-$10 \divides 150$ et $10 \notdivides 154$ rend lieu que $10 | 150$ et $10 \not| 154$.
+$10 \divides 150$ et $10 \notdivides 154$ rend mieux que $10 | 150$ et $10 \not| 154$.
 
-Facile alors d'écrire que $a \equiv b \modulo p \Leftrightarrow p \divides (a - b)$.
+Facile alors d'écrire que $a \equiv b \modulo p \iff p \divides (a - b)$.
 \end{tcblisting}
 
 
@@ -1926,13 +2014,15 @@ Facile alors d'écrire que $a \equiv b \modulo p \Leftrightarrow p \divides (a -
 
 
 
-\section{Fractions continuées}
+%\subsection{Arithmétiques}
 
-	\subsection{Fractions continuées standard}
+    \subsection{Fractions continuées}
 
-            \paragraph{Exemple d'utilisation}
+            \subsubsection{Fractions continuées standard}
 
-Dans l'exemple suivant, la notation en ligne semble avoir être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
+                \paragraph{Exemple d'utilisation}
+
+Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
 \begin{tcblisting}{}
 $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
@@ -1940,7 +2030,7 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+                \paragraph{Fiches techniques}
 
 \IDmacro*{contfrac}{1}
 
@@ -1951,9 +2041,9 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 
 
 
-	\subsection{Fractions continuées généralisées}
+        \subsubsection{Fractions continuées généralisées}
 
-            \paragraph{Exemple d'utilisation}
+                \paragraph{Exemple d'utilisation}
 
 Voici comment écrire une fraction continuée généralisée.
 
@@ -1963,7 +2053,7 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+                \paragraph{Fiches techniques}
 
 \IDmacro*{contfracgene}{1}
 
@@ -1973,9 +2063,9 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 
 
 
-	\subsection{Comme une fraction continuée isolée}
+        \subsubsection{Comme une fraction continuée isolée}
 
-            \paragraph{Exemple d'utilisation}
+                \paragraph{Exemple d'utilisation}
 
 La raison d'être de la macro ci-dessous vient juste de son usage en interne.
 
@@ -1984,7 +2074,7 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+                \paragraph{Fiche technique}
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -1994,10 +2084,10 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 
 
 
-    \subsection{\texorpdfstring{L'opérateur $\contfracope$}%
+        \subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
                                {L'opérateur K}}
 
-            \paragraph{Exemple d'utilisation 1}
+                \paragraph{Exemple d'utilisation 1}
 
 \IDconstant{contfracope}
 
@@ -2011,11 +2101,11 @@ $\displaystyle
 
 
 \begin{remark}
-	La lettre $\contfracope$ vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
+    La lettre $\contfracope$ vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
 \end{remark}
 
 
-            \paragraph{Exemple d'utilisation 2}
+                \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $\displaystyle
@@ -2168,25 +2258,44 @@ $\left(
 
 \section{Historique}
 
-Tous les changements sont décrits en anglais uniquement dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+. Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+.
 
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
 
 
- 
-% --------------- %
-
-%	\item[2019-????]  Nouvelle version mineure \verb+0.5.0-beta+ dont voici les principaux changements.
-%	\begin{itemize}
-%		\item Redéfinition de \verb+\sqrt+ pour un meilleur espacement.
-
-%		\item new math operator \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+
-%	\end{itemize}
 
 % --------------- %
 
-	\item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+ dont voici les principaux changements.
+	\item[2019-09-27]  Nouvelle version mineure \verb+0.5.0-beta+.
+	\begin{itemize}
+		\item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
+
+		\item En arithmétique, ajout des opérateurs \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+.
+
+		\item En géométrie, une nouvelle macro et un opérateur modifié.
+		\begin{itemize}
+			\item \verb+\pts+ permet d'indiquer plusieurs points.
+
+			\item \verb+\parallel+ utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+		\end{itemize}
+
+		\item En logique, il y a les nouveautés suivantes.
+		\begin{itemize}
+			\item La version doublement étoilée \verb+\eqdef**+ donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+
+			\item Ajout de \verb+\liesimp+ comme alias de \verb+\Longleftarrow+.
+
+			\item Les macros \verb+\vimplies+, \verb+\viff+ et \verb+\vliesimp+ sont des versions verticales de \verb+\implies+, \verb+\iff+ et \verb+\liesimp+.
+
+			\item Comme pour les égalités, il existe les macros \verb+\impliestest+, \verb+\iffhyp+ ... etc.
+		\end{itemize}
+	\end{itemize}
+
+% --------------- %
+
+	\item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+.
 	\begin{itemize}
 		\item Dans \emph{\og Logique et fondements \fg}, différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
 
@@ -2197,7 +2306,7 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 % --------------- %
 
-	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+ dont voici les principaux changements.
+	\item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+.
 	\begin{itemize}
 		\item Une nouvelle section \emph{\og Logique et fondements \fg} a été ajoutée.
 		\begin{itemize}
@@ -2222,7 +2331,7 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 
 % --------------- %
 
-	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+ dont voici les principaux changements.
+	\item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+.
 	\begin{itemize}
 		\item L'usage de \verb+//+ pour les macros-commandes avec un nombre quelconque d'arguments a été remplacé par celui de \verb+|+.
 

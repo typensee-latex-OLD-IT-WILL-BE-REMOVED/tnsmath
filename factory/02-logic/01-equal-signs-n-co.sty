@@ -10,16 +10,30 @@
 
 % Standard (none) equations
 
-\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
+\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
+
+\newcommand\@eqdef@no@star{%
+	\mathrel{\overset{\mathrm{\text{\textopdef}}}{=}}%
+}
+
+\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
 
 \newcommand\@eqdef@star{%
 	\coloneqq%
 }
 
-\newcommand\@eqdef@no@star{%
-	\mathrel{\overset{\mathrm{\text{\texteqdef}}}{=}}%
-}
+% Source: https://tex.stackexchange.com/a/510011/6880
 
+\providecommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
+\newcommand{\my@hat@eq}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1=$}%
+  \ooalign{%
+    \hidewidth\raisebox{-0.3\ht\z@}{$\m@th#1\widehat{}$}\hidewidth\cr
+    \box\z@\cr
+  }%
+  \endgroup
+}
 
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
 
@@ -28,7 +42,7 @@
 }
 
 \newcommand\@eqid@no@star{%
-	\mathrel{\overset{\mathrm{\text{\texteqid}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textopid}}}{=}}%
 }
 
 
@@ -38,12 +52,12 @@
 
 
 \newcommand\eqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{=}}%
 }
 
 
 \newcommand\eqcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{=}}%
 }
 
 
@@ -52,11 +66,11 @@
 }
 
 \newcommand\neqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\neq}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\neq}}%
 }
 
 \newcommand\neqcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{\neq}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{\neq}}%
 }
 
 
@@ -67,11 +81,11 @@
 }
 
 \newcommand\leqhyp{%
-	\stackrel{\text{\text{\textineqhyp}}}{\leq}%
+	\stackrel{\text{\text{\textophyp}}}{\leq}%
 }
 
 \newcommand\leqcond{%
-	\stackrel{\text{\text{\textineqcond}}}{\leq}%
+	\stackrel{\text{\text{\textopcond}}}{\leq}%
 }
 
 
@@ -80,11 +94,11 @@
 }
 
 \newcommand\lhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{<}\vphantom{\leq}}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{{<}\vphantom{\leq}}}%
 }
 
 \newcommand\lcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{<}\vphantom{\leq}}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{{<}\vphantom{\leq}}}%
 }
 
 
@@ -93,11 +107,11 @@
 }
 
 \newcommand\geqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\geq}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\geq}}%
 }
 
 \newcommand\geqcond{%
-	\stackrel{\text{\text{\textineqcond}}}{\geq}%
+	\stackrel{\text{\text{\textopcond}}}{\geq}%
 }
 
 
@@ -106,10 +120,10 @@
 }
 
 \newcommand\ghyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{>}\vphantom{\leq}}}
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{{>}\vphantom{\leq}}}
 }
 
 \newcommand\gcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{>}\vphantom{\leq}}}
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{{>}\vphantom{\leq}}}
 }
 

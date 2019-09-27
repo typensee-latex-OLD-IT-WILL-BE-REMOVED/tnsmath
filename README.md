@@ -17,10 +17,86 @@ English is not my native language, so be nice if you notice misunderstandings, m
 
 
 
-Changes in this version `0.2.0-beta`
+Changes in this version `0.5.0-beta`
 ====================================
 
-#????????????
+**New minor version ``0.5.0-beta``:** see all the changes below.
+
+
+**Easy displayed mode for sums and products:** the macros ``\dsum`` and ``\dprod`` regarding to ``\sum`` and ``\prod`` work both similarly to ``\dfrac`` regarding to ``\frac``.
+
+
+**Arithmetic:** new math operators `\divides`, `\notdivides` and `\modulo` have beend added.
+
+
+**Geometry:** three new macros.
+
+1. The macros ``\pts`` allow to write several points.
+
+2. Oblic version, instead of a vertical one, of the macro ``\parallel``.
+
+
+**Logic:** several new macros have benne added.
+
+1. The macros `\eqhyp` and `\eqcond` has been added.
+
+2. The macro `\liesimp` is an alias for `\Longleftarrow`.
+
+3. The macros ``\vimplies``, ``\viff`` and ``\vliesimp`` are vertical versions of ``\implies``, ``\iff`` and ``\liesimp``.
+
+4. There are also macros like ``\impliestest``, ``\iffhyp``...
+
+5. The double starred macro `\eqdef**` gives another symbolic symbol for the equal definition symbols (this version is used by the B language).
+
+
+**Automatic spacings:** extra spaces are automatically added when using ``\sqrt`` for the exponent and the value.
+
+
+Changes in this version `0.4.0-beta`
+====================================
+
+**New minor version `0.4.0-beta`:** see all the changes below.
+
+
+**Logic and fundations:** different kinds of inequality and not equal signs such as to stress a test to be done, a condition or an hypothesis.
+
+
+**Two new packages loaded:** we have added the packages `tkz-tab` and `nicematrix` with special settings.
+
+
+Changes in this version `0.3.0-beta`
+====================================
+
+**New minor version `0.3.0-beta`:** see all the changes below.
+
+
+**New macro ``\lymathsubsep``:** this defines the separators of arguments for a second level. By default it is a semi-colon but if this will be a coma if the option ``french`` of ``babel`` is activated.
+
+
+**Logic and fundations:** here are the new features in this new section.
+
+1. Different kind of equal signs are available.
+
+2. The macro ``\explain`` allows to explain efficiently formal reasonning or calculus.
+
+
+**Sets:** here are the new features.
+
+1. ``\fieldset`` has been renamed ``\algeset``.
+
+2. One new classical set added : ``\PP`` indicates the set of prime numbers.
+
+
+**Geometry:** here are the new features.
+
+1. The macro ``\hangleorient`` writes oriented angles of vectors using a hat.
+
+2. The macros ``\vangleorient`` and ``\vhangleorient`` are shortcuts to not use ``\vect`` when writing oriented angles of vectors without or with a hat.
+
+3. The macros ``\vdotprod``, ``\vadotprod`` and ``\vcroosprod`` are shortcuts to not use ``\vect`` when writing dot and cross products.
+
+
+
 
 
 
@@ -76,7 +152,6 @@ Changes in this version `0.2.0-beta`
 **Internal changes in the factory:** a deep cleaning has been achieved.
 
 
-<!--
 Changes in this version `0.1.0-beta`
 ====================================
 
@@ -141,7 +216,5 @@ About this first version `0.0.0-beta`
 All informations are inside the PDF named `lymath-doc.pdf` inside the folder `lymath`.
 
 The only thing needed to use the package is the folder `lymath`.
-
-
 
 -->

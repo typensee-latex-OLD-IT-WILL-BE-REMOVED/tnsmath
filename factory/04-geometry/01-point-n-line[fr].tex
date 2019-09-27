@@ -3,7 +3,7 @@
 \makeatletter
 	\input{../config/header[fr].sty}
 
-	\usepackage{01-point}
+	\usepackage{01-point-n-line}
 \makeatother
 
 
@@ -12,7 +12,9 @@
 
 \section{Géométrie}
 
-    \subsection{Points}
+    \subsection{Points et lignes}
+
+	    \subsubsection{Points}
 
             \paragraph{Exemple d'utilisation 1}
 
@@ -25,6 +27,13 @@ $\pt{I}$ indique un point nommé "I".
 
 \begin{tcblisting}{}
 Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
+\end{tcblisting}
+
+
+            \paragraph{Exemple d'utilisation 3}
+
+\begin{tcblisting}{}
+Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 \end{tcblisting}
 
 
@@ -43,5 +52,23 @@ Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
 \IDarg{1} un texte indiquant $\pt{UP}$ dans le nom $\pt*{UP}{down}$ d'un point.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\pt*{UP}{down}$ d'un point.
+
+
+\bigskip
+
+
+\IDmacro*{pts}{1}
+
+\IDarg{} un texte indiquant des noms de points non indicés.
+
+
+
+	    \subsubsection{Droites}
+	    
+L'opérateur \verb+\parallel+ utilise des obliques au lieu de barres verticales comme le montre l'exemple qui suit.
+
+\begin{tcblisting}{}
+$(\pts{AB}) \parallel (\pts{CD})$ au lieu de $(\pts{AB}) \stdparallel (\pts{CD})$
+\end{tcblisting}
 
 \end{document}

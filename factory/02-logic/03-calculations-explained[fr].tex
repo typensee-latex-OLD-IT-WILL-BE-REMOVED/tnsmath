@@ -4,18 +4,19 @@
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
 
-	\usepackage{02-calculations-explained}
+	\usepackage{03-calculations-explained}
 \makeatother
 
 
 \newcommand\RRp{RR+}
+\newcommand\vimplies{\Downarrow}
 
 
 \begin{document}
 
 %\section{Logique et fondements}
 
-    \subsection{Détailler un raisonnment}
+    \subsection{Détailler un raisonnment} \label{explain-proof}
     
 	    \paragraph{Un exemple sur une petite étape}
     
@@ -24,7 +25,7 @@ La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le 
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
@@ -34,7 +35,7 @@ Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version �
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain*{\Downarrow}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}

@@ -31,17 +31,17 @@
 \@ifpackagewith{babel}{french}{
     \newcommand\lymathsep{;}
     \newcommand\lymathsubsep{,}
-    \newcommand\texteqdef{déf}
-    \newcommand\texteqid{id}
-    \newcommand\textineqhyp{hyp}
-    \newcommand\textineqcond{cond}
+    \newcommand\textopdef{déf}
+    \newcommand\textopid{id}
+    \newcommand\textophyp{hyp}
+    \newcommand\textopcond{cond}
 }{
 	\newcommand\lymathsep{,}
 	\newcommand\lymathsubsep{;}
-    \newcommand\texteqdef{def}
-    \newcommand\texteqid{id}
-    \newcommand\textineqhyp{hyp}
-    \newcommand\textineqcond{cond}
+    \newcommand\textopdef{def}
+    \newcommand\textopid{id}
+    \newcommand\textophyp{hyp}
+    \newcommand\textopcond{cond}
 }
 
 
@@ -144,6 +144,14 @@
 }
 
 
+% ---------------- %
+% -- DSUM DPROD -- %
+% ---------------- %
+
+\newcommand\dprod{\prod\limits}
+\newcommand\dsum{\sum\limits}
+
+
 % ----------------------- %
 % -- SPACES SEMI COLON -- %
 % ----------------------- %
@@ -183,16 +191,30 @@
 
 % Standard (none) equations
 
-\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
+\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
+
+\newcommand\@eqdef@no@star{%
+	\mathrel{\overset{\mathrm{\text{\textopdef}}}{=}}%
+}
+
+\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
 
 \newcommand\@eqdef@star{%
 	\coloneqq%
 }
 
-\newcommand\@eqdef@no@star{%
-	\mathrel{\overset{\mathrm{\text{\texteqdef}}}{=}}%
-}
+% Source: https://tex.stackexchange.com/a/510011/6880
 
+\providecommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
+\newcommand{\my@hat@eq}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1=$}%
+  \ooalign{%
+    \hidewidth\raisebox{-0.3\ht\z@}{$\m@th#1\widehat{}$}\hidewidth\cr
+    \box\z@\cr
+  }%
+  \endgroup
+}
 
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
 
@@ -201,7 +223,7 @@
 }
 
 \newcommand\@eqid@no@star{%
-	\mathrel{\overset{\mathrm{\text{\texteqid}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textopid}}}{=}}%
 }
 
 
@@ -211,12 +233,12 @@
 
 
 \newcommand\eqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{=}}%
 }
 
 
 \newcommand\eqcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{=}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{=}}%
 }
 
 
@@ -225,11 +247,11 @@
 }
 
 \newcommand\neqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\neq}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\neq}}%
 }
 
 \newcommand\neqcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{\neq}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{\neq}}%
 }
 
 
@@ -240,11 +262,11 @@
 }
 
 \newcommand\leqhyp{%
-	\stackrel{\text{\text{\textineqhyp}}}{\leq}%
+	\stackrel{\text{\text{\textophyp}}}{\leq}%
 }
 
 \newcommand\leqcond{%
-	\stackrel{\text{\text{\textineqcond}}}{\leq}%
+	\stackrel{\text{\text{\textopcond}}}{\leq}%
 }
 
 
@@ -253,11 +275,11 @@
 }
 
 \newcommand\lhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{<}\vphantom{\leq}}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{{<}\vphantom{\leq}}}%
 }
 
 \newcommand\lcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{<}\vphantom{\leq}}}%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{{<}\vphantom{\leq}}}%
 }
 
 
@@ -266,11 +288,11 @@
 }
 
 \newcommand\geqhyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{\geq}}%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\geq}}%
 }
 
 \newcommand\geqcond{%
-	\stackrel{\text{\text{\textineqcond}}}{\geq}%
+	\stackrel{\text{\text{\textopcond}}}{\geq}%
 }
 
 
@@ -279,11 +301,78 @@
 }
 
 \newcommand\ghyp{%
-	\mathrel{\overset{\mathrm{\text{\textineqhyp}}}{{>}\vphantom{\leq}}}
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{{>}\vphantom{\leq}}}
 }
 
 \newcommand\gcond{%
-	\mathrel{\overset{\mathrm{\text{\textineqcond}}}{{>}\vphantom{\leq}}}
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{{>}\vphantom{\leq}}}
+}
+
+
+% --------------- %
+% -- OPERATORS -- %
+% --------------- %
+
+% Horizontal versions
+
+\newcommand\iffcond{%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{\iff}}%
+}
+
+\newcommand\iffhyp{%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\iff}}%
+}
+
+\newcommand\ifftest{%
+	\mathrel{\overset{\mathrm{?}}{\iff}}%
+}
+
+
+\newcommand\impliescond{%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{\implies}}%
+}
+
+\newcommand\implieshyp{%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\implies}}%
+}
+
+\newcommand\impliestest{%
+	\mathrel{\overset{\mathrm{?}}{\implies}}%
+}
+
+
+\newcommand\liesimp{%
+	\mathrel{\Longleftarrow}%
+}
+
+
+\newcommand\liesimpcond{%
+	\mathrel{\overset{\mathrm{\text{\textopcond}}}{\liesimp}}%
+}
+
+\newcommand\liesimphyp{%
+	\mathrel{\overset{\mathrm{\text{\textophyp}}}{\liesimp}}%
+}
+
+\newcommand\liesimptest{%
+	\mathrel{\overset{\mathrm{?}}{\liesimp}}%
+}
+
+
+% Vertical versions 
+
+\newcommand\vliesimp{%
+	\mathrel{\Uparrow}%
+}
+
+
+\newcommand\vimplies{%
+	\mathrel{\Downarrow}%
+}
+
+
+\newcommand\viff{%
+	\mathrel{\Updownarrow}%
 }
 
 
@@ -879,9 +968,9 @@
 }
 
 
-% ----------- %
-% -- POINT -- %
-% ----------- %
+% ------------------ %
+% -- POINT N LINE -- %
+% ------------------ %
 
 \newcommand\pt{\@ifstar{\@pt@star}{\@pt@no@star}}
 
@@ -890,6 +979,12 @@
 \newcommand\@pt@star[2]{%
 	\@pt@no@star{#1}_{#2}
 }
+
+\newcommand\pts[1]{\mathrm{#1}}
+
+
+\let\stdparallel\parallel
+\renewcommand\parallel{\mathbin{/\!/}}
 
 
 % ------------ %
