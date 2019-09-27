@@ -1,4 +1,12 @@
 ==========
+2019-09-27
+==========
+
+**Arithmetic:** new math operators `\divides`, `\notdivides` and `\modulo`
+ have beend added.
+
+
+==========
 2019-09-26
 ==========
 
@@ -9,7 +17,7 @@
 2019-09-19
 ==========
 
-**Logic and fundations:** the macros `\eqhyp` and `\eqcond` was not added. This missing has been repaired.
+**Logic and fundations:** the macros `\eqhyp` and `\eqcond` was not added. This missing feature has been added.
 
 
 ==========

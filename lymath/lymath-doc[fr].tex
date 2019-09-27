@@ -136,7 +136,7 @@
 {\footnotesize Version \texttt{0.4.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-09-26}
+\date{2019-09-27}
 
 \maketitle
 
@@ -1908,6 +1908,24 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 
 
 
+\section{Opérateurs arithmétiques}
+
+%	\subsection{$a$ divise $b$}
+
+Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+ ont été ajoutés comme alias de \verb+\mid+, \verb+\nmid+ et \verb+\bmod+ respectivement qui sont proposés par le package \verb+amssymb+.
+
+\begin{tcblisting}{}
+$10 \divides 150$ et $10 \notdivides 154$ rend lieu que $10 | 150$ et $10 \not| 154$.
+
+Facile alors d'écrire que $a \equiv b \modulo p \Leftrightarrow p \divides (a - b)$.
+\end{tcblisting}
+
+
+
+
+
+
+
 \section{Fractions continuées}
 
 	\subsection{Fractions continuées standard}
@@ -2155,6 +2173,16 @@ Tous les changements sont décrits en anglais uniquement dans le dossier \verb+c
 \begin{description}[leftmargin=1em]
 	\setlength\itemsep{1em}
 
+
+ 
+% --------------- %
+
+%	\item[2019-????]  Nouvelle version mineure \verb+0.5.0-beta+ dont voici les principaux changements.
+%	\begin{itemize}
+%		\item Redéfinition de \verb+\sqrt+ pour un meilleur espacement.
+
+%		\item new math operator \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+
+%	\end{itemize}
 
 % --------------- %
 
