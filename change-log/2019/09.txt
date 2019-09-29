@@ -1,4 +1,13 @@
 ==========
+2019-09-29
+==========
+
+**Computer Science version of closed intervals:** the macro ``\CSinterval`` has been added so as to produce closed integer intervals by printing ``a..b``.
+
+
+
+
+==========
 2019-09-27
 ==========
 

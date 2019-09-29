@@ -129,14 +129,14 @@
 \renewcommand\labelitemi{\raisebox{0.125em}{\tiny\textbullet}}
 \renewcommand{\labelitemii}{---}
 
-\title{%	
+\title{%
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
 {\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-09-27}
+\date{2019-09-29}
 
 \maketitle
 
@@ -882,6 +882,26 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % Docs for discrete intervals - END
 
 
+        \subsubsection{Intervalles discrets d'entiers à la sauce \og informatique \fg}
+
+            \paragraph{Exemple d'utilisation}
+
+Dans l'exemple, la syntaxe fait référence à \og Computer Science \fg{} soit \og Informatique Théorique \fg{}.
+
+\begin{tcblisting}{}
+Par définition, $\CSinterval{4}{7} = \{ 4 ; 5 ; 6 ; 7 \}$.
+\end{tcblisting}
+
+
+            \paragraph{Fiches techniques}
+
+\IDmacro*{CSinterval}{2}
+
+\IDarg{1} borne inférieure $a$ de l'intervalle $\CSinterval{a}{b}$.
+
+\IDarg{2} borne supérieure $b$ de l'intervalle $\CSinterval{a}{b}$.
+
+
 
 
 \section{Analyse}
@@ -1488,8 +1508,7 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 L'opérateur \verb+\parallel+ utilise des obliques au lieu de barres verticales comme le montre l'exemple qui suit.
 
 \begin{tcblisting}{}
-$(\pts{AB}) \parallel (\pts{CD})$ au lieu de $(\pts{AB}) \stdparallel (\pts{CD})$
-\end{tcblisting}
+$(\pts{AB}) \parallel (\pts{CD})$ au lieu de $(\pts{AB}) \stdparallel (\pts{CD})$.\end{tcblisting}
 
 
 
@@ -2268,7 +2287,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % --------------- %
 
-	\item[2019-09-27]  Nouvelle version mineure \verb+0.5.0-beta+.
+	\item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
 	\begin{itemize}
 		\item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
 
