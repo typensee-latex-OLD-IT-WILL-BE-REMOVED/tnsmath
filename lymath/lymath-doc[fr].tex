@@ -289,10 +289,11 @@ D'un point de vue pédagogique, il peut être intéressant de disposer de diffé
 
         \subsubsection{Définir quelque chose}
 
-Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqdef+ qui vaut \emph{\og déf \fg} si l'option \verb+french+ de \verb+babel+ est choisie, et \emph{\og def \fg} sinon
+L'exemple suivant montre trois façons de rédiger une égalité signifiant une définition
 \footnote{
 	Le symbole peu courant $\eqdef**$ est utilisé par le langage B qui permet de spécifier et prouver certains programmes.
-}.
+}
+\emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
 
 \begin{tcblisting}{}
 La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures 
@@ -302,7 +303,7 @@ symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
 
         \subsubsection{Indiquer une identité}
 
-Dans l'exemple suivant, le texte au-dessus du signe égal est définie dans la macro \verb+\texteqid+ qui vaut \emph{\og id \fg} si l'option \verb+french+ de \verb+babel+ est choisie ou non.
+L'exemple suivant montre deux façons de rédiger des identités, la noptation symbolique n'étant pas standard \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
 
 \begin{tcblisting}{}
 $\forall (a ; b) \in \RR^2$, nous avons : $(a + b)^2 \eqid a^2 + b^2 + 2 a b$ .
@@ -311,6 +312,8 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
 
 
         \subsubsection{Une égalité à vérifier ou non, une hypothèse, une condition}
+
+Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
 
 \begin{tcblisting}{}
 Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
@@ -336,6 +339,22 @@ A moins que ce ne soit $x \geqtest x^2$ ou $x \gtest x^2$ qu'il faille vérifier
 On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 
 \end{tcblisting}
+
+
+		\subsection{Textes utilisés} \label{text-for-opes}
+
+Voici les macros définissant les textes utilisés qui tiennet compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+.
+
+\begin{enumerate}
+	\item \verb+\textopdef+ donne \emph{\og déf \fg} en français et \emph{\og def \fg} sinon. 
+
+	\item \verb+\textopid+ donne \emph{\og id \fg} dans tous les cas.
+
+	\item \verb+\textopcond+ donne \emph{\og cond \fg} dans tous les cas.
+
+	\item \verb+\textophyp+ donne \emph{\og hyp \fg} dans tous les cas.
+\end{enumerate}
+
 
 
 

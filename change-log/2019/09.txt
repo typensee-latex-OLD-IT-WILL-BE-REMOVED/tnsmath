@@ -1,10 +1,15 @@
 ==========
+2019-09-30
+==========
+
+**¨Doc updated:** the infos about the text used for decorated equal signs and co were not the good ones.
+
+
+==========
 2019-09-29
 ==========
 
 **Computer Science version of closed intervals:** the macro ``\CSinterval`` has been added so as to produce closed integer intervals by printing ``a..b``.
-
-
 
 
 ==========
