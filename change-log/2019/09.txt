@@ -32,7 +32,7 @@
     2) Oblic version, instead of a vertical one, of the macro ``\parallel``.
 
 
-**Logic:** several new macros have benne added.
+**Logic:** several new macros have been added.
 
     1) The macro `\liesimp` is an alias for `\Longleftarrow`.
 

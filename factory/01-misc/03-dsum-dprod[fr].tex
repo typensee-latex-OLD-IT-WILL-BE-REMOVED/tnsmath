@@ -14,13 +14,13 @@
 
 	\subsection{Sommes et produits en mode ligne}
 
-Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=1}^{n}$ et non $\dsum_{k=1}^{n}$ sauf si l'on utilise la commande \verb+\displaystyle+.
+Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=0}^{n}$ et non $\dsum_{k=0}^{n}$ sauf si l'on utilise la commande \verb+\displaystyle+.
 Les macros \verb+\dsum+ et \verb+\dprod+ permettent de se passer de \verb+\displaystyle+.
 Voici un exemple.
 
 
 \begin{tcblisting}{}
-$\dsum_{k=1}^{n} 2^k = \sum_{k=1}^{n} 2^k = 2^{n+1} - 1$
+$\dsum_{k=0}^{n} 2^k = \sum_{k=0}^{n} 2^k = 2^{n+1} - 1$
 
 $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 \end{tcblisting}

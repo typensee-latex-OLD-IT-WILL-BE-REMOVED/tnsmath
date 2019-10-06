@@ -48,6 +48,7 @@ Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis 
 
 \begin{tcblisting}{}
 Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
+Non car $(a + b)^3 \neqid a^3 + b^3 + 3 a b$
 
 A-t-on $x \neqhyp 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
 
@@ -57,10 +58,20 @@ Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 \end{tcblisting}
 
 
+        \subsubsection{Une égalité indiquant le choix d'une valeur}
+
+La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
+
+\begin{tcblisting}{}
+Sachant que si $x \geq 4$ alors $x^2 \geq 16$, on peut choisir $x \eqchoice 123$
+et affirmer que $123^2 \geq 16$.
+\end{tcblisting}
+
+
 
 	    \subsubsection{Différents types d'inéquations}
     
-Le principe reste le même pour les symboles d'inéquations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
+Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique et que l'on pas la version \emph{\og {choix} \fg}. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
 
 \begin{tcblisting}{}
 A-t-on $x \leqtest x^2$ ou $x \ltest x^2$ ?
@@ -77,13 +88,15 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 Voici les macros définissant les textes utilisés qui tiennet compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+.
 
 \begin{enumerate}
-	\item \verb+\textopdef+ donne \emph{\og déf \fg} en français et \emph{\og def \fg} sinon. 
-
-	\item \verb+\textopid+ donne \emph{\og id \fg} dans tous les cas.
+	\item \verb+\textopchoice+ donne \emph{\og choix \fg} en français et \emph{\og choice \fg} sinon.
 
 	\item \verb+\textopcond+ donne \emph{\og cond \fg} dans tous les cas.
 
+	\item \verb+\textopdef+ donne \emph{\og déf \fg} en français et \emph{\og def \fg} sinon.
+
 	\item \verb+\textophyp+ donne \emph{\og hyp \fg} dans tous les cas.
+
+	\item \verb+\textopid+ donne \emph{\og id \fg} dans tous les cas.
 \end{enumerate}
 
 \end{document}
