@@ -1,12 +1,33 @@
 ==========
+2019-10-10
+==========
+
+**New minor version version::``0.6.0-beta`` of ¨lymath:** see all the changes below.
+
+
+**Probability:** this is a new section.
+
+    1) The macros ``\probacond`` and ``\probacond*`` have been created.
+
+    2) The macro ``\probatree`` simplifies the production of weighted probabilistic trees but also of decision trees.
+
+
+==========
+2019-10-09
+==========
+
+**Geometry:** the macro ``\notparallel`` has been added.
+
+
+==========
 2019-10-06
 ==========
 
-**Logic:** one new semantic equal sign `\neqid` has been added.
+**Logic:** one new semantic equal sign ``\neqid`` has been added.
 
 
 ==========
 2019-10-01
 ==========
 
-**Logic:** one new semantic equal sign `\eqchoice` has been added.
+**Logic:** one new semantic equal sign ``\eqchoice`` has been added.

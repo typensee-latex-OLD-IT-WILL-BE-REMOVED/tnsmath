@@ -1,0 +1,33 @@
+% == PACKAGES USED == %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+
+% == DEFINITIONS == %
+
+% Points
+
+\newcommand\pt{\@ifstar{\@pt@star}{\@pt@no@star}}
+
+\newcommand\@pt@no@star[1]{\mathrm{#1}}
+
+\newcommand\@pt@star[2]{%
+	\@pt@no@star{#1}_{#2}
+}
+
+\newcommand\pts[1]{\mathrm{#1}}
+
+
+% Lines
+
+\let\stdparallel\parallel
+\renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
+
+\newcommand{\notparallel}{%
+  \mathrel{\mathpalette\not@parallel\relax}%
+}
+\newcommand{\not@parallel}[2]{%
+  \ooalign{\reflectbox{$\m@th#1\smallsetminus$}\cr\hfil$\m@th#1\parallel$\cr}%
+}

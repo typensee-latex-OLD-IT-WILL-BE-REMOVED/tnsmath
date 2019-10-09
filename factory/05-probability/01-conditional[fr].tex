@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{01-conditional}
+\makeatother
+
+
+% == EXTRAS == %
+
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+
+
+\begin{document}
+
+\section{Probabilité}
+
+    \subsection{Probabilité conditionnelle}
+
+			\paragraph{Un exemple type}
+
+Dans l'exemple ci-dessous, les options \texttt{x} et \texttt{X} font référence au mot anglais \emph{\og expand \fg} qui peut signifier \emph{\og développer \fg} comme on l'entend en mathématiques.
+
+\begin{tcblisting}{}
+Écrire des probabilités conditionnelles :
+$\probacond{p}{A}{B} = \probacond*{p}{A}{B} 
+                     = \probacond[x]{p}{A}{B} 
+                     = \probacond[X]{p}{A}{B}$.
+\end{tcblisting}
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro{probacond}{1}{3}
+
+\IDmacro{probacond*}{1}{3}
+
+\IDoption{} si utilisée avec la valeur \verb+x+, cette option donne l'écriture sous forme de fraction via \verb+\frac+ tandis qu'avec \verb+X+ ce sera \verb+\dfrac+ qui sera utilisée.
+
+\IDarg{1} le nom de la probabilité.
+
+\IDarg{2} l'ensemble dont on veut calculer la probabilité.
+
+\IDarg{3} l'ensemble qui donne la condition.
+
+\end{document}

@@ -10,6 +10,7 @@
 
 \begin{document}
 
+$\smallsetminus$
 \section{Géométrie}
 
     \subsection{Points et lignes}
@@ -63,11 +64,13 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 
 
 
-	    \subsubsection{Droites}
+	    \subsubsection{Droites parallèles ou non}
 	    
-L'opérateur \verb+\parallel+ utilise des obliques au lieu de barres verticales comme le montre l'exemple qui suit.
+Les opérateurs \verb+\parallel+ et \verb+\notparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\nparallel+ est fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
 
 \begin{tcblisting}{}
-$(\pts{AB}) \parallel (\pts{CD})$ au lieu de $(\pts{AB}) \stdparallel (\pts{CD})$.\end{tcblisting}
+$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \notparallel (\pts{GH})$ au lieu de
+$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
+\end{tcblisting}
 
 \end{document}

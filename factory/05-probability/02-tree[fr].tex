@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+
+    \usepackage{02-tree}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Probabilité}
+
+    \subsection{Arbres pondérés}
+    
+            \paragraph{Que se passe-t-il en coulisse ?}
+
+Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. Ceci permet de faire des choses sympatiques comme dans l'exemple qui suit où l'on encadre un sous-arbre.
+
+
+            \paragraph{Un exemple type}
+
+\begin{tcblisting}{}
+\probatree{
+    [
+        [$A$, name=left, edge label={node[midway, fill=white]{$a$}}
+            [$B$, name=topright, edge label={node[midway, fill=white]{$b$}}]
+            [$C$, name=bottomright, edge label={node[midway, fill=white]{$c$}}]
+        ]
+        [$D$, edge label={node[midway, fill=white]{$d$}}
+            [$E$, edge label={node[midway, fill=white]{$e$}}]
+            [$F$, edge label={node[midway, fill=white]{$f$}}]
+        ]
+    ]
+    \node[draw=blue, thick, rounded corners, fit=(left)(topright)(bottomright)] {};
+}
+\end{tcblisting}
+
+
+            \paragraph{Fiche technique}
+
+\IDmacro*{probatree}{1}
+
+\IDarg{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+
+\end{document}
