@@ -68,11 +68,12 @@
     \immediate\write\tempfile{constant@#1}%
 }
 
+
 \newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
 
 \newcommand\@IDmacro@no@star[3]{%
     \texttt{%
-    	\textbackslash#1%
+    	\textbackslash#1 <macro>%
     	\IfStrEq{#2}{0}{}{%
     		\,\,[#2 Option%
 				\IfStrEq{#2}{1}{}{s}]%
@@ -88,6 +89,26 @@
 \newcommand\@IDmacro@star[2]{%
     \@IDmacro@no@star{#1}{0}{#2}%
 }
+
+
+
+\newcommand\IDenv{\@ifstar{\@IDenv@star}{\@IDenv@no@star}}
+
+\newcommand\@IDenv@no@star[2]{%
+    \texttt{%
+    	#1 <env>%
+    	\IfStrEq{#2}{0}{}{%
+    		\,\,[#2 Option%
+				\IfStrEq{#2}{1}{}{s}]%
+			}%
+	   	}
+    \immediate\write\tempfile{env,#1,#2}%
+}
+
+\newcommand\@IDenv@star[1]{%
+    \@IDenv@no@star{#1}{0}%
+}
+
 
 \newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
 
@@ -106,16 +127,24 @@
 	}%
 }
 
+
 \newcommand\IDkey[1]{%
 	\@IDoptarg*{Option}{{\itshape "#1"}}%
 }
+
 
 \newcommand\IDoption[1]{%
 	\@IDoptarg{Option}{#1}%
 }
 
+
 \newcommand\IDarg[1]{%
 	\@IDoptarg{Argument}{#1}%
+}
+
+
+\newcommand\Content[1]{%
+	\@IDoptarg{Contenu}{#1}%
 }
 
 \makeatother % Technical doc - END
@@ -133,7 +162,7 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.5.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
 \date{2019-10-10}
@@ -229,7 +258,7 @@ Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \
 
 \section{Quelques gestions d'espaces}
 
-	\subsection{Espace et fraction}
+\subsection{Espace et fraction}
 
 Si vous utilisez \verb+\frac+ ou \verb+\dfrac+ alors de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \verb+\stdfrac+ et \verb+\stddfrac+ . Voici un exemple.
 
@@ -242,7 +271,7 @@ Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 
 %\section{Quelques gestions d'espaces}
 
-	\subsection{Espace et racines n-ièmes d'un réel}
+\subsection{Espace et racines n-ièmes d'un réel}
 
 \verb+\sqrt+ a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \verb+\stdsqrt+ . Voici un exemple.
 
@@ -256,7 +285,7 @@ Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
 
 %\section{Quelques gestions d'espaces}
 
-	\subsection{Sommes et produits en mode ligne}
+\subsection{Sommes et produits en mode ligne}
 
 Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=0}^{n}$ et non $\dsum_{k=0}^{n}$ sauf si l'on utilise la commande \verb+\displaystyle+.
 Les macros \verb+\dsum+ et \verb+\dprod+ permettent de se passer de \verb+\displaystyle+.
@@ -274,7 +303,7 @@ $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 
 %\section{Quelques gestions d'espaces}
 
-	\subsection{Espace et point-virgule avec l'option \texttt{french} de \texttt{babel}}
+\subsection{Espace et point-virgule avec l'option \texttt{french} de \texttt{babel}}
 
 \textbf{Seulement si vous utilisez \texttt{babel} avec l'option \texttt{french}}, comme c'est le cas dans cette documentation, alors vous verrez le même espacement autour du point-virgule dans $A(x;y)$. Que c'est beau !
 
@@ -283,11 +312,11 @@ $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 
 \section{Logique et fondements}
 
-    \subsection{Différents types d'égalités \og standard \fg}
-    
+\subsection{Différents types d'égalités \og standard \fg}
+
 D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité. Voici ce qui est proposé.
 
-        \subsubsection{Définir quelque chose}
+\subsubsection{Définir quelque chose}
 
 L'exemple suivant montre trois façons de rédiger une égalité signifiant une définition
 \footnote{
@@ -296,12 +325,12 @@ L'exemple suivant montre trois façons de rédiger une égalité signifiant une 
 \emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
 
 \begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures 
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures
 symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
 \end{tcblisting}
 
 
-        \subsubsection{Indiquer une identité}
+\subsubsection{Indiquer une identité}
 
 L'exemple suivant montre deux façons de rédiger des identités, la noptation symbolique n'étant pas standard \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
 
@@ -311,7 +340,7 @@ On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2
 \end{tcblisting}
 
 
-        \subsubsection{Une égalité à vérifier ou non, une hypothèse, une condition}
+\subsubsection{Une égalité à vérifier ou non, une hypothèse, une condition}
 
 Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
 
@@ -327,7 +356,7 @@ Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 \end{tcblisting}
 
 
-        \subsubsection{Une égalité indiquant le choix d'une valeur}
+\subsubsection{Une égalité indiquant le choix d'une valeur}
 
 La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
 
@@ -338,8 +367,8 @@ et affirmer que $123^2 \geq 16$.
 
 
 
-	    \subsubsection{Différents types d'inéquations}
-    
+\subsubsection{Différents types d'inéquations}
+
 Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique et que l'on pas la version \emph{\og {choix} \fg}. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
 
 \begin{tcblisting}{}
@@ -352,7 +381,7 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 \end{tcblisting}
 
 
-		\subsection{Textes utilisés} \label{text-for-opes}
+	\subsection{Textes utilisés} \label{text-for-opes}
 
 Voici les macros définissant les textes utilisés qui tiennet compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+.
 
@@ -373,9 +402,9 @@ Voici les macros définissant les textes utilisés qui tiennet compte de l'utili
 
 %\section{Logique et fondements}
 
-    \subsection{Équivalences et implications}
+\subsection{Équivalences et implications}
 
-	    \subsubsection{Des symboles supplémentaires}
+\subsubsection{Des symboles supplémentaires}
 
 En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, le verlan de \verb+\implies+ pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
 
@@ -395,7 +424,7 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 \end{tcblisting}
 
 
-    	\subsubsection{Équivalences et implications verticales}
+\subsubsection{Équivalences et implications verticales}
 
 Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales des symboles d'équivalence et d'implication. Voici comment les obtenir.
 
@@ -412,10 +441,10 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 
 %\section{Logique et fondements}
 
-    \subsection{Détailler un raisonnement} \label{explain-proof}
-    
-	    \paragraph{Un exemple sur une petite étape}
-    
+\subsection{Détailler un raisonnement} \label{explain-proof}
+
+	\paragraph{Un exemple sur une petite étape}
+
 La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
 \begin{tcblisting}{}
@@ -435,22 +464,22 @@ $\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
-	
+
 
 \verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
 \begin{itemize}
 	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
-	
+
 	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
-	
-	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.	
+
+	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.
 \end{itemize}
 
 
-	
-	    \paragraph{Détailler des calculs}
-    
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul. 
+
+	\paragraph{Détailler des calculs}
+
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul.
 
 \begin{tcblisting}{}
 \begin{flalign*}
@@ -473,7 +502,7 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{explain}{2}
 
@@ -488,28 +517,28 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 \section{Ensembles}
 
-    \subsection{Différents types d'ensembles}
+\subsection{Différents types d'ensembles}
 
-        \subsubsection{Ensembles versus accolades}
+\subsubsection{Ensembles versus accolades}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Un ensemble de beaux nombres : $\geneset{1 ; 3 ; 5}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Choisissez votre camp :
 $\displaystyle \geneset{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
-ou 
+ou
 $\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{geneset}{1}
 
@@ -518,9 +547,9 @@ $\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
 \IDarg{} la définition de l'ensemble.
 
 
-        \subsubsection{Ensembles pour la géométrie}
+\subsubsection{Ensembles pour la géométrie}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez écrire sémantiquement $\geoset{C}$, $\geoset{D}$ et $\geoset{d}$ mais pas
@@ -528,14 +557,14 @@ taper \verb+$\geoset{ABC}$+.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{geoset}{1}
 
@@ -552,9 +581,9 @@ Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
 \IDarg{2} un texte donnant $d$ dans le nom $\geoset*{U}{d}$ d'un ensemble géométrique.
 
 
-        \subsubsection{Ensembles probabilistes}
+\subsubsection{Ensembles probabilistes}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez écrire sémantiquement $\probaset{E}$ et $\probaset{G}$ mais pas taper
@@ -562,14 +591,14 @@ Vous pouvez écrire sémantiquement $\probaset{E}$ et $\probaset{G}$ mais pas ta
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{probaset}{1}
 
@@ -587,9 +616,9 @@ Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 
 
 
-        \subsubsection{Ensembles pour l'algèbre générale}
+\subsubsection{Ensembles pour l'algèbre générale}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez écrire sémantiquement $\algeset{A}$, $\algeset{K}$, $\algeset{h}$ et
@@ -597,14 +626,14 @@ $\algeset{k}$ mais pas taper \verb+$\algeset{ABC}$+.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{algeset}{1}
 
@@ -622,7 +651,7 @@ Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
 
 
 
-        \subsubsection{Ensembles classiques}
+\subsubsection{Ensembles classiques}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
@@ -632,7 +661,7 @@ enfin $\OO$ pour les octonions.
 
 
 
-        \subsubsection{Ensembles classiques suffixés}
+\subsubsection{Ensembles classiques suffixés}
 
 \begin{tcblisting}{}
 Il est facile de taper $\RRn$, $\RRp$, $\RRs$, $\RRsn$ et $\RRsp$.
@@ -677,9 +706,9 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car
 
 
 
-        \subsubsection{Des suffixes à la carte}
+\subsubsection{Des suffixes à la carte}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
 Il est tout de même possible d'écrire $\specialset{\CC}{n}$ ou $\specialset{\HH}{sp}$.
@@ -687,7 +716,7 @@ Il y a aussi $\specialset*{\probaset{P}}{n}$ avec une autre mise en forme.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{specialset}{2}
 
@@ -702,11 +731,11 @@ Il y a aussi $\specialset*{\probaset{P}}{n}$ avec une autre mise en forme.
 
 % \section{Sets}
 
-    \subsection{Intervalles}
-    
-        \subsubsection{Intervalles réels - Notation française (?\,)}
+\subsection{Intervalles}
 
-            \paragraph{Exemple d'utilisation 1}
+\subsubsection{Intervalles réels - Notation française (?\,)}
+
+\paragraph{Exemple d'utilisation 1}
 
 Dans cet exemple, la syntaxe fait référence à \textbf{O}-pened et \textbf{C}-losed pour "ouvert" et "fermé" en anglais.
 Nous verrons que \textbf{CC} et \textbf{OO} sont contractés en \textbf{C} et \textbf{O}.
@@ -717,7 +746,7 @@ un problème d'espacement vis à vis du signe $=$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Les crochets s'étendent verticalement automatiquement. Pour empêcher cela, il suffit d'utiliser la version étoilée de la macro.
 Dans ce cas, les crochets restent tout de même un peu plus grands que des crochets utilisés directement. Voici un exemple.
@@ -729,7 +758,7 @@ $\displaystyle \intervalC{ \frac{1}{2} }{ 1^{2^{3}} }
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
 
@@ -787,9 +816,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-        \subsubsection{Intervalles réels - Notation américaine}
+\subsubsection{Intervalles réels - Notation américaine}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 Dans cet exemple, la syntaxe fait référence à \textbf{P}-arenthèse.
 
@@ -799,7 +828,7 @@ un intervalle ouvert se tape $\intervalP{a}{b} = (a ; b)$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
 
@@ -845,9 +874,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-        \subsubsection{Intervalles discrets d'entiers}
+\subsubsection{Intervalles discrets d'entiers}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 Dans l'exemple, la syntaxe fait référence à $\ZZ$ l'ensemble des entiers relatifs.
 
@@ -857,7 +886,7 @@ $\ZintervalC{-1}{4} = \ZintervalO{-2}{5}$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
 
@@ -914,9 +943,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % Docs for discrete intervals - END
 
 
-        \subsubsection{Intervalles discrets d'entiers à la sauce \og informatique \fg}
+\subsubsection{Intervalles discrets d'entiers à la sauce \og informatique \fg}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 Dans l'exemple, la syntaxe fait référence à \og Computer Science \fg{} soit \og Informatique Théorique \fg{}.
 
@@ -925,7 +954,7 @@ Par définition, $\CSinterval{4}{7} = \{ 4 ; 5 ; 6 ; 7 \}$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{CSinterval}{2}
 
@@ -939,32 +968,32 @@ Par définition, $\CSinterval{4}{7} = \{ 4 ; 5 ; 6 ; 7 \}$.
 $\smallsetminus$
 \section{Géométrie}
 
-    \subsection{Points et lignes}
+\subsection{Points et lignes}
 
-	    \subsubsection{Points}
+\subsubsection{Points}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 $\pt{I}$ indique un point nommé "I".
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 3}
+\paragraph{Exemple d'utilisation 3}
 
 \begin{tcblisting}{}
 Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{pt}{1}
 
@@ -990,8 +1019,8 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 
 
 
-	    \subsubsection{Droites parallèles ou non}
-	    
+\subsubsection{Droites parallèles ou non}
+
 Les opérateurs \verb+\parallel+ et \verb+\notparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\nparallel+ est fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
 
 \begin{tcblisting}{}
@@ -1004,11 +1033,11 @@ $(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
 
 % \section{Géométrie}
 
-    \subsection{Vecteurs}
+\subsection{Vecteurs}
 
 		\subsubsection{Les écrire}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Voici un vecteur $\vect{ABCDEF}$ avec beaucoup de lettres et vous pouvez écrire
@@ -1016,7 +1045,7 @@ $\vect*{e}{rot}$ au lieu de $\vect{e_{rot}}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Vous pouvez écrire $\vect{i}$ and $\vect*{j}{2}$ sans point.
@@ -1024,7 +1053,7 @@ Vous pouvez écrire $\vect{i}$ and $\vect*{j}{2}$ sans point.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{vect}{1}
 
@@ -1045,14 +1074,14 @@ Vous pouvez écrire $\vect{i}$ and $\vect*{j}{2}$ sans point.
 
 % \section{Géométrie}
 
-%    \subsection{Vecteurs}
+%\subsection{Vecteurs}
 
 		\subsubsection{Norme}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
-Nous pouvons écrire $\norm{\vect{i}}$, $\displaystyle \norm{\frac{2}{7} \vect*{e}{k}}$, 
+Nous pouvons écrire $\norm{\vect{i}}$, $\displaystyle \norm{\frac{2}{7} \vect*{e}{k}}$,
 ou $\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ avec de petites barres verticales.
 \end{tcblisting}
 
@@ -1062,7 +1091,7 @@ ou $\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ avec de petites barres verti
 \end{remark}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{norm}{1}
 
@@ -1075,11 +1104,11 @@ ou $\displaystyle \norm*{\frac{2}{7} \vect*{e}{k}}$ avec de petites barres verti
 
 % \section{Géométrie}
 
-%    \subsection{Vecteurs}
+%\subsection{Vecteurs}
 
 		\subsubsection{Produit scalaire -- Écriture minimaliste}
 
-            \paragraph{Exemple d'utilisation - Version longue}
+\paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est usage d'écrire un produit scalaire avec un point via
@@ -1087,7 +1116,7 @@ $\dotprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
+\paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
 
@@ -1096,7 +1125,7 @@ On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{dotprod}{2}
 
@@ -1130,7 +1159,7 @@ $\displaystyle \vadotprod*{i}{j}$ .
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{adotprod}{2} où \quad \verb&a = a-ngle&
 
@@ -1156,21 +1185,21 @@ $\displaystyle \vadotprod*{i}{j}$ .
 
 		\subsubsection{Produit vectoriel}
 
-            \paragraph{Exemple d'utilisation - Version longue}
+\paragraph{Exemple d'utilisation - Version longue}
 
 \begin{tcblisting}{}
 Un produit vectoriel peut s'écrire via $\crossprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation - Version courte mais restrictive}
+\paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
 \begin{tcblisting}{}
 Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{crossprod}{2}
 
@@ -1193,9 +1222,9 @@ Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
 
 %\section{Géométrie}
 
-    \subsection{Coordonnées}
+\subsection{Coordonnées}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 On peut choisir d'écrire
@@ -1205,18 +1234,18 @@ $\displaystyle \pt{I} \coord*{\frac{1}{3} | -4 | 0}$ .
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ertical.
 
 \begin{tcblisting}{}
 Pour les vecteurs, on peut préférer $\vect{i} \vcoord{3 | -4 | 0}$, voire
-$\vect{i} \vcoord*{3 | -4 | 0}$ , à la place de $\vect{i} \coord{3 | -4 | 0}$ 
+$\vect{i} \vcoord*{3 | -4 | 0}$ , à la place de $\vect{i} \coord{3 | -4 | 0}$
 afin de bien différencier les coordonnées de points de celles de vecteurs.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{coord}{1}
 
@@ -1239,9 +1268,9 @@ afin de bien différencier les coordonnées de points de celles de vecteurs.
 
 % \section{Géométrie}
 
-    \subsection{Nommer un repère}
+\subsection{Nommer un repère}
 
-            \paragraph{Exemple d'utilisation 1 -- La méthode basique}
+\paragraph{Exemple d'utilisation 1 -- La méthode basique}
 
 Commençons par la manière la plus basique d'écrire un repère \textit{(nous verrons d'autres méthodes qui peuvent être plus efficaces)}.
 
@@ -1251,7 +1280,7 @@ un repère cartésien $\axes{\pt{O} | \pt{I} | \pt{J}}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2 -- La méthode basique en version étoilée}
+\paragraph{Exemple d'utilisation 2 -- La méthode basique en version étoilée}
 
 Dans l'exemple ci-dessous, on voit que la version étoilée produit des petites parenthèses.
 \begin{tcblisting}{}
@@ -1261,7 +1290,7 @@ $\displaystyle \axes*{\pt{O} | \frac{7}{3} \vect{i} | \vect{j}}$
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 3 -- La méthode basique en dimension quelconque}
+\paragraph{Exemple d'utilisation 3 -- La méthode basique en dimension quelconque}
 
 Il faut au minimum deux "morceaux" séparés par des barres \verb+|+, cas de la dimension $1$, mais il n'y a pas de maximum, cas d'une dimension quelconque $n > 0$.
 
@@ -1271,7 +1300,7 @@ $\axes{\pt{O} | \vect*{i}{1} | \vect*{i}{2} | \vect*{i}{3} | \dots |
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 4 -- Repère affine}
+\paragraph{Exemple d'utilisation 4 -- Repère affine}
 
 Dans l'exemple suivant, le préfixe \verb+p+ est pour \textbf{p}-oint.
 
@@ -1280,7 +1309,7 @@ $\paxes{O | I | J | K}$ évite de taper $\axes{\pt{O} | \pt{I} | \pt{J} | \pt{K}
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
+\paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ecteur.
 
@@ -1289,7 +1318,7 @@ $\vaxes{\pt{O} | i | j}$ est un raccourci de $\axes{\pt{O} | \vect{i} | \vect{j}
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
+\paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
 
 Dans l'exemple suivant, le préfixe \verb+pv+ permet de combiner à la fois les fonctionnalités proposés par les préfixes \verb+p+ et \verb+v+.
 
@@ -1299,7 +1328,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{axes}{1}
 
@@ -1309,7 +1338,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est l'origine du repère.
-	
+
 	\item Les morceaux suivants sont des points ou des vecteurs qui "définissent" chaque axe.
 \end{itemize}
 
@@ -1322,7 +1351,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
-	
+
 	\item Viennent ensuite les noms des points "définissant" chaque axe. Pour chacun de ces points la macro-commande \verb+\pt+ sera automatiquement appliquée.
 \end{itemize}
 
@@ -1335,7 +1364,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est l'origine du repère.
-	
+
 	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
 \end{itemize}
 
@@ -1348,7 +1377,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
-	
+
 	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
 \end{itemize}
 
@@ -1357,9 +1386,9 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 % \section{Géométrie}
 
-    \subsection{Arcs circulaires}
+\subsection{Arcs circulaires}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Voici un arc $\arc{ABCDEF}$ utilisant beaucoup de lettres, et vous pouvez écrire
@@ -1367,7 +1396,7 @@ $\arc*{A}{rot}$ à la place de $\arc{A_{rot}}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
@@ -1375,7 +1404,7 @@ $\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{arc}{1}
 
@@ -1396,19 +1425,19 @@ $\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
 
 % \section{Géométrie}
 
-    \subsection{Angles}
-    
+\subsection{Angles}
+
 		\subsubsection{Angles géométriques intérieurs}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Voici un angle géométrique intérieur $\anglein{ABCDEF}$ avec un long nom, et vous 
+Voici un angle géométrique intérieur $\anglein{ABCDEF}$ avec un long nom, et vous
 pouvez écrire $\anglein*{A}{rot}$ au lieu de $\anglein{A_{rot}}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Vous pouvez aussi écrire $\anglein{i}$ and $\anglein*{j}{2}$ sans point.
@@ -1416,7 +1445,7 @@ Vous pouvez aussi écrire $\anglein{i}$ and $\anglein*{j}{2}$ sans point.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{anglein}{1}
 
@@ -1437,11 +1466,11 @@ Vous pouvez aussi écrire $\anglein{i}$ and $\anglein*{j}{2}$ sans point.
 
 % \section{Géométrie}
 
-%    \subsection{Angles}
-    
+%\subsection{Angles}
+
 		\subsubsection{Angles orientés de vecteurs}
 
-            \paragraph{Sans chapeau - Version longue}
+\paragraph{Sans chapeau - Version longue}
 
 \begin{tcblisting}{}
 En mathématique, il est d'usage de noter les angles orientés via
@@ -1452,7 +1481,7 @@ $\displaystyle \angleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
 
 
 
-            \paragraph{Sans chapeau - Version courte mais restrictive}
+\paragraph{Sans chapeau - Version courte mais restrictive}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
 \begin{tcblisting}{}
@@ -1464,7 +1493,7 @@ $\displaystyle \vangleorient*{i}{j}$ (la seconde écriture n'apporte rien de nou
 
 
 
-            \paragraph{Avec un chapeau}
+\paragraph{Avec un chapeau}
 
 Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-at, et \verb+v+ pour \textbf{v}-ector.
 
@@ -1479,7 +1508,7 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{angleorient}{2}
 
@@ -1506,12 +1535,12 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 
 \section{Analyse}
 
-    \subsection{Constantes}
+\subsection{Constantes}
 
-        \subsubsection{Constantes classiques}
+\subsubsection{Constantes classiques}
 
-            \paragraph{La liste complète}
-       
+\paragraph{La liste complète}
+
 % List of classical constants - START
 
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
@@ -1530,9 +1559,9 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 
 
 
-        \subsubsection{Constantes latines personnelles}
+\subsubsection{Constantes latines personnelles}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
 Il est aisé d'écrire $\ct{a} x^2 + \ct{b} x + \ct{c}$ au lieu de $a x^2 + b x + c$
@@ -1540,7 +1569,7 @@ afin de souligner que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{ct}{1}
 
@@ -1551,9 +1580,9 @@ afin de souligner que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
 
 % \section{Analysis}
 
-    \subsection{La fonction valeur absolue}
+\subsection{La fonction valeur absolue}
 
-            \paragraph{Un exemple d'utilisation}
+\paragraph{Un exemple d'utilisation}
 
 \begin{tcblisting}{}
 Il est facile d'écrire $\abs{2}$ ou $\displaystyle \abs{\frac{3}{5}}$ voire aussi
@@ -1566,7 +1595,7 @@ $\displaystyle \abs*{\frac{3}{5}}$ si vous préférez des petits traits verticau
 \end{remark}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{abs}{1}
 
@@ -1579,9 +1608,9 @@ $\displaystyle \abs*{\frac{3}{5}}$ si vous préférez des petits traits verticau
 
 % \section{Analysis}
 
-    \subsection{Fonctions nommées spéciales}
+\subsection{Fonctions nommées spéciales}
 
-        \subsubsection{Un exemple d'utilisation}
+\subsubsection{Un exemple d'utilisation}
 
 \begin{tcblisting}{}
 Quelques fonctions nommées supplémentaires (voir la liste ecomplète ci-dessous) :
@@ -1589,7 +1618,7 @@ $\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x =\logb{2} x$ and $\expb{6} y$.
 \end{tcblisting}
 
 
-        \subsubsection{Fonctions nommées sans paramètre}
+\subsubsection{Fonctions nommées sans paramètre}
 
 Toutes les macros suivantes n'ont aucun paramètre.
 
@@ -1611,9 +1640,9 @@ Toutes les macros suivantes n'ont aucun paramètre.
 
 
 
-        \subsubsection{Fonctions nommées avec un paramètre}
+\subsubsection{Fonctions nommées avec un paramètre}
 
-            \paragraph{La liste complète}
+\paragraph{La liste complète}
 
 Toutes les macros suivantes ont un seul paramètre.
 
@@ -1629,7 +1658,7 @@ Toutes les macros suivantes ont un seul paramètre.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{expb}{1}
 
@@ -1642,9 +1671,9 @@ Toutes les macros suivantes ont un seul paramètre.
 
 % \section{Analysis}
 
-    \subsection{Des notations complémentaires pour des suites spéciales}
+\subsection{Des notations complémentaires pour des suites spéciales}
 
-            \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
 Parfois nous avons besoin d'écrire $\seqplus{F}{1}{2}$ ou $\hypergeo{F}{1}{2}$ et
@@ -1652,7 +1681,7 @@ le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{seqplus}{2}
 
@@ -1689,19 +1718,19 @@ le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
 
 % \section{Analysis}
 
-    \subsection{Calcul différentiel}
+\subsection{Calcul différentiel}
 
-        \subsubsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
+\subsubsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
                                {Les opérateurs "d rond" et "d droit"}}
 
-           \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
 Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
 \end{tcblisting}
 
 
-           \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro{dd}{1}{1}
 
@@ -1713,9 +1742,9 @@ Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
 
 
 
-        \subsubsection{Dérivation totale}
+\subsubsection{Dérivation totale}
 
-           \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 $\displaystyle \derpow*{f} (a) = \derpow{f} (a)
@@ -1724,7 +1753,7 @@ $\displaystyle \derpow*{f} (a) = \derpow{f} (a)
 \end{tcblisting}
 
 
-           \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $\displaystyle \derpow*[3]{f}(a) = \derpow[3]{f} (a)
@@ -1735,16 +1764,16 @@ de primes à gauche (mais le compte y est).
 \end{tcblisting}
 
 
-           \paragraph{Exemple d'utilisation 3}
+\paragraph{Exemple d'utilisation 3}
 
 \begin{tcblisting}{}
 Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
-   $\displaystyle \derpow[3]{f} (a) 
+   $\displaystyle \derpow[3]{f} (a)
                 = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
 \end{tcblisting}
 
 
-           \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro{derpow}{1}{1}
 
@@ -1772,9 +1801,9 @@ Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
 
 
 
-        \subsubsection{Dérivation partielle}
+\subsubsection{Dérivation partielle}
 
-           \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 $\displaystyle \partialfrac{f}{x} (a;b)
@@ -1783,7 +1812,7 @@ $\displaystyle \partialfrac{f}{x} (a;b)
 \end{tcblisting}
 
 
-           \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $\displaystyle \partialfrac[3]{G}{f^2 | v} (a;b)
@@ -1793,7 +1822,7 @@ $\displaystyle \partialfrac[3]{G}{f^2 | v} (a;b)
 \end{tcblisting}
 
 
-           \paragraph{Exemple d'utilisation 3}
+\paragraph{Exemple d'utilisation 3}
 
 \begin{tcblisting}{}
 Si $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$ alors nous avons
@@ -1802,7 +1831,7 @@ Si $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$ alors nous avons
 \end{tcblisting}
 
 
-           \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro{partialfrac}{1}{2}
 
@@ -1831,11 +1860,11 @@ Si $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$ alors nous avons
 
 % \section{Analysis}
 
-    \subsection{Calcul intégral}
+\subsection{Calcul intégral}
 
-        \subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
+\subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Par définition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ où
@@ -1843,7 +1872,7 @@ $\hook{F(x)}{a}{b} = F(b) - F(a)$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Par défaut, les crochets s'étirent verticalement si besoin, mais si cela vous dérange, vous pouvez faire appel à la version étoilée de la macro comme dans l'exemple suivant
 
@@ -1853,7 +1882,7 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{hook}{3}
 
@@ -1867,16 +1896,16 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-        \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
+\subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser $\vhook{F(x)}{a}{b}$ au lieu de $\hook{F(x)}{a}{b}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Tout comme avec la première version de l'opérateur crochet, vous pouvez utiliser une version étoilée pour empêcher l'étirement verticalement du trait vertical. Voici un exemple.
 
@@ -1886,7 +1915,7 @@ $\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{vhook}{3}
 
@@ -1900,7 +1929,7 @@ $\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-        \subsubsection{Intégrales multiples}
+\subsubsection{Intégrales multiples}
 
 Le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
 
@@ -1924,14 +1953,14 @@ $\displaystyle
 
 % \section{Analysis}
 
-    \subsection{Tableaux de variation et de signe}
+\subsection{Tableaux de variation et de signe}
 
-            \paragraph{Comment ça marche ?}
+\paragraph{Comment ça marche ?}
 
 Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible. Nous vous demandons donc de vous reporter à la documentation de \verb+tkz-tab+ pour savoir comment s'y prendre.
 
 
-            \paragraph{Un exemple de tableaux de signes}
+\paragraph{Un exemple de tableaux de signes}
 
 \begin{tcblisting}{}
 \begin{tikzpicture}
@@ -1941,7 +1970,7 @@ Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix 
 \end{tcblisting}
 
 
-            \paragraph{Un exemple de tableaux de variation}
+\paragraph{Un exemple de tableaux de variation}
 
 \begin{tcblisting}{}
 \begin{tikzpicture}
@@ -1951,7 +1980,7 @@ Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix 
 \end{tcblisting}
 
 
-            \paragraph{Un exemple de tableaux de variation avec une dérivée}
+\paragraph{Un exemple de tableaux de variation avec une dérivée}
 
 \begin{tcblisting}{}
 \begin{tikzpicture}
@@ -1964,30 +1993,28 @@ Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix 
 
 
 
-
-
 % \section{Analysis}
 
-    \subsection{Comparaison asymptotique de suites et de fonctions}
+\subsection{Comparaison asymptotique de suites et de fonctions}
 
-        \subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
+\subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
                                {Les notations "grand O" et "petit O"}}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser les symboles $\bigO{}$ et $\smallO{}$ créés par Landau.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO{t}}$.
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{bigO}{1}
 
@@ -1997,17 +2024,17 @@ Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO
 
 
 
-        \subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
                                {La notation "grand Omega"}}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser le symbole $\bigomega{}$ créé par Hardy et Littlewood.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $f(n) = \bigomega{g(n)}$ signifie :
@@ -2015,7 +2042,7 @@ $\exists (m, n_0)$ tel que $n \geqslant n_0$ implique $f(n) \geqslant m g(n)$.
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{bigomega}{1}
 
@@ -2023,17 +2050,17 @@ $\exists (m, n_0)$ tel que $n \geqslant n_0$ implique $f(n) \geqslant m g(n)$.
 
 
 
-        \subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
                                {La notation "grand Theta"}}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Voici le dernier symbole $\bigtheta{}$ qui peut rendre service.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $n \geqslant n_0$
@@ -2041,7 +2068,7 @@ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{bigtheta}{1}
 
@@ -2052,7 +2079,7 @@ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
 
 \section{Probabilité}
 
-    \subsection{Probabilité conditionnelle}
+\subsection{Probabilité conditionnelle}
 
 			\paragraph{Un exemple type}
 
@@ -2060,13 +2087,13 @@ Dans l'exemple ci-dessous, les options \texttt{x} et \texttt{X} font référence
 
 \begin{tcblisting}{}
 Écrire des probabilités conditionnelles :
-$\probacond{p}{A}{B} = \probacond*{p}{A}{B} 
-                     = \probacond[x]{p}{A}{B} 
+$\probacond{p}{A}{B} = \probacond*{p}{A}{B}
+                     = \probacond[x]{p}{A}{B}
                      = \probacond[X]{p}{A}{B}$.
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro{probacond}{1}{3}
 
@@ -2085,17 +2112,17 @@ $\probacond{p}{A}{B} = \probacond*{p}{A}{B}
 
 %\section{Probabilité}
 
-    \subsection{Arbres pondérés}
-    
-            \paragraph{Que se passe-t-il en coulisse ?}
+\subsection{Arbres pondérés}
+
+\paragraph{Que se passe-t-il en coulisse ?}
 
 Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. Ceci permet de faire des choses sympatiques comme dans l'exemple qui suit où l'on encadre un sous-arbre.
 
 
-            \paragraph{Un exemple type}
+\paragraph{Un exemple type}
 
 \begin{tcblisting}{}
-\probatree{
+\begin{probatree}
     [
         [$A$, name=left, edge label={node[midway, fill=white]{$a$}}
             [$B$, name=topright, edge label={node[midway, fill=white]{$b$}}]
@@ -2107,27 +2134,28 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
         ]
     ]
     \node[draw=blue, thick, rounded corners, fit=(left)(topright)(bottomright)] {};
-}
+\end{probatree}
+
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
-\IDmacro*{probatree}{1}
+\IDenv*{probatree}
 
-\IDarg{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+\Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
 
 
 
 
 \section{Arithmétique}
 
-	\subsection{Opérateurs de base}
+\subsection{Opérateurs de base}
 
 Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+ ont été ajoutés comme alias de \verb+\mid+, \verb+\nmid+ et \verb+\bmod+ respectivement qui sont proposés par le package \verb+amssymb+.
 
 \begin{tcblisting}{}
-$10 \divides 150$ et $10 \notdivides 154$ rend mieux que $10 | 150$ et $10 \not| 154$.
+$10 \divides 150$ et $10 \notdivides 154$ c'est mieux que $10 | 150$ et $10 \not| 154$.
 
 De plus, il est facile d'écrire que $a \equiv b \modulo p \iff p \divides (a - b)$.
 \end{tcblisting}
@@ -2135,16 +2163,13 @@ De plus, il est facile d'écrire que $a \equiv b \modulo p \iff p \divides (a - 
 
 
 
-
-
-
 %\subsection{Arithmétiques}
 
-    \subsection{Fractions continuées}
+\subsection{Fractions continuées}
 
-            \subsubsection{Fractions continuées standard}
+\subsubsection{Fractions continuées standard}
 
-                \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
@@ -2154,7 +2179,7 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 \end{tcblisting}
 
 
-                \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{contfrac}{1}
 
@@ -2165,9 +2190,9 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 
 
 
-        \subsubsection{Fractions continuées généralisées}
+\subsubsection{Fractions continuées généralisées}
 
-                \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 Voici comment écrire une fraction continuée généralisée.
 
@@ -2177,7 +2202,7 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 \end{tcblisting}
 
 
-                \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{contfracgene}{1}
 
@@ -2187,9 +2212,9 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 
 
 
-        \subsubsection{Comme une fraction continuée isolée}
+\subsubsection{Comme une fraction continuée isolée}
 
-                \paragraph{Exemple d'utilisation}
+\paragraph{Exemple d'utilisation}
 
 La raison d'être de la macro ci-dessous vient juste de son usage en interne.
 
@@ -2198,7 +2223,7 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 \end{tcblisting}
 
 
-                \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -2208,10 +2233,10 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 
 
 
-        \subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
+\subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
                                {L'opérateur K}}
 
-                \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \IDconstant{contfracope}
 
@@ -2229,7 +2254,7 @@ $\displaystyle
 \end{remark}
 
 
-                \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
 $\displaystyle
@@ -2242,11 +2267,11 @@ $\displaystyle
 
 \section{Algèbre}
 
-	\subsection{Polynômes, séries formelles et compagnie}
+\subsection{Polynômes, séries formelles et compagnie}
 
-        \subsubsection{Polynômes et fractions polynômiales}
+\subsubsection{Polynômes et fractions polynômiales}
 
-            \paragraph{Exemple d'utilisation 1 : Polynômes}
+\paragraph{Exemple d'utilisation 1 : Polynômes}
 
 \begin{tcblisting}{}
 $\polyset{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
@@ -2256,18 +2281,18 @@ en les variables $X$ , $Y$ et $Z$.
 
 
 
-            \paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
+\paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
 
 \begin{tcblisting}{}
-$\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent 
+$\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
 d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 \end{tcblisting}
 
 
 
-        \subsubsection{Séries formelles et leurs corps de fractions}
+\subsubsection{Séries formelles et leurs corps de fractions}
 
-            \paragraph{Exemple d'utilisation 1 : Séries formelles}
+\paragraph{Exemple d'utilisation 1 : Séries formelles}
 
 \begin{tcblisting}{}
 $\serieset{\CC}{X}$ et $\serieset{\CC}{T | O | P}$ permettent de travailler avec des
@@ -2276,7 +2301,7 @@ séries formelles à coefficients complexes.
 
 
 
-            \paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
+\paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
 
 \begin{tcblisting}{}
 $\seriefracset{\ZZ}{X}$ et $\seriefracset{\ZZ}{Z | T | O | P}$ permettent de travailler
@@ -2285,9 +2310,9 @@ avec des fractions de séries formelles à coefficients entiers.
 
 
 
-        \subsubsection{Polynômes de Laurent et séries formelles de Laurent}
+\subsubsection{Polynômes de Laurent et séries formelles de Laurent}
 
-            \paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
+\paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
 
 \begin{tcblisting}{}
 $\polylaurentset{\RR}{X} = \polyset{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
@@ -2297,17 +2322,17 @@ $\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}
 
 
 
-            \paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
+\paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
 
 \begin{tcblisting}{}
-$\serielaurentset{\QQ}{X} = \serieset{\QQ}{X | X^{-1}}$ est l'ensemble des séries 
+$\serielaurentset{\QQ}{X} = \serieset{\QQ}{X | X^{-1}}$ est l'ensemble des séries
 formelles rationnelles de Laurent en $X$. On généralise via, notation non standard,
 $\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
 \end{tcblisting}
 
 
 
-        \subsubsection{Toutes les fiches techniques}
+\subsubsection{Toutes les fiches techniques}
 
 \IDmacro*{polyset}{2}
 
@@ -2330,14 +2355,14 @@ $\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-
 
 %\section{Algèbre}
 
-    \subsection{Matrices}
+\subsection{Matrices}
 
-            \paragraph{Comment ça marche ?}
+\paragraph{Comment ça marche ?}
 
 Tout le boulot est fait par le package \verb+nicematrix+ auquel on impose l'option \verb+transparent+. Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre.
 
 
-            \paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
 
 \begin{tcblisting}{}
 $\begin{pmatrix}
@@ -2349,7 +2374,7 @@ $\begin{pmatrix}
 \end{tcblisting}
 
 
-            \paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
 
 \begin{tcblisting}{}
 $\begin{pNiceMatrix}[name=mymatrix]
@@ -2363,7 +2388,7 @@ $\begin{pNiceMatrix}[name=mymatrix]
 \end{tcblisting}
 
 
-            \paragraph{Exemple 3 tiré de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 3 tiré de la documentation de \texttt{nicematrix}}
 
 \begin{tcblisting}{}
 $\left(
@@ -2395,9 +2420,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}
         \item En probabilité, deux nouvelles macros.
         \begin{itemize}
-            \item \verb+\probacond+ et \verb+\probacond*+ servent à écrire des probabilités conditionnelles.
+            \item Les macros \verb+\probacond+ et \verb+\probacond*+ servent à écrire des probabilités conditionnelles.
 
-            \item \verb+\probatree+ simplifie la production d'arbres probabilistes pondérés et aussi d'arbres de décision.
+            \item L'environnement \verb+\probatree+ simplifie la production d'arbres probabilistes pondérés et aussi d'arbres de décision.
         \end{itemize}
 
         \item En géométrie, la macro \verb+\notparallel+ a été rajoutée.

@@ -16,10 +16,10 @@
 
 %\section{Logique et fondements}
 
-    \subsection{Détailler un raisonnement} \label{explain-proof}
-    
-	    \paragraph{Un exemple sur une petite étape}
-    
+\subsection{Détailler un raisonnement} \label{explain-proof}
+
+	\paragraph{Un exemple sur une petite étape}
+
 La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
 \begin{tcblisting}{}
@@ -39,22 +39,22 @@ $\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
-	
+
 
 \verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
 \begin{itemize}
 	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
-	
+
 	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
-	
-	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.	
+
+	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.
 \end{itemize}
 
 
-	
-	    \paragraph{Détailler des calculs}
-    
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul. 
+
+	\paragraph{Détailler des calculs}
+
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul.
 
 \begin{tcblisting}{}
 \begin{flalign*}
@@ -77,7 +77,7 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{explain}{2}
 

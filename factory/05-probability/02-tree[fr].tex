@@ -14,17 +14,17 @@
 
 %\section{Probabilité}
 
-    \subsection{Arbres pondérés}
-    
-            \paragraph{Que se passe-t-il en coulisse ?}
+\subsection{Arbres pondérés}
+
+\paragraph{Que se passe-t-il en coulisse ?}
 
 Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. Ceci permet de faire des choses sympatiques comme dans l'exemple qui suit où l'on encadre un sous-arbre.
 
 
-            \paragraph{Un exemple type}
+\paragraph{Un exemple type}
 
 \begin{tcblisting}{}
-\probatree{
+\begin{probatree}
     [
         [$A$, name=left, edge label={node[midway, fill=white]{$a$}}
             [$B$, name=topright, edge label={node[midway, fill=white]{$b$}}]
@@ -36,14 +36,15 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
         ]
     ]
     \node[draw=blue, thick, rounded corners, fit=(left)(topright)(bottomright)] {};
-}
+\end{probatree}
+
 \end{tcblisting}
 
 
-            \paragraph{Fiche technique}
+\paragraph{Fiche technique}
 
-\IDmacro*{probatree}{1}
+\IDenv*{probatree}
 
-\IDarg{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+\Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
 
 \end{document}

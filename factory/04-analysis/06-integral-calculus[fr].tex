@@ -16,7 +16,7 @@
 
     \newcommand\@interval@tool@no@star[4]{\ensuremath{ \left#1 #2 \, ; #3 \right#4}}
 \makeatother
-    
+
 \newcommand\dd[1]{d#1}
 
 
@@ -25,11 +25,11 @@
 
 % \section{Analysis}
 
-    \subsection{Calcul intégral}
+\subsection{Calcul intégral}
 
-        \subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
+\subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Par définition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ où
@@ -37,7 +37,7 @@ $\hook{F(x)}{a}{b} = F(b) - F(a)$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Par défaut, les crochets s'étirent verticalement si besoin, mais si cela vous dérange, vous pouvez faire appel à la version étoilée de la macro comme dans l'exemple suivant
 
@@ -47,7 +47,7 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{hook}{3}
 
@@ -61,16 +61,16 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-        \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
+\subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
-            \paragraph{Exemple d'utilisation 1}
+\paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser $\vhook{F(x)}{a}{b}$ au lieu de $\hook{F(x)}{a}{b}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2}
+\paragraph{Exemple d'utilisation 2}
 
 Tout comme avec la première version de l'opérateur crochet, vous pouvez utiliser une version étoilée pour empêcher l'étirement verticalement du trait vertical. Voici un exemple.
 
@@ -80,7 +80,7 @@ $\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
 \end{tcblisting}
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{vhook}{3}
 
@@ -94,7 +94,7 @@ $\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
 
 
 
-        \subsubsection{Intégrales multiples}
+\subsubsection{Intégrales multiples}
 
 Le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
 

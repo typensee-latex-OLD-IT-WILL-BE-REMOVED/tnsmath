@@ -640,6 +640,8 @@
 
 % Lines
 
+% Source
+%    * https://tex.stackexchange.com/questions/511495
 \let\stdparallel\parallel
 \renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
 
@@ -1311,7 +1313,7 @@
 
 % Source : ????
 
-\newcommand\probatree[1]{
+\newcommand\@proba@tree[1]{
     \begin{forest}
         for tree={%
             sn edges,
@@ -1369,6 +1371,11 @@
         #1
     \end{forest}
 }
+
+
+% Source: https://stackoverflow.com/a/1873617/4589608
+\newenvironment{probatree}{\startprobatree}{}
+\def\startprobatree#1\end{\@proba@tree{#1}\end}
 
 
 % --------------------- %

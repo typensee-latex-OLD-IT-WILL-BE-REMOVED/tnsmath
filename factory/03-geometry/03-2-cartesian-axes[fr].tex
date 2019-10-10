@@ -31,7 +31,7 @@
 			}%
 		}%
 	}
-	
+
 	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
 	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
 	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
@@ -43,9 +43,9 @@
 
 % \section{Géométrie}
 
-    \subsection{Nommer un repère}
+\subsection{Nommer un repère}
 
-            \paragraph{Exemple d'utilisation 1 -- La méthode basique}
+\paragraph{Exemple d'utilisation 1 -- La méthode basique}
 
 Commençons par la manière la plus basique d'écrire un repère \textit{(nous verrons d'autres méthodes qui peuvent être plus efficaces)}.
 
@@ -55,7 +55,7 @@ un repère cartésien $\axes{\pt{O} | \pt{I} | \pt{J}}$.
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 2 -- La méthode basique en version étoilée}
+\paragraph{Exemple d'utilisation 2 -- La méthode basique en version étoilée}
 
 Dans l'exemple ci-dessous, on voit que la version étoilée produit des petites parenthèses.
 \begin{tcblisting}{}
@@ -65,7 +65,7 @@ $\displaystyle \axes*{\pt{O} | \frac{7}{3} \vect{i} | \vect{j}}$
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 3 -- La méthode basique en dimension quelconque}
+\paragraph{Exemple d'utilisation 3 -- La méthode basique en dimension quelconque}
 
 Il faut au minimum deux "morceaux" séparés par des barres \verb+|+, cas de la dimension $1$, mais il n'y a pas de maximum, cas d'une dimension quelconque $n > 0$.
 
@@ -75,7 +75,7 @@ $\axes{\pt{O} | \vect*{i}{1} | \vect*{i}{2} | \vect*{i}{3} | \dots |
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 4 -- Repère affine}
+\paragraph{Exemple d'utilisation 4 -- Repère affine}
 
 Dans l'exemple suivant, le préfixe \verb+p+ est pour \textbf{p}-oint.
 
@@ -84,7 +84,7 @@ $\paxes{O | I | J | K}$ évite de taper $\axes{\pt{O} | \pt{I} | \pt{J} | \pt{K}
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
+\paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ecteur.
 
@@ -93,7 +93,7 @@ $\vaxes{\pt{O} | i | j}$ est un raccourci de $\axes{\pt{O} | \vect{i} | \vect{j}
 \end{tcblisting}
 
 
-            \paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
+\paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
 
 Dans l'exemple suivant, le préfixe \verb+pv+ permet de combiner à la fois les fonctionnalités proposés par les préfixes \verb+p+ et \verb+v+.
 
@@ -103,7 +103,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 
 
-            \paragraph{Fiches techniques}
+\paragraph{Fiches techniques}
 
 \IDmacro*{axes}{1}
 
@@ -113,7 +113,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est l'origine du repère.
-	
+
 	\item Les morceaux suivants sont des points ou des vecteurs qui "définissent" chaque axe.
 \end{itemize}
 
@@ -126,7 +126,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
-	
+
 	\item Viennent ensuite les noms des points "définissant" chaque axe. Pour chacun de ces points la macro-commande \verb+\pt+ sera automatiquement appliquée.
 \end{itemize}
 
@@ -139,7 +139,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est l'origine du repère.
-	
+
 	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
 \end{itemize}
 
@@ -152,7 +152,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
-	
+
 	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
 \end{itemize}
 
