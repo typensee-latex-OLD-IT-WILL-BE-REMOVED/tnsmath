@@ -9,7 +9,7 @@
 
     1) The macros ``\probacond`` and ``\probacond*`` have been created.
 
-    2) The environment ``probatree`` simplifies the production of weighted probabilistic trees but also of decision trees.
+    2) The environments ``probatree`` and ``probatree*`` used with the macros ``probaweight`` and ``probanoweight`` simplify the production of (un)weighted probabilistic trees.
 
 
 ==========

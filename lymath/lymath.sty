@@ -1372,10 +1372,20 @@
     \end{forest}
 }
 
-
 % Source: https://stackoverflow.com/a/1873617/4589608
 \newenvironment{probatree}{\startprobatree}{}
 \def\startprobatree#1\end{\@proba@tree{#1}\end}
+
+\newenvironment{probatree*}{
+	\let\probaweight\probanoweight
+	\begin{probatree}
+}{
+	\end{probatree}
+}
+
+
+\newcommand\probaweight[1]{node[midway, fill=white]{#1}}
+\newcommand\probanoweight[1]{}
 
 
 % --------------------- %
