@@ -1309,33 +1309,38 @@
 % ---------- %
 
 \useforestlibrary{linguistics}
-\forestset{declare count={connections}{1}}
-
-% Source : ????
+\forestset{
+	declare count={connections}{1},
+	pweight/.style={edge label={node[midway, fill=white]{#1}}},
+	pweight*/.style={}
+}
+% Sources
+%	* ???? (all settings)
+%	* ???? (hide/show the weights)
 
 \newcommand\@proba@tree[1]{
     \begin{forest}
-        for tree={%
+        for tree = {%
             sn edges,
             grow'  = 0,
             l      = 2.5cm,
             s sep  = 1.2cm,
             anchor = parent,
         },
-        before typesetting nodes={%
-            where connections=1{}{%
+        before typesetting nodes = {%
+            where connections = 1{}{%
                 if = {isodd(connections())}{%
-                    edge path'={%
+                    edge path' = {%
                         foreach \i [
-                            count=\j from 0,
-                            evaluate=\noexpand\j
+                            count    = \j from 0,
+                            evaluate = \noexpand\j
                             as \noexpand\k
                             using \noexpand {
-                                (\j==0) ?
+                                (\j == 0) ?
                                 0pt :
                                 ((isodd(\j)) ?
                                 (\j*4pt) :
-                                ((-\j+1)*4pt))
+                                ((-\j + 1)*4pt))
                             }
                         ]
                         in {%
@@ -1343,26 +1348,26 @@
                         }{
                             (!u.parent anchor)
                             --
-                            ([yshift=\noexpand\k].child anchor)
+                            ([yshift = \noexpand\k].child anchor)
                         }
                     },
                 }{%
-                    edge path'={%
+                    edge path' = {%
                         foreach \i [
-                            count=\j,
-                            evaluate=\noexpand\j
+                            count    = \j,
+                            evaluate = \noexpand\j
                             as \noexpand\k
                             using {
                                 (isodd(\j)) ?
                                 (\j*4pt) :
-                                ((-\j+1)*4pt)
+                                ((-\j + 1)*4pt)
                             }
                         ]
                         in {1,...,\foresteoption{connections}}
                         {
                             (!u.parent anchor)
                             --
-                            ([yshift=\noexpand\k].child anchor)
+                            ([yshift = \noexpand\k].child anchor)
                         }
                     },
                 },
@@ -1377,15 +1382,11 @@
 \def\startprobatree#1\end{\@proba@tree{#1}\end}
 
 \newenvironment{probatree*}{
-	\let\probaweight\probanoweight
+	\forestset{pweight/.style={}}
 	\begin{probatree}
 }{
 	\end{probatree}
 }
-
-
-\newcommand\probaweight[1]{node[midway, fill=white]{#1}}
-\newcommand\probanoweight[1]{}
 
 
 % --------------------- %

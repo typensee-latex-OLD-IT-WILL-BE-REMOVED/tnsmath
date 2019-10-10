@@ -23,18 +23,18 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 
 \paragraph{Un exemple type}
 
-Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute la macro \verb+\probaweight+ qui facilite l'écriture des pondérations sur les branches.
+Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute le style spécial \verb+pweight+ qui facilite l'écriture des pondérations sur les branches.
 
 \begin{tcblisting}{}
 \begin{probatree}
 [
-    [$A$, edge label = \probaweight{$a$}
-        [$B$, edge label = \probaweight{$b$}]
-        [$C$, edge label = \probaweight{$c$}]
+    [$A$, pweight = $a$
+        [$B$, pweight = $b$]
+        [$C$, pweight = $c$]
     ]
-    [$D$, edge label = \probaweight{$d$}
-        [$E$, edge label = \probaweight{$e$}]
-        [$F$, edge label = \probaweight{$f$}]
+    [$D$, pweight = $d$
+        [$E$, pweight = $e$]
+        [$F$, pweight = $f$]
     ]
 ]
 \end{probatree}
@@ -49,11 +49,11 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
 \begin{tcblisting}{}
 \begin{probatree}
 [
-    [$A$, name = left, edge label = \probaweight{$a$}
-        [$B$, name = topright, edge label = \probaweight{$b$}]
-        [$C$, name = bottomright, edge label = \probaweight{$c$}]
+    [$A$, pweight = $a$, name = left
+        [$B$, pweight = $b$, name = topright]
+        [$C$, pweight = $c$, name = bottomright]
     ]
-    [$D$, edge label = \probaweight{$d$}]
+    [$D$, pweight = $d$]
 ]
 \node[draw = blue, thick, rounded corners, fit = (left)(topright)(bottomright)] {};
 \end{probatree}
@@ -67,9 +67,9 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \begin{tcblisting}{}
 \begin{probatree*}
-[$A$, name = left, edge label = \probaweight{$a$}
-    [$B$, name = topright, edge label = \probaweight{$b$}]
-    [$C$, name = bottomright, edge label = \probaweight{$c$}]
+[$A$, pweight = $a$
+    [$B$, pweight = $b$]
+    [$C$, pweight = $c$]
 ]
 \end{probatree*}
 \end{tcblisting}
@@ -77,16 +77,16 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \paragraph{Un exemple de poids cachés localement}
 
-Pour ne cacher que certains poids, il faudra utiliser, à la main, la macro \verb+\probanoweight+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \begin{tcblisting}{}
 \begin{probatree}
 [
-    [$A$, name = left, edge label = \probaweight{$a$}
-        [$B$, name = topright, edge label = \probanoweight{$b$}]
-        [$C$, name = bottomright, edge label = \probaweight{$c$}]
+    [$A$, pweight = $a$
+        [$B$, pweight* = $b$]
+        [$C$, pweight = $c$]
     ]
-    [$D$, edge label = \probanoweight{$d$}]
+    [$D$, pweight* = $d$]
 ]
 \end{probatree}
 \end{tcblisting}
@@ -99,21 +99,5 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, la macro \ver
 \IDenv*{probatree*}
 
 \Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
-
-
-\bigskip
-
-
-\IDmacro*{probaweight}{1}
-
-\IDarg{} le poids à inscrire sur la branche.
-
-
-\bigskip
-
-
-\IDmacro*{probanoweight}{1}
-
-\IDarg{} cet argument est ignoré mais utile comme vu ci-dessus.
 
 \end{document}
