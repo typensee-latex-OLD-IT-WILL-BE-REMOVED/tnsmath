@@ -1,4 +1,15 @@
 ==========
+2019-10-12
+==========
+
+**Probability:** two new featires for the environments ``probatree`` and ``probatree*``.
+
+    1) One new key ``frame`` allows to frame a subtree very easily.
+
+    2) ``apweight`` and ``bpweight`` give two new way to write the weights.
+
+
+==========
 2019-10-10
 ==========
 
@@ -9,7 +20,7 @@
 
     1) The macros ``\probacond`` and ``\probacond*`` have been created.
 
-    2) The environments ``probatree`` and ``probatree*`` used with the macros ``probaweight`` and ``probanoweight`` simplify the production of (un)weighted probabilistic trees.
+    2) The environments ``probatree`` and ``probatree*`` simplify the production of (un)weighted probabilistic trees.
 
 
 ==========

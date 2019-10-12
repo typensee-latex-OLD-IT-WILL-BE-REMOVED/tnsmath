@@ -165,7 +165,7 @@
 {\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-10}
+\date{2019-10-12}
 
 \maketitle
 
@@ -2121,7 +2121,11 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 
 \paragraph{Un exemple type}
 
-Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute le style spécial \verb+pweight+ qui facilite l'écriture des pondérations sur les branches.
+Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+\footnote{
+	\texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
+	Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
+}.
 
 \begin{tcblisting}{}
 \begin{probatree}
@@ -2131,32 +2135,60 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
         [$C$, pweight = $c$]
     ]
     [$D$, pweight = $d$
-        [$E$, pweight = $e$]
-        [$F$, pweight = $f$]
+        [$E$, apweight = $e$]
+        [$F$, bpweight = $f$]
     ]
 ]
 \end{probatree}
-
 \end{tcblisting}
 
 
-\paragraph{Un exemple décoré}
+\paragraph{Un exemple décoré facilement}
 
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés.
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep  = 1.3cm+ qui évite que les cadres se superposent.
+
+\begin{tcblisting}{}
+\begin{probatree}
+[{},s sep  = 1.3cm
+    [$A$, pweight=$a$, frame=red
+        [$B$, pweight=$b$]
+        [$C$, pweight=$c$]
+    ]
+    [$D$, pweight=$d$, frame=blue
+        [$E$, pweight=$e$
+        	[$F$, pweight=$f$]
+        	[$G$, pweight=$g$]
+		]
+        [$H$, pweight=$h$
+        	[$I$, pweight=$i$]
+        	[$J$, pweight=$j$]
+        ]
+    ]
+]
+\end{probatree}
+\end{tcblisting}
+
+
+\paragraph{Un exemple décoré à la main}
+
+En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple n'est pas faisable avec la clé \verb+frame+.
 
 \begin{tcblisting}{}
 \begin{probatree}
 [
     [$A$, pweight = $a$, name = left
-        [$B$, pweight = $b$, name = topright]
-        [$C$, pweight = $c$, name = bottomright]
+        [$B$, pweight = $b$, name = topright
+	        [$C$, pweight = $c$]
+	        [$D$, pweight = $d$]
+       	]
+	    [$F$, pweight = $f$, name = bottomright]
     ]
-    [$D$, pweight = $d$]
+    [$G$, pweight = $g$]
 ]
 \node[draw = blue, thick, rounded corners, fit = (left)(topright)(bottomright)] {};
 \end{probatree}
-
 \end{tcblisting}
+
 
 
 \paragraph{Un exemple de poids cachés partout}
@@ -2197,6 +2229,14 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 \IDenv*{probatree*}
 
 \Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+
+\IDkey{pweight} pour écrire un poids sur le milieu d'une branche.
+
+\IDkey{apweight} pour écrire un poids au-dessus le milieu d'une branche.
+
+\IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
+
+\IDkey{frame} pour encadre un sous-arbre.
 
 
 
