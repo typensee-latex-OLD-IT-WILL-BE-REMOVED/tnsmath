@@ -1,33 +1,37 @@
 % == PACKAGES USED == %
 
 \usepackage{amsmath}
-\usepackage{ifthen}
 
 
 % == DEFINITIONS == %
 
 % Conditional probability
 
+\newcommand\@abstract@proba@cond[4]{%
+    #1{#2\left( #3 \cap #4 \right)}{#2\left( #4 \right)}%
+}
+
+
 \newcommand\probacond{\@ifstar{\@probacond@star}{\@probacond@no@star}}
+\newcommand\@probacond@star{\@ifstar{\@probacond@star@star}{\@probacond@one@star}}
 
-\newcommand\@abstract@proba@cond[5]{%
-    #1{#3\left( #4 \cap #5 \right)}{#3\left( #5 \right)}%
+\newcommand\@probacond@no@star[3]{%
+	#1_{#3}\left( #2 \right)%
 }
 
-\newcommand\@probacond@star[4][nx]{%
-    \ifthenelse{\equal{#1}{x}}%
-        {\@abstract@proba@cond{\frac}{#1}{#2}{#3}{#4}}%
-        {\ifthenelse{\equal{#1}{X}}
-            {\@abstract@proba@cond{\dfrac}{#1}{#2}{#3}{#4}}
-            {#2\left( #3 \mid #4 \right)}}%
+\newcommand\@probacond@one@star[3]{%
+	#1\left( #2 \mid #3 \right)%
+}
+
+\newcommand\@probacond@star@star[3]{%
+	\@abstract@proba@cond{\frac}{#1}{#2}{#3}
 }
 
 
-\newcommand\@probacond@no@star[4][nx]{%
-    \ifthenelse{\equal{#1}{x}}%
-        {\@abstract@proba@cond{\frac}{#1}{#2}{#3}{#4}}%
-        {\ifthenelse{\equal{#1}{X}}
-            {\@abstract@proba@cond{\dfrac}{#1}{#2}{#3}{#4}}
-            {#2_{#4}\left( #3 \right)}}%
+\newcommand\dprobacond{\@ifstar{\@dprobacond@star}{\@dprobacond@no@star}}
+\newcommand\@dprobacond@star{\@ifstar{\@dprobacond@star@star}{\@dprobacond@one@star}}
+
+\newcommand\@dprobacond@star@star[3]{%
+	\@abstract@proba@cond{\dfrac}{#1}{#2}{#3}
 }
 

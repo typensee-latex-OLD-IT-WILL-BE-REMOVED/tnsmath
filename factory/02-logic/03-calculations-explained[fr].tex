@@ -20,7 +20,7 @@
 
 	\paragraph{Un exemple sur une petite étape}
 
-La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
+La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
 \begin{tcblisting}{}
 $0 \leq a < b$
@@ -30,24 +30,22 @@ $\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 $a^2 \leq b^2$
 \end{tcblisting}
 
-Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version étoilée comme suit.
+Si vous souhaitez un espace devant le symbole, il suffit d'indiquer l'espace via une distance grâce à l'argument optionnel comme ci-après.
 
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain[1.5em]{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
 
 
-\verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
+\verb+\explain+ utilise les macros constantes suivantes.
 \begin{itemize}
 	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
-
-	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.
+	\item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
 \end{itemize}
 
 
@@ -79,11 +77,11 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{explain}{2}
+\IDmacro{explain}{1}{2}
 
-\IDmacro*{explain*}{2}
+\IDoption{} espacement avant le symbole. Valeur par défaut : \verb+0em+.
 
-\IDarg{1} un symnole.
+\IDarg{1} un symbole.
 
 \IDarg{2} une courte explication.
 

@@ -12,23 +12,23 @@
 % == DEFINITIONS == %
 
 % General sets
-\newcommand\geneset{\@ifstar{\@geneset@star}{\@geneset@no@star}}
-\newcommand\@geneset@no@star[1]{\ensuremath{\@interval@tool@no@star{\{}{#1}{}{}{\}}}}
-\newcommand\@geneset@star[1]{\ensuremath{\@interval@tool@star{\{}{#1}{}{}{\}}}}
+\newcommand\setgene{\@ifstar{\@setgene@star}{\@setgene@no@star}}
+\newcommand\@setgene@no@star[1]{\ensuremath{\@interval@tool@no@star{\{}{#1}{}{}{\}}}}
+\newcommand\@setgene@star[1]{\ensuremath{\@interval@tool@star{\{}{#1}{}{}{\}}}}
 
 % Probabilistic sets
-\newcommand\probaset{\@ifstar{\@probaset@star}{\@probaset@no@star}}
+\newcommand\setproba{\@ifstar{\@setproba@star}{\@setproba@no@star}}
 
-\newcommand\@probaset@no@star[1]{
+\newcommand\@setproba@no@star[1]{
 	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
     	\mathcal{#1}
 	}{%
-    	\PackageError{lymath}{Command << probaset >> only accepts single upper case letters}%
+    	\PackageError{lymath}{Command << setproba >> only accepts single upper case letters}%
 	}
 }
 
-\newcommand\@probaset@star[2]{%
-	\@probaset@no@star{#1}_{#2}
+\newcommand\@setproba@star[2]{%
+	\@setproba@no@star{#1}_{#2}
 }
 
 % Geometric sets
@@ -40,9 +40,9 @@
 %    * page 68 de ''The Comprehensive LATEX Symbol List''
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
-\newcommand\geoset{\@ifstar{\@geoset@star}{\@geoset@no@star}}
+\newcommand\setgeo{\@ifstar{\@setgeo@star}{\@setgeo@no@star}}
 
-\newcommand\@geoset@no@star[1]{
+\newcommand\@setgeo@no@star[1]{
     \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
     	\mathscr{#1}
 	}{%
@@ -54,8 +54,8 @@
 	}
 }
 
-\newcommand\@geoset@star[2]{%
-	\@geoset@no@star{#1}_{#2}
+\newcommand\@setgeo@star[2]{%
+	\@setgeo@no@star{#1}_{#2}
 }
 
 % Sets for algebra
@@ -63,9 +63,9 @@
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
-\newcommand\algeset{\@ifstar{\@algeset@star}{\@algeset@no@star}}
+\newcommand\setalge{\@ifstar{\@setalge@star}{\@setalge@no@star}}
 
-\newcommand\@algeset@no@star[1]{
+\newcommand\@setalge@no@star[1]{
 	\IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
 	    \mathds{#1}
 	}{%
@@ -73,8 +73,8 @@
 	}
 }
 
-\newcommand\@algeset@star[2]{%
-	\@algeset@no@star{#1}_{#2}
+\newcommand\@setalge@star[2]{%
+	\@setalge@no@star{#1}_{#2}
 }
 
 % Tools for classical sets
@@ -82,9 +82,9 @@
 \newcommand\setneg{\vphantom{\setpos}-}
 \newcommand\set@star{\text{*}}
 
-\newcommand\specialset{\@ifstar{\@specialset@star}{\@specialset@no@star}}
+\newcommand\setspecial{\@ifstar{\@setspecial@star}{\@setspecial@no@star}}
 
-\newcommand\@specialset@no@star[2]{
+\newcommand\@setspecial@no@star[2]{
     \IfEqCase{#2}{
         {s}{ #1^{\set@star} }
         {n}{ #1^{\phantom{\set@star}}_{\setneg} }
@@ -94,7 +94,7 @@
     }
 }
 
-\newcommand\@specialset@star[2]{
+\newcommand\@setspecial@star[2]{
     \IfEqCase{#2}{
         {s}{ #1_{\neq 0} }
         {n}{ #1_{\le 0} }
@@ -111,46 +111,46 @@
 
 % List of classical sets - START
 
-\newcommand\NN{\ensuremath{\algeset{N}}}
-\newcommand\NNs{\ensuremath{\specialset{\NN}{s}}}
+\newcommand\NN{\ensuremath{\setalge{N}}}
+\newcommand\NNs{\ensuremath{\setspecial{\NN}{s}}}
 
-\newcommand\PP{\ensuremath{\algeset{P}}}
+\newcommand\PP{\ensuremath{\setalge{P}}}
 
-\newcommand\ZZ{\ensuremath{\algeset{Z}}}
-\newcommand\ZZp{\ensuremath{\specialset{\ZZ}{p}}}
-\newcommand\ZZn{\ensuremath{\specialset{\ZZ}{n}}}
-\newcommand\ZZs{\ensuremath{\specialset{\ZZ}{s}}}
-\newcommand\ZZsn{\ensuremath{\specialset{\ZZ}{sn}}}
-\newcommand\ZZsp{\ensuremath{\specialset{\ZZ}{sp}}}
+\newcommand\ZZ{\ensuremath{\setalge{Z}}}
+\newcommand\ZZp{\ensuremath{\setspecial{\ZZ}{p}}}
+\newcommand\ZZn{\ensuremath{\setspecial{\ZZ}{n}}}
+\newcommand\ZZs{\ensuremath{\setspecial{\ZZ}{s}}}
+\newcommand\ZZsn{\ensuremath{\setspecial{\ZZ}{sn}}}
+\newcommand\ZZsp{\ensuremath{\setspecial{\ZZ}{sp}}}
 
-\newcommand\DD{\ensuremath{\algeset{D}}}
-\newcommand\DDp{\ensuremath{\specialset{\DD}{p}}}
-\newcommand\DDn{\ensuremath{\specialset{\DD}{n}}}
-\newcommand\DDs{\ensuremath{\specialset{\DD}{s}}}
-\newcommand\DDsn{\ensuremath{\specialset{\DD}{sn}}}
-\newcommand\DDsp{\ensuremath{\specialset{\DD}{sp}}}
+\newcommand\DD{\ensuremath{\setalge{D}}}
+\newcommand\DDp{\ensuremath{\setspecial{\DD}{p}}}
+\newcommand\DDn{\ensuremath{\setspecial{\DD}{n}}}
+\newcommand\DDs{\ensuremath{\setspecial{\DD}{s}}}
+\newcommand\DDsn{\ensuremath{\setspecial{\DD}{sn}}}
+\newcommand\DDsp{\ensuremath{\setspecial{\DD}{sp}}}
 
-\newcommand\QQ{\ensuremath{\algeset{Q}}}
-\newcommand\QQp{\ensuremath{\specialset{\QQ}{p}}}
-\newcommand\QQn{\ensuremath{\specialset{\QQ}{n}}}
-\newcommand\QQs{\ensuremath{\specialset{\QQ}{s}}}
-\newcommand\QQsn{\ensuremath{\specialset{\QQ}{sn}}}
-\newcommand\QQsp{\ensuremath{\specialset{\QQ}{sp}}}
+\newcommand\QQ{\ensuremath{\setalge{Q}}}
+\newcommand\QQp{\ensuremath{\setspecial{\QQ}{p}}}
+\newcommand\QQn{\ensuremath{\setspecial{\QQ}{n}}}
+\newcommand\QQs{\ensuremath{\setspecial{\QQ}{s}}}
+\newcommand\QQsn{\ensuremath{\setspecial{\QQ}{sn}}}
+\newcommand\QQsp{\ensuremath{\setspecial{\QQ}{sp}}}
 
-\newcommand\RR{\ensuremath{\algeset{R}}}
-\newcommand\RRp{\ensuremath{\specialset{\RR}{p}}}
-\newcommand\RRn{\ensuremath{\specialset{\RR}{n}}}
-\newcommand\RRs{\ensuremath{\specialset{\RR}{s}}}
-\newcommand\RRsn{\ensuremath{\specialset{\RR}{sn}}}
-\newcommand\RRsp{\ensuremath{\specialset{\RR}{sp}}}
+\newcommand\RR{\ensuremath{\setalge{R}}}
+\newcommand\RRp{\ensuremath{\setspecial{\RR}{p}}}
+\newcommand\RRn{\ensuremath{\setspecial{\RR}{n}}}
+\newcommand\RRs{\ensuremath{\setspecial{\RR}{s}}}
+\newcommand\RRsn{\ensuremath{\setspecial{\RR}{sn}}}
+\newcommand\RRsp{\ensuremath{\setspecial{\RR}{sp}}}
 
-\newcommand\CC{\ensuremath{\algeset{C}}}
-\newcommand\CCs{\ensuremath{\specialset{\CC}{s}}}
+\newcommand\CC{\ensuremath{\setalge{C}}}
+\newcommand\CCs{\ensuremath{\setspecial{\CC}{s}}}
 
-\newcommand\HH{\ensuremath{\algeset{H}}}
-\newcommand\HHs{\ensuremath{\specialset{\HH}{s}}}
+\newcommand\HH{\ensuremath{\setalge{H}}}
+\newcommand\HHs{\ensuremath{\setspecial{\HH}{s}}}
 
-\newcommand\OO{\ensuremath{\algeset{O}}}
-\newcommand\OOs{\ensuremath{\specialset{\OO}{s}}}
+\newcommand\OO{\ensuremath{\setalge{O}}}
+\newcommand\OOs{\ensuremath{\setspecial{\OO}{s}}}
 
 % List of classical sets - END

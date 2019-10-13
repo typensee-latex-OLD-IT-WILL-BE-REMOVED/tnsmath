@@ -1,12 +1,38 @@
 ==========
+2019-10-13
+==========
+
+**New subminor version version::``0.6.1-beta`` of ¨lymath:** see all the changes below.
+
+
+**Logic:** the macro ``\explain`` has now an optional argument such as to give a customized distance for the spacing before the symbol. This implies the remove of ``\explain*`` and ``\textexplainspacebefore``.
+
+
+**Probability:** the macros ``\probacond`` and ``\probacond*`` do not have anymore an optional argument. The fractional notation of a conditional probability is now obtained by using ``\probacond**``. For convenience, there is also ``\dprobacond**`` that uses ``\dfrac`` instead of ``\frac``.
+
+
+**Sets:** because this really helps in the writing, some macros have been renamed such as to make all of them having the same prefix.
+
+    1) ``\algeset`` becomes ``\setalge``.
+
+    2) ``\geoset`` becomes ``\setgeo``.
+
+    3) ``\geneset`` becomes ``\setgene``.
+
+    4) ``\probaset`` becomes ``\setproba``.
+
+    5) ``\specialset`` becomes ``\setspecial``.
+
+
+==========
 2019-10-12
 ==========
 
-**Probability:** two new featires for the environments ``probatree`` and ``probatree*``.
+**Probability:** two new features for the environments ``probatree`` and ``probatree*``.
 
     1) One new key ``frame`` allows to frame a subtree very easily.
 
-    2) ``apweight`` and ``bpweight`` give two new way to write the weights.
+    2) ``apweight`` and ``bpweight`` give two new way to write the weights (above or below).
 
 
 ==========

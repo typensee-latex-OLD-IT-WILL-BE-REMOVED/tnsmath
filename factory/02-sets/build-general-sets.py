@@ -26,7 +26,7 @@ def latex_classical(setdef):
     latexname          = setname*2
 
     latexdef = [
-        f"\\newcommand\\{latexname}{{\\ensuremath{{\\algeset{{{setname}}}}}}}"
+        f"\\newcommand\\{latexname}{{\\ensuremath{{\\setalge{{{setname}}}}}}}"
     ]
 
     latexsuffixes = [SUFFIXES[s] for s in suffixes]
@@ -38,7 +38,7 @@ def latex_classical(setdef):
 
     for onesuf in latexsuffixes:
         latexdef.append(
-            f"\\newcommand\\{latexname}{onesuf}{{\\ensuremath{{\\specialset{{\\{latexname}}}{{{onesuf}}}}}}}"
+            f"\\newcommand\\{latexname}{onesuf}{{\\ensuremath{{\\setspecial{{\\{latexname}}}{{{onesuf}}}}}}}"
         )
 
     latexdef = "\n".join(latexdef)

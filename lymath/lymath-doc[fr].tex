@@ -162,10 +162,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.6.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.6.1-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-12}
+\date{2019-10-13}
 
 \maketitle
 
@@ -227,19 +227,43 @@ $\displaystyle \int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
 \end{tcblisting}
 
 
-\section{Versions étoilées}
+
+\section{A propos des macros}
+
+\subsection{Règles de nommage}
+
+\subsubsection{Les macros de même \og type \fg}
+
+Les macros partageant une même fonctionnalité mathématique auront toute le même préfixe comme par exemple pour \verb+\derpow+ , \verb+\derfrac+ \dots{} utilisables pour rédiger des dérivées de fonctions.
+Ce choix est assumé même si pour les macros du type \verb+\set...+ on obtient un nom pouvant faire penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble du type ... \fg}.
+
+
+
+\subsubsection{Les macros en mode \texttt{displaystyle}}
+
+Les macros évitant d'avoir à taper \verb+displaystyle+ auront un nom commençant par la lettre \verb+d+.
+
+
+
+\subsection{Versions étoilées}
 
 Généralement les versions étoilées proposent des mises en forme faisant un peu moins de travail que la version non étoilée \textit{(il y a tout de même quelques exceptions)}. Par exemple une macro utilisant des parenthèses extensibles aura sa version étoilée qui n'utilisera que des parenthèses non extensibles.
 
 
 
-\section{A propos des arguments \LaTeX, une convention à connaître}
+\subsection{Les arguments, deux conventions à connaître}
 
-\verb+lymath+ propose des macros avec un \textbf{nombre fixé d'arguments}. Dans ce cas, la syntaxe \LaTeX{} est gardée comme dans \verb+\derfrac{f}{x}+ .
+\subsubsection{Nombre fixé d'arguments}
 
-\medskip
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \verb+\derfrac{f}{x}+.
 
-Par contre, pour les macros avec un \textbf{nombre variable d'arguments}, la convention sera toujours d'utiliser un seul argument, au sens \LaTeX{}, dont le contenu sera formé de morceaux séparés par des traits verticaux \verb+|+ comme dans \verb+\coord{3 | -4 | 0}+ où l'unique argument \verb+3 | -4 | 0+ contient les trois morceaux \verb+3+ , \verb+-4+ et \verb+0+ .
+
+
+\subsubsection{Nombre variable d'arguments}
+
+Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \verb+\coord{x | y | z | t}+ et \verb+\coord{x | y}+.
+Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
+Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+ sera analysé comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
 
 
 
@@ -260,7 +284,7 @@ Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \
 
 \subsection{Espace et fraction}
 
-Si vous utilisez \verb+\frac+ ou \verb+\dfrac+ alors de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \verb+\stdfrac+ et \verb+\stddfrac+ . Voici un exemple.
+Quand on utilise \verb+\frac+ ou \verb+\dfrac+, de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \verb+\stdfrac+ et \verb+\stddfrac+ . Voici un exemple.
 
 \begin{tcblisting}{}
 Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
@@ -406,7 +430,7 @@ Voici les macros définissant les textes utilisés qui tiennet compte de l'utili
 
 \subsubsection{Des symboles supplémentaires}
 
-En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, le verlan de \verb+\implies+ pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
+En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
 
 \begin{tcblisting}{}
 Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
@@ -426,7 +450,7 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 
 \subsubsection{Équivalences et implications verticales}
 
-Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales des symboles d'équivalence et d'implication. Voici comment les obtenir.
+Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales non décorées des symboles d'équivalence et d'implication. Voici comment les obtenir.
 
 \begin{tcblisting}{}
 \begin{tabular}{ccc}
@@ -445,7 +469,7 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 
 	\paragraph{Un exemple sur une petite étape}
 
-La macro \verb+\explain+ prend deux arguments : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
+La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
 \begin{tcblisting}{}
 $0 \leq a < b$
@@ -455,24 +479,22 @@ $\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 $a^2 \leq b^2$
 \end{tcblisting}
 
-Si vous souhaitez un espace devant le symbole, il suffit d'utiliser la version étoilée comme suit.
+Si vous souhaitez un espace devant le symbole, il suffit d'indiquer l'espace via une distance grâce à l'argument optionnel comme ci-après.
 
 \begin{tcblisting}{}
 $0 \leq a < b$
 
-$\explain*{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
+$\explain[1.5em]{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
 \end{tcblisting}
 
 
-\verb+\explain+ et \verb+\explain*+ utilisent les macros constantes suivantes.
+\verb+\explain+ utilise les macros constantes suivantes.
 \begin{itemize}
 	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-	\item \verb+\textexplainspacebefore+ est l'espace entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+\qquad+.
-
-	\item \verb+\textexplainspacein+ est l'espace supplémentaire ajouté par \verb+\explain*+ avant le symbole. Par défaut, cette macro vaut \verb+\qquad+ aussi.
+	\item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
 \end{itemize}
 
 
@@ -504,11 +526,11 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{explain}{2}
+\IDmacro{explain}{1}{2}
 
-\IDmacro*{explain*}{2}
+\IDoption{} espacement avant le symbole. Valeur par défaut : \verb+0em+.
 
-\IDarg{1} un symnole.
+\IDarg{1} un symbole.
 
 \IDarg{2} une courte explication.
 
@@ -524,7 +546,7 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Un ensemble de beaux nombres : $\geneset{1 ; 3 ; 5}$ .
+Un ensemble de beaux nombres : $\setgene{1 ; 3 ; 5}$ .
 \end{tcblisting}
 
 
@@ -532,19 +554,20 @@ Un ensemble de beaux nombres : $\geneset{1 ; 3 ; 5}$ .
 
 \begin{tcblisting}{}
 Choisissez votre camp :
-$\displaystyle \geneset{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
+$\displaystyle \setgene{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$
 ou
-$\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
+$\displaystyle \setgene*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
 \end{tcblisting}
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{geneset}{1}
+\IDmacro*{setgene}{1}
 
-\IDmacro*{geneset*}{1}
+\IDmacro*{setgene*}{1}
 
 \IDarg{} la définition de l'ensemble.
+
 
 
 \subsubsection{Ensembles pour la géométrie}
@@ -552,21 +575,21 @@ $\displaystyle \geneset*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
 \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Vous pouvez écrire sémantiquement $\geoset{C}$, $\geoset{D}$ et $\geoset{d}$ mais pas
-taper \verb+$\geoset{ABC}$+.
+Vous pouvez écrire sémantiquement $\setgeo{C}$, $\setgeo{D}$ et $\setgeo{d}$ mais pas
+taper \verb+$\setgeo{ABC}$+.
 \end{tcblisting}
 
 
 \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
+Pour les indices, utilisez $\setgeo*{C}{1}$, $\setgeo*{C}{2}$ \dots
 \end{tcblisting}
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{geoset}{1}
+\IDmacro*{setgeo}{1}
 
 \IDarg{} un seul caractère \ascii{} indiquant un ensemble géométrique.
 
@@ -574,11 +597,12 @@ Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
 \bigskip
 
 
-\IDmacro*{geoset*}{2}
+\IDmacro*{setgeo*}{2}
 
-\IDarg{1} un seul caractère \ascii{} indiquant $\geoset{U}$ dans le nom $\geoset*{U}{d}$ d'un ensemble géométrique.
+\IDarg{1} un seul caractère \ascii{} indiquant $\setgeo{U}$ dans le nom $\setgeo*{U}{d}$ d'un ensemble géométrique.
 
-\IDarg{2} un texte donnant $d$ dans le nom $\geoset*{U}{d}$ d'un ensemble géométrique.
+\IDarg{2} un texte donnant $d$ dans le nom $\setgeo*{U}{d}$ d'un ensemble géométrique.
+
 
 
 \subsubsection{Ensembles probabilistes}
@@ -586,21 +610,21 @@ Pour les indices, utilisez $\geoset*{C}{1}$, $\geoset*{C}{2}$ \dots
 \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Vous pouvez écrire sémantiquement $\probaset{E}$ et $\probaset{G}$ mais pas taper
-\verb+$\probaset{ABC}$+.
+Vous pouvez écrire sémantiquement $\setproba{E}$ et $\setproba{G}$ mais pas taper
+\verb+$\setproba{ABC}$+.
 \end{tcblisting}
 
 
 \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
+Pour les indices, utilisez $\setproba*{E}{1}$, $\setproba*{E}{2}$ \dots
 \end{tcblisting}
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{probaset}{1}
+\IDmacro*{setproba}{1}
 
 \IDarg{} un seul caractère \ascii{} majuscule indiquant un ensemble probabiliste.
 
@@ -608,11 +632,11 @@ Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 \bigskip
 
 
-\IDmacro*{probaset*}{2}
+\IDmacro*{setproba*}{2}
 
-\IDarg{1} un seul caractère \ascii{} majuscule indiquant $\probaset{U}$ dans le nom $\probaset*{U}{d}$ d'un ensemble probabiliste.
+\IDarg{1} un seul caractère \ascii{} majuscule indiquant $\setproba{U}$ dans le nom $\setproba*{U}{d}$ d'un ensemble probabiliste.
 
-\IDarg{2} un texte donnant $d$ dans le nom $\probaset*{U}{d}$ d'un ensemble probabiliste.
+\IDarg{2} un texte donnant $d$ dans le nom $\setproba*{U}{d}$ d'un ensemble probabiliste.
 
 
 
@@ -621,21 +645,21 @@ Pour les indices, utilisez $\probaset*{E}{1}$, $\probaset*{E}{2}$ \dots
 \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Vous pouvez écrire sémantiquement $\algeset{A}$, $\algeset{K}$, $\algeset{h}$ et
-$\algeset{k}$ mais pas taper \verb+$\algeset{ABC}$+.
+Vous pouvez écrire sémantiquement $\setalge{A}$, $\setalge{K}$, $\setalge{h}$ et
+$\setalge{k}$ mais pas taper \verb+$\setalge{ABC}$+.
 \end{tcblisting}
 
 
 \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
+Pour les indices, utilisez $\setalge*{k}{1}$, $\setalge*{k}{2}$ \dots
 \end{tcblisting}
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{algeset}{1}
+\IDmacro*{setalge}{1}
 
 \IDarg{} soit l'une des lettres  \texttt{h} et \texttt{k}, soit un seul caractère \ascii{} majuscule indiquant un ensemble de type anneau ou corps.
 
@@ -643,15 +667,17 @@ Pour les indices, utilisez $\algeset*{k}{1}$, $\algeset*{k}{2}$ \dots
 \bigskip
 
 
-\IDmacro*{algeset*}{2}
+\IDmacro*{setalge*}{2}
 
-\IDarg{1} un seul caractère \ascii{} indiquant $\algeset{U}$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{1} un seul caractère \ascii{} indiquant $\setalge{U}$ dans le nom $\setalge*{U}{d}$ d'un ensemble de type anneau ou corps.
 
-\IDarg{2} un texte donnant $d$ dans le nom $\algeset*{U}{d}$ d'un ensemble de type anneau ou corps.
+\IDarg{2} un texte donnant $d$ dans le nom $\setalge*{U}{d}$ d'un ensemble de type anneau ou corps.
 
 
 
-\subsubsection{Ensembles classiques}
+\subsection{Ensembles classiques}
+
+\subsubsection{La liste complète}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
@@ -672,7 +698,7 @@ Nous avons utilisé les suffixes \verb+n+ pour \verb+Negatif+, \verb+p+ pour \ve
 
 \medskip
 
-Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car l'ensemble $\CC$ ne possède pas de structure ordonnée standard. Jetez un oeil à la section suivante pour apprendre à taper $\specialset{\CC}{n}$ si vous en avez besoin. L'interdiction est ici purement sémantique !
+Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car l'ensemble $\CC$ ne possède pas de structure ordonnée standard. Jetez un oeil à la section suivante pour apprendre à taper $\setspecial{\CC}{n}$ si vous en avez besoin. L'interdiction est ici purement sémantique !
 
 \medskip
 
@@ -706,21 +732,21 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\specialset{\CC}{n}$ car
 
 
 
-\subsubsection{Des suffixes à la carte}
+\subsection{Des suffixes à la carte}
 
 \paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
-Il est tout de même possible d'écrire $\specialset{\CC}{n}$ ou $\specialset{\HH}{sp}$.
-Il y a aussi $\specialset*{\probaset{P}}{n}$ avec une autre mise en forme.
+Il est tout de même possible d'écrire $\setspecial{\CC}{n}$ ou $\setspecial{\HH}{sp}$.
+Il y a aussi $\setspecial*{\setproba{P}}{n}$ avec une autre mise en forme.
 \end{tcblisting}
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{specialset}{2}
+\IDmacro*{setspecial}{2}
 
-\IDmacro*{specialset*}{2}
+\IDmacro*{setspecial*}{2}
 
 \IDarg{1} l'ensemble à "suffixer".
 
@@ -2081,25 +2107,25 @@ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
 
 \subsection{Probabilité conditionnelle}
 
-			\paragraph{Un exemple type}
-
-Dans l'exemple ci-dessous, les options \texttt{x} et \texttt{X} font référence au mot anglais \emph{\og expand \fg} qui peut signifier \emph{\og développer \fg} comme on l'entend en mathématiques.
+\paragraph{Un exemple type}
 
 \begin{tcblisting}{}
 Écrire des probabilités conditionnelles :
 $\probacond{p}{A}{B} = \probacond*{p}{A}{B}
-                     = \probacond[x]{p}{A}{B}
-                     = \probacond[X]{p}{A}{B}$.
+                     = \probacond**{p}{A}{B}
+                     = \dprobacond**{p}{A}{B}$.
 \end{tcblisting}
 
 
 \paragraph{Fiche technique}
 
-\IDmacro{probacond}{1}{3}
+\IDmacro*{probacond}{3}
 
-\IDmacro{probacond*}{1}{3}
+\IDmacro*{probacond*}{3}
 
-\IDoption{} si utilisée avec la valeur \verb+x+, cette option donne l'écriture sous forme de fraction via \verb+\frac+ tandis qu'avec \verb+X+ ce sera \verb+\dfrac+ qui sera utilisée.
+\IDmacro*{probacond**}{3}
+
+\IDmacro*{dprobacond**}{3}
 
 \IDarg{1} le nom de la probabilité.
 
@@ -2506,6 +2532,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \begin{description}[leftmargin=1em]
     \setlength\itemsep{1em}
 
+
+% --------------- %
+
+    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+    \begin{itemize}
+        \item En logique, la macro \verb+\explain+ possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \verb+\explain*+ et \verb+\textexplainspacebefore+ ont été supprimées.
+
+        \item En probabilité, voici ce qui a évolué.
+        \begin{itemize}
+        	\item Les macros \verb+\probacond+ et \verb+\probacond*+ n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \verb+\probacond**+ ou \verb+\dprobacond**+.
+
+        	\item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
+			      La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+        \end{itemize}
+    
+        \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
+        \begin{itemize}
+        	\item \verb+\algeset+ est devenu \verb+\setalge+.
+        	\item \verb+\geoset+ est devenu \verb+\setgeo+.
+        	\item \verb+\geneset+ est devenu \verb+\setgene+.
+        	\item \verb+\probaset+ est devenu \verb+\setproba+.
+        	\item \verb+\specialset+ est devenu \verb+\setspecial+.
+        \end{itemize}
+    \end{itemize}  
+    
 
 % --------------- %
 
