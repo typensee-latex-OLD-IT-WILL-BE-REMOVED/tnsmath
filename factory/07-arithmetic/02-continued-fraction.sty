@@ -13,58 +13,58 @@
 
 % Operator
 \newcommand\contfracope{%
-	\operatornamewithlimits{%
-		\mathchoice{% * Display style
-			\vcenter{\hbox{\huge $\mathcal{K}$}}%
-		}{%           * Text style
-			\vcenter{\hbox{\Large $\mathcal{K}$}}%
-		}{%           * Script style
-			\mathrm{\mathcal{K}}%
-		}{%           * Script script style
-			\mathrm{\mathcal{K}}%
-		}
-	}
+    \operatornamewithlimits{%
+        \mathchoice{% * Display style
+            \vcenter{\hbox{\huge $\mathcal{K}$}}%
+        }{%           * Text style
+            \vcenter{\hbox{\Large $\mathcal{K}$}}%
+        }{%           * Script style
+            \mathrm{\mathcal{K}}%
+        }{%           * Script script style
+            \mathrm{\mathcal{K}}%
+        }
+    }
 }
 
 % Single continued fraction (useful ?)
 \newcommand\singlecontfrac[2]{%
-	\begin{array}{@{}c@{}}%
-		\multicolumn{1}{c|}{#1}%
-		\\%
-		\hline%
-		\multicolumn{1}{|c}{#2}%
-	\end{array}%
+    \begin{array}{@{}c@{}}%
+        \multicolumn{1}{c|}{#1}%
+        \\%
+        \hline%
+        \multicolumn{1}{|c}{#2}%
+    \end{array}%
 }
 
 % Standard continued fraction
 \newcommand\contfrac{\@ifstar{\@contfrac@star}{\@contfrac@no@star}}
 
 \newcommand\@contfrac@no@star[1]{%
-	\@contfrac@no@star@recu@#1|\@nil%
+    \@contfrac@no@star@recu@#1|\@nil%
 }
 \def\@contfrac@no@star@recu@#1|#2\@nil{%
-	\@ifmtarg{#2}{%
-		#1%
-	}{%
-		#1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
-	}%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
+    }%
 }
 
 \newcommand\@contfrac@star[1]{%
-	\@contfrac@star@before@#1|\@nil%
+    \@contfrac@star@before@#1|\@nil%
 }
 \def\@contfrac@star@before@#1|#2\@nil{%
-	\@ifmtarg{#2}{%
-    	#1%
+    \@ifmtarg{#2}{%
+        #1%
     }{%
-    	#1 \@contfrac@star@recu@#2\@nil%
+        #1 \@contfrac@star@recu@#2\@nil%
     }%
 }
 \def\@contfrac@star@recu@#1|#2\@nil{%
-	\@ifmtarg{#2}{%
-    	+ \singlecontfrac{1}{#1}%
+    \@ifmtarg{#2}{%
+        + \singlecontfrac{1}{#1}%
     }{%
-    	+ \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
+        + \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
     }%
 }
 
@@ -72,25 +72,25 @@
 \newcommand\contfracgene{\@ifstar{\@contfracgene@star}{\@contfracgene@no@star}}
 
 \newcommand\@contfracgene@no@star[1]{%
-	\@contfracgene@no@star@recu@#1||\@nil%
+    \@contfracgene@no@star@recu@#1||\@nil%
 }
 \def\@contfracgene@no@star@recu@#1|#2|#3\@nil{%
-	\@ifmtarg{#2}{%
-		#1%
-	}{%
-		#1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
-	}%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
+    }%
 }
 
 
 \newcommand\@contfracgene@star[1]{%
-	\@contfracgene@star@before@#1|\@nil%
+    \@contfracgene@star@before@#1|\@nil%
 }
 \def\@contfracgene@star@before@#1|#2\@nil{%
-	\@ifmtarg{#2}{%
-    	#1%
+    \@ifmtarg{#2}{%
+        #1%
     }{%
-    	#1 \@contfracgene@star@recu@#2\@nil%
+        #1 \@contfracgene@star@recu@#2\@nil%
     }%
 }
 \def\@contfracgene@star@recu@#1|#2|#3\@nil{%

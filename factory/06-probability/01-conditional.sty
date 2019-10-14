@@ -16,15 +16,15 @@
 \newcommand\@probacond@star{\@ifstar{\@probacond@star@star}{\@probacond@one@star}}
 
 \newcommand\@probacond@no@star[3]{%
-	#1_{#3}\left( #2 \right)%
+    #1_{#3}\left( #2 \right)%
 }
 
 \newcommand\@probacond@one@star[3]{%
-	#1\left( #2 \mid #3 \right)%
+    #1\left( #2 \mid #3 \right)%
 }
 
 \newcommand\@probacond@star@star[3]{%
-	\@abstract@proba@cond{\frac}{#1}{#2}{#3}
+    \@abstract@proba@cond{\frac}{#1}{#2}{#3}
 }
 
 
@@ -32,6 +32,6 @@
 \newcommand\@dprobacond@star{\@ifstar{\@dprobacond@star@star}{\@dprobacond@one@star}}
 
 \newcommand\@dprobacond@star@star[3]{%
-	\@abstract@proba@cond{\dfrac}{#1}{#2}{#3}
+    \@abstract@proba@cond{\dfrac}{#1}{#2}{#3}
 }
 

@@ -6,15 +6,15 @@
 % == DEFINITIONS == %
 
 \newcommand\@no@point[1]{%
-	\if#1i%
-		\imath%
-	\else%
-		\if#1j%
-			\jmath%
-		\else%
-			#1
-		\fi%
-	\fi%
+    \if#1i%
+        \imath%
+    \else%
+        \if#1j%
+            \jmath%
+        \else%
+            #1
+        \fi%
+    \fi%
 }
 
 \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}

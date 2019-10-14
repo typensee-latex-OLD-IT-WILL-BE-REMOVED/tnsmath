@@ -162,10 +162,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.6.1-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.6.2-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-13}
+\date{2019-10-14}
 
 \maketitle
 
@@ -247,7 +247,7 @@ Les macros évitant d'avoir à taper \verb+displaystyle+ auront un nom commença
 
 \subsection{Versions étoilées}
 
-Généralement les versions étoilées proposent des mises en forme faisant un peu moins de travail que la version non étoilée \textit{(il y a tout de même quelques exceptions)}. Par exemple une macro utilisant des parenthèses extensibles aura sa version étoilée qui n'utilisera que des parenthèses non extensibles.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels : par exemple une macro utilisant des parenthèses rendra ces dernières extensibles sauf dans sa version étoilée.
 
 
 
@@ -263,7 +263,7 @@ Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \
 
 Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \verb+\coord{x | y | z | t}+ et \verb+\coord{x | y}+.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
-Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+ sera analysé comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lyxam+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
 
 
 
@@ -2393,8 +2393,8 @@ $\displaystyle
 \paragraph{Exemple d'utilisation 1 : Polynômes}
 
 \begin{tcblisting}{}
-$\polyset{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
-$X$, et $\polyset{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
+$\setpoly{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
+$X$, et $\setpoly{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
 en les variables $X$ , $Y$ et $Z$.
 \end{tcblisting}
 
@@ -2403,7 +2403,7 @@ en les variables $X$ , $Y$ et $Z$.
 \paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
 
 \begin{tcblisting}{}
-$\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
+$\setpolyfrac{\QQ}{T}$ et $\setpolyfrac{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
 d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 \end{tcblisting}
 
@@ -2414,7 +2414,7 @@ d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 \paragraph{Exemple d'utilisation 1 : Séries formelles}
 
 \begin{tcblisting}{}
-$\serieset{\CC}{X}$ et $\serieset{\CC}{T | O | P}$ permettent de travailler avec des
+$\setserie{\CC}{X}$ et $\setserie{\CC}{T | O | P}$ permettent de travailler avec des
 séries formelles à coefficients complexes.
 \end{tcblisting}
 
@@ -2423,7 +2423,7 @@ séries formelles à coefficients complexes.
 \paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
 
 \begin{tcblisting}{}
-$\seriefracset{\ZZ}{X}$ et $\seriefracset{\ZZ}{Z | T | O | P}$ permettent de travailler
+$\setseriefrac{\ZZ}{X}$ et $\setseriefrac{\ZZ}{Z | T | O | P}$ permettent de travailler
 avec des fractions de séries formelles à coefficients entiers.
 \end{tcblisting}
 
@@ -2434,9 +2434,9 @@ avec des fractions de séries formelles à coefficients entiers.
 \paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
 
 \begin{tcblisting}{}
-$\polylaurentset{\RR}{X} = \polyset{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
+$\setpolylaurent{\RR}{X} = \setpoly{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
 réels de Laurent en $X$. On propose de généraliser comme suit (notation non standard) :
-$\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+$\setpolylaurent{\RR}{X_1 | X_2} = \setpoly{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
 \end{tcblisting}
 
 
@@ -2444,26 +2444,26 @@ $\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}
 \paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
 
 \begin{tcblisting}{}
-$\serielaurentset{\QQ}{X} = \serieset{\QQ}{X | X^{-1}}$ est l'ensemble des séries
+$\setserielaurent{\QQ}{X} = \setserie{\QQ}{X | X^{-1}}$ est l'ensemble des séries
 formelles rationnelles de Laurent en $X$. On généralise via, notation non standard,
-$\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+$\setserielaurent{\QQ}{X_1 | X_2} = \setserie{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
 \end{tcblisting}
 
 
 
 \subsubsection{Toutes les fiches techniques}
 
-\IDmacro*{polyset}{2}
+\IDmacro*{setpoly}{2}
 
-\IDmacro*{polyfracset}{2}
+\IDmacro*{setpolyfrac}{2}
 
-\IDmacro*{serieset}{2}
+\IDmacro*{setserie}{2}
 
-\IDmacro*{seriefracset}{2}
+\IDmacro*{setseriefrac}{2}
 
-\IDmacro*{polylaurentset}{2}
+\IDmacro*{setpolylaurent}{2}
 
-\IDmacro*{serielaurentset}{2}
+\IDmacro*{setserielaurent}{2}
 
 \IDarg{1} l'ensemble auquel les coefficients appartiennent.
 

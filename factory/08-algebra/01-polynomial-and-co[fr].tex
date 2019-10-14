@@ -26,8 +26,8 @@
 \paragraph{Exemple d'utilisation 1 : Polynômes}
 
 \begin{tcblisting}{}
-$\polyset{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
-$X$, et $\polyset{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
+$\setpoly{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
+$X$, et $\setpoly{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
 en les variables $X$ , $Y$ et $Z$.
 \end{tcblisting}
 
@@ -36,7 +36,7 @@ en les variables $X$ , $Y$ et $Z$.
 \paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
 
 \begin{tcblisting}{}
-$\polyfracset{\QQ}{T}$ et $\polyfracset{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
+$\setpolyfrac{\QQ}{T}$ et $\setpolyfrac{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
 d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 \end{tcblisting}
 
@@ -47,7 +47,7 @@ d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
 \paragraph{Exemple d'utilisation 1 : Séries formelles}
 
 \begin{tcblisting}{}
-$\serieset{\CC}{X}$ et $\serieset{\CC}{T | O | P}$ permettent de travailler avec des
+$\setserie{\CC}{X}$ et $\setserie{\CC}{T | O | P}$ permettent de travailler avec des
 séries formelles à coefficients complexes.
 \end{tcblisting}
 
@@ -56,7 +56,7 @@ séries formelles à coefficients complexes.
 \paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
 
 \begin{tcblisting}{}
-$\seriefracset{\ZZ}{X}$ et $\seriefracset{\ZZ}{Z | T | O | P}$ permettent de travailler
+$\setseriefrac{\ZZ}{X}$ et $\setseriefrac{\ZZ}{Z | T | O | P}$ permettent de travailler
 avec des fractions de séries formelles à coefficients entiers.
 \end{tcblisting}
 
@@ -67,9 +67,9 @@ avec des fractions de séries formelles à coefficients entiers.
 \paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
 
 \begin{tcblisting}{}
-$\polylaurentset{\RR}{X} = \polyset{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
+$\setpolylaurent{\RR}{X} = \setpoly{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
 réels de Laurent en $X$. On propose de généraliser comme suit (notation non standard) :
-$\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+$\setpolylaurent{\RR}{X_1 | X_2} = \setpoly{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
 \end{tcblisting}
 
 
@@ -77,26 +77,26 @@ $\polylaurentset{\RR}{X_1 | X_2} = \polyset{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}
 \paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
 
 \begin{tcblisting}{}
-$\serielaurentset{\QQ}{X} = \serieset{\QQ}{X | X^{-1}}$ est l'ensemble des séries
+$\setserielaurent{\QQ}{X} = \setserie{\QQ}{X | X^{-1}}$ est l'ensemble des séries
 formelles rationnelles de Laurent en $X$. On généralise via, notation non standard,
-$\serielaurentset{\QQ}{X_1 | X_2} = \serieset{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
+$\setserielaurent{\QQ}{X_1 | X_2} = \setserie{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
 \end{tcblisting}
 
 
 
 \subsubsection{Toutes les fiches techniques}
 
-\IDmacro*{polyset}{2}
+\IDmacro*{setpoly}{2}
 
-\IDmacro*{polyfracset}{2}
+\IDmacro*{setpolyfrac}{2}
 
-\IDmacro*{serieset}{2}
+\IDmacro*{setserie}{2}
 
-\IDmacro*{seriefracset}{2}
+\IDmacro*{setseriefrac}{2}
 
-\IDmacro*{polylaurentset}{2}
+\IDmacro*{setpolylaurent}{2}
 
-\IDmacro*{serielaurentset}{2}
+\IDmacro*{setserielaurent}{2}
 
 \IDarg{1} l'ensemble auquel les coefficients appartiennent.
 

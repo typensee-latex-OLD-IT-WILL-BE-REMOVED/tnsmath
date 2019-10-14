@@ -7,16 +7,16 @@
 
 \useforestlibrary{linguistics}
 \forestset{
-	declare count={connections}{1},
-	frame/.style={tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
-	apweight/.style={edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
-	bpweight/.style={edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
-	pweight/.style={edge label={node[midway, fill=white]{#1}}},
-	pweight*/.style={}
+    declare count={connections}{1},
+    frame/.style={tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
+    apweight/.style={edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
+    bpweight/.style={edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
+    pweight/.style={edge label={node[midway, fill=white]{#1}}},
+    pweight*/.style={}
 }
 % Sources
-%	* ???? (all settings)
-%	* https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
+%    * ???? (all settings)
+%    * https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
 
 \newcommand\@proba@tree[1]{
     \begin{forest}
@@ -82,9 +82,9 @@
 \def\startprobatree#1\end{\@proba@tree{#1}\end}
 
 \newenvironment{probatree*}{
-	\forestset{pweight/.style={}}
-	\begin{probatree}
+    \forestset{pweight/.style={}}
+    \begin{probatree}
 }{
-	\end{probatree}
+    \end{probatree}
 }
 

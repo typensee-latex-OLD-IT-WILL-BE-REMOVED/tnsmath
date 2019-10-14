@@ -56,10 +56,10 @@
         #2^{\,\prime}
     }{
         #2^{\,%
-        	\forloop[1]{@derpow@no@star@counter}{0}{\value{@derpow@no@star@counter} < #1}{%
-				\prime%
-			}
-		}
+            \forloop[1]{@derpow@no@star@counter}{0}{\value{@derpow@no@star@counter} < #1}{%
+                \prime%
+            }
+        }
     }
 }
 
@@ -75,7 +75,7 @@
 }
 
 \newcommand\@derfrac@star[3][]{
-	\@derfrac@no@star[#1]{}{#3} #2
+    \@derfrac@no@star[#1]{}{#3} #2
 }
 
 % Subscript writing of total derivate
@@ -83,7 +83,7 @@
 % The following command works because xstring traits {...} like a single character.
     \dd%
     \@ifmtarg{#1}{
-    	^{\vphantom{\prime}}%
+        ^{\vphantom{\prime}}%
     }{%
         ^{#1}%
     }%
@@ -128,11 +128,11 @@
 % ARG 3 = Before   : nothing here
 % ARG 4 = Between  : ;
 % ARG 5 = After    : nothing here
-		\makemultiargument{|}{#3}{\partial}{\,\partial}{}%
+        \makemultiargument{|}{#3}{\partial}{\,\partial}{}%
     }
 }
 
 \newcommand\@partialfrac@star[3][\relax]{
-	\@partialfrac@no@star[#1]{}{#3} #2
+    \@partialfrac@no@star[#1]{}{#3} #2
 }
 

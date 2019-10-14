@@ -1,4 +1,25 @@
 ==========
+2019-10-14
+==========
+
+**New subminor version version::``0.6.2-beta`` of ¨lymath:** see the changes below : some renames have been forgotten.
+
+**Algebra:** some macros have been renamed.
+
+    1) ``\polyset`` becomes ``\setpoly``.
+
+    2) ``\polyfracset`` becomes ``\setpolyfrac``.
+
+    3) ``\serieset`` becomes ``\setserie``.
+
+    4) ``\seriefracset`` becomes ``\setseriefrac``.
+
+    5) ``\polylaurentset`` becomes ``\setpolylaurent``.
+
+    6) ``\serielaurentset`` becomes ``\setserielaurent``.
+
+
+==========
 2019-10-13
 ==========
 
@@ -32,7 +53,7 @@
 
     1) One new key ``frame`` allows to frame a subtree very easily.
 
-    2) ``apweight`` and ``bpweight`` give two new way to write the weights (above or below).
+    2) ``apweight`` and ``bpweight`` give two new ways to write the weights (above or below).
 
 
 ==========
