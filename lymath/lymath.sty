@@ -544,6 +544,13 @@
 \newcommand\OO{\ensuremath{\setalge{O}}}
 \newcommand\OOs{\ensuremath{\setspecial{\OO}{s}}}
 
+\newcommand\FF{\ensuremath{\setalge{F}}}
+\newcommand\FFp{\ensuremath{\setspecial{\FF}{p}}}
+\newcommand\FFn{\ensuremath{\setspecial{\FF}{n}}}
+\newcommand\FFs{\ensuremath{\setspecial{\FF}{s}}}
+\newcommand\FFsn{\ensuremath{\setspecial{\FF}{sn}}}
+\newcommand\FFsp{\ensuremath{\setspecial{\FF}{sp}}}
+
 % List of classical sets - END
 
 
@@ -987,14 +994,14 @@
 % -- SEQUENCES -- %
 % --------------- %
 
-\newcommand\suprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
+\newcommand\seqsuprageo[5]{ \prescript{#5}{#2}{#1}_{#3}^{#4} }
 
-\newcommand\hypergeo[3]{%
-    \suprageo{#1}{#2}{#3}{}{}%
+\newcommand\seqhypergeo[3]{%
+    \seqsuprageo{#1}{#2}{#3}{}{}%
 }
 
 \newcommand\seqplus[3]{%
-    \suprageo{#1}{}{#2}{#3}{}%
+    \seqsuprageo{#1}{}{#2}{#3}{}%
 }
 
 

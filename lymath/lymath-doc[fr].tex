@@ -69,9 +69,12 @@
 }
 
 
+\newcommand\@last@macro@env@{}
+
 \newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
 
 \newcommand\@IDmacro@no@star[3]{%
+   	\renewcommand\@last@macro@env@{#1}%
     \texttt{%
     	\textbackslash#1 <macro>%
     	\IfStrEq{#2}{0}{}{%
@@ -79,8 +82,14 @@
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
 	    \IfStrEq{#3}{}{}{%
-	    		\,\,(#3 Argument%
-				\IfStrEq{#3}{1}{}{s})%
+	    		\,\,(%
+				\IfStrEq{#3}{0}{%
+					Sans argument%
+				}{%
+					#3 Argument%
+					\IfStrEq{#3}{1}{}{s}%
+				}%
+				)%
 			}
 	   	}
     \immediate\write\tempfile{macro,#1,#2,#3}%
@@ -95,6 +104,7 @@
 \newcommand\IDenv{\@ifstar{\@IDenv@star}{\@IDenv@no@star}}
 
 \newcommand\@IDenv@no@star[2]{%
+   	\renewcommand\@last@macro@env@{#1}%
     \texttt{%
     	#1 <env>%
     	\IfStrEq{#2}{0}{}{%
@@ -129,6 +139,7 @@
 
 
 \newcommand\IDkey[1]{%
+	\immediate\write\tempfile{option,\@last@macro@env@,#1}%
 	\@IDoptarg*{Option}{{\itshape "#1"}}%
 }
 
@@ -165,7 +176,7 @@
 {\footnotesize Version \texttt{0.6.2-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-14}
+\date{2019-10-15}
 
 \maketitle
 
@@ -278,6 +289,13 @@ et celle de
 Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \fbox{\,\lymathsubsep$\vphantom{F}$\,} et \fbox{\,\lymathsep$\vphantom{F}$\,} respectivement.
 
 
+\paragraph{Fiches techniques}
+
+\IDmacro*{lymathsep}{0}
+
+\IDmacro*{lymathsubsep}{0}
+
+
 
 
 \section{Quelques gestions d'espaces}
@@ -289,6 +307,17 @@ Quand on utilise \verb+\frac+ ou \verb+\dfrac+, de petits espaces sont automatiq
 \begin{tcblisting}{}
 Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 \end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{frac}{0}
+
+\IDmacro*{dfrac}{0}
+
+\IDmacro*{stdfrac}{0}
+
+\IDmacro*{stddfrac}{0}
 
 
 
@@ -303,6 +332,14 @@ Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
 \begin{tcblisting}{}
 Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
 \end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{sqrt}{0}
+
+\IDmacro*{stdsqrt}{0}
+
 
 
 
@@ -321,6 +358,13 @@ $\dsum_{k=0}^{n} 2^k = \sum_{k=0}^{n} 2^k = 2^{n+1} - 1$
 
 $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 \end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{dprod}{0}
+
+\IDmacro*{dsum}{0}
 
 
 
@@ -423,6 +467,12 @@ Voici les macros définissant les textes utilisés qui tiennet compte de l'utili
 
 
 
+\paragraph{???? Fiches techniques}
+
+\IDmacro*{textexplainleft}{0}
+
+
+
 
 %\section{Logique et fondements}
 
@@ -459,6 +509,10 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
     $D$       &   $E$           &   $F$
 \end{tabular}
 \end{tcblisting}
+
+
+
+\paragraph{Fiches techniques ????}
 
 
 
@@ -533,6 +587,16 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 \IDarg{1} un symbole.
 
 \IDarg{2} une courte explication.
+
+
+\bigskip
+
+
+\IDmacro*{textexplainleft}{0}
+
+\IDmacro*{textexplainright}{0}
+
+\IDmacro*{textexplainspacein}{0}
 
 
 
@@ -675,14 +739,15 @@ Pour les indices, utilisez $\setalge*{k}{1}$, $\setalge*{k}{2}$ \dots
 
 
 
-\subsection{Ensembles classiques}
+\subsection{Ensembles classiques en mathématiques et en informatique théorique} 
 
 \subsubsection{La liste complète}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions et
-enfin $\OO$ pour les octonions.
+mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions,
+$\OO$ pour les octonions, et aussi $\FF$ pour des nombres flottants \emph{(notation à 
+préciser suivant le contexte)}.
 \end{tcblisting}
 
 
@@ -708,21 +773,21 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 
 % == Table of suffixes - START == %
 
-\newcommand\xx{\phantom{$\times$}}
 \begin{table}[h]
     \caption{Suffixes}
     \begin{center}
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
-            \hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+P+ & \xx & \xx & \xx & \xx & \xx \\
-            \hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+R+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+C+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+H+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+\NN+ &          &          & $\times$ &          &          \\
+            \hline \verb+\PP+ &          &          &          &          &          \\
+            \hline \verb+\ZZ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\DD+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\QQ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\RR+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\CC+ &          &          & $\times$ &          &          \\
+            \hline \verb+\HH+ &          &          & $\times$ &          &          \\
+            \hline \verb+\OO+ &          &          & $\times$ &          &          \\
+            \hline \verb+\FF+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:suffixes-sets}
@@ -969,7 +1034,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % Docs for discrete intervals - END
 
 
-\subsubsection{Intervalles discrets d'entiers à la sauce \og informatique \fg}
+\subsubsection{Informatique théorique - Intervalles discrets d'entiers}
 
 \paragraph{Exemple d'utilisation}
 
@@ -1053,6 +1118,15 @@ Les opérateurs \verb+\parallel+ et \verb+\notparallel+ utilisent des obliques a
 $(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \notparallel (\pts{GH})$ au lieu de
 $(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
 \end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{parallel}{0}
+
+\IDmacro*{stdparallel}{0}
+
+\IDmacro*{notparallel}{0}
 
 
 
@@ -1702,8 +1776,8 @@ Toutes les macros suivantes ont un seul paramètre.
 \paragraph{Exemple d'utilisation}
 
 \begin{tcblisting}{}
-Parfois nous avons besoin d'écrire $\seqplus{F}{1}{2}$ ou $\hypergeo{F}{1}{2}$ et
-le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
+Parfois nous avons besoin d'écrire $\seqplus{F}{1}{2}$ ou $\seqhypergeo{F}{1}{2}$ et
+le fou (?\,) aime vraiment $\seqsuprageo{F}{1}{2}{3}{4}$.
 \end{tcblisting}
 
 
@@ -1719,7 +1793,7 @@ le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
 \bigskip
 
 
-\IDmacro*{hypergeo}{2}
+\IDmacro*{seqhypergeo}{2}
 
 \IDarg{1} l'indice à gauche.
 
@@ -1729,7 +1803,7 @@ le fou (?\,) aime vraiment $\suprageo{F}{1}{2}{3}{4}$.
 \bigskip
 
 
-\IDmacro*{suprageo}{4}
+\IDmacro*{seqsuprageo}{4}
 
 \IDarg{1} l'indice à gauche.
 
@@ -2046,7 +2120,7 @@ Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO
 
 \IDmacro*{smallO}{1}
 
-\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
+\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
 
 
 
@@ -2072,7 +2146,7 @@ $\exists (m, n_0)$ tel que $n \geqslant n_0$ implique $f(n) \geqslant m g(n)$.
 
 \IDmacro*{bigomega}{1}
 
-\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigomega{}$.
+\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigomega{}$.
 
 
 
@@ -2098,7 +2172,7 @@ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
 
 \IDmacro*{bigtheta}{1}
 
-\IDarg{} non vide, cet argument sera mis entre des parenthèses après $\bigtheta{}$.
+\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
 
 
 
@@ -2262,7 +2336,7 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 
 \IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
 
-\IDkey{frame} pour encadre un sous-arbre.
+\IDkey{frame} pour encadrer un sous-arbre se terminant par des feuilles.
 
 
 
@@ -2278,6 +2352,15 @@ $10 \divides 150$ et $10 \notdivides 154$ c'est mieux que $10 | 150$ et $10 \not
 
 De plus, il est facile d'écrire que $a \equiv b \modulo p \iff p \divides (a - b)$.
 \end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{divides}{0}
+
+\IDmacro*{notdivides}{0}
+
+\IDmacro*{modulo}{0}
 
 
 
@@ -2380,6 +2463,11 @@ $\displaystyle
   u_0 + \contfracope_{k=1}^{n} (1:u_k)
 = \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
 \end{tcblisting}
+
+
+\paragraph{Fiche technique}
+
+\IDmacro*{contfracope}{0}
 
 
 
@@ -2531,6 +2619,27 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \begin{description}[leftmargin=1em]
     \setlength\itemsep{1em}
+
+
+% --------------- %
+
+    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+    \begin{itemize}
+        \item En algèbre, il y a eu les renommages ci-dessous qui avaient été oubliés.
+        \begin{itemize}
+        	\item \verb+\polyset+ est devenu \verb+\setpoly+.
+
+        	\item \verb+\polyfracsetp+ est devenu \verb+\setpolyfrac+.
+
+        	\item \verb+\serieset+ est devenu \verb+\setserie+.
+
+        	\item \verb+\seriefracset+ est devenu \verb+\setseriefrac+.
+
+        	\item \verb+\polylaurentset+ est devenu \verb+\setpolylaurent+.
+
+        	\item \verb+\serielaurentset+ est devenu \verb+\setserielaurent+.
+        \end{itemize}
+    \end{itemize} 
 
 
 % --------------- %

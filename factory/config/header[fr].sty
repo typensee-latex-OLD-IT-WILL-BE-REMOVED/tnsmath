@@ -64,9 +64,12 @@
 }
 
 
+\newcommand\@last@macro@env@{}
+
 \newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
 
 \newcommand\@IDmacro@no@star[3]{%
+   	\renewcommand\@last@macro@env@{#1}%
     \texttt{%
     	\textbackslash#1 <macro>%
     	\IfStrEq{#2}{0}{}{%
@@ -74,8 +77,14 @@
 				\IfStrEq{#2}{1}{}{s}]%
 			}%
 	    \IfStrEq{#3}{}{}{%
-	    		\,\,(#3 Argument%
-				\IfStrEq{#3}{1}{}{s})%
+	    		\,\,(%
+				\IfStrEq{#3}{0}{%
+					Sans argument%
+				}{%
+					#3 Argument%
+					\IfStrEq{#3}{1}{}{s}%
+				}%
+				)%
 			}
 	   	}
     \immediate\write\tempfile{macro,#1,#2,#3}%
@@ -90,6 +99,7 @@
 \newcommand\IDenv{\@ifstar{\@IDenv@star}{\@IDenv@no@star}}
 
 \newcommand\@IDenv@no@star[2]{%
+   	\renewcommand\@last@macro@env@{#1}%
     \texttt{%
     	#1 <env>%
     	\IfStrEq{#2}{0}{}{%
@@ -124,6 +134,7 @@
 
 
 \newcommand\IDkey[1]{%
+	\immediate\write\tempfile{option,\@last@macro@env@,#1}%
 	\@IDoptarg*{Option}{{\itshape "#1"}}%
 }
 

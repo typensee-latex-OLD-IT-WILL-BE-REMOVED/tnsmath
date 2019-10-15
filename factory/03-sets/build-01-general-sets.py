@@ -1,12 +1,20 @@
 #! /usr/bin/env python3
 
+import re
+
 from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
-THIS_DIR = PPath( __file__ ).parent
-STY_FILE = THIS_DIR / '01-general-sets.sty'
-TEX_FILE = THIS_DIR / '01-general-sets[fr].tex'
+BASENAME = PPath(__file__).stem.replace("build-", "")
+
+THIS_DIR = PPath(__file__).parent
+STY_FILE = THIS_DIR / f'{BASENAME}.sty'
+TEX_FILE = STY_FILE.parent / (STY_FILE.stem + "[fr].tex")
+
+PATTERN_FOR_PEUF = re.compile("\d+-(.*)")
+match            = re.search(PATTERN_FOR_PEUF, STY_FILE.stem)
+PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 
 DECO = " "*4
 
@@ -51,7 +59,7 @@ def latex_classical(setdef):
 # -------------------------- #
 
 with ReadBlock(
-    content = THIS_DIR / "general.peuf",
+    content = PEUF_FILE,
     mode    = "verbatim"
 ) as data:
     config = {
@@ -131,7 +139,7 @@ table_header = DECO*3 + "  & {0} \\\\".format(
 table_lines = []
 
 for onesetdef in classicalsets:
-    cells = [f"\\verb+{onesetdef[0]}+"]
+    cells = [f"\\verb+\\{onesetdef[0]*2}+"]
 
     for s in suffix_header:
         hassuffix = True
@@ -145,7 +153,7 @@ for onesetdef in classicalsets:
             cells.append(r'$\times$')
 
         else:
-            cells.append('\\xx')
+            cells.append('        ')
 
     table_lines.append(" & ".join(cells) + r' \\')
 
@@ -155,7 +163,6 @@ table_lines = f'{DECO*3}\\hline ' \
 
 latextable = f"""
 
-\\newcommand\\xx{{\\phantom{{$\\times$}}}}
 \\begin{{table}}[h]
     \\caption{{Suffixes}}
     \\begin{{center}}

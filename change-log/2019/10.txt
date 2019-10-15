@@ -1,4 +1,18 @@
 ==========
+2019-10-15
+==========
+
+**Sets:** one new classical set added ``\FF`` set of float like numbers.
+
+
+**Analysis:** two others macros have been renamed.
+
+    1) ``\hypergeo`` becomes ``\seqhypergeo``.
+
+    2) ``\suprageo`` becomes ``\seqsuprageo``.
+
+
+==========
 2019-10-14
 ==========
 

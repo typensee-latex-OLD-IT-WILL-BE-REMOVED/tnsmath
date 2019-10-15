@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+import re
+
 from collections import defaultdict
 from itertools import product
 
@@ -7,9 +9,15 @@ from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
-THIS_DIR = PPath( __file__ ).parent
-STY_FILE = THIS_DIR / '02-intervals.sty'
-TEX_FILE = THIS_DIR / '02-intervals[fr].tex'
+BASENAME = PPath(__file__).stem.replace("build-", "")
+
+THIS_DIR = PPath(__file__).parent
+STY_FILE = THIS_DIR / f'{BASENAME}.sty'
+TEX_FILE = STY_FILE.parent / (STY_FILE.stem + "[fr].tex")
+
+PATTERN_FOR_PEUF = re.compile("\d+-(.*)")
+match            = re.search(PATTERN_FOR_PEUF, STY_FILE.stem)
+PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 
 DECO = " "*4
 
@@ -109,7 +117,7 @@ with open(
 
 
 with ReadBlock(
-    content = THIS_DIR / "intervals.peuf",
+    content = PEUF_FILE,
     mode    = "k::="
 ) as data:
     config = parse(data.mydict("std mini"))

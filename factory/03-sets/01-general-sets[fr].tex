@@ -152,14 +152,15 @@ Pour les indices, utilisez $\setalge*{k}{1}$, $\setalge*{k}{2}$ \dots
 
 
 
-\subsection{Ensembles classiques}
+\subsection{Ensembles classiques en mathématiques et en informatique théorique} 
 
 \subsubsection{La liste complète}
 
 \begin{tcblisting}{}
 Vous pouvez utiliser directement $\nullset$, $\NN$, $\ZZ$, $\DD$, $\QQ$, $\RR$, $\CC$,
-mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions et
-enfin $\OO$ pour les octonions.
+mais aussi $\PP$ pour l'ensemble des nombres premiers, $\HH$ pour les quaternions,
+$\OO$ pour les octonions, et aussi $\FF$ pour des nombres flottants \emph{(notation à 
+préciser suivant le contexte)}.
 \end{tcblisting}
 
 
@@ -185,21 +186,21 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 
 % == Table of suffixes - START == %
 
-\newcommand\xx{\phantom{$\times$}}
 \begin{table}[h]
     \caption{Suffixes}
     \begin{center}
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
-            \hline \verb+N+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+P+ & \xx & \xx & \xx & \xx & \xx \\
-            \hline \verb+Z+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+D+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+Q+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+R+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+C+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+H+ & \xx & \xx & $\times$ & \xx & \xx \\
-            \hline \verb+O+ & \xx & \xx & $\times$ & \xx & \xx \\
+            \hline \verb+\NN+ &          &          & $\times$ &          &          \\
+            \hline \verb+\PP+ &          &          &          &          &          \\
+            \hline \verb+\ZZ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\DD+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\QQ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\RR+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\CC+ &          &          & $\times$ &          &          \\
+            \hline \verb+\HH+ &          &          & $\times$ &          &          \\
+            \hline \verb+\OO+ &          &          & $\times$ &          &          \\
+            \hline \verb+\FF+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:suffixes-sets}

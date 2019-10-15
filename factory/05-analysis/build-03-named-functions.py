@@ -1,12 +1,23 @@
 #! /usr/bin/env python3
 
+import re
+
+from collections import defaultdict
+from itertools import product
+
 from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 from orpyste.data import ReadBlock
 
-THIS_DIR = PPath( __file__ ).parent
-STY_FILE = THIS_DIR / '03-named-functions.sty'
-TEX_FILE = THIS_DIR / '03-named-functions[fr].tex'
+BASENAME = PPath(__file__).stem.replace("build-", "")
+
+THIS_DIR = PPath(__file__).parent
+STY_FILE = THIS_DIR / f'{BASENAME}.sty'
+TEX_FILE = STY_FILE.parent / (STY_FILE.stem + "[fr].tex")
+
+PATTERN_FOR_PEUF = re.compile("\d+-(.*)")
+match            = re.search(PATTERN_FOR_PEUF, STY_FILE.stem)
+PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 
 DECO = " "*4
 
@@ -16,7 +27,7 @@ DECO = " "*4
 # -------------------------- #
 
 with ReadBlock(
-    content = THIS_DIR / "functions.peuf",
+    content = PEUF_FILE,
     mode    = {
         "verbatim"  : 'no-parameter',
         "keyval:: =": 'parameter'
