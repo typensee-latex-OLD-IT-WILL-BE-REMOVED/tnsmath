@@ -239,12 +239,12 @@ template_tex = text_start + f"""
 
 
 text_start, _, text_end = between(
-    text = template_tex,
-    seps = [
-        "% == Technical infos - Operators - START == %\n",
-        "\n% == Technical infos - Operators - END == %"
-    ],
-    keepseps = True
+text = template_tex,
+seps = [
+    "% == Technical infos - Operators - START == %\n",
+    "\n% == Technical infos - Operators - END == %"
+],
+keepseps = True
 )
 
 ALL_OPES_DECO = ", ".join(ALL_OPES_DECO)

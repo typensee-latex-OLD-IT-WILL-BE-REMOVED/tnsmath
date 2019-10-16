@@ -2,13 +2,13 @@
 2019-10-16
 ==========
 
-**Internal changes in the factory:** somme new features.
+**Internal changes in the factory:** some new features.
 
     1) All the macros and constants of the API are indicated in the documentation.
 
-    2) The macros ``\IDkey`` adds automatically in the file with extension path::``macros-x.txt`` the last environment or macro defined in teh documentation.
+    2) The macros ``\IDkey`` adds automatically in the file with extension path::``macros-x.txt`` the last environment or macro defined in the documentation.
 
-    3) Some automation for decorated operators in the logic folder.
+    3) Some automations added for the decorated operators in the logic folder.
 
 
 ==========

@@ -447,6 +447,13 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 \end{tcblisting}
 
 
+
+\subsubsection{Une table récapitulative}
+
+La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} fournit toutes les associations autorisées entre opérateurs de comparaison et décorations.
+
+
+
 \subsection{Textes utilisés} \label{text-for-opes}
 
 Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
@@ -535,6 +542,11 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 \end{tcblisting}
 
 
+\begin{remark}
+	La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} montre toutes les associations autorisées entre opérateurs logiques et décorations.
+\end{remark}
+
+
 \paragraph{Fiches techniques}
 
 \begin{multicols}{2}
@@ -579,6 +591,39 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 }
 
 % == Vertical versions - END == %
+
+
+
+
+%\section{Logique et fondements}
+
+\subsection{Tables des décorations possibles des opérateurs}
+
+La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} donne toutes les associations autorisées entre opérateurs et décorations.
+
+% == Table - START == %
+
+\begin{table}[h]
+    \caption{Décorations}
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+              & \verb+choice+ & \verb+cond+ & \verb+def+ & \verb+def*+ & \verb+def**+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+test+ \\
+            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\neq+ &          & $\times$ &          &          &          & $\times$ & $\times$ &          & $\times$ \\
+            \hline \verb+\l+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\g+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\leq+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\geq+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\iff+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\implies+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+            \hline \verb+\liesimp+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+        \end{tabular}
+    \end{center}
+    \label{table:decorations-operators}
+\end{table}
+
+
+% == Table - END == %
 
 
 
