@@ -83,26 +83,60 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 \end{tcblisting}
 
 
-	\subsection{Textes utilisés} \label{text-for-opes}
+\subsection{Textes utilisés} \label{text-for-opes}
 
-Voici les macros définissant les textes utilisés qui tiennet compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+.
+Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
 
-\begin{enumerate}
-	\item \verb+\textopchoice+ donne \emph{\og choix \fg} en français et \emph{\og choice \fg} sinon.
+% == All texts - START == %
 
-	\item \verb+\textopcond+ donne \emph{\og cond \fg} dans tous les cas.
+\begin{multicols}{2}
+    \verb+\textopchoice+ donne \emph{\og \textopchoice \fg}
 
-	\item \verb+\textopdef+ donne \emph{\og déf \fg} en français et \emph{\og def \fg} sinon.
+    \verb+\textopcond+ donne \emph{\og \textopcond \fg}
 
-	\item \verb+\textophyp+ donne \emph{\og hyp \fg} dans tous les cas.
+    \verb+\textopdef+ donne \emph{\og \textopdef \fg}
 
-	\item \verb+\textopid+ donne \emph{\og id \fg} dans tous les cas.
-\end{enumerate}
+    \verb+\textophyp+ donne \emph{\og \textophyp \fg}
+
+    \verb+\textopid+ donne \emph{\og \textopid \fg}
+
+    \verb+\textoptest+ donne \emph{\og \textoptest \fg}
+\vfill\null\end{multicols}
+
+% == All texts - END == %
 
 
 
-\paragraph{???? Fiches techniques}
+\subsection{Fiches techniques}
 
-\IDmacro*{textexplainleft}{0}
+\paragraph{Les opérateurs disponibles}
+
+\begin{multicols}{2}
+% == Technical infos - Operators - START == %
+
+\foreach \k in {eqid, eqid*, eqdef, eqdef*, eqdef**, eqchoice, eqcond, eqhyp, eqtest, neqid, neqcond, neqhyp, neqtest, lcond, lhyp, ltest, gcond, ghyp, gtest, leqcond, leqhyp, leqtest, geqcond, geqhyp, geqtest}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Technical infos - Operators - END == %
+\vfill\null\end{multicols}
+
+
+
+\paragraph{Les textes disponibles}
+
+\begin{multicols}{2}
+% == Technical infos - Texts - START == %
+
+\foreach \k in {textopchoice, textopcond, textopdef, textophyp, textopid, textoptest}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Technical infos - Texts - END == %
+\vfill\null\end{multicols}
 
 \end{document}

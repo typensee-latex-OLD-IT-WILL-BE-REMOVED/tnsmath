@@ -1,0 +1,31 @@
+decorations::
+    id
+    def
+    choice
+    cond
+    hyp
+    test
+
+
+todecorate::
+    eq  = :all:
+    neq = id , cond , hyp , test
+
+    l , g , leq , geq = cond , hyp , test
+
+
+stars::
+    eqdef*  = \coloneqq
+    eqdef** = \mathrel{\mathpalette\my@hat@eq\relax}
+
+    eqid* = \rightleftharpoons
+
+
+latex::
+    eq  = =
+    neq = \neq
+
+    l   = <
+    g   = >
+    leq = \leq
+    geq = \geq

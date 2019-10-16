@@ -1,8 +1,21 @@
 ==========
+2019-10-16
+==========
+
+**Internal changes in the factory:** somme new features.
+
+    1) All the macros and constants of the API are indicated in the documentation.
+
+    2) The macros ``\IDkey`` adds automatically in the file with extension path::``macros-x.txt`` the last environment or macro defined in teh documentation.
+
+    3) Some automation for decorated operators in the logic folder.
+
+
+==========
 2019-10-15
 ==========
 
-**Sets:** one new classical set added ``\FF`` set of float like numbers.
+**Sets:** one new classical set added ``\FF`` for float like numbers.
 
 
 **Analysis:** two others macros have been renamed.
@@ -10,6 +23,9 @@
     1) ``\hypergeo`` becomes ``\seqhypergeo``.
 
     2) ``\suprageo`` becomes ``\seqsuprageo``.
+
+
+**Logic:** one new macro ``\textoptest`` added.
 
 
 ==========

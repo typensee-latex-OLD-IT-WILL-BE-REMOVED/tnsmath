@@ -179,6 +179,45 @@ latextable = f"""
 template_tex = text_start + latextable + text_end
 
 
+# ------------------- #
+# -- DOCUMENTATION -- #
+# ------------------- #
+
+text_start, _, text_end = between(
+    text = template_tex,
+    seps = [
+        "% == Docs for classical sets - START == %",
+        "% == Docs for classical sets - END == %"
+    ],
+    keepseps = True
+)
+
+allmacros = []
+
+for onesetdef in classicalsets:
+    allmacros.append(f"{onesetdef[0]}")
+
+    for s in suffix_header:
+        hassuffix = True
+
+        for char in s:
+            if sexiffus[char] not in onesetdef:
+                hassuffix = False
+                break
+
+        if hassuffix:
+            allmacros.append(f"{onesetdef[0]}{s}")
+
+template_tex = text_start + f"""
+
+\\foreach \\k in {{{", ".join(allmacros)}}}{{
+
+	\\IDmacro*{{\k}}{{0}}
+
+}}
+""" + "\n" + text_end
+
+
 # -------------------------- #
 # -- UPDATES OF THE FILES -- #
 # -------------------------- #

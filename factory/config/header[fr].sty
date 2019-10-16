@@ -7,6 +7,8 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+\usepackage{multicol}
+
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
@@ -58,10 +60,6 @@
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
 
 \AtEndDocument{\immediate\closeout\tempfile}
-
-\newcommand\IDconstant[1]{%
-    \immediate\write\tempfile{constant@#1}%
-}
 
 
 \newcommand\@last@macro@env@{}

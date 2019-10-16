@@ -40,11 +40,12 @@ with ReadBlock(
     ).split()
 
     for k, v in functions['parameter'].items():
-        nbparam, latex = v.split(";")
+        nbparam, latex, *desc = v.split(";")
 
         functions['parameter'][k] = {
             'nbparam': nbparam.strip(),
-            'latex'  : latex.strip()
+            'latex'  : latex.strip(),
+            'desc'   : [d.strip() for d in desc],
         }
 
 
@@ -117,39 +118,14 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-text_start += "\n"
+template_tex = text_start + f"""
 
-text_auto = "\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
-    ", ".join(functions['no-parameter'])
-)
+\\foreach \\k in {{{", ".join(functions['no-parameter'])}}}{{
 
-text_table = []
+	\\IDmacro*{{\k}}{{0}}
 
-tablewidth = 3
-
-for i in range(0, len(functions['no-parameter']), tablewidth):
-    sublist = functions['no-parameter'][i:i + tablewidth]
-    sublist += ['']*(tablewidth - len(sublist))
-
-    text_table.append(
-        " & ".join(
-            r"\verb+\{0}+".format(name)
-            if name else ""
-            for name in sublist
-        ) + r"\\"
-    )
-
-text_table = DECO + ("\n" + DECO).join(text_table)
-
-text_auto += r"""
-
-\begin{{tabular*}}{{\textwidth}}{{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
-{0}
-\end{{tabular*}}
-
-""".format(text_table)
-
-template_tex = text_start + text_auto + text_end
+}}
+""" + "\n" + text_end
 
 
 # --------------------------------------------- #
@@ -167,49 +143,29 @@ text_start, _, text_end = between(
 
 text_start += "\n"
 
-text_table = []
-
-paramfuncs = []
+docinfos = []
 
 for name, infos in functions['parameter'].items():
     nbparam = int(infos['nbparam'])
 
-    if nbparam != 1:
-        plurial = "s"
+    docinfos += [
+        "\\bigskip",
+        f"\\IDmacro*{{{name}}}{{{nbparam}}}"
+    ]
+
+    desc = infos["desc"]
+
+    if len(desc) == 1:
+        docinfos.append(f"\\IDarg{{}} {desc[0]}")
 
     else:
-        plurial = ""
+        for i, d in enumerate(desc, 1):
+            docinfos.append(f"\\IDarg{{{i}}} {d}")
 
-    paramfuncs.append(
-        r"\verb+\{0}+ \, ({1} paramètre{2})".format(
-            name,
-            nbparam,
-            plurial
-        )
-    )
+docinfos.append("")
+docinfos = [""] + docinfos[1:]
 
-for i in range(0, len(paramfuncs), 4):
-    sublist = paramfuncs[i:i+4]
-    sublist += ['']*(4 - len(sublist))
-
-    text_table.append(
-        " & ".join(sublist) + r"\\"
-    )
-
-text_table = DECO + ("\n" + DECO).join(text_table)
-
-text_auto = r"""
-\begin{{tabular*}}{{\textwidth}}{{@{{\extracolsep{{\fill}}}}*{{4}}{{l}}}}
-{0}
-\end{{tabular*}}
-
-""".format(text_table)
-
-template_tex = text_start + text_auto + text_end
-# text_auto = "\n\\foreach \k in {{{0}}}{{\IDmacro{{\k}}}}".format(
-#     ", ".join(functions['parameter'])
-
-
+template_tex = text_start + "\n\n".join(docinfos) + text_end
 
 
 # -------------------------- #

@@ -1,0 +1,14 @@
+decorations::
+    cond
+    hyp
+    test
+
+
+todecorate::
+    iff     = :all:
+    implies = :all:
+    liesimp = :all:
+
+
+latex::
+    liesimp = \mathrel{\Longleftarrow}

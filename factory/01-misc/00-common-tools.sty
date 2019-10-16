@@ -11,19 +11,23 @@
 \@ifpackagewith{babel}{french}{
     \newcommand\lymathsep{;}
     \newcommand\lymathsubsep{,}
+
     \newcommand\textopchoice{choix}
     \newcommand\textopcond{cond}
     \newcommand\textopdef{déf}
     \newcommand\textophyp{hyp}
     \newcommand\textopid{id}
+    \newcommand\textoptest{?}
 }{
     \newcommand\lymathsep{,}
     \newcommand\lymathsubsep{;}
+
     \newcommand\textopchoice{choice}
     \newcommand\textopcond{cond}
     \newcommand\textopdef{def}
     \newcommand\textophyp{hyp}
     \newcommand\textopid{id}
+    \newcommand\textoptest{?}
 }
 
 
@@ -39,6 +43,13 @@
 % #3 and #4 : the two arguments
 \newcommand\@apply@macro@two@args[4]{%
     #1{#2{#3}}{#2{#4}}%
+}
+
+
+% Tools - Deco over a math symbol
+
+\newcommand\@over@math@symbol[2]{%
+	\mathrel{\overset{\mathrm{\text{\raisebox{.5ex}{#1}}}}{#2}}%
 }
 
 

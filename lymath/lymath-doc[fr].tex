@@ -12,6 +12,8 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+\usepackage{multicol}
+
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
@@ -63,10 +65,6 @@
 \immediate\openout\tempfile=x-\jobname.macros-x.txt
 
 \AtEndDocument{\immediate\closeout\tempfile}
-
-\newcommand\IDconstant[1]{%
-    \immediate\write\tempfile{constant@#1}%
-}
 
 
 \newcommand\@last@macro@env@{}
@@ -176,7 +174,7 @@
 {\footnotesize Version \texttt{0.6.2-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-15}
+\date{2019-10-16}
 
 \maketitle
 
@@ -449,27 +447,61 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 \end{tcblisting}
 
 
-	\subsection{Textes utilisés} \label{text-for-opes}
+\subsection{Textes utilisés} \label{text-for-opes}
 
-Voici les macros définissant les textes utilisés qui tiennet compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+.
+Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
 
-\begin{enumerate}
-	\item \verb+\textopchoice+ donne \emph{\og choix \fg} en français et \emph{\og choice \fg} sinon.
+% == All texts - START == %
 
-	\item \verb+\textopcond+ donne \emph{\og cond \fg} dans tous les cas.
+\begin{multicols}{2}
+    \verb+\textopchoice+ donne \emph{\og \textopchoice \fg}
 
-	\item \verb+\textopdef+ donne \emph{\og déf \fg} en français et \emph{\og def \fg} sinon.
+    \verb+\textopcond+ donne \emph{\og \textopcond \fg}
 
-	\item \verb+\textophyp+ donne \emph{\og hyp \fg} dans tous les cas.
+    \verb+\textopdef+ donne \emph{\og \textopdef \fg}
 
-	\item \verb+\textopid+ donne \emph{\og id \fg} dans tous les cas.
-\end{enumerate}
+    \verb+\textophyp+ donne \emph{\og \textophyp \fg}
+
+    \verb+\textopid+ donne \emph{\og \textopid \fg}
+
+    \verb+\textoptest+ donne \emph{\og \textoptest \fg}
+\vfill\null\end{multicols}
+
+% == All texts - END == %
 
 
 
-\paragraph{???? Fiches techniques}
+\subsection{Fiches techniques}
 
-\IDmacro*{textexplainleft}{0}
+\paragraph{Les opérateurs disponibles}
+
+\begin{multicols}{2}
+% == Technical infos - Operators - START == %
+
+\foreach \k in {eqid, eqid*, eqdef, eqdef*, eqdef**, eqchoice, eqcond, eqhyp, eqtest, neqid, neqcond, neqhyp, neqtest, lcond, lhyp, ltest, gcond, ghyp, gtest, leqcond, leqhyp, leqtest, geqcond, geqhyp, geqtest}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Technical infos - Operators - END == %
+\vfill\null\end{multicols}
+
+
+
+\paragraph{Les textes disponibles}
+
+\begin{multicols}{2}
+% == Technical infos - Texts - START == %
+
+\foreach \k in {textopchoice, textopcond, textopdef, textophyp, textopid, textoptest}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Technical infos - Texts - END == %
+\vfill\null\end{multicols}
 
 
 
@@ -480,12 +512,17 @@ Voici les macros définissant les textes utilisés qui tiennet compte de l'utili
 
 \subsubsection{Des symboles supplémentaires}
 
+\paragraph{Un premier exemple -- Implication réciproque}
+
 En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
 
 \begin{tcblisting}{}
 Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
 \end{tcblisting}
 
+
+
+\paragraph{Un deuxième exemple -- Des opérateurs décorés}
 
 Tout comme pour les égalités, il existe des versions de type test, hypothèse et condition.
 
@@ -498,7 +535,26 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 \end{tcblisting}
 
 
+\paragraph{Fiches techniques}
+
+\begin{multicols}{2}
+% == Decorated versions - START == %
+
+\foreach \k in {iff, iffcond, iffhyp, ifftest, implies, impliescond, implieshyp, impliestest, liesimp, liesimpcond, liesimphyp, liesimptest}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Decorated versions - END == %
+\vfill\null
+\end{multicols}
+
+
+
 \subsubsection{Équivalences et implications verticales}
+
+\paragraph{À quoi cela sert-il ?}
 
 Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales non décorées des symboles d'équivalence et d'implication. Voici comment les obtenir.
 
@@ -512,7 +568,17 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 
 
 
-\paragraph{Fiches techniques ????}
+\paragraph{Fiches techniques}
+
+% == Vertical versions - START == %
+
+\foreach \k in {viff, vimplies, vliesimp}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Vertical versions - END == %
 
 
 
@@ -794,6 +860,22 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 \end{table}
 
 % == Table of suffixes - END == %
+
+
+\paragraph{Fiches techniques}
+
+\begin{multicols}{2}
+% == Docs for classical sets - START == %
+
+\foreach \k in {N, Ns, P, Z, Zn, Zp, Zs, Zsn, Zsp, D, Dn, Dp, Ds, Dsn, Dsp, Q, Qn, Qp, Qs, Qsn, Qsp, R, Rn, Rp, Rs, Rsn, Rsp, C, Cs, H, Hs, O, Os, F, Fn, Fp, Fs, Fsn, Fsp}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Docs for classical sets - END == %
+\vfill\null
+\end{multicols}
 
 
 
@@ -1643,8 +1725,6 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 
 % List of classical constants - START
 
-\foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
-
 \begin{tcblisting}{}
 Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
 $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
@@ -1658,6 +1738,22 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 \end{remark}
 
 
+\paragraph{Fiches techniques}
+
+\begin{multicols}{2}
+% == Docs for contants - START == %
+
+\foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Docs for contants - END == %
+\vfill\null
+\end{multicols}
+
+
 
 \subsubsection{Constantes latines personnelles}
 
@@ -1665,7 +1761,7 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 
 \begin{tcblisting}{}
 Il est aisé d'écrire $\ct{a} x^2 + \ct{b} x + \ct{c}$ au lieu de $a x^2 + b x + c$
-afin de souligner que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
+afin d'indiquer que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
 \end{tcblisting}
 
 
@@ -1710,61 +1806,58 @@ $\displaystyle \abs*{\frac{3}{5}}$ si vous préférez des petits traits verticau
 
 \subsection{Fonctions nommées spéciales}
 
-\subsubsection{Un exemple d'utilisation}
+\subsubsection{Sans paramètre}
+
+\paragraph{Un exemple d'utilisation}
 
 \begin{tcblisting}{}
-Quelques fonctions nommées supplémentaires (voir la liste ecomplète ci-dessous) :
-$\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x =\logb{2} x$ and $\expb{6} y$.
+Quelques fonctions nommées supplémentaires (voir la liste complète ci-dessous) :
+$\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x$ le logarithme binaire.
 \end{tcblisting}
-
-
-\subsubsection{Fonctions nommées sans paramètre}
-
-Toutes les macros suivantes n'ont aucun paramètre.
-
-\medskip
-
-% List of functions without parameter - START
-
-\foreach \k in {ch, sh, th, ach, ash, ath, arccosh, arcsinh, arctanh, acos, asin, atan, pgcd, ppcm}{\IDconstant{\k}}
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
-    \verb+\ch+ & \verb+\sh+ & \verb+\th+\\
-    \verb+\ach+ & \verb+\ash+ & \verb+\ath+\\
-    \verb+\arccosh+ & \verb+\arcsinh+ & \verb+\arctanh+\\
-    \verb+\acos+ & \verb+\asin+ & \verb+\atan+\\
-    \verb+\pgcd+ & \verb+\ppcm+ & \\
-\end{tabular*}
-
-% List of functions without parameter - END
-
-
-
-\subsubsection{Fonctions nommées avec un paramètre}
-
-\paragraph{La liste complète}
-
-Toutes les macros suivantes ont un seul paramètre.
-
-\medskip
-
-% List of functions with parameters - START
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
-    \verb+\expb+ \, (1 paramètre) & \verb+\logb+ \, (1 paramètre) &  & \\
-\end{tabular*}
-
-% List of functions with parameters - END
-
 
 
 \paragraph{Fiches techniques}
 
+\begin{multicols}{2}
+% List of functions without parameter - START
+
+\foreach \k in {ch, sh, th, ach, ash, ath, arccosh, arcsinh, arctanh, acos, asin, atan, pgcd, ppcm}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% List of functions without parameter - END
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Avec un paramètre}
+
+\paragraph{Un exemple d'utilisation}
+
+\begin{tcblisting}{}
+D'autres fonctions nommées supplémentaires avec un paarmètre (voir la liste complète
+ci-dessous) : $\logb{2} x = \lg x$ et $\expb{6} y = 6^y$.
+\end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+% List of functions with parameters - START
+
+
 \IDmacro*{expb}{1}
+
+\IDarg{} la base de l'exponentielle
+
+\bigskip
 
 \IDmacro*{logb}{1}
 
-\IDarg{} la base de l'exponentielle ou du logarithme.
+\IDarg{} la base du logarithme
+
+% List of functions with parameters - END
 
 
 
@@ -2439,8 +2532,6 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
                                {L'opérateur K}}
 
 \paragraph{Exemple d'utilisation 1}
-
-\IDconstant{contfracope}
 
 La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 

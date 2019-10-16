@@ -5,26 +5,10 @@
 
 % == DEFINITIONS == %
 
-% Source
+% Sources
 %    * https://tex.stackexchange.com/a/506745/6880
+%    * https://tex.stackexchange.com/a/510011/6880
 
-% Standard (none) equations
-
-\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
-
-\newcommand\@eqdef@no@star{%
-    \mathrel{\overset{\mathrm{\text{\textopdef}}}{=}}%
-}
-
-\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
-
-\newcommand\@eqdef@star{%
-    \coloneqq%
-}
-
-% Source: https://tex.stackexchange.com/a/510011/6880
-
-\providecommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 \newcommand{\my@hat@eq}[2]{%
   \begingroup
   \sbox\z@{$\m@th#1=$}%
@@ -35,105 +19,43 @@
   \endgroup
 }
 
+% == Decorated versions - START == %
+
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+\newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
+\newcommand\@eqid@star{\rightleftharpoons}
 
-\newcommand\@eqid@star{%
-    \rightleftharpoons%
-}
+\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
+\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
+\newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
+\newcommand\@eqdef@star{\coloneqq}
+\newcommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 
-\newcommand\@eqid@no@star{%
-    \mathrel{\overset{\mathrm{\text{\textopid}}}{=}}%
-}
+\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
+\newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
+\newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
+\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
+\newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
+\newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
-\newcommand\eqtest{%
-    \mathrel{\overset{\mathrm{?}}{=}}%
-}
+\newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
+\newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
+\newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
 
+\newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
+\newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
+\newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
 
-\newcommand\eqhyp{%
-    \mathrel{\overset{\mathrm{\text{\textophyp}}}{=}}%
-}
+\newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
+\newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
+\newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
+\newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
+\newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
+\newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
 
-\newcommand\eqcond{%
-    \mathrel{\overset{\mathrm{\text{\textopcond}}}{=}}%
-}
-
-
-\newcommand\eqchoice{%
-    \mathrel{\overset{\mathrm{\text{\textopchoice}}}{=}}%
-}
-
-
-\newcommand\neqid{
-    \mathrel{\overset{\mathrm{\text{\textopid}}}{\neq}}%
-}
-
-
-\newcommand\neqtest{
-    \mathrel{\overset{\mathrm{?}}{\neq}}%
-}
-
-\newcommand\neqhyp{%
-    \mathrel{\overset{\mathrm{\text{\textophyp}}}{\neq}}%
-}
-
-\newcommand\neqcond{%
-    \mathrel{\overset{\mathrm{\text{\textopcond}}}{\neq}}%
-}
-
-
-% Standard inequations
-
-\newcommand\leqtest{%
-    \stackrel{\text{?}}{\leq}%
-}
-
-\newcommand\leqhyp{%
-    \stackrel{\text{\text{\textophyp}}}{\leq}%
-}
-
-\newcommand\leqcond{%
-    \stackrel{\text{\text{\textopcond}}}{\leq}%
-}
-
-
-\newcommand\ltest{%
-    \mathrel{\overset{\mathrm{?}}{{<}\vphantom{\leq}}}%
-}
-
-\newcommand\lhyp{%
-    \mathrel{\overset{\mathrm{\text{\textophyp}}}{{<}\vphantom{\leq}}}%
-}
-
-\newcommand\lcond{%
-    \mathrel{\overset{\mathrm{\text{\textopcond}}}{{<}\vphantom{\leq}}}%
-}
-
-
-\newcommand\geqtest{%
-    \mathrel{\overset{\mathrm{?}}{\geq}}%
-}
-
-\newcommand\geqhyp{%
-    \mathrel{\overset{\mathrm{\text{\textophyp}}}{\geq}}%
-}
-
-\newcommand\geqcond{%
-    \stackrel{\text{\text{\textopcond}}}{\geq}%
-}
-
-
-\newcommand\gtest{%
-    \mathrel{\overset{\mathrm{?}}{{>}\vphantom{\leq}}}
-}
-
-\newcommand\ghyp{%
-    \mathrel{\overset{\mathrm{\text{\textophyp}}}{{>}\vphantom{\leq}}}
-}
-
-\newcommand\gcond{%
-    \mathrel{\overset{\mathrm{\text{\textopcond}}}{{>}\vphantom{\leq}}}
-}
+% == Decorated versions - END == %
 

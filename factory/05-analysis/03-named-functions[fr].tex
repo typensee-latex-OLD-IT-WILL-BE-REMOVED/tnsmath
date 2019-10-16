@@ -14,60 +14,57 @@
 
 \subsection{Fonctions nommées spéciales}
 
-\subsubsection{Un exemple d'utilisation}
+\subsubsection{Sans paramètre}
+
+\paragraph{Un exemple d'utilisation}
 
 \begin{tcblisting}{}
-Quelques fonctions nommées supplémentaires (voir la liste ecomplète ci-dessous) :
-$\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x =\logb{2} x$ and $\expb{6} y$.
+Quelques fonctions nommées supplémentaires (voir la liste complète ci-dessous) :
+$\ch x \neq ch x$ , $\ppcm(x;y)$ , $\lg x$ le logarithme binaire.
 \end{tcblisting}
-
-
-\subsubsection{Fonctions nommées sans paramètre}
-
-Toutes les macros suivantes n'ont aucun paramètre.
-
-\medskip
-
-% List of functions without parameter - START
-
-\foreach \k in {ch, sh, th, ach, ash, ath, arccosh, arcsinh, arctanh, acos, asin, atan, pgcd, ppcm}{\IDconstant{\k}}
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
-    \verb+\ch+ & \verb+\sh+ & \verb+\th+\\
-    \verb+\ach+ & \verb+\ash+ & \verb+\ath+\\
-    \verb+\arccosh+ & \verb+\arcsinh+ & \verb+\arctanh+\\
-    \verb+\acos+ & \verb+\asin+ & \verb+\atan+\\
-    \verb+\pgcd+ & \verb+\ppcm+ & \\
-\end{tabular*}
-
-% List of functions without parameter - END
-
-
-
-\subsubsection{Fonctions nommées avec un paramètre}
-
-\paragraph{La liste complète}
-
-Toutes les macros suivantes ont un seul paramètre.
-
-\medskip
-
-% List of functions with parameters - START
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{4}{l}}
-    \verb+\expb+ \, (1 paramètre) & \verb+\logb+ \, (1 paramètre) &  & \\
-\end{tabular*}
-
-% List of functions with parameters - END
-
 
 
 \paragraph{Fiches techniques}
 
+\begin{multicols}{2}
+% List of functions without parameter - START
+
+\foreach \k in {ch, sh, th, ach, ash, ath, arccosh, arcsinh, arctanh, acos, asin, atan, pgcd, ppcm}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% List of functions without parameter - END
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Avec un paramètre}
+
+\paragraph{Un exemple d'utilisation}
+
+\begin{tcblisting}{}
+D'autres fonctions nommées supplémentaires avec un paarmètre (voir la liste complète
+ci-dessous) : $\logb{2} x = \lg x$ et $\expb{6} y = 6^y$.
+\end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+% List of functions with parameters - START
+
+
 \IDmacro*{expb}{1}
+
+\IDarg{} la base de l'exponentielle
+
+\bigskip
 
 \IDmacro*{logb}{1}
 
-\IDarg{} la base de l'exponentielle ou du logarithme.
+\IDarg{} la base du logarithme
+
+% List of functions with parameters - END
 
 \end{document}

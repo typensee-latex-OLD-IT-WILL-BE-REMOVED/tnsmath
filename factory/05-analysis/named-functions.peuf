@@ -13,5 +13,5 @@ no-parameter::
 parameter::
 // Specifications :
 // nb parameter ; LaTeX code
-    expb = 1 ; \exp_{#1}
-    logb = 1 ; \log_{#1}
+    expb = 1 ; \exp_{#1} ; la base de l'exponentielle
+    logb = 1 ; \log_{#1} ; la base du logarithme

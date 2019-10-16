@@ -116,13 +116,7 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-text_auto = "\n\n\\foreach \k in {{{0}}}{{\IDconstant{{\k}}}}".format(
-    ", ".join(
-        "{0[0]}{0}".format(x) for x in allconstants
-    )
-)
-
-text_auto += r"""
+text_auto = r"""
 
 \begin{{tcblisting}}{{}}
 Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
@@ -137,6 +131,33 @@ Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
 
 template_tex = text_start + text_auto + text_end
 
+
+# ------------------- #
+# -- DOCUMENTATION -- #
+# ------------------- #
+
+text_start, _, text_end = between(
+    text = template_tex,
+    seps = [
+        "% == Docs for contants - START == %",
+        "% == Docs for contants - END == %"
+    ],
+    keepseps = True
+)
+
+allmacros = []
+
+for onect in allconstants:
+    allmacros.append(f"{onect[0]}{onect}")
+
+template_tex = text_start + f"""
+
+\\foreach \\k in {{{", ".join(allmacros)}}}{{
+
+	\\IDmacro*{{\k}}{{0}}
+
+}}
+""" + "\n" + text_end
 
 # -------------------------- #
 # -- UPDATES OF THE FILES -- #

@@ -25,8 +25,6 @@
 
 % List of classical constants - START
 
-\foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{\IDconstant{\k}}
-
 \begin{tcblisting}{}
 Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
 $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
@@ -40,6 +38,22 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 \end{remark}
 
 
+\paragraph{Fiches techniques}
+
+\begin{multicols}{2}
+% == Docs for contants - START == %
+
+\foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{
+
+	\IDmacro*{\k}{0}
+
+}
+
+% == Docs for contants - END == %
+\vfill\null
+\end{multicols}
+
+
 
 \subsubsection{Constantes latines personnelles}
 
@@ -47,7 +61,7 @@ $\ggamma$, $\ppi$, $\ttau$, $\ee$, $\ii$, $\jj$ and $\kk$.
 
 \begin{tcblisting}{}
 Il est aisé d'écrire $\ct{a} x^2 + \ct{b} x + \ct{c}$ au lieu de $a x^2 + b x + c$
-afin de souligner que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
+afin d'indiquer que $\ct{a}$, $\ct{b}$ et $\ct{c}$ sont des constantes.
 \end{tcblisting}
 
 
