@@ -8,7 +8,7 @@
 
     2) The macros ``\IDkey`` adds automatically in the file with extension path::``macros-x.txt`` the last environment or macro defined in the documentation.
 
-    3) Some automations added for the decorated operators in the logic folder.
+    3) Some automations added for ¨late and ¨doc files of the decorated operators in the logic folder.
 
 
 ==========
