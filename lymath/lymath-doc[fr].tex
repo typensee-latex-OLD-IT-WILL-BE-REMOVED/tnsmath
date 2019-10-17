@@ -31,8 +31,7 @@
 
 \usepackage{ifplatform}
 
-\usepackage{pgffor}
-\usepackage{xstring}
+\usepackage{cbdevtool}
 
 
 % MISC
@@ -57,105 +56,6 @@
 
 \newcommand\ascii{\texttt{ASCII}}
 
-
-% Technical IDs
-
-\newwrite\tempfile
-
-\immediate\openout\tempfile=x-\jobname.macros-x.txt
-
-\AtEndDocument{\immediate\closeout\tempfile}
-
-
-\newcommand\@last@macro@env@{}
-
-\newcommand\IDmacro{\@ifstar{\@IDmacro@star}{\@IDmacro@no@star}}
-
-\newcommand\@IDmacro@no@star[3]{%
-   	\renewcommand\@last@macro@env@{#1}%
-    \texttt{%
-    	\textbackslash#1 <macro>%
-    	\IfStrEq{#2}{0}{}{%
-    		\,\,[#2 Option%
-				\IfStrEq{#2}{1}{}{s}]%
-			}%
-	    \IfStrEq{#3}{}{}{%
-	    		\,\,(%
-				\IfStrEq{#3}{0}{%
-					Sans argument%
-				}{%
-					#3 Argument%
-					\IfStrEq{#3}{1}{}{s}%
-				}%
-				)%
-			}
-	   	}
-    \immediate\write\tempfile{macro,#1,#2,#3}%
-}
-
-\newcommand\@IDmacro@star[2]{%
-    \@IDmacro@no@star{#1}{0}{#2}%
-}
-
-
-
-\newcommand\IDenv{\@ifstar{\@IDenv@star}{\@IDenv@no@star}}
-
-\newcommand\@IDenv@no@star[2]{%
-   	\renewcommand\@last@macro@env@{#1}%
-    \texttt{%
-    	#1 <env>%
-    	\IfStrEq{#2}{0}{}{%
-    		\,\,[#2 Option%
-				\IfStrEq{#2}{1}{}{s}]%
-			}%
-	   	}
-    \immediate\write\tempfile{env,#1,#2}%
-}
-
-\newcommand\@IDenv@star[1]{%
-    \@IDenv@no@star{#1}{0}%
-}
-
-
-\newcommand\@IDoptarg{\@ifstar{\@IDoptarg@star}{\@IDoptarg@no@star}}
-
-\newcommand\@IDoptarg@star[2]{%
-	\vspace{0.5em}
-	\textbf{---} \texttt{#1%
-		\IfStrEq{#2}{}{:}{\,#2:}%
-	}%
-}
-
-\newcommand\@IDoptarg@no@star[2]{%
-	\IfStrEq{#2}{}{%
-		\@IDoptarg@star{#1}{}%
-	}{%
-		\@IDoptarg@star{#1}{#2}%
-	}%
-}
-
-
-\newcommand\IDkey[1]{%
-	\immediate\write\tempfile{option,\@last@macro@env@,#1}%
-	\@IDoptarg*{Option}{{\itshape "#1"}}%
-}
-
-
-\newcommand\IDoption[1]{%
-	\@IDoptarg{Option}{#1}%
-}
-
-
-\newcommand\IDarg[1]{%
-	\@IDoptarg{Argument}{#1}%
-}
-
-
-\newcommand\Content[1]{%
-	\@IDoptarg{Contenu}{#1}%
-}
-
 \makeatother % Technical doc - END
 
 
@@ -174,7 +74,7 @@
 {\footnotesize Version \texttt{0.6.2-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-16}
+\date{2019-10-17}
 
 \maketitle
 
@@ -250,7 +150,7 @@ Ce choix est assumé même si pour les macros du type \verb+\set...+ on obtient 
 
 \subsubsection{Les macros en mode \texttt{displaystyle}}
 
-Les macros évitant d'avoir à taper \verb+displaystyle+ auront un nom commençant par la lettre \verb+d+.
+Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commençant par la lettre \verb+d+.
 
 
 
@@ -380,7 +280,8 @@ $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 
 \subsection{Différents types d'égalités \og standard \fg}
 
-D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité. Voici ce qui est proposé.
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité.
+Bien entendu on tord les règles de typographie avec ce type de pratique mais c'est pour le bien de la communauté.
 
 \subsubsection{Définir quelque chose}
 
@@ -427,8 +328,17 @@ Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
 
 \begin{tcblisting}{}
-Sachant que si $x \geq 4$ alors $x^2 \geq 16$, on peut choisir $x \eqchoice 123$
-et affirmer que $123^2 \geq 16$.
+Sachant que si $x \geqcond 4$ alors $x^2 \geqcons 16$ alors $x \eqchoice 123$ nous
+donne $123^2 \geqappli 16$.
+\end{tcblisting}
+
+
+\subsubsection{Une égalité indiquant l'équation d'une courbe que l'on utilise}
+
+La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopplot \fg} et \emph{\og \textopappli \fg} sont définis \emph{(la macro \emph{\texttt{setgeo}} est définie dans la section \ref{set-geo})}.
+
+\begin{tcblisting}{}
+Si $M(4 ; y_M) \in \setgeo{C}: y \eqplot x^2 + 3$ alors $y_M \eqappli 4^2 + 3 = 19$.
 \end{tcblisting}
 
 
@@ -461,15 +371,21 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 % == All texts - START == %
 
 \begin{multicols}{2}
+    \verb+\textopappli+ donne \emph{\og \textopappli \fg}
+
     \verb+\textopchoice+ donne \emph{\og \textopchoice \fg}
 
     \verb+\textopcond+ donne \emph{\og \textopcond \fg}
+
+    \verb+\textopcons+ donne \emph{\og \textopcons \fg}
 
     \verb+\textopdef+ donne \emph{\og \textopdef \fg}
 
     \verb+\textophyp+ donne \emph{\og \textophyp \fg}
 
     \verb+\textopid+ donne \emph{\og \textopid \fg}
+
+    \verb+\textopplot+ donne \emph{\og \textopplot \fg}
 
     \verb+\textoptest+ donne \emph{\og \textoptest \fg}
 \vfill\null\end{multicols}
@@ -485,7 +401,7 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 \begin{multicols}{2}
 % == Technical infos - Operators - START == %
 
-\foreach \k in {eqid, eqid*, eqdef, eqdef*, eqdef**, eqchoice, eqcond, eqhyp, eqtest, neqid, neqcond, neqhyp, neqtest, lcond, lhyp, ltest, gcond, ghyp, gtest, leqcond, leqhyp, leqtest, geqcond, geqhyp, geqtest}{
+\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqdef**, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
 	\IDmacro*{\k}{0}
 
@@ -501,7 +417,7 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 \begin{multicols}{2}
 % == Technical infos - Texts - START == %
 
-\foreach \k in {textopchoice, textopcond, textopdef, textophyp, textopid, textoptest}{
+\foreach \k in {textopappli, textopchoice, textopcond, textopcons, textopdef, textophyp, textopid, textopplot, textoptest}{
 
 	\IDmacro*{\k}{0}
 
@@ -531,15 +447,25 @@ Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
 
 \paragraph{Un deuxième exemple -- Des opérateurs décorés}
 
-Tout comme pour les égalités, il existe des versions de type test, hypothèse et condition.
+Tout comme pour les égalités, il existe des versions décorées de type test, hypothèse, condition \dots{} 
+Elles sont toutes présentes dans l'exemple suivant.
+
+% == Example of decorated versions - START == %
 
 \begin{tcblisting}{}
-Équivalences : $A \ifftest B \iffhyp C \iffcond D$
+Équivalences :
+$A \iffappli B \iffchoice C \iffcond D \iffcons E \iffhyp F \ifftest G$
 
-Implications directes : $A \impliestest B \implieshyp C \impliescond D$
+Implications directes :
+$A \impliesappli B \implieschoice C \impliescond D
+   \impliescons E \implieshyp F \impliestest G$
 
-Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
+Implications indirectes :
+$A \liesimpappli B \liesimpchoice C \liesimpcond D
+   \liesimpcons E \liesimphyp F \liesimptest G$
 \end{tcblisting}
+
+% == Example of decorated versions - END == %
 
 
 \begin{remark}
@@ -552,7 +478,7 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 \begin{multicols}{2}
 % == Decorated versions - START == %
 
-\foreach \k in {iff, iffcond, iffhyp, ifftest, implies, impliescond, implieshyp, impliestest, liesimp, liesimpcond, liesimphyp, liesimptest}{
+\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest, implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest, liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
 
 	\IDmacro*{\k}{0}
 
@@ -600,23 +526,25 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 \subsection{Tables des décorations possibles des opérateurs}
 
 La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} donne toutes les associations autorisées entre opérateurs et décorations.
+Il faut retenir que les versions étoilées produisent des écritures symboliques. 
+
 
 % == Table - START == %
 
 \begin{table}[h]
     \caption{Décorations}
     \begin{center}
-        \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
-              & \verb+choice+ & \verb+cond+ & \verb+def+ & \verb+def*+ & \verb+def**+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+test+ \\
-            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\neq+ &          & $\times$ &          &          &          & $\times$ & $\times$ &          & $\times$ \\
-            \hline \verb+\l+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\g+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\leq+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\geq+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\iff+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\implies+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
-            \hline \verb+\liesimp+ &          & $\times$ &          &          &          & $\times$ &          &          & $\times$ \\
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
+              & \verb+appli+ & \verb+choice+ & \verb+cond+ & \verb+cons+ & \verb+def+ & \verb+def*+ & \verb+def**+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+plot+ & \verb+test+ \\
+            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\neq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ & $\times$ &          &          & $\times$ \\
+            \hline \verb+\l+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\g+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\leq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\geq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\iff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\implies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\liesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:decorations-operators}
@@ -632,7 +560,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
 
 \subsection{Détailler un raisonnement} \label{explain-proof}
 
-	\paragraph{Un exemple sur une petite étape}
+\paragraph{Un exemple sur une petite étape}
 
 La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
@@ -657,33 +585,33 @@ $a^2 \leq b^2$
 
 \verb+\explain+ utilise les macros constantes suivantes.
 \begin{itemize}
-	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+    \item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-	\item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
+    \item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
 \end{itemize}
 
 
 
-	\paragraph{Détailler des calculs}
+\paragraph{Détailler des calculs}
 
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul.
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul.
 
 \begin{tcblisting}{}
 \begin{flalign*}
-	& (a + b)^2
-	&&\\
-	& \explain{=}{On utilise $x^2 = x \cdot x$.}
-	&&\\
-	& (a + b) (a + b)
-	&&\\
-	& \explain{=}{Double développement depuis la parenthèse gauche.}
-	&&\\
-	& a^2 + a b + b a + b^2
-	&&\\
-	& \explain{=}{Commutativité du produit.}
-	&&\\
-	& a^2 + 2 a b + b^2
-	&&\\
+    & (a + b)^2
+    &&\\
+    & \explain{=}{On utilise $x^2 = x \cdot x$.}
+    &&\\
+    & (a + b) (a + b)
+    &&\\
+    & \explain{=}{Double développement depuis la parenthèse gauche.}
+    &&\\
+    & a^2 + a b + b a + b^2
+    &&\\
+    & \explain{=}{Commutativité du produit.}
+    &&\\
+    & a^2 + 2 a b + b^2
+    &&\\
 \end{flalign*}
 \end{tcblisting}
 
@@ -745,7 +673,7 @@ $\displaystyle \setgene*{\frac{1}{3} ; \frac{5}{7} ; \frac{9}{11}}$ .
 
 
 
-\subsubsection{Ensembles pour la géométrie}
+\subsubsection{Ensembles pour la géométrie} \label{set-geo}
 
 \paragraph{Exemple d'utilisation 1}
 
@@ -912,7 +840,7 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 \begin{multicols}{2}
 % == Docs for classical sets - START == %
 
-\foreach \k in {N, Ns, P, Z, Zn, Zp, Zs, Zsn, Zsp, D, Dn, Dp, Ds, Dsn, Dsp, Q, Qn, Qp, Qs, Qsn, Qsp, R, Rn, Rp, Rs, Rsn, Rsp, C, Cs, H, Hs, O, Os, F, Fn, Fp, Fs, Fsn, Fsp}{
+\foreach \k in {NN, NNs, PP, ZZ, ZZn, ZZp, ZZs, ZZsn, ZZsp, DD, DDn, DDp, DDs, DDsn, DDsp, QQ, QQn, QQp, QQs, QQsn, QQsp, RR, RRn, RRp, RRs, RRsn, RRsp, CC, CCs, HH, HHs, OO, OOs, FF, FFn, FFp, FFs, FFsn, FFsp}{
 
 	\IDmacro*{\k}{0}
 

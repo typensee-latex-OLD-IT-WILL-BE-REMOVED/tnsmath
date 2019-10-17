@@ -1,10 +1,10 @@
 \documentclass[12pt,a4paper]{article}
 
 \makeatletter
-	\input{../config/header[fr].sty}
-	\input{../01-misc/00-common-tools.sty}
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
 
-	\usepackage{04-calculations-explained}
+    \usepackage{04-calculations-explained}
 \makeatother
 
 
@@ -18,7 +18,7 @@
 
 \subsection{Détailler un raisonnement} \label{explain-proof}
 
-	\paragraph{Un exemple sur une petite étape}
+\paragraph{Un exemple sur une petite étape}
 
 La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
@@ -43,33 +43,33 @@ $a^2 \leq b^2$
 
 \verb+\explain+ utilise les macros constantes suivantes.
 \begin{itemize}
-	\item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+    \item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-	\item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
+    \item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
 \end{itemize}
 
 
 
-	\paragraph{Détailler des calculs}
+\paragraph{Détailler des calculs}
 
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+ \emph{(qui est automatiquement chargé par \emph{\texttt{lymath}})}. Il est alors relativement rapide de détailler un calcul.
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul.
 
 \begin{tcblisting}{}
 \begin{flalign*}
-	& (a + b)^2
-	&&\\
-	& \explain{=}{On utilise $x^2 = x \cdot x$.}
-	&&\\
-	& (a + b) (a + b)
-	&&\\
-	& \explain{=}{Double développement depuis la parenthèse gauche.}
-	&&\\
-	& a^2 + a b + b a + b^2
-	&&\\
-	& \explain{=}{Commutativité du produit.}
-	&&\\
-	& a^2 + 2 a b + b^2
-	&&\\
+    & (a + b)^2
+    &&\\
+    & \explain{=}{On utilise $x^2 = x \cdot x$.}
+    &&\\
+    & (a + b) (a + b)
+    &&\\
+    & \explain{=}{Double développement depuis la parenthèse gauche.}
+    &&\\
+    & a^2 + a b + b a + b^2
+    &&\\
+    & \explain{=}{Commutativité du produit.}
+    &&\\
+    & a^2 + 2 a b + b^2
+    &&\\
 \end{flalign*}
 \end{tcblisting}
 

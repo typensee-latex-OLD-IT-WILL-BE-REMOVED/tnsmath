@@ -9,6 +9,10 @@ from orpyste.data import ReadBlock
 BASENAME = PPath(__file__).stem.replace("build-", "")
 
 THIS_DIR = PPath(__file__).parent
+
+DECO_TRANS_DIR  = THIS_DIR / BASENAME
+COMMON_STY_FILE = THIS_DIR.parent / '01-misc' / '00-common-tools.sty'
+
 STY_FILE = THIS_DIR / f'{BASENAME}.sty'
 TEX_FILE = STY_FILE.parent / (STY_FILE.stem + "[fr].tex")
 
@@ -17,6 +21,37 @@ match            = re.search(PATTERN_FOR_PEUF, STY_FILE.stem)
 PEUF_FILE        = STY_FILE.parent / (match.group(1).strip() + ".peuf")
 
 DECO = " "*4
+
+
+# ------------------ #
+# -- TRANSLATIONS -- #
+# ------------------ #
+
+DEFAULT_LANG = "english"
+ALL_LANGS    = {}
+
+for onetranspeuf in DECO_TRANS_DIR.walk("file::*.peuf"):
+    lang = onetranspeuf.stem
+
+    with ReadBlock(
+        content = onetranspeuf,
+        mode    = 'keyval:: ='
+    ) as data:
+        ALL_LANGS[lang] = {
+            k:(v if v else k)
+            for k, v in data.mydict("std mini")["deco"].items()
+        }
+
+ALL_DECOS = list(ALL_LANGS[DEFAULT_LANG].keys())
+ALL_DECOS.sort()
+SET_ALL_DECOS = set(ALL_DECOS)
+
+for lang, trans in ALL_LANGS.items():
+    if lang != DEFAULT_LANG:
+        if set(trans.keys()) != SET_ALL_DECOS:
+            raise Exception(
+                f"missing deco(s) in the file << {lang}.peuf >>"
+            )
 
 
 # -------------------------- #
@@ -61,16 +96,19 @@ for macro, latexdef in INFOS["stars"].items():
 
 del INFOS["stars"]
 
-ALL_DECOS = [
+ALL_LOCAL_DECOS = [
     d
     for d in INFOS["decorations"]
 ]
+
+if not(set(ALL_LOCAL_DECOS) <= SET_ALL_DECOS):
+    raise Exception("see the decorations used")
 
 easydecos = {}
 
 for symbnames, decos in INFOS["todecorate"].items():
     if decos == ":all:":
-        decos = ALL_DECOS
+        decos = ALL_LOCAL_DECOS
 
     else:
         decos = [
@@ -88,6 +126,14 @@ INFOS["todecorate"] = easydecos
 # ------------------------- #
 # -- TEMPLATES TO UPDATE -- #
 # ------------------------- #
+
+with open(
+    file     = COMMON_STY_FILE,
+    mode     = 'r',
+    encoding = 'utf-8'
+) as styfile:
+    common_sty = styfile.read()
+
 
 with open(
     file     = STY_FILE,
@@ -196,7 +242,7 @@ alldecos.sort()
 
 textversions = ["", "\\begin{multicols}{2}"]
 
-for onedeco in alldecos:
+for onedeco in ALL_DECOS:
     textversions += [
 f"    \\verb+\\textop{onedeco}+ donne \\emph{{\\og \\textop{onedeco} \\fg}}",
 ""
@@ -224,7 +270,7 @@ text_start, _, text_end = between(
 
 alldecos = [
     f"textop{d}"
-    for d in alldecos
+    for d in ALL_DECOS
 ]
 
 alldecos = ", ".join(alldecos)
@@ -258,9 +304,46 @@ template_tex = text_start + f"""
 """ + text_end
 
 
+# ----------------------------------- #
+# -- UPDATES THE TRANSLATED MACROS -- #
+# ----------------------------------- #
+
+for lang, trans in ALL_LANGS.items():
+    lang = lang.upper()
+
+    text_start, _, text_end = between(
+        text = common_sty,
+        seps = [
+            f"% == Decorations - {lang} - START == %",
+            f"% == Decorations - {lang} - END == %"
+        ],
+        keepseps = True
+    )
+
+    texlines = [
+        f"\\newcommand\\textop{word}{{{wtrans}}}"
+        for word, wtrans in trans.items()
+    ]
+
+    texlines = "\n    ".join(texlines)
+
+    common_sty = f"""
+{text_start}
+    {texlines}
+{text_end}
+    """.strip()
+
+
 # -------------------------- #
 # -- UPDATES OF THE FILES -- #
 # -------------------------- #
+
+with open(
+    file     = COMMON_STY_FILE,
+    mode     = 'w',
+    encoding = 'utf-8'
+) as docfile:
+    docfile.write(common_sty)
 
 with open(
     file     = STY_FILE,

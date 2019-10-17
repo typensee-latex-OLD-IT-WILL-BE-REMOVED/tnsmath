@@ -195,7 +195,7 @@ text_start, _, text_end = between(
 allmacros = []
 
 for onesetdef in classicalsets:
-    allmacros.append(f"{onesetdef[0]}")
+    allmacros.append(f"{onesetdef[0]*2}")
 
     for s in suffix_header:
         hassuffix = True
@@ -206,7 +206,7 @@ for onesetdef in classicalsets:
                 break
 
         if hassuffix:
-            allmacros.append(f"{onesetdef[0]}{s}")
+            allmacros.append(f"{onesetdef[0]*2}{s}")
 
 template_tex = text_start + f"""
 

@@ -1,5 +1,8 @@
 decorations::
+    appli
+    choice
     cond
+    cons
     hyp
     test
 

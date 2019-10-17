@@ -1,17 +1,19 @@
 decorations::
-    id
-    def
+    appli
     choice
     cond
+    cons
+    def
     hyp
+    id
+    plot
     test
 
 
 todecorate::
-    eq  = :all:
-    neq = id , cond , hyp , test
-
-    l , g , leq , geq = cond , hyp , test
+    eq                = :all:
+    neq               = appli , id , choice , cond , cons , hyp , test
+    l , g , leq , geq = appli ,      choice , cond , cons , hyp , test
 
 
 stars::

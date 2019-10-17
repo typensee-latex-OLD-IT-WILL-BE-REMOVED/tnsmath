@@ -21,39 +21,57 @@
 
 % == Decorated versions - START == %
 
-\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
-\newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
-\newcommand\@eqid@star{\rightleftharpoons}
-
+\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
+\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
+\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
 \newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
 \newcommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 
-\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
-\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
 \newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
+\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+\newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
+\newcommand\@eqid@star{\rightleftharpoons}
+
+\newcommand\eqplot{\@over@math@symbol{\textopplot}{=}}
 \newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
+\newcommand\neqappli{\@over@math@symbol{\textopappli}{\neq}}
 \newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqchoice{\@over@math@symbol{\textopchoice}{\neq}}
 \newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
+\newcommand\neqcons{\@over@math@symbol{\textopcons}{\neq}}
 \newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
 \newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
+\newcommand\lappli{\@over@math@symbol{\textopappli}{<}}
+\newcommand\lchoice{\@over@math@symbol{\textopchoice}{<}}
 \newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
+\newcommand\lcons{\@over@math@symbol{\textopcons}{<}}
 \newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
 \newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
 
+\newcommand\gappli{\@over@math@symbol{\textopappli}{>}}
+\newcommand\gchoice{\@over@math@symbol{\textopchoice}{>}}
 \newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
+\newcommand\gcons{\@over@math@symbol{\textopcons}{>}}
 \newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
 \newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
 
+\newcommand\leqappli{\@over@math@symbol{\textopappli}{\leq}}
+\newcommand\leqchoice{\@over@math@symbol{\textopchoice}{\leq}}
 \newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
+\newcommand\leqcons{\@over@math@symbol{\textopcons}{\leq}}
 \newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
 \newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
+\newcommand\geqappli{\@over@math@symbol{\textopappli}{\geq}}
+\newcommand\geqchoice{\@over@math@symbol{\textopchoice}{\geq}}
 \newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
+\newcommand\geqcons{\@over@math@symbol{\textopcons}{\geq}}
 \newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
 \newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
 

@@ -28,15 +28,25 @@ Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
 
 \paragraph{Un deuxième exemple -- Des opérateurs décorés}
 
-Tout comme pour les égalités, il existe des versions de type test, hypothèse et condition.
+Tout comme pour les égalités, il existe des versions décorées de type test, hypothèse, condition \dots{} 
+Elles sont toutes présentes dans l'exemple suivant.
+
+% == Example of decorated versions - START == %
 
 \begin{tcblisting}{}
-Équivalences : $A \ifftest B \iffhyp C \iffcond D$
+Équivalences :
+$A \iffappli B \iffchoice C \iffcond D \iffcons E \iffhyp F \ifftest G$
 
-Implications directes : $A \impliestest B \implieshyp C \impliescond D$
+Implications directes :
+$A \impliesappli B \implieschoice C \impliescond D
+   \impliescons E \implieshyp F \impliestest G$
 
-Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
+Implications indirectes :
+$A \liesimpappli B \liesimpchoice C \liesimpcond D
+   \liesimpcons E \liesimphyp F \liesimptest G$
 \end{tcblisting}
+
+% == Example of decorated versions - END == %
 
 
 \begin{remark}
@@ -49,7 +59,7 @@ Implications réciproques : $A \liesimptest B \liesimphyp C \liesimpcond D$
 \begin{multicols}{2}
 % == Decorated versions - START == %
 
-\foreach \k in {iff, iffcond, iffhyp, ifftest, implies, impliescond, implieshyp, impliestest, liesimp, liesimpcond, liesimphyp, liesimptest}{
+\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest, implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest, liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
 
 	\IDmacro*{\k}{0}
 

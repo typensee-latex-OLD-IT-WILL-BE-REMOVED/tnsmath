@@ -8,6 +8,7 @@
 \makeatother
 
 \newcommand\RR{RR}
+\newcommand\setgeo[1]{#1}
 
 
 \begin{document}
@@ -16,7 +17,8 @@
 
 \subsection{Différents types d'égalités \og standard \fg}
 
-D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité. Voici ce qui est proposé.
+D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité.
+Bien entendu on tord les règles de typographie avec ce type de pratique mais c'est pour le bien de la communauté.
 
 \subsubsection{Définir quelque chose}
 
@@ -63,8 +65,17 @@ Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
 La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
 
 \begin{tcblisting}{}
-Sachant que si $x \geq 4$ alors $x^2 \geq 16$, on peut choisir $x \eqchoice 123$
-et affirmer que $123^2 \geq 16$.
+Sachant que si $x \geqcond 4$ alors $x^2 \geqcons 16$ alors $x \eqchoice 123$ nous
+donne $123^2 \geqappli 16$.
+\end{tcblisting}
+
+
+\subsubsection{Une égalité indiquant l'équation d'une courbe que l'on utilise}
+
+La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopplot \fg} et \emph{\og \textopappli \fg} sont définis \emph{(la macro \emph{\texttt{setgeo}} est définie dans la section \ref{set-geo})}.
+
+\begin{tcblisting}{}
+Si $M(4 ; y_M) \in \setgeo{C}: y \eqplot x^2 + 3$ alors $y_M \eqappli 4^2 + 3 = 19$.
 \end{tcblisting}
 
 
@@ -97,15 +108,21 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 % == All texts - START == %
 
 \begin{multicols}{2}
+    \verb+\textopappli+ donne \emph{\og \textopappli \fg}
+
     \verb+\textopchoice+ donne \emph{\og \textopchoice \fg}
 
     \verb+\textopcond+ donne \emph{\og \textopcond \fg}
+
+    \verb+\textopcons+ donne \emph{\og \textopcons \fg}
 
     \verb+\textopdef+ donne \emph{\og \textopdef \fg}
 
     \verb+\textophyp+ donne \emph{\og \textophyp \fg}
 
     \verb+\textopid+ donne \emph{\og \textopid \fg}
+
+    \verb+\textopplot+ donne \emph{\og \textopplot \fg}
 
     \verb+\textoptest+ donne \emph{\og \textoptest \fg}
 \vfill\null\end{multicols}
@@ -121,7 +138,7 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 \begin{multicols}{2}
 % == Technical infos - Operators - START == %
 
-\foreach \k in {eqid, eqid*, eqdef, eqdef*, eqdef**, eqchoice, eqcond, eqhyp, eqtest, neqid, neqcond, neqhyp, neqtest, lcond, lhyp, ltest, gcond, ghyp, gtest, leqcond, leqhyp, leqtest, geqcond, geqhyp, geqtest}{
+\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqdef**, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
 	\IDmacro*{\k}{0}
 
@@ -137,7 +154,7 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 \begin{multicols}{2}
 % == Technical infos - Texts - START == %
 
-\foreach \k in {textopchoice, textopcond, textopdef, textophyp, textopid, textoptest}{
+\foreach \k in {textopappli, textopchoice, textopcond, textopcons, textopdef, textophyp, textopid, textopplot, textoptest}{
 
 	\IDmacro*{\k}{0}
 

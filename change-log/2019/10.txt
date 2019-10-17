@@ -1,4 +1,15 @@
 ==========
+2019-10-17
+==========
+
+**Logic:** new semantic signs.
+
+    1) For equalities, ``\eqplot`` and ``\eqappli`` have been added.
+
+    2) For formal logic, ``cons``, ``appli`` and ``choice`` of ``\iff``, ``\implies`` and ``\liesimp`` have been added.
+
+
+==========
 2019-10-16
 ==========
 
@@ -9,6 +20,8 @@
     2) The macros ``\IDkey`` adds automatically in the file with extension path::``macros-x.txt`` the last environment or macro defined in the documentation.
 
     3) Some automations added for ¨late and ¨doc files of the decorated operators in the logic folder.
+
+    4) A tiny package ``cbdevtool`` has been made such as to manage the technical reports about the macros and environments of the API.
 
 
 ==========

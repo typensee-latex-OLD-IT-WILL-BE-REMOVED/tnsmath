@@ -33,22 +33,32 @@
     \newcommand\lymathsep{;}
     \newcommand\lymathsubsep{,}
 
+% == Decorations - FRENCH - START == %
+    \newcommand\textopappli{appli}
     \newcommand\textopchoice{choix}
     \newcommand\textopcond{cond}
+    \newcommand\textopcons{cons}
     \newcommand\textopdef{déf}
+    \newcommand\textopplot{graph}
     \newcommand\textophyp{hyp}
     \newcommand\textopid{id}
     \newcommand\textoptest{?}
+% == Decorations - FRENCH - END == %
 }{
     \newcommand\lymathsep{,}
     \newcommand\lymathsubsep{;}
 
+% == Decorations - ENGLISH - START == %
+    \newcommand\textopappli{appli}
     \newcommand\textopchoice{choice}
     \newcommand\textopcond{cond}
+    \newcommand\textopcons{cons}
     \newcommand\textopdef{def}
+    \newcommand\textopplot{plot}
     \newcommand\textophyp{hyp}
     \newcommand\textopid{id}
     \newcommand\textoptest{?}
+% == Decorations - ENGLISH - END == %
 }
 
 
@@ -213,39 +223,57 @@
 
 % == Decorated versions - START == %
 
-\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
-\newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
-\newcommand\@eqid@star{\rightleftharpoons}
-
+\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
+\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
+\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
 \newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
 \newcommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 
-\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
-\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
 \newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
+\newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
+\newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
+\newcommand\@eqid@star{\rightleftharpoons}
+
+\newcommand\eqplot{\@over@math@symbol{\textopplot}{=}}
 \newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
+\newcommand\neqappli{\@over@math@symbol{\textopappli}{\neq}}
 \newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqchoice{\@over@math@symbol{\textopchoice}{\neq}}
 \newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
+\newcommand\neqcons{\@over@math@symbol{\textopcons}{\neq}}
 \newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
 \newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
+\newcommand\lappli{\@over@math@symbol{\textopappli}{<}}
+\newcommand\lchoice{\@over@math@symbol{\textopchoice}{<}}
 \newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
+\newcommand\lcons{\@over@math@symbol{\textopcons}{<}}
 \newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
 \newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
 
+\newcommand\gappli{\@over@math@symbol{\textopappli}{>}}
+\newcommand\gchoice{\@over@math@symbol{\textopchoice}{>}}
 \newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
+\newcommand\gcons{\@over@math@symbol{\textopcons}{>}}
 \newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
 \newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
 
+\newcommand\leqappli{\@over@math@symbol{\textopappli}{\leq}}
+\newcommand\leqchoice{\@over@math@symbol{\textopchoice}{\leq}}
 \newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
+\newcommand\leqcons{\@over@math@symbol{\textopcons}{\leq}}
 \newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
 \newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
+\newcommand\geqappli{\@over@math@symbol{\textopappli}{\geq}}
+\newcommand\geqchoice{\@over@math@symbol{\textopchoice}{\geq}}
 \newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
+\newcommand\geqcons{\@over@math@symbol{\textopcons}{\geq}}
 \newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
 \newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
 
@@ -271,15 +299,24 @@
 
 \newcommand\liesimp{\mathrel{\Longleftarrow}}
 
+\newcommand\iffappli{\@over@math@symbol{\textopappli}{\iff}}
+\newcommand\iffchoice{\@over@math@symbol{\textopchoice}{\iff}}
 \newcommand\iffcond{\@over@math@symbol{\textopcond}{\iff}}
+\newcommand\iffcons{\@over@math@symbol{\textopcons}{\iff}}
 \newcommand\iffhyp{\@over@math@symbol{\textophyp}{\iff}}
 \newcommand\ifftest{\@over@math@symbol{\textoptest}{\iff}}
 
+\newcommand\impliesappli{\@over@math@symbol{\textopappli}{\implies}}
+\newcommand\implieschoice{\@over@math@symbol{\textopchoice}{\implies}}
 \newcommand\impliescond{\@over@math@symbol{\textopcond}{\implies}}
+\newcommand\impliescons{\@over@math@symbol{\textopcons}{\implies}}
 \newcommand\implieshyp{\@over@math@symbol{\textophyp}{\implies}}
 \newcommand\impliestest{\@over@math@symbol{\textoptest}{\implies}}
 
+\newcommand\liesimpappli{\@over@math@symbol{\textopappli}{\liesimp}}
+\newcommand\liesimpchoice{\@over@math@symbol{\textopchoice}{\liesimp}}
 \newcommand\liesimpcond{\@over@math@symbol{\textopcond}{\liesimp}}
+\newcommand\liesimpcons{\@over@math@symbol{\textopcons}{\liesimp}}
 \newcommand\liesimphyp{\@over@math@symbol{\textophyp}{\liesimp}}
 \newcommand\liesimptest{\@over@math@symbol{\textoptest}{\liesimp}}
 
