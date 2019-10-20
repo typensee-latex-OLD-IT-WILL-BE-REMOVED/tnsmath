@@ -5,8 +5,10 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{bm}
+\RequirePackage{centernot}
 \RequirePackage{dsfont}
-\RequirePackage[f]{esvect}
+\PassOptionsToPackage{f}{esvect}
+\RequirePackage{esvect}
 \RequirePackage{forest}
 \RequirePackage{forloop}
 \RequirePackage{graphicx}
@@ -18,7 +20,8 @@
 \RequirePackage{stmaryrd}
 \RequirePackage{tkz-tab}
 \RequirePackage{trimspaces}
-\RequirePackage[Symbolsmallscale]{upgreek}
+\PassOptionsToPackage{Symbolsmallscale}{upgreek}
+\RequirePackage{upgreek}
 \RequirePackage{xparse}
 \RequirePackage{xstring}
 \RequirePackage{yhmath}
@@ -297,7 +300,10 @@
 
 % == Decorated versions - START == %
 
+\newcommand\notiff{\centernot\iff}
+\newcommand\notimplies{\centernot\implies}
 \newcommand\liesimp{\mathrel{\Longleftarrow}}
+\newcommand\notliesimp{\centernot\liesimp}
 
 \newcommand\iffappli{\@over@math@symbol{\textopappli}{\iff}}
 \newcommand\iffchoice{\@over@math@symbol{\textopchoice}{\iff}}
@@ -306,6 +312,13 @@
 \newcommand\iffhyp{\@over@math@symbol{\textophyp}{\iff}}
 \newcommand\ifftest{\@over@math@symbol{\textoptest}{\iff}}
 
+\newcommand\notiffappli{\@over@math@symbol{\textopappli}{\notiff}}
+\newcommand\notiffchoice{\@over@math@symbol{\textopchoice}{\notiff}}
+\newcommand\notiffcond{\@over@math@symbol{\textopcond}{\notiff}}
+\newcommand\notiffcons{\@over@math@symbol{\textopcons}{\notiff}}
+\newcommand\notiffhyp{\@over@math@symbol{\textophyp}{\notiff}}
+\newcommand\notifftest{\@over@math@symbol{\textoptest}{\notiff}}
+
 \newcommand\impliesappli{\@over@math@symbol{\textopappli}{\implies}}
 \newcommand\implieschoice{\@over@math@symbol{\textopchoice}{\implies}}
 \newcommand\impliescond{\@over@math@symbol{\textopcond}{\implies}}
@@ -313,12 +326,26 @@
 \newcommand\implieshyp{\@over@math@symbol{\textophyp}{\implies}}
 \newcommand\impliestest{\@over@math@symbol{\textoptest}{\implies}}
 
+\newcommand\notimpliesappli{\@over@math@symbol{\textopappli}{\notimplies}}
+\newcommand\notimplieschoice{\@over@math@symbol{\textopchoice}{\notimplies}}
+\newcommand\notimpliescond{\@over@math@symbol{\textopcond}{\notimplies}}
+\newcommand\notimpliescons{\@over@math@symbol{\textopcons}{\notimplies}}
+\newcommand\notimplieshyp{\@over@math@symbol{\textophyp}{\notimplies}}
+\newcommand\notimpliestest{\@over@math@symbol{\textoptest}{\notimplies}}
+
 \newcommand\liesimpappli{\@over@math@symbol{\textopappli}{\liesimp}}
 \newcommand\liesimpchoice{\@over@math@symbol{\textopchoice}{\liesimp}}
 \newcommand\liesimpcond{\@over@math@symbol{\textopcond}{\liesimp}}
 \newcommand\liesimpcons{\@over@math@symbol{\textopcons}{\liesimp}}
 \newcommand\liesimphyp{\@over@math@symbol{\textophyp}{\liesimp}}
 \newcommand\liesimptest{\@over@math@symbol{\textoptest}{\liesimp}}
+
+\newcommand\notliesimpappli{\@over@math@symbol{\textopappli}{\notliesimp}}
+\newcommand\notliesimpchoice{\@over@math@symbol{\textopchoice}{\notliesimp}}
+\newcommand\notliesimpcond{\@over@math@symbol{\textopcond}{\notliesimp}}
+\newcommand\notliesimpcons{\@over@math@symbol{\textopcons}{\notliesimp}}
+\newcommand\notliesimphyp{\@over@math@symbol{\textophyp}{\notliesimp}}
+\newcommand\notliesimptest{\@over@math@symbol{\textoptest}{\notliesimp}}
 
 % == Decorated versions - END == %
 

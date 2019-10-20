@@ -25,8 +25,8 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 
 Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
 \footnote{
-	\texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
-	Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
+    \texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
+    Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
 }.
 
 \begin{tcblisting}{}
@@ -58,12 +58,12 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
     ]
     [$D$, pweight=$d$, frame=blue
         [$E$, pweight=$e$
-        	[$F$, pweight=$f$]
-        	[$G$, pweight=$g$]
-		]
+            [$F$, pweight=$f$]
+            [$G$, pweight=$g$]
+        ]
         [$H$, pweight=$h$
-        	[$I$, pweight=$i$]
-        	[$J$, pweight=$j$]
+            [$I$, pweight=$i$]
+            [$J$, pweight=$j$]
         ]
     ]
 ]
@@ -80,10 +80,10 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
 [
     [$A$, pweight = $a$, name = left
         [$B$, pweight = $b$, name = topright
-	        [$C$, pweight = $c$]
-	        [$D$, pweight = $d$]
-       	]
-	    [$F$, pweight = $f$, name = bottomright]
+            [$C$, pweight = $c$]
+            [$D$, pweight = $d$]
+           ]
+        [$F$, pweight = $f$, name = bottomright]
     ]
     [$G$, pweight = $g$]
 ]

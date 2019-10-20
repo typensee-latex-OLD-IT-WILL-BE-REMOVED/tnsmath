@@ -18,10 +18,16 @@
 
 \paragraph{Un premier exemple -- Implication réciproque}
 
-En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
+En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$
+\footnote{
+	Penser aussi aux preuves d'équivalence par double implication.
+},
+ainsi que des versions négatives. Voici un exemple d'utilisation.
 
 \begin{tcblisting}{}
 Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
+
+Un autre théorème de la logique : $(A \implies B) \notiff (A \notimplies B)$
 \end{tcblisting}
 
 
@@ -37,13 +43,25 @@ Elles sont toutes présentes dans l'exemple suivant.
 Équivalences :
 $A \iffappli B \iffchoice C \iffcond D \iffcons E \iffhyp F \ifftest G$
 
+Équivalences - Formes négatives :
+$A \notiffappli B \notiffchoice C \notiffcond D
+   \notiffcons E \notiffhyp F \notifftest G$
+
 Implications directes :
 $A \impliesappli B \implieschoice C \impliescond D
    \impliescons E \implieshyp F \impliestest G$
 
+Implications directes - Formes négatives :
+$A \notimpliesappli B \notimplieschoice C \notimpliescond D
+   \notimpliescons E \notimplieshyp F \notimpliestest G$
+
 Implications indirectes :
 $A \liesimpappli B \liesimpchoice C \liesimpcond D
    \liesimpcons E \liesimphyp F \liesimptest G$
+
+Implications indirectes - Formes négatives :
+$A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
+   \notliesimpcons E \notliesimphyp F \notliesimptest G$
 \end{tcblisting}
 
 % == Example of decorated versions - END == %
@@ -59,14 +77,48 @@ $A \liesimpappli B \liesimpchoice C \liesimpcond D
 \begin{multicols}{2}
 % == Decorated versions - START == %
 
-\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest, implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest, liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
-
+\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest}{
 	\IDmacro*{\k}{0}
 
 }
+    
+\medskip
 
+\foreach \k in {notiff, notiffappli, notiffchoice, notiffcond, notiffcons, notiffhyp, notifftest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {notimplies, notimpliesappli, notimplieschoice, notimpliescond, notimpliescons, notimplieshyp, notimpliestest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {notliesimp, notliesimpappli, notliesimpchoice, notliesimpcond, notliesimpcons, notliesimphyp, notliesimptest}{
+	\IDmacro*{\k}{0}
+
+}
+    
 % == Decorated versions - END == %
-\vfill\null
+\null\vfill\null
 \end{multicols}
 
 

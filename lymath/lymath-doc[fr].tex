@@ -345,7 +345,7 @@ Si $M(4 ; y_M) \in \setgeo{C}: y \eqplot x^2 + 3$ alors $y_M \eqappli 4^2 + 3 = 
 
 \subsubsection{Différents types d'inéquations}
 
-Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique et que l'on pas la version \emph{\og {choix} \fg}. Voici un code \og fourre-tout \fg{} pour voir ce que vous avez à votre disposition.
+Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} montrant quelques exemples.
 
 \begin{tcblisting}{}
 A-t-on $x \leqtest x^2$ ou $x \ltest x^2$ ?
@@ -437,10 +437,16 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 
 \paragraph{Un premier exemple -- Implication réciproque}
 
-En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$ . Voici un exemple d'utilisation \emph{(penser aussi aux preuves d'équivalence par double implication)}.
+En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$
+\footnote{
+	Penser aussi aux preuves d'équivalence par double implication.
+},
+ainsi que des versions négatives. Voici un exemple d'utilisation.
 
 \begin{tcblisting}{}
 Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
+
+Un autre théorème de la logique : $(A \implies B) \notiff (A \notimplies B)$
 \end{tcblisting}
 
 
@@ -456,13 +462,25 @@ Elles sont toutes présentes dans l'exemple suivant.
 Équivalences :
 $A \iffappli B \iffchoice C \iffcond D \iffcons E \iffhyp F \ifftest G$
 
+Équivalences - Formes négatives :
+$A \notiffappli B \notiffchoice C \notiffcond D
+   \notiffcons E \notiffhyp F \notifftest G$
+
 Implications directes :
 $A \impliesappli B \implieschoice C \impliescond D
    \impliescons E \implieshyp F \impliestest G$
 
+Implications directes - Formes négatives :
+$A \notimpliesappli B \notimplieschoice C \notimpliescond D
+   \notimpliescons E \notimplieshyp F \notimpliestest G$
+
 Implications indirectes :
 $A \liesimpappli B \liesimpchoice C \liesimpcond D
    \liesimpcons E \liesimphyp F \liesimptest G$
+
+Implications indirectes - Formes négatives :
+$A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
+   \notliesimpcons E \notliesimphyp F \notliesimptest G$
 \end{tcblisting}
 
 % == Example of decorated versions - END == %
@@ -478,14 +496,48 @@ $A \liesimpappli B \liesimpchoice C \liesimpcond D
 \begin{multicols}{2}
 % == Decorated versions - START == %
 
-\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest, implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest, liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
-
+\foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest}{
 	\IDmacro*{\k}{0}
 
 }
+    
+\medskip
 
+\foreach \k in {notiff, notiffappli, notiffchoice, notiffcond, notiffcons, notiffhyp, notifftest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {notimplies, notimpliesappli, notimplieschoice, notimpliescond, notimpliescons, notimplieshyp, notimpliestest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
+	\IDmacro*{\k}{0}
+
+}
+    
+\medskip
+
+\foreach \k in {notliesimp, notliesimpappli, notliesimpchoice, notliesimpcond, notliesimpcons, notliesimphyp, notliesimptest}{
+	\IDmacro*{\k}{0}
+
+}
+    
 % == Decorated versions - END == %
-\vfill\null
+\null\vfill\null
 \end{multicols}
 
 
@@ -543,8 +595,11 @@ Il faut retenir que les versions étoilées produisent des écritures symbolique
             \hline \verb+\leq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
             \hline \verb+\geq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
             \hline \verb+\iff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notiff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
             \hline \verb+\implies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notimplies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
             \hline \verb+\liesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notliesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:decorations-operators}
@@ -2289,8 +2344,8 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 
 Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
 \footnote{
-	\texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
-	Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
+    \texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
+    Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
 }.
 
 \begin{tcblisting}{}
@@ -2322,12 +2377,12 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
     ]
     [$D$, pweight=$d$, frame=blue
         [$E$, pweight=$e$
-        	[$F$, pweight=$f$]
-        	[$G$, pweight=$g$]
-		]
+            [$F$, pweight=$f$]
+            [$G$, pweight=$g$]
+        ]
         [$H$, pweight=$h$
-        	[$I$, pweight=$i$]
-        	[$J$, pweight=$j$]
+            [$I$, pweight=$i$]
+            [$J$, pweight=$j$]
         ]
     ]
 ]
@@ -2344,10 +2399,10 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
 [
     [$A$, pweight = $a$, name = left
         [$B$, pweight = $b$, name = topright
-	        [$C$, pweight = $c$]
-	        [$D$, pweight = $d$]
-       	]
-	    [$F$, pweight = $f$, name = bottomright]
+            [$C$, pweight = $c$]
+            [$D$, pweight = $d$]
+           ]
+        [$F$, pweight = $f$, name = bottomright]
     ]
     [$G$, pweight = $g$]
 ]

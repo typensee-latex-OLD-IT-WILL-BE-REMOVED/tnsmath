@@ -122,7 +122,10 @@ fullnames = {
 latexample = []
 
 for symb, assocdecos in infos["todecorate"].items():
-    latexample += ["", f"{fullnames[symb]} :"]
+    if symb.startswith("not"):
+        latexample += ["", f"{fullnames[symb[3:]]} - Formes négatives :"]
+    else:
+        latexample += ["", f"{fullnames[symb]} :"]
 
     examples = [f"{chr(65)}"]
 
@@ -161,24 +164,29 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-allmacros = []
+texforidmacros = []
 
 for symb, assocdecos in infos["todecorate"].items():
-    allmacros += [symb]
+    if texforidmacros:
+        texforidmacros.append("\\medskip")
+
+    somemacros = [symb]
 
     if assocdecos == ":all:":
         for onedeco in infos["decorations"]:
-            allmacros.append(f"{symb}{onedeco}")
+            somemacros.append(f"{symb}{onedeco}")
 
-allmacros = ", ".join(allmacros)
+    somemacros = ", ".join(somemacros)
 
-template_tex = text_start + f"""
-\\foreach \\k in {{{allmacros}}}{{
-
+    texforidmacros.append(f"""
+\\foreach \\k in {{{somemacros}}}{{
 	\\IDmacro*{{\k}}{{0}}
 
 }}
-""" + text_end
+    """)
+
+texforidmacros = "\n".join(texforidmacros)
+template_tex = text_start + texforidmacros + text_end
 
 
 text_start, _, text_end = between(
@@ -193,6 +201,7 @@ text_start, _, text_end = between(
 allmacros = [
     "v" + m
     for m in infos["todecorate"]
+    if not m.startswith("not")
 ]
 
 allmacros = ", ".join(allmacros)

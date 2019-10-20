@@ -81,14 +81,16 @@ def organize_packages(packages):
 
     for onename in allnames:
         options = packages_found[onename]
+        options = set(options)
 
         if options:
-            options = f'[{", ".join(options)}]'
+            options = f'{",".join(options)}'
 
-        else:
-            options = ""
+            packages_ok.append(f"\\PassOptionsToPackage{{{options}}}{{{onename}}}")
 
-        packages_ok.append(f"\\RequirePackage{options}{{{onename}}}")
+        packages_ok.append(f"\\RequirePackage{{{onename}}}")
+
+    print(f"{DECO}* Declaration of packages organized.")
 
 
     print(f"{DECO}* Declaration of packages organized.")
