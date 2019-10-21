@@ -1198,6 +1198,92 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
+% \section{Sets}
+
+\subsection{Unions et intersections}
+
+\paragraph{Exemple d'unions}
+
+Ci-dessous est utilisée la macro \verb+\bigcup+ proposée par le package \verb+amssymb+.
+
+\begin{tcblisting}{}
+$\dcup_{k=1}^{n} A_k \cup \bigcup_{k=1}^{n} B_k \cup 
+ \displaystyle \bigcup_{k=1}^{n} C_k$
+\end{tcblisting}
+
+
+\paragraph{Exemple d'unions disjointes}
+
+Ci-dessous sont utilisées les macros \verb+\sqcup+ et \verb+\bigsqcup+ proposée par le package \verb+amssymb+.
+
+\begin{tcblisting}{}
+$\dsqcup_{k=1}^{n} A_k \sqcup \bigsqcup_{k=1}^{n} B_k \sqcup
+ \displaystyle \bigsqcup_{k=1}^{n} C_k$
+\end{tcblisting}
+
+
+\paragraph{Exemple d'intersections}
+
+Ci-dessous est utilisée la macro \verb+\bigcap+ proposée par le package \verb+amssymb+.
+
+\begin{tcblisting}{}
+$\dcap_{k=1}^{n} A_k \cap \bigcap_{k=1}^{n} B_k \cap
+ \displaystyle \bigcap_{k=1}^{n} C_k$
+\end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{dcap}{0}
+
+\IDmacro*{dcup}{0}
+
+\IDmacro*{dsqcup}{0}
+
+
+
+
+% \section{Sets}
+
+\subsection{Cardinal, image et compagnie}
+
+\paragraph{Cardinal -- Un exemple}
+
+\begin{tcblisting}{}
+$\card* E = \card E$ est le cardinal de $E$.
+\end{tcblisting}
+
+
+
+\paragraph{Image et compagnie -- Un exemple}
+
+\begin{tcblisting}{}
+Une application $f$ a un domaine $\dom f$, une image $\im f$, on dit aussi codomaine
+$\codom f$, ainsi qu'un noyau $\ker f$.
+\end{tcblisting}
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{card}{0}
+
+\IDmacro*{card*}{0}
+
+
+\bigskip
+
+
+\IDmacro*{dom}{0}
+
+\IDmacro*{codom}{0}
+
+\IDmacro*{im}{0}
+
+\IDmacro*{ker}{0}
+
+
+
+
 %\section{Logique et fondements}
 
 \subsection{Application totale, partielle, injective, surjective et/ou bijective} \label{section:application}
@@ -1343,7 +1429,7 @@ $(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \stdnparallel (\pts{GH})$
 
 \subsection{Vecteurs}
 
-		\subsubsection{Les écrire}
+\subsubsection{Les écrire}
 
 \paragraph{Exemple d'utilisation 1}
 
@@ -2842,7 +2928,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
     \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     \begin{itemize}
-        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée vers le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée dans le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
 
         \item En logique, il y a eu les modifications suivantes.
         \begin{itemize}

@@ -146,6 +146,23 @@
 \ExplSyntaxOff
 
 
+% Source for DeclareMathMacro :
+%    * http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
+
+% One useful tool
+
+\newcommand\DeclareMathMacro[2]{%
+    \expandafter\let\csname original@\expandafter\@gobble\string#1\endcsname=#1
+    \expandafter\def\csname\expandafter\@gobble\string#1\endcsname{%
+        \relax%
+        \ifmmode#2%
+        \else%
+            \csname original@\expandafter\@gobble\string#1\expandafter\endcsname%
+        \fi%
+    }%
+}
+
+
 % --------------------- %
 % -- SPACES FRACTION -- %
 % --------------------- %
@@ -587,6 +604,32 @@
 % Macros for intervals - END
 
 
+% --------------- %
+% -- OPERATORS -- %
+% --------------- %
+
+\newcommand\@display@this[3]{\mathop{\raisebox{#1}{\scalebox{#2}{$#3$}}}\limits}
+
+\newcommand\dcup{\@display@this{.05em}{0.8}{\bigcup}}
+\newcommand\dsqcup{\@display@this{.05em}{0.8}{\bigsqcup}}
+\newcommand\dcap{\@display@this{.05em}{0.8}{\bigcap}}
+
+
+% ---------------- %
+% -- IMAGE N CO -- %
+% ---------------- %
+
+\newcommand\card{\@ifstar{\@card@star}{\@card@no@star}}
+\DeclareMathMacro{\@card@no@star}{\operatorname{card}}
+\newcommand\@card@star{\#}
+
+\DeclareMathMacro{\im}{\operatorname{im}}
+\DeclareMathMacro{\ker}{\operatorname{ker}}
+
+\DeclareMathMacro{\dom}{\operatorname{dom}}
+\DeclareMathMacro{\codom}{\operatorname{codom}}
+
+
 % ----------------- %
 % -- APPLICATONS -- %
 % ----------------- %
@@ -939,22 +982,6 @@
 % --------------------- %
 % -- NAMED FUNCTIONS -- %
 % --------------------- %
-
-% Source for DeclareMathMacro :
-%    * http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
-
-% One useful tool
-
-\newcommand\DeclareMathMacro[2]{%
-    \expandafter\let\csname original@\expandafter\@gobble\string#1\endcsname=#1
-    \expandafter\def\csname\expandafter\@gobble\string#1\endcsname{%
-        \relax%
-        \ifmmode#2%
-        \else%
-            \csname original@\expandafter\@gobble\string#1\expandafter\endcsname%
-        \fi%
-    }%
-}
 
 % Classical functions - START
 

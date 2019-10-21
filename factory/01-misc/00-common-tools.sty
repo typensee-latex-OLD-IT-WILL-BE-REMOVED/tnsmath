@@ -119,3 +119,20 @@
           \group_end:
     }    
 \ExplSyntaxOff
+
+
+% Source for DeclareMathMacro :
+%    * http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
+
+% One useful tool
+
+\newcommand\DeclareMathMacro[2]{%
+    \expandafter\let\csname original@\expandafter\@gobble\string#1\endcsname=#1
+    \expandafter\def\csname\expandafter\@gobble\string#1\endcsname{%
+        \relax%
+        \ifmmode#2%
+        \else%
+            \csname original@\expandafter\@gobble\string#1\expandafter\endcsname%
+        \fi%
+    }%
+}
