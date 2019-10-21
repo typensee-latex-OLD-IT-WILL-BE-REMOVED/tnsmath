@@ -1,8 +1,31 @@
 ==========
+2019-10-21
+==========
+
+**New subminor version version::``0.6.3-beta`` of ¨lymath:** some changes fo names have been done.
+
+**Applications:** new symbols have been added to differentiate partial and total applications, and also the ones that are one-to-one, onto or both.
+
+
+**Computer Science:** all the macros for the Computer Science has been put inside the package ``lyalgo``.
+
+    1) ``\eqdef**`` has been removed. See the macro ``\Store*`` of ``lyalgo``
+
+    2) ``\CSinterval`` has been moved to the package ``lyalgo``.
+
+
+==========
 2019-10-20
 ==========
 
-**Logic:** ``\notiff``, ``\notimplies`` and ``\notliesimp`` have been added.
+**Geometry:** the macro ``\notparallel`` has been renamed ``\nparallel``.
+
+
+**Logic:** two new features.
+
+    1) Different kinds of existential symbols can be written by using ``\existsone``, ``\nexistsone``, ``\existmulti`` and ``\nexistmulti``.
+
+    2) ``\niff``, ``\nimplies`` and ``\nliesimp`` have been added.
 
 
 ==========
@@ -11,9 +34,9 @@
 
 **Logic:** new semantic signs.
 
-    1) For equalities, ``\eqplot`` and ``\eqappli`` have been added.
+    1) For equalities, ``\eqplot`` and ``\eqappli`` have been added. This implies the addition of ``\textopplot`` and ``\textopappli`` to the package.
 
-    2) For formal logic, ``cons``, ``appli`` and ``choice`` of ``\iff``, ``\implies`` and ``\liesimp`` have been added.
+    2) For formal logic, the decorations ``cons``, ``appli`` and ``choice`` can be used with ``\iff``, ``\implies`` and ``\liesimp``.
 
 
 ==========
@@ -26,7 +49,7 @@
 
     2) The macros ``\IDkey`` adds automatically in the file with extension path::``x-macros-x.txt`` the last environment or macro defined in the documentation.
 
-    3) Some automations added for ¨late and ¨doc files of the decorated operators in the logic folder.
+    3) Some automations added for ¨latex and ¨doc files of the decorated operators in the logic folder.
 
     4) A tiny package ``cbdevtool`` has been made such as to manage the technical reports about the macros and environments of the API.
 
@@ -35,7 +58,7 @@
 2019-10-15
 ==========
 
-**Sets:** one new classical set added ``\FF`` for float like numbers.
+**Sets:** "one" new classical set added ``\FF`` for float like numbers.
 
 
 **Analysis:** two others macros have been renamed.
@@ -52,7 +75,7 @@
 2019-10-14
 ==========
 
-**New subminor version version::``0.6.2-beta`` of ¨lymath:** see the changes below : some renames have been forgotten.
+**New subminor version version::``0.6.2-beta`` of ¨lymath:** some changes fo names have been done.
 
 **Algebra:** some macros have been renamed.
 

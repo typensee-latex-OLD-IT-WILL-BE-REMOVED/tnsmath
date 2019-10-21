@@ -18,7 +18,6 @@ todecorate::
 
 stars::
     eqdef*  = \coloneqq
-    eqdef** = \mathrel{\mathpalette\my@hat@eq\relax}
 
     eqid* = \rightleftharpoons
 

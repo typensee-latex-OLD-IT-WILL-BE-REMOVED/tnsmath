@@ -20,6 +20,38 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % --------------- %
 
+    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+    \begin{itemize}
+        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée vers le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+
+        \item En logique, il y a eu les modifications suivantes.
+        \begin{itemize}
+        	\item \verb+\eqdef**+ a été supprimé. Voir la macro \verb+\Store*+ du package \verb+\lyalgo+.
+
+        	\item Différentes versions de l'opérateur $\exists$ via \verb+\existsone+ et \verb+\existmulti+ avec leurs versions négatives \verb+\nexistsone+ et \verb+\nexistmulti+.
+
+        	\item Deux nouvelles macros \verb+\eqplot+ et \verb+\eqappli+ pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \verb+\textopplot+ et \verb+\textopappli+.
+
+			\item Ajout des formes négatives \verb+\niff+, \verb+\nimplies+ et \verb+\nliesimp+.
+
+        	\item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \verb+\iff+, \verb+\implies+ et \verb+\liesimp+ et leurs formes négatives.
+
+        	\item Une macro \verb+\textoptest+ a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
+        \end{itemize}
+
+        \item En analyse, il y a eu les renommages suivants.
+        \begin{itemize}
+        	\item \verb+\hypergeo+ est devenu \verb+\seqhypergeo+.
+
+        	\item \verb+\suprageo+ est devenu \verb+\seqsuprageo+.
+        \end{itemize}
+
+        \item En géométrie, \verb+\notparallel+ est devenu \verb+\nparallel+.
+    \end{itemize}
+
+
+% --------------- %
+
     \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
     \begin{itemize}
         \item En algèbre, il y a eu les renommages ci-dessous qui avaient été oubliés.

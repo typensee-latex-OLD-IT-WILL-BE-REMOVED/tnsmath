@@ -25,11 +25,9 @@
 \newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
 \newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
 \newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
-\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
-\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
+\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
-\newcommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 
 \newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}

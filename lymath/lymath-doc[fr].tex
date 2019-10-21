@@ -71,10 +71,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{0.6.2-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.6.3-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-17}
+\date{2019-10-21}
 
 \maketitle
 
@@ -276,6 +276,7 @@ $\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
 
 
 
+$\triangleq$
 \section{Logique et fondements}
 
 \subsection{Différents types d'égalités \og standard \fg}
@@ -292,8 +293,8 @@ L'exemple suivant montre trois façons de rédiger une égalité signifiant une 
 \emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
 
 \begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures
-symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec l'écriture
+symbolique $f(x) \eqdef* x^3 + 1$.
 \end{tcblisting}
 
 
@@ -364,7 +365,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
 
 
 
-\subsection{Textes utilisés} \label{text-for-opes}
+\subsubsection{Textes utilisés} \label{text-for-opes}
 
 Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
 
@@ -394,14 +395,14 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 
 
 
-\subsection{Fiches techniques}
+\subsubsection{Fiches techniques}
 
 \paragraph{Les opérateurs disponibles}
 
 \begin{multicols}{2}
 % == Technical infos - Operators - START == %
 
-\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqdef**, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
+\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
 	\IDmacro*{\k}{0}
 
@@ -537,7 +538,7 @@ $A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
 }
     
 % == Decorated versions - END == %
-\null\vfill\null
+\vfill\null
 \end{multicols}
 
 
@@ -586,20 +587,20 @@ Il faut retenir que les versions étoilées produisent des écritures symbolique
 \begin{table}[h]
     \caption{Décorations}
     \begin{center}
-        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
-              & \verb+appli+ & \verb+choice+ & \verb+cond+ & \verb+cons+ & \verb+def+ & \verb+def*+ & \verb+def**+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+plot+ & \verb+test+ \\
-            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\neq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ & $\times$ &          &          & $\times$ \\
-            \hline \verb+\l+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\g+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\leq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\geq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\iff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notiff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\implies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notimplies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\liesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notliesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          &          & $\times$ &          &          &          & $\times$ \\
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
+              & \verb+appli+ & \verb+choice+ & \verb+cond+ & \verb+cons+ & \verb+def+ & \verb+def*+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+plot+ & \verb+test+ \\
+            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \verb+\neq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ & $\times$ &          &          & $\times$ \\
+            \hline \verb+\l+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\g+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\leq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\geq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\iff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notiff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\implies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notimplies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\liesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \verb+\notliesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:decorations-operators}
@@ -695,7 +696,58 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 
 
-\section{Ensembles}
+%\section{Logique et fondements}
+
+\subsection{\texorpdfstring{Des versions alternatives du quantificateur $\exists$}%
+                           {Des versions alternatives du quantificateur existentiel}}
+         
+\paragraph{Quantifier l'existence}
+
+Voici deux versions, l'une classique, et l'autre beaucoup moins, permettant de préciser le quantificateur $\exists$ \emph{(concernant les applications injectives, surjectives,\dots{} \emph{etc.} se reporter à la section \ref{section:application})}.
+
+\begin{tcblisting}{}
+$f: E \to F$ est une application bijective si $\forall y \in F$,
+$\existsone x \in E$ tel que $y = f(x)$.
+
+$f: E \to F$ est une fonction, ou application partielle, si $\forall x \in E$,
+$\existmulti{\leq 1} y \in F$ tel que $y = f(x)$ où $\existmulti{\leq 1}$ signifie
+\emph{\og il existe au plus un \fg}.
+
+On pourrait poser $\existmulti{=1} \eqdef \existsone$ pour ne pas multiplier
+le symbolisme. Quoique\dots
+\end{tcblisting}
+
+
+
+\paragraph{Versions négatives}
+
+\begin{tcblisting}{}
+On peut utiliser $\nexistsone$ soit \emph{\og il n'existe pas un unique \fg},
+et $\nexistmulti{>4}$ soit \emph{\og il n'existe pas plus de quatre \fg}, en plus
+de $\nexists$ proposé par \verb+amssymb+.
+\end{tcblisting}
+
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{existmulti}{1}
+
+\IDmacro*{nexistmulti}{1}
+
+\IDarg{1} une écriture mathématique servant à préciser la portée du quantificateur.
+
+
+\bigskip
+
+\IDmacro*{existsone}{0}
+
+\IDmacro*{nexistsone}{0}
+
+
+
+
+\section{Ensembles et applications}
 
 \subsection{Différents types d'ensembles}
 
@@ -1144,29 +1196,72 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % Docs for discrete intervals - END
 
 
-\subsubsection{Informatique théorique - Intervalles discrets d'entiers}
 
-\paragraph{Exemple d'utilisation}
 
-Dans l'exemple, la syntaxe fait référence à \og Computer Science \fg{} soit \og Informatique Théorique \fg{}.
+%\section{Logique et fondements}
+
+\subsection{Application totale, partielle, injective, surjective et/ou bijective} \label{section:application}
+
+Voici des symboles qui, bien que très techniques, facilitent la rédaction de documents à propos des applications totales ou partielles
+\footnote{
+	$a: E \to F$ est une application si $\forall x \in E$, $\existsone y \in F$ tel que $y = a(x)$. 
+	Plus généralement, $f: E \to F$ est une fonction si $\forall x \in E$, $\existmulti{\leq 1} y \in F$ tel que $y = f(x)$, autrement dit soit $f(x)$ existe dans $F$, soit $f$ n'est pas définie en $x$.
+}
+\emph{(on parle aussi d'applications, sans qualificatif, et de fonctions)}.
+
+
+
+\paragraph{Applications totales -- Un exemple complet}
 
 \begin{tcblisting}{}
-Par définition, $\CSinterval{4}{7} = \{ 4 ; 5 ; 6 ; 7 \}$.
+$f: A \to B$ est une application totale, c'est à dire définie sur $A$ tout entier.
+
+$i: C \onetoone D$ est une application totale injective.
+
+$s: E \onto F$ est une application totale surjective.
+
+$b: G \biject H$ est une application totale bijective.
 \end{tcblisting}
+
+
+
+\paragraph{Applications partielles -- Un exemple complet}
+
+\begin{tcblisting}{}
+$f: A \pto B$ est une application partielle, c'est à dire définie sur un sous-ensemble
+de $A$.
+
+$i: C \ponetoone D$ est une application partielle injective.
+
+$s: E \ponto F$ est une application partielle surjective.
+
+$b: G \pbiject H$ est une application partielle bijective.
+\end{tcblisting}
+
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{CSinterval}{2}
+\begin{multicols}{2}
+    \IDmacro*{to}{0}
+    
+    \IDmacro*{onetoone}{0}
+    
+    \IDmacro*{onto}{0}
+    
+    \IDmacro*{biject}{0}
+    
+    \IDmacro*{pto}{0}
+    
+    \IDmacro*{ponetoone}{0}
+    
+    \IDmacro*{ponto}{0}
+    
+    \IDmacro*{pbiject}{0}
+\end{multicols}
 
-\IDarg{1} borne inférieure $a$ de l'intervalle $\CSinterval{a}{b}$.
-
-\IDarg{2} borne supérieure $b$ de l'intervalle $\CSinterval{a}{b}$.
 
 
-
-
-$\smallsetminus$
 \section{Géométrie}
 
 \subsection{Points et lignes}
@@ -1222,11 +1317,11 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 
 \subsubsection{Droites parallèles ou non}
 
-Les opérateurs \verb+\parallel+ et \verb+\notparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\nparallel+ est fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
+Les opérateurs \verb+\parallel+ et \verb+\nparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\stdnparallel+ est un alias de \verb+\nparallel+ fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
 
 \begin{tcblisting}{}
-$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \notparallel (\pts{GH})$ au lieu de
-$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
+$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \nparallel (\pts{GH})$ au lieu de
+$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \stdnparallel (\pts{GH})$.
 \end{tcblisting}
 
 
@@ -1234,9 +1329,12 @@ $(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
 
 \IDmacro*{parallel}{0}
 
+\IDmacro*{nparallel}{0}
+
 \IDmacro*{stdparallel}{0}
 
-\IDmacro*{notparallel}{0}
+\IDmacro*{stdnparallel}{0}
+
 
 
 
@@ -2738,6 +2836,38 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \begin{description}[leftmargin=1em]
     \setlength\itemsep{1em}
+
+
+% --------------- %
+
+    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+    \begin{itemize}
+        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée vers le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+
+        \item En logique, il y a eu les modifications suivantes.
+        \begin{itemize}
+        	\item \verb+\eqdef**+ a été supprimé. Voir la macro \verb+\Store*+ du package \verb+\lyalgo+.
+
+        	\item Différentes versions de l'opérateur $\exists$ via \verb+\existsone+ et \verb+\existmulti+ avec leurs versions négatives \verb+\nexistsone+ et \verb+\nexistmulti+.
+
+        	\item Deux nouvelles macros \verb+\eqplot+ et \verb+\eqappli+ pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \verb+\textopplot+ et \verb+\textopappli+.
+
+			\item Ajout des formes négatives \verb+\niff+, \verb+\nimplies+ et \verb+\nliesimp+.
+
+        	\item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \verb+\iff+, \verb+\implies+ et \verb+\liesimp+ et leurs formes négatives.
+
+        	\item Une macro \verb+\textoptest+ a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
+        \end{itemize}
+
+        \item En analyse, il y a eu les renommages suivants.
+        \begin{itemize}
+        	\item \verb+\hypergeo+ est devenu \verb+\seqhypergeo+.
+
+        	\item \verb+\suprageo+ est devenu \verb+\seqsuprageo+.
+        \end{itemize}
+
+        \item En géométrie, \verb+\notparallel+ est devenu \verb+\nparallel+.
+    \end{itemize}
 
 
 % --------------- %

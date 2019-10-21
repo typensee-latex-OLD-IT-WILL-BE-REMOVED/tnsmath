@@ -6,13 +6,14 @@
 
 	\usepackage{01-equal-signs-n-co}
 \makeatother
-
+\usepackage{amssymb}
 \newcommand\RR{RR}
 \newcommand\setgeo[1]{#1}
 
 
 \begin{document}
 
+$\triangleq$
 \section{Logique et fondements}
 
 \subsection{Différents types d'égalités \og standard \fg}
@@ -29,8 +30,8 @@ L'exemple suivant montre trois façons de rédiger une égalité signifiant une 
 \emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
 
 \begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec les écritures
-symboliques $f(x) \eqdef* x^3 + 1$ et $f(x) \eqdef** x^3 + 1$.
+La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec l'écriture
+symbolique $f(x) \eqdef* x^3 + 1$.
 \end{tcblisting}
 
 
@@ -101,7 +102,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
 
 
 
-\subsection{Textes utilisés} \label{text-for-opes}
+\subsubsection{Textes utilisés} \label{text-for-opes}
 
 Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
 
@@ -131,14 +132,14 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 
 
 
-\subsection{Fiches techniques}
+\subsubsection{Fiches techniques}
 
 \paragraph{Les opérateurs disponibles}
 
 \begin{multicols}{2}
 % == Technical infos - Operators - START == %
 
-\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqdef**, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
+\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
 	\IDmacro*{\k}{0}
 

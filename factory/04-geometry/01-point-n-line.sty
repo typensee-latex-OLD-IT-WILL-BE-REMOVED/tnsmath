@@ -27,7 +27,8 @@
 \let\stdparallel\parallel
 \renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
 
-\newcommand{\notparallel}{%
+\let\stdnparallel\nparallel
+\renewcommand{\nparallel}{%
   \mathrel{\mathpalette\not@parallel\relax}%
 }
 \newcommand{\not@parallel}[2]{%

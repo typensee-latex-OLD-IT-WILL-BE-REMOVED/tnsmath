@@ -17,6 +17,7 @@
 \RequirePackage{mathtools}
 \RequirePackage{nicematrix}
 \RequirePackage{relsize}
+\RequirePackage{stackengine}
 \RequirePackage{stmaryrd}
 \RequirePackage{tkz-tab}
 \RequirePackage{trimspaces}
@@ -230,11 +231,9 @@
 \newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
 \newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
 \newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
-\newcommand\eqdef{\@ifstar{\@eqdef@pre@star}{\@eqdef@no@star}}
-\newcommand\@eqdef@pre@star{\@ifstar{\@eqdef@star@star}{\@eqdef@star}}
+\newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
-\newcommand\@eqdef@star@star{\mathrel{\mathpalette\my@hat@eq\relax}}
 
 \newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
@@ -360,6 +359,17 @@
 \newcommand\explain[3][0em]{%
     \kern#1 #2 {} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}%
 }
+
+
+% ----------------- %
+% -- QUANTIFIERS -- %
+% ----------------- %
+
+\newcommand\existsone{\exists\kern0.1em !}
+\newcommand\nexistsone{\nexists\kern0.1em !}
+
+\newcommand\existmulti[1]{\exists_{\kern0.1em #1}}
+\newcommand\nexistmulti[1]{\nexists_{\kern0.1em #1}}
 
 
 % ------------------ %
@@ -522,11 +532,6 @@
 % -- INTERVALS -- %
 % --------------- %
 
-% Computer Science interval
-
-\newcommand\CSinterval[2]{\ensuremath{#1\,..\,#2}}
-
-
 % Macros for intervals - START
 
 % Macros for french real intervals
@@ -582,6 +587,25 @@
 % Macros for intervals - END
 
 
+% ----------------- %
+% -- APPLICATONS -- %
+% ----------------- %
+
+\newcommand\@rel@scale[3]{\mathrel{\scalebox{#1}[#2]{$#3$}}}
+
+\newcommand\onetoone{\@rel@scale{1.1}{1.3}{\rightarrowtail}}
+\newcommand\onto{\@rel@scale{1.1}{1.3}{\twoheadrightarrow}}
+\newcommand\biject{\mathrel{\mathrlap{\onetoone}\mkern0.9mu\onto}}
+ 
+    
+\newcommand\@partaial@deco[3]{\stackMath\mathrel{\stackinset{c}{#1}{c}{#2}{\scalebox{1}[0.4]{$\vert$}}{#3}}}
+
+\newcommand\pto{\@partaial@deco{-0.1ex}{0.15ex}{\to}}
+\newcommand\ponetoone{\@partaial@deco{0ex}{0ex}{\onetoone}}
+\newcommand\ponto{\@partaial@deco{-0.3ex}{0ex}{\onto}}
+\newcommand\pbiject{\@partaial@deco{-0.25ex}{0ex}{\biject}}
+
+
 % ------------------ %
 % -- POINT N LINE -- %
 % ------------------ %
@@ -606,7 +630,8 @@
 \let\stdparallel\parallel
 \renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
 
-\newcommand{\notparallel}{%
+\let\stdnparallel\nparallel
+\renewcommand{\nparallel}{%
   \mathrel{\mathpalette\not@parallel\relax}%
 }
 \newcommand{\not@parallel}[2]{%

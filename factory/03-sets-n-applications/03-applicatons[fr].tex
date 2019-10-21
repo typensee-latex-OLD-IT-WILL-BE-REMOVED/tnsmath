@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+    \input{../02-logic/05-quantifiers.sty}
+
+    \usepackage{03-applicatons}
+\makeatother
+
+    
+\begin{document}
+
+%\section{Logique et fondements}
+
+\subsection{Application totale, partielle, injective, surjective et/ou bijective} \label{section:application}
+
+Voici des symboles qui, bien que très techniques, facilitent la rédaction de documents à propos des applications totales ou partielles
+\footnote{
+	$a: E \to F$ est une application si $\forall x \in E$, $\existsone y \in F$ tel que $y = a(x)$. 
+	Plus généralement, $f: E \to F$ est une fonction si $\forall x \in E$, $\existmulti{\leq 1} y \in F$ tel que $y = f(x)$, autrement dit soit $f(x)$ existe dans $F$, soit $f$ n'est pas définie en $x$.
+}
+\emph{(on parle aussi d'applications, sans qualificatif, et de fonctions)}.
+
+
+
+\paragraph{Applications totales -- Un exemple complet}
+
+\begin{tcblisting}{}
+$f: A \to B$ est une application totale, c'est à dire définie sur $A$ tout entier.
+
+$i: C \onetoone D$ est une application totale injective.
+
+$s: E \onto F$ est une application totale surjective.
+
+$b: G \biject H$ est une application totale bijective.
+\end{tcblisting}
+
+
+
+\paragraph{Applications partielles -- Un exemple complet}
+
+\begin{tcblisting}{}
+$f: A \pto B$ est une application partielle, c'est à dire définie sur un sous-ensemble
+de $A$.
+
+$i: C \ponetoone D$ est une application partielle injective.
+
+$s: E \ponto F$ est une application partielle surjective.
+
+$b: G \pbiject H$ est une application partielle bijective.
+\end{tcblisting}
+
+
+
+\paragraph{Fiches techniques}
+
+\begin{multicols}{2}
+    \IDmacro*{to}{0}
+    
+    \IDmacro*{onetoone}{0}
+    
+    \IDmacro*{onto}{0}
+    
+    \IDmacro*{biject}{0}
+    
+    \IDmacro*{pto}{0}
+    
+    \IDmacro*{ponetoone}{0}
+    
+    \IDmacro*{ponto}{0}
+    
+    \IDmacro*{pbiject}{0}
+\end{multicols}
+\end{document}

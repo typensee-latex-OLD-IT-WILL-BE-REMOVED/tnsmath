@@ -10,7 +10,6 @@
 
 \begin{document}
 
-$\smallsetminus$
 \section{Géométrie}
 
 \subsection{Points et lignes}
@@ -66,11 +65,11 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 
 \subsubsection{Droites parallèles ou non}
 
-Les opérateurs \verb+\parallel+ et \verb+\notparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\nparallel+ est fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
+Les opérateurs \verb+\parallel+ et \verb+\nparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\stdnparallel+ est un alias de \verb+\nparallel+ fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
 
 \begin{tcblisting}{}
-$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \notparallel (\pts{GH})$ au lieu de
-$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
+$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \nparallel (\pts{GH})$ au lieu de
+$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \stdnparallel (\pts{GH})$.
 \end{tcblisting}
 
 
@@ -78,8 +77,11 @@ $(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \nparallel (\pts{GH})$.
 
 \IDmacro*{parallel}{0}
 
+\IDmacro*{nparallel}{0}
+
 \IDmacro*{stdparallel}{0}
 
-\IDmacro*{notparallel}{0}
+\IDmacro*{stdnparallel}{0}
+
 
 \end{document}

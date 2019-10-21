@@ -1,0 +1,64 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{05-quantifiers}
+\makeatother
+
+
+\newcommand\eqdef{:=}
+
+
+\begin{document}
+
+%\section{Logique et fondements}
+
+\subsection{\texorpdfstring{Des versions alternatives du quantificateur $\exists$}%
+                           {Des versions alternatives du quantificateur existentiel}}
+         
+\paragraph{Quantifier l'existence}
+
+Voici deux versions, l'une classique, et l'autre beaucoup moins, permettant de préciser le quantificateur $\exists$ \emph{(concernant les applications injectives, surjectives,\dots{} \emph{etc.} se reporter à la section \ref{section:application})}.
+
+\begin{tcblisting}{}
+$f: E \to F$ est une application bijective si $\forall y \in F$,
+$\existsone x \in E$ tel que $y = f(x)$.
+
+$f: E \to F$ est une fonction, ou application partielle, si $\forall x \in E$,
+$\existmulti{\leq 1} y \in F$ tel que $y = f(x)$ où $\existmulti{\leq 1}$ signifie
+\emph{\og il existe au plus un \fg}.
+
+On pourrait poser $\existmulti{=1} \eqdef \existsone$ pour ne pas multiplier
+le symbolisme. Quoique\dots
+\end{tcblisting}
+
+
+
+\paragraph{Versions négatives}
+
+\begin{tcblisting}{}
+On peut utiliser $\nexistsone$ soit \emph{\og il n'existe pas un unique \fg},
+et $\nexistmulti{>4}$ soit \emph{\og il n'existe pas plus de quatre \fg}, en plus
+de $\nexists$ proposé par \verb+amssymb+.
+\end{tcblisting}
+
+
+
+\paragraph{Fiches techniques}
+
+\IDmacro*{existmulti}{1}
+
+\IDmacro*{nexistmulti}{1}
+
+\IDarg{1} une écriture mathématique servant à préciser la portée du quantificateur.
+
+
+\bigskip
+
+\IDmacro*{existsone}{0}
+
+\IDmacro*{nexistsone}{0}
+
+\end{document}
