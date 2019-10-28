@@ -873,9 +873,9 @@
 % -- ARC -- %
 % --------- %
 
-\newcommand\arc{\@ifstar{\@arc@star}{\@arc@no@star}}
-\newcommand*\@arc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
-\newcommand*\@arc@no@star[1]{\wideparen{\@no@point{#1}}}
+\newcommand\circarc{\@ifstar{\@circarc@star}{\@circarc@no@star}}
+\newcommand*\@circarc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
+\newcommand*\@circarc@no@star[1]{\wideparen{\@no@point{#1}}}
 
 
 % --------------------- %
@@ -1328,12 +1328,12 @@
 
 \useforestlibrary{linguistics}
 \forestset{
-    declare count={connections}{1},
-    frame/.style={tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
-    apweight/.style={edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
-    bpweight/.style={edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
-    pweight/.style={edge label={node[midway, fill=white]{#1}}},
-    pweight*/.style={}
+    declare count   = {connections}{1},
+    frame/.style    = {tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
+    apweight/.style = {edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
+    bpweight/.style = {edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
+    pweight/.style  = {edge label={node[midway, fill=white]{#1}}},
+    pweight*/.style = {}
 }
 % Sources
 %    * ???? (all settings)

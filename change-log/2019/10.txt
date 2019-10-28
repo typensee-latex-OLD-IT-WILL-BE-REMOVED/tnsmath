@@ -1,4 +1,11 @@
 ==========
+2019-10-28
+==========
+
+**Conflict ``pict2e`` with resolevd:** this more serious package than ``lymath`` uses a macro ``\arc``. So the macro ``\arc`` of ``lymath`` has been renamed ``\circarc``.
+
+
+==========
 2019-10-22
 ==========
 
@@ -6,9 +13,9 @@
 
     1) For unions, disjoint unions and intersections in "semi displaystyle", you can use ``\dcup``, ``\dsqcup`` and ``\dcap``.
 
-    2) ``\card`` and ``\card`` allow to write the cardinality function.
+    2) ``\card`` and ``\card*`` allow to write the cardinality function.
 
-    3) ``\dom``, ``\codom``, ``\im`` and ``\ker`` are functions for domain, codomain, image and kernel.
+    3) ``\dom``, ``\codom``, ``\im`` and ``\ker`` are for domain, codomain, image and kernel of functions.
 
 
 ==========

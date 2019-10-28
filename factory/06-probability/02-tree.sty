@@ -7,12 +7,12 @@
 
 \useforestlibrary{linguistics}
 \forestset{
-    declare count={connections}{1},
-    frame/.style={tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
-    apweight/.style={edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
-    bpweight/.style={edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
-    pweight/.style={edge label={node[midway, fill=white]{#1}}},
-    pweight*/.style={}
+    declare count   = {connections}{1},
+    frame/.style    = {tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
+    apweight/.style = {edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
+    bpweight/.style = {edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
+    pweight/.style  = {edge label={node[midway, fill=white]{#1}}},
+    pweight*/.style = {}
 }
 % Sources
 %    * ???? (all settings)

@@ -74,7 +74,7 @@
 {\footnotesize Version \texttt{0.6.3-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2019-10-21}
+\date{2019-10-28}
 
 \maketitle
 
@@ -1258,8 +1258,8 @@ $\card* E = \card E$ est le cardinal de $E$.
 \paragraph{Image et compagnie -- Un exemple}
 
 \begin{tcblisting}{}
-Une application $f$ a un domaine $\dom f$, une image $\im f$, on dit aussi codomaine
-$\codom f$, ainsi qu'un noyau $\ker f$.
+Une application $f$ a un noyau $\ker f$, un domaine $\dom f$ et une image $\im f$, 
+on parle aussi de codomaine $\codom f$.
 \end{tcblisting}
 
 
@@ -1290,8 +1290,8 @@ $\codom f$, ainsi qu'un noyau $\ker f$.
 
 Voici des symboles qui, bien que très techniques, facilitent la rédaction de documents à propos des applications totales ou partielles
 \footnote{
-	$a: E \to F$ est une application si $\forall x \in E$, $\existsone y \in F$ tel que $y = a(x)$. 
-	Plus généralement, $f: E \to F$ est une fonction si $\forall x \in E$, $\existmulti{\leq 1} y \in F$ tel que $y = f(x)$, autrement dit soit $f(x)$ existe dans $F$, soit $f$ n'est pas définie en $x$.
+	$a: E \to F$ est une application totale si $\forall x \in E$, $\existsone y \in F$ tel que $y = a(x)$. 
+	Plus généralement, $f: E \to F$ est une application partielle si $\forall x \in E$, $\existmulti{\leq 1} y \in F$ tel que $y = f(x)$, autrement dit soit $f(x)$ existe dans $F$, soit $f$ n'est pas définie en $x$.
 }
 \emph{(on parle aussi d'applications, sans qualificatif, et de fonctions)}.
 
@@ -1785,22 +1785,22 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 \paragraph{Exemple d'utilisation 1}
 
 \begin{tcblisting}{}
-Voici un arc $\arc{ABCDEF}$ utilisant beaucoup de lettres, et vous pouvez écrire
-$\arc*{A}{rot}$ à la place de $\arc{A_{rot}}$.
+Voici un arc $\circarc{ABCDEF}$ utilisant beaucoup de lettres, et vous pouvez écrire
+$\circarc*{A}{rot}$ à la place de $\circarc{A_{rot}}$.
 \end{tcblisting}
 
 
 \paragraph{Exemple d'utilisation 2}
 
 \begin{tcblisting}{}
-$\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
+$\circarc{i}$ et $\circarc*{j}{2}$ n'affiche pas de point sous l'arc.
 \end{tcblisting}
 
 
 
 \paragraph{Fiches techniques}
 
-\IDmacro*{arc}{1}
+\IDmacro*{circarc}{1} où \quad \verb+circarc = circ-ular arc+
 
 \IDarg{} un texte donnant le nom d'un arc circulaire.
 
@@ -1808,11 +1808,11 @@ $\arc{i}$ et $\arc*{j}{2}$ n'affiche pas de point sous l'arc.
 \bigskip
 
 
-\IDmacro*{arc*}{2}
+\IDmacro*{circarc*}{2} où \quad \verb+circarc = circ-ular arc+
 
-\IDarg{1} un texte indiquant $up$ dans le nom $\arc*{up}{down}$ d'un arc circulaire.
+\IDarg{1} un texte indiquant $up$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 
-\IDarg{2} un texte indiquant $down$ dans le nom $\arc*{up}{down}$ d'un arc circulaire.
+\IDarg{2} un texte indiquant $down$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 
 
 
