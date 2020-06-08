@@ -1,0 +1,45 @@
+==========
+2020-06-08
+==========
+
+**New minor version version::``0.7.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
+
+
+**Analysis :** here are the new features.
+
+    1) ``\ch``, ``\sh``, ``\th``, ``\ach``, ``\ash`` and ``\ath`` have been renamed ``\fch``, ``\fsh``, ``\fth``, ``\afch``, ``\afsh`` and ``\afth``.
+
+    1) The macros ``\acosh``, ``\asinh`` and ``\atanh`` have been added.
+
+    1) ``\derpar`` and ``\derpar*`` writes extensible braces before the derivation indication. For non extensible braces, there are ``\sderpar`` and ``\sderpar*``.
+
+    1) ``\stdint`` is the standard integral operator.
+
+
+**Geometry : ** one deletion and three new things.
+
+    1) ``\pts`` has been supressed because of its lake of semantic meaning.
+
+    1) `\gline`` and ``\pgline`` are for lines, whereas ``\hgline``is for half lines, and ``\segment`` is for segments.
+
+
+**Logic :** here are the enhancements.
+
+    1) Inequalities can be decorated with "plot".
+
+    1) Negative versions of the vertical logic operators.
+
+
+**Probability :** somes modifications have been made.
+
+    1) ``\proba`` is a new macro for the writing of "basic" probabilities.
+
+    1) ``\probacond`` has a new signature whiwh is more logical.
+
+
+**One internal update regarding to ``amsmath``:** the macro ``\DeclareMathMacro`` has been changed to ``\DeclareMathOperator``.
+
+
+**Simplification of the documentation:** the ¨latex codes now just show the use of the macros outside any context such as to see directly what is proposed by the package, and the technical  informations have been moved to a dedicated section.
+
+**A better way to manage the changes :** see the folder path::``factory/99-major-change-log``.

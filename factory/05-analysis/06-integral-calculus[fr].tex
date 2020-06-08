@@ -31,23 +31,36 @@
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Par définition, $\displaystyle \int_{a}^{b} f(x) \dd{x} = \hook{F(x)}{a}{b}$ où
-$\hook{F(x)}{a}{b} = F(b) - F(a)$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \int_{a}^{b} f(x) \dd{x}
+ = \hook{F(x)}{a}{b}$
+
+$\hook{F(x)}{a}{b}
+ = F(b) - F(a)$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
 Par défaut, les crochets s'étirent verticalement si besoin, mais si cela vous dérange, vous pouvez faire appel à la version étoilée de la macro comme dans l'exemple suivant
 
-\begin{tcblisting}{}
-$\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \hook{\frac{x - 1}{5 + x^2}}{a}{b}
+ = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{L'opérateur crochet -- 1\textsuperscript{ère} version}
 
 \IDmacro*{hook}{3}
 
@@ -60,27 +73,39 @@ $\displaystyle \hook{\frac{x - 1}{5 + x^2}}{a}{b}
 \IDarg{3} la borne supérieure affichée en exposant.
 
 
+% ---------------------- %
+
 
 \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Vous pouvez utiliser $\vhook{F(x)}{a}{b}$ au lieu de $\hook{F(x)}{a}{b}$.
-\end{tcblisting}
+\begin{latexex}
+$\vhook{F(x)}{a}{b}
+ = \hook{F(x)}{a}{b}$.
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
 Tout comme avec la première version de l'opérateur crochet, vous pouvez utiliser une version étoilée pour empêcher l'étirement verticalement du trait vertical. Voici un exemple.
 
-\begin{tcblisting}{}
-$\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
-             = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
+ = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
 \IDmacro*{vhook}{3}
 
@@ -93,24 +118,38 @@ $\displaystyle \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
 \IDarg{3} la borne supérieure affichée en exposant.
 
 
+% ---------------------- %
+
 
 \subsubsection{Intégrales multiples}
 
 Le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $\displaystyle
-  \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
-= \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
-\end{tcblisting}
+ \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
+ = \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
+\end{latexex-flat}
 
 
 \begin{remark}
 	Par défaut, \LaTeX{} affiche
-	\makeatletter
-    	$\displaystyle \original@int \original@int \original@int F(x;y;z) \dd{x} \dd{y} \dd{z}
-    	= \original@int_{a}^{b} \original@int_{c}^{d} \original@int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$.
-	\makeatother
+	$\displaystyle
+	 \stdint \stdint \stdint F(x;y;z) \dd{x} \dd{y} \dd{z}
+     =
+     \stdint_{a}^{b} \stdint_{c}^{d} \stdint_{e}^{f}
+     F(x;y;z) \dd{x} \dd{y} \dd{z}$.
+     Nous avons obtenu ce résultat en utilisant \verb+\stdint+ qui est l'opérateur proposé de façon standard par \LaTeX.
 \end{remark}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{L'opérateur d'intégration standard}
+
+\IDmacro*{stdint}{0}
 
 \end{document}

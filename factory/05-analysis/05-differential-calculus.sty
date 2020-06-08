@@ -63,6 +63,27 @@
     }
 }
 
+% Parenthesis versions of a total derivate
+\newcommand\derpar{\@ifstar{\@derpar@star}{\@derpar@no@star}}
+
+\newcommand\@derpar@no@star[2][]{
+    \derpow[#1]{\left( #2 \right)}
+}
+
+\newcommand\@derpar@star[2][]{
+    \derpow*[#1]{\left( #2 \right)}
+}
+
+\newcommand\sderpar{\@ifstar{\@sderpar@star}{\@sderpar@no@star}}
+
+\newcommand\@sderpar@no@star[2][]{
+    \derpow[#1]{( #2 )}
+}
+
+\newcommand\@sderpar@star[2][]{
+    \derpow*[#1]{( #2 )}
+}
+
 % Fractional writing of total derivate
 \newcommand\derfrac{\@ifstar{\@derfrac@star}{\@derfrac@no@star}}
 

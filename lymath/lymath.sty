@@ -19,6 +19,7 @@
 \RequirePackage{relsize}
 \RequirePackage{stackengine}
 \RequirePackage{stmaryrd}
+\RequirePackage{tikz}
 \RequirePackage{tkz-tab}
 \RequirePackage{trimspaces}
 \PassOptionsToPackage{Symbolsmallscale}{upgreek}
@@ -261,11 +262,11 @@
 \newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
 \newcommand\neqappli{\@over@math@symbol{\textopappli}{\neq}}
-\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
 \newcommand\neqchoice{\@over@math@symbol{\textopchoice}{\neq}}
 \newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
 \newcommand\neqcons{\@over@math@symbol{\textopcons}{\neq}}
 \newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
+\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
 \newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
 \newcommand\lappli{\@over@math@symbol{\textopappli}{<}}
@@ -273,6 +274,7 @@
 \newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
 \newcommand\lcons{\@over@math@symbol{\textopcons}{<}}
 \newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
+\newcommand\lplot{\@over@math@symbol{\textopplot}{<}}
 \newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
 
 \newcommand\gappli{\@over@math@symbol{\textopappli}{>}}
@@ -280,6 +282,7 @@
 \newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
 \newcommand\gcons{\@over@math@symbol{\textopcons}{>}}
 \newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
+\newcommand\gplot{\@over@math@symbol{\textopplot}{>}}
 \newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
 
 \newcommand\leqappli{\@over@math@symbol{\textopappli}{\leq}}
@@ -287,6 +290,7 @@
 \newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
 \newcommand\leqcons{\@over@math@symbol{\textopcons}{\leq}}
 \newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
+\newcommand\leqplot{\@over@math@symbol{\textopplot}{\leq}}
 \newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
 \newcommand\geqappli{\@over@math@symbol{\textopappli}{\geq}}
@@ -294,6 +298,7 @@
 \newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
 \newcommand\geqcons{\@over@math@symbol{\textopcons}{\geq}}
 \newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
+\newcommand\geqplot{\@over@math@symbol{\textopplot}{\geq}}
 \newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
 
 % == Decorated versions - END == %
@@ -308,6 +313,10 @@
 \newcommand\vliesimp{\mathrel{\Uparrow}}
 \newcommand\vimplies{\mathrel{\Downarrow}}
 \newcommand\viff{\mathrel{\Updownarrow}}
+
+\newcommand\notvliesimp{\centernot\vliesimp}
+\newcommand\notvimplies{\centernot\vimplies}
+\newcommand\notviff{\centernot\viff}
 
 
 % Horizontal versions
@@ -663,10 +672,47 @@
     \@pt@no@star{#1}_{#2}
 }
 
-\newcommand\pts[1]{\mathrm{#1}}
-
 
 % Lines
+
+\newcommand\gline[3][O]{%
+	\IfStrEqCase{#1}{%
+		{O}{\left(}%
+		{C}{\left[}%
+		{OC}{\left(}%
+		{CO}{\left[}%
+	}%
+	 #2 #3%		
+	\IfStrEqCase{#1}{%
+		{O}{\right)}%
+		{C}{\right]}%
+		{OC}{\right]}%
+		{CO}{\right)}%
+	}%
+}
+
+\newcommand\pgline[3][O]{%
+    \gline[#1]{\pt{#2}}{\pt{#3}}%
+}
+
+
+\newcommand\hgline[2]{%
+    \gline[CO]{#1}{#2}%
+}
+
+\newcommand\phgline[2]{%
+    \pgline[CO]{#1}{#2}%
+}
+
+
+\newcommand\segment[2]{%
+    \gline[C]{#1}{#2}%
+}
+
+\newcommand\psegment[2]{%
+    \pgline[C]{#1}{#2}%
+}
+
 
 % Source
 %    * https://tex.stackexchange.com/questions/511495
@@ -985,20 +1031,23 @@
 
 % Classical functions - START
 
-\DeclareMathMacro{\ch}{\operatorname{ch}}
-\DeclareMathMacro{\sh}{\operatorname{sh}}
-\DeclareMathMacro{\th}{\operatorname{th}}
-\DeclareMathMacro{\ach}{\operatorname{ach}}
-\DeclareMathMacro{\ash}{\operatorname{ash}}
-\DeclareMathMacro{\ath}{\operatorname{ath}}
-\DeclareMathMacro{\arccosh}{\operatorname{arccosh}}
-\DeclareMathMacro{\arcsinh}{\operatorname{arcsinh}}
-\DeclareMathMacro{\arctanh}{\operatorname{arctanh}}
-\DeclareMathMacro{\acos}{\operatorname{acos}}
-\DeclareMathMacro{\asin}{\operatorname{asin}}
-\DeclareMathMacro{\atan}{\operatorname{atan}}
-\DeclareMathMacro{\pgcd}{\operatorname{pgcd}}
-\DeclareMathMacro{\ppcm}{\operatorname{ppcm}}
+\DeclareMathOperator{\pgcd}{\operatorname{pgcd}}
+\DeclareMathOperator{\ppcm}{\operatorname{ppcm}}
+\DeclareMathOperator{\acos}{\operatorname{acos}}
+\DeclareMathOperator{\asin}{\operatorname{asin}}
+\DeclareMathOperator{\atan}{\operatorname{atan}}
+\DeclareMathOperator{\arccosh}{\operatorname{arccosh}}
+\DeclareMathOperator{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathOperator{\arctanh}{\operatorname{arctanh}}
+\DeclareMathOperator{\acosh}{\operatorname{acosh}}
+\DeclareMathOperator{\asinh}{\operatorname{asinh}}
+\DeclareMathOperator{\atanh}{\operatorname{atanh}}
+\DeclareMathOperator{\fch}{\operatorname{ch}}
+\DeclareMathOperator{\fsh}{\operatorname{sh}}
+\DeclareMathOperator{\fth}{\operatorname{th}}
+\DeclareMathOperator{\afch}{\operatorname{ach}}
+\DeclareMathOperator{\afsh}{\operatorname{ash}}
+\DeclareMathOperator{\afth}{\operatorname{ath}}
 
 \newcommand\expb[1]{\exp_{#1}}
 \newcommand\logb[1]{\log_{#1}}
@@ -1078,6 +1127,27 @@
             }
         }
     }
+}
+
+% Parenthesis versions of a total derivate
+\newcommand\derpar{\@ifstar{\@derpar@star}{\@derpar@no@star}}
+
+\newcommand\@derpar@no@star[2][]{
+    \derpow[#1]{\left( #2 \right)}
+}
+
+\newcommand\@derpar@star[2][]{
+    \derpow*[#1]{\left( #2 \right)}
+}
+
+\newcommand\sderpar{\@ifstar{\@sderpar@star}{\@sderpar@no@star}}
+
+\newcommand\@sderpar@no@star[2][]{
+    \derpow[#1]{( #2 )}
+}
+
+\newcommand\@sderpar@star[2][]{
+    \derpow*[#1]{( #2 )}
 }
 
 % Fractional writing of total derivate
@@ -1163,9 +1233,9 @@
 
 % Consecutive integrals
 
-\let\original@int\int
+\let\stdint\int
 \DeclareRobustCommand{\int}{%
-    \original@int\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
+    \stdint\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
 }
 
 \def\operator@followup#1{%
@@ -1291,34 +1361,41 @@
 % -- CONDITIONAL -- %
 % ----------------- %
 
+% Semantic probability
+
+\newcommand\proba[2][p]{%
+    #1\left( #2 \right)%
+}
+
+
 % Conditional probability
 
 \newcommand\@abstract@proba@cond[4]{%
-    #1{#2\left( #3 \cap #4 \right)}{#2\left( #4 \right)}%
+    #1{\proba[#2]{#3 \cap #4}}{\proba[#2]{#4}}%
 }
 
 
 \newcommand\probacond{\@ifstar{\@probacond@star}{\@probacond@no@star}}
 \newcommand\@probacond@star{\@ifstar{\@probacond@star@star}{\@probacond@one@star}}
 
-\newcommand\@probacond@no@star[3]{%
-    #1_{#3}\left( #2 \right)%
+\newcommand\@probacond@no@star[3][p]{%
+    \proba[#1_{#2}]{#3}%
 }
 
-\newcommand\@probacond@one@star[3]{%
-    #1\left( #2 \mid #3 \right)%
+\newcommand\@probacond@one@star[3][p]{%
+    \proba[#1]{#3 \mid #2}%
 }
 
-\newcommand\@probacond@star@star[3]{%
-    \@abstract@proba@cond{\frac}{#1}{#2}{#3}
+\newcommand\@probacond@star@star[3][p]{%
+    \@abstract@proba@cond{\frac}{#1}{#3}{#2}
 }
 
 
 \newcommand\dprobacond{\@ifstar{\@dprobacond@star}{\@dprobacond@no@star}}
 \newcommand\@dprobacond@star{\@ifstar{\@dprobacond@star@star}{\@dprobacond@one@star}}
 
-\newcommand\@dprobacond@star@star[3]{%
-    \@abstract@proba@cond{\dfrac}{#1}{#2}{#3}
+\newcommand\@dprobacond@star@star[3][p]{%
+    \@abstract@proba@cond{\dfrac}{#1}{#3}{#2}
 }
 
 

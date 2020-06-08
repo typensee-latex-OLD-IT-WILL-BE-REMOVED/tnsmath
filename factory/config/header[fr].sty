@@ -26,17 +26,40 @@
 
 \usepackage{ifplatform}
 
+\usepackage{ifthen}
+
 \usepackage{cbdevtool}
 
 
 % MISC
 
-\tcbset{%
+\newtcblisting{latexex}{%
 	sharp corners,%
 	left=1mm, right=1mm,%
 	bottom=1mm, top=1mm,%
-	colupper=red!75!blue% 
+	colupper=red!75!blue,%
+	listing side text
 }
+
+\newtcblisting{latexex-flat}{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+}
+
+\newtcblisting{latexex-alone}{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing only
+}
+
+
+\newcommand\macro[1]{\texttt{\textbackslash{}#1}}
+
+
 
 \setlength{\parindent}{0cm}
 \setlist{noitemsep}
@@ -48,5 +71,18 @@
 
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+
+\newcommand\separation{
+	\medskip
+	\hfill\rule{0.5\textwidth}{0.75pt}\hfill
+	\medskip
+}
+
+
+\newcommand\extraspace{
+	\vspace{0.25em}
+}
+
 
 \newcommand\ascii{\texttt{ASCII}}

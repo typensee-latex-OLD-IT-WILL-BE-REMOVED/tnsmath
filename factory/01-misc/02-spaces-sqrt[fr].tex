@@ -16,16 +16,26 @@
 \verb+\sqrt+ a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \verb+\stdsqrt+ . Voici un exemple.
 
 
-\begin{tcblisting}{}
-Vous avez $\sqrt{2} = \stdsqrt{2}$ et $\sqrt[n]{45} = \stdsqrt[n]{45}$ .
-\end{tcblisting}
+\begin{latexex}
+$\sqrt{2} = \stdsqrt{2}$ ,
+$\sqrt[n]{45} = \stdsqrt[n]{45}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
 
-\IDmacro*{sqrt}{0}
 
-\IDmacro*{stdsqrt}{0}
+\subsection{Fiches techniques}
 
+\paragraph{Racines n-ièmes}
+
+\IDmacro{sqrt}{1}{1}
+
+\IDmacro{stdsqrt}{1}{1}
+
+
+\IDoption{} l'indice à indiquer pour une racine n-ième.
+
+\IDarg{} le radicande, c'est à dire ce qui sera écrit sous le radical.
 
 \end{document}

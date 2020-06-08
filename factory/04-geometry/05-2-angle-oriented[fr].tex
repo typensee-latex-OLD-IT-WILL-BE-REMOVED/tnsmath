@@ -43,47 +43,65 @@
 
 %\subsection{Angles}
 
-		\subsubsection{Angles orientés de vecteurs}
+\subsubsection{Angles orientés de vecteurs}
 
 \paragraph{Sans chapeau - Version longue}
 
-\begin{tcblisting}{}
-En mathématique, il est d'usage de noter les angles orientés via
-$\displaystyle \angleorient{\frac{1}{2} \vect{i}}{\vect{j}}$
+\begin{latexex}
+$\displaystyle
+ \angleorient{\frac{1}{2} \vect{i}}%
+             {\vect{j}}$
 ou
-$\displaystyle \angleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ .
-\end{tcblisting}
+$\displaystyle
+ \angleorient*{\frac{1}{2} \vect{i}}%
+              {\vect{j}}$ .
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \paragraph{Sans chapeau - Version courte mais restrictive}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
-\begin{tcblisting}{}
-Avec des noms de vecteurs utilisant juste des lettres, on peut juste taper
-$\displaystyle \vangleorient{i}{j}$
-ou
-$\displaystyle \vangleorient*{i}{j}$ (la seconde écriture n'apporte rien de nouveau).
-\end{tcblisting}
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector qui permet de simplifier la saisie quand l'on a juste des vecteurs nommés avec des lettres
+\emph{(notez que la version étoilée n'apporte rien de nouveau)}.
 
+\begin{latexex}
+$\vangleorient{i}{j}$
+ou
+$\vangleorient*{i}{j}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Avec un chapeau}
 
 Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-at, et \verb+v+ pour \textbf{v}-ector.
+Ceci permet d'avoir les angles orientés avec un chapeau \emph{(la dernière écriture n'apporte rien de neuf)}.
 
-\begin{tcblisting}{}
-Si vous préférez les angles orientés avec un chapeau, tapez les alors via
-$\displaystyle \hangleorient{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
-$\displaystyle \hangleorient*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
-$\displaystyle \hvangleorient{i}{j}$
-ou
-$\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien de neuf).
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \hangleorient{\frac{1}{2} \vect{i}}%
+              {\vect{j}}$
+ 
+$\displaystyle
+ \hangleorient*{\frac{1}{2} \vect{i}}%
+               {\vect{j}}$
+
+$\hvangleorient{i}{j}$
+
+$\hvangleorient*{i}{j}$
+\end{latexex}
 
 
+% ---------------------- %
 
-\paragraph{Fiche technique}
+
+\subsubsection{Fiche technique}
+
+\paragraph{Angles orientés de vecteurs}
 
 \IDmacro*{angleorient}{2}
 
@@ -94,7 +112,7 @@ $\displaystyle \hvangleorient*{i}{j}$ (la dernière écriture n'apportant rien d
 \IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{vangleorient}{2} où \quad \verb+v = v-ector+

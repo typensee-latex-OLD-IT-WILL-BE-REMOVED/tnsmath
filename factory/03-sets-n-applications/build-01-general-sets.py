@@ -208,14 +208,39 @@ for onesetdef in classicalsets:
         if hassuffix:
             allmacros.append(f"{onesetdef[0]*2}{s}")
 
-template_tex = text_start + f"""
 
-\\foreach \\k in {{{", ".join(allmacros)}}}{{
+template_tex = []
+lastmacros   = []
+lastfirst    = ""
 
-	\\IDmacro*{{\k}}{{0}}
+for onemacro in allmacros + ["ZZZZ-unsed-ZZZZ"]:
+    if lastfirst:
+        if lastfirst != onemacro[0]:
+            lastfirst = onemacro[0]
 
+            lastmacros = ", ".join(lastmacros)
+
+            template_tex += [
+                f"""
+\\foreach \\k in {{{lastmacros}}}{{
+
+    \\IDmacro*{{\k}}{{0}}
 }}
-""" + "\n" + text_end
+                """,
+                "\\separation"
+                ""
+            ]
+
+            lastmacros     = []
+
+    else:
+        lastfirst = onemacro[0]
+
+    lastmacros.append(onemacro)
+
+
+template_tex = "\n".join(template_tex[:-3])
+template_tex = f"{text_start}{template_tex}{text_end}"
 
 
 # -------------------------- #

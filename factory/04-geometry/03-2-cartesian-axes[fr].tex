@@ -49,61 +49,100 @@
 
 Commençons par la manière la plus basique d'écrire un repère \textit{(nous verrons d'autres méthodes qui peuvent être plus efficaces)}.
 
-\begin{tcblisting}{}
-Dans le plan, trois points $\pt{O}$, $\pt{I}$ and $\pt{J}$ non alignés définissent
-un repère cartésien $\axes{\pt{O} | \pt{I} | \pt{J}}$.
-\end{tcblisting}
+\begin{latexex}
+$\axes{\pt{O} %
+       | \pt{I} | \pt{J}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2 -- La méthode basique en version étoilée}
 
 Dans l'exemple ci-dessous, on voit que la version étoilée produit des petites parenthèses.
-\begin{tcblisting}{}
-$\displaystyle \axes{\pt{O} | \frac{7}{3} \vect{i} | \vect{j}}$
+\begin{latexex}
+$\displaystyle
+ \axes{\pt{O} %
+       | \frac{7}{3} \vect{i} %
+       | \vect{j}}$
 ou
-$\displaystyle \axes*{\pt{O} | \frac{7}{3} \vect{i} | \vect{j}}$
-\end{tcblisting}
+$\displaystyle
+ \axes*{\pt{O} %
+       | \frac{7}{3} \vect{i} %
+       | \vect{j}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 3 -- La méthode basique en dimension quelconque}
 
 Il faut au minimum deux "morceaux" séparés par des barres \verb+|+, cas de la dimension $1$, mais il n'y a pas de maximum, cas d'une dimension quelconque $n > 0$.
 
-\begin{tcblisting}{}
-$\axes{\pt{O} | \vect*{i}{1} | \vect*{i}{2} | \vect*{i}{3} | \dots |
- \vect*{i}{9} | \vect*{i}{10} | \vect*{i}{11} | \vect*{i}{12}}$
-\end{tcblisting}
+\begin{latexex}
+$\axes{\pt{O} %
+       | \vect*{i}{1} %
+       | \vect*{i}{2} %
+       | \vect*{i}{3} %
+       | \dots %
+       | \vect*{i}{9} %
+       | \vect*{i}{10} %
+       | \vect*{i}{11} %
+       | \vect*{i}{12}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 4 -- Repère affine}
 
 Dans l'exemple suivant, le préfixe \verb+p+ est pour \textbf{p}-oint.
 
-\begin{tcblisting}{}
-$\paxes{O | I | J | K}$ évite de taper $\axes{\pt{O} | \pt{I} | \pt{J} | \pt{K}}$.
-\end{tcblisting}
+\begin{latexex}
+$\paxes{O | I | J | K}$
+au lieu de
+$\axes{\pt{O} %
+       | \pt{I} | \pt{J} | \pt{K}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ecteur.
 
-\begin{tcblisting}{}
-$\vaxes{\pt{O} | i | j}$ est un raccourci de $\axes{\pt{O} | \vect{i} | \vect{j}}$.
-\end{tcblisting}
+\begin{latexex}
+$\vaxes{\pt{O} | i | j}$
+au lieu de
+$\axes{\pt{O} | \vect{i} | \vect{j}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
 
-Dans l'exemple suivant, le préfixe \verb+pv+ permet de combiner à la fois les fonctionnalités proposés par les préfixes \verb+p+ et \verb+v+.
+Dans l'exemple suivant, le préfixe \verb+pv+ permet de combiner ensemble les fonctionnalités proposées par les préfixes \verb+p+ et \verb+v+.
 
-\begin{tcblisting}{}
-$\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
-\end{tcblisting}
+\begin{latexex}
+$\pvaxes{O | i | j}$
+au lieu de
+$\axes{\pt{O} | \vect{i} | \vect{j}}$
+\end{latexex}
 
 
+% ---------------------- %
 
-\paragraph{Fiches techniques}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Nommer un repère}
 
 \IDmacro*{axes}{1}
 
@@ -118,7 +157,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 \end{itemize}
 
 
-\bigskip
+\separation
 
 \IDmacro*{paxes}{1} où \quad \verb+p = p-oint+
 
@@ -131,7 +170,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 \end{itemize}
 
 
-\bigskip
+\separation
 
 \IDmacro*{vaxes}{1} où \quad \verb+v = v-ector+
 
@@ -144,7 +183,7 @@ $\pvaxes{O | i | j}$ donne rapidement $\axes{\pt{O} | \vect{i} | \vect{j}}$.
 \end{itemize}
 
 
-\bigskip
+\separation
 
 \IDmacro*{pvaxes}{3} où \quad \verb&pv = p + v&
 

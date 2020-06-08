@@ -2,7 +2,7 @@
 2019-10-28
 ==========
 
-**Conflict ``pict2e`` with resolevd:** this more serious package than ``lymath`` uses a macro ``\arc``. So the macro ``\arc`` of ``lymath`` has been renamed ``\circarc``.
+**Conflict with ``pict2e`` resolved:** this more serious package than ``lymath`` uses a macro ``\arc``. So the macro ``\arc`` of ``lymath`` has been renamed ``\circarc``.
 
 
 ==========

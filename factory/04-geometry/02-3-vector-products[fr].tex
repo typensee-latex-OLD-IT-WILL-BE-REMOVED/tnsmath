@@ -44,26 +44,34 @@
 
 %\subsection{Vecteurs}
 
-		\subsubsection{Produit scalaire -- Écriture minimaliste}
+\subsubsection{Produit scalaire -- Écriture minimaliste}
 
 \paragraph{Exemple d'utilisation - Version longue}
 
-\begin{tcblisting}{}
-En mathématique, il est usage d'écrire un produit scalaire avec un point via
-$\dotprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
-\end{tcblisting}
+\begin{latexex}
+$\dotprod{\dfrac{1}{2} \vect{i}}%
+         {\vect{j}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
 Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
 
-\begin{tcblisting}{}
-On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
-\end{tcblisting}
+\begin{latexex}
+$\vdotprod{i}{j}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiche technique}
+
+\paragraph{Produit scalaire -- Écriture minimaliste}
 
 \IDmacro*{dotprod}{2}
 
@@ -72,7 +80,7 @@ On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
 \IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
@@ -82,22 +90,36 @@ On peut aussi parfois juste taper $\vdotprod{i}{j}$ .
 \IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
+% ---------------------- %
 
-		\subsubsection{Produit scalaire -- Écriture \og physicienne \fg}
+
+\subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
 
 Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle, et  \verb+v+ pour \textbf{v}-ector.
+Les physiciens aiment bien cette notation.
 
-\begin{tcblisting}{}
-Les physiciens pourront utiliser
-$\displaystyle \adotprod{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
-$\displaystyle \adotprod*{\frac{1}{2} \vect{i}}{\vect{j}}$ ,
-$\displaystyle \vadotprod{i}{j}$
-ou
-$\displaystyle \vadotprod*{i}{j}$ .
-\end{tcblisting}
+\begin{latexex}
+
+$\displaystyle
+ \adotprod{\frac{1}{2} \vect{i}}%
+          {\vect{j}}$
+
+$\displaystyle
+ \adotprod*{\frac{1}{2} \vect{i}}%
+           {\vect{j}}$
+ 
+$\vadotprod{i}{j}$
+
+$\vadotprod*{i}{j}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiche technique}
+
+\paragraph{Produit scalaire -- Écriture \og à la physicienne \fg}
 
 \IDmacro*{adotprod}{2} où \quad \verb&a = a-ngle&
 
@@ -108,7 +130,7 @@ $\displaystyle \vadotprod*{i}{j}$ .
 \IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
@@ -118,26 +140,36 @@ $\displaystyle \vadotprod*{i}{j}$ .
 \IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
 
 
+% ---------------------- %
 
 
-
-		\subsubsection{Produit vectoriel}
+\subsubsection{Produit vectoriel}
 
 \paragraph{Exemple d'utilisation - Version longue}
 
-\begin{tcblisting}{}
-Un produit vectoriel peut s'écrire via $\crossprod{\dfrac{1}{2} \vect{i}}{\vect{j}}$ .
-\end{tcblisting}
+\begin{latexex}
+$\crossprod{\dfrac{1}{2} \vect{i}}%
+           {\vect{j}}$ 
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
-\begin{tcblisting}{}
-Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
-\end{tcblisting}
+\begin{latexex}
+$\vcrossprod{i}{j}$
+\end{latexex}
 
 
-\paragraph{Fiche technique}
+% ---------------------- %
+
+
+\subsubsection{Fiche technique}
+
+\paragraph{Produit vectoriel}
+
 
 \IDmacro*{crossprod}{2}
 
@@ -146,7 +178,7 @@ Dans certain cas, un produit vectoriel s'écrit vite via $\vcrossprod{i}{j}$ .
 \IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+

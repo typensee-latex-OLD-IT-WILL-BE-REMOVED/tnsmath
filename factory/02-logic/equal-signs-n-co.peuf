@@ -12,12 +12,12 @@ decorations::
 
 todecorate::
     eq                = :all:
-    neq               = appli , id , choice , cond , cons , hyp , test
-    l , g , leq , geq = appli ,      choice , cond , cons , hyp , test
+    neq               = appli , choice , cond , cons , hyp , id , test
+    l , g , leq , geq = appli , choice , cond , cons , hyp      , plot , test
 
 
 stars::
-    eqdef*  = \coloneqq
+    eqdef* = \coloneqq
 
     eqid* = \rightleftharpoons
 

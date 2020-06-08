@@ -28,16 +28,13 @@ DECO = " "*4
 
 with ReadBlock(
     content = PEUF_FILE,
-    mode    = {
-        "verbatim"  : 'no-parameter',
-        "keyval:: =": 'parameter'
-    }
+    mode    = "keyval:: ="
 ) as data:
     functions = data.mydict("std mini")
 
-    functions['no-parameter'] = " ".join(
-        functions['no-parameter']
-    ).split()
+    for k, v in functions['no-parameter'].items():
+        if not v:
+            functions['no-parameter'][k] = k
 
     for k, v in functions['parameter'].items():
         nbparam, latex, *desc = v.split(";")
@@ -85,8 +82,11 @@ text_start, _, text_end = between(
 text_auto = [
     "\n",
     "\n".join(
-        r"\DeclareMathMacro{{\{0}}}{{\operatorname{{{0}}}}}".format(name)
-        for name in functions['no-parameter']
+        r"\DeclareMathOperator{{\{0}}}{{\operatorname{{{1}}}}}".format(
+            latexname,
+            humanname
+        )
+        for latexname, humanname in functions['no-parameter'].items()
     ),
     "",
     "\n".join(
@@ -105,6 +105,32 @@ text_auto = "\n".join(text_auto)
 template_sty = text_start + text_auto + text_end
 
 
+# ------------------------------ #
+# -- UPDATING SUMMARING TABLE -- #
+# ------------------------------ #
+
+text_start, _, text_end = between(
+    text = template_tex,
+    seps = [
+        "% Table of all - START",
+        "% Table of all - END"
+    ],
+    keepseps = True
+)
+
+tabletex = [
+    f"\\verb+{name}+ : $\\{name}\dots$"
+    for name in list(functions['no-parameter'])
+] + [
+    f"\\verb+{name}{{p}}+ : $\\{name}{{p}}\dots$"
+    for name in list(functions['parameter'])
+]
+
+tabletex = '\n\n'.join(tabletex)
+
+template_tex = text_start + f"\n{tabletex}\n" + text_end
+
+
 # ----------------------------------------------- #
 # -- UPDATING LISTS FOR THE DOC - NO PARAMETER -- #
 # ----------------------------------------------- #
@@ -118,14 +144,47 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-template_tex = text_start + f"""
 
-\\foreach \\k in {{{", ".join(functions['no-parameter'])}}}{{
 
-	\\IDmacro*{{\k}}{{0}}
 
+
+template_tex = []
+lastmacros   = []
+lastfirst    = ""
+lastlenght   = -1
+
+for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
+    if lastfirst:
+        if lastfirst != onemacro[0] \
+        or lastlenght != len(onemacro):
+            lastfirst  = onemacro[0]
+            lastlenght = len(onemacro)
+
+            lastmacros = ", ".join(lastmacros)
+
+            template_tex += [
+                f"""
+\\foreach \\k in {{{lastmacros}}}{{
+
+    \\IDmacro*{{\k}}{{0}}
 }}
-""" + "\n" + text_end
+                """,
+                "\\separation"
+                ""
+            ]
+
+            lastmacros     = []
+
+    else:
+        lastfirst  = onemacro[0]
+        lastlenght = len(onemacro)
+
+    lastmacros.append(onemacro)
+
+
+template_tex = "\n".join(template_tex[:-3])
+template_tex = f"{text_start}{template_tex}{text_end}"
+
 
 
 # --------------------------------------------- #
@@ -149,7 +208,7 @@ for name, infos in functions['parameter'].items():
     nbparam = int(infos['nbparam'])
 
     docinfos += [
-        "\\bigskip",
+        "\\separation",
         f"\\IDmacro*{{{name}}}{{{nbparam}}}"
     ]
 

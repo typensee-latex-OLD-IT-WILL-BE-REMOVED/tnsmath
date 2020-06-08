@@ -18,33 +18,35 @@
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-$\pt{I}$ indique un point nommé "I".
-\end{tcblisting}
+\begin{latexex}
+$\pt{I}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-Une liste de points : $\pt*{I}{1}$, $\pt*{I}{2}$ \dots
-\end{tcblisting}
+\begin{latexex}
+$\pt*{I}{1}$ ou
+$\pt*{I}{2}$
+\end{latexex}
 
 
-\paragraph{Exemple d'utilisation 3}
-
-\begin{tcblisting}{}
-Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
-\end{tcblisting}
+% ---------------------- %
 
 
-\paragraph{Fiches techniques}
+\subsubsection{Fiches techniques}
+
+\paragraph{Points}
 
 \IDmacro*{pt}{1}
 
 \IDarg{} un texte donnant le nom d'un point.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{pt*}{2}
@@ -54,30 +56,138 @@ Une droite $(\pts{AB})$ au lieu de $(\pt{A}\pt{B})$.
 \IDarg{2} un texte indiquant $down$ dans le nom $\pt*{UP}{down}$ d'un point.
 
 
-\bigskip
+% ---------------------- %
 
 
-\IDmacro*{pts}{1}
+\subsubsection{Lignes}
 
-\IDarg{} un texte indiquant des noms de points non indicés.
+\paragraph{Exemple 1 -- Les droites}
 
+Dans l'exemple suivant, le préfixe \verb+g+ est pour \textbf{g}-eometry, tandis que \verb+p+ est pour \textbf{p}-oint.
+
+\begin{latexex}
+$\gline{A}{B}$ ,
+$\gline{\pt{A}}{\pt{B}}$ ou
+$\pgline{A}{B}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 2 -- Les segments}
+
+Les macros \verb+\segment+ et \verb+\psegment+ ont un comportement similaire à \verb+\gline+ et \verb+\pgline+.
+
+\begin{latexex}
+$\segment{A}{B}$ ,
+$\segment{\pt{A}}{\pt{B}}$ ou
+$\psegment{A}{B}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 -- Les demi-droites}
+
+Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-alf soit moitié en anglais.
+
+\begin{latexex}
+$\hgline{A}{B}$ ,
+$\hgline{\pt{A}}{\pt{B}}$ ou
+$\phgline{A}{B}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 4 -- D'autres demi-droites}
+
+Ce qui suit nécessite d'utilise l'argument optionnel de \verb+\gline+ et \verb+\pgline+. La valeur \verb+OC+ provient de \textbf{O}-pened--\textbf{C}-losed, soit ouvert--fermé en anglais.
+
+\begin{latexex}
+$\gline[OC]{A}{B}$ ,
+$\gline[OC]{\pt{A}}{\pt{B}}$ ou
+$\pgline[OC]{A}{B}$
+\end{latexex}
+
+
+\begin{remark}
+	Les segments utilisent en fait l'option \verb+C+ et les demi-droites standard l'option \verb+CO+.
+	La valeur par défaut est \verb+O+.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Lignes}
+
+\IDmacro{gline}{1}{2}
+
+\IDmacro{pgline}{1}{2}
+
+\IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \verb+O+, valeur par défaut, \verb+C+, \verb+CO+ et \verb+OC+.
+
+\IDarg{1} le 1\ier{} point géométrique.
+
+\IDarg{2} le 2\ieme{} point géométrique.
+
+
+\separation
+
+
+\IDmacro*{hgline}{2}
+
+\IDmacro*{phgline}{2}
+
+\extraspace
+
+\IDmacro*{segment}{2}
+
+\IDmacro*{psegment}{2}
+
+\IDarg{1} le 1\ier{} point géométrique.
+
+\IDarg{2} le 2\ieme{} point géométrique.
+
+
+% ---------------------- %
 
 
 \subsubsection{Droites parallèles ou non}
 
 Les opérateurs \verb+\parallel+ et \verb+\nparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\stdnparallel+ est un alias de \verb+\nparallel+ fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
 
-\begin{tcblisting}{}
-$(\pts{AB}) \parallel (\pts{CD})$ et $(\pts{EF}) \nparallel (\pts{GH})$ au lieu de
-$(\pts{AB}) \stdparallel (\pts{CD})$ et de $(\pts{EF}) \stdnparallel (\pts{GH})$.
-\end{tcblisting}
+\begin{latexex}
+$\pgline{A}{B} \parallel \pgline{C}{D}$
+au lieu de
+$\pgline{A}{B}
+ \stdparallel \pgline{C}{D}$
+
+$\pgline{E}{F} \nparallel \pgline{G}{H}$
+au lieu de
+$\pgline{E}{F}
+ \stdnparallel \pgline{G}{H}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Droites parallèles ou non}
 
 \IDmacro*{parallel}{0}
 
 \IDmacro*{nparallel}{0}
+
+\extraspace
 
 \IDmacro*{stdparallel}{0}
 

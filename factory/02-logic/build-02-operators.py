@@ -107,57 +107,6 @@ template_sty = text_start + f"""
 text_start, _, text_end = between(
     text = template_tex,
     seps = [
-        "% == Example of decorated versions - START == %\n",
-        "\n% == Example of decorated versions - END == %"
-    ],
-    keepseps = True
-)
-
-fullnames = {
-    'iff'    : "Équivalences",
-    'implies': "Implications directes",
-    'liesimp': "Implications indirectes",
-}
-
-latexample = []
-
-for symb, assocdecos in infos["todecorate"].items():
-    if symb.startswith("not"):
-        latexample += ["", f"{fullnames[symb[3:]]} - Formes négatives :"]
-    else:
-        latexample += ["", f"{fullnames[symb]} :"]
-
-    examples = [f"{chr(65)}"]
-
-    for i, onedeco in enumerate(infos["decorations"], start = 1):
-        examples.append(f"\\{symb}{onedeco} {chr(65 + i)}")
-
-    if symb == "iff":
-        fullexample = " ".join(examples)
-
-    else:
-        fullexample = examples[0] + " "
-
-        for i in range(1, len(examples), 3):
-            if i != 1:
-                fullexample += "\n   "
-
-            fullexample += " ".join(examples[i: i+3])
-
-    latexample.append(f"${fullexample}$")
-
-latexample = "\n".join(latexample[1:])
-
-template_tex = text_start + f"""
-\\begin{{tcblisting}}{{}}
-{latexample}
-\\end{{tcblisting}}
-""" + text_end
-
-
-text_start, _, text_end = between(
-    text = template_tex,
-    seps = [
         "% == Decorated versions - START == %\n",
         "\n% == Decorated versions - END == %"
     ],
@@ -168,7 +117,7 @@ texforidmacros = []
 
 for symb, assocdecos in infos["todecorate"].items():
     if texforidmacros:
-        texforidmacros.append("\\medskip")
+        texforidmacros.append("\\separation")
 
     somemacros = [symb]
 
@@ -211,6 +160,9 @@ template_tex = text_start + f"""
 
 	\\IDmacro*{{\k}}{{0}}
 
+	\\IDmacro*{{not\k}}{{0}}
+
+    \\extraspace
 }}
 """ + text_end
 

@@ -31,28 +31,37 @@
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Voici un arc $\circarc{ABCDEF}$ utilisant beaucoup de lettres, et vous pouvez écrire
-$\circarc*{A}{rot}$ à la place de $\circarc{A_{rot}}$.
-\end{tcblisting}
+\begin{latexex}
+$\circarc{ABCDEF}$ ,
+$\circarc*{A}{rot}$ ou
+$\circarc{A_{rot}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-$\circarc{i}$ et $\circarc*{j}{2}$ n'affiche pas de point sous l'arc.
-\end{tcblisting}
+\begin{latexex}
+$\circarc{i}$ ou
+$\circarc*{j}{2}$
+\end{latexex}
 
 
+% ---------------------- %
 
-\paragraph{Fiches techniques}
+
+\subsubsection{Fiche technique}
+
+\paragraph{Arcs circulaires}
 
 \IDmacro*{circarc}{1} où \quad \verb+circarc = circ-ular arc+
 
 \IDarg{} un texte donnant le nom d'un arc circulaire.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{circarc*}{2} où \quad \verb+circarc = circ-ular arc+

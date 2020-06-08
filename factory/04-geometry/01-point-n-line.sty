@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{xstring}
 
 
 % == DEFINITIONS == %
@@ -17,10 +18,47 @@
     \@pt@no@star{#1}_{#2}
 }
 
-\newcommand\pts[1]{\mathrm{#1}}
-
 
 % Lines
+
+\newcommand\gline[3][O]{%
+	\IfStrEqCase{#1}{%
+		{O}{\left(}%
+		{C}{\left[}%
+		{OC}{\left(}%
+		{CO}{\left[}%
+	}%
+	 #2 #3%		
+	\IfStrEqCase{#1}{%
+		{O}{\right)}%
+		{C}{\right]}%
+		{OC}{\right]}%
+		{CO}{\right)}%
+	}%
+}
+
+\newcommand\pgline[3][O]{%
+    \gline[#1]{\pt{#2}}{\pt{#3}}%
+}
+
+
+\newcommand\hgline[2]{%
+    \gline[CO]{#1}{#2}%
+}
+
+\newcommand\phgline[2]{%
+    \pgline[CO]{#1}{#2}%
+}
+
+
+\newcommand\segment[2]{%
+    \gline[C]{#1}{#2}%
+}
+
+\newcommand\psegment[2]{%
+    \pgline[C]{#1}{#2}%
+}
+
 
 % Source
 %    * https://tex.stackexchange.com/questions/511495

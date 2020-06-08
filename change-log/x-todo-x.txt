@@ -1,0 +1,192 @@
+==============
+ly-math - TODO
+==============
+
+VERSION = MAJOR.MINOR.PATCH
+
+
+
+> ---------------------------- <
+
+====> nel emplacent sut github !
+====> cookiecutter pour latex
+
+
+> ---------------------------- <
+
+environnement pour explication
+    ---> symbole (= <=> ...) devient faculattif mais peut être changer et alignment mieux géréer
+
+
+> ---------------------------- <
+
+critèe colinéarité avec la boucle
+
+    ---> voir noe de nice matrix !!! jouable...
+
+idem pour prod vectiriel tant uq'à faire
+
+
+> ---------------------------- <
+
+verrsion texte de toutes les macrios
+    ---> gestionde mathmode ou non (à retrouver)
+
+
+> ---------------------------- <
+
+composition visulle e fonction
+    --> sol TiKZ car modulable facimement !
+
++
+
+système boîte noire fonction !
+    ---> voir nouveau package diagram commutatif qui est top !
+
+
+> ---------------------------- <
+
+Utiliser \mathrm partout où italique interdit !!!
+
+
+> ---------------------------- <
+
+en intern mettre \macro partout !!!!
+
+00-intro
+01-misc
+02-logic
+03-sets-n-applications
+04-geometry
+05-analysis
+06-probability
+07-arithmetic
+08-algebra
+99-major-change-log
+    _2017
+    2019
+    2020
+
+> ---------------------------- <
+
+option pour par exemple activer espace point virgule si french babael utilisé ou si utilisateur le demande !!!
+
+    ---> consolider cet espacement !!!
+
+
+
+> ---------------------------- <
+
+mettre à jour les cas de macros ayant des sargs et/ou des options en commun
+
+
+> ---------------------------- <
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{venndiagram}[2018/06/07 v1.2 (NLCT) Venn diagrams]
+
+
+> ---------------------------- <
+
+automation via a meta file
+    ---> date
+    ---> version
+
+
+> ---------------------------- <
+
+gestion interne des noms de macro et constante
+    ---> vérifier au passage pas de doublon
+    ---> produire un fichier donnant tous tes la caractéristqiues (comparison avec autres projets perso faisable auto ensuite)
+
+    nom::
+        type = macro, operator, environment
+        options = 0, ...
+        arguments = 0, ...
+        keys = key1, key2, ...
+
+
+> ---------------------------- <
+
+a ¨python script builds a ¨csv file of all the new things defined by ¨lymath.
+
+
+> ---------------------------- <
+
+une doc plus effiacce ???
+
+
+> ---------------------------- <
+
+réel support multilangue et non juste french/english
+
+
+> ---------------------------- <
+
+pb avec chemformula qui définit \ch{Na2SO4 ->[ H2O ] Na+ + SO4^2-}
+
+
+> ---------------------------- <
+
+améliorer espacement pour les intervalles
+
+
+> ---------------------------- <
+
+améliorer espacement des opérateurs de dérivation
+
+
+> ---------------------------- <
+
+sémantique des ensembles
+
+    ---> ne plus avoir de limite sur le nombre de lettres
+
+
+> ---------------------------- <
+
+proposer des macros principales de mef
+
+ensuite proposer un système permettant de changer globalement cette macro principales
+
+    ---> on évite ainsi l'utiklisation de macrios différentes alorsq u'au final c'est juste une partiauqe perso qui fait avoir un choix de mef
+
+
+
+> ---------------------------- <
+
+mettre les \noexpandarg dans les macros : effets de bord le mettre dans un groupe
+
+
+> ---------------------------- <
+
+protection nécéssaire
+
+\usepackage{savesym}
+\usepackage{pxfonts}
+\savesymbol{iint}
+\savesymbol{iiint}
+\savesymbol{iiiint}
+\savesymbol{idotsint}
+
+
+> ---------------------------- <
+
+Kpfonts  ????
+
+    ----> Kp-Fonts est un ensemble le plus complet possible de polices pour LaTeX, in- cluant des polices de texte romaines, sans-serif et machine à écrire, ainsi qu’un ensemble de polices mathématiques comprenant, en normal et gras, tous les symboles usuels et tous les symboles de l’ams et davantage. . .
+
+    ----> faire un système de gestion des polices au chargement : ne plus gérérer cela dans le s différentes amcros qui deviennent jsute sd es outils
+
+    ----> du coup, besoin de redéfinr si besoin des symboles, idée de wraper
+
+
+> ---------------------------- <
+
+support de toutes les lettres grecque via gamma ET NON \gamma !! pour la macro \ct
+
+
+> ---------------------------- <
+
+faire une feuille testant les cas problématiques de chaque macro
+---> passer via un fichier TeX du type xxxxx.visualtest.tex

@@ -22,23 +22,23 @@
 
 La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $0 \leq a < b$
 
 $\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
-\end{tcblisting}
+\end{latexex-flat}
 
 Si vous souhaitez un espace devant le symbole, il suffit d'indiquer l'espace via une distance grâce à l'argument optionnel comme ci-après.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $0 \leq a < b$
 
 $\explain[1.5em]{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
 
 $a^2 \leq b^2$
-\end{tcblisting}
+\end{latexex-flat}
 
 
 \verb+\explain+ utilise les macros constantes suivantes.
@@ -49,12 +49,14 @@ $a^2 \leq b^2$
 \end{itemize}
 
 
+% ---------------------- %
+
 
 \paragraph{Détailler des calculs}
 
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul.
+Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul tout un code \LaTeX{} sémantique.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 \begin{flalign*}
     & (a + b)^2
     &&\\
@@ -71,11 +73,27 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
     & a^2 + 2 a b + b^2
     &&\\
 \end{flalign*}
-\end{tcblisting}
+\end{latexex-flat}
 
 
+% ---------------------- %
 
-\paragraph{Fiches techniques}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Les textes pour détailler un raisonnement}
+
+\IDmacro*{textexplainleft}{0}
+
+\IDmacro*{textexplainright}{0}
+
+\IDmacro*{textexplainspacein}{0}
+
+
+% ---------------------- %
+
+
+\paragraph{Détailler un raisonnement}
 
 \IDmacro{explain}{1}{2}
 
@@ -84,15 +102,5 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 \IDarg{1} un symbole.
 
 \IDarg{2} une courte explication.
-
-
-\bigskip
-
-
-\IDmacro*{textexplainleft}{0}
-
-\IDmacro*{textexplainright}{0}
-
-\IDmacro*{textexplainspacein}{0}
 
 \end{document}

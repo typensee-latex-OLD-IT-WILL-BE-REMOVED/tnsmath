@@ -19,13 +19,18 @@
 
 Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 = \contfrac*{u_0 | u_1 | u_2 | \dots | u_n}$
-\end{tcblisting}
+\end{latexex-flat}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Fractions continuées standard}
 
 \IDmacro*{contfrac}{1}
 
@@ -34,6 +39,7 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 \IDarg{} tous les éléments de la fraction continuée séparés par des \verb+|+.
 
 
+% ---------------------- %
 
 
 \subsubsection{Fractions continuées généralisées}
@@ -42,13 +48,19 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 
 Voici comment écrire une fraction continuée généralisée.
 
-\begin{tcblisting}{}
-$\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
-             = \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
-\end{tcblisting}
+\begin{latexex-flat}
+$\displaystyle
+ \contfracgene{a | b | c | d | e | f | \dots | y | z}
+ = \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
+\end{latexex-flat}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Fractions continuées généralisées}
 
 \IDmacro*{contfracgene}{1}
 
@@ -57,6 +69,8 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 \IDarg{} tous les éléments de la fraction continuée généralisée séparés par des \verb+|+.
 
 
+% ---------------------- %
+
 
 \subsubsection{Comme une fraction continuée isolée}
 
@@ -64,12 +78,18 @@ $\displaystyle \contfracgene{a | b | c | d | e | f | \dots | y | z}
 
 La raison d'être de la macro ci-dessous vient juste de son usage en interne.
 
-\begin{tcblisting}{}
-Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$.
-\end{tcblisting}
+\begin{latexex}
+$\singlecontfrac{a}{b}$
+pour les fous\dots :-)
+\end{latexex}
 
 
-\paragraph{Fiche technique}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Comme une fraction continuée isolée}
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -77,6 +97,8 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 
 \IDarg{2} le pseudo dénominateur.
 
+
+% ---------------------- %
 
 
 \subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
@@ -86,11 +108,11 @@ Les fous (?\,) adorent vraiment écrire des choses comme $\singlecontfrac{a}{b}$
 
 La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $\displaystyle
-  \contfracope_{k=1}^{n} (b_k:c_k)
-= \cfrac{b_1}{\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
-\end{tcblisting}
+ \contfracope_{k=1}^{n} (b_k:c_k)
+ = \cfrac{b_1}{\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+\end{latexex-flat}
 
 
 \begin{remark}
@@ -98,16 +120,31 @@ $\displaystyle
 \end{remark}
 
 
+% ---------------------- %
+
+
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 $\displaystyle
-  u_0 + \contfracope_{k=1}^{n} (1:u_k)
-= \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
-\end{tcblisting}
+ u_0 + \contfracope_{k=1}^{n} (1:u_k)
+ = \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
 
 
-\paragraph{Fiche technique}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{L'opérateur $\contfracope$}%
+                          {L'opérateur K}}
+
+La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
+
+
+\separation
+
 
 \IDmacro*{contfracope}{0}
 

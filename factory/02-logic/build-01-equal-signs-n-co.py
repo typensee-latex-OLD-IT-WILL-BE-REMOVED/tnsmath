@@ -293,15 +293,38 @@ seps = [
 keepseps = True
 )
 
-ALL_OPES_DECO = ", ".join(ALL_OPES_DECO)
 
-template_tex = text_start + f"""
-\\foreach \\k in {{{ALL_OPES_DECO}}}{{
+template_tex = []
+lastopes     = []
+lastfirst    = ""
 
-	\\IDmacro*{{\k}}{{0}}
+for oneope in ALL_OPES_DECO + ["ZZZZ-unsed-ZZZZ"]:
+    if lastfirst:
+        if lastfirst != oneope[0]:
+            lastfirst = oneope[0]
 
+            lastopes = ", ".join(lastopes)
+
+            template_tex += [
+                f"""
+\\foreach \\k in {{{lastopes}}}{{
+
+    \\IDmacro*{{\k}}{{0}}
 }}
-""" + text_end
+                """,
+                "\\separation"
+                ""
+            ]
+
+            lastopes     = []
+
+    else:
+        lastfirst = oneope[0]
+
+    lastopes.append(oneope)
+
+template_tex = "\n".join(template_tex[:-3])
+template_tex = f"{text_start}{template_tex}{text_end}"
 
 
 # ----------------------------------- #

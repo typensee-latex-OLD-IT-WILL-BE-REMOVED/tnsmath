@@ -21,23 +21,36 @@
 \subsection{Comparaison asymptotique de suites et de fonctions}
 
 \subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
-                               {Les notations "grand O" et "petit O"}}
+                              {Les notations "grand O" et "petit O"}}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Vous pouvez utiliser les symboles $\bigO{}$ et $\smallO{}$ créés par Landau.
-\end{tcblisting}
+Les notations suivantes sont dues à Landau.
+
+\begin{latexex}
+$\bigO{}$ ou
+$\smallO{}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO{t}}$.
-\end{tcblisting}
+\begin{latexex}
+$\bigO{x} \neq \smallO{x}$ ou
+$e^{t + \smallO{t}} = e^{\bigO{t}}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
+                          {Les notations "grand O" et "petit O"}}
 
 \IDmacro*{bigO}{1}
 
@@ -46,52 +59,79 @@ Vous pouvez écrire $\bigO{x} \neq \smallO{x}$ et $e^{t + \smallO{t}} = e^{\bigO
 \IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
 
 
+% ---------------------- %
+
 
 \subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
-                               {La notation "grand Omega"}}
+                              {La notation "grand Omega"}}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Vous pouvez utiliser le symbole $\bigomega{}$ créé par Hardy et Littlewood.
-\end{tcblisting}
+La notation suivante est due à Hardy et Littlewood.
+
+\begin{latexex}
+$\bigomega{}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-$f(n) = \bigomega{g(n)}$ signifie :
+Dans l'exemple suivant, $f(n) = \bigomega{g(n)}$ signifie :
 $\exists (m, n_0)$ tel que $n \geqslant n_0$ implique $f(n) \geqslant m g(n)$.
-\end{tcblisting}
+
+\begin{latexex}
+$f(n) = \bigomega{g(n)}$
+\end{latexex}
 
 
-\paragraph{Fiche technique}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{La notation $\bigomega{}$}%
+                          {La notation "grand Omega"}}
 
 \IDmacro*{bigomega}{1}
 
 \IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigomega{}$.
 
 
+% ---------------------- %
+
 
 \subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
-                               {La notation "grand Theta"}}
+                              {La notation "grand Theta"}}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-Voici le dernier symbole $\bigtheta{}$ qui peut rendre service.
-\end{tcblisting}
+\begin{latexex}
+$\bigtheta{}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-$f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $n \geqslant n_0$
-implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
-\end{tcblisting}
+Dans l'exemple suivant, $f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $n \geqslant n_0$ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
+
+\begin{latexex}
+$f(n) = \bigtheta{g(n)}$
+\end{latexex}
 
 
-\paragraph{Fiche technique}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{La notation $\bigtheta{}$}%
+                          {La notation "grand Theta"}}
 
 \IDmacro*{bigtheta}{1}
 

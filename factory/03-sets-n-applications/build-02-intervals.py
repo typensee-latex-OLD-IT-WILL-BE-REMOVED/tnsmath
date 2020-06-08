@@ -133,7 +133,7 @@ for interkind, defs in config.items():
         ]
 
         fortexdoc += [
-            "\n\n\\bigskip\n\n",
+            "\n\n\\separation\n\n",
             "\n",
             texdoc(prefix, suffix)
         ]

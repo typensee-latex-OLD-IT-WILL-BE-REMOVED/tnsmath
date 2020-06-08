@@ -104,7 +104,7 @@ text_start, _, text_end = between(
     text = template_tex,
     seps = [
         "% == Table - START == %\n",
-        "\n% == Table - END == %"
+        "% == Table - END == %"
     ],
     keepseps = True
 )

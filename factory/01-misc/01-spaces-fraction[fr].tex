@@ -15,19 +15,32 @@
 
 Quand on utilise \verb+\frac+ ou \verb+\dfrac+, de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \verb+\stdfrac+ et \verb+\stddfrac+ . Voici un exemple.
 
-\begin{tcblisting}{}
-Vous avez $\frac{2}{3} = \stdfrac{2}{3}$ et $\dfrac{2}{3} = \stddfrac{2}{3}$ .
-\end{tcblisting}
+\begin{latexex}
+$\frac{2}{3} = \stdfrac{2}{3}$ ,
+$\dfrac{2}{3} = \stddfrac{2}{3}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
 
-\IDmacro*{frac}{0}
 
-\IDmacro*{dfrac}{0}
+\subsection{Fiches techniques}
 
-\IDmacro*{stdfrac}{0}
+\paragraph{Fractions}
 
-\IDmacro*{stddfrac}{0}
+\IDmacro*{frac}{2}
+
+\IDmacro*{dfrac}{2}
+
+\extraspace
+
+\IDmacro*{stdfrac}{2}
+
+\IDmacro*{stddfrac}{2}
+
+
+\IDarg{1} le numérateur.
+
+\IDarg{2} le dénominateur.
 
 \end{document}

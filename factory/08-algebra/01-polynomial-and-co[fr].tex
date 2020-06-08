@@ -25,74 +25,104 @@
 
 \paragraph{Exemple d'utilisation 1 : Polynômes}
 
-\begin{tcblisting}{}
-$\setpoly{\RR}{X}$ est l'ensemble des polynômes à coefficients réels en la variable
-$X$, et $\setpoly{\RR}{X | Y | Z}$ est l'ensemble des polynômes à coefficients réels
-en les variables $X$ , $Y$ et $Z$.
-\end{tcblisting}
+\begin{latexex}
+$\setpoly{\RR}{X}$ ou
+$\setpoly{\RR}{X | Y | Z}$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2 : Fractions polynômiales}
 
-\begin{tcblisting}{}
-$\setpolyfrac{\QQ}{T}$ et $\setpolyfrac{\QQ}{S_1 | S_2 | \dots | S_k}$ permettent
-d'indiquer des ensemble de fractions polynomiales à coefficients rationnels.
-\end{tcblisting}
+\begin{latexex}
+$\setpolyfrac{\QQ}{T}$ ou
+$\setpolyfrac{\QQ}%
+             {S_1 | S_2 | \dots | S_k}$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \subsubsection{Séries formelles et leurs corps de fractions}
 
 \paragraph{Exemple d'utilisation 1 : Séries formelles}
 
-\begin{tcblisting}{}
-$\setserie{\CC}{X}$ et $\setserie{\CC}{T | O | P}$ permettent de travailler avec des
-séries formelles à coefficients complexes.
-\end{tcblisting}
+\begin{latexex}
+$\setserie{\CC}{X}$ ou
+$\setserie{\CC}{T | O | P}$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2 : Corps des fractions de séries formelles}
 
-\begin{tcblisting}{}
-$\setseriefrac{\ZZ}{X}$ et $\setseriefrac{\ZZ}{Z | T | O | P}$ permettent de travailler
-avec des fractions de séries formelles à coefficients entiers.
-\end{tcblisting}
+\begin{latexex}
+$\setseriefrac{\ZZ}{X}$ ou
+$\setseriefrac{\ZZ}{Z | T | O | P}$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \subsubsection{Polynômes de Laurent et séries formelles de Laurent}
 
 \paragraph{Exemple d'utilisation 1 : Polynômes de Laurent}
 
-\begin{tcblisting}{}
-$\setpolylaurent{\RR}{X} = \setpoly{\RR}{X | X^{-1}}$ est l'ensemble des polynômes
-réels de Laurent en $X$. On propose de généraliser comme suit (notation non standard) :
-$\setpolylaurent{\RR}{X_1 | X_2} = \setpoly{\RR}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
-\end{tcblisting}
+Ci-dessous, la notation $\setpolylaurent{\RR}{X_1 | X_2}$ n'est pas standard.
 
+\begin{latexex}
+$\setpolylaurent{\RR}{X}
+ = \setpoly{\RR}{X | X^{-1}}$
+
+$\setpolylaurent{\RR}{X_1 | X_2}
+ = \setpoly{\RR}%
+           {X_1 | X_1^{-1} %
+            | X_2 | X_2^{-1}}$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2 : Séries formelles de Laurent}
 
-\begin{tcblisting}{}
-$\setserielaurent{\QQ}{X} = \setserie{\QQ}{X | X^{-1}}$ est l'ensemble des séries
-formelles rationnelles de Laurent en $X$. On généralise via, notation non standard,
-$\setserielaurent{\QQ}{X_1 | X_2} = \setserie{\QQ}{X_1 | X_1^{-1} | X_2 | X_2^{-1}}$
-\end{tcblisting}
+Ci-dessous, la notation $\setserielaurent{\QQ}{X_1 | X_2}$ n'est pas standard.
+
+\begin{latexex}
+$\setserielaurent{\QQ}{X}
+ = \setserie{\QQ}{X | X^{-1}}$
+
+$\setserielaurent{\QQ}{X_1 | X_2} 
+= \setserie{\QQ}%
+           {X_1 | X_1^{-1} %
+           | X_2 | X_2^{-1}}$
+\end{latexex}
 
 
+% ---------------------- %
 
-\subsubsection{Toutes les fiches techniques}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Polynômes, séries formelles et compagnie}
 
 \IDmacro*{setpoly}{2}
 
 \IDmacro*{setpolyfrac}{2}
 
+\extraspace
+
 \IDmacro*{setserie}{2}
 
 \IDmacro*{setseriefrac}{2}
+
+\extraspace
 
 \IDmacro*{setpolylaurent}{2}
 

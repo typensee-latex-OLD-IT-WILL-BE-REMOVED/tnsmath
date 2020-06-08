@@ -13,13 +13,14 @@
 
 \begin{document}
 
-$\triangleq$
+
 \section{Logique et fondements}
 
 \subsection{Différents types d'égalités \og standard \fg}
 
 D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité.
 Bien entendu on tord les règles de typographie avec ce type de pratique mais c'est pour le bien de la communauté.
+
 
 \subsubsection{Définir quelque chose}
 
@@ -29,71 +30,87 @@ L'exemple suivant montre trois façons de rédiger une égalité signifiant une 
 }
 \emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
 
-\begin{tcblisting}{}
-La fonction $f$ est définie sur $\RR$ par $f(x) \eqdef x^3 + 1$ ou avec l'écriture
-symbolique $f(x) \eqdef* x^3 + 1$.
-\end{tcblisting}
+\begin{latexex}
+$f(x) \eqdef x^3 + 1$ ou
+$f(x) \eqdef* x^3 + 1$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \subsubsection{Indiquer une identité}
 
 L'exemple suivant montre deux façons de rédiger des identités, la noptation symbolique n'étant pas standard \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
 
-\begin{tcblisting}{}
-$\forall (a ; b) \in \RR^2$, nous avons : $(a + b)^2 \eqid a^2 + b^2 + 2 a b$ .
-On peut utiliser une écriture plus symbolique : $(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
-\end{tcblisting}
+\begin{latexex}
+$(a + b)^2 \eqid a^2 + b^2 + 2 a b$ ou
+$(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \subsubsection{Une égalité à vérifier ou non, une hypothèse, une condition}
 
 Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
 
-\begin{tcblisting}{}
-Est-il vrai que $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$ ?
-Non car $(a + b)^3 \neqid a^3 + b^3 + 3 a b$
+\begin{latexex}
+$(a + b)^3 \eqtest a^3 + b^3 + 3 a b$
 
-A-t-on $x \neqhyp 0$ pour pouvoir écrire $\dfrac{1}{x}$ ?
+$(a + b)^3 \neqid a^3 + b^3 + 3 a b$
 
-Comme $x$ doit être non nul, je sait que $x \neqcond 0$.
+$x \neqhyp 0$ ou $x \neqcond 0$
 
-Une autre condition $x \eqcond 0$ ou une autre hypothèse $x \eqhyp 0$ ?
-\end{tcblisting}
+$x \eqcond 0$ ou $x \eqhyp 0$ ?
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \subsubsection{Une égalité indiquant le choix d'une valeur}
 
 La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
 
-\begin{tcblisting}{}
-Sachant que si $x \geqcond 4$ alors $x^2 \geqcons 16$ alors $x \eqchoice 123$ nous
-donne $123^2 \geqappli 16$.
-\end{tcblisting}
+\begin{latexex}
+$x \geqcond 4$ implique
+$x^2 \geqcons 16$.
+
+Alors $x \eqchoice 123$ donne
+$123^2 \geqappli 16$.
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \subsubsection{Une égalité indiquant l'équation d'une courbe que l'on utilise}
 
-La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopplot \fg} et \emph{\og \textopappli \fg} sont définis \emph{(la macro \emph{\texttt{setgeo}} est définie dans la section \ref{set-geo})}.
+La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopplot \fg} et \emph{\og \textopappli \fg} sont définis \emph{(la macro \emph{\texttt{\textbackslash{}setgeo}} est définie dans la section \ref{set-geo})}.
 
-\begin{tcblisting}{}
-Si $M(4 ; y_M) \in \setgeo{C}: y \eqplot x^2 + 3$ alors $y_M \eqappli 4^2 + 3 = 19$.
-\end{tcblisting}
+\begin{latexex}
+$M \in \setgeo{C}: y \eqplot x^2 + 3$
+donne
+$y_M \eqappli x_M^2 + 3$.
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \subsubsection{Différents types d'inéquations}
 
 Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} montrant quelques exemples.
 
-\begin{tcblisting}{}
-A-t-on $x \leqtest x^2$ ou $x \ltest x^2$ ?
+\begin{latexex}
+$x \leqtest x^2$ ou $x \ltest x^2$ ou
+$x \geqhyp 1$ ou $x \gcond 2$.
+\end{latexex}
 
-A moins que ce ne soit $x \geqtest x^2$ ou $x \gtest x^2$ qu'il faille vérifier.
 
-On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
-
-\end{tcblisting}
-
+% ---------------------- %
 
 
 \subsubsection{Une table récapitulative}
@@ -101,10 +118,14 @@ On peut supposer $x \leqhyp 1$ ou avoir la condition $x \gcond 2$.
 La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} fournit toutes les associations autorisées entre opérateurs de comparaison et décorations.
 
 
+% ---------------------- %
+
 
 \subsubsection{Textes utilisés} \label{text-for-opes}
 
 Voici les macros définissant les textes utilisés qui tiennent compte de l'utilisation ou non de l'option \verb+french+ de \verb+babel+. Nous ne donnons que les versions françaises.
+
+\vspace{-.5em}
 
 % == All texts - START == %
 
@@ -131,28 +152,13 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 % == All texts - END == %
 
 
+% ---------------------- %
+
 
 \subsubsection{Fiches techniques}
 
-\paragraph{Les opérateurs disponibles}
+\paragraph{Les textes pour les opérateurs de \og comparaison algébrique \fg et de logique}
 
-\begin{multicols}{2}
-% == Technical infos - Operators - START == %
-
-\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqhyp, eqid, eqid*, eqplot, eqtest, neqappli, neqid, neqchoice, neqcond, neqcons, neqhyp, neqtest, lappli, lchoice, lcond, lcons, lhyp, ltest, gappli, gchoice, gcond, gcons, ghyp, gtest, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
-
-	\IDmacro*{\k}{0}
-
-}
-
-% == Technical infos - Operators - END == %
-\vfill\null\end{multicols}
-
-
-
-\paragraph{Les textes disponibles}
-
-\begin{multicols}{2}
 % == Technical infos - Texts - START == %
 
 \foreach \k in {textopappli, textopchoice, textopcond, textopcons, textopdef, textophyp, textopid, textopplot, textoptest}{
@@ -162,6 +168,56 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 }
 
 % == Technical infos - Texts - END == %
-\vfill\null\end{multicols}
+
+
+% ---------------------- %
+
+
+\paragraph{Les opérateurs de \og comparaison algébrique \fg}
+
+% == Technical infos - Operators - START == %
+
+\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqhyp, eqid, eqid*, eqplot, eqtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {neqappli, neqchoice, neqcond, neqcons, neqhyp, neqid, neqtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {lappli, lchoice, lcond, lcons, lhyp, lplot, ltest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {gappli, gchoice, gcond, gcons, ghyp, gplot, gtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {leqappli, leqchoice, leqcond, leqcons, leqhyp, leqplot, leqtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+% == Technical infos - Operators - END == %
 
 \end{document}
+
+
+
+
+
+
+
+

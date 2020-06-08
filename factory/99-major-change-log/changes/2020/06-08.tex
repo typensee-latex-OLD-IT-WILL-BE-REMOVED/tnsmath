@@ -1,0 +1,54 @@
+Nouvelle version mineure \verb+0.7.0-beta+.
+
+\begin{itemize}[itemsep=.5em]
+    \item En analyse, il y a eu les changements suivants.
+    \begin{itemize}[itemsep=.5em]
+        \item Pour éviter des conflits avec d'autres packages, les renommages suivants on été faits.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{ch} et \macro{ach} sont devenus \macro{fch} et \macro{afch} où \verb+f+ est pour \textbf{f}-rench.
+
+            \item \macro{sh} et \macro{ash} sont devenus \macro{fsh} et \macro{afsh}.
+
+            \item \macro{th} et \macro{ath} sont devenus \macro{fth} et \macro{afth}.
+        \end{itemize}
+
+		\item Les macros \macro{acosh}, \macro{asinh} et \macro{atanh} été ajoutées.
+
+ 		\item \macro{derpar} et \macro{derpar*} servent à rédiger des dérivées avec des parenthèses extensibles. En coulisse, \macro{derpow} et \macro{derpow*} sont appelées.
+
+        Pour utiliser des parenthèses non extensibles, on passera par \macro{sderpar} et \macro{sderpar*} où \verb+s+ est pour \textbf{s}-mall.
+
+		\item Ajout de \macro{stdint} pour rendre public l'opérateur intégral proposé par défaut par \LaTeX.
+    \end{itemize}
+
+    % ------------ %
+
+    \item En géométrie, il y a eu une suppression et trois ajouts.
+    \begin{itemize}[itemsep=.5em]
+        \item La macro \macro{pts} a été supprimée car sans signification sémantique puisqu'un point peut être nommé avec deux lettres.
+
+        \item Les macros \macro{gline} et \macro{pgline} servent à indiquer des droites.
+
+        \item La macro \macro{hgline}, avec \verb+h+ pour \textbf{h}-alf, est pour les demi-droites.
+
+        \item La macro \macro{segment} est utile pour les segments.
+    \end{itemize}
+
+    % ------------ %
+
+    \item En logique, voici les améliorations apportées.
+    \begin{itemize}[itemsep=.5em]
+        \item Pour les inégalités, on peut maintenant utiliser le décorateur \verb+plot+.
+
+		\item Ajout des versions négatives des opérateurs logiques verticaux.
+    \end{itemize}
+
+    % ------------ %
+
+    \item Pour les probabilités, il y a eu les modifications ci-après.
+    \begin{itemize}[itemsep=.5em]
+        \item Ajout de \macro{proba} pour écrire des probabilités.
+
+		\item Le comportement de \macro{probacond} a été modifié pour le rendre plus logique.
+    \end{itemize}
+\end{itemize}

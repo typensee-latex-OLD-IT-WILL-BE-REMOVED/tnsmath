@@ -21,37 +21,44 @@
 Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. Ceci permet de faire des choses sympathiques comme dans le 2\ieme{} exemple ci-dessous.
 
 
+% ---------------------- %
+
+
 \paragraph{Un exemple type}
 
-Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après. A cela s'ajoute les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
+À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
 \footnote{
     \texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
     Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
 }.
 
-\begin{tcblisting}{}
+\begin{latexex}
 \begin{probatree}
 [
     [$A$, pweight = $a$
         [$B$, pweight = $b$]
         [$C$, pweight = $c$]
     ]
-    [$D$, pweight = $d$
+    [$D$, bpweight = $d$
         [$E$, apweight = $e$]
         [$F$, bpweight = $f$]
     ]
 ]
 \end{probatree}
-\end{tcblisting}
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Un exemple décoré facilement}
 
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep  = 1.3cm+ qui évite que les cadres se superposent.
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
-\begin{tcblisting}{}
+\begin{latexex}
 \begin{probatree}
-[{},s sep  = 1.3cm
+[{},s sep = 1.3cm
     [$A$, pweight=$a$, frame=red
         [$B$, pweight=$b$]
         [$C$, pweight=$c$]
@@ -68,14 +75,17 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
     ]
 ]
 \end{probatree}
-\end{tcblisting}
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Un exemple décoré à la main}
 
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple n'est pas faisable avec la clé \verb+frame+.
+En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
 
-\begin{tcblisting}{}
+\begin{latexex-flat}
 \begin{probatree}
 [
     [$A$, pweight = $a$, name = left
@@ -87,31 +97,39 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
     ]
     [$G$, pweight = $g$]
 ]
-\node[draw = blue, thick, rounded corners, fit = (left)(topright)(bottomright)] {};
+\node[draw = blue,
+      thick,
+      rounded corners,
+      fit = (left)(topright)(bottomright)] {};
 \end{probatree}
-\end{tcblisting}
+\end{latexex-flat}
 
+
+% ---------------------- %
 
 
 \paragraph{Un exemple de poids cachés partout}
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
 
-\begin{tcblisting}{}
+\begin{latexex}
 \begin{probatree*}
 [$A$, pweight = $a$
     [$B$, pweight = $b$]
     [$C$, pweight = $c$]
 ]
 \end{probatree*}
-\end{tcblisting}
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Un exemple de poids cachés localement}
 
 Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
-\begin{tcblisting}{}
+\begin{latexex}
 \begin{probatree}
 [
     [$A$, pweight = $a$
@@ -121,10 +139,32 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
     [$D$, pweight* = $d$]
 ]
 \end{probatree}
-\end{tcblisting}
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\paragraph{Une astuce pour un signe $=$ et une virgule dans les étiquettes}
+
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
+
+\begin{latexex}
+\begin{probatree}
+[
+    [$A$, apweight = {$a = 0,1$}]
+    [$B$, bpweight = $b$]
+]
+\end{probatree}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Arbres pondérés}
 
 \IDenv*{probatree}
 
@@ -138,6 +178,6 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 
 \IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
 
-\IDkey{frame} pour encadrer un sous-arbre se terminant par des feuilles.
+\IDkey{frame} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
 
 \end{document}

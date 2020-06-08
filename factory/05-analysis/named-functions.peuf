@@ -1,13 +1,31 @@
 no-parameter::
-    ch sh th
+// Specifications :
+// latex command = name for humans
+//
+// If name for humans is empty then the name is the same
+// as the latex name of the command.
+    pgcd =
+    ppcm =
 
-    ach ash ath
+    acos =
+    asin =
+    atan =
 
-    arccosh arcsinh arctanh
+    arccosh =
+    arcsinh =
+    arctanh =
 
-    acos asin atan
+    acosh =
+    asinh =
+    atanh =
 
-    pgcd ppcm
+    fch = ch
+    fsh = sh
+    fth = th
+
+    afch = ach
+    afsh = ash
+    afth = ath
 
 
 parameter::

@@ -13,20 +13,20 @@
 Malheureusement toute la puissance de \LaTeX{} permet d'écrire des codes très peu sémantiques.
 Le modeste but du package \verb+lymath+ est de fournir quelques macros sémantiques pour la rédaction de formules mathématiques élémentaires. Considérons le code \LaTeX{} suivant.
 
-\begin{tcblisting}{listing only}
+\begin{latexex-alone}
 Sachant que $\frac{df}{dx}(x) = 4 cos(x^2)$ sur $[a ; b]$ , nous avons :
 
 $\int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
-\end{tcblisting}
+\end{latexex-alone}
 
 
 Avec \verb+lymath+, vous pouvez écrire le code suivant.
 
-\begin{tcblisting}{listing only}
+\begin{latexex-alone}
 Sachant que $\derfrac{f}{x}(x) = 4 cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
 
 $\int_a^b cos(x^2) \dd{x} = \hook{\frac{1}{4} f(x)}{a}{b}$.
-\end{tcblisting}
+\end{latexex-alone}
 
 
 Même si certaines commandes sont plus longues à écrire que ce que permet \LaTeX{}, il y a trois avantages à utiliser des commandes sémantiques.
@@ -39,16 +39,20 @@ Même si certaines commandes sont plus longues à écrire que ce que permet \LaT
 \end{enumerate}
 
 
+% ---------------------- %
+
 
 \section{Comment lire cette documentation ?}
 
-Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes. Les exemples se présentent comme ci-dessous \textit{(un code \LaTeX{} suivi de sa mise en forme)}.
+Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes. Les exemples se présentent comme ci-dessous.
 
-\begin{tcblisting}{}
-Sachant que $\displaystyle \frac{df}{dx}(x) = 4 cos(x^2)$ sur $[a ; b]$ , nous avons :
-$\displaystyle \int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle \int_a^b cos(x^2) dx
+ = \left[ \frac{1}{4} f(x) \right]_a^b$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \section{A propos des macros}
@@ -57,9 +61,20 @@ $\displaystyle \int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
 
 \subsubsection{Les macros de même \og type \fg}
 
-Les macros partageant une même fonctionnalité mathématique auront toute le même préfixe comme par exemple pour \verb+\derpow+ , \verb+\derfrac+ \dots{} utilisables pour rédiger des dérivées de fonctions.
-Ce choix est assumé même si pour les macros du type \verb+\set...+ on obtient un nom pouvant faire penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble du type ... \fg}.
+Les macros partageant une même fonctionnalité mathématique suivent les deux règles suivantes.
+\begin{enumerate}
+	\item Un gros préfixe est utilisé : 
+	      par exemple, \verb+\derpow+ et \verb+\derfrac+ sont des macros pour rédiger des dérivées de fonctions
+	      \footnote{
+	      	Ce choix est assumé même si pour les macros du type \texttt{\textbackslash{}set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
+		  }.
 
+	\item Un mini préfixe permet d'indiquer une spécialisation d'une macro : 
+	      par exemple, \verb+\nparallel+ est la version négative de \verb+\parallel+ \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
+\end{enumerate}
+
+
+% ---------------------- %
 
 
 \subsubsection{Les macros en mode \texttt{displaystyle}}
@@ -67,11 +82,15 @@ Ce choix est assumé même si pour les macros du type \verb+\set...+ on obtient 
 Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commençant par la lettre \verb+d+.
 
 
+% ---------------------- %
+
 
 \subsection{Versions étoilées}
 
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels : par exemple une macro utilisant des parenthèses rendra ces dernières extensibles sauf dans sa version étoilée.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \verb+\derpow+ utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
 
+
+% ---------------------- %
 
 
 \subsection{Les arguments, deux conventions à connaître}
@@ -81,11 +100,13 @@ Les versions étoilées proposent des mises en forme correspondant aux cas les m
 Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \verb+\derfrac{f}{x}+.
 
 
+% ---------------------- %
+
 
 \subsubsection{Nombre variable d'arguments}
 
 Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \verb+\coord{x | y | z | t}+ et \verb+\coord{x | y}+.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
-Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lyxam+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
 
 \end{document}

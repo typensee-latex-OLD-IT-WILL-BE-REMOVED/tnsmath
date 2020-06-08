@@ -1,0 +1,23 @@
+// Configurations used by the package setYtUp (which is on PyPI and github).
+
+general::
+    author = Christophe , BAL
+    email  = projetmbc@gmail.com
+
+    name    = orPyste
+//    python  = 3
+    version = 0.1.0-beta
+    url     = https://github.com/bc-latex/ly-math
+    license = GPL 3
+    test    = Mac OS 10.11
+
+    desc     = ly-math proposes some tools to ease the writings
+               of low level maths.
+    longdesc = readme/main.md
+    logdate  = 2017...
+
+file::
+    main = ../lymath
+
+keyword::
+    ???

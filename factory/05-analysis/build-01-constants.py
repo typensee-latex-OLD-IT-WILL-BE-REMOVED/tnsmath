@@ -116,18 +116,36 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-text_auto = r"""
 
-\begin{{tcblisting}}{{}}
-Voici la liste des constantes classiques où $\ttau = 2 \ppi$ est la benjamine :
-{0}.
-\end{{tcblisting}}
+codelist = []
 
-""".format(
-    joinand([
-        "$\{0[0]}{0}$".format(c) for c in allconstants
-    ])
-)
+firsts = allconstants[:-1]
+last   = allconstants[-1]
+
+for i in range(0, len(firsts), 3):
+    codelist.append(
+        " , ".join(
+            "$\{0[0]}{0}$".format(c)
+            for c in firsts[i: i + 3]
+        )
+        +
+        " ,"
+    )
+
+
+codelist[-1] = codelist[-1][:-1]
+codelist = "\n".join(codelist)
+
+last = "$\{0[0]}{0}$".format(last)
+codelist +=  f"\net {last}"
+
+text_auto = f"""
+
+\\begin{{latexex}}
+{codelist} où $\\ttau = 2 \ppi$
+\end{{latexex}}
+
+"""
 
 template_tex = text_start + text_auto + text_end
 

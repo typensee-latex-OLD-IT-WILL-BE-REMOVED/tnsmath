@@ -37,6 +37,36 @@ MYFRAME = lambda x: withframe(
 )
 
 
+def startingtech(text):
+    return "{Fiches techniques}" in text \
+        or "{Fiche technique}" in text
+
+
+LATEX_SECTIONS = [
+    section
+    for section in """
+\\section
+\\subsection
+\\subsubsection
+\\paragraph
+    """.strip().split("\n")
+]
+
+def closetechsec(text, section):
+    if not section:
+        raise Exception("Empty section for technical reports !")
+
+    text = text.strip()
+
+    pos = LATEX_SECTIONS.index(section)
+
+    for sublevel in LATEX_SECTIONS[:pos+1]:
+        if text.startswith(sublevel):
+            return True
+
+    return False
+
+
 # ------------ #
 # -- HEADER -- #
 # ------------ #
@@ -52,8 +82,9 @@ with open(
 # -- LOOKING FOR DOCS -- #
 # ---------------------- #
 
-CONTENTS   = []
-LATEXFILES = []
+HUMAN_CONTENTS   = []
+TECHNIC_CONTENTS = []
+LATEXFILES       = []
 
 for subdir in THIS_DIR.walk("dir::"):
     subdir_name = str(subdir.name)
@@ -84,7 +115,65 @@ for latexfile in LATEXFILES:
             ]
         )
 
-        CONTENTS.append(content)
+        content = content.strip()
+
+# Extract technical infos
+        if not startingtech(content):
+            humancontent = content
+            techcontent  = ""
+
+        else:
+            humancontent = []
+            techcontent  = []
+            addtotech    = False
+            latexsectech = ""
+
+            for i, line in enumerate(content.split("\n")):
+                if i == 0:
+                    if not line.startswith("%"):
+                        techcontent  += [" ", " ", line]
+
+                    humancontent += [" ", " ", line]
+
+                    continue
+
+                if startingtech(line):
+                    addtotech       = True
+                    latexsectech, _ = line.split("{", maxsplit = 1)
+                    continue
+
+                if addtotech \
+                and closetechsec(line, latexsectech):
+                    addtotech = False
+
+                if addtotech:
+                    techcontent.append(line)
+
+                else:
+                    humancontent.append(line)
+
+
+            techcontent = "\n".join(techcontent)
+            techcontent = techcontent.strip()
+
+            for i, section in enumerate(LATEX_SECTIONS[::-1][1:], -1):
+                techcontent = techcontent.replace(
+                    section,
+                    LATEX_SECTIONS[i]
+                )
+
+            techcontent = techcontent.replace(
+                "\\paragraph",
+                "\\subsubsection"
+            )
+
+
+            humancontent = "\n".join(humancontent)
+            humancontent = humancontent.strip()
+
+
+        TECHNIC_CONTENTS.append(techcontent)
+        HUMAN_CONTENTS.append(humancontent)
 
 
 # ------------------------- #
@@ -98,8 +187,9 @@ with TEMPLATE_PATH.open(
     content = DOUBLE_BRACES(docfile.read())
     content = PYFORMAT(content)
     content = content.format(
-        header  = HEADER,
-        content = "\n".join(CONTENTS)
+        header    = HEADER,
+        content   = "\n".join(HUMAN_CONTENTS),
+        technical = "\n".join(TECHNIC_CONTENTS),
     )
 
 

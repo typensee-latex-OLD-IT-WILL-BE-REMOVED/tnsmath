@@ -1,0 +1,30 @@
+Nouvelle version sous-mineure \verb+0.6.1-beta+.
+
+\begin{itemize}[itemsep=.5em]
+    \item En logique, la macro \verb+\explain+ possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \verb+\explain*+ et \verb+\textexplainspacebefore+ ont été supprimées.
+
+    % ------------ %
+
+    \item En probabilité, voici ce qui a évolué.
+    \begin{itemize}[itemsep=.5em]
+        \item Les macros \verb+\probacond+ et \verb+\probacond*+ n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \verb+\probacond**+ ou \verb+\dprobacond**+.
+
+        \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
+                  La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+    \end{itemize}
+
+    % ------------ %
+
+    \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
+    \begin{itemize}[itemsep=.5em]
+        \item \verb+\algeset+ est devenu \verb+\setalge+.
+
+        \item \verb+\geoset+ est devenu \verb+\setgeo+.
+
+        \item \verb+\geneset+ est devenu \verb+\setgene+.
+
+        \item \verb+\probaset+ est devenu \verb+\setproba+.
+
+        \item \verb+\specialset+ est devenu \verb+\setspecial+.
+    \end{itemize}
+\end{itemize}

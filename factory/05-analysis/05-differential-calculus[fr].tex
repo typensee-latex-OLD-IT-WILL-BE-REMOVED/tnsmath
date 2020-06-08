@@ -19,12 +19,18 @@
 
 \paragraph{Exemple d'utilisation}
 
-\begin{tcblisting}{}
-Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
-\end{tcblisting}
+\begin{latexex}
+$\dd{f}$ , $\pp{t}$ ,
+$\dd[5]{x}$ ou $\pp[n]{x}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Calcul différentiel}
 
 \IDmacro{dd}{1}{1}
 
@@ -35,39 +41,86 @@ Vous pouvez écrire $\dd{f}$ et $\pp{t}$ et aussi $ \dd[5]{x}$ ou $\pp[n]{x}$.
 \IDarg{} la variable de différentiation à droite du symbole $\pp{}$ ou $\dd{}$.
 
 
+% ---------------------- %
+
 
 \subsubsection{Dérivation totale}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-$\displaystyle \derpow*{f} (a) = \derpow{f} (a)
-                               = \derfrac{f}{x} (a)
-                               = \dersub{f}{x} (a)$
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \derpow*{f} (a) 
+ = \derpow{f} (a)
+ = \derfrac{f}{x} (a)
+ = \dersub{f}{x} (a)$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-$\displaystyle \derpow*[3]{f}(a) = \derpow[3]{f} (a)
-                                 = \derfrac[3]{f}{x} (a)
-                                 = \dersub[3]{f}{x} (a)$
-et $\displaystyle \derpow*[10]{\cos} a = \derfrac[10]{\cos}{x} (a)$ avec beaucoup trop
-de primes à gauche (mais le compte y est).
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \derpow*[3]{f}(a) 
+ = \derpow[3]{f} (a)
+ = \derfrac[3]{f}{x} (a)
+ = \dersub[3]{f}{x} (a)$
+
+$\displaystyle
+ \derpow*[10]{\cos} a 
+ = \derfrac[10]{\cos}{x} (a)$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 3}
 
-\begin{tcblisting}{}
-Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
-   $\displaystyle \derpow[3]{f} (a)
-                = \derfrac*[3]{\left( \frac{1}{x^2+3} \right)}{x} (a)$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \derpow[3]{f} (a)
+ = \derfrac*[3]{\left( \frac{1}{x} \right)}{x} (a)$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\paragraph{Exemple d'utilisation 4}
+
+\begin{latexex}
+$\displaystyle
+ \derpar[3]{\dfrac{1}{2} uv}
+ = \derpar*[3]{\dfrac{1}{2} uv}$
+
+$\displaystyle
+ \sderpar[3]{\dfrac{1}{2} uv}
+ = \sderpar*[3]{\dfrac{1}{2} uv}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Dérivation totale}
+
+\IDmacro{derpar}{1}{1}
+
+\IDmacro{derpar*}{1}{1}
+
+\extraspace
+
+\IDmacro{sderpar}{1}{1}
+
+\IDmacro{sderpar*}{1}{1}
+
+\extraspace
 
 \IDmacro{derpow}{1}{1}
 
@@ -78,7 +131,7 @@ Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
 \IDarg{} la fonction à différencier.
 
 
-\bigskip
+\separation
 
 
 \IDmacro{derfrac}{1}{2}
@@ -94,38 +147,60 @@ Si $\displaystyle f(x) = \frac{1}{x^2+3}$ alors nous avons :
 \IDarg{2} la variable.
 
 
+% ---------------------- %
+
 
 \subsubsection{Dérivation partielle}
 
 \paragraph{Exemple d'utilisation 1}
 
-\begin{tcblisting}{}
-$\displaystyle \partialfrac{f}{x} (a;b)
-             = \partialsub{f}{x} (a;b)
-             = \partialprime{f}{x} (a;b)$
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \partialfrac{f}{x} (a;b)
+ = \partialsub{f}{x} (a;b)
+ = \partialprime{f}{x} (a;b)$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 2}
 
-\begin{tcblisting}{}
-$\displaystyle \partialfrac[3]{G}{f^2 | v} (a;b)
-             = \partialfrac{G}{f^2 | v} (a;b)
-             = \partialsub{G}{f^2 | v} (a;b)
-             = \partialprime{G}{f^2 | v} (a;b)$
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \partialfrac[3]{G}{f^2 | v} (a;b)
+ = \partialfrac{G}{f^2 | v} (a;b)
+ = \dots$
+ 
+$\displaystyle
+ \dots
+ =\partialsub{G}{f^2 | v} (a;b)
+ = \partialprime{G}{f^2 | v} (a;b)$
+\end{latexex}
+
+
+% ---------------------- %
 
 
 \paragraph{Exemple d'utilisation 3}
 
-\begin{tcblisting}{}
-Si $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$ alors nous avons
-   $\displaystyle \partialfrac[2]{f}{x | y}
-                = \partialfrac*[2]{\left( \frac{cos(x y)}{x^2 + y^2} \right)}{x | y}$.
-\end{tcblisting}
+\begin{latexex}
+$\displaystyle
+ \partialfrac[2]{f}{x | y}
+ = \partialfrac*[2]{%
+      \left( \frac{1}{cos(x y)} \right)%
+   }{x | y}$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Dérivation partielle}
+
 
 \IDmacro{partialfrac}{1}{2}
 
@@ -138,7 +213,7 @@ Si $\displaystyle f(x;y) = \frac{cos(x y)}{x^2+y^2}$ alors nous avons
 \IDarg{2} les variables utilisées pour la dérivation partielle en utilisant la syntaxe suivante : par exemple, \verb+x | y^3 | ...+ indique de dériver suivant $x$ une fois, puis suivant $y$ trois fois... etc.
 
 
-\bigskip
+\separation
 
 
 \IDmacro*{partialsub}{2}

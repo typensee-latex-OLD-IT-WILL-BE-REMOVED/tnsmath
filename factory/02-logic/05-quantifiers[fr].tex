@@ -20,33 +20,44 @@
          
 \paragraph{Quantifier l'existence}
 
-Voici deux versions, l'une classique, et l'autre beaucoup moins, permettant de préciser le quantificateur $\exists$ \emph{(concernant les applications injectives, surjectives,\dots{} \emph{etc.} se reporter à la section \ref{section:application})}.
+Voici deux versions, l'une classique, et l'autre beaucoup moins, permettant de préciser le quantificateur $\exists$.
 
-\begin{tcblisting}{}
-$f: E \to F$ est une application bijective si $\forall y \in F$,
-$\existsone x \in E$ tel que $y = f(x)$.
+\begin{latexex}
+$\existsone x \in E$
+pour \og il existe un seul $x$ \fg.
 
-$f: E \to F$ est une fonction, ou application partielle, si $\forall x \in E$,
-$\existmulti{\leq 1} y \in F$ tel que $y = f(x)$ où $\existmulti{\leq 1}$ signifie
-\emph{\og il existe au plus un \fg}.
+$\existmulti{\leq 1} y \in F$
+pour \og il existe au plus un $y$ \fg.
 
-On pourrait poser $\existmulti{=1} \eqdef \existsone$ pour ne pas multiplier
-le symbolisme. Quoique\dots
-\end{tcblisting}
+$\existmulti{=1} \eqdef \existsone$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \paragraph{Versions négatives}
 
-\begin{tcblisting}{}
-On peut utiliser $\nexistsone$ soit \emph{\og il n'existe pas un unique \fg},
-et $\nexistmulti{>4}$ soit \emph{\og il n'existe pas plus de quatre \fg}, en plus
-de $\nexists$ proposé par \verb+amssymb+.
-\end{tcblisting}
+\begin{latexex}
+$\nexistsone$
+pour \og il n'existe pas un unique \fg.
+
+$\nexistmulti{>4}$
+pour \og il n'existe pas plus de
+quatre \fg.
+
+$\nexists$
+est proposé par \verb+amssymb+.
+\end{latexex}
 
 
+% ---------------------- %
 
-\paragraph{Fiches techniques}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{Des versions alternatives du quantificateur $\exists$}%
+                          {Des versions alternatives du quantificateur existentiel}}
 
 \IDmacro*{existmulti}{1}
 
@@ -55,7 +66,8 @@ de $\nexists$ proposé par \verb+amssymb+.
 \IDarg{1} une écriture mathématique servant à préciser la portée du quantificateur.
 
 
-\bigskip
+\separation
+
 
 \IDmacro*{existsone}{0}
 

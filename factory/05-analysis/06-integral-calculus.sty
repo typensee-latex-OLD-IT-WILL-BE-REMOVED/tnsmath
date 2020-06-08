@@ -10,9 +10,9 @@
 
 % Consecutive integrals
 
-\let\original@int\int
+\let\stdint\int
 \DeclareRobustCommand{\int}{%
-    \original@int\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
+    \stdint\operator@followup{\@ifnextchar{\int}{\!\!}{}}%
 }
 
 \def\operator@followup#1{%

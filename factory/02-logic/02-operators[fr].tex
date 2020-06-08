@@ -24,12 +24,16 @@ En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, i
 },
 ainsi que des versions négatives. Voici un exemple d'utilisation.
 
-\begin{tcblisting}{}
-Un théorème de la logique : $(A \implies B) \iff (B \liesimp A)$
+\begin{latexex}
+$(A \implies B)
+ \iff (B \liesimp A)$
 
-Un autre théorème de la logique : $(A \implies B) \notiff (A \notimplies B)$
-\end{tcblisting}
+$(A \implies B)
+ \notiff (A \notimplies B)$
+\end{latexex}
 
+
+% ---------------------- %
 
 
 \paragraph{Un deuxième exemple -- Des opérateurs décorés}
@@ -37,44 +41,27 @@ Un autre théorème de la logique : $(A \implies B) \notiff (A \notimplies B)$
 Tout comme pour les égalités, il existe des versions décorées de type test, hypothèse, condition \dots{} 
 Elles sont toutes présentes dans l'exemple suivant.
 
-% == Example of decorated versions - START == %
+\begin{latexex}
+$A \iffappli B \notiffchoice C$
 
-\begin{tcblisting}{}
-Équivalences :
-$A \iffappli B \iffchoice C \iffcond D \iffcons E \iffhyp F \ifftest G$
+$A \impliescond B \notimpliescons C$
 
-Équivalences - Formes négatives :
-$A \notiffappli B \notiffchoice C \notiffcond D
-   \notiffcons E \notiffhyp F \notifftest G$
-
-Implications directes :
-$A \impliesappli B \implieschoice C \impliescond D
-   \impliescons E \implieshyp F \impliestest G$
-
-Implications directes - Formes négatives :
-$A \notimpliesappli B \notimplieschoice C \notimpliescond D
-   \notimpliescons E \notimplieshyp F \notimpliestest G$
-
-Implications indirectes :
-$A \liesimpappli B \liesimpchoice C \liesimpcond D
-   \liesimpcons E \liesimphyp F \liesimptest G$
-
-Implications indirectes - Formes négatives :
-$A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
-   \notliesimpcons E \notliesimphyp F \notliesimptest G$
-\end{tcblisting}
-
-% == Example of decorated versions - END == %
+$A \liesimphyp B \notliesimptest C$
+\end{latexex}
 
 
-\begin{remark}
-	La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} montre toutes les associations autorisées entre opérateurs logiques et décorations.
-\end{remark}
+\subsubsection{Une table récapitulative}
+
+La table \ref{table:decorations-operators} \vpageref{table:decorations-operators} montre toutes les associations autorisées entre opérateurs logiques et décorations.
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
 
-\begin{multicols}{2}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Les opérateurs de logique}
+
 % == Decorated versions - START == %
 
 \foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest}{
@@ -82,35 +69,35 @@ $A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
 
 }
     
-\medskip
+\separation
 
 \foreach \k in {notiff, notiffappli, notiffchoice, notiffcond, notiffcons, notiffhyp, notifftest}{
 	\IDmacro*{\k}{0}
 
 }
     
-\medskip
+\separation
 
 \foreach \k in {implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest}{
 	\IDmacro*{\k}{0}
 
 }
     
-\medskip
+\separation
 
 \foreach \k in {notimplies, notimpliesappli, notimplieschoice, notimpliescond, notimpliescons, notimplieshyp, notimpliestest}{
 	\IDmacro*{\k}{0}
 
 }
     
-\medskip
+\separation
 
 \foreach \k in {liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
 	\IDmacro*{\k}{0}
 
 }
     
-\medskip
+\separation
 
 \foreach \k in {notliesimp, notliesimpappli, notliesimpchoice, notliesimpcond, notliesimpcons, notliesimphyp, notliesimptest}{
 	\IDmacro*{\k}{0}
@@ -118,28 +105,40 @@ $A \notliesimpappli B \notliesimpchoice C \notliesimpcond D
 }
     
 % == Decorated versions - END == %
-\vfill\null
-\end{multicols}
 
+
+% ---------------------- %
 
 
 \subsubsection{Équivalences et implications verticales}
 
 \paragraph{À quoi cela sert-il ?}
 
-Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales non décorées des symboles d'équivalence et d'implication. Voici comment les obtenir.
+Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales non décorées des symboles d'équivalence et d'implication. Voici comment les obtenir \emph{(tous les cas possibles ont été indiqués)}.
 
-\begin{tcblisting}{}
-\begin{tabular}{ccc}
-    $A$       &   $B$           &   $C$         \\
-    $\viff$   &   $\vimplies$   &   $\vliesimp$ \\
-    $D$       &   $E$           &   $F$
+\begin{latexex}
+\begin{tabular}{cccccc}
+  $A$            & $B$
+& $C$            & $D$
+& $E$            & $F$
+\\
+  $\viff$        & $\vimplies$  
+& $\vliesimp$    & $\notviff$
+& $\notvimplies$ & $\notvliesimp$
+\\
+  $A$            & $B$
+& $C$            & $D$
+& $E$            & $F$
 \end{tabular}
-\end{tcblisting}
+\end{latexex}
 
 
+% ---------------------- %
 
-\paragraph{Fiches techniques}
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Les opérateurs de logique \og verticaux \fg}
 
 % == Vertical versions - START == %
 
@@ -147,6 +146,9 @@ Dans la section \ref{explain-proof} est expliqué comment détailler les étapes
 
 	\IDmacro*{\k}{0}
 
+	\IDmacro*{not\k}{0}
+
+    \extraspace
 }
 
 % == Vertical versions - END == %

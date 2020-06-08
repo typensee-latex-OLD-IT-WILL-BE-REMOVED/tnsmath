@@ -19,14 +19,27 @@ Les macros \verb+\dsum+ et \verb+\dprod+ permettent de se passer de \verb+\displ
 Voici un exemple.
 
 
-\begin{tcblisting}{}
-$\dsum_{k=0}^{n} 2^k = \sum_{k=0}^{n} 2^k = 2^{n+1} - 1$
+\begin{latexex}
+$\dsum_{k=0}^{n} 2^k =
+ \sum_{k=0}^{n} 2^k$
 
-$\dprod_{k=1}^{n} k = \prod_{k=1}^{n} k = k !$
-\end{tcblisting}
+$\dprod_{k=1}^{n} k =
+ \prod_{k=1}^{n} k$
+\end{latexex}
 
 
-\paragraph{Fiches techniques}
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\paragraph{Sommes et produits}
+
+Les macros suivantes sans argument ont un comportement spécifique vis à vis des mises en index et en exposant. 
+
+
+\separation
+
 
 \IDmacro*{dprod}{0}
 
