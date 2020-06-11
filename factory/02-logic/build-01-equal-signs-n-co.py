@@ -244,7 +244,7 @@ textversions = ["", "\\begin{multicols}{2}"]
 
 for onedeco in ALL_DECOS:
     textversions += [
-f"    \\verb+\\textop{onedeco}+ donne \\emph{{\\og \\textop{onedeco} \\fg}}",
+f"    \\macro{{textop{onedeco}}} donne \\emph{{\\og \\textop{onedeco} \\fg}}",
 ""
     ]
 

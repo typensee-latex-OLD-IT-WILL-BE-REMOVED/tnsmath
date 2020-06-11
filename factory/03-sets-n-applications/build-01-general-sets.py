@@ -139,7 +139,7 @@ table_header = DECO*3 + "  & {0} \\\\".format(
 table_lines = []
 
 for onesetdef in classicalsets:
-    cells = [f"\\verb+\\{onesetdef[0]*2}+"]
+    cells = [f"\\macro{{{onesetdef[0]*2}}}"]
 
     for s in suffix_header:
         hassuffix = True

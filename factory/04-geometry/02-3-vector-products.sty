@@ -1,7 +1,13 @@
 % == PACKAGES USED == %
 
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{nicematrix}
+
 
 % == DEFINITIONS == %
+
+% The dot product
 
 \newcommand\dotprod[2]{%
     #1 \cdot #2%
@@ -34,6 +40,8 @@
 }
 
 
+% The cross product
+
 \newcommand\crossprod[2]{%
     #1 \wedge #2%
 }
@@ -41,6 +49,57 @@
 \newcommand\vcrossprod[2]{%
     \@apply@macro@two@args{\crossprod}{\vect}{#1}{#2}%
 }
+
+% Source
+%	* https://tex.stackexchange.com/a/548662/6880
+
+\newcommand\ccrossprod[8]{%
+	\begin{vNiceMatrix}[first-row]
+		#1 & #5  \\
+		#2 & #6  \\
+		#3 & #7  \\
+		#4 & #8  \\
+		#2 & #6
+		%%
+		\CodeAfter
+    	\begin{tikzpicture}
+    		\path (2-1.east) 
+    			  -- node[below=0.35em,blue,circle,inner sep=1.25pt]
+			         (minusone) {\tiny$1$}
+			      (2-2.west);
+    		\draw [blue,->]
+     			   let \p1=($(minusone.east)-(minusone.center)$) in 
+    	    		   (2-1.east) to[out=0,in=150]  (minusone.60)
+		   			   arc[start angle=60,end angle=-240,radius=\x1] 
+    	    		   to[out=30,in=180] (2-1.east-|2-2.west);
+            %%
+     		\path (3-1.east) 
+            	  -- node[below=0.35em,red,circle,inner sep=1.25pt] 
+			         (minustwo) {\tiny$2$}
+                  (3-2.west);
+    		\draw [red,->]
+     			   let \p1=($(minustwo.east)-(minustwo.center)$) in 
+    	    		   (3-1.east) to[out=0,in=150]  (minustwo.60)
+		   			   arc[start angle=60,end angle=-240,radius=\x1] 
+    	    		   to[out=30,in=180] (3-1.east-|3-2.west);
+            %%
+    		\path (1-1.east) 
+    			  -- node[below=0.35em,orange,circle,inner sep=1.25pt] 
+			         (minus) {\tiny$3$}
+			      (1-2.west);
+    		\draw [orange,->]
+     			   let \p1=($(minus.east)-(minus.center)$) in 
+    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
+		   			   arc[start angle=60,end angle=-240,radius=\x1] 
+    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+        \end{tikzpicture} 
+	\end{vNiceMatrix}
+}
+
+\newcommand\vccrossprod[8]{%
+	\ccrossprod{\vect{#1}}{#2}{#3}{#4}{\vect{#5}}{#6}{#7}{#8}%
+}
+
 
 
 

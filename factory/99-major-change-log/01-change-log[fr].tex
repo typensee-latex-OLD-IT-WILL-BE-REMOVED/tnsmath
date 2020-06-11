@@ -79,37 +79,37 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée dans le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+        \item Pour les intervalles, \macro{CSinterval} a été déplacée dans le package \verb+lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
     
         % ------------ %
     
         \item En logique, il y a eu les modifications suivantes.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\eqdef**+ a été supprimé. Voir la macro \verb+\Store*+ du package \verb+\lyalgo+.
+            \item \macro{eqdef**} a été supprimé. Voir la macro \macro{Store*} du package \verb+lyalgo+.
     
-            \item Différentes versions de l'opérateur $\exists$ via \verb+\existsone+ et \verb+\existmulti+ avec leurs versions négatives \verb+\nexistsone+ et \verb+\nexistmulti+.
+            \item Différentes versions de l'opérateur $\exists$ via \macro{existsone} et \macro{existmulti} avec leurs versions négatives \macro{nexistsone} et \macro{nexistmulti}.
     
-            \item Deux nouvelles macros \verb+\eqplot+ et \verb+\eqappli+ pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \verb+\textopplot+ et \verb+\textopappli+.
+            \item Deux nouvelles macros \macro{eqplot} et \macro{eqappli} pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \macro{textopplot} et \macro{textopappli}.
     
-            \item Ajout des formes négatives \verb+\niff+, \verb+\nimplies+ et \verb+\nliesimp+.
+            \item Ajout des formes négatives \macro{niff}, \macro{nimplies} et \macro{nliesimp}.
     
-            \item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \verb+\iff+, \verb+\implies+ et \verb+\liesimp+ et leurs formes négatives.
+            \item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \macro{iff}, \macro{implies} et \macro{liesimp} et leurs formes négatives.
     
-            \item Une macro \verb+\textoptest+ a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
+            \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     
         % ------------ %
     
         \item En analyse, il y a eu les renommages suivants.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\hypergeo+ est devenu \verb+\seqhypergeo+.
+            \item \macro{hypergeo} est devenu \macro{seqhypergeo}.
     
-            \item \verb+\suprageo+ est devenu \verb+\seqsuprageo+.
+            \item \macro{suprageo} est devenu \macro{seqsuprageo}.
         \end{itemize}
     
         % ------------ %
     
-        \item En géométrie, \verb+\notparallel+ est devenu \verb+\nparallel+.
+        \item En géométrie, \macro{notparallel} est devenu \macro{nparallel}.
     \end{itemize}
 
 % ------------------------ %
@@ -120,17 +120,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item En algèbre, il y a eu les renommages ci-dessous qui avaient été oubliés.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\polyset+ est devenu \verb+\setpoly+.
+            \item \macro{polyset} est devenu \macro{setpoly}.
     
-            \item \verb+\polyfracset+ est devenu \verb+\setpolyfrac+.
+            \item \macro{polyfracset} est devenu \macro{setpolyfrac}.
     
-            \item \verb+\serieset+ est devenu \verb+\setserie+.
+            \item \macro{serieset} est devenu \macro{setserie}.
     
-            \item \verb+\seriefracset+ est devenu \verb+\setseriefrac+.
+            \item \macro{seriefracset} est devenu \macro{setseriefrac}.
     
-            \item \verb+\polylaurentset+ est devenu \verb+\setpolylaurent+.
+            \item \macro{polylaurentset} est devenu \macro{setpolylaurent}.
     
-            \item \verb+\serielaurentset+ est devenu \verb+\setserielaurent+.
+            \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
         \end{itemize}
     \end{itemize}
 
@@ -140,31 +140,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item En logique, la macro \verb+\explain+ possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \verb+\explain*+ et \verb+\textexplainspacebefore+ ont été supprimées.
+        \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \macro{explain*} et \macro{textexplainspacebefore} ont été supprimées.
     
         % ------------ %
     
         \item En probabilité, voici ce qui a évolué.
         \begin{itemize}[itemsep=.5em]
-            \item Les macros \verb+\probacond+ et \verb+\probacond*+ n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \verb+\probacond**+ ou \verb+\dprobacond**+.
+            \item Les macros \macro{probacond} et \macro{probacond*} n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \macro{probacond**} ou \macro{dprobacond**}.
     
             \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
-                      La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+                  La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     
         % ------------ %
     
         \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\algeset+ est devenu \verb+\setalge+.
+            \item \macro{algeset} est devenu \macro{setalge}.
     
-            \item \verb+\geoset+ est devenu \verb+\setgeo+.
+            \item \macro{geoset} est devenu \macro{setgeo}.
     
-            \item \verb+\geneset+ est devenu \verb+\setgene+.
+            \item \macro{geneset} est devenu \macro{setgene}.
     
-            \item \verb+\probaset+ est devenu \verb+\setproba+.
+            \item \macro{probaset} est devenu \macro{setproba}.
     
-            \item \verb+\specialset+ est devenu \verb+\setspecial+.
+            \item \macro{specialset} est devenu \macro{setspecial}.
         \end{itemize}
     \end{itemize}
 
@@ -176,22 +176,22 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item Des nouveaux outils spécifiques aux probabilités.
         \begin{itemize}[itemsep=.5em]
-            \item Les macros \verb+\probacond+ et \verb+\probacond*+ servent à écrire des probabilités conditionnelles.
+            \item Les macros \macro{probacond} et \macro{probacond*} servent à écrire des probabilités conditionnelles.
     
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     
         % ------------ %
     
-        \item En géométrie, la macro \verb+\notparallel+ a été rajoutée.
+        \item En géométrie, la macro \macro{notparallel} a été rajoutée.
     
         % ------------ %
     
-        \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \verb+\CSinterval+ afin d'obtenir quelque chose comme \verb+a..b+.
+        \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \macro{CSinterval} afin d'obtenir quelque chose comme \verb+a..b+.
     
         % ------------ %
     
-        \item En logique, il y a deux nouvelles macros sémantiques \verb+\neqid+ et \verb+\eqchoice+.
+        \item En logique, il y a deux nouvelles macros sémantiques \macro{neqid} et \macro{eqchoice}.
     \end{itemize}
 
 % ------------------------ %
@@ -200,32 +200,32 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
+        \item Ajout des macros \macro{dsum} et \macro{dprod} qui sont vis à vis de \macro{sum} et \macro{prod} des équivalents de \macro{dfrac} pour \macro{frac}.
     
         % ------------ %
     
-        \item En arithmétique, ajout des opérateurs \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+.
+        \item En arithmétique, ajout des opérateurs \macro{divides}, \macro{notdivides} et \macro{modulo}.
     
         % ------------ %
     
         \item En géométrie, une nouvelle macro et un opérateur modifié.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\pts+ permet d'indiquer plusieurs points.
+            \item \macro{pts} permet d'indiquer plusieurs points.
     
-            \item \verb+\parallel+ utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+            \item \macro{parallel} utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
         \end{itemize}
     
         % ------------ %
     
         \item En logique, il y a les nouveautés suivantes.
         \begin{itemize}[itemsep=.5em]
-            \item La version doublement étoilée \verb+\eqdef**+ donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+            \item La version doublement étoilée \macro{eqdef**} donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
     
-            \item Ajout de \verb+\liesimp+ comme alias de \verb+\Longleftarrow+.
+            \item Ajout de \macro{liesimp} comme alias de \macro{Longleftarrow}.
     
-            \item Les macros \verb+\vimplies+, \verb+\viff+ et \verb+\vliesimp+ sont des versions verticales de \verb+\implies+, \verb+\iff+ et \verb+\liesimp+.
+            \item Les macros \macro{vimplies}, \macro{viff} et \macro{vliesimp} sont des versions verticales de \macro{implies}, \macro{iff} et \macro{liesimp}.
     
-            \item Comme pour les égalités, il existe les macros \verb+\impliestest+, \verb+\iffhyp+ ... etc.
+            \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
         \end{itemize}
     \end{itemize}
 

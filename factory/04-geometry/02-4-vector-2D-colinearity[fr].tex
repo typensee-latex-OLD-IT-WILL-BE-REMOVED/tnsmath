@@ -1,0 +1,134 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+
+	\usepackage{02-4-vector-2D-colinearity}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+    \newcommand\pt[1]{\mathrm{#1}}
+
+	\newcommand\@no@point[1]{%
+		\IfStrEq{#1}{i}{%
+			\imath%
+		}{%
+			\IfStrEq{#1}{j}{%
+				\jmath%
+			}{%
+				#1
+			}%
+		}%
+	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+%\subsection{Vecteurs}
+
+\subsubsection{Plan -- Déterminant de deux vecteurs}
+
+\paragraph{Exemple d'utilisation - Version décorée}
+
+Dans l'exemple suivant, le préfixe \verb+c+ est pour \textbf{c}-oordinates.
+
+\begin{latexex}
+$\cdetplane{\vect{u}}{x }{y }%
+           {\vect{v}}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple d'utilisation - Version non décorée}
+
+\begin{latexex}
+$\cdetplane*{\vect{u}}{x }{y }%
+            {\vect{v}}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple d'utilisation - Versions courtes}
+
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+
+\begin{latexex}
+$\vcdetplane{u}{x }{y }%
+            {v}{x'}{y'}
+=
+ \vcdetplane*{u}{x }{y }%
+             {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiche technique}
+
+\paragraph{Plan -- Déterminant de deux vecteurs}
+
+\IDmacro*{cdetplane}{6}  où \quad \verb+c = c-oordinates+
+
+\IDmacro*{cdetplane*}{6} où \quad \verb+c = c-oordinates+
+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro*{vcdetplane}{6}  où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+\IDmacro*{vcdetplane*}{6} où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+
+\end{document}

@@ -8,29 +8,25 @@ VERSION = MAJOR.MINOR.PATCH
 
 > ---------------------------- <
 
-====> nel emplacent sut github !
-====> cookiecutter pour latex
-
-
-> ---------------------------- <
-
 environnement pour explication
-    ---> symbole (= <=> ...) devient faculattif mais peut être changer et alignment mieux géréer
+    ---> faire mode de mef via witharrow (penser aux classes non scientifiques !)
+
+    D'OÙ CHAGT DE NUMÉRO SOUS-MINEUR CAR RÉELLE GROSSSE MODIF !
+
+
 
 
 > ---------------------------- <
 
-critèe colinéarité avec la boucle
-
-    ---> voir noe de nice matrix !!! jouable...
-
-idem pour prod vectiriel tant uq'à faire
+calcul élémentaire
+    ---> tableaux de proprotionnalité : différentes représenation
+    ---> 4ième proportionnelle
 
 
 > ---------------------------- <
 
-verrsion texte de toutes les macrios
-    ---> gestionde mathmode ou non (à retrouver)
+tableau de preuve comme ceux que je faisiais au collège :
+JE SAIS QUE - PROP. UTILISÉE - NOUVEAU FAIT
 
 
 > ---------------------------- <
@@ -38,7 +34,8 @@ verrsion texte de toutes les macrios
 composition visulle e fonction
     --> sol TiKZ car modulable facimement !
 
-+
+
+> ---------------------------- <
 
 système boîte noire fonction !
     ---> voir nouveau package diagram commutatif qui est top !
@@ -46,26 +43,25 @@ système boîte noire fonction !
 
 > ---------------------------- <
 
-Utiliser \mathrm partout où italique interdit !!!
+====> nel emplacent sut github !
+====> cookiecutter pour latex
 
 
 > ---------------------------- <
 
-en intern mettre \macro partout !!!!
+amélioration du rendu critèe colinéarité et calc prod vecto
 
-00-intro
-01-misc
-02-logic
-03-sets-n-applications
-04-geometry
-05-analysis
-06-probability
-07-arithmetic
-08-algebra
-99-major-change-log
-    _2017
-    2019
-    2020
+
+> ---------------------------- <
+
+verrsion texte de toutes (?) les macrios
+    ---> gestionde mathmode ou non (à retrouver)
+
+
+> ---------------------------- <
+
+Utiliser \mathrm partout où italique interdit !!!
+
 
 > ---------------------------- <
 
@@ -113,27 +109,15 @@ a ¨python script builds a ¨csv file of all the new things defined by ¨lymath.
 
 > ---------------------------- <
 
-une doc plus effiacce ???
-
-
-> ---------------------------- <
-
 réel support multilangue et non juste french/english
 
 
 > ---------------------------- <
 
-pb avec chemformula qui définit \ch{Na2SO4 ->[ H2O ] Na+ + SO4^2-}
-
-
-> ---------------------------- <
-
-améliorer espacement pour les intervalles
-
-
-> ---------------------------- <
-
-améliorer espacement des opérateurs de dérivation
+améliorer espacement
+    ---> des opérateurs de dérivation
+    ---> pzrenthèse pour proba !
+    ---> les intervalles
 
 
 > ---------------------------- <
@@ -189,4 +173,4 @@ support de toutes les lettres grecque via gamma ET NON \gamma !! pour la macro \
 > ---------------------------- <
 
 faire une feuille testant les cas problématiques de chaque macro
----> passer via un fichier TeX du type xxxxx.visualtest.tex
+    ---> passer via un fichier TeX du type xxxxx.visualtest.tex

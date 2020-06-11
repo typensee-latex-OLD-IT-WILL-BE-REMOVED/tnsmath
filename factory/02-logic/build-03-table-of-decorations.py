@@ -118,7 +118,7 @@ table_header = DECO*3 + "  & {0} \\\\".format(
 table_lines = []
 
 for oneopedeco, itsdecos in opedecos.items():
-    cells = [f"\\verb+\\{oneopedeco}+"]
+    cells = [f"\\macro{{{oneopedeco}}}"]
 
     for d in alldecos:
         hasdeco = True

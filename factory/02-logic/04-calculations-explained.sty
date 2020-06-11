@@ -9,6 +9,27 @@
 % [#1] : espace before
 %  #2  : an operator
 %  #3  : an explanation
-\newcommand\explain[3][0em]{%
-    \kern#1 #2 {} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}%
+%\newcommand\explain[3][0em]{%
+%    \kern#1 #2 {} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}%
+%}
+
+\newcommand\@explain@sep@{=}
+
+\newcommand\explnext[2][\@explain@sep@]{
+	&&\\
+    &
+    \kern-.3em #1
+    \if\relax\detokenize{#2}\relax\else
+    	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}
+	\fi
+    &&\\
+    &
+}
+
+\newenvironment{explain}[1][=]{
+	\renewcommand\@explain@sep@{#1}
+	\csname flalign*\endcsname
+		&
+}{
+	\csname endflalign*\endcsname
 }

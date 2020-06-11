@@ -62,7 +62,8 @@
 }
 
 
-\newcommand\macro[1]{\texttt{\textbackslash{}#1}}
+\newcommand\env[1]{\texttt{#1}}
+\newcommand\macro[1]{\env{\textbackslash{}#1}}
 
 
 
@@ -184,13 +185,13 @@ $\displaystyle \int_a^b cos(x^2) dx
 Les macros partageant une même fonctionnalité mathématique suivent les deux règles suivantes.
 \begin{enumerate}
 	\item Un gros préfixe est utilisé : 
-	      par exemple, \verb+\derpow+ et \verb+\derfrac+ sont des macros pour rédiger des dérivées de fonctions
+	      par exemple, \macro{derpow} et \macro{derfrac} sont des macros pour rédiger des dérivées de fonctions
 	      \footnote{
-	      	Ce choix est assumé même si pour les macros du type \texttt{\textbackslash{}set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
+	      	Ce choix est assumé même si pour les macros du type \macro{set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
 		  }.
 
 	\item Un mini préfixe permet d'indiquer une spécialisation d'une macro : 
-	      par exemple, \verb+\nparallel+ est la version négative de \verb+\parallel+ \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
+	      par exemple, \macro{nparallel} est la version négative de \macro{parallel} \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
 \end{enumerate}
 
 
@@ -199,7 +200,7 @@ Les macros partageant une même fonctionnalité mathématique suivent les deux r
 
 \subsubsection{Les macros en mode \texttt{displaystyle}}
 
-Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commençant par la lettre \verb+d+.
+Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commençant par la lettre \verb+d+.
 
 
 % ---------------------- %
@@ -207,7 +208,7 @@ Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commenç
 
 \subsection{Versions étoilées}
 
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \verb+\derpow+ utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \macro{derpow} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
 
 
 % ---------------------- %
@@ -217,7 +218,7 @@ Les versions étoilées proposent des mises en forme correspondant aux cas les m
 
 \subsubsection{Nombre fixé d'arguments}
 
-Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \verb+\derfrac{f}{x}+.
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{derfrac\{f\}\{x\}}.
 
 
 % ---------------------- %
@@ -225,22 +226,22 @@ Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \
 
 \subsubsection{Nombre variable d'arguments}
 
-Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \verb+\coord{x | y | z | t}+ et \verb+\coord{x | y}+.
+Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \macro{coord\{x | y | z | t\}} et \macro{coord\{x | y\}}.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
-Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+Ainsi dans \macro{coord\{x | y | z | t\}}, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
 \section{Deux séparateurs d'arguments par défaut}
 
-La macro \verb+\lymathsep+ définit le séparateur d'arguments de premier niveau, et \verb+\lymathsubsep+ celui des arguments de deuxième niveau.
+La macro \macro{lymathsep} définit le séparateur d'arguments de premier niveau, et \macro{lymathsubsep} celui des arguments de deuxième niveau.
 Cette documentation utilisant l'option \verb+french+ de \verb+babel+, la valeur de 
-\verb+\lymathsep+ est \fbox{\,\lymathsep$\vphantom{F}$\,} 
+\macro{lymathsep} est \fbox{\,\lymathsep$\vphantom{F}$\,} 
 et celle de
-\verb+\lymathsubsep+ est \fbox{\,\lymathsubsep$\vphantom{F}$\,} .
-Sans ce choix, les valeurs de \verb+\lymathsep+ et \verb+\lymathsubsep+ seront \fbox{\,\lymathsubsep$\vphantom{F}$\,} et \fbox{\,\lymathsep$\vphantom{F}$\,} respectivement.
+\macro{lymathsubsep} est \fbox{\,\lymathsubsep$\vphantom{F}$\,} .
+Sans ce choix, les valeurs de \macro{lymathsep} et \macro{lymathsubsep} seront \fbox{\,\lymathsubsep$\vphantom{F}$\,} et \fbox{\,\lymathsep$\vphantom{F}$\,} respectivement.
 \section{Quelques gestions d'espaces}
 
 \subsection{Espace et fraction}
 
-Quand on utilise \verb+\frac+ ou \verb+\dfrac+, de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \verb+\stdfrac+ et \verb+\stddfrac+ . Voici un exemple.
+Quand on utilise \macro{frac} ou \macro{dfrac}, de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par   défaut se retrouve en utilisant les macros \macro{stdfrac} et \macro{stddfrac}. Voici un exemple.
 
 \begin{latexex}
 $\frac{2}{3} = \stdfrac{2}{3}$ ,
@@ -253,7 +254,7 @@ $\dfrac{2}{3} = \stddfrac{2}{3}$
 
 \subsection{Espace et racines n-ièmes d'un réel}
 
-\verb+\sqrt+ a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \verb+\stdsqrt+ . Voici un exemple.
+\macro{sqrt} a été redéfini pour ajouter un peu d'espaces. Le comportement par défaut se retrouve en utilisant la macro \macro{stdsqrt} . Voici un exemple.
 
 
 \begin{latexex}
@@ -267,8 +268,8 @@ $\sqrt[n]{45} = \stdsqrt[n]{45}$
 
 \subsection{Sommes et produits en mode ligne}
 
-Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=0}^{n}$ et non $\dsum_{k=0}^{n}$ sauf si l'on utilise la commande \verb+\displaystyle+.
-Les macros \verb+\dsum+ et \verb+\dprod+ permettent de se passer de \verb+\displaystyle+.
+Pour limiter l'espace, \LaTeX{} affiche $\sum_{k=0}^{n}$ et non $\dsum_{k=0}^{n}$ sauf si l'on utilise la commande \macro{displaystyle}.
+Les macros \macro{dsum} et \macro{dprod} permettent de se passer de \macro{displaystyle}.
 Voici un exemple.
 
 
@@ -403,23 +404,23 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 % == All texts - START == %
 
 \begin{multicols}{2}
-    \verb+\textopappli+ donne \emph{\og \textopappli \fg}
+    \macro{textopappli} donne \emph{\og \textopappli \fg}
 
-    \verb+\textopchoice+ donne \emph{\og \textopchoice \fg}
+    \macro{textopchoice} donne \emph{\og \textopchoice \fg}
 
-    \verb+\textopcond+ donne \emph{\og \textopcond \fg}
+    \macro{textopcond} donne \emph{\og \textopcond \fg}
 
-    \verb+\textopcons+ donne \emph{\og \textopcons \fg}
+    \macro{textopcons} donne \emph{\og \textopcons \fg}
 
-    \verb+\textopdef+ donne \emph{\og \textopdef \fg}
+    \macro{textopdef} donne \emph{\og \textopdef \fg}
 
-    \verb+\textophyp+ donne \emph{\og \textophyp \fg}
+    \macro{textophyp} donne \emph{\og \textophyp \fg}
 
-    \verb+\textopid+ donne \emph{\og \textopid \fg}
+    \macro{textopid} donne \emph{\og \textopid \fg}
 
-    \verb+\textopplot+ donne \emph{\og \textopplot \fg}
+    \macro{textopplot} donne \emph{\og \textopplot \fg}
 
-    \verb+\textoptest+ donne \emph{\og \textoptest \fg}
+    \macro{textoptest} donne \emph{\og \textoptest \fg}
 \vfill\null\end{multicols}
 
 % == All texts - END == %
@@ -434,7 +435,7 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 
 \paragraph{Un premier exemple -- Implication réciproque}
 
-En plus des opérateurs \verb+\iff+ et \verb+\implies+ proposés par \LaTeX{}, il a été ajouté l'opérateur \verb+\liesimp+, où l'on a inversé les groupes syllabiques de \verb+\implies+, un opérateur pour pour obtenir $\liesimp$
+En plus des opérateurs \macro{iff} et \macro{implies} proposés par \LaTeX{}, il a été ajouté l'opérateur \macro{liesimp}, où l'on a inversé les groupes syllabiques de \macro{implies}, un opérateur pour pour obtenir $\liesimp$
 \footnote{
 	Penser aussi aux preuves d'équivalence par double implication.
 },
@@ -513,18 +514,18 @@ Il faut retenir que les versions étoilées produisent des écritures symbolique
     \begin{center}
         \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
               & \verb+appli+ & \verb+choice+ & \verb+cond+ & \verb+cons+ & \verb+def+ & \verb+def*+ & \verb+hyp+ & \verb+id+ & \verb+id*+ & \verb+plot+ & \verb+test+ \\
-            \hline \verb+\eq+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\neq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ & $\times$ &          &          & $\times$ \\
-            \hline \verb+\l+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
-            \hline \verb+\g+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
-            \hline \verb+\leq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
-            \hline \verb+\geq+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
-            \hline \verb+\iff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notiff+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\implies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notimplies+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\liesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
-            \hline \verb+\notliesimp+ & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{eq} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{neq} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ & $\times$ &          &          & $\times$ \\
+            \hline \macro{l} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
+            \hline \macro{g} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
+            \hline \macro{leq} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
+            \hline \macro{geq} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          & $\times$ & $\times$ \\
+            \hline \macro{iff} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{notiff} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{implies} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{notimplies} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{liesimp} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
+            \hline \macro{notliesimp} & $\times$ & $\times$ & $\times$ & $\times$ &          &          & $\times$ &          &          &          & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:decorations-operators}
@@ -535,62 +536,94 @@ Il faut retenir que les versions étoilées produisent des écritures symbolique
 
 \subsection{Détailler un raisonnement} \label{explain-proof}
 
-\paragraph{Un exemple sur une petite étape}
+\paragraph{Exemple 1 -- Avec les réglages par défaut}
 
-La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
-
-\begin{latexex-flat}
-$0 \leq a < b$
-
-$\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
-
-$a^2 \leq b^2$
-\end{latexex-flat}
-
-Si vous souhaitez un espace devant le symbole, il suffit d'indiquer l'espace via une distance grâce à l'argument optionnel comme ci-après.
+L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \textbf{expl}-ain \textbf{next} step \fg} soit \emph{\og expliquer la prochaine étape \fg}
+\footnote{
+    Le gros du travail est fait par l'environnement \env{flalign} du package \texttt{amsmath} qui est automatiquement chargé par \texttt{lymath}.
+}.
+Voici un exemple avec les réglages par défaut \emph{(notez les espaces verticaux ajoutés automatiquement avant et après)}.
 
 \begin{latexex-flat}
-$0 \leq a < b$
-
-$\explain[1.5em]{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
-
-$a^2 \leq b^2$
+\begin{explain}
+    (a + b)^2
+        \explnext{On utilise $x^2 = x \cdot x$.}
+    (a + b) (a + b)
+        \explnext{Double développement depuis la parenthèse gauche.}
+    a^2 + a b + b a + b^2
+        \explnext{Commutativité du produit.}
+    a^2 + 2 a b + b^2
+\end{explain}
 \end{latexex-flat}
 
 
-\verb+\explain+ utilise les macros constantes suivantes.
-\begin{itemize}
-    \item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+\begin{remark}
+    La macro \macro{explnext} utilise les macros constantes suivantes.
+    \begin{itemize}
+        \item \macro{textexplainleft} et \macro{textexplainright} qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-    \item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
-\end{itemize}
+        \item \macro{textexplainspacein} est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
+    \end{itemize}
+\end{remark}
 
 
 % ---------------------- %
 
 
-\paragraph{Détailler des calculs}
+\paragraph{Exemple 2 -- Utiliser un autre symbole globalement}
 
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul tout un code \LaTeX{} sémantique.
+L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ par défaut. Ceci permet de faire ce qui suit sans effort.
 
-\begin{latexex-flat}
-\begin{flalign*}
-    & (a + b)^2
-    &&\\
-    & \explain{=}{On utilise $x^2 = x \cdot x$.}
-    &&\\
-    & (a + b) (a + b)
-    &&\\
-    & \explain{=}{Double développement depuis la parenthèse gauche.}
-    &&\\
-    & a^2 + a b + b a + b^2
-    &&\\
-    & \explain{=}{Commutativité du produit.}
-    &&\\
-    & a^2 + 2 a b + b^2
-    &&\\
-\end{flalign*}
-\end{latexex-flat}
+\begin{latexex}
+\begin{explain}[\viff]
+    x^2 + 10 x + 25 = 0
+        \explnext{Identité remarquable.}
+    (x + 5)^2 = 0
+        \explnext{$X^2 = 0$ si et 
+                  seulement si $X = 0$.}
+    x = -5
+\end{explain}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 -- Juste utiliser des symboles}
+
+Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché. Voici un court exemple de ceci.
+
+\begin{latexex}
+\begin{explain}[\viff]
+    a^2 = b^2
+        \explnext{}
+    a = \pm b
+\end{explain}
+\end{latexex}
+
+
+%% ---------------------- %
+
+
+\paragraph{Exemple 4 -- Utiliser un autre symbole localement}
+
+La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple farfelu d'utilisation.
+
+\begin{latexex}
+\begin{explain}[\viff]
+    0 \leq a < b
+        \explnext[\vimplies]%
+                 {Croissance de $x^2$ 
+                  sur $\RRp$.}
+    a^2 < b^2
+        \explnext{}
+    a^2 - b^2 < 0
+        \explnext{Identité remarquable.}
+    (a - b)(a + b) < 0
+        \explnext[\vimplies]{}
+    a \neq b
+\end{explain}
+\end{latexex}
 
 
 % ---------------------- %
@@ -807,16 +840,16 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
     \begin{center}
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
-            \hline \verb+\NN+ &          &          & $\times$ &          &          \\
-            \hline \verb+\PP+ &          &          &          &          &          \\
-            \hline \verb+\ZZ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\DD+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\QQ+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\RR+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \verb+\CC+ &          &          & $\times$ &          &          \\
-            \hline \verb+\HH+ &          &          & $\times$ &          &          \\
-            \hline \verb+\OO+ &          &          & $\times$ &          &          \\
-            \hline \verb+\FF+ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{NN} &          &          & $\times$ &          &          \\
+            \hline \macro{PP} &          &          &          &          &          \\
+            \hline \macro{ZZ} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{DD} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{QQ} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{RR} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \macro{CC} &          &          & $\times$ &          &          \\
+            \hline \macro{HH} &          &          & $\times$ &          &          \\
+            \hline \macro{OO} &          &          & $\times$ &          &          \\
+            \hline \macro{FF} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:suffixes-sets}
@@ -917,7 +950,7 @@ $\ZintervalC{-1}{4}
 
 \paragraph{Exemple d'unions}
 
-Ci-dessous est utilisée la macro \verb+\bigcup+ proposée par le package \verb+amssymb+.
+Ci-dessous est utilisée la macro \macro{bigcup} proposée par le package \verb+amssymb+.
 
 \begin{latexex}
 $A \cup B$
@@ -935,7 +968,7 @@ $\displaystyle \bigcup_{k=1}^{n} C_k$
 
 \paragraph{Exemple d'unions disjointes}
 
-Ci-dessous sont utilisées les macros \verb+\sqcup+ et \verb+\bigsqcup+ proposée par le package \verb+amssymb+.
+Ci-dessous sont utilisées les macros \macro{sqcup} et \macro{bigsqcup} proposée par le package \verb+amssymb+.
 
 \begin{latexex}
 $A\sqcup B$
@@ -953,7 +986,7 @@ $\displaystyle \bigsqcup_{k=1}^{n} C_k$
 
 \paragraph{Exemple d'intersections}
 
-Ci-dessous est utilisée la macro \verb+\bigcap+ proposée par le package \verb+amssymb+.
+Ci-dessous est utilisée la macro \macro{bigcap} proposée par le package \verb+amssymb+.
 
 \begin{latexex}
 $A \cap B$
@@ -1081,7 +1114,7 @@ $\pgline{A}{B}$
 
 \paragraph{Exemple 2 -- Les segments}
 
-Les macros \verb+\segment+ et \verb+\psegment+ ont un comportement similaire à \verb+\gline+ et \verb+\pgline+.
+Les macros \macro{segment} et \macro{psegment} ont un comportement similaire à \macro{gline} et \macro{pgline}.
 
 \begin{latexex}
 $\segment{A}{B}$ ,
@@ -1109,7 +1142,7 @@ $\phgline{A}{B}$
 
 \paragraph{Exemple 4 -- D'autres demi-droites}
 
-Ce qui suit nécessite d'utilise l'argument optionnel de \verb+\gline+ et \verb+\pgline+. La valeur \verb+OC+ provient de \textbf{O}-pened--\textbf{C}-losed, soit ouvert--fermé en anglais.
+Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \verb+OC+ provient de \textbf{O}-pened--\textbf{C}-losed, soit ouvert--fermé en anglais.
 
 \begin{latexex}
 $\gline[OC]{A}{B}$ ,
@@ -1129,7 +1162,7 @@ $\pgline[OC]{A}{B}$
 
 \subsubsection{Droites parallèles ou non}
 
-Les opérateurs \verb+\parallel+ et \verb+\nparallel+ utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \verb+\stdnparallel+ est un alias de \verb+\nparallel+ fourni par le package \verb+amssymb+, et \verb+\stdparallel+ est un alias de la version standard de \verb+\parallel+ proposée par \LaTeX{}.
+Les opérateurs \macro{parallel} et \macro{nparallel} utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \macro{stdnparallel} est un alias de \macro{nparallel} fourni par le package \verb+amssymb+, et \macro{stdparallel} est un alias de la version standard de \macro{parallel} proposée par \LaTeX{}.
 
 \begin{latexex}
 $\pgline{A}{B} \parallel \pgline{C}{D}$
@@ -1271,6 +1304,66 @@ $\vcrossprod{i}{j}$
 
 
 % ---------------------- %
+
+
+\paragraph{Exemple d'utilisation - Explication des calculs}
+
+Dans l'exemple suivant, le préfixe \verb+c+, qui double cette lettre au début, est pour \textbf{c}-oordinates, et \verb+v+ pour \textbf{v}-ector.
+
+\begin{latexex}
+$\ccrossprod{\vect{u}}{x }{y }{z }%
+            {\vect{v}}{x'}{y'}{z'}
+=
+ \vccrossprod{u}{x }{y }{z }%
+             {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+% ---------------------- %
+% \section{Géométrie}
+
+%\subsection{Vecteurs}
+
+\subsubsection{Plan -- Déterminant de deux vecteurs}
+
+\paragraph{Exemple d'utilisation - Version décorée}
+
+Dans l'exemple suivant, le préfixe \verb+c+ est pour \textbf{c}-oordinates.
+
+\begin{latexex}
+$\cdetplane{\vect{u}}{x }{y }%
+           {\vect{v}}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple d'utilisation - Version non décorée}
+
+\begin{latexex}
+$\cdetplane*{\vect{u}}{x }{y }%
+            {\vect{v}}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple d'utilisation - Versions courtes}
+
+Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+
+\begin{latexex}
+$\vcdetplane{u}{x }{y }%
+            {v}{x'}{y'}
+=
+ \vcdetplane*{u}{x }{y }%
+             {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
 %\section{Géométrie}
 
 \subsection{Coordonnées}
@@ -1312,7 +1405,7 @@ Commençons par la manière la plus basique d'écrire un repère \textit{(nous v
 
 \begin{latexex}
 $\axes{\pt{O} %
-       | \pt{I} | \pt{J}}$
+     | \pt{I} | \pt{J}}$
 \end{latexex}
 
 
@@ -1325,13 +1418,13 @@ Dans l'exemple ci-dessous, on voit que la version étoilée produit des petites 
 \begin{latexex}
 $\displaystyle
  \axes{\pt{O} %
-       | \frac{7}{3} \vect{i} %
-       | \vect{j}}$
+     | \frac{7}{3} \vect{i} %
+     | \vect{j}}$
 ou
 $\displaystyle
  \axes*{\pt{O} %
-       | \frac{7}{3} \vect{i} %
-       | \vect{j}}$
+     | \frac{7}{3} \vect{i} %
+     | \vect{j}}$
 \end{latexex}
 
 
@@ -1344,14 +1437,14 @@ Il faut au minimum deux "morceaux" séparés par des barres \verb+|+, cas de la 
 
 \begin{latexex}
 $\axes{\pt{O} %
-       | \vect*{i}{1} %
-       | \vect*{i}{2} %
-       | \vect*{i}{3} %
-       | \dots %
-       | \vect*{i}{9} %
-       | \vect*{i}{10} %
-       | \vect*{i}{11} %
-       | \vect*{i}{12}}$
+     | \vect*{i}{1} %
+     | \vect*{i}{2} %
+     | \vect*{i}{3} %
+     | \dots %
+     | \vect*{i}{9} %
+     | \vect*{i}{10} %
+     | \vect*{i}{11} %
+     | \vect*{i}{12}}$
 \end{latexex}
 
 
@@ -1366,7 +1459,7 @@ Dans l'exemple suivant, le préfixe \verb+p+ est pour \textbf{p}-oint.
 $\paxes{O | I | J | K}$
 au lieu de
 $\axes{\pt{O} %
-       | \pt{I} | \pt{J} | \pt{K}}$
+     | \pt{I} | \pt{J} | \pt{K}}$
 \end{latexex}
 
 
@@ -1867,7 +1960,7 @@ $\displaystyle
      =
      \stdint_{a}^{b} \stdint_{c}^{d} \stdint_{e}^{f}
      F(x;y;z) \dd{x} \dd{y} \dd{z}$.
-     Nous avons obtenu ce résultat en utilisant \verb+\stdint+ qui est l'opérateur proposé de façon standard par \LaTeX.
+     Nous avons obtenu ce résultat en utilisant \macro{stdint} qui est l'opérateur proposé de façon standard par \LaTeX.
 \end{remark}
 
 
@@ -1999,7 +2092,7 @@ $\bigtheta{}$
 
 \paragraph{Exemple d'utilisation 2}
 
-Dans l'exemple suivant, $f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $n \geqslant n_0$ implique $m g(n) \leqslant f(n) \leqslant M g(n)$.
+Dans l'exemple suivant, $f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $m g(n) \leqslant f(n) \leqslant M g(n)$ dès que $n \geqslant n_0$.
 
 \begin{latexex}
 $f(n) = \bigtheta{g(n)}$
@@ -2207,7 +2300,7 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 
 \subsection{Opérateurs de base}
 
-Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+ ont été ajoutés comme alias respectifs de \verb+\mid+, \verb+\nmid+ et \verb+\bmod+ qui sont proposés par le package \verb+amssymb+.
+Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{notdivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+.
 
 \begin{latexex}
 $10 \divides 150 = 10 | 150$ ,
@@ -2490,17 +2583,16 @@ $\begin{bNiceArray}%
     \addtocounter{cntaij}{-1}%
     \arabic{cntaij}%
 }
+Si $a_{ij} = i + j - 1$ alors
 
-$\begin{bNiceArray}{*{5}{>{\aij}C}}
+$(a_{ij})_{1 \leq i \leq 3 , 1 \leq j \leq 5}
+=
+\begin{bNiceArray}{*{5}{>{\aij}C}}
     & & & & \\
     & & & & \\
     & & & &
-\end{bNiceArray}
-=
-(a_{ij})_{1 \leq i \leq 3 , 1 \leq j \leq 5}$
-
-où $a_{ij} = i + j - 1$
-\end{latexex}$
+\end{bNiceArray}$
+\end{latexex}
 \newpage
 
 \section{Historique}
@@ -2573,37 +2665,37 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item Pour les intervalles, \verb+\CSinterval+ a été déplacée dans le package \verb+\lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+        \item Pour les intervalles, \macro{CSinterval} a été déplacée dans le package \verb+lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
     
         % ------------ %
     
         \item En logique, il y a eu les modifications suivantes.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\eqdef**+ a été supprimé. Voir la macro \verb+\Store*+ du package \verb+\lyalgo+.
+            \item \macro{eqdef**} a été supprimé. Voir la macro \macro{Store*} du package \verb+lyalgo+.
     
-            \item Différentes versions de l'opérateur $\exists$ via \verb+\existsone+ et \verb+\existmulti+ avec leurs versions négatives \verb+\nexistsone+ et \verb+\nexistmulti+.
+            \item Différentes versions de l'opérateur $\exists$ via \macro{existsone} et \macro{existmulti} avec leurs versions négatives \macro{nexistsone} et \macro{nexistmulti}.
     
-            \item Deux nouvelles macros \verb+\eqplot+ et \verb+\eqappli+ pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \verb+\textopplot+ et \verb+\textopappli+.
+            \item Deux nouvelles macros \macro{eqplot} et \macro{eqappli} pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \macro{textopplot} et \macro{textopappli}.
     
-            \item Ajout des formes négatives \verb+\niff+, \verb+\nimplies+ et \verb+\nliesimp+.
+            \item Ajout des formes négatives \macro{niff}, \macro{nimplies} et \macro{nliesimp}.
     
-            \item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \verb+\iff+, \verb+\implies+ et \verb+\liesimp+ et leurs formes négatives.
+            \item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \macro{iff}, \macro{implies} et \macro{liesimp} et leurs formes négatives.
     
-            \item Une macro \verb+\textoptest+ a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
+            \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     
         % ------------ %
     
         \item En analyse, il y a eu les renommages suivants.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\hypergeo+ est devenu \verb+\seqhypergeo+.
+            \item \macro{hypergeo} est devenu \macro{seqhypergeo}.
     
-            \item \verb+\suprageo+ est devenu \verb+\seqsuprageo+.
+            \item \macro{suprageo} est devenu \macro{seqsuprageo}.
         \end{itemize}
     
         % ------------ %
     
-        \item En géométrie, \verb+\notparallel+ est devenu \verb+\nparallel+.
+        \item En géométrie, \macro{notparallel} est devenu \macro{nparallel}.
     \end{itemize}
 
 % ------------------------ %
@@ -2614,17 +2706,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item En algèbre, il y a eu les renommages ci-dessous qui avaient été oubliés.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\polyset+ est devenu \verb+\setpoly+.
+            \item \macro{polyset} est devenu \macro{setpoly}.
     
-            \item \verb+\polyfracset+ est devenu \verb+\setpolyfrac+.
+            \item \macro{polyfracset} est devenu \macro{setpolyfrac}.
     
-            \item \verb+\serieset+ est devenu \verb+\setserie+.
+            \item \macro{serieset} est devenu \macro{setserie}.
     
-            \item \verb+\seriefracset+ est devenu \verb+\setseriefrac+.
+            \item \macro{seriefracset} est devenu \macro{setseriefrac}.
     
-            \item \verb+\polylaurentset+ est devenu \verb+\setpolylaurent+.
+            \item \macro{polylaurentset} est devenu \macro{setpolylaurent}.
     
-            \item \verb+\serielaurentset+ est devenu \verb+\setserielaurent+.
+            \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
         \end{itemize}
     \end{itemize}
 
@@ -2634,31 +2726,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item En logique, la macro \verb+\explain+ possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \verb+\explain*+ et \verb+\textexplainspacebefore+ ont été supprimées.
+        \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \macro{explain*} et \macro{textexplainspacebefore} ont été supprimées.
     
         % ------------ %
     
         \item En probabilité, voici ce qui a évolué.
         \begin{itemize}[itemsep=.5em]
-            \item Les macros \verb+\probacond+ et \verb+\probacond*+ n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \verb+\probacond**+ ou \verb+\dprobacond**+.
+            \item Les macros \macro{probacond} et \macro{probacond*} n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \macro{probacond**} ou \macro{dprobacond**}.
     
             \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
-                      La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+                  La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     
         % ------------ %
     
         \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\algeset+ est devenu \verb+\setalge+.
+            \item \macro{algeset} est devenu \macro{setalge}.
     
-            \item \verb+\geoset+ est devenu \verb+\setgeo+.
+            \item \macro{geoset} est devenu \macro{setgeo}.
     
-            \item \verb+\geneset+ est devenu \verb+\setgene+.
+            \item \macro{geneset} est devenu \macro{setgene}.
     
-            \item \verb+\probaset+ est devenu \verb+\setproba+.
+            \item \macro{probaset} est devenu \macro{setproba}.
     
-            \item \verb+\specialset+ est devenu \verb+\setspecial+.
+            \item \macro{specialset} est devenu \macro{setspecial}.
         \end{itemize}
     \end{itemize}
 
@@ -2670,22 +2762,22 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item Des nouveaux outils spécifiques aux probabilités.
         \begin{itemize}[itemsep=.5em]
-            \item Les macros \verb+\probacond+ et \verb+\probacond*+ servent à écrire des probabilités conditionnelles.
+            \item Les macros \macro{probacond} et \macro{probacond*} servent à écrire des probabilités conditionnelles.
     
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     
         % ------------ %
     
-        \item En géométrie, la macro \verb+\notparallel+ a été rajoutée.
+        \item En géométrie, la macro \macro{notparallel} a été rajoutée.
     
         % ------------ %
     
-        \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \verb+\CSinterval+ afin d'obtenir quelque chose comme \verb+a..b+.
+        \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \macro{CSinterval} afin d'obtenir quelque chose comme \verb+a..b+.
     
         % ------------ %
     
-        \item En logique, il y a deux nouvelles macros sémantiques \verb+\neqid+ et \verb+\eqchoice+.
+        \item En logique, il y a deux nouvelles macros sémantiques \macro{neqid} et \macro{eqchoice}.
     \end{itemize}
 
 % ------------------------ %
@@ -2694,32 +2786,32 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
+        \item Ajout des macros \macro{dsum} et \macro{dprod} qui sont vis à vis de \macro{sum} et \macro{prod} des équivalents de \macro{dfrac} pour \macro{frac}.
     
         % ------------ %
     
-        \item En arithmétique, ajout des opérateurs \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+.
+        \item En arithmétique, ajout des opérateurs \macro{divides}, \macro{notdivides} et \macro{modulo}.
     
         % ------------ %
     
         \item En géométrie, une nouvelle macro et un opérateur modifié.
         \begin{itemize}[itemsep=.5em]
-            \item \verb+\pts+ permet d'indiquer plusieurs points.
+            \item \macro{pts} permet d'indiquer plusieurs points.
     
-            \item \verb+\parallel+ utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+            \item \macro{parallel} utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
         \end{itemize}
     
         % ------------ %
     
         \item En logique, il y a les nouveautés suivantes.
         \begin{itemize}[itemsep=.5em]
-            \item La version doublement étoilée \verb+\eqdef**+ donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+            \item La version doublement étoilée \macro{eqdef**} donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
     
-            \item Ajout de \verb+\liesimp+ comme alias de \verb+\Longleftarrow+.
+            \item Ajout de \macro{liesimp} comme alias de \macro{Longleftarrow}.
     
-            \item Les macros \verb+\vimplies+, \verb+\viff+ et \verb+\vliesimp+ sont des versions verticales de \verb+\implies+, \verb+\iff+ et \verb+\liesimp+.
+            \item Les macros \macro{vimplies}, \macro{viff} et \macro{vliesimp} sont des versions verticales de \macro{implies}, \macro{iff} et \macro{liesimp}.
     
-            \item Comme pour les égalités, il existe les macros \verb+\impliestest+, \verb+\iffhyp+ ... etc.
+            \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
         \end{itemize}
     \end{itemize}
 
@@ -2931,13 +3023,19 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 \subsubsection{Détailler un raisonnement}
 
-\IDmacro{explain}{1}{2}
+\IDenv{explain}{1}
 
-\IDoption{} espacement avant le symbole. Valeur par défaut : \verb+0em+.
+\IDoption{} le symbole à utiliser dans l'environnement, la valeur par défaut étant \verb+=+ .
 
-\IDarg{1} un symbole.
 
-\IDarg{2} une courte explication.
+\separation
+
+
+\IDmacro{explnext}{1}{1}
+
+\IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
+
+\IDarg{} le texte de l'explication qui peut être vide si aucune explication n'est à afficher.
 \subsubsection{\texorpdfstring{Des versions alternatives du quantificateur $\exists$}%
                           {Des versions alternatives du quantificateur existentiel}}
 
@@ -3415,9 +3513,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{dotprod}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -3425,9 +3523,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
 % ---------------------- %
@@ -3440,9 +3538,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{adotprod*}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -3450,9 +3548,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
 % ---------------------- %
@@ -3464,9 +3562,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{crossprod}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -3474,9 +3572,95 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+
+\separation
+
+
+\IDmacro*{ccrossprod}{8}  où \quad \verb+c = c-oordinates+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro*{vccrossprod}{8} où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+\subsubsection{Plan -- Déterminant de deux vecteurs}
+
+\IDmacro*{cdetplane}{6}  où \quad \verb+c = c-oordinates+
+
+\IDmacro*{cdetplane*}{6} où \quad \verb+c = c-oordinates+
+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro*{vcdetplane}{6}  où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+\IDmacro*{vcdetplane*}{6} où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
 \subsubsection{Coordonnées}
 
 \IDmacro*{coord}{1}
@@ -3516,9 +3700,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
 \begin{itemize}[topsep=0pt]
-	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
+	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \macro{pt} sera automatiquement appliquée.
 
-	\item Viennent ensuite les noms des points "définissant" chaque axe. Pour chacun de ces points la macro-commande \verb+\pt+ sera automatiquement appliquée.
+	\item Viennent ensuite les noms des points "définissant" chaque axe. Pour chacun de ces points la macro-commande \macro{pt} sera automatiquement appliquée.
 \end{itemize}
 
 
@@ -3531,7 +3715,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \begin{itemize}[topsep=0pt]
 	\item Le premier morceau est l'origine du repère.
 
-	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
+	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \macro{vect} sera automatiquement appliquée.
 \end{itemize}
 
 
@@ -3542,9 +3726,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
 \begin{itemize}[topsep=0pt]
-	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \verb+\pt+ sera automatiquement appliquée.
+	\item Le premier morceau est le nom de l'origine du repère sur laquelle la macro-commande \macro{pt} sera automatiquement appliquée.
 
-	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \verb+\vect+ sera automatiquement appliquée.
+	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \macro{vect} sera automatiquement appliquée.
 \end{itemize}
 \subsubsection{Arcs circulaires}
 
@@ -3582,9 +3766,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{hangleorient}{2}  où \quad \verb+h = h-at+
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le premier vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le second vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -3594,9 +3778,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{hvangleorient}{2} où \quad \verb+h = h-at+ et \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du premier vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du second vecteur sans utiliser la macro \macro{vect}.
 \subsection{Analyse}
 
 \subsubsection{Constantes classiques}
@@ -3849,7 +4033,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{smallO}{1}
 
-\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
+\IDarg{} si l'argument est vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
 
 
 % ---------------------- %
@@ -3861,7 +4045,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{bigomega}{1}
 
-\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigomega{}$.
+\IDarg{} si l'argument est vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigomega{}$.
 
 
 % ---------------------- %
@@ -3873,7 +4057,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{bigtheta}{1}
 
-\IDarg{} si l'argument vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
+\IDarg{} si l'argument est vide, il est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
 \subsection{Probabilité}
 
 \subsubsection{Probabilité \og simple \fg}

@@ -1,0 +1,57 @@
+% == PACKAGES USED == %
+
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{nicematrix}
+
+
+% == DEFINITIONS == %
+
+% Source
+%	* F. Pantigny gives me good advices to use its great package nicematrix.
+%	* https://tex.stackexchange.com/a/548662/6880
+
+\newcommand\cdetplane{\@ifstar{\@cdetplane@star}{\@cdetplane@no@star}}
+
+\newcommand\@cdetplane@star[6]{%
+	\begin{vNiceMatrix}[first-row]
+		#1 & #4 \\
+		#2 & #5 \\
+		#3 & #6
+	\end{vNiceMatrix}
+}
+
+\newcommand\@cdetplane@no@star[6]{%
+	\begin{vNiceMatrix}[first-row,columns-width=1.1em]
+		#1 & #4  \\
+		#2 & #5  \\
+		#3 & #6
+   		%%
+		\CodeAfter
+    	\begin{tikzpicture}
+    		\path (1-1.east) 
+    			  -- node[below=0.35em,red,circle,inner sep=1.5pt] 
+			         (minus) {\tiny$-$}
+			      (1-2.west);
+    		\draw [red,->]
+     			   let \p1=($(minus.east)-(minus.center)$) in 
+    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
+		   			   arc[start angle=60,end angle=-240,radius=\x1] 
+    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+    	\end{tikzpicture}   
+	\end{vNiceMatrix}
+}
+
+
+\newcommand\vcdetplane{\@ifstar{\@vcdetplane@star}{\@vcdetplane@no@star}}
+
+\newcommand\@vcdetplane@star[6]{%
+    \@cdetplane@star{\vect#1}{#2}{#3}%
+                   {\vect#4}{#5}{#6}%
+}
+
+\newcommand\@vcdetplane@no@star[6]{%
+    \@cdetplane@no@star{\vect#1}{#2}{#3}%
+                      {\vect#4}{#5}{#6}%
+}

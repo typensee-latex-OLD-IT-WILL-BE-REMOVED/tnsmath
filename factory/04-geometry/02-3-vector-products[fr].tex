@@ -75,9 +75,9 @@ $\vdotprod{i}{j}$
 
 \IDmacro*{dotprod}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -85,9 +85,9 @@ $\vdotprod{i}{j}$
 
 \IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
 % ---------------------- %
@@ -125,9 +125,9 @@ $\vadotprod*{i}{j}$
 
 \IDmacro*{adotprod*}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -135,9 +135,9 @@ $\vadotprod*{i}{j}$
 
 \IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
 % ---------------------- %
@@ -166,6 +166,22 @@ $\vcrossprod{i}{j}$
 % ---------------------- %
 
 
+\paragraph{Exemple d'utilisation - Explication des calculs}
+
+Dans l'exemple suivant, le préfixe \verb+c+, qui double cette lettre au début, est pour \textbf{c}-oordinates, et \verb+v+ pour \textbf{v}-ector.
+
+\begin{latexex}
+$\ccrossprod{\vect{u}}{x }{y }{z }%
+            {\vect{v}}{x'}{y'}{z'}
+=
+ \vccrossprod{u}{x }{y }{z }%
+             {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
 \subsubsection{Fiche technique}
 
 \paragraph{Produit vectoriel}
@@ -173,9 +189,9 @@ $\vcrossprod{i}{j}$
 
 \IDmacro*{crossprod}{2}
 
-\IDarg{1} le premier vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} le second vecteur qu'il faut taper via la macro \verb+\vect+.
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
 
 \separation
@@ -183,8 +199,54 @@ $\vcrossprod{i}{j}$
 
 \IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+
 
-\IDarg{1} le nom du premier vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} le nom du second vecteur sans utiliser la macro \verb+\vect+.
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+
+\separation
+
+
+\IDmacro*{ccrossprod}{8}  où \quad \verb+c = c-oordinates+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro*{vccrossprod}{8} où \quad \verb+c = c-oordinates+ 
+                                et \verb+v = v-ector+
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+
+\IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+
+\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+
 
 \end{document}

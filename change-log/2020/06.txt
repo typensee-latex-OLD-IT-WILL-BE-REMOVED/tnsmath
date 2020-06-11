@@ -1,4 +1,25 @@
 ==========
+2020-06-11
+==========
+
+**Logic and fundations:** the macro ``\explain`` has been deleted. Now you must use the environement ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
+
+
+**Geometry :** better formatting, but not still perfect, of calculations explained of the determinant of two vectors in a plane and of the cross product of two vectors of the 3D space.
+
+
+==========
+2020-06-09
+==========
+
+**Geometry :* two pedagogical useful new features for vectors.
+
+    1) Calculation explained of the determinant of two vectors in a plane : see ``\cdetplane``, ``\cdetplane*``, ``\vcdetplane`` and ``\vcdetplane*``.
+
+    1) Calculation explained of the cross product of two vectors of the 3D space : see ``\ccrossprod`` and ``\vccrossprod``.
+
+
+==========
 2020-06-08
 ==========
 
@@ -7,11 +28,11 @@
 
 **Analysis :** here are the new features.
 
-    1) ``\ch``, ``\sh``, ``\th``, ``\ach``, ``\ash`` and ``\ath`` have been renamed ``\fch``, ``\fsh``, ``\fth``, ``\afch``, ``\afsh`` and ``\afth``.
+    1) ``\ch``, ``\sh``, ``\th``, ``\ach``, ``\ash`` and ``\ath`` have been renamed ``\fch``, ``\fsh``, ``\fth``, ``\afch``, ``\afsh`` and ``\afth`` because ``\ch`` is used by some more serious package than ¨lymath.
 
-    1) The macros ``\acosh``, ``\asinh`` and ``\atanh`` have been added.
+    1) ``\acosh``, ``\asinh`` and ``\atanh`` have been added.
 
-    1) ``\derpar`` and ``\derpar*`` writes extensible braces before the derivation indication. For non extensible braces, there are ``\sderpar`` and ``\sderpar*``.
+    1) ``\derpar`` and ``\derpar*`` write extensible braces before the derivation the power indicated the degree of derivation. For non extensible braces, there are ``\sderpar`` and ``\sderpar*``.
 
     1) ``\stdint`` is the standard integral operator.
 
@@ -20,26 +41,27 @@
 
     1) ``\pts`` has been supressed because of its lake of semantic meaning.
 
-    1) `\gline`` and ``\pgline`` are for lines, whereas ``\hgline``is for half lines, and ``\segment`` is for segments.
+    1) `\gline`` and ``\pgline`` are for lines whereas ``\hgline``is for half lines and ``\segment`` is for segments.
 
 
 **Logic :** here are the enhancements.
 
     1) Inequalities can be decorated with "plot".
 
-    1) Negative versions of the vertical logic operators.
+    1) Negative versions of the vertical logic operators have been added.
 
 
-**Probability :** somes modifications have been made.
+**Probability :** some modifications have been made.
 
     1) ``\proba`` is a new macro for the writing of "basic" probabilities.
 
-    1) ``\probacond`` has a new signature whiwh is more logical.
+    1) ``\probacond`` has a new signature which is more logical.
 
 
 **One internal update regarding to ``amsmath``:** the macro ``\DeclareMathMacro`` has been changed to ``\DeclareMathOperator``.
 
 
-**Simplification of the documentation:** the ¨latex codes now just show the use of the macros outside any context such as to see directly what is proposed by the package, and the technical  informations have been moved to a dedicated section.
+**Simplification of the documentation:** the ¨latex codes just show now the use of the macros outside any context such as to see directly what is proposed by the package. Another thing : the technical informations have been moved to a dedicated section.
 
-**A better way to manage the changes :** see the folder path::``factory/99-major-change-log``.
+
+**A better way to manage internally the changes for the log :** see the folder path::``factory/99-major-change-log``.

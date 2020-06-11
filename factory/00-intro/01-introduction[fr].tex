@@ -64,13 +64,13 @@ $\displaystyle \int_a^b cos(x^2) dx
 Les macros partageant une même fonctionnalité mathématique suivent les deux règles suivantes.
 \begin{enumerate}
 	\item Un gros préfixe est utilisé : 
-	      par exemple, \verb+\derpow+ et \verb+\derfrac+ sont des macros pour rédiger des dérivées de fonctions
+	      par exemple, \macro{derpow} et \macro{derfrac} sont des macros pour rédiger des dérivées de fonctions
 	      \footnote{
-	      	Ce choix est assumé même si pour les macros du type \texttt{\textbackslash{}set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
+	      	Ce choix est assumé même si pour les macros du type \macro{set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
 		  }.
 
 	\item Un mini préfixe permet d'indiquer une spécialisation d'une macro : 
-	      par exemple, \verb+\nparallel+ est la version négative de \verb+\parallel+ \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
+	      par exemple, \macro{nparallel} est la version négative de \macro{parallel} \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
 \end{enumerate}
 
 
@@ -79,7 +79,7 @@ Les macros partageant une même fonctionnalité mathématique suivent les deux r
 
 \subsubsection{Les macros en mode \texttt{displaystyle}}
 
-Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commençant par la lettre \verb+d+.
+Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commençant par la lettre \verb+d+.
 
 
 % ---------------------- %
@@ -87,7 +87,7 @@ Les macros évitant d'avoir à taper \verb+\displaystyle+ auront un nom commenç
 
 \subsection{Versions étoilées}
 
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \verb+\derpow+ utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \macro{derpow} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
 
 
 % ---------------------- %
@@ -97,7 +97,7 @@ Les versions étoilées proposent des mises en forme correspondant aux cas les m
 
 \subsubsection{Nombre fixé d'arguments}
 
-Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \verb+\derfrac{f}{x}+.
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{derfrac\{f\}\{x\}}.
 
 
 % ---------------------- %
@@ -105,8 +105,8 @@ Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \
 
 \subsubsection{Nombre variable d'arguments}
 
-Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \verb+\coord{x | y | z | t}+ et \verb+\coord{x | y}+.
+Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \macro{coord\{x | y | z | t\}} et \macro{coord\{x | y\}}.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
-Ainsi dans \verb+\coord{x | y | z | t}+, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+Ainsi dans \macro{coord\{x | y | z | t\}}, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
 
 \end{document}

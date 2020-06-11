@@ -10,6 +10,7 @@
 
 \newcommand\RRp{RR+}
 \newcommand\vimplies{\Downarrow}
+\newcommand\viff{\Updownarrow}
 
 
 \begin{document}
@@ -18,62 +19,94 @@
 
 \subsection{Détailler un raisonnement} \label{explain-proof}
 
-\paragraph{Un exemple sur une petite étape}
+\paragraph{Exemple 1 -- Avec les réglages par défaut}
 
-La macro \verb+\explain+ prend deux arguments obligatoires : le premier est un symbole et le second une courte explication. Commençons par une simple étape de raisonnement détaillée comme suit.
-
-\begin{latexex-flat}
-$0 \leq a < b$
-
-$\explain{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
-
-$a^2 \leq b^2$
-\end{latexex-flat}
-
-Si vous souhaitez un espace devant le symbole, il suffit d'indiquer l'espace via une distance grâce à l'argument optionnel comme ci-après.
+L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \textbf{expl}-ain \textbf{next} step \fg} soit \emph{\og expliquer la prochaine étape \fg}
+\footnote{
+    Le gros du travail est fait par l'environnement \env{flalign} du package \texttt{amsmath} qui est automatiquement chargé par \texttt{lymath}.
+}.
+Voici un exemple avec les réglages par défaut \emph{(notez les espaces verticaux ajoutés automatiquement avant et après)}.
 
 \begin{latexex-flat}
-$0 \leq a < b$
-
-$\explain[1.5em]{\vimplies}{Par croissance de la fonction carrée sur $\RRp$.}$
-
-$a^2 \leq b^2$
+\begin{explain}
+    (a + b)^2
+        \explnext{On utilise $x^2 = x \cdot x$.}
+    (a + b) (a + b)
+        \explnext{Double développement depuis la parenthèse gauche.}
+    a^2 + a b + b a + b^2
+        \explnext{Commutativité du produit.}
+    a^2 + 2 a b + b^2
+\end{explain}
 \end{latexex-flat}
 
 
-\verb+\explain+ utilise les macros constantes suivantes.
-\begin{itemize}
-    \item \verb+\textexplainleft+ et \verb+\textexplainright+ qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
+\begin{remark}
+    La macro \macro{explnext} utilise les macros constantes suivantes.
+    \begin{itemize}
+        \item \macro{textexplainleft} et \macro{textexplainright} qui donnent $\textexplainleft$ et $\textexplainright$ respectivement par défaut.
 
-    \item \verb+\textexplainspacein+ est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
-\end{itemize}
+        \item \macro{textexplainspacein} est l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
+    \end{itemize}
+\end{remark}
 
 
 % ---------------------- %
 
 
-\paragraph{Détailler des calculs}
+\paragraph{Exemple 2 -- Utiliser un autre symbole globalement}
 
-Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \verb+amsmath+, qui est automatiquement chargé par \verb+lymath+, où l'on constate qu'il est relativement rapide de détailler un calcul tout un code \LaTeX{} sémantique.
+L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ par défaut. Ceci permet de faire ce qui suit sans effort.
 
-\begin{latexex-flat}
-\begin{flalign*}
-    & (a + b)^2
-    &&\\
-    & \explain{=}{On utilise $x^2 = x \cdot x$.}
-    &&\\
-    & (a + b) (a + b)
-    &&\\
-    & \explain{=}{Double développement depuis la parenthèse gauche.}
-    &&\\
-    & a^2 + a b + b a + b^2
-    &&\\
-    & \explain{=}{Commutativité du produit.}
-    &&\\
-    & a^2 + 2 a b + b^2
-    &&\\
-\end{flalign*}
-\end{latexex-flat}
+\begin{latexex}
+\begin{explain}[\viff]
+    x^2 + 10 x + 25 = 0
+        \explnext{Identité remarquable.}
+    (x + 5)^2 = 0
+        \explnext{$X^2 = 0$ si et 
+                  seulement si $X = 0$.}
+    x = -5
+\end{explain}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 -- Juste utiliser des symboles}
+
+Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché. Voici un court exemple de ceci.
+
+\begin{latexex}
+\begin{explain}[\viff]
+    a^2 = b^2
+        \explnext{}
+    a = \pm b
+\end{explain}
+\end{latexex}
+
+
+%% ---------------------- %
+
+
+\paragraph{Exemple 4 -- Utiliser un autre symbole localement}
+
+La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple farfelu d'utilisation.
+
+\begin{latexex}
+\begin{explain}[\viff]
+    0 \leq a < b
+        \explnext[\vimplies]%
+                 {Croissance de $x^2$ 
+                  sur $\RRp$.}
+    a^2 < b^2
+        \explnext{}
+    a^2 - b^2 < 0
+        \explnext{Identité remarquable.}
+    (a - b)(a + b) < 0
+        \explnext[\vimplies]{}
+    a \neq b
+\end{explain}
+\end{latexex}
 
 
 % ---------------------- %
@@ -95,12 +128,19 @@ Pour finir, voici un exemple avec l'environnement \verb+flalign+ du package \ver
 
 \paragraph{Détailler un raisonnement}
 
-\IDmacro{explain}{1}{2}
+\IDenv{explain}{1}
 
-\IDoption{} espacement avant le symbole. Valeur par défaut : \verb+0em+.
+\IDoption{} le symbole à utiliser dans l'environnement, la valeur par défaut étant \verb+=+ .
 
-\IDarg{1} un symbole.
 
-\IDarg{2} une courte explication.
+\separation
+
+
+\IDmacro{explnext}{1}{1}
+
+\IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
+
+\IDarg{} le texte de l'explication qui peut être vide si aucune explication n'est à afficher.
+
 
 \end{document}
