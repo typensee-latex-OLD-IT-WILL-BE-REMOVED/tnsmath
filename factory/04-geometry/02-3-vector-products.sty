@@ -64,37 +64,62 @@
 		\CodeAfter
     	\begin{tikzpicture}
     		\path (2-1.east) 
-    			  -- node[below=0.35em,blue,circle,inner sep=1.25pt]
+    			  -- node[below = 0.35em,
+			              blue,
+			              circle,
+			              inner sep = 1.25pt]
 			         (minusone) {\tiny$1$}
 			      (2-2.west);
     		\draw [blue,->]
-     			   let \p1=($(minusone.east)-(minusone.center)$) in 
-    	    		   (2-1.east) to[out=0,in=150]  (minusone.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (2-1.east-|2-2.west);
+     			   let \p1 = ($(minusone.east) - (minusone.center)$) in 
+    	    		   ([xshift = 0.5mm]2-1.east)
+			           to[out = 0, in = 137.5]
+			           (minusone.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]2-1.east-|2-2.west);
             %%
      		\path (3-1.east) 
-            	  -- node[below=0.35em,red,circle,inner sep=1.25pt] 
+            	  -- node[below = 0.35em,
+	                      red,
+	                      circle,
+	                      inner sep = 1.25pt] 
 			         (minustwo) {\tiny$2$}
                   (3-2.west);
     		\draw [red,->]
-     			   let \p1=($(minustwo.east)-(minustwo.center)$) in 
-    	    		   (3-1.east) to[out=0,in=150]  (minustwo.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (3-1.east-|3-2.west);
+     			   let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
+    	    		   ([xshift=0.5mm]3-1.east)
+			           to[out = 0, in = 137.5]
+			           (minustwo.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190] 
+			           ([xshift = -0.3mm]3-1.east-|3-2.west);
             %%
     		\path (1-1.east) 
-    			  -- node[below=0.35em,orange,circle,inner sep=1.25pt] 
+    			  -- node[below = 0.35em,
+			              orange,
+			              circle,
+			              inner sep = 1.25pt] 
 			         (minus) {\tiny$3$}
 			      (1-2.west);
     		\draw [orange,->]
-     			   let \p1=($(minus.east)-(minus.center)$) in 
-    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift=0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190] 
+			           ([xshift=-0.3mm]1-1.east-|1-2.west);
         \end{tikzpicture} 
 	\end{vNiceMatrix}
 }
+
 
 \newcommand\vccrossprod[8]{%
 	\ccrossprod{\vect{#1}}{#2}{#3}{#4}{\vect{#5}}{#6}{#7}{#8}%

@@ -1,9 +1,52 @@
 % == PACKAGES USED == %
 
-\usepackage{tikz}
-\usepackage{nicematrix}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{nicematrix}
 
 
 % == DEFINITIONS == %
 
 \NiceMatrixOptions{transparent}
+
+\newcommand\cdettwo[4]{%
+	\begin{vNiceMatrix}[columns-width=1.1em]
+		#1 & #2  \\
+		#3 & #4
+   		%%
+		\CodeAfter
+    	\begin{tikzpicture}
+    		\path (1-1.east) 
+    			  -- node[below = 0.45em,
+			  			  red,
+						  circle,
+						  inner sep = 1pt] 
+			         (minus) {\tiny$-$}
+			      (1-2.west);
+    		\draw [red,->]
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift = 0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]1-1.east-|1-2.west);
+    	\end{tikzpicture}   
+	\end{vNiceMatrix}
+}
+
+
+\newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}
+
+
+\newcommand\@cdetthree@star[9]{%
+	STAR
+}
+
+
+\newcommand\@cdetthree@no@star[9]{%
+	NO STAR
+}
+

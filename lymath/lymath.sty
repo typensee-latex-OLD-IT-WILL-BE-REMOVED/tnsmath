@@ -25,6 +25,7 @@
 \RequirePackage{trimspaces}
 \PassOptionsToPackage{Symbolsmallscale}{upgreek}
 \RequirePackage{upgreek}
+\RequirePackage{witharrows}
 \RequirePackage{xparse}
 \RequirePackage{xstring}
 \RequirePackage{yhmath}
@@ -380,6 +381,16 @@
 % -- CALCULATIONS EXPLAINED -- %
 % ---------------------------- %
 
+\newcommand\explnext{\@ifstar{\@explnext@star}{\@explnext@no@star}}
+\newcommand\@explnext@no@star{}
+\newcommand\@explnext@star{}
+
+\newcommand\@explain@sep@{=}
+
+\newcommand\explsymb{}
+
+% University version
+
 % [#1] : espace before
 %  #2  : an operator
 %  #3  : an explanation
@@ -387,12 +398,10 @@
 %    \kern#1 #2 {} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}%
 %}
 
-\newcommand\@explain@sep@{=}
-
-\newcommand\explnext[2][\@explain@sep@]{
+\newcommand\@explnext@university@no@star[2][\@explain@sep@]{
 	&&\\
     &
-    \kern-.3em #1
+    {#1}
     \if\relax\detokenize{#2}\relax\else
     	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}
 	\fi
@@ -400,12 +409,94 @@
     &
 }
 
+\newcommand\@explnext@university@star[3][\@explain@sep@]{
+    &&\\
+    &
+    {#1}
+    \if\relax\detokenize{#2}\relax\else
+    	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}
+	\fi
+    &&\\
+    &
+    \phantom{#1}
+    \if\relax\detokenize{#3}\relax\else
+    	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}
+	\fi
+    &&\\
+    &
+}
+
 \newenvironment{explain}[1][=]{
-	\renewcommand\@explain@sep@{#1}
+	\setlength{\abovedisplayskip}{0pt}%
+	\setlength{\belowdisplayskip}{0pt}%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{
+		\PackageError{lymath}{illegal use inside the environment explain}{}
+	}%
+	\renewcommand\@explnext@no@star\@explnext@university@no@star%
+	\renewcommand\@explnext@star\@explnext@university@star%
 	\csname flalign*\endcsname
 		&
 }{
 	\csname endflalign*\endcsname
+}
+
+
+% Middle school version
+
+\newlength\@lenght@explnext@middle
+
+\newcommand\@explnext@middle@school@no@star[2][\@explain@sep@]{
+    \if\relax\detokenize{#2}\relax\else
+    	\Arrow[tikz=<->]{#2}
+	\fi
+	\\
+    &#1
+}
+
+\newcommand\@explnext@middle@school@star[3][\@explain@sep@]{
+	\if\relax\detokenize{#2}\relax%
+		\if\relax\detokenize{#3}\relax%
+			\PackageError{lymath}{two empty arguments}{at least one none empty text is needed}
+		\else%
+			\Arrow[tikz = <-]{#3}%
+		\fi%
+	\else%
+		\if\relax\detokenize{#3}\relax%
+			\Arrow[tikz = ->]{#2}%
+		\else%
+			\settowidth\@lenght@explnext@middle{#2}
+			\global\@lenght@explnext@middle=\@lenght@explnext@middle
+			\Arrow[tikz = ->]{#2}
+			\Arrow[xoffset=\dimexpr\@lenght@explnext@middle+0.75em,
+			       tikz = <-]{#3}
+		\fi%
+	\fi%
+    \\
+    &#1
+}
+
+\newenvironment{aexplain}[1][=]{
+	\renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
+	\renewcommand\@explnext@star\@explnext@middle@school@star%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{
+		\PackageError{lymath}{illegal use inside the environment aexplain}{}
+	}%%
+	$\WithArrows
+		&\phantom{{}\@explain@sep@{}}
+}{
+	\endWithArrows$
+}
+
+\newenvironment{aexplain*}[1][=]{
+	\renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
+	\renewcommand\@explnext@star\@explnext@middle@school@star%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{&\@explain@sep@}%%
+	$\WithArrows
+}{
+	\endWithArrows$
 }
 
 
@@ -846,37 +937,62 @@
 		\CodeAfter
     	\begin{tikzpicture}
     		\path (2-1.east) 
-    			  -- node[below=0.35em,blue,circle,inner sep=1.25pt]
+    			  -- node[below = 0.35em,
+			              blue,
+			              circle,
+			              inner sep = 1.25pt]
 			         (minusone) {\tiny$1$}
 			      (2-2.west);
     		\draw [blue,->]
-     			   let \p1=($(minusone.east)-(minusone.center)$) in 
-    	    		   (2-1.east) to[out=0,in=150]  (minusone.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (2-1.east-|2-2.west);
+     			   let \p1 = ($(minusone.east) - (minusone.center)$) in 
+    	    		   ([xshift = 0.5mm]2-1.east)
+			           to[out = 0, in = 137.5]
+			           (minusone.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]2-1.east-|2-2.west);
             %%
      		\path (3-1.east) 
-            	  -- node[below=0.35em,red,circle,inner sep=1.25pt] 
+            	  -- node[below = 0.35em,
+	                      red,
+	                      circle,
+	                      inner sep = 1.25pt] 
 			         (minustwo) {\tiny$2$}
                   (3-2.west);
     		\draw [red,->]
-     			   let \p1=($(minustwo.east)-(minustwo.center)$) in 
-    	    		   (3-1.east) to[out=0,in=150]  (minustwo.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (3-1.east-|3-2.west);
+     			   let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
+    	    		   ([xshift=0.5mm]3-1.east)
+			           to[out = 0, in = 137.5]
+			           (minustwo.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190] 
+			           ([xshift = -0.3mm]3-1.east-|3-2.west);
             %%
     		\path (1-1.east) 
-    			  -- node[below=0.35em,orange,circle,inner sep=1.25pt] 
+    			  -- node[below = 0.35em,
+			              orange,
+			              circle,
+			              inner sep = 1.25pt] 
 			         (minus) {\tiny$3$}
 			      (1-2.west);
     		\draw [orange,->]
-     			   let \p1=($(minus.east)-(minus.center)$) in 
-    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift=0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190] 
+			           ([xshift=-0.3mm]1-1.east-|1-2.west);
         \end{tikzpicture} 
 	\end{vNiceMatrix}
 }
+
 
 \newcommand\vccrossprod[8]{%
 	\ccrossprod{\vect{#1}}{#2}{#3}{#4}{\vect{#5}}{#6}{#7}{#8}%
@@ -910,14 +1026,22 @@
 		\CodeAfter
     	\begin{tikzpicture}
     		\path (1-1.east) 
-    			  -- node[below=0.35em,red,circle,inner sep=1.5pt] 
+    			  -- node[below = 0.45em,
+			  			  red,
+						  circle,
+						  inner sep = 1pt] 
 			         (minus) {\tiny$-$}
 			      (1-2.west);
     		\draw [red,->]
-     			   let \p1=($(minus.east)-(minus.center)$) in 
-    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift = 0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]1-1.east-|1-2.west);
     	\end{tikzpicture}   
 	\end{vNiceMatrix}
 }
@@ -927,12 +1051,12 @@
 
 \newcommand\@vcdetplane@star[6]{%
     \@cdetplane@star{\vect#1}{#2}{#3}%
-                   {\vect#4}{#5}{#6}%
+                    {\vect#4}{#5}{#6}%
 }
 
 \newcommand\@vcdetplane@no@star[6]{%
     \@cdetplane@no@star{\vect#1}{#2}{#3}%
-                      {\vect#4}{#5}{#6}%
+                       {\vect#4}{#5}{#6}%
 }
 
 
@@ -1486,14 +1610,22 @@
 }
 
 
-% ----------------- %
-% -- CONDITIONAL -- %
-% ----------------- %
+% ---------- %
+% -- BASE -- %
+% ---------- %
 
 % Semantic probability
 
 \newcommand\proba[2][p]{%
-    #1\left( #2 \right)%
+    \mathchoice{% * Display style
+        #1\mskip-.65\medmuskip\left( #2 \right)%
+    }{%           * Text style
+        #1\mskip-.65\medmuskip\left( #2 \right)%
+    }{%           * Script style
+        #1\left( #2 \right)%
+    }{%           * Script script style
+        #1\left( #2 \right)%
+    }
 }
 
 
@@ -1525,6 +1657,13 @@
 
 \newcommand\@dprobacond@star@star[3][p]{%
     \@abstract@proba@cond{\dfrac}{#1}{#3}{#2}
+}
+
+
+% Expected value 
+
+\newcommand\expval[2][E]{%
+	\proba[\mathrm{#1}]{#2}%
 }
 
 
@@ -1789,3 +1928,44 @@
 % -------------- %
 
 \NiceMatrixOptions{transparent}
+
+\newcommand\cdettwo[4]{%
+	\begin{vNiceMatrix}[columns-width=1.1em]
+		#1 & #2  \\
+		#3 & #4
+   		%%
+		\CodeAfter
+    	\begin{tikzpicture}
+    		\path (1-1.east) 
+    			  -- node[below = 0.45em,
+			  			  red,
+						  circle,
+						  inner sep = 1pt] 
+			         (minus) {\tiny$-$}
+			      (1-2.west);
+    		\draw [red,->]
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift = 0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]1-1.east-|1-2.west);
+    	\end{tikzpicture}   
+	\end{vNiceMatrix}
+}
+
+
+\newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}
+
+
+\newcommand\@cdetthree@star[9]{%
+	STAR
+}
+
+
+\newcommand\@cdetthree@no@star[9]{%
+	NO STAR
+}

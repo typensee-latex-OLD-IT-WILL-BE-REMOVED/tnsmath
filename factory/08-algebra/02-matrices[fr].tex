@@ -15,15 +15,125 @@
 
 \subsection{Matrices}
 
-\paragraph{Comment ça marche ?}
+Tout le boulot ou presque est fait par l'excellent package \verb+nicematrix+ auquel on impose l'option \verb+transparent+ avec l'ajout 
+d'une macro
+%de deux macros
+\emph{\og maison \fg} à but pédagogique.
+Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre en général.
 
-Tout le boulot est fait par le package \verb+nicematrix+ auquel on impose l'option \verb+transparent+. Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre.
+
+\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+                              {Calculs expliqués des déterminants 2x2}}
+
+Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{alculer} et \prefix{two} est pour \inenglish{deux}.
+
+\begin{latexex}
+$\cdettwo{a}{b}%
+         {c}{d}$
+\end{latexex}                    
 
 
 % ---------------------- %
 
 
-\paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+                          {Calculs expliqués des déterminants 3x3}}
+
+\IDmacro*{cdettwo}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDarg{1} l'entrée à la position $(1, 1)$
+
+\IDarg{2} l'entrée à la position $(1, 2)$
+
+\extraspace
+
+\IDarg{3} l'entrée à la position $(2, 1)$
+
+\IDarg{4} l'entrée à la position $(2, 2)$                   
+
+
+
+
+
+
+
+
+%% ---------------------- %
+%
+%
+%\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                              {Calculs expliqués des déterminants 3x3}}
+%
+%Dans les exemples suivants, le préfixe \prefix{c} reste pour \whyprefix{c}{alculer} et \prefix{three} est pour \inenglish{trois}.
+%
+%
+%% ---------------------- %
+%
+%
+%\paragraph{Exemple 1 -- Bien pour les débutants}
+%
+%\begin{latexex}
+%$\cdetthree{a}{b}{c}%
+%           {x}{y}{z}%
+%           {r}{s}{t}$
+%\end{latexex}         
+%
+%
+%% ---------------------- %
+%
+%
+%\paragraph{Exemple 2 -- Plus efficace à l'usage}
+%
+%\begin{latexex}
+%$\cdetthree*{a}{b}{c}%
+%            {x}{y}{z}%
+%            {r}{s}{t}$
+%\end{latexex}                      
+%
+%
+%% ---------------------- %
+%
+%
+%\subsubsection{Fi    ches techniques}
+%
+%\paragraph{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                          {Calculs expliqués des déterminants 3x3}}
+%
+%\IDmacro*{cdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDmacro*{cdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDarg{1} l'entrée à la position $(1, 1)$
+%
+%\IDarg{2} l'entrée à la position $(1, 2)$
+%
+%\IDarg{3} l'entrée à la position $(1, 3)$
+%
+%\extraspace
+%
+%\IDarg{4} l'entrée à la position $(2, 1)$
+%
+%\IDarg{5} l'entrée à la position $(2, 2)$
+%
+%\IDarg{6} l'entrée à la position $(2, 3)$
+%
+%\extraspace
+%
+%\IDarg{7} l'entrée à la position $(3, 1)$
+%
+%\IDarg{8} l'entrée à la position $(3, 2)$
+%
+%\IDarg{9} l'entrée à la position $(3, 3)$
+%
+
+% ---------------------- %
+
+
+\subsubsection{Quelques exemples pour bien démarrer}
+
+\paragraph{Exemple 1 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\begin{pmatrix}
@@ -38,7 +148,37 @@ $\begin{pmatrix}
 % ---------------------- %
 
 
-\paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 2}
+
+\begin{latexex}
+$\begin{vmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{vmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 2}
+
+\begin{latexex}
+$\begin{bmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{bmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\begin{pNiceMatrix}[name = mymatrix]
@@ -56,7 +196,7 @@ $\begin{pNiceMatrix}[name = mymatrix]
 % ---------------------- %
 
 
-\paragraph{Exemple 3 adapté de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 4 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\left(
@@ -72,7 +212,7 @@ $\left(
 % ---------------------- %
 
 
-\paragraph{Exemple 4 proposé par l'auteur de \texttt{nicematrix} suite à une discussion par mail}
+\paragraph{Exemple 5 proposé par l'auteur de \texttt{nicematrix} suite à une discussion par mail}
 
 \begin{latexex}
 % Besoin du package ``ifthen``.
@@ -83,13 +223,14 @@ $\left(
 $\begin{bNiceArray}%
   {*{5}{>{%
     \ifthenelse{\value{iRow}>0}{\aij}{}%
-  }C}}%
-  [first-col,
-   first-row,
-   code-for-first-row
-   = \mathbf{\arabic{jCol}},
-   code-for-first-col
-   = \mathbf{\arabic{iRow}}]
+}C}}[
+    first-col,
+    first-row,
+    code-for-first-row
+      = \mathbf{\arabic{jCol}},
+    code-for-first-col
+      = \mathbf{\arabic{iRow}}
+  ]
       & & & & & \\
       & & & & & \\
       & & & & &
@@ -100,7 +241,7 @@ $\begin{bNiceArray}%
 % ---------------------- %
 
 
-\paragraph{Exemple 5 avec des calculs automatiques}
+\paragraph{Exemple 6 avec des calculs automatiques}
 
 \begin{latexex}
 \newcounter{cntaij}
@@ -112,13 +253,14 @@ $\begin{bNiceArray}%
 }
 Si $a_{ij} = i + j - 1$ alors
 
-$(a_{ij})_{1 \leq i \leq 3 , 1 \leq j \leq 5}
+$(a_{ij})_{1 \leq i \leq 3 ,
+           1 \leq j \leq 5}
 =
-\begin{bNiceArray}{*{5}{>{\aij}C}}
+ \begin{bNiceArray}{*{5}{>{\aij}C}}
     & & & & \\
     & & & & \\
     & & & &
-\end{bNiceArray}$
+ \end{bNiceArray}$
 \end{latexex}
 
 \end{document}

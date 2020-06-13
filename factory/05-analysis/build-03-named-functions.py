@@ -145,9 +145,6 @@ text_start, _, text_end = between(
 )
 
 
-
-
-
 template_tex = []
 lastmacros   = []
 lastfirst    = ""
@@ -157,23 +154,28 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
     if lastfirst:
         if lastfirst != onemacro[0] \
         or lastlenght != len(onemacro):
-            lastfirst  = onemacro[0]
-            lastlenght = len(onemacro)
-
             lastmacros = ", ".join(lastmacros)
+
+            if lastfirst == "f":
+                extra ="  où \\quad \\mwhyprefix{{f}}{{rench}}"
+
+            else:
+                extra = ""
 
             template_tex += [
                 f"""
 \\foreach \\k in {{{lastmacros}}}{{
 
-    \\IDmacro*{{\k}}{{0}}
+    \\IDmacro*{{\k}}{{0}}{extra}
 }}
                 """,
                 "\\separation"
                 ""
             ]
 
-            lastmacros     = []
+            lastfirst  = onemacro[0]
+            lastlenght = len(onemacro)
+            lastmacros = []
 
     else:
         lastfirst  = onemacro[0]

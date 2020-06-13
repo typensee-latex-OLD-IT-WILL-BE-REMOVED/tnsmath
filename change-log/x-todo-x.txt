@@ -8,12 +8,12 @@ VERSION = MAJOR.MINOR.PATCH
 
 > ---------------------------- <
 
-environnement pour explication
-    ---> faire mode de mef via witharrow (penser aux classes non scientifiques !)
+proba
+    ---> arbre
+            + var aléatoire à côté arbre
+            + chemin le long de pour proba du type A inter B   AUTO ????
 
-    D'OÙ CHAGT DE NUMÉRO SOUS-MINEUR CAR RÉELLE GROSSSE MODIF !
-
-
+    ---> An interesting example of decoration of a probabilistic tree has been added to the documentation : this is to show a path from the root to a leaf.
 
 
 > ---------------------------- <
@@ -21,6 +21,44 @@ environnement pour explication
 calcul élémentaire
     ---> tableaux de proprotionnalité : différentes représenation
     ---> 4ième proportionnelle
+    ---> witharrows : intégrer simplement l'exemple avec calcul dans cercle de la doc : top pour les 2nders et les colélgiens
+
+
+
+$\begin{WithArrows}[
+	format = c,
+	interline = 10mm,
+	tikz = {every node/.style = {circle,
+								 draw,
+								 auto=false,
+								 fill=gray!50,
+								 inner sep=1pt,
+								 font=\tiny}
+	}
+]
+	a
+		\Arrow{$\frac{x=x^X}{x_X}$}
+	\\
+	b
+		\Arrow{$y$}
+	\\
+	c
+		\Arrow{$y$}
+	\\
+	d
+\end{WithArrows}$
+
+
+
+
+
+
+
+
+> ---------------------------- <
+
+====> nel emplacent sut github !
+====> cookiecutter pour latex
 
 
 > ---------------------------- <
@@ -39,17 +77,6 @@ composition visulle e fonction
 
 système boîte noire fonction !
     ---> voir nouveau package diagram commutatif qui est top !
-
-
-> ---------------------------- <
-
-====> nel emplacent sut github !
-====> cookiecutter pour latex
-
-
-> ---------------------------- <
-
-amélioration du rendu critèe colinéarité et calc prod vecto
 
 
 > ---------------------------- <
@@ -174,3 +201,9 @@ support de toutes les lettres grecque via gamma ET NON \gamma !! pour la macro \
 
 faire une feuille testant les cas problématiques de chaque macro
     ---> passer via un fichier TeX du type xxxxx.visualtest.tex
+
+
+> ---------------------------- <
+
+explications
+    --> université : aligner (???) les accolades (besoin de mesurer les tailles de textes)

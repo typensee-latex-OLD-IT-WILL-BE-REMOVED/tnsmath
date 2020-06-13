@@ -91,6 +91,24 @@
 }
 
 
+\newcommand\whyprefix[2]{%
+	\textbf{\prefix{#1}}-#2%
+}
+
+\newcommand\mwhyprefix[2]{%
+	\texttt{#1 = #1-#2}%
+}
+
+\newcommand\prefix[1]{%
+	\texttt{#1}%
+}
+
+
+\newcommand\inenglish[1]{%
+	\emph{\og #1 \fg} en anglais%
+}
+
+
 \newcommand\ascii{\texttt{ASCII}}
 
 \makeatother % Technical doc - END
@@ -135,24 +153,24 @@ Malheureusement toute la puissance de \LaTeX{} permet d'écrire des codes très 
 Le modeste but du package \verb+lymath+ est de fournir quelques macros sémantiques pour la rédaction de formules mathématiques élémentaires. Considérons le code \LaTeX{} suivant.
 
 \begin{latexex-alone}
-Sachant que $\frac{df}{dx}(x) = 4 cos(x^2)$ sur $[a ; b]$ , nous avons :
+Sachant que $\frac{df}{dx}(x) = cos(x^2)$ sur $[a ; b]$ , nous avons :
 
-$\int_a^b cos(x^2) dx = \left[ \frac{1}{4} f(x) \right]_a^b$.
+$\int_a^b cos(x^2) dx = \left[ f(x) \right]_a^b$.
 \end{latexex-alone}
 
 
 Avec \verb+lymath+, vous pouvez écrire le code suivant.
 
 \begin{latexex-alone}
-Sachant que $\derfrac{f}{x}(x) = 4 cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
+Sachant que $\derfrac{f}{x}(x) = cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
 
-$\int_a^b cos(x^2) \dd{x} = \hook{\frac{1}{4} f(x)}{a}{b}$.
+$\int_a^b cos(x^2) \dd{x} = \hook{f(x)}{a}{b}$.
 \end{latexex-alone}
 
 
 Même si certaines commandes sont plus longues à écrire que ce que permet \LaTeX{}, il y a trois avantages à utiliser des commandes sémantiques.
 \begin{enumerate}
-	\item La mise en forme dans votre document sera consistante.
+	\item La mise en forme dans votre document devient consistante.
 
 	\item Il est facile de changer une mise en forme sur l'ensemble d'un document.
 
@@ -165,11 +183,12 @@ Même si certaines commandes sont plus longues à écrire que ce que permet \LaT
 
 \section{Comment lire cette documentation ?}
 
-Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes. Les exemples se présentent comme ci-dessous.
+Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes \emph{(voir la section \ref{techincal-ids})}. Les exemples se présentent comme ci-dessous.
 
 \begin{latexex}
-$\displaystyle \int_a^b cos(x^2) dx
- = \left[ \frac{1}{4} f(x) \right]_a^b$
+$ \displaystyle
+  \int_a^b cos(x^2) dx
+= \left[ f(x) \right]_a^b$
 \end{latexex}
 
 
@@ -191,8 +210,17 @@ Les macros partageant une même fonctionnalité mathématique suivent les deux r
 		  }.
 
 	\item Un mini préfixe permet d'indiquer une spécialisation d'une macro : 
-	      par exemple, \macro{nparallel} est la version négative de \macro{parallel} \emph{(le mini préfixe \texttt{n} est pour \textbf{n}-ot.)}.
+	      par exemple, \macro{nparallel} est la version négative de \macro{parallel} \emph{(le mini préfixe \prefix{n} est pour \whyprefix{n}{ot} soit \inenglish{non})}.
 \end{enumerate}
+
+
+% ---------------------- %
+
+
+\subsubsection{Les macros standards redéfinies}
+
+Certaines macros comme \verb+\frac+ sont un peu revues par \verb+lymath+.
+Dans ce cas, les versions standard restent accessibles en utilisant le préfixe \prefix{std} ce qui donne ici la macro \verb+\stdfrac+.
 
 
 % ---------------------- %
@@ -200,7 +228,7 @@ Les macros partageant une même fonctionnalité mathématique suivent les deux r
 
 \subsubsection{Les macros en mode \texttt{displaystyle}}
 
-Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commençant par la lettre \verb+d+.
+Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commençant par la lettre \prefix{d}.
 
 
 % ---------------------- %
@@ -208,15 +236,15 @@ Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commenç
 
 \subsection{Versions étoilées}
 
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels, les moins pratiques : par exemple, la macro \macro{derpow} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels ou les moins pratiques : par exemple, la macro \macro{derpow} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
 
 
 % ---------------------- %
 
 
-\subsection{Les arguments, deux conventions à connaître}
+\subsection{Les arguments : deux conventions à connaître}
 
-\subsubsection{Nombre fixé d'arguments}
+\subsubsection{Avec un nombre fixé d'arguments}
 
 Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{derfrac\{f\}\{x\}}.
 
@@ -224,11 +252,19 @@ Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \
 % ---------------------- %
 
 
-\subsubsection{Nombre variable d'arguments}
+\subsubsection{Avec un nombre variable d'arguments}
 
 Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \macro{coord\{x | y | z | t\}} et \macro{coord\{x | y\}}.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
 Ainsi dans \macro{coord\{x | y | z | t\}}, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+
+
+% ---------------------- %
+
+
+\section{Couleurs}
+
+Certaines macros utilisent de la couleur. Les choix faits sont tels que l'impression en noir et blanc ne soit pas impactée.
 \section{Deux séparateurs d'arguments par défaut}
 
 La macro \macro{lymathsep} définit le séparateur d'arguments de premier niveau, et \macro{lymathsubsep} celui des arguments de deuxième niveau.
@@ -480,6 +516,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
 \paragraph{À quoi cela sert-il ?}
 
 Dans la section \ref{explain-proof} est expliqué comment détailler les étapes d'un raisonnement. Avec cet outil, il devient utile d'avoir des versions verticales non décorées des symboles d'équivalence et d'implication. Voici comment les obtenir \emph{(tous les cas possibles ont été indiqués)}.
+Bien entendu le préfixe \prefix{v} est pour \whyprefix{v}{ertical}.
 
 \begin{latexex}
 \begin{tabular}{cccccc}
@@ -534,22 +571,28 @@ Il faut retenir que les versions étoilées produisent des écritures symbolique
 % == Table - END == %
 %\section{Logique et fondements}
 
-\subsection{Détailler un raisonnement} \label{explain-proof}
+\subsection{Détailler un raisonnement -- Version pour le lycée et après} \label{explain-proof}
 
 \paragraph{Exemple 1 -- Avec les réglages par défaut}
 
-L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \textbf{expl}-ain \textbf{next} step \fg} soit \emph{\og expliquer la prochaine étape \fg}
+L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \whyprefix{expl}{ain} \prefix{next} step \fg} soit \inenglish{expliquer la prochaine étape}
 \footnote{
     Le gros du travail est fait par l'environnement \env{flalign} du package \texttt{amsmath} qui est automatiquement chargé par \texttt{lymath}.
 }.
-Voici un exemple avec les réglages par défaut \emph{(notez les espaces verticaux ajoutés automatiquement avant et après)}.
+Voici un exemple avec les réglages par défaut où \macro{explnext*} permet d'utiliser deux lignes au lieu d'une seule
+\footnote{
+    Les explications données ne doivent pas être trop longues car ce serait contre productif.
+    Avec deux lignes on peut distinguer une phase montante et une autre descendante.
+}.
+Notons au passage que ce type de présentation n'est sûrement pas bien adaptée à un jeune public pour lequel une 2\ieme{} façon de détailler des calculs ou un raisonnement est proposée dans la section \ref{explain-proof-for-youngs} un peu plus bas.
 
 \begin{latexex-flat}
 \begin{explain}
     (a + b)^2
         \explnext{On utilise $x^2 = x \cdot x$.}
     (a + b) (a + b)
-        \explnext{Double développement depuis la parenthèse gauche.}
+        \explnext*{$\Downarrow$ Double développement depuis la parenthèse gauche.}%
+                  {$\Uparrow$ Double factorisation non nécessairement évidente.}
     a^2 + a b + b a + b^2
         \explnext{Commutativité du produit.}
     a^2 + 2 a b + b^2
@@ -579,8 +622,8 @@ L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ pa
     x^2 + 10 x + 25 = 0
         \explnext{Identité remarquable.}
     (x + 5)^2 = 0
-        \explnext{$X^2 = 0$ si et 
-                  seulement si $X = 0$.}
+        \explnext{$P^2 = 0$ si et 
+                  seulement si $P = 0$.}
     x = -5
 \end{explain}
 \end{latexex}
@@ -591,7 +634,7 @@ L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ pa
 
 \paragraph{Exemple 3 -- Juste utiliser des symboles}
 
-Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché. Voici un court exemple de ceci.
+Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché \emph{(ne pas oublier les accolades vides)}. Voici un court exemple de ceci.
 
 \begin{latexex}
 \begin{explain}[\viff]
@@ -607,7 +650,7 @@ Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le sy
 
 \paragraph{Exemple 4 -- Utiliser un autre symbole localement}
 
-La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple farfelu d'utilisation.
+La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple d'utilisation complètement farfelu bien que correct.
 
 \begin{latexex}
 \begin{explain}[\viff]
@@ -622,6 +665,160 @@ La macro \macro{explnext} possède un argument optionnel qui utilise par défaut
     (a - b)(a + b) < 0
         \explnext[\vimplies]{}
     a \neq b
+\end{explain}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Détailler un raisonnement -- Version pour les collégiens} \label{explain-proof-for-youngs}
+
+L'environnement \env{aexplain}
+\footnote{
+    Cet environnement utilise le package \texttt{witharrows} qui est très sympathique pour expliquer des étapes de calcul.
+}
+utilise des flèches pour indiquer les explications
+\emph{(\prefix{a} est pour \whyprefix{a}{rrow} soit \inenglish{flèche})}.
+Son fonctionnement est similaire à celui de \env{explain} si ce n'est que la macro \macro{explnext*} permet d'avoir une flèche unidirectionnelle, vers le haut ou le bas au choix, ou bien d'écrire deux indications dont l'une est montante et l'autre descendante.
+
+\medskip
+
+Il existe aussi l'environnement \env{aexplain*} lorsque la toute 1\iere{} étape n'est pas expliquée.
+Par contre ceci nécessite au tout début de l'environnement l'usage de la macro très spéciale \macro{explsymb}.
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 1 -- Flèche à double sens ou sans flèche}
+
+\begin{latexex}
+\begin{aexplain}
+    (a + b)^2 
+        \explnext{Identité remarquable}
+    a^2 + 2 a b + b^2
+        \explnext{}
+    a^2 + b^2 + 2 a b
+\end{aexplain}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 2 -- Des flèches unidirectionnelles}
+
+Ce qui suit est juste là comme démo. car les explications y sont un peu farfelues.
+
+\begin{latexex-flat}
+\begin{aexplain}
+    (a + b) (a + b)
+        \explnext*{Double développement.}%
+                  {Double factorisation (pas simple).}
+    a^2 + a b + b a + b^2
+        \explnext*{Commutativité du produit.}%
+                  {}
+    a^2 + 2 a b + b^2
+        \explnext*{}%
+                  {Commutativité de l'addition.}
+    a^2 + b^2 + 2 a b
+\end{aexplain}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 -- Ne pas expliquer le tout début}
+
+Ci-dessous, la macro \macro{explsymb} n'est à utiliser qu'une seule fois !
+
+\begin{latexex-flat}
+\begin{aexplain*}
+    (a + b) (a + b)
+        \explsymb{}
+    (a + b)^2
+        \explnext{Identité remarquable.}
+    a^2 + b^2 + 2 a b
+\end{aexplain*}
+\end{latexex-flat}
+
+% ---------------------- %
+
+
+\paragraph{Exemple 4 -- Choisir son symbole}
+
+Voici comment faire avec la version non étoilée.
+
+\begin{latexex}
+\begin{aexplain}[\iff]
+    a^2 + 2 a b + b^2 = 0
+        \explnext{}
+    (a + b)^2 = 0
+        \explnext{$P^2 = 0$ ssi $P = 0$.}
+    a + b = 0
+\end{aexplain}
+\end{latexex}
+
+
+Avec la version étoilée, on obtient ce qui suit.
+
+\begin{latexex-flat}
+\begin{aexplain*}[\iff]
+    a^2 + 2 a b + b^2 = 0
+        \explsymb{}
+    (a + b)^2 = 0
+        \explnext{$P^2 = 0$ ssi $P = 0$.}
+    a + b = 0
+\end{aexplain*}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 6 -- Un mini hack très utile}
+
+Vous pouvez écrire très facilement des calculs alignés comme suit sans trop vous fatiguez \emph{(chacune des trois solutions présentées laisse toujours la possibilité d'expliquer une étape intermédiaire après coup)}.
+
+\begin{latexex}
+\begin{aexplain*}
+    (a + b) (a + b)
+        \explsymb{}
+    (a + b)^2
+        \explnext{}
+    a^2 + b^2 + 2 a b
+        \explnext{}
+    a^2 + 2 a b + b^2
+\end{aexplain*}
+\end{latexex}
+
+On a accès à une autre mise en forme \emph{(ceci peut rendre aussi service)}. 
+
+\begin{latexex}
+\begin{aexplain}
+    (a + b) (a + b)
+        \explnext{}
+    (a + b)^2
+        \explnext{}
+    a^2 + b^2 + 2 a b
+        \explnext{}
+    a^2 + 2 a b + b^2
+\end{aexplain}
+\end{latexex}
+
+Enfin dans le cadre de calculs à faire expliquer par des élèves, ce qui suit peut être utile.
+
+\begin{latexex}
+\begin{explain}
+    (a + b) (a + b)
+        \explnext{}
+    (a + b)^2
+        \explnext{}
+    a^2 + b^2 + 2 a b
+        \explnext{}
+    a^2 + 2 a b + b^2
 \end{explain}
 \end{latexex}
 
@@ -821,7 +1018,7 @@ $\RRsp$
 \end{latexex}
 
 
-Nous avons utilisé les suffixes \verb+n+ pour \verb+Negatif+, \verb+p+ pour \verb+Positif+, et \verb+s+ pour \verb+star+, soit "étoile" en anglais. Il y a aussi les suffixes composites \verb+sn+ et \verb+sp+.
+Nous avons utilisé les suffixes \prefix{n} pour \whyprefix{n}{égatif}, \prefix{p} pour \whyprefix{p}{ositif} et \prefix{s} pour \whyprefix{s}{tar} soit \inenglish{étoile}. Il y a aussi les suffixes composites \prefix{sn} et \prefix{sp}.
 
 \medskip
 
@@ -865,7 +1062,7 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 
 \paragraph{Exemple d'utilisation}
 
-Dans cet exemple, il faut savoir que le 2\ieme{} argument ne peut prendre que les valeurs \verb+n+, \verb+p+, \verb+s+, \verb+sn+ ou \verb+sp+.
+Dans cet exemple, il faut savoir que le 2\ieme{} argument ne peut prendre que les valeurs \prefix{n}, \prefix{p}, \prefix{s}, \prefix{sn} ou \prefix{sp}.
 
 \begin{latexex}
 $\setspecial{\CC}{n}$ ,
@@ -883,8 +1080,11 @@ $\setspecial*{\setproba{P}}{n}$
 
 \paragraph{Exemple d'utilisation 1}
 
-Dans cet exemple, la syntaxe fait référence à \textbf{O}-pened et \textbf{C}-losed pour "ouvert" et "fermé" en anglais.
-Nous verrons que \textbf{CC} et \textbf{OO} sont contractés en \textbf{C} et \textbf{O}.
+Dans cet exemple, la syntaxe fait référence à 
+\whyprefix{O}{pened} et \whyprefix{C}{losed}
+pour
+\inenglish{ouvert et fermé}.
+Nous verrons que \prefix{CC} et \prefix{OO} sont contractés en \prefix{C} et \prefix{O}.
 Notez au passage que la macro utilisée résout un problème d'espacement vis à vis du signe $=$ .
 
 \begin{latexex}
@@ -917,7 +1117,7 @@ $\displaystyle
 
 \paragraph{Exemple d'utilisation}
 
-Dans cet exemple, la syntaxe fait référence à \textbf{P}-arenthèse. Cette notation est utilisée États Unis.
+Dans cet exemple, la syntaxe fait référence à \whyprefix{P}{arenthèse}. Cette notation est utilisée États Unis.
 
 \begin{latexex}
 $\intervalPC{a}{b} = \intervalOC{a}{b}$ et
@@ -1100,7 +1300,7 @@ $\pt*{I}{2}$
 
 \paragraph{Exemple 1 -- Les droites}
 
-Dans l'exemple suivant, le préfixe \verb+g+ est pour \textbf{g}-eometry, tandis que \verb+p+ est pour \textbf{p}-oint.
+Dans l'exemple suivant, le préfixe \prefix{g} est pour \whyprefix{g}{éometrie} tandis que \prefix{p} est pour \whyprefix{p}{oint}.
 
 \begin{latexex}
 $\gline{A}{B}$ ,
@@ -1128,7 +1328,7 @@ $\psegment{A}{B}$
 
 \paragraph{Exemple 3 -- Les demi-droites}
 
-Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-alf soit moitié en anglais.
+Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{alf}  soit \inenglish{moitié}.
 
 \begin{latexex}
 $\hgline{A}{B}$ ,
@@ -1142,7 +1342,7 @@ $\phgline{A}{B}$
 
 \paragraph{Exemple 4 -- D'autres demi-droites}
 
-Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \verb+OC+ provient de \textbf{O}-pened--\textbf{C}-losed, soit ouvert--fermé en anglais.
+Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \prefix{OC} provient de \whyprefix{O}{pened} -- \whyprefix{C}{losed} soit \inenglish{ouvert -- fermé}.
 
 \begin{latexex}
 $\gline[OC]{A}{B}$ ,
@@ -1152,8 +1352,8 @@ $\pgline[OC]{A}{B}$
 
 
 \begin{remark}
-	Les segments utilisent en fait l'option \verb+C+ et les demi-droites standard l'option \verb+CO+.
-	La valeur par défaut est \verb+O+.
+	Les segments utilisent en fait l'option \prefix{C} et les demi-droites standard l'option \prefix{CO}.
+	La valeur par défaut est \prefix{O}.
 \end{remark}
 
 
@@ -1249,7 +1449,7 @@ $\dotprod{\dfrac{1}{2} \vect{i}}%
 
 \paragraph{Exemple d'utilisation - Version courte mais restrictive}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
 $\vdotprod{i}{j}$
@@ -1261,7 +1461,7 @@ $\vdotprod{i}{j}$
 
 \subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
 
-Dans l'exemple suivant, le préfixe \verb+a+ est pour \textbf{a}-ngle, et  \verb+v+ pour \textbf{v}-ector.
+Dans l'exemple suivant, le préfixe \prefix{a} est pour \whyprefix{a}{ngle} et  \prefix{v} pour \whyprefix{v}{ecteur}.
 Les physiciens aiment bien cette notation.
 
 \begin{latexex}
@@ -1308,7 +1508,7 @@ $\vcrossprod{i}{j}$
 
 \paragraph{Exemple d'utilisation - Explication des calculs}
 
-Dans l'exemple suivant, le préfixe \verb+c+, qui double cette lettre au début, est pour \textbf{c}-oordinates, et \verb+v+ pour \textbf{v}-ector.
+Dans l'exemple suivant, le préfixe \prefix{c}, qui double cette lettre au début, est pour \whyprefix{c}{oordonnées} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
 $\ccrossprod{\vect{u}}{x }{y }{z }%
@@ -1328,7 +1528,7 @@ $\ccrossprod{\vect{u}}{x }{y }{z }%
 
 \paragraph{Exemple d'utilisation - Version décorée}
 
-Dans l'exemple suivant, le préfixe \verb+c+ est pour \textbf{c}-oordinates.
+Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{oordonnées}.
 
 \begin{latexex}
 $\cdetplane{\vect{u}}{x }{y }%
@@ -1352,7 +1552,7 @@ $\cdetplane*{\vect{u}}{x }{y }%
 
 \paragraph{Exemple d'utilisation - Versions courtes}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector.
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
 $\vcdetplane{u}{x }{y }%
@@ -1384,7 +1584,7 @@ $\displaystyle
 
 \paragraph{Exemple d'utilisation 2}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ertical.
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ertical}.
 
 \begin{latexex}
 $\vect{i} \vcoord{3 | -4 | 0}$ ,
@@ -1453,7 +1653,7 @@ $\axes{\pt{O} %
 
 \paragraph{Exemple d'utilisation 4 -- Repère affine}
 
-Dans l'exemple suivant, le préfixe \verb+p+ est pour \textbf{p}-oint.
+Dans l'exemple suivant, le préfixe \prefix{p} est pour \whyprefix{p}{oint}.
 
 \begin{latexex}
 $\paxes{O | I | J | K}$
@@ -1468,7 +1668,7 @@ $\axes{\pt{O} %
 
 \paragraph{Exemple d'utilisation 5 -- Repère vectoriel (méthode 1)}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ecteur.
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
 $\vaxes{\pt{O} | i | j}$
@@ -1482,7 +1682,7 @@ $\axes{\pt{O} | \vect{i} | \vect{j}}$
 
 \paragraph{Exemple d'utilisation 6 -- Repère vectoriel (méthode 2)}
 
-Dans l'exemple suivant, le préfixe \verb+pv+ permet de combiner ensemble les fonctionnalités proposées par les préfixes \verb+p+ et \verb+v+.
+Dans l'exemple suivant, le préfixe \prefix{pv} permet de combiner ensemble les fonctionnalités proposées par les préfixes \prefix{p} et \prefix{v}.
 
 \begin{latexex}
 $\pvaxes{O | i | j}$
@@ -1568,7 +1768,7 @@ $\displaystyle
 
 \paragraph{Sans chapeau - Version courte mais restrictive}
 
-Dans l'exemple suivant, le préfixe \verb+v+ est pour \textbf{v}-ector qui permet de simplifier la saisie quand l'on a juste des vecteurs nommés avec des lettres
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur} qui permet de simplifier la saisie quand l'on a juste des vecteurs nommés avec des lettres
 \emph{(notez que la version étoilée n'apporte rien de nouveau)}.
 
 \begin{latexex}
@@ -1583,8 +1783,8 @@ $\vangleorient*{i}{j}$
 
 \paragraph{Avec un chapeau}
 
-Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-at, et \verb+v+ pour \textbf{v}-ector.
-Ceci permet d'avoir les angles orientés avec un chapeau \emph{(la dernière écriture n'apporte rien de neuf)}.
+Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{at} soit \inenglish{chapeau}, et \prefix{v} pour \whyprefix{v}{ecteurr}.
+Ceci permet d'avoir les angles orientés avec un chapeau \emph{(la dernière écriture n'apporte rien de neuf mais elle evite de tout reprendre en cas de changement de mise en forme dans un document)}.
 
 \begin{latexex}
 $\displaystyle
@@ -1668,7 +1868,7 @@ $\displaystyle \abs*{\frac{3}{5}}$
 
 \paragraph{Un exemple d'utilisation}
 
-Quelques fonctions nommées supplémentaires où \verb+fch+ est pour \og \textbf{f}-rench \fg{} cosinus hyperbolique \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète est donnée un peu plus bas dans une section dédiée.
+Quelques fonctions nommées supplémentaires où \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans une section dédiée.
 
 \begin{latexex}
 $\fch x \neq ch x$ ,
@@ -1888,6 +2088,7 @@ $\displaystyle
 
 \paragraph{Exemple d'utilisation 1}
 
+Il faut savoir que \verb+hook+ signifie \inenglish{crochet} mais la bonne traduction est en fait \emph{\og square bracket \fg}.
 \begin{latexex}
 $\displaystyle
  \int_{a}^{b} f(x) \dd{x}
@@ -1918,6 +2119,8 @@ $\displaystyle
 \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
 \paragraph{Exemple d'utilisation 1}
+
+Ci-dessous \prefix{v} est pour \whyprefix{v}{ertical}.
 
 \begin{latexex}
 $\vhook{F(x)}{a}{b}
@@ -2148,6 +2351,29 @@ $\probacond[P]{B}{A}
 
 
 % ---------------------- %
+
+
+\subsection{Espérance}
+
+\paragraph{Un exemple type}
+
+\prefix{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
+\begin{latexex}
+$\expval{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Choisir le nom de l'espérance}
+
+\begin{latexex}
+$\expval[E_1]{X}$
+\end{latexex}
+
+
+% ---------------------- %
 %\section{Probabilité}
 
 \subsection{Arbres pondérés}
@@ -2160,7 +2386,7 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 % ---------------------- %
 
 
-\paragraph{Un exemple type}
+\paragraph{Exemple 1 -- Le cas type}
 
 Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
 À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
@@ -2171,89 +2397,33 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, pweight = $a$
-        [$B$, pweight = $b$]
-        [$C$, pweight = $c$]
-    ]
-    [$D$, bpweight = $d$
-        [$E$, apweight = $e$]
-        [$F$, bpweight = $f$]
-    ]
-]
-\end{probatree}
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Un exemple décoré facilement}
-
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
-
-\begin{latexex}
-\begin{probatree}
-[{},s sep = 1.3cm
-    [$A$, pweight=$a$, frame=red
-        [$B$, pweight=$b$]
-        [$C$, pweight=$c$]
-    ]
-    [$D$, pweight=$d$, frame=blue
-        [$E$, pweight=$e$
-            [$F$, pweight=$f$]
-            [$G$, pweight=$g$]
-        ]
-        [$H$, pweight=$h$
-            [$I$, pweight=$i$]
-            [$J$, pweight=$j$]
-        ]
-    ]
-]
-\end{probatree}
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Un exemple décoré à la main}
-
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
-
-\begin{latexex-flat}
-\begin{probatree}
-[
-    [$A$, pweight = $a$, name = left
-        [$B$, pweight = $b$, name = topright
+    [
+        [$A$, pweight = $a$
+            [$B$, pweight = $b$]
             [$C$, pweight = $c$]
-            [$D$, pweight = $d$]
-           ]
-        [$F$, pweight = $f$, name = bottomright]
+        ]
+        [$D$, bpweight = $d$
+            [$E$, apweight = $e$]
+            [$F$, bpweight = $f$]
+        ]
     ]
-    [$G$, pweight = $g$]
-]
-\node[draw = blue,
-      thick,
-      rounded corners,
-      fit = (left)(topright)(bottomright)] {};
 \end{probatree}
-\end{latexex-flat}
+\end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Un exemple de poids cachés partout}
+\paragraph{Exemple 2 -- Des poids cachés partout}
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
 
 \begin{latexex}
 \begin{probatree*}
-[$A$, pweight = $a$
-    [$B$, pweight = $b$]
-    [$C$, pweight = $c$]
-]
+    [$A$, pweight = $a$
+        [$B$, pweight = $b$]
+        [$C$, pweight = $c$]
+    ]
 \end{probatree*}
 \end{latexex}
 
@@ -2261,19 +2431,19 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 % ---------------------- %
 
 
-\paragraph{Un exemple de poids cachés localement}
+\paragraph{Exemple 3 -- Des poids cachés localement}
 
 Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, pweight = $a$
-        [$B$, pweight* = $b$]
-        [$C$, pweight = $c$]
+    [
+        [$A$, pweight = $a$
+            [$B$, pweight* = $b$]
+            [$C$, pweight  = $c$]
+        ]
+        [$D$, pweight* = $d$]
     ]
-    [$D$, pweight* = $d$]
-]
 \end{probatree}
 \end{latexex}
 
@@ -2281,18 +2451,125 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 % ---------------------- %
 
 
-\paragraph{Une astuce pour un signe $=$ et une virgule dans les étiquettes}
+\paragraph{Exemple 4 -- Un signe $=$ et/ou une virgule dans les étiquettes}
 
 Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, apweight = {$a = 0,1$}]
-    [$B$, bpweight = $b$]
-]
+    [
+        [$A$, apweight = {$a = 0,1$}]
+        [$B$, bpweight = $b$]
+    ]
 \end{probatree}
 \end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 5 -- Des cadres facilement}
+
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
+
+\begin{latexex}
+\begin{probatree}
+    [{}, s sep = 1.3cm 
+     % Astuce pour espacer les cadres.
+        [$A$, pweight = $a$,
+              frame   = red
+            [$B$, pweight = $b$]
+            [$C$, pweight = $c$]
+        ]
+        [$D$, pweight = $d$,
+              frame   = blue
+            [$E$, pweight = $e$
+                [$F$, pweight = $f$]
+                [$G$, pweight = $g$]
+            ]
+            [$H$, pweight = $h$
+                [$I$, pweight = $i$]
+                [$J$, pweight = $j$]
+            ]
+        ]
+    ]
+\end{probatree}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 6 -- Des cadres faits à la main}
+
+En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
+
+\begin{latexex}
+\begin{probatree}
+    [
+        [$A$, pweight = $a$,
+              name    = nA
+            [$B$, pweight = $b$,
+                  name    = nB
+                [$C$, pweight = $c$]
+                [$D$, pweight = $d$]
+               ]
+            [$F$, pweight = $f$,
+                  name    = nF]
+        ]
+        [$G$, pweight = $g$]
+    ]
+    \node[draw = orange,
+          thick,
+          rounded corners,
+          fit = (nA)(nB)(nF)] {};
+\end{probatree}
+\end{latexex}
+
+
+
+
+
+
+
+% ---------------------- %
+
+
+%\paragraph{Exemple 7 -- Indiquer un chemin}
+%
+%L'exemple suivant demande un peu plus d'implication mais de nouveau tout est obtenu via la machinerie de \verb+TiKz+.
+%
+%\begin{latexex}
+%\begin{probatree}
+%    [{}, name = start
+%        [$A$, pweight = $a$, 
+%              name    = nA
+%            [$B$, pweight = $b$]
+%            [$C$, pweight = $c$,
+%                  name    = nC]
+%        ]
+%        [$D$, pweight = $d$,
+%            [$E$, pweight = $e$]    
+%            [$F$, pweight = $f$]
+%        ]
+%    ]
+%    \draw[blue,
+%          rounded corners,
+%          dashed,
+%          line width=0.7pt]          
+%    (start.90) --
+%    (nA.135) --
+%    (nA.45) --
+%    (nC.45) --
+%    (nC.315) --
+%    (nC.225) --
+%    (nA.315) --
+%    (nA.225) --
+%    (start.315) --
+%    (start.180) --
+%    (start.90);
+%\end{probatree}
+%\end{latexex}
 
 
 % ---------------------- %
@@ -2303,8 +2580,11 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{notdivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+.
 
 \begin{latexex}
-$10 \divides 150 = 10 | 150$ ,
-$10 \notdivides 154 = 10 \not| 154$
+$10 \divides 150$ au lieu de
+$10 | 150$
+
+$10 \notdivides 154$ au lieu de
+$10 \not| 154$
 
 $a \equiv b \modulo p
  \iff
@@ -2339,9 +2619,9 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 Voici comment écrire une fraction continuée généralisée.
 
 \begin{latexex-flat}
-$\displaystyle
- \contfracgene{a | b | c | d | e | f | \dots | y | z}
- = \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
+$ \displaystyle
+  \contfracgene{a | b | c | d | e | f | \dots | y | z}
+= \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
 \end{latexex-flat}
 
 
@@ -2371,9 +2651,9 @@ pour les fous\dots :-)
 La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 
 \begin{latexex-flat}
-$\displaystyle
- \contfracope_{k=1}^{n} (b_k:c_k)
- = \cfrac{b_1}{\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+$ \displaystyle
+  \contfracope_{k=1}^{n} (b_k:c_k)
+= \cfrac{b_1}{\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
 \end{latexex-flat}
 
 
@@ -2388,9 +2668,9 @@ $\displaystyle
 \paragraph{Exemple d'utilisation 2}
 
 \begin{latexex-flat}
-$\displaystyle
- u_0 + \contfracope_{k=1}^{n} (1:u_k)
- = \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
+$ \displaystyle
+  u_0 + \contfracope_{k=1}^{n} (1:u_k)
+= \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
 \end{latexex-flat}
 
 
@@ -2488,15 +2768,30 @@ $\setserielaurent{\QQ}{X_1 | X_2}
 
 \subsection{Matrices}
 
-\paragraph{Comment ça marche ?}
+Tout le boulot ou presque est fait par l'excellent package \verb+nicematrix+ auquel on impose l'option \verb+transparent+ avec l'ajout 
+d'une macro
+%de deux macros
+\emph{\og maison \fg} à but pédagogique.
+Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre en général.
 
-Tout le boulot est fait par le package \verb+nicematrix+ auquel on impose l'option \verb+transparent+. Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre.
+
+\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+                              {Calculs expliqués des déterminants 2x2}}
+
+Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{alculer} et \prefix{two} est pour \inenglish{deux}.
+
+\begin{latexex}
+$\cdettwo{a}{b}%
+         {c}{d}$
+\end{latexex}                    
 
 
 % ---------------------- %
 
 
-\paragraph{Exemple 1 tiré de la documentation de \texttt{nicematrix}}
+\subsubsection{Quelques exemples pour bien démarrer}
+
+\paragraph{Exemple 1 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\begin{pmatrix}
@@ -2511,7 +2806,37 @@ $\begin{pmatrix}
 % ---------------------- %
 
 
-\paragraph{Exemple 2 tiré de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 2}
+
+\begin{latexex}
+$\begin{vmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{vmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 2}
+
+\begin{latexex}
+$\begin{bmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{bmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\begin{pNiceMatrix}[name = mymatrix]
@@ -2529,7 +2854,7 @@ $\begin{pNiceMatrix}[name = mymatrix]
 % ---------------------- %
 
 
-\paragraph{Exemple 3 adapté de la documentation de \texttt{nicematrix}}
+\paragraph{Exemple 4 (cf. la documentation de \texttt{nicematrix})}
 
 \begin{latexex}
 $\left(
@@ -2545,7 +2870,7 @@ $\left(
 % ---------------------- %
 
 
-\paragraph{Exemple 4 proposé par l'auteur de \texttt{nicematrix} suite à une discussion par mail}
+\paragraph{Exemple 5 proposé par l'auteur de \texttt{nicematrix} suite à une discussion par mail}
 
 \begin{latexex}
 % Besoin du package ``ifthen``.
@@ -2556,13 +2881,14 @@ $\left(
 $\begin{bNiceArray}%
   {*{5}{>{%
     \ifthenelse{\value{iRow}>0}{\aij}{}%
-  }C}}%
-  [first-col,
-   first-row,
-   code-for-first-row
-   = \mathbf{\arabic{jCol}},
-   code-for-first-col
-   = \mathbf{\arabic{iRow}}]
+}C}}[
+    first-col,
+    first-row,
+    code-for-first-row
+      = \mathbf{\arabic{jCol}},
+    code-for-first-col
+      = \mathbf{\arabic{iRow}}
+  ]
       & & & & & \\
       & & & & & \\
       & & & & &
@@ -2573,7 +2899,7 @@ $\begin{bNiceArray}%
 % ---------------------- %
 
 
-\paragraph{Exemple 5 avec des calculs automatiques}
+\paragraph{Exemple 6 avec des calculs automatiques}
 
 \begin{latexex}
 \newcounter{cntaij}
@@ -2585,13 +2911,14 @@ $\begin{bNiceArray}%
 }
 Si $a_{ij} = i + j - 1$ alors
 
-$(a_{ij})_{1 \leq i \leq 3 , 1 \leq j \leq 5}
+$(a_{ij})_{1 \leq i \leq 3 ,
+           1 \leq j \leq 5}
 =
-\begin{bNiceArray}{*{5}{>{\aij}C}}
+ \begin{bNiceArray}{*{5}{>{\aij}C}}
     & & & & \\
     & & & & \\
     & & & &
-\end{bNiceArray}$
+ \end{bNiceArray}$
 \end{latexex}
 \newpage
 
@@ -2609,9 +2936,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item En analyse, il y a eu les changements suivants.
         \begin{itemize}[itemsep=.5em]
-            \item Pour éviter des conflits avec d'autres packages, les renommages suivants on été faits.
+            \item Pour éviter des conflits avec d'autres packages les renommages suivants ont été faits.
             \begin{itemize}[itemsep=.5em]
-                \item \macro{ch} et \macro{ach} sont devenus \macro{fch} et \macro{afch} où \verb+f+ est pour \textbf{f}-rench.
+                \item \macro{ch} et \macro{ach} sont devenus \macro{fch} et \macro{afch} où \prefix{f} est pour \whyprefix{f}{rench}.
     
                 \item \macro{sh} et \macro{ash} sont devenus \macro{fsh} et \macro{afsh}.
     
@@ -2622,7 +2949,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
      		\item \macro{derpar} et \macro{derpar*} servent à rédiger des dérivées avec des parenthèses extensibles. En coulisse, \macro{derpow} et \macro{derpow*} sont appelées.
     
-            Pour utiliser des parenthèses non extensibles, on passera par \macro{sderpar} et \macro{sderpar*} où \verb+s+ est pour \textbf{s}-mall.
+            Pour utiliser des parenthèses non extensibles, on passera par \macro{sderpar} et \macro{sderpar*} où \prefix{s} est pour \whyprefix{s}{mall}.
     
     		\item Ajout de \macro{stdint} pour rendre public l'opérateur intégral proposé par défaut par \LaTeX.
         \end{itemize}
@@ -2635,7 +2962,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
             \item Les macros \macro{gline} et \macro{pgline} servent à indiquer des droites.
     
-            \item La macro \macro{hgline}, avec \verb+h+ pour \textbf{h}-alf, est pour les demi-droites.
+            \item La macro \macro{hgline}, avec \prefix{h} pour \whyprefix{h}{alf}, est pour les demi-droites.
     
             \item La macro \macro{segment} est utile pour les segments.
         \end{itemize}
@@ -2726,7 +3053,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
-        \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \macro{explain*} et \macro{textexplainspacebefore} ont été supprimées.
+        \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole.
+              Ceci s'accompagne de la suppression des macros obsolètes \macro{explain*} et \macro{textexplainspacebefore}.
     
         % ------------ %
     
@@ -2839,7 +3167,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 \newpage
-\section{Toutes les fiches techniques}
+\section{Toutes les fiches techniques} \label{techincal-ids}
 
 
 \subsection{Deux séparateurs d'arguments par défaut}
@@ -3009,7 +3337,7 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 % == Vertical versions - END == %
 
-\subsubsection{Les textes pour détailler un raisonnement}
+\subsubsection{Les textes pour détailler un raisonnement -- Version pour le lycée et après} \label{step-by-step-texts}
 
 \IDmacro*{textexplainleft}{0}
 
@@ -3021,7 +3349,7 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsubsection{Détailler un raisonnement}
+\subsubsection{Détailler un raisonnement -- Version pour le lycée et après} \label{step-by-step-university} 
 
 \IDenv{explain}{1}
 
@@ -3031,11 +3359,57 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \separation
 
 
-\IDmacro{explnext}{1}{1}
+\IDmacro{explnext}{1}{1} où \quad \mwhyprefix{expl}{ain}
 
 \IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
 
 \IDarg{} le texte de l'explication qui peut être vide si aucune explication n'est à afficher.
+
+
+\separation
+
+
+\IDmacro{explnext*}{1}{2} où \quad \mwhyprefix{expl}{ain}
+
+\IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
+
+\IDarg{1} le texte de l'explication pour la 1\iere{} ligne.
+          Ce texte peut être vide \emph{(voir l'environnement \env{aexplain} pour la raison de ceci)}.
+
+\IDarg{2} le texte de l'explication pour la 2\ieme{} ligne.
+          Ce texte peut être vide \emph{(voir l'environnement \env{aexplain} pour la raison de ceci)}.
+
+
+% ---------------------- %
+
+
+
+\subsubsection{Détailler un raisonnement -- Version pour les collégiens}
+
+Voir les macros
+\macro{textexplainleft},
+\macro{textexplainright},
+\macro{textexplainspacein},
+\macro{explnext} ainsi que
+\macro{explnext*}
+dans les sections \ref{step-by-step-texts} et \ref{step-by-step-university}.
+
+\separation
+
+\IDenv{aexplain}{1}  où \quad \mwhyprefix{a}{rrow}
+
+\IDenv{aexplain*}{1}  où \quad \mwhyprefix{a}{rrow}
+
+\IDoption{} le symbole à utiliser dans l'environnement, la valeur par défaut étant \verb+=+ .
+
+
+\separation
+
+\IDmacro*{explsymb}{0}
+
+\extraspace
+
+\emph{\textbf{ATTENTION !} Cette macro n'est utilisable qu'au début de l'environnement \env{aexplain*}.}
 \subsubsection{\texorpdfstring{Des versions alternatives du quantificateur $\exists$}%
                           {Des versions alternatives du quantificateur existentiel}}
 
@@ -3208,7 +3582,7 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 \IDarg{1} l'ensemble à "suffixer".
 
-\IDarg{2} l'un des suffixes \verb+n+, \verb+p+, \verb+s+, \verb+sn+ ou \verb+sp+.
+\IDarg{2} l'un des suffixes \prefix{n}, \prefix{p}, \prefix{s}, \prefix{sn} ou \prefix{sp}.
 \subsubsection{Intervalles réels - Notation française (?\,)}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
@@ -3443,11 +3817,12 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \subsubsection{Lignes}
 
-\IDmacro{gline}{1}{2}
+\IDmacro{gline}{1}{2}   où \quad \mwhyprefix{g}{eometry}
 
-\IDmacro{pgline}{1}{2}
+\IDmacro{pgline}{1}{2}  où \quad \mwhyprefix{p}{oint}
+                              et \mwhyprefix{g}{eometry}
 
-\IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \verb+O+, valeur par défaut, \verb+C+, \verb+CO+ et \verb+OC+.
+\IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \prefix{O}, valeur par défaut, \prefix{C}, \prefix{CO} et \prefix{OC}.
 
 \IDarg{1} le 1\ier{} point géométrique.
 
@@ -3457,15 +3832,18 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{hgline}{2}
+\IDmacro*{hgline}{2}   où \quad \mwhyprefix{h}{alf}
+                             et \mwhyprefix{g}{eometry}
 
-\IDmacro*{phgline}{2}
+\IDmacro*{phgline}{2}  où \quad \mwhyprefix{p}{oint},
+                                \mwhyprefix{h}{alf}
+                             et \mwhyprefix{g}{eometry}
 
 \extraspace
 
 \IDmacro*{segment}{2}
 
-\IDmacro*{psegment}{2}
+\IDmacro*{psegment}{2}  où \quad \mwhyprefix{p}{oint}
 
 \IDarg{1} le 1\ier{} point géométrique.
 
@@ -3521,7 +3899,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vdotprod}{2} où \quad \verb+v = v-ector+
+\IDmacro*{vdotprod}{2} où \quad \mwhyprefix{v}{ector}
 
 \IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
@@ -3534,7 +3912,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
 
-\IDmacro*{adotprod}{2} où \quad \verb&a = a-ngle&
+\IDmacro*{adotprod}{2} où \quad \mwhyprefix{a}{ngle}
 
 \IDmacro*{adotprod*}{2}
 
@@ -3546,7 +3924,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vadotprod}{2} où \quad \verb&a = a-ngle& et \verb+v = v-ector+
+\IDmacro*{vadotprod}{2} où \quad \mwhyprefix{a}{ngle} 
+                              et \mwhyprefix{v}{ector}
 
 \IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
@@ -3570,7 +3949,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vcrossprod}{2} où \quad \verb+v = v-ector+
+\IDmacro*{vcrossprod}{2} où \quad \mwhyprefix{v}{ector}
 
 \IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
@@ -3580,7 +3959,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{ccrossprod}{8}  où \quad \verb+c = c-oordinates+
+\IDmacro*{ccrossprod}{8}  où \quad \mwhyprefix{c}{oordinates}
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -3602,8 +3981,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vccrossprod}{8} où \quad \verb+c = c-oordinates+ 
-                                et \verb+v = v-ector+
+\IDmacro*{vccrossprod}{8} où \quad \mwhyprefix{c}{oordinates}
+                                et \mwhyprefix{v}{ector}
 
 \IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
@@ -3622,9 +4001,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
 \subsubsection{Plan -- Déterminant de deux vecteurs}
 
-\IDmacro*{cdetplane}{6}  où \quad \verb+c = c-oordinates+
+\IDmacro*{cdetplane}{6}  où \quad \mwhyprefix{c}{oordinates}
 
-\IDmacro*{cdetplane*}{6} où \quad \verb+c = c-oordinates+
+\IDmacro*{cdetplane*}{6} où \quad \mwhyprefix{c}{oordinates}
 
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
@@ -3643,11 +4022,11 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vcdetplane}{6}  où \quad \verb+c = c-oordinates+ 
-                                et \verb+v = v-ector+
+\IDmacro*{vcdetplane}{6}  où \quad \mwhyprefix{c}{oordinates}
+                                et \mwhyprefix{v}{ector}
 
-\IDmacro*{vcdetplane*}{6} où \quad \verb+c = c-oordinates+ 
-                                et \verb+v = v-ector+
+\IDmacro*{vcdetplane*}{6} où \quad \mwhyprefix{c}{oordinates}
+                                et \mwhyprefix{v}{ector}
 
 
 \IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
@@ -3673,7 +4052,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vcoord}{1} où \quad \verb&v = v-ertical&
+\IDmacro*{vcoord}{1} où \quad \mwhyprefix{v}{ertical}
 
 \IDmacro*{vcoord*}{1} pour des crochets à la place de parenthèses
 
@@ -3695,7 +4074,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \separation
 
-\IDmacro*{paxes}{1} où \quad \verb+p = p-oint+
+\IDmacro*{paxes}{1} où \quad \mwhyprefix{p}{oint}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -3708,7 +4087,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \separation
 
-\IDmacro*{vaxes}{1} où \quad \verb+v = v-ector+
+\IDmacro*{vaxes}{1} où \quad \mwhyprefix{v}{ector}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -3721,7 +4100,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \separation
 
-\IDmacro*{pvaxes}{3} où \quad \verb&pv = p + v&
+\IDmacro*{pvaxes}{3} où \quad \prefix{pv = p + v}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -3732,7 +4111,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \end{itemize}
 \subsubsection{Arcs circulaires}
 
-\IDmacro*{circarc}{1} où \quad \verb+circarc = circ-ular arc+
+\IDmacro*{circarc}{1} où \quad \mwhyprefix{circ}{ular}
 
 \IDarg{} un texte donnant le nom d'un arc circulaire.
 
@@ -3740,7 +4119,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{circarc*}{2} où \quad \verb+circarc = circ-ular arc+
+\IDmacro*{circarc*}{2} où \quad \mwhyprefix{circ}{ular}
 
 \IDarg{1} un texte indiquant $up$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 
@@ -3764,7 +4143,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro*{angleorient}{2}
 
-\IDmacro*{hangleorient}{2}  où \quad \verb+h = h-at+
+\IDmacro*{hangleorient}{2}  où \quad \mwhyprefix{h}{at}
 
 \IDarg{1} le premier vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -3774,9 +4153,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vangleorient}{2} où \quad \verb+v = v-ector+
+\IDmacro*{vangleorient}{2} où \quad \mwhyprefix{v}{ector}
 
-\IDmacro*{hvangleorient}{2} où \quad \verb+h = h-at+ et \verb+v = v-ector+
+\IDmacro*{hvangleorient}{2} où \quad \mwhyprefix{h}{at} et \mwhyprefix{v}{ector}
 
 \IDarg{1} le nom du premier vecteur sans utiliser la macro \macro{vect}.
 
@@ -3847,7 +4226,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \foreach \k in {fch, fsh, fth}{
 
-    \IDmacro*{\k}{0}
+    \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
 }
                 % List of functions without parameter - END
 
@@ -4007,9 +4386,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
 
-\IDmacro*{vhook}{3}
+\IDmacro*{vhook}{3}   où \quad \mwhyprefix{v}{ertical}
 
-\IDmacro*{vhook*}{3}
+\IDmacro*{vhook*}{3}  où \quad \mwhyprefix{v}{ertical}
 
 \IDarg{1} le contenu avant le trait vertical.
 
@@ -4088,6 +4467,19 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{1} l'ensemble qui donne la condition.
 
 \IDarg{2} l'ensemble dont on veut calculer la probabilité.
+
+
+% ---------------------- %
+
+
+
+\subsubsection{Espérance}
+
+\IDmacro{expval}{1}{1}
+
+\IDoption{} le nom de la fonction espérance.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'espérance.
 \subsubsection{Arbres pondérés}
 
 \IDenv*{probatree}
@@ -4186,7 +4578,97 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \IDarg{1} l'ensemble auquel les coefficients appartiennent.
 
 \IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
+\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+                          {Calculs expliqués des déterminants 3x3}}
 
+\IDmacro*{cdettwo}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDarg{1} l'entrée à la position $(1, 1)$
+
+\IDarg{2} l'entrée à la position $(1, 2)$
+
+\extraspace
+
+\IDarg{3} l'entrée à la position $(2, 1)$
+
+\IDarg{4} l'entrée à la position $(2, 2)$                   
+
+
+
+
+
+
+
+
+%% ---------------------- %
+%
+%
+%\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                              {Calculs expliqués des déterminants 3x3}}
+%
+%Dans les exemples suivants, le préfixe \prefix{c} reste pour \whyprefix{c}{alculer} et \prefix{three} est pour \inenglish{trois}.
+%
+%
+%% ---------------------- %
+%
+%
+%\subsubsection{Exemple 1 -- Bien pour les débutants}
+%
+%\begin{latexex}
+%$\cdetthree{a}{b}{c}%
+%           {x}{y}{z}%
+%           {r}{s}{t}$
+%\end{latexex}         
+%
+%
+%% ---------------------- %
+%
+%
+%\subsubsection{Exemple 2 -- Plus efficace à l'usage}
+%
+%\begin{latexex}
+%$\cdetthree*{a}{b}{c}%
+%            {x}{y}{z}%
+%            {r}{s}{t}$
+%\end{latexex}                      
+%
+%
+%% ---------------------- %
+%
+%
+%\subsubsection{Fi    ches techniques}
+%
+%\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                          {Calculs expliqués des déterminants 3x3}}
+%
+%\IDmacro*{cdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDmacro*{cdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDarg{1} l'entrée à la position $(1, 1)$
+%
+%\IDarg{2} l'entrée à la position $(1, 2)$
+%
+%\IDarg{3} l'entrée à la position $(1, 3)$
+%
+%\extraspace
+%
+%\IDarg{4} l'entrée à la position $(2, 1)$
+%
+%\IDarg{5} l'entrée à la position $(2, 2)$
+%
+%\IDarg{6} l'entrée à la position $(2, 3)$
+%
+%\extraspace
+%
+%\IDarg{7} l'entrée à la position $(3, 1)$
+%
+%\IDarg{8} l'entrée à la position $(3, 2)$
+%
+%\IDarg{9} l'entrée à la position $(3, 3)$
+%
+
+% ---------------------- %
 
 
 \end{document}

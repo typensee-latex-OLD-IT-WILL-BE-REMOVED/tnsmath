@@ -63,7 +63,7 @@ $\pt*{I}{2}$
 
 \paragraph{Exemple 1 -- Les droites}
 
-Dans l'exemple suivant, le préfixe \verb+g+ est pour \textbf{g}-eometry, tandis que \verb+p+ est pour \textbf{p}-oint.
+Dans l'exemple suivant, le préfixe \prefix{g} est pour \whyprefix{g}{éometrie} tandis que \prefix{p} est pour \whyprefix{p}{oint}.
 
 \begin{latexex}
 $\gline{A}{B}$ ,
@@ -91,7 +91,7 @@ $\psegment{A}{B}$
 
 \paragraph{Exemple 3 -- Les demi-droites}
 
-Dans l'exemple suivant, le préfixe \verb+h+ est pour \textbf{h}-alf soit moitié en anglais.
+Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{alf}  soit \inenglish{moitié}.
 
 \begin{latexex}
 $\hgline{A}{B}$ ,
@@ -105,7 +105,7 @@ $\phgline{A}{B}$
 
 \paragraph{Exemple 4 -- D'autres demi-droites}
 
-Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \verb+OC+ provient de \textbf{O}-pened--\textbf{C}-losed, soit ouvert--fermé en anglais.
+Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \prefix{OC} provient de \whyprefix{O}{pened} -- \whyprefix{C}{losed} soit \inenglish{ouvert -- fermé}.
 
 \begin{latexex}
 $\gline[OC]{A}{B}$ ,
@@ -115,8 +115,8 @@ $\pgline[OC]{A}{B}$
 
 
 \begin{remark}
-	Les segments utilisent en fait l'option \verb+C+ et les demi-droites standard l'option \verb+CO+.
-	La valeur par défaut est \verb+O+.
+	Les segments utilisent en fait l'option \prefix{C} et les demi-droites standard l'option \prefix{CO}.
+	La valeur par défaut est \prefix{O}.
 \end{remark}
 
 
@@ -127,11 +127,12 @@ $\pgline[OC]{A}{B}$
 
 \paragraph{Lignes}
 
-\IDmacro{gline}{1}{2}
+\IDmacro{gline}{1}{2}   où \quad \mwhyprefix{g}{eometry}
 
-\IDmacro{pgline}{1}{2}
+\IDmacro{pgline}{1}{2}  où \quad \mwhyprefix{p}{oint}
+                              et \mwhyprefix{g}{eometry}
 
-\IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \verb+O+, valeur par défaut, \verb+C+, \verb+CO+ et \verb+OC+.
+\IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \prefix{O}, valeur par défaut, \prefix{C}, \prefix{CO} et \prefix{OC}.
 
 \IDarg{1} le 1\ier{} point géométrique.
 
@@ -141,15 +142,18 @@ $\pgline[OC]{A}{B}$
 \separation
 
 
-\IDmacro*{hgline}{2}
+\IDmacro*{hgline}{2}   où \quad \mwhyprefix{h}{alf}
+                             et \mwhyprefix{g}{eometry}
 
-\IDmacro*{phgline}{2}
+\IDmacro*{phgline}{2}  où \quad \mwhyprefix{p}{oint},
+                                \mwhyprefix{h}{alf}
+                             et \mwhyprefix{g}{eometry}
 
 \extraspace
 
 \IDmacro*{segment}{2}
 
-\IDmacro*{psegment}{2}
+\IDmacro*{psegment}{2}  où \quad \mwhyprefix{p}{oint}
 
 \IDarg{1} le 1\ier{} point géométrique.
 

@@ -1,0 +1,94 @@
+% Source
+%    * https://tex.stackexchange.com/a/549151/6880
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{forest}
+\tikzset{parallel path/.style args={#1--#2}{insert path={
+       ($(#1)!\pgfkeysvalueof{/tikz/parallel distance}!90:(#2)$)
+        -- ($(#2)!\pgfkeysvalueof{/tikz/parallel distance}!-90:(#1)$)
+}},parallel distance/.initial=1em
+}
+
+\begin{document}
+
+\begin{forest}
+        for tree = {%
+            grow'  = 0,
+            l      = 2.5cm,
+            parent anchor=east,
+            s sep  = 1.2cm,
+        },
+   [{}, name = start,anchor=east
+        [$A$, name = nA
+            [$B$]
+            [$C$, name    = nC]
+        ]
+        [$D$,
+            [$E$]    
+            [$F$]
+        ]
+    ]
+    \path
+    [parallel path={nA.child anchor--start.parent anchor}]
+    coordinate[pos=0.2] (p0) coordinate[pos=1] (p1)
+    [parallel path={start.parent anchor--nA.child anchor}]
+     coordinate[pos=0] (p2)  coordinate[pos=1] (p3)
+    [parallel path={nA.parent anchor--nC.child anchor}]
+     coordinate[pos=0] (p4)  coordinate[pos=1.02] (p5)
+    [parallel path={nC.child anchor--nA.parent anchor}]
+     coordinate[pos=-0.02] (p6)  coordinate[pos=0.8] (p7)
+    ; 
+    \draw[blue,dashed,line width=0.7pt]          
+    let \p1=($(p0)-(p1)$),
+    \p2=($(p4)-(p5)$),
+    \n1={atan2(\y1,\x1)},
+    \n2={atan2(\y2,\x2)},
+    \n3={\pgfkeysvalueof{/tikz/parallel distance}} in 
+    (p0) -- (p1) arc[start angle=\n1-90,end angle=\n1-270,radius=\n3] 
+    -- (p3) to[out=\n1,in=\n2] (p4) -- (p5)
+    arc[start angle=\n2-90,end angle=\n2-270,radius=\n3] 
+    -- (p7) to[out=\n2,in=\n1] cycle;
+\end{forest}
+
+
+\begin{forest}
+        for tree = {%
+            grow'  = 0,
+            l      = 2.5cm,
+            parent anchor=east,
+            s sep  = 1.2cm,
+        },
+   [{}, name = start,anchor=east
+        [$A$
+            [$B$]
+            [$C$]
+        ]
+        [$D$, name = nA
+            [$E$, name    = nC]    
+            [$F$]
+        ]
+    ]
+    \path
+    [parallel path={nA.child anchor--start.parent anchor}]
+    coordinate[pos=0.2] (p0) coordinate[pos=1] (p1)
+    [parallel path={start.parent anchor--nA.child anchor}]
+     coordinate[pos=0] (p2)  coordinate[pos=1] (p3)
+    [parallel path={nA.parent anchor--nC.child anchor}]
+     coordinate[pos=0] (p4)  coordinate[pos=1.02] (p5)
+    [parallel path={nC.child anchor--nA.parent anchor}]
+     coordinate[pos=-0.02] (p6)  coordinate[pos=0.8] (p7)
+    ; 
+    \draw[blue,dashed,line width=0.7pt]          
+    let \p1=($(p0)-(p1)$),
+    \p2=($(p4)-(p5)$),
+    \n1={atan2(\y1,\x1)},
+    \n2={atan2(\y2,\x2)},
+    \n3={\pgfkeysvalueof{/tikz/parallel distance}} in 
+    (p0) -- (p1) arc[start angle=\n1-90,end angle=\n1-270,radius=\n3] 
+    -- (p3) to[out=\n1,in=\n2] (p4) -- (p5)
+    arc[start angle=\n2-90,end angle=\n2-270,radius=\n3] 
+    -- (p7) to[out=\n2,in=\n1] cycle;
+\end{forest}
+
+
+\end{document}

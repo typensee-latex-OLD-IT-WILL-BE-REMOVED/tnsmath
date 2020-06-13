@@ -3,7 +3,7 @@
 \makeatletter
 	\input{../config/header[fr].sty}
 
-	\usepackage{01-conditional}
+	\usepackage{01-base}
 \makeatother
 
 
@@ -95,6 +95,43 @@ $\probacond[P]{B}{A}
 \IDarg{1} l'ensemble qui donne la condition.
 
 \IDarg{2} l'ensemble dont on veut calculer la probabilité.
+
+
+% ---------------------- %
+
+
+\subsection{Espérance}
+
+\paragraph{Un exemple type}
+
+\prefix{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
+\begin{latexex}
+$\expval{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Choisir le nom de l'espérance}
+
+\begin{latexex}
+$\expval[E_1]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Espérance}
+
+\IDmacro{expval}{1}{1}
+
+\IDoption{} le nom de la fonction espérance.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'espérance.
 
 
 \end{document}

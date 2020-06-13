@@ -1,11 +1,35 @@
 ==========
+2020-06-13
+==========
+
+**Algebra :** two pedagogical useful new features for determinants such as to show how to calculate it case of matrices of dimension `2*2` or `3*3`.
+
+
+**Geometry :** an almost "perfect" formatting of the calculations explained of the determinant of two 2D-vectors and the cross product of two 3D-vectors.
+
+
+**Logic and fundations:** here are the new features.
+
+    1) Two environments ``aexplain`` and ``aexplain*`` allows to use arrows to indicate explanations (examples have alos been added to show how to use ``explain``, ``aexplain`` or ``aexplain*`` suchas to to do stepe by step manipualtions with alignment regarding one symbol).
+
+    1) Unwanted spaces are no longer added before and after the environement ``explain``.
+
+
+**Probability :** some enhancements have been made.
+
+    1) ``\expval`` is a new macro for the writing of an expected value of a random variable.
+
+    1) Better spaces before automatically added braces has been achieved.
+
+
+==========
 2020-06-11
 ==========
 
+**Geometry :** better formatting, but not still perfect, of calculations explained of the determinant of two 2D-vectors and of the cross product of two 3D-vectors.
+
+
 **Logic and fundations:** the macro ``\explain`` has been deleted. Now you must use the environement ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
-
-
-**Geometry :** better formatting, but not still perfect, of calculations explained of the determinant of two vectors in a plane and of the cross product of two vectors of the 3D space.
 
 
 ==========

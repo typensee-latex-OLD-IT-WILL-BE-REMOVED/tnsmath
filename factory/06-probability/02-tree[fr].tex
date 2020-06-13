@@ -24,7 +24,7 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 % ---------------------- %
 
 
-\paragraph{Un exemple type}
+\paragraph{Exemple 1 -- Le cas type}
 
 Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
 À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
@@ -35,89 +35,33 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, pweight = $a$
-        [$B$, pweight = $b$]
-        [$C$, pweight = $c$]
-    ]
-    [$D$, bpweight = $d$
-        [$E$, apweight = $e$]
-        [$F$, bpweight = $f$]
-    ]
-]
-\end{probatree}
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Un exemple décoré facilement}
-
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
-
-\begin{latexex}
-\begin{probatree}
-[{},s sep = 1.3cm
-    [$A$, pweight=$a$, frame=red
-        [$B$, pweight=$b$]
-        [$C$, pweight=$c$]
-    ]
-    [$D$, pweight=$d$, frame=blue
-        [$E$, pweight=$e$
-            [$F$, pweight=$f$]
-            [$G$, pweight=$g$]
-        ]
-        [$H$, pweight=$h$
-            [$I$, pweight=$i$]
-            [$J$, pweight=$j$]
-        ]
-    ]
-]
-\end{probatree}
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Un exemple décoré à la main}
-
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
-
-\begin{latexex-flat}
-\begin{probatree}
-[
-    [$A$, pweight = $a$, name = left
-        [$B$, pweight = $b$, name = topright
+    [
+        [$A$, pweight = $a$
+            [$B$, pweight = $b$]
             [$C$, pweight = $c$]
-            [$D$, pweight = $d$]
-           ]
-        [$F$, pweight = $f$, name = bottomright]
+        ]
+        [$D$, bpweight = $d$
+            [$E$, apweight = $e$]
+            [$F$, bpweight = $f$]
+        ]
     ]
-    [$G$, pweight = $g$]
-]
-\node[draw = blue,
-      thick,
-      rounded corners,
-      fit = (left)(topright)(bottomright)] {};
 \end{probatree}
-\end{latexex-flat}
+\end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Un exemple de poids cachés partout}
+\paragraph{Exemple 2 -- Des poids cachés partout}
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
 
 \begin{latexex}
 \begin{probatree*}
-[$A$, pweight = $a$
-    [$B$, pweight = $b$]
-    [$C$, pweight = $c$]
-]
+    [$A$, pweight = $a$
+        [$B$, pweight = $b$]
+        [$C$, pweight = $c$]
+    ]
 \end{probatree*}
 \end{latexex}
 
@@ -125,19 +69,19 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 % ---------------------- %
 
 
-\paragraph{Un exemple de poids cachés localement}
+\paragraph{Exemple 3 -- Des poids cachés localement}
 
 Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, pweight = $a$
-        [$B$, pweight* = $b$]
-        [$C$, pweight = $c$]
+    [
+        [$A$, pweight = $a$
+            [$B$, pweight* = $b$]
+            [$C$, pweight  = $c$]
+        ]
+        [$D$, pweight* = $d$]
     ]
-    [$D$, pweight* = $d$]
-]
 \end{probatree}
 \end{latexex}
 
@@ -145,18 +89,125 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 % ---------------------- %
 
 
-\paragraph{Une astuce pour un signe $=$ et une virgule dans les étiquettes}
+\paragraph{Exemple 4 -- Un signe $=$ et/ou une virgule dans les étiquettes}
 
 Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
 
 \begin{latexex}
 \begin{probatree}
-[
-    [$A$, apweight = {$a = 0,1$}]
-    [$B$, bpweight = $b$]
-]
+    [
+        [$A$, apweight = {$a = 0,1$}]
+        [$B$, bpweight = $b$]
+    ]
 \end{probatree}
 \end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 5 -- Des cadres facilement}
+
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
+
+\begin{latexex}
+\begin{probatree}
+    [{}, s sep = 1.3cm 
+     % Astuce pour espacer les cadres.
+        [$A$, pweight = $a$,
+              frame   = red
+            [$B$, pweight = $b$]
+            [$C$, pweight = $c$]
+        ]
+        [$D$, pweight = $d$,
+              frame   = blue
+            [$E$, pweight = $e$
+                [$F$, pweight = $f$]
+                [$G$, pweight = $g$]
+            ]
+            [$H$, pweight = $h$
+                [$I$, pweight = $i$]
+                [$J$, pweight = $j$]
+            ]
+        ]
+    ]
+\end{probatree}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 6 -- Des cadres faits à la main}
+
+En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
+
+\begin{latexex}
+\begin{probatree}
+    [
+        [$A$, pweight = $a$,
+              name    = nA
+            [$B$, pweight = $b$,
+                  name    = nB
+                [$C$, pweight = $c$]
+                [$D$, pweight = $d$]
+               ]
+            [$F$, pweight = $f$,
+                  name    = nF]
+        ]
+        [$G$, pweight = $g$]
+    ]
+    \node[draw = orange,
+          thick,
+          rounded corners,
+          fit = (nA)(nB)(nF)] {};
+\end{probatree}
+\end{latexex}
+
+
+
+
+
+
+
+% ---------------------- %
+
+
+%\paragraph{Exemple 7 -- Indiquer un chemin}
+%
+%L'exemple suivant demande un peu plus d'implication mais de nouveau tout est obtenu via la machinerie de \verb+TiKz+.
+%
+%\begin{latexex}
+%\begin{probatree}
+%    [{}, name = start
+%        [$A$, pweight = $a$, 
+%              name    = nA
+%            [$B$, pweight = $b$]
+%            [$C$, pweight = $c$,
+%                  name    = nC]
+%        ]
+%        [$D$, pweight = $d$,
+%            [$E$, pweight = $e$]    
+%            [$F$, pweight = $f$]
+%        ]
+%    ]
+%    \draw[blue,
+%          rounded corners,
+%          dashed,
+%          line width=0.7pt]          
+%    (start.90) --
+%    (nA.135) --
+%    (nA.45) --
+%    (nC.45) --
+%    (nC.315) --
+%    (nC.225) --
+%    (nA.315) --
+%    (nA.225) --
+%    (start.315) --
+%    (start.180) --
+%    (start.90);
+%\end{probatree}
+%\end{latexex}
 
 
 % ---------------------- %

@@ -31,14 +31,22 @@
 		\CodeAfter
     	\begin{tikzpicture}
     		\path (1-1.east) 
-    			  -- node[below=0.35em,red,circle,inner sep=1.5pt] 
+    			  -- node[below = 0.45em,
+			  			  red,
+						  circle,
+						  inner sep = 1pt] 
 			         (minus) {\tiny$-$}
 			      (1-2.west);
     		\draw [red,->]
-     			   let \p1=($(minus.east)-(minus.center)$) in 
-    	    		   (1-1.east) to[out=0,in=150]  (minus.60)
-		   			   arc[start angle=60,end angle=-240,radius=\x1] 
-    	    		   to[out=30,in=180] (1-1.east-|1-2.west);
+     			   let \p1 = ($(minus.east) - (minus.center)$) in 
+    	    		   ([xshift = 0.5mm]1-1.east)
+			           to[out = 0, in = 137.5]
+			           (minus.50)
+		   			   arc[start angle = 50,
+					       end angle = -230,
+					       radius = \x1] 
+    	    		   to[out = 42.5, in =190]
+			           ([xshift = -0.3mm]1-1.east-|1-2.west);
     	\end{tikzpicture}   
 	\end{vNiceMatrix}
 }
@@ -48,10 +56,10 @@
 
 \newcommand\@vcdetplane@star[6]{%
     \@cdetplane@star{\vect#1}{#2}{#3}%
-                   {\vect#4}{#5}{#6}%
+                    {\vect#4}{#5}{#6}%
 }
 
 \newcommand\@vcdetplane@no@star[6]{%
     \@cdetplane@no@star{\vect#1}{#2}{#3}%
-                      {\vect#4}{#5}{#6}%
+                       {\vect#4}{#5}{#6}%
 }

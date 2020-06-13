@@ -2,9 +2,20 @@
 
 
 \RequirePackage{amsmath}
+\RequirePackage{witharrows}
 
 
 % == DEFINITIONS == %
+
+\newcommand\explnext{\@ifstar{\@explnext@star}{\@explnext@no@star}}
+\newcommand\@explnext@no@star{}
+\newcommand\@explnext@star{}
+
+\newcommand\@explain@sep@{=}
+
+\newcommand\explsymb{}
+
+% University version
 
 % [#1] : espace before
 %  #2  : an operator
@@ -13,12 +24,10 @@
 %    \kern#1 #2 {} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}%
 %}
 
-\newcommand\@explain@sep@{=}
-
-\newcommand\explnext[2][\@explain@sep@]{
+\newcommand\@explnext@university@no@star[2][\@explain@sep@]{
 	&&\\
     &
-    \kern-.3em #1
+    {#1}
     \if\relax\detokenize{#2}\relax\else
     	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}
 	\fi
@@ -26,10 +35,93 @@
     &
 }
 
+\newcommand\@explnext@university@star[3][\@explain@sep@]{
+    &&\\
+    &
+    {#1}
+    \if\relax\detokenize{#2}\relax\else
+    	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #2 \textexplainright{}}
+	\fi
+    &&\\
+    &
+    \phantom{#1}
+    \if\relax\detokenize{#3}\relax\else
+    	{} \kern\textexplainspacein  \text{\footnotesize \itshape \textexplainleft{} #3 \textexplainright{}}
+	\fi
+    &&\\
+    &
+}
+
 \newenvironment{explain}[1][=]{
-	\renewcommand\@explain@sep@{#1}
+	\setlength{\abovedisplayskip}{0pt}%
+	\setlength{\belowdisplayskip}{0pt}%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{
+		\PackageError{lymath}{illegal use inside the environment explain}{}
+	}%
+	\renewcommand\@explnext@no@star\@explnext@university@no@star%
+	\renewcommand\@explnext@star\@explnext@university@star%
 	\csname flalign*\endcsname
 		&
 }{
 	\csname endflalign*\endcsname
 }
+
+
+% Middle school version
+
+\newlength\@lenght@explnext@middle
+
+\newcommand\@explnext@middle@school@no@star[2][\@explain@sep@]{
+    \if\relax\detokenize{#2}\relax\else
+    	\Arrow[tikz=<->]{#2}
+	\fi
+	\\
+    &#1
+}
+
+\newcommand\@explnext@middle@school@star[3][\@explain@sep@]{
+	\if\relax\detokenize{#2}\relax%
+		\if\relax\detokenize{#3}\relax%
+			\PackageError{lymath}{two empty arguments}{at least one none empty text is needed}
+		\else%
+			\Arrow[tikz = <-]{#3}%
+		\fi%
+	\else%
+		\if\relax\detokenize{#3}\relax%
+			\Arrow[tikz = ->]{#2}%
+		\else%
+			\settowidth\@lenght@explnext@middle{#2}
+			\global\@lenght@explnext@middle=\@lenght@explnext@middle
+			\Arrow[tikz = ->]{#2}
+			\Arrow[xoffset=\dimexpr\@lenght@explnext@middle+0.75em,
+			       tikz = <-]{#3}
+		\fi%
+	\fi%
+    \\
+    &#1
+}
+
+\newenvironment{aexplain}[1][=]{
+	\renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
+	\renewcommand\@explnext@star\@explnext@middle@school@star%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{
+		\PackageError{lymath}{illegal use inside the environment aexplain}{}
+	}%%
+	$\WithArrows
+		&\phantom{{}\@explain@sep@{}}
+}{
+	\endWithArrows$
+}
+
+\newenvironment{aexplain*}[1][=]{
+	\renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
+	\renewcommand\@explnext@star\@explnext@middle@school@star%
+	\renewcommand\@explain@sep@{#1}%
+	\renewcommand\explsymb{&\@explain@sep@}%%
+	$\WithArrows
+}{
+	\endWithArrows$
+}
+
