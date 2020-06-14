@@ -1,8 +1,29 @@
 ==========
+2020-06-14
+==========
+
+**Logic and fundations:** here are the new features.
+
+    1) The standard operator ``\neg`` works now with a thin space after it. The standard behaviour is obtained by using ``\stdneg``.
+
+    1) The environments ``explain``, ``aexplain`` and ``aexplain*`` use now a blue color for the explanations and the macro ``\explsymb`` has been removed (a boolean is used in backstage).
+
+    1) The environment ``explain`` works a little differently internally.
+
+        a) The macro constants ``\textexplainleft`` and ``\textexplainright``  have been removed and the macro constant ``\textexplainspacein`` has been renamed ``\expltxtspacein``.
+
+        a) The macros ``\explnext`` uses now one customizable macro ``\expltxt``.
+
+        a) The macros ``\explnext*`` uses now two customizable macros ``\expltxtdown`` and ``\expltxtup``.
+
+    1) The environments ``demoexplain`` and ``demoexplain*`` allow to write demonstrations using an efficent and rigorous tabular like formatting.
+
+
+==========
 2020-06-13
 ==========
 
-**Algebra :** two pedagogical useful new features for determinants such as to show how to calculate it case of matrices of dimension `2*2` or `3*3`.
+**Algebra :** one pedagogical useful new feature shows how to calculate the determinant of square matrices of dimension `2`.
 
 
 **Geometry :** an almost "perfect" formatting of the calculations explained of the determinant of two 2D-vectors and the cross product of two 3D-vectors.
@@ -10,16 +31,16 @@
 
 **Logic and fundations:** here are the new features.
 
-    1) Two environments ``aexplain`` and ``aexplain*`` allows to use arrows to indicate explanations (examples have alos been added to show how to use ``explain``, ``aexplain`` or ``aexplain*`` suchas to to do stepe by step manipualtions with alignment regarding one symbol).
+    1) Two environments ``aexplain`` and ``aexplain*`` allows to use arrows to indicate explanations (examples have also been added to show how to use ``explain``, ``aexplain`` or ``aexplain*`` suchas to to do step by step manipulations with alignment regarding one or several symbols).
 
     1) Unwanted spaces are no longer added before and after the environement ``explain``.
 
 
 **Probability :** some enhancements have been made.
 
-    1) ``\expval`` is a new macro for the writing of an expected value of a random variable.
+    1) ``\expval`` is a new macro for the symbolic writing of the expected value of a random variable.
 
-    1) Better spaces before automatically added braces has been achieved.
+    1) Better spaces before automatically added braces has been achieved when writing symbolically probabilties.
 
 
 ==========
@@ -29,7 +50,7 @@
 **Geometry :** better formatting, but not still perfect, of calculations explained of the determinant of two 2D-vectors and of the cross product of two 3D-vectors.
 
 
-**Logic and fundations:** the macro ``\explain`` has been deleted. Now you must use the environement ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
+**Logic and fundations:** the macro ``\explain`` has been deleted. Now you must use the environment ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
 
 
 ==========

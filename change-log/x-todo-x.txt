@@ -6,14 +6,17 @@ VERSION = MAJOR.MINOR.PATCH
 
 
 
+
 > ---------------------------- <
 
-proba
-    ---> arbre
-            + var aléatoire à côté arbre
-            + chemin le long de pour proba du type A inter B   AUTO ????
+**New minor version version::``0.8.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
 
-    ---> An interesting example of decoration of a probabilistic tree has been added to the documentation : this is to show a path from the root to a leaf.
+    ---> quand ne plus utiliser not mais just n comme préfixe pour comportement consistant !!!!
+
+
+> ---------------------------- <
+
+**Algebra :** you can now show two way to calculate easily by hand the determinant of square matrices of dimension `3` (this is only for pedagogical use).
 
 
 > ---------------------------- <
@@ -49,24 +52,6 @@ $\begin{WithArrows}[
 \end{WithArrows}$
 
 
-
-
-
-
-
-
-> ---------------------------- <
-
-====> nel emplacent sut github !
-====> cookiecutter pour latex
-
-
-> ---------------------------- <
-
-tableau de preuve comme ceux que je faisiais au collège :
-JE SAIS QUE - PROP. UTILISÉE - NOUVEAU FAIT
-
-
 > ---------------------------- <
 
 composition visulle e fonction
@@ -77,6 +62,29 @@ composition visulle e fonction
 
 système boîte noire fonction !
     ---> voir nouveau package diagram commutatif qui est top !
+
+
+> ---------------------------- <
+
+proba
+    ---> arbre
+            + var aléatoire à côté arbre
+            + chemin le long de pour proba du type A inter B   AUTO ????
+
+    ---> An interesting example of decoration of a probabilistic tree has been added to the documentation : this is to show a path from the root to a leaf.
+
+
+
+
+
+
+
+> ---------------------------- <
+
+====> nouveau nom : tnsmath où tns = type and see (ideme pour la série des ly...)
+====> nel emplacent sut github !
+====> cookiecutter pour latex
+====> fiches techniwues : passer via des tableaux pour bonne alignenent des méta (macro, nbre argument...)
 
 
 > ---------------------------- <

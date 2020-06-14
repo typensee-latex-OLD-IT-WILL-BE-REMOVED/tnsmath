@@ -1,0 +1,9 @@
+\begin{explain}
+    (a + b) (a + b)
+        \explnext{}
+    (a + b)^2
+        \explnext{}
+    a^2 + b^2 + 2 a b
+        \explnext{}
+    a^2 + 2 a b + b^2
+\end{explain}

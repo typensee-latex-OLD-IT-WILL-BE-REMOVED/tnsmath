@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{02-spaces}
+\makeatother
+
+
+\begin{document}
+
+%\section{Quelques modifications générales}
+
+\subsection{Espace et fractions}
+
+Quand on utilise \macro{frac} ou \macro{dfrac}, de petits espaces sont automatiquement ajoutés pour éviter d'avoir des traits de fraction trop petits. Le comportement par  défaut se retrouve en utilisant les macros \macro{stdfrac} et \macro{stddfrac}. Voici un exemple.
+
+\begin{latexex}
+$\frac{2}{3} = \stdfrac{2}{3}$ ,
+$\dfrac{2}{3} = \stddfrac{2}{3}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Espace et fractions}
+
+\IDmacro*{frac}{2}
+
+\IDmacro*{dfrac}{2}
+
+\extraspace
+
+\IDmacro*{stdfrac}{2}
+
+\IDmacro*{stddfrac}{2}
+
+
+\IDarg{1} le numérateur.
+
+\IDarg{2} le dénominateur.
+
+\end{document}
