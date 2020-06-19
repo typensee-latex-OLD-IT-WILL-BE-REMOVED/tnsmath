@@ -1,6 +1,7 @@
 % == PACKAGES USED == %
 
 \RequirePackage{mathtools}
+\RequirePackage{xstring}
 
 
 % == DEFINITIONS == %
@@ -10,6 +11,18 @@
 %
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 
-
 \let\@old@norm\norm
-\def\norm{\@ifstar{\@old@norm}{\@old@norm*}}
+
+\renewcommand\norm[2][b]{%
+	\IfEqCase{#1}{%
+		{b}{\@old@norm*{#2}}%
+		{s}{\@old@norm{#2}}
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use b (default) or s.}%
+	]
+}
+
+\newcommand\vnorm[2][b]{%
+	\norm[#1]{\vect{#2}}%
+}

@@ -8,6 +8,7 @@
 \makeatother
 
 \newcommand\ZZ{ZZ}
+\newcommand\eqdef{:=}
 
 
 \begin{document}
@@ -122,7 +123,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 Dans cet exemple, la syntaxe fait référence à \whyprefix{P}{arenthèse}. Cette notation est utilisée États Unis.
 
 \begin{latexex}
-$\intervalPC{a}{b} = \intervalOC{a}{b}$ et
+$\intervalPC{a}{b} = \intervalOC{a}{b}$
+et
 $\intervalP{a}{b} = \intervalO{a}{b}$.
 \end{latexex}
 
@@ -187,11 +189,12 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 Dans l'exemple, la syntaxe fait référence à $\ZZ$ l'ensemble des entiers relatifs.
 
 \begin{latexex}
-$\ZintervalC{-1}{4} 
- = \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$
+ $\ZintervalC{-1}{4} 
+  \eqdef
+  \{ -1 ; 0 ; 1 ; 2 ; 3 ; 4 \}$
  
-$\ZintervalC{-1}{4} 
- = \ZintervalO{-2}{5}$.
+ $\ZintervalC{-1}{4} 
+= \ZintervalO{-2}{5}$.
 \end{latexex}
 
 

@@ -7,9 +7,22 @@
 \RequirePackage{etoolbox}
 \RequirePackage{simplekv}
 
+\RequirePackage{longtable}
 
 
 % == DEFINITIONS == %
+
+% Texts used
+
+\newcommand\textexplainmiddleID{Réf.}
+\newcommand\textexplainmiddlehyp{Je sais que...}
+\newcommand\textexplainmiddleprop{Propriété ou fait utilisé}
+\newcommand\textexplainmiddlecons{Conséquence}
+
+\newcommand\textexplainuniversityhyps{Démonstration sous les hypothèses}
+\newcommand\textexplainuniversityhyp{Démonstration sous l'hypothèse}
+\newcommand\textexplainuniversityccl{Conclusion}
+
 
 % Without a table like writing
 
@@ -177,12 +190,12 @@
 
 \newcommand\explref{\@ifstar{\@explref@star}{\@explref@no@star}}
 
-\newcommand\@explref@no@star[1]{%
+\newcommand\@explref@star[1]{%
     \framebox[1.5em]{#1}%
 }
 
-\newcommand\@explref@star[1]{%
-    \@explref@no@star{\ref{#1}}%
+\newcommand\@explref@no@star[1]{%
+    \@explref@star{\ref{#1}}%
 }
 
 \newcommand\demostep{}
@@ -245,17 +258,17 @@
     \if\relax\hyps\relax\else%
         \if\relax\hyp\relax\else%
             \PackageError{lymath}{hyps and hyp are both used}%
-                                   {use either hyps or hyp, or none of them}
+                                 {use either hyps or hyp, or none of them}
         \fi
     \fi
     %
     \if\relax\hyps\relax\else%
-        \underline{Démonstration sous les hypothèses} : \hyps
+        \underline{\textexplainuniversityhyps} : \hyps
 
         \medskip
     \fi
     \if\relax\hyp\relax\else%
-        \underline{Démonstration sous la seule hypothèse} : \hyp
+        \underline{\textexplainuniversityhyp} : \hyp
 
         \medskip
     \fi
@@ -267,13 +280,9 @@
         
         \medskip
 
-        \underline{Conclusion} : \ccl
+        \underline{\textexplainuniversityccl} : \ccl
     \fi
 }
-
-
-
-
 
 
 %    * Middle school version
@@ -320,10 +329,10 @@
     \small
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
-    	\textbf{\footnotesize Réf.}
-			& \textbf{\footnotesize Je sais que...}
-	        & \textbf{\footnotesize Propriété ou fait utilisé}
-	        & \textbf{\footnotesize Conséquence}
+    	\textbf{\footnotesize\textexplainmiddleID}
+			& \textbf{\footnotesize\textexplainmiddlehyp}
+	        & \textbf{\footnotesize\textexplainmiddleprop}
+	        & \textbf{\footnotesize\textexplainmiddlecons}
 }{
     \end{tabular}
     \renewcommand{\arraystretch}{1}

@@ -150,7 +150,7 @@ text_start, _, text_end = between(
 allmacros = [
     "v" + m
     for m in infos["todecorate"]
-    if not m.startswith("not")
+    if not m.startswith("n")
 ]
 
 allmacros = ", ".join(allmacros)
@@ -160,7 +160,7 @@ template_tex = text_start + f"""
 
 	\\IDmacro*{{\k}}{{0}}
 
-	\\IDmacro*{{not\k}}{{0}}
+	\\IDmacro*{{n\k}}{{0}}
 
     \\extraspace
 }}

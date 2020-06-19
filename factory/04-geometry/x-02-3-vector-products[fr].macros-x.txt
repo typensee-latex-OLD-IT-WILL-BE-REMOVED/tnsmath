@@ -1,0 +1,12 @@
+macro,dotprod,0,2
+macro,vdotprod,0,2
+macro,adotprod,0,2
+macro,adotprod*,0,2
+macro,vadotprod,0,2
+macro,crossprod,0,2
+macro,vcrossprod,0,2
+macro,calccrossprod,0,8
+macro,calccrossprod*,0,8
+macro,vcalccrossprod,0,8
+macro,vcalccrossprod*,0,8
+macro,coordcrossprod,1,6

@@ -29,7 +29,7 @@ $(A \implies B)
  \iff (B \liesimp A)$
 
 $(A \implies B)
- \notiff (A \notimplies B)$
+ \niff (A \nimplies B)$
 \end{latexex}
 
 
@@ -42,11 +42,11 @@ Tout comme pour les égalités, il existe des versions décorées de type test, 
 Elles sont toutes présentes dans l'exemple suivant.
 
 \begin{latexex}
-$A \iffappli B \notiffchoice C$
+$A \iffappli B \niffchoice C$
 
-$A \impliescond B \notimpliescons C$
+$A \impliescond B \nimpliescons C$
 
-$A \liesimphyp B \notliesimptest C$
+$A \liesimphyp B \nliesimptest C$
 \end{latexex}
 
 
@@ -71,7 +71,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
     
 \separation
 
-\foreach \k in {notiff, notiffappli, notiffchoice, notiffcond, notiffcons, notiffhyp, notifftest}{
+\foreach \k in {niff, niffappli, niffchoice, niffcond, niffcons, niffhyp, nifftest}{
 	\IDmacro*{\k}{0}
 
 }
@@ -85,7 +85,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
     
 \separation
 
-\foreach \k in {notimplies, notimpliesappli, notimplieschoice, notimpliescond, notimpliescons, notimplieshyp, notimpliestest}{
+\foreach \k in {nimplies, nimpliesappli, nimplieschoice, nimpliescond, nimpliescons, nimplieshyp, nimpliestest}{
 	\IDmacro*{\k}{0}
 
 }
@@ -99,7 +99,7 @@ La table \ref{table:decorations-operators} \vpageref{table:decorations-operators
     
 \separation
 
-\foreach \k in {notliesimp, notliesimpappli, notliesimpchoice, notliesimpcond, notliesimpcons, notliesimphyp, notliesimptest}{
+\foreach \k in {nliesimp, nliesimpappli, nliesimpchoice, nliesimpcond, nliesimpcons, nliesimphyp, nliesimptest}{
 	\IDmacro*{\k}{0}
 
 }
@@ -119,17 +119,17 @@ Bien entendu le préfixe \prefix{v} est pour \whyprefix{v}{ertical}.
 
 \begin{latexex}
 \begin{tabular}{cccccc}
-  $A$            & $B$
-& $C$            & $D$
-& $E$            & $F$
-\\
-  $\viff$        & $\vimplies$  
-& $\vliesimp$    & $\notviff$
-& $\notvimplies$ & $\notvliesimp$
-\\
-  $A$            & $B$
-& $C$            & $D$
-& $E$            & $F$
+    $A$          & $B$
+  & $C$          & $D$
+  & $E$          & $F$
+  \\
+    $\viff$      & $\vimplies$   
+  & $\vliesimp$  & $\nviff$
+  & $\nvimplies$ & $\nvliesimp$
+  \\
+    $A$          & $B$
+  & $C$          & $D$
+  & $E$          & $F$
 \end{tabular}
 \end{latexex}
 
@@ -147,7 +147,7 @@ Bien entendu le préfixe \prefix{v} est pour \whyprefix{v}{ertical}.
 
 	\IDmacro*{\k}{0}
 
-	\IDmacro*{not\k}{0}
+	\IDmacro*{n\k}{0}
 
     \extraspace
 }

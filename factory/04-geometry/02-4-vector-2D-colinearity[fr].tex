@@ -1,10 +1,10 @@
 \documentclass[12pt,a4paper]{article}
 
 \makeatletter
-	\input{../config/header[fr].sty}
-	\input{../01-misc/00-common-tools.sty}
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
 
-	\usepackage{02-4-vector-2D-colinearity}
+    \usepackage{02-4-vector-2D-colinearity}
 \makeatother
 
 
@@ -19,21 +19,21 @@
 \makeatletter
     \newcommand\pt[1]{\mathrm{#1}}
 
-	\newcommand\@no@point[1]{%
-		\IfStrEq{#1}{i}{%
-			\imath%
-		}{%
-			\IfStrEq{#1}{j}{%
-				\jmath%
-			}{%
-				#1
-			}%
-		}%
-	}
+    \newcommand\@no@point[1]{%
+        \IfStrEq{#1}{i}{%
+            \imath%
+        }{%
+            \IfStrEq{#1}{j}{%
+                \jmath%
+            }{%
+                #1
+            }%
+        }%
+    }
 
-	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
-	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
-	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+    \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+    \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+    \newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
 \makeatother
 
 
@@ -44,42 +44,120 @@
 
 %\subsection{Vecteurs}
 
-\subsubsection{Plan -- Déterminant de deux vecteurs}
+\subsubsection{Plan -- Déterminant de deux vecteurs} \label{colinearity-criteria}
 
-\paragraph{Exemple d'utilisation - Version décorée}
+\paragraph{Exemple 1 - Version décorée}
 
-Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{oordonnées}.
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler}.
 
 \begin{latexex}
-$\cdetplane{\vect{u}}{x }{y }%
-           {\vect{v}}{x'}{y'}$
+$\calcdetplane{\vect{u}}{x }{y }%
+              {\vect{v}}{x'}{y'}$
+ou
+$\calcdetplane{\vect{AB}}%
+              {x_B - x_A}{y_B - y_A}%
+              {\vect{CD}}%
+              {x_D - x_C}{y_D - y_C}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Exemple d'utilisation - Version non décorée}
+\paragraph{Exemple 2 - Version non décorée}
 
 \begin{latexex}
-$\cdetplane*{\vect{u}}{x }{y }%
-            {\vect{v}}{x'}{y'}$
+$\calcdetplane*{\vect{u}}{x }{y }%
+               {\vect{v}}{x'}{y'}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Exemple d'utilisation - Versions courtes}
+\paragraph{Exemple 3 - Rédaction raccourcie pour les vecteurs}
 
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\vcdetplane{u}{x }{y }%
-            {v}{x'}{y'}
-=
- \vcdetplane*{u}{x }{y }%
-             {v}{x'}{y'}$
+$\vcalcdetplane{u}{x }{y }%
+               {v}{x'}{y'}
+ =
+ \vcalcdetplane*{u}{x }{y }%
+                {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 4 - Versions sans les vecteurs}
+
+Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument optionnel de \macro{vcalcdetplane} qui par défaut est \verb+vec+ pour pour \whyprefix{vec}{teur}.
+À l'usage ceci permet des copier-coller très efficaces !
+
+
+\begin{latexex}
+$\vcalcdetplane[novec]{u}{x }{y }%
+                      {v}{x'}{y'}
+ =
+ \vcalcdetplane*[novec]{u}{x }{y }%
+                       {v}{x'}{y'}$
+\end{latexex}
+
+
+\begin{remark}
+	Ce qui précède marche aussi avec les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 5 - Calcul développé}
+
+Grâce à l'argument optionnel de \macro{calcdetplane} ou \macro{vcalcdetplane}, il est aussi possible d'obtenir le résultat développé du calcul comme ci-après
+où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
+Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car permettant de faire des copier-coller.
+
+\begin{latexex}
+$\vcalcdetplane[exp]{u}{x }{y }%
+                    {v}{x'}{y'}$
+
+$\vcalcdetplane[cexp]{u}{x }{y }%
+                     {v}{x'}{y'}$
+
+$\vcalcdetplane[texp]{u}{x }{y }%
+                     {v}{x'}{y'}$
+\end{latexex}
+
+
+\begin{remark}
+	Ce qui précède marche aussi avec les versions étoilées.
+\end{remark}
+
+
+\textbf{Attention !}
+Le développement effectué est stupide. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle qui suit.
+    
+\begin{latexex}
+$\vcalcdetplane[exp]{AB}%
+                    {x_B - x_A}%
+                    {y_B - y_A}%
+                    {CD}%
+                    {x_D - x_C}%
+                    {y_D - y_C}$
+\end{latexex}
+
+Ici nous n'avons pas d'autre choix que de régler le problème à la amin. Ce genre de situation n'est pas rare dans la vraie vie mathématique.
+    
+\begin{latexex}
+$\vcalcdetplane[exp]{AB}%
+                    {(x_B - x_A)}%
+                    {(y_B - y_A)}%
+                    {CD}%
+                    {(x_D - x_C)}%
+                    {(y_D - y_C)}$
 \end{latexex}
 
 
@@ -90,9 +168,23 @@ $\vcdetplane{u}{x }{y }%
 
 \paragraph{Plan -- Déterminant de deux vecteurs}
 
-\IDmacro*{cdetplane}{6}  où \quad \mwhyprefix{c}{oordinates}
+\IDmacro{calcdetplane}{1}{6}  où \quad \mwhyprefix{calc}{ulate}
 
-\IDmacro*{cdetplane*}{6} où \quad \mwhyprefix{c}{oordinates}
+\IDmacro{calcdetplane*}{1}{6} où \quad \mwhyprefix{calc}{ulate}
+
+
+\IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+
+	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+
+	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+
+	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+\end{enumerate}
 
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
@@ -111,24 +203,16 @@ $\vcdetplane{u}{x }{y }%
 \separation
 
 
-\IDmacro*{vcdetplane}{6}  où \quad \mwhyprefix{c}{oordinates}
-                                et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane}{1}{6}  où \quad \mwhyprefix{calc}{ulate}
+                                      et \mwhyprefix{v}{ector}
 
-\IDmacro*{vcdetplane*}{6} où \quad \mwhyprefix{c}{oordinates}
-                                et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane*}{1}{6} où \quad \mwhyprefix{calc}{ulate}
+                                      et \mwhyprefix{v}{ector}
 
 
-\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+\IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
 
-\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
-
-\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+\IDarg{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
 
 
 \end{document}

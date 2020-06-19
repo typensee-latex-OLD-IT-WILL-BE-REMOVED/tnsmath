@@ -19,6 +19,8 @@
 
 \newcommand\dd[1]{d#1}
 
+\newcommand\eqdef{:=}
+
 
 
 \begin{document}
@@ -27,122 +29,31 @@
 
 \subsection{Calcul intégral}
 
-\subsubsection{L'opérateur crochet -- 1\textsuperscript{ère} version}
-
-\paragraph{Exemple d'utilisation 1}
-
-Il faut savoir que \verb+hook+ signifie \inenglish{crochet} mais la bonne traduction est en fait \emph{\og square bracket \fg}.
-\begin{latexex}
-$\displaystyle
- \int_{a}^{b} f(x) \dd{x}
- = \hook{F(x)}{a}{b}$
-
-$\hook{F(x)}{a}{b}
- = F(b) - F(a)$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Exemple d'utilisation 2}
-
-Par défaut, les crochets s'étirent verticalement si besoin, mais si cela vous dérange, vous pouvez faire appel à la version étoilée de la macro comme dans l'exemple suivant
-
-\begin{latexex}
-$\displaystyle
- \hook{\frac{x - 1}{5 + x^2}}{a}{b}
- = \hook*{\frac{x - 1}{5 + x^2}}{a}{b}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiches techniques}
-
-\paragraph{L'opérateur crochet -- 1\textsuperscript{ère} version}
-
-\IDmacro*{hook}{3}
-
-\IDmacro*{hook*}{3}
-
-\IDarg{1} le contenu entre les crochets.
-
-\IDarg{2} la borne inférieure affichée en indice.
-
-\IDarg{3} la borne supérieure affichée en exposant.
-
-
-% ---------------------- %
-
-
-\subsubsection{L'opérateur crochet -- 2\textsuperscript{nde} version}
-
-\paragraph{Exemple d'utilisation 1}
-
-Ci-dessous \prefix{v} est pour \whyprefix{v}{ertical}.
-
-\begin{latexex}
-$\vhook{F(x)}{a}{b}
- = \hook{F(x)}{a}{b}$.
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\paragraph{Exemple d'utilisation 2}
-
-Tout comme avec la première version de l'opérateur crochet, vous pouvez utiliser une version étoilée pour empêcher l'étirement verticalement du trait vertical. Voici un exemple.
-
-\begin{latexex}
-$\displaystyle
- \vhook{\frac{x - 1}{5 + x^2}}{a}{b}
- = \vhook*{\frac{x - 1}{5 + x^2}}{a}{b}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiches techniques}
-
-\paragraph{L'opérateur crochet -- 2\textsuperscript{nde} version}
-
-\IDmacro*{vhook}{3}   où \quad \mwhyprefix{v}{ertical}
-
-\IDmacro*{vhook*}{3}  où \quad \mwhyprefix{v}{ertical}
-
-\IDarg{1} le contenu avant le trait vertical.
-
-\IDarg{2} la borne inférieure affichée en indice.
-
-\IDarg{3} la borne supérieure affichée en exposant.
-
-
-% ---------------------- %
-
-
 \subsubsection{Intégrales multiples}
 
-Le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
+Commençons par un point important : le package réduit les espacements entres des symboles $\int$ successifs. Voici un exemple.
 
-\begin{latexex-flat}
+\begin{latexex}
 $\displaystyle
- \int \int \int F(x;y;z) \dd{x} \dd{y} \dd{z}
- = \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} F(x;y;z) \dd{x} \dd{y} \dd{z}$
-\end{latexex-flat}
+ \int \int \int 
+ F(x;y;z) \dd{x} \dd{y} \dd{z}$
+
+$\displaystyle
+ \int_{a}^{b} \int_{c}^{d} \int_{e}^{f} 
+ F(x;y;z) \dd{x} \dd{y} \dd{z}$
+\end{latexex}
 
 
 \begin{remark}
 	Par défaut, \LaTeX{} affiche
 	$\displaystyle
-	 \stdint \stdint \stdint F(x;y;z) \dd{x} \dd{y} \dd{z}
-     =
-     \stdint_{a}^{b} \stdint_{c}^{d} \stdint_{e}^{f}
+	 \stdint \stdint \stdint
+	 F(x;y;z) \dd{x} \dd{y} \dd{z}$
+    et
+    $\displaystyle
+	 \stdint_{a}^{b} \stdint_{c}^{d} \stdint_{e}^{f}
      F(x;y;z) \dd{x} \dd{y} \dd{z}$.
-     Nous avons obtenu ce résultat en utilisant \macro{stdint} qui est l'opérateur proposé de façon standard par \LaTeX.
+    Nous avons obtenu ce résultat en utilisant \macro{stdint} qui est l'opérateur proposé de façon standard par \LaTeX.
 \end{remark}
 
 
@@ -154,5 +65,158 @@ $\displaystyle
 \paragraph{L'opérateur d'intégration standard}
 
 \IDmacro*{stdint}{0}
+
+
+% ---------------------- %
+
+
+\subsubsection{Une fonctionnelle d'intégration clés en main}
+
+\paragraph{Exemple 1 - À quoi bon ?}
+
+Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+lymath+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
+
+\begin{latexex}
+ $\displaystyle
+  \integrate{a}{b}{f(x)}{x}
+= \int_{x=a}^{x=b} f(x) \dd{x}$
+
+ $\displaystyle
+  \integrate*{a}{b}{f(x)}{x}
+  \eqdef
+  \integrate{a}{b}{f(x)}{x}$
+\end{latexex}
+
+
+\paragraph{Exemple 2 - Le mode \texttt{displaystyle}}
+
+La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version non étoilée \macro{dintegrate}.
+
+\begin{latexex}
+ $\dintegrate*{a}{b}{f(x)}{x}
+= \integrate*{a}{b}{f(x)}{x}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Fonctionnelle d'intégration}
+
+\IDmacro*{integrate}{4}
+
+\IDmacro*{integrate*}{4}
+
+\extraspace
+
+\IDmacro*{dintegrate}{4}   où \quad \mwhyprefix{d}{isplaystyle}
+
+\IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
+
+\IDarg{1} ce qui est en bas du symbole $\int_{\bullet}$ .
+
+\IDarg{2} ce qui est en haut du symbole $\int^{\bullet}$ .
+
+\IDarg{3} la fonction intégrée.
+
+\IDarg{4} suivant quoi on intègre.
+
+
+
+
+
+
+
+
+
+% ---------------------- %
+
+
+\subsubsection{L'opérateur crochet}
+
+
+\paragraph{Exemple 1}
+
+Dans l'exemple suivant, il peut sembler un peu lourd de taper \verb+\hook*{a}{b}{F(x)}{x}+ alors que $x$ ne sera pas utilisé mais à l'usage ceci permet des copier-coller très efficaces vis à vis de la macro \macro{integrate}.
+
+\begin{latexex}
+ $\hook{a}{b}{F(x)}{x}
+  \eqdef F(b) - F(a)$
+
+ $\dintegrate*{a}{b}{f(x)}{x}
+= \hook*{a}{b}{F(x)}{x}$
+
+\end{latexex}
+
+
+\begin{remark}
+	Il faut savoir que \macro{hook} signifie \inenglish{crochet} mais la bonne traduction du terme mathématique est en fait \emph{\og square bracket \fg}. Ceci étant dit l'auteur de \verb+lymath+ trouve plus efficace d'utiliser \macro{hook} comme nom de macro.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 2 - Des crochets non extensibles}
+
+Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall} \whyprefix{b}{rackets} soit \inenglish{petits crochets}. Les options sont disponibles à la fois pour \macro{hook} et \macro{hook*}.
+
+
+\begin{latexex}
+ $\displaystyle
+  \hook*{a}{b}%
+        {\frac{x - 1}{5 + x^2}}{x}
+= \hook*[sb]{a}{b}%
+            {\frac{x - 1}{5 + x^2}}{x}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 3 - Un trait vertical épuré}
+
+Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
+
+\begin{latexex}
+ $\displaystyle
+  \hook[r]{a}{b}%
+          {\frac{x - 1}{5 + x^2}}{x}
+= \hook[sr]{a}{b}%
+           {\frac{x - 1}{5 + x^2}}{x}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{L'opérateur crochet}
+
+\IDmacro{hook}{1}{4}
+
+\IDmacro{hook*}{1}{4}
+
+\IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+b+ : des crochets extensibles sont utilisés.
+
+	\item \verb+sb+ : des crochets non extensibles sont utilisés.
+
+	\item \verb+r+ : un unique trait vertical extensible est utilisé à droite.
+
+	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
+\end{enumerate}
+
+\IDarg{1} ce qui est en bas du crochet fermant.
+
+\IDarg{2} ce qui est en haut du crochet fermant.
+
+\IDarg{3} la fonction sur laquelle effectuer le calcul.
+
+\IDarg{4} la variable pour les calculs.
 
 \end{document}

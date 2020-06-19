@@ -16,22 +16,19 @@
 
 \section{Logique et fondements}
 
-\subsection{Différents types d'égalités \og standard \fg}
+\subsection{Différents types de comparaisons \og standard \fg}
 
 D'un point de vue pédagogique, il peut être intéressant de disposer de différentes façon d'écrire une égalité, une non égalité ou une inégalité.
-Bien entendu on tord les règles de typographie avec ce type de pratique mais c'est pour le bien de la communauté.
+Bien entendu on tord les règles de typographie avec ce type de pratique mais c'est pour le bien de la communauté éducative.
 
 
 \subsubsection{Définir quelque chose}
 
-L'exemple suivant montre trois façons de rédiger une égalité signifiant une définition
-\footnote{
-	Le symbole peu courant $\eqdef**$ est utilisé par le langage B qui permet de spécifier et prouver certains programmes.
-}
-\emph{(la section \ref{text-for-opes} explique comment est définit le texte \emph{\og \textopdef \fg})}.
+L'exemple suivant montre deux façons de rédiger une égalité signifiant une définition \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopdef \fg})}.
 
 \begin{latexex}
-$f(x) \eqdef x^3 + 1$ ou
+$f(x) \eqdef x^3 + 1$
+
 $f(x) \eqdef* x^3 + 1$
 \end{latexex}
 
@@ -41,11 +38,12 @@ $f(x) \eqdef* x^3 + 1$
 
 \subsubsection{Indiquer une identité}
 
-L'exemple suivant montre deux façons de rédiger des identités, la noptation symbolique n'étant pas standard \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
+L'exemple suivant montre deux façons de rédiger des identités avec une notation symbolique non standard \emph{(la section \ref{text-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
 
 \begin{latexex}
-$(a + b)^2 \eqid a^2 + b^2 + 2 a b$ ou
-$(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
+$(a + b)^2 \eqid a^2 + b^2 + 2 a b$
+
+$(a + b)^2 \eqid* a^2 + b^2 + 2 a b$
 \end{latexex}
 
 
@@ -54,31 +52,31 @@ $(a + b)^2 \eqid* a^2 + b^2 + 2 a b$ .
 
 \subsubsection{Une égalité à vérifier ou non, une hypothèse, une condition}
 
-Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
+Se reporter à la section \ref{text-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcons \fg} , \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
 
 \begin{latexex}
 $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$
 
 $(a + b)^3 \neqid a^3 + b^3 + 3 a b$
 
-$x \neqhyp 0$ ou $x \neqcond 0$
-
-$x \eqcond 0$ ou $x \eqhyp 0$ ?
+$x \neqhyp 0$  ou
+$x \neqcond 0$ ou
+$x \eqcons 0$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\subsubsection{Une égalité indiquant le choix d'une valeur}
+\subsubsection{Une égalité indiquant le choix d'une valeur ou l'application d'une relation}
 
-La section \ref{text-for-opes} permet de savoir comment le texte \emph{\og \textopchoice \fg} est défini.
+La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopchoice \fg} et \emph{\og \textopappli \fg} sont définis.
 
 \begin{latexex}
 $x \geqcond 4$ implique
 $x^2 \geqcons 16$.
 
-Alors $x \eqchoice 123$ donne
+Donc $x \eqchoice 123$ donne
 $123^2 \geqappli 16$.
 \end{latexex}
 
@@ -86,9 +84,9 @@ $123^2 \geqappli 16$.
 % ---------------------- %
 
 
-\subsubsection{Une égalité indiquant l'équation d'une courbe que l'on utilise}
+\subsubsection{Une égalité indiquant l'équation d'une courbe}
 
-La section \ref{text-for-opes} permet de savoir comment les textes \emph{\og \textopplot \fg} et \emph{\og \textopappli \fg} sont définis \emph{(la macro \emph{\texttt{\textbackslash{}setgeo}} est définie dans la section \ref{set-geo})}.
+La section \ref{text-for-opes} permet de savoir comment les texte \emph{\og \textopplot \fg} est défini \emph{(la macro \emph{\macro{setgeo}} est présentée dans la section \ref{set-geo})}.
 
 \begin{latexex}
 $M \in \setgeo{C}: y \eqplot x^2 + 3$
@@ -105,8 +103,23 @@ $y_M \eqappli x_M^2 + 3$.
 Le principe reste le même pour les symboles d'équations excepté qu'il n'y a ici aucune écriture purement symbolique. Voici un code \og fourre-tout \fg{} montrant quelques exemples.
 
 \begin{latexex}
-$x \leqtest x^2$ ou $x \ltest x^2$ ou
-$x \geqhyp 1$ ou $x \gcond 2$.
+$x \leqtest x^2$ ou $x \lesscons x^2$ ou
+$x \geqhyp 1$    ou $x \gtrcond 2$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Des formes négatives aussi pour les inéquations}
+
+Tous les opérateurs de comparaison ont une forme négative qui s'obtient en préfixant le nom de l'opérateur par \verb+n+.
+Voici quelques exemples d'utilisation.
+
+\begin{latexex}
+$x \nlesshyp 3$ ou
+$y \nleqtest 4$ ou
+$z \ngeqcons 5$
 \end{latexex}
 
 
@@ -177,35 +190,63 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 
 % == Technical infos - Operators - START == %
 
-\foreach \k in {eqappli, eqchoice, eqcond, eqcons, eqdef, eqdef*, eqhyp, eqid, eqid*, eqplot, eqtest}{
+\foreach \k in {eqdef, eqdef*, eqid, eqid*, eqplot, eqappli, eqchoice, eqcond, eqcons, eqhyp, eqtest}{
 
     \IDmacro*{\k}{0}
 }
                 
 \separation
 
-\foreach \k in {neqappli, neqchoice, neqcond, neqcons, neqhyp, neqid, neqtest}{
+\foreach \k in {neqid, neqplot, neqappli, neqchoice, neqcond, neqcons, neqhyp, neqtest}{
 
     \IDmacro*{\k}{0}
 }
                 
 \separation
 
-\foreach \k in {lappli, lchoice, lcond, lcons, lhyp, lplot, ltest}{
+\foreach \k in {lessplot, lessappli, lesschoice, lesscond, lesscons, lesshyp, lesstest}{
 
     \IDmacro*{\k}{0}
 }
                 
 \separation
 
-\foreach \k in {gappli, gchoice, gcond, gcons, ghyp, gplot, gtest}{
+\foreach \k in {nlessplot, nlessappli, nlesschoice, nlesscond, nlesscons, nlesshyp, nlesstest}{
 
     \IDmacro*{\k}{0}
 }
                 
 \separation
 
-\foreach \k in {leqappli, leqchoice, leqcond, leqcons, leqhyp, leqplot, leqtest}{
+\foreach \k in {leqplot, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {nleqplot, nleqappli, nleqchoice, nleqcond, nleqcons, nleqhyp, nleqtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {gtrplot, gtrappli, gtrchoice, gtrcond, gtrcons, gtrhyp, gtrtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {ngtrplot, ngtrappli, ngtrchoice, ngtrcond, ngtrcons, ngtrhyp, ngtrtest}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {geqplot, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
     \IDmacro*{\k}{0}
 }

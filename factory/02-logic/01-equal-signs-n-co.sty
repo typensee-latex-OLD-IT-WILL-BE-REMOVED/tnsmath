@@ -21,61 +21,94 @@
 
 % == Decorated versions - START == %
 
-\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
-\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
-\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
-\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
 \newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
 
-\newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
 \newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
 \newcommand\@eqid@star{\rightleftharpoons}
 
 \newcommand\eqplot{\@over@math@symbol{\textopplot}{=}}
+\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
+\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
+\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
+\newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
+\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqplot{\@over@math@symbol{\textopplot}{\neq}}
 \newcommand\neqappli{\@over@math@symbol{\textopappli}{\neq}}
 \newcommand\neqchoice{\@over@math@symbol{\textopchoice}{\neq}}
 \newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
 \newcommand\neqcons{\@over@math@symbol{\textopcons}{\neq}}
 \newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
-\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
 \newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
-\newcommand\lappli{\@over@math@symbol{\textopappli}{<}}
-\newcommand\lchoice{\@over@math@symbol{\textopchoice}{<}}
-\newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
-\newcommand\lcons{\@over@math@symbol{\textopcons}{<}}
-\newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
-\newcommand\lplot{\@over@math@symbol{\textopplot}{<}}
-\newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
+\newcommand\lessplot{\@over@math@symbol{\textopplot}{<}}
+\newcommand\lessappli{\@over@math@symbol{\textopappli}{<}}
+\newcommand\lesschoice{\@over@math@symbol{\textopchoice}{<}}
+\newcommand\lesscond{\@over@math@symbol{\textopcond}{<}}
+\newcommand\lesscons{\@over@math@symbol{\textopcons}{<}}
+\newcommand\lesshyp{\@over@math@symbol{\textophyp}{<}}
+\newcommand\lesstest{\@over@math@symbol{\textoptest}{<}}
 
-\newcommand\gappli{\@over@math@symbol{\textopappli}{>}}
-\newcommand\gchoice{\@over@math@symbol{\textopchoice}{>}}
-\newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
-\newcommand\gcons{\@over@math@symbol{\textopcons}{>}}
-\newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
-\newcommand\gplot{\@over@math@symbol{\textopplot}{>}}
-\newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
+\newcommand\nlessplot{\@over@math@symbol{\textopplot}{\nless}}
+\newcommand\nlessappli{\@over@math@symbol{\textopappli}{\nless}}
+\newcommand\nlesschoice{\@over@math@symbol{\textopchoice}{\nless}}
+\newcommand\nlesscond{\@over@math@symbol{\textopcond}{\nless}}
+\newcommand\nlesscons{\@over@math@symbol{\textopcons}{\nless}}
+\newcommand\nlesshyp{\@over@math@symbol{\textophyp}{\nless}}
+\newcommand\nlesstest{\@over@math@symbol{\textoptest}{\nless}}
 
+\newcommand\leqplot{\@over@math@symbol{\textopplot}{\leq}}
 \newcommand\leqappli{\@over@math@symbol{\textopappli}{\leq}}
 \newcommand\leqchoice{\@over@math@symbol{\textopchoice}{\leq}}
 \newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
 \newcommand\leqcons{\@over@math@symbol{\textopcons}{\leq}}
 \newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
-\newcommand\leqplot{\@over@math@symbol{\textopplot}{\leq}}
 \newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
+\newcommand\nleqplot{\@over@math@symbol{\textopplot}{\nleq}}
+\newcommand\nleqappli{\@over@math@symbol{\textopappli}{\nleq}}
+\newcommand\nleqchoice{\@over@math@symbol{\textopchoice}{\nleq}}
+\newcommand\nleqcond{\@over@math@symbol{\textopcond}{\nleq}}
+\newcommand\nleqcons{\@over@math@symbol{\textopcons}{\nleq}}
+\newcommand\nleqhyp{\@over@math@symbol{\textophyp}{\nleq}}
+\newcommand\nleqtest{\@over@math@symbol{\textoptest}{\nleq}}
+
+\newcommand\gtrplot{\@over@math@symbol{\textopplot}{>}}
+\newcommand\gtrappli{\@over@math@symbol{\textopappli}{>}}
+\newcommand\gtrchoice{\@over@math@symbol{\textopchoice}{>}}
+\newcommand\gtrcond{\@over@math@symbol{\textopcond}{>}}
+\newcommand\gtrcons{\@over@math@symbol{\textopcons}{>}}
+\newcommand\gtrhyp{\@over@math@symbol{\textophyp}{>}}
+\newcommand\gtrtest{\@over@math@symbol{\textoptest}{>}}
+
+\newcommand\ngtrplot{\@over@math@symbol{\textopplot}{\ngtr}}
+\newcommand\ngtrappli{\@over@math@symbol{\textopappli}{\ngtr}}
+\newcommand\ngtrchoice{\@over@math@symbol{\textopchoice}{\ngtr}}
+\newcommand\ngtrcond{\@over@math@symbol{\textopcond}{\ngtr}}
+\newcommand\ngtrcons{\@over@math@symbol{\textopcons}{\ngtr}}
+\newcommand\ngtrhyp{\@over@math@symbol{\textophyp}{\ngtr}}
+\newcommand\ngtrtest{\@over@math@symbol{\textoptest}{\ngtr}}
+
+\newcommand\geqplot{\@over@math@symbol{\textopplot}{\geq}}
 \newcommand\geqappli{\@over@math@symbol{\textopappli}{\geq}}
 \newcommand\geqchoice{\@over@math@symbol{\textopchoice}{\geq}}
 \newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
 \newcommand\geqcons{\@over@math@symbol{\textopcons}{\geq}}
 \newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
-\newcommand\geqplot{\@over@math@symbol{\textopplot}{\geq}}
 \newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
+
+\newcommand\ngeqplot{\@over@math@symbol{\textopplot}{\ngeq}}
+\newcommand\ngeqappli{\@over@math@symbol{\textopappli}{\ngeq}}
+\newcommand\ngeqchoice{\@over@math@symbol{\textopchoice}{\ngeq}}
+\newcommand\ngeqcond{\@over@math@symbol{\textopcond}{\ngeq}}
+\newcommand\ngeqcons{\@over@math@symbol{\textopcons}{\ngeq}}
+\newcommand\ngeqhyp{\@over@math@symbol{\textophyp}{\ngeq}}
+\newcommand\ngeqtest{\@over@math@symbol{\textoptest}{\ngeq}}
 
 % == Decorated versions - END == %
 

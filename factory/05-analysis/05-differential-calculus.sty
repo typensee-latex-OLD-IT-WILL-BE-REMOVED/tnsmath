@@ -1,5 +1,8 @@
 % == PACKAGES USED == %
 
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+
 \RequirePackage{yhmath}
 \RequirePackage{ifmtarg}
 \RequirePackage{xstring}
@@ -14,14 +17,18 @@
 %    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
 %    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
 
+
 % dd, partial and pp useful operators
 %
 % Argument #1: the exponent
 % Argument #2: the variable
 % Argument #3: the operator
-\newcommand{\@diffOpe}[3]{%
+% Argument #4: space before exponent
+% Argument #5: space after exponent
+
+\newcommand{\@diffOpe}[5]{%
     #3%
-    \ifx0#1\else^{#1}\!\fi%
+    \ifx0#1\else^{\kern#4#1\kern#5}\!\fi%
     \hspace{0.07em}#2%
 }
 
@@ -29,87 +36,237 @@
     \mathop{}\mathopen{}\mathrm{d}
 }
 
-\newcommand\dd[2][0]{\@diffOpe{#1}{#2}{\@dder}}
+\newcommand\dd[2][0]{\@diffOpe{#1}{#2}{\@dder}{.05ex}{0.15ex}}
 
 \let\original@partial\partial
 \renewcommand{\partial}{%
     \original@partial\mathopen{}%
 }
 
-\newcommand\pp[2][0]{\@diffOpe{#1}{#2}{\partial}}
+\newcommand\pp[2][0]{\@diffOpe{#1}{#2}{\partial}{.15ex}{0.15ex}}
 
-% Power writing of total derivate
-\newcommand\derpow{\@ifstar{\@derpow@star}{\@derpow@no@star}}
 
-\newcommand\@derpow@no@star[2][]{
-    \@ifmtarg{#1}{
-        #2^{\left( 1 \right)}
-    }{
-        #2^{\left( #1 \right)}
-    }
+
+% Common tools
+
+\newcounter{@der@prime@counter}
+
+\newcommand\@der@func@no@par[1]{%
+	#1%
 }
 
-\newcounter{@derpow@no@star@counter}
+\newcommand\@der@func@ext@par[1]{%
+	\left( #1 \right)%
+}
 
-\newcommand\@derpow@star[2][]{
-    \@ifmtarg{#1}{
-        #2^{\,\prime}
-    }{
-        #2^{\,%
-            \forloop[1]{@derpow@no@star@counter}{0}{\value{@derpow@no@star@counter} < #1}{%
-                \prime%
-            }
+\newcommand\@der@func@no@ext@par[1]{%
+	( #1 )%
+}
+
+
+\newbool{@der@option@u}   % Default.
+\newbool{@der@option@e}
+\newbool{@der@option@i}
+\newbool{@der@option@f}
+\newbool{@der@option@of}
+\newbool{@der@option@sf}
+\newbool{@der@option@osf}
+\newbool{@der@option@p}
+\newbool{@der@option@sp}
+
+
+\newcommand\@der@usual[3]{%
+	#1{#2}^{%
+		\,%
+       	\forloop[1]{@der@prime@counter}{0}{\value{@der@prime@counter} < #3}{%
+        	\prime%
         }
     }
 }
 
-% Parenthesis versions of a total derivate
-\newcommand\derpar{\@ifstar{\@derpar@star}{\@derpar@no@star}}
 
-\newcommand\@derpar@no@star[2][]{
-    \derpow[#1]{\left( #2 \right)}
+\newcommand\@der@exp[3]{%
+	#1{#2}^{\left( #3 \right)}%
 }
 
-\newcommand\@derpar@star[2][]{
-    \derpow*[#1]{\left( #2 \right)}
+
+\newcommand\@der@indice[3]{
+    \@dder^{\kern.15ex#2\kern.15ex}_{\kern.15ex#3\kern.15ex} #1%
 }
 
-\newcommand\sderpar{\@ifstar{\@sderpar@star}{\@sderpar@no@star}}
 
-\newcommand\@sderpar@no@star[2][]{
-    \derpow[#1]{( #2 )}
+\newcommand\@der@abstract@frac[4]{%
+    #1{\dd[#3]{#2}}{\dd{#4}^{#3}}%
 }
 
-\newcommand\@sderpar@star[2][]{
-    \derpow*[#1]{( #2 )}
+\newcommand\@der@dfrac[3]{%
+    \@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
 }
 
-% Fractional writing of total derivate
-\newcommand\derfrac{\@ifstar{\@derfrac@star}{\@derfrac@no@star}}
-
-\newcommand\@derfrac@no@star[3][]{
-    \@ifmtarg{#1}{
-        \frac{\dd{#2}}{\dd{#3}}
-    }{
-        \frac{\dd[#1]{#2}}{\dd{#3}^{#1}}
-    }
+\newcommand\@der@frac[3]{
+    \@der@abstract@frac{\frac}{#1}{#2}{#3}%
 }
 
-\newcommand\@derfrac@star[3][]{
-    \@derfrac@no@star[#1]{}{#3} #2
+\newcommand\@der@ope@frac[3]{
+    \@der@abstract@frac{\frac}{}{#2}{#3}#1%
 }
 
-% Subscript writing of total derivate
-\newcommand\dersub[3][]{
-% The following command works because xstring traits {...} like a single character.
-    \dd%
-    \@ifmtarg{#1}{
-        ^{\vphantom{\prime}}%
+\newcommand\@der@ope@dfrac[3]{
+    \@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+
+% Total derivate
+
+%     + Simple version (no var. of derivation)
+
+\newcommand\@validate@simple@der@option[1]{
+	\IfEqCase{#1}{%
+		{u}{\booltrue{@der@option@u}}%
+		{e}{\booltrue{@der@option@e}}%
+		{p}{\booltrue{@der@option@p}}%
+		{sp}{\booltrue{@der@option@sp}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use u (default), e , p and sp}%
+	]%
+}
+
+
+\newcommand\sder[3][u]{%
+	\boolfalse{@der@option@u}%
+	\boolfalse{@der@option@e}%
+	\boolfalse{@der@option@p}%
+	\boolfalse{@der@option@sp}%
+	%
+	\DoWithCSL\@validate@simple@der@option{#1}
+	%
+	\ifbool{@der@option@e}{}{%
+		\booltrue{@der@option@u}%
+	}%
+	%
+	\ifbool{@der@option@p}{%
+		\let\parithere\@der@func@ext@par%
+	}{%
+		\ifbool{@der@option@sp}{%
+			\let\parithere\@der@func@no@ext@par%
+		}{%
+			\let\parithere\@der@func@no@par%
+		}%
+	}%
+	%
+	\ifbool{@der@option@u}{%
+		\let\callithere\@der@usual%
     }{%
-        ^{#1}%
-    }%
-    _{#3} #2%
+		\let\callithere\@der@exp%
+	}%
+	\callithere{\parithere}{#2}{#3}%
 }
+
+
+%     + Strict version (this one needs the var. of derivation)
+
+\newcommand\@validatee@der@option[1]{
+	\IfEqCase{#1}{%
+		{u}{\booltrue{@der@option@u}}%
+		{e}{\booltrue{@der@option@e}}%
+		{i}{\booltrue{@der@option@i}}%
+		{f}{\booltrue{@der@option@f}}%
+		{of}{\booltrue{@der@option@of}}%
+		{sf}{\booltrue{@der@option@sf}}%
+		{osf}{\booltrue{@der@option@osf}}%
+		{p}{\booltrue{@der@option@p}}%
+		{sp}{\booltrue{@der@option@sp}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use u (default), e , i , f , sf , oi , of , osf , p and sp}%
+	]%
+}
+
+
+\newcommand\der[4][u]{%
+	\boolfalse{@der@option@u}%
+	\boolfalse{@der@option@e}%
+	\boolfalse{@der@option@i}%
+	\boolfalse{@der@option@f}%
+	\boolfalse{@der@option@of}%
+	\boolfalse{@der@option@sf}%
+	\boolfalse{@der@option@osf}%
+	\boolfalse{@der@option@p}%
+	\boolfalse{@der@option@sp}%
+	%
+	\DoWithCSL\@validatee@der@option{#1}
+	%
+	\ifbool{@der@option@e}{}{%
+		\ifbool{@der@option@i}{}{%
+				\ifbool{@der@option@f}{}{%
+					\ifbool{@der@option@of}{}{%
+						\ifbool{@der@option@sf}{}{%
+							\ifbool{@der@option@osf}{}{%
+								\booltrue{@der@option@u}%
+							}%
+						}%
+					}%
+				}%
+		}%
+	}%
+	% Usual
+	\ifbool{@der@option@u}{%
+		\sder[#1]{#2}{#3}
+	% Exponent
+	}{
+    	\ifbool{@der@option@e}{%
+    		\sder[#1]{#2}{#3}
+    	}{
+    % Indice or fraction like
+        	\ifbool{@der@option@p}{%
+        		\let\parithere\@der@func@ext@par%
+        	}{%
+        		\ifbool{@der@option@sp}{%
+        			\let\parithere\@der@func@no@ext@par%
+        		}{%
+        			\let\parithere\@der@func@no@par%
+        		}%
+        	}%
+	 % Big frac
+	 		\ifbool{@der@option@f}{%
+				\@der@dfrac{\parithere{#2}}{#3}{#4}%
+	 % Small frac
+	 		}{%
+				\ifbool{@der@option@sf}{%
+					\@der@frac{\parithere{#2}}{#3}{#4}%
+	 % Indice
+	 			}{%
+					\ifbool{@der@option@i}{%
+						\@der@indice{\parithere{#2}}{#3}{#4}%
+	% Operators
+					}{
+	%    + Big frac ope
+						\ifbool{@der@option@of}{%
+							\@der@ope@dfrac{\parithere{#2}}{#3}{#4}%
+						}{
+	%    + Big frac ope
+							\ifbool{@der@option@osf}{%
+								\@der@ope@frac{\parithere{#2}}{#3}{#4}%
+							}{}%
+						}%
+					}%
+				}%
+	 		}%
+		}%
+	}%
+}
+
+
+
+
+
+% Power writing of total derivate
+
+
+
+
+
 
 %% Subscript writing of partial derivate
 

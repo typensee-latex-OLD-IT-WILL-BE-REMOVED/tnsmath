@@ -8,19 +8,19 @@ decorations::
 
 
 todecorate::
-    iff    = :all:
-    notiff = :all:
+    iff  = :all:
+    niff = :all:
 
-    implies    = :all:
-    notimplies = :all:
+    implies  = :all:
+    nimplies = :all:
 
-    liesimp    = :all:
-    notliesimp = :all:
+    liesimp  = :all:
+    nliesimp = :all:
 
 
 latex::
     liesimp = \mathrel{\Longleftarrow}
 
-    notiff     = \centernot\iff
-    notimplies = \centernot\implies
-    notliesimp = \centernot\liesimp
+    niff     = \centernot\iff
+    nimplies = \centernot\implies
+    nliesimp = \centernot\liesimp

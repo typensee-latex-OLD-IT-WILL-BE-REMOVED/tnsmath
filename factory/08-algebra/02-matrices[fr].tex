@@ -3,6 +3,7 @@
 \makeatletter
     \input{../config/header[fr].sty}
     \input{../01-misc/00-common-tools.sty}
+    \input{../04-geometry/02-4-vector-2D-colinearity.sty}
 
     \usepackage{02-matrices}
 \makeatother
@@ -15,7 +16,11 @@
 
 \subsection{Matrices}
 
-Tout le boulot ou presque est fait par l'excellent package \verb+nicematrix+ auquel on impose l'option \verb+transparent+ avec l'ajout 
+Tout le boulot ou presque est fait par l'excellent package \verb+nicematrix+
+\footnote{
+	On impose l'option \texttt{transparent}.
+} 
+avec l'ajout
 d'une macro
 %de deux macros
 \emph{\og maison \fg} à but pédagogique.
@@ -25,12 +30,34 @@ Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comm
 \subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
                               {Calculs expliqués des déterminants 2x2}}
 
-Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{alculer} et \prefix{two} est pour \inenglish{deux}.
+Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{alculer} et \prefix{two} signifie \inenglish{deux}
+\footnote{
+	En coulisse on utilise les outils pour le critère de colinéarité présentés dans la section \ref{colinearity-criteria}.
+}.
 
 \begin{latexex}
-$\cdettwo{a}{b}%
-         {c}{d}$
-\end{latexex}                    
+$\calcdettwo*{a}{c}%
+             {b}{d}
+ =
+ \calcdettwo{a}{c}%
+            {b}{d}
+ =
+ \calcdettwo[exp]{a}{c}%
+                 {b}{d}$
+\end{latexex}
+
+
+\begin{remark}
+	Il existe deux autres types de développement.
+	\begin{enumerate}
+		\item $\calcdettwo[cexp]{a}{c}{b}{d}$ s'obtient via l'option \verb+cexp+.
+		
+		\item $\calcdettwo[texp]{a}{c}{b}{d}$ s'obtient via l'option \verb+texp+
+	\end{enumerate}
+	\prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
+\end{remark}
+
+                   
 
 
 % ---------------------- %
@@ -41,7 +68,20 @@ $\cdettwo{a}{b}%
 \paragraph{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
                           {Calculs expliqués des déterminants 3x3}}
 
-\IDmacro*{cdettwo}{4}  où \quad \mwhyprefix{c}{alculate}
+\IDmacro{calcdettwo}{1}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDmacro{calcdettwo*}{1}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDoption{} la valeur par défaut est \verb+std+ pour \verb+standard+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+std+ : on utilise l'écriture matricielle.
+
+	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant $\times$ pour les produits.
+
+	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+	\item \verb+sexp+ : comme \verb+exp+ mais avec un espace pour séparer les facteurs de chaque produit.
+\end{enumerate}
 
 \IDarg{1} l'entrée à la position $(1, 1)$
 
@@ -75,7 +115,7 @@ $\cdettwo{a}{b}%
 %\paragraph{Exemple 1 -- Bien pour les débutants}
 %
 %\begin{latexex}
-%$\cdetthree{a}{b}{c}%
+%$\calcdetthree{a}{c}{c}%
 %           {x}{y}{z}%
 %           {r}{s}{t}$
 %\end{latexex}         
@@ -87,7 +127,7 @@ $\cdettwo{a}{b}%
 %\paragraph{Exemple 2 -- Plus efficace à l'usage}
 %
 %\begin{latexex}
-%$\cdetthree*{a}{b}{c}%
+%$\calcdetthree*{a}{c}{c}%
 %            {x}{y}{z}%
 %            {r}{s}{t}$
 %\end{latexex}                      
@@ -101,9 +141,9 @@ $\cdettwo{a}{b}%
 %\paragraph{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
 %                          {Calculs expliqués des déterminants 3x3}}
 %
-%\IDmacro*{cdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
+%\IDmacro*{calcdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
 %
-%\IDmacro*{cdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
+%\IDmacro*{calcdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
 %
 %\IDarg{1} l'entrée à la position $(1, 1)$
 %
@@ -182,14 +222,15 @@ $\begin{bmatrix}
 
 \begin{latexex}
 $\begin{pNiceMatrix}[name = mymatrix]
-    1 & 2 & 3 \\
-    4 & 5 & 6 \\
-    7 & 8 & 9
-\end{pNiceMatrix}$
+     1 & 2 & 3 \\
+     4 & 5 & 6 \\
+     7 & 8 & 9
+ \end{pNiceMatrix}$
 
-\tikz[remember picture,
-      overlay]
-\draw[red] (mymatrix-2-2) circle (2.5mm);
+ \tikz[remember picture,
+       overlay]
+ \draw[red]
+     (mymatrix-2-2) circle (2.5mm);
 \end{latexex}
 
 
@@ -200,12 +241,12 @@ $\begin{pNiceMatrix}[name = mymatrix]
 
 \begin{latexex}
 $\left(
-    \begin{NiceArray}{CCCC:C}
-        1  & 2  & 3  & 4  & 5  \\
-        6  & 7  & 8  & 9  & 10 \\
-        11 & 12 & 13 & 14 & 15
-    \end{NiceArray}
-\right)$
+     \begin{NiceArray}{CCCC:C}
+         1  & 2  & 3  & 4  & 5  \\
+         6  & 7  & 8  & 9  & 10 \\
+         11 & 12 & 13 & 14 & 15
+     \end{NiceArray}
+ \right)$
 \end{latexex}$
 
 
@@ -220,21 +261,20 @@ $\left(
   a_{\arabic{iRow}\arabic{jCol}}%
 }
 
-$\begin{bNiceArray}%
-  {*{5}{>{%
-    \ifthenelse{\value{iRow}>0}{\aij}{}%
-}C}}[
-    first-col,
-    first-row,
-    code-for-first-row
-      = \mathbf{\arabic{jCol}},
-    code-for-first-col
-      = \mathbf{\arabic{iRow}}
-  ]
-      & & & & & \\
-      & & & & & \\
-      & & & & &
-\end{bNiceArray}$
+$\begin{bNiceArray}{*{5}{>{%
+     \ifthenelse{\value{iRow}>0}{\aij}{}%
+ }C}}[
+     first-col,
+     first-row,
+     code-for-first-row
+       = \mathbf{\arabic{jCol}},
+     code-for-first-col
+       = \mathbf{\arabic{iRow}}
+   ]
+       & & & & & \\
+       & & & & & \\
+       & & & & &
+ \end{bNiceArray}$
 \end{latexex}$
 
 
@@ -251,15 +291,16 @@ $\begin{bNiceArray}%
     \addtocounter{cntaij}{-1}%
     \arabic{cntaij}%
 }
+
 Si $a_{ij} = i + j - 1$ alors
 
 $(a_{ij})_{1 \leq i \leq 3 ,
            1 \leq j \leq 5}
-=
+ =
  \begin{bNiceArray}{*{5}{>{\aij}C}}
-    & & & & \\
-    & & & & \\
-    & & & &
+     & & & & \\
+     & & & & \\
+     & & & &
  \end{bNiceArray}$
 \end{latexex}
 

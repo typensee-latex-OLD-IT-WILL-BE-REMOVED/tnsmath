@@ -2,6 +2,8 @@
 
 \RequirePackage{amsmath}
 \RequirePackage{relsize}
+\RequirePackage{xstring}
+
 
 % == DEFINITIONS == %
 
@@ -59,11 +61,73 @@
     ^{#2}_{#3}#1%
 }
 
-% The hook calculator
-\newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
-\newcommand\@hook@star[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
-\newcommand\@hook@no@star[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-\newcommand\vhook{\@ifstar{\@vhook@star}{\@vhook@no@star}}
-\newcommand\@vhook@star[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
-\newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}
+% Integration
+
+\newcommand\integrate{\@ifstar{\@integrate@star}{\@integrate@no@star}}
+
+\newcommand\@integrate@star[4]{%
+	\int_{#1}^{#2} #3 \dd{#4}%
+}
+
+\newcommand\@integrate@no@star[4]{%
+	\@integrate@star{#4\,=\,#1}{#4\,=\,#2}{#3}{#4}%
+}
+
+
+\newcommand\dintegrate{\@ifstar{\@dintegrate@star}{\@dintegrate@no@star}}
+
+\newcommand\@dintegrate@star[4]{%
+	{\displaystyle\integrate*{#1}{#2}{#3}{#4}}%
+}
+
+\newcommand\@dintegrate@no@star[4]{%
+	{\displaystyle\integrate{#1}{#2}{#3}{#4}}%
+}
+
+
+% The hook operator
+
+\newcommand\@hook@small@vertical@phantom[1]{%
+	\vphantom{\text{\relsize{1.1}$#1$}}%
+}
+
+\newcommand\@hook@big@vertical@phantom{%
+	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
+}
+
+\newcommand\@abstract@hook[4][b]{%
+    \IfEqCase{#1}{%
+        {b}{%
+			\left[%
+				\@hook@small@vertical@phantom{#4}%
+				\,#4\,%
+			\right]%
+        }{sb}{%
+			\left[%
+				\@hook@big@vertical@phantom \right. \!\!%
+				\,#4\,%
+				\left. \@hook@big@vertical@phantom \!\!%
+			\right]%
+        }{r}{%
+            \left. #4\, \right\rvert%
+        }{sr}{%
+            #4\, {\text{\relsize{1.5}$\rvert$}}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use b (default), sb, r or sr.}
+    ]%
+	_{\,#2}^{\,#3}%
+}
+
+
+\newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
+
+\newcommand\@hook@star[5][b]{%
+	\@abstract@hook[#1]{#2}{#3}{#4}%
+}
+
+\newcommand\@hook@no@star[5][b]{%
+	\@abstract@hook[#1]{#5\,=\,#2}{#5\,=\,#3}{#4}%
+}

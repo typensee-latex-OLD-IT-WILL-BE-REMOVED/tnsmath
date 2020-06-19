@@ -46,6 +46,19 @@ for peufname in [
             if decos == ":all:":
                 decos = list(alldecos)
 
+            elif decos.startswith(":not:"):
+                toignore = [
+                    d.strip()
+                    for d in decos[len(":not:"):].split(',')
+                ]
+
+
+                decos = [
+                    d
+                    for d in alldecos
+                    if d not in toignore
+                ]
+
             else:
                 decos = [
                     d.strip()
@@ -79,10 +92,41 @@ for peufname in [
                 opedecos[":alldecos:"].append(stardeco)
 
 
-alldecos = list(set(opedecos[":alldecos:"]))
+alldecos = [
+    d
+    for d in set(opedecos[":alldecos:"])
+    if d
+]
 alldecos.sort()
 
 del opedecos[":alldecos:"]
+
+
+# ------------------------ #
+# -- GATHER SAMES DECOS -- #
+# ------------------------ #
+
+gatheredopedecos = {}
+lastdecos        = []
+lastkey          = None
+
+for ope, decos in opedecos.items():
+    if lastkey is None:
+        lastkey = [ope]
+        lastdecos = decos
+
+    elif decos == lastdecos:
+        lastkey.append(ope)
+
+    else:
+        gatheredopedecos[tuple(lastkey)] = lastdecos
+
+        lastkey = [ope]
+        lastdecos = decos
+
+if lastdecos != []:
+    gatheredopedecos[tuple(lastkey)] = lastdecos
+
 
 # ------------------------- #
 # -- TEMPLATES TO UPDATE -- #
@@ -109,7 +153,7 @@ text_start, _, text_end = between(
     keepseps = True
 )
 
-table_header = DECO*3 + "  & {0} \\\\".format(
+table_header = DECO*3 + " Préfixe & {0} \\\\".format(
     " & ".join(
         f"\\verb+{d}+" for d in alldecos
     )
@@ -117,13 +161,21 @@ table_header = DECO*3 + "  & {0} \\\\".format(
 
 table_lines = []
 
-for oneopedeco, itsdecos in opedecos.items():
-    cells = [f"\\macro{{{oneopedeco}}}"]
+for opes, decos in gatheredopedecos.items():
+    opes = "\\\\".join(
+        f"\\macro{{{oneope}}}"
+        for oneope in opes
+    )
+
+    if "\\" in opes:
+        opes = f"\\makecell{{{opes}}}"
+
+    cells = [opes]
 
     for d in alldecos:
         hasdeco = True
 
-        if d not in itsdecos:
+        if d not in decos:
             hasdeco = False
 
         if hasdeco:

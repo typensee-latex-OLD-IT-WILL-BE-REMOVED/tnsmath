@@ -1,4 +1,168 @@
 ==========
+2020-06-20     ??????
+==========
+
+
+
+Z!!!!
+    ---> mettre à jour chnagelog pour préaper nelle subversion !!!!
+
+**New minor version version::``0.8.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
+
+
+
+
+
+
+
+**Algebra :** here are the changes.
+
+    1) ``\cdettwo`` has been renamed ``\calcdettwo``.
+
+    1) ``\calcdettwo`` has an optional argument to choose the formatting wanted (in backstage the formattings are exactly the same as the ones done by the macro ``\calcdetplane`` without vectors).
+
+
+**Analysis :** there are brand new things.
+
+    1) \integrate{a}{b}{f(x)}{x} <--> \int_{a}^{b} f(x) \dd{x}
+        \dintegrate --> mode dsiplaystyle !
+
+    1) \vhook devien hook[r] ou hook[sr]
+
+        \hook{f(x)}{a}{b} ---> \hook{a}{b}{f(x)} avec x=a et x=b    CF   copier -coller !!!
+        \hook* juste avec a et b en cohérnece aevvec integrate
+
+
+    1) der total
+
+        sder et sder[e] avec e pour exponent (cf indice après ) remplace  derpow* et derpow  u = usual don els primes
+
+        oppiton p ou sp piur parenthèse ext/ non ext  autour
+
+        e,p possible
+
+
+        tou ceci vaalabl pour \der qui porpose aussi
+
+            of osf  ---> ope frac à côté fonction !
+            f  ---> derfrac
+            sf ---> derfrac*
+            i(ndice)---> dersub
+
+
+
+
+    ?????? 1) der total
+
+          ope de der/partial der sous forme fraction
+
+          partialfrac   partial[u] u-sual
+
+          partialfrac   partaila[f] + partial[sf] + version opé
+
+          partialsub    partial[i]
+
+          partialprime  partial[e]
+
+
+
+
+
+
+
+
+**Arithmetic :** ``\notdivides`` has been renamed ``\ndivides``.
+
+
+**Geometry :** here are the changes.
+
+    1) Some renamings have been done.
+
+        * ``\cdetplane``     and ``\vcdetplane``
+          become
+          ``\calcdetplane``  and ``\vcalcdetplane``.
+
+        * ``\ccrossprod``    and ``\vccrossprod``
+          become
+          ``\calccrossprod`` and ``\vcalccrossprod``.
+
+    1) Here are the brand new features for the determinant of two vectors of the plane.
+
+        * ``\calcdetplane*`` and ``\vcalcdetplane*`` have been removed.
+          Instead of using this starred macros, an optional argument can be used with ``\calcdetplane`` and ``\vcalcdetplane``.
+
+        * With the optional argument it is now possible to ask to  ``\calcdetplane`` or ``\vcalcdetplane`` to print an expanded calculation in a form like `x y' - y x'`.
+
+        * When they are printed the vectors are now smaller suchas to not polluate the reading of the determinant.
+
+    1) A new macro ``\coordcrossprod`` prints the expanded coordinates in a form like `(y z' - z y' , z x' - x z ' , x y' - y x')`. An optional argument can be used to chose the formatting of the coordinates and of the products.
+
+    1) The way to print coordinates has totally changed.
+
+        * The starred macro ``\coord*`` has been removed.
+
+        * There are three macros : ``\coord`` for coordinates alone, ``\pcoord`` for a point with its coordinates and ``\vcoord`` for a vector with its coordinates.
+
+        * The macros ``\pcoord*`` and ``\vcoord*`` give back to the writer the responsabilty of formatting the point or the vector instead of automatically used ``\pt`` or ``\vect``.
+
+        * All of this macros have an optional argument to choose the formatting : parenthesis in horizontal mode, brackets in vertical mode...
+
+    1) The way to write norms has changed.
+
+        * The starred macro ``\norm*`` has been removed.
+
+        * The none extensible version is obtained now via ``\norm[s]{...}``.
+
+        * A new macro ``\vnorm`` has been added sucha as to write the just the name of a vector (it has the same options as ``\norm``).
+
+
+**Logic :** here are the changes.
+
+    1) Some renamings have been done (the "not" version of a macro will allways have a name using the prefix `n` alone).
+
+        * ``\notiff``     and ``\notviff``
+          become
+          ``\niff``       and ``\nviff``.
+
+        * ``\notimplies`` and ``\notvimplies``
+          become
+          ``\nimplies``   and ``\nvimplies``.
+
+        * ``\notliesimp`` and `\notvliesimp``
+          become
+          ``\nliesimp``   and ``\nvliesimp``.
+
+    1) All the operators have a negative version.
+
+    1) Some macros have been added for the text used by the table explaining "real" reasonings :
+
+        * `\textexplainmiddleID`
+
+        * `\textexplainmiddlecons`.
+
+        * `\textexplainuniversityhyps`
+
+        * `\textexplainuniversityhyp`
+
+        * `\textexplainuniversityccl`
+
+    1) For the explanations of "real" reasonings, the features of the macros
+    ``\explref`` and ``\explref*`` have been switched (this is necuse in ¨lymath the starred macros use to do less work).
+
+
+
+**Documentation:** tables for suffixes and/or ^prefixes will be clearer from now.
+
+
+
+==========
+2020-06-15
+==========
+
+**Geometry :** the formatting of the calculations explained of the determinant of two 2D-vectors and the cross product of two 3D-vectors was bad when using `x_B - x_A` and co. This has been fixed and the looking is better now.
+
+
+==========
 2020-06-14
 ==========
 

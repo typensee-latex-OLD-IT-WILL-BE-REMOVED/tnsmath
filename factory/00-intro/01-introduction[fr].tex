@@ -5,6 +5,15 @@
 \makeatother
 
 
+\newcommand\dintegrate[4]{%
+  \int_{#1}^{#2} #3 d#4%
+}
+
+\newcommand\hook[4]{%
+	\left[ #3 \right]_{#4=#1}^{#4=#2}%
+}
+
+
 \begin{document}
 
 \section{Introduction}
@@ -14,26 +23,26 @@ Malheureusement toute la puissance de \LaTeX{} permet d'écrire des codes très 
 Le modeste but du package \verb+lymath+ est de fournir quelques macros sémantiques pour la rédaction de formules mathématiques élémentaires. Considérons le code \LaTeX{} suivant.
 
 \begin{latexex-alone}
-Sachant que $\frac{df}{dx}(x) = cos(x^2)$ sur $[a ; b]$ , nous avons :
+Sachant que $f^\prime(x) = cos(x^2)$ sur $[a ; b]$ , nous avons :
 
-$\int_a^b cos(x^2) dx = \left[ f(x) \right]_a^b$.
+$\displaystyle \int_a^b cos(x^2) dx = \left[ f(x) \right]_{x=a}^{x=b}$.
 \end{latexex-alone}
 
 
 Avec \verb+lymath+, vous pouvez écrire le code suivant.
 
 \begin{latexex-alone}
-Sachant que $\derfrac{f}{x}(x) = cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
+Sachant que $\sder{f}(x) = cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
 
-$\int_a^b cos(x^2) \dd{x} = \hook{f(x)}{a}{b}$.
+$\dintegrate*{a}{b}{cos(x^2)}{x} = \hook{a}{b}{f(x)}{x}$.
 \end{latexex-alone}
 
 
-Même si certaines commandes sont plus longues à écrire que ce que permet \LaTeX{}, il y a trois avantages à utiliser des commandes sémantiques.
+Même si certaines commandes sont plus longues à écrire que ce que permet \LaTeX{}, il y a des avantages à utiliser des commandes sémantiques.
 \begin{enumerate}
 	\item La mise en forme dans votre document devient consistante.
 
-	\item Il est facile de changer une mise en forme sur l'ensemble d'un document.
+	\item Il est facile de changer une mise en forme sur l'ensemble d'un document ou localement via certaines options.
 
 	\item \verb+lymath+ résout certains problèmes "complexes" pour vous.
 \end{enumerate}
@@ -44,12 +53,12 @@ Même si certaines commandes sont plus longues à écrire que ce que permet \LaT
 
 \section{Comment lire cette documentation ?}
 
-Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes \emph{(voir la section \ref{techincal-ids})}. Les exemples se présentent comme ci-dessous.
+Le choix a été fait de fournir des exemples comme documentation du package suivis de fiches techniques des macros-commandes \emph{(voir la section dédiée \ref{techincal-ids})}. Les exemples se présentent comme ci-dessous et sont généralement très courts.
 
 \begin{latexex}
-$ \displaystyle
-  \int_a^b cos(x^2) dx
-= \left[ f(x) \right]_a^b$
+$\dintegrate*{a}{b}{cos(x^2)}{x}
+ =
+ \hook*{a}{b}{f(x)}{x}$
 \end{latexex}
 
 
@@ -62,17 +71,38 @@ $ \displaystyle
 
 \subsubsection{Les macros de même \og type \fg}
 
-Les macros partageant une même fonctionnalité mathématique suivent les deux règles suivantes.
+Les macros partageant une même fonctionnalité mathématique suivent les règles suivantes.
 \begin{enumerate}
-	\item Un gros préfixe est utilisé : 
-	      par exemple, \macro{derpow} et \macro{derfrac} sont des macros pour rédiger des dérivées de fonctions
-	      \footnote{
-	      	Ce choix est assumé même si pour les macros du type \macro{set...} on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
-		  }.
+	\item Un nom de base explicite est choisi comme par exemple \macro{dotproduct} pour \inenglish{produit scalaire} ou \macro{set} pour \inenglish{ensemble}.
 
-	\item Un mini préfixe permet d'indiquer une spécialisation d'une macro : 
-	      par exemple, \macro{nparallel} est la version négative de \macro{parallel} \emph{(le mini préfixe \prefix{n} est pour \whyprefix{n}{ot} soit \inenglish{non})}.
+	\item Si besoin, on spécialise du point de vue sémantique avec un préfixe et/ou un suffixe. Voici deux exemples.
+	\begin{enumerate}
+		\item Dans \macro{vdotproduct}, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur} car cette macro s'utilise avec des noms de vecteurs \verb+u+ et \verb+v+ et non directement des vecteurs \verb+\vect{u}+ et \verb+\vect{v}+.
+
+		\item Dans \macro{setproba}, le suffixe \prefix{proba} est pour \whyprefix{proba}{bilité} car cette macro sert à écrire des ensembles munis d'une probabilité
+	      \footnote{
+	      	Ce choix est assumé même si on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
+		  }.
+	\end{enumerate}
+
+	\item Si l'on propose différentes mises en forme pour une même signification sémantique alors ceci se fera via des versions étoilées et/ou par le biais d'option(s) comme dans \macro{dotproduct[r]} pour obtenir des produits scalaires utilisant des chevrons \emph{(\prefix{r} est pour \whyprefix{r}{after} soit \inenglish{chevron})}.
 \end{enumerate}
+
+
+% ---------------------- %
+
+
+\subsubsection{Les formes \og négatives \fg{} des macros}
+
+Les formes \og négatives \fg{} des macros auront un nom préfixé par la lettre \prefix{n} en référence à \whyprefix{n}{ot}.
+
+
+% ---------------------- %
+
+
+\subsubsection{Les macros en mode \texttt{displaystyle}}
+
+Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom préfixé par la lettre \prefix{d} comme par exemple dans \macro{dintegrate}.
 
 
 % ---------------------- %
@@ -81,15 +111,7 @@ Les macros partageant une même fonctionnalité mathématique suivent les deux r
 \subsubsection{Les macros standards redéfinies}
 
 Certaines macros comme \verb+\frac+ sont un peu revues par \verb+lymath+.
-Dans ce cas, les versions standard restent accessibles en utilisant le préfixe \prefix{std} ce qui donne ici la macro \verb+\stdfrac+.
-
-
-% ---------------------- %
-
-
-\subsubsection{Les macros en mode \texttt{displaystyle}}
-
-Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commençant par la lettre \prefix{d}.
+Dans ce cas, les versions standard restent accessibles en utilisant le préfixe \prefix{std} ce qui donne ici la macro \macro{stdfrac}.
 
 
 % ---------------------- %
@@ -97,7 +119,7 @@ Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom commenç
 
 \subsection{Versions étoilées}
 
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels ou les moins pratiques : par exemple, la macro \macro{derpow} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
+Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels ou les moins pratiques : par exemple, la macro \macro{sder} utilise un exposant entre des parenthèses pour rédiger une dérivée n\ieme{} tandis que la version étoilée, si c'est possible, affichera des primes en exposant.
 
 
 % ---------------------- %
@@ -107,7 +129,7 @@ Les versions étoilées proposent des mises en forme correspondant aux cas les m
 
 \subsubsection{Avec un nombre fixé d'arguments}
 
-Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{derfrac\{f\}\{x\}}.
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{vdotprod\{u\}\{v\}}.
 
 
 % ---------------------- %
@@ -118,6 +140,14 @@ Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \
 Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \macro{coord\{x | y | z | t\}} et \macro{coord\{x | y\}}.
 Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
 Ainsi dans \macro{coord\{x | y | z | t\}}, l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+lymath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+
+
+% ---------------------- %
+
+
+\subsubsection{Important}
+
+Certaines macros pourront demander des arguments non utilisés pour la mise en forme. Pourquoi cela ? Tout simplement pour permettre des copier-coller lors de la rédaction : voir par exemple le calcul du déterminant de deux vecteurs du plan pour vérifier leur colinéarité \emph{(ceci est présenté dans la section \ref{colinearity-criteria})}.
 
 
 % ---------------------- %

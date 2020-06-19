@@ -7,16 +7,85 @@ VERSION = MAJOR.MINOR.PATCH
 
 
 
+
+
+
+Geometry
+    ??? dotproduct : option au leiu de préfixe pour diffrente mise en forme !!!
+
+        prodsca[form] donne x_u x_v + y_u y_v  mais pas de mode via coordonnées car loyrdingue et inutile en pratqiue !
+
+        idem pour crosprod mais du coup ob doit gérer option de coordp-cors prod
+
+
+    ??? angles orientés : option au leiu de préfixe pour diffrente mise en forme !!!
+
+    ??? circarc et anglein versin poitn préfixé par p
+
+
+
+
+
+
+
+
+
+
+
+
 > ---------------------------- <
 
-**New minor version version::``0.8.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
+abtraction
+    ---> macro qui gère option sans clé via virgule utilisé par detpklane
+            + on vérifie que c'st u-uatorisé vai substr de ,opt1,opt2,opt3, de xtsring
+            + par contre on continue gestion à la amin de prise en comptedes options
 
-    ---> quand ne plus utiliser not mais just n comme préfixe pour comportement consistant !!!!
+> ---------------------------- <
+
+explain - macro pour explication sur me^me ligne à coté
+    ---> explthis avec espace horzont rgélable via option : pour commentaire plus qu'explications
+    ---> mode multilign facile des commentaires
 
 
 > ---------------------------- <
 
-**Algebra :** you can now show two way to calculate easily by hand the determinant of square matrices of dimension `3` (this is only for pedagogical use).
+explain, aexplain et aexplain*
+    ---> rendre espace verticla consistent : en fait plus besoin de flalign : passer via witharrow en le détournant !
+
+    ---> explthis pour expliuqre sur mêm ligne
+
+    ---> intégrer nelle version de witharrow et jumb ???
+
+    ---> montrer withaarow avec version = { ... } fait via méca de witharrow
+
+
+    ---> université : aligner (???) les accolades (besoin de mesurer les tailles de textes)
+
+
+> ---------------------------- <
+
+demoexplian
+    ---> passer via ongtable pour possibilité de scinder ! mettre continue après
+
+
+> ---------------------------- <
+
+**Algebra :** you can now show one way to calculate easily by hand the determinant of a square matrice of dimension `3` (this is only for pedagogical use).
+
+
+> ---------------------------- <
+
+**Analysis :** the table of signs can be now decorated with a very small graph or a short text to explain the signs (this is useful for basic functions like affine ones or parabolic ones for example).
+
+
+> ---------------------------- <
+
+proba
+    ---> arbre
+            + var aléatoire à côté arbre
+            + chemin le long de pour proba du type A inter B   AUTO ????
+
+    ---> An interesting example of decoration of a probabilistic tree has been added to the documentation : this is to show a path from the root to a leaf.
 
 
 > ---------------------------- <
@@ -54,6 +123,12 @@ $\begin{WithArrows}[
 
 > ---------------------------- <
 
+boucle det
+    ---> cérer un style pour éviter les affreux copier -coller
+
+
+> ---------------------------- <
+
 composition visulle e fonction
     --> sol TiKZ car modulable facimement !
 
@@ -62,16 +137,6 @@ composition visulle e fonction
 
 système boîte noire fonction !
     ---> voir nouveau package diagram commutatif qui est top !
-
-
-> ---------------------------- <
-
-proba
-    ---> arbre
-            + var aléatoire à côté arbre
-            + chemin le long de pour proba du type A inter B   AUTO ????
-
-    ---> An interesting example of decoration of a probabilistic tree has been added to the documentation : this is to show a path from the root to a leaf.
 
 
 
@@ -103,7 +168,6 @@ Utiliser \mathrm partout où italique interdit !!!
 option pour par exemple activer espace point virgule si french babael utilisé ou si utilisateur le demande !!!
 
     ---> consolider cet espacement !!!
-
 
 
 > ---------------------------- <
@@ -140,6 +204,13 @@ gestion interne des noms de macro et constante
 > ---------------------------- <
 
 a ¨python script builds a ¨csv file of all the new things defined by ¨lymath.
+
+
+> ---------------------------- <
+
+build-update-changes-n-version.py
+
+    ---> virer modif > 1 and depuis dernière modif : un premier passage regarder le dernier fichier pui ensuite ajout underscor auto si besoin au fichier trop vieux
 
 
 > ---------------------------- <
@@ -211,7 +282,43 @@ faire une feuille testant les cas problématiques de chaque macro
     ---> passer via un fichier TeX du type xxxxx.visualtest.tex
 
 
+
 > ---------------------------- <
 
-explications
-    --> université : aligner (???) les accolades (besoin de mesurer les tailles de textes)
+Calcul multivariés !
+
+(vérifier cohérence : non car one peut vouloir laisser vide tous les ahuts ou bien faire une intégrable double mais juste avec un dS)
+\integrate{a | c | e}%
+          {b | d | f}{F(x;y;z)}%
+          {x | y | z}
+<--->
+\int_{a}^{b} \int_{c}^{d} \int_{e}^{f}
+F(x;y;z)
+\dd{x} \dd{y} \dd{z}
+
++
+
+multi hook ???
+
++
+
+diff en plus ???
+
+
+> ---------------------------- <
+
+logic
+    ---> \usepackage{longtable}
+
+
+> ---------------------------- <
+
+calcdet + crossprod
+
+    ---> parenthèse auto via  https://tex.stackexchange.com/a/549816/6880   ????
+
+
+> ---------------------------- <
+
+Geometry
+    ---> gplane + gnspace (ici pas de nombre limité de pts)

@@ -223,7 +223,9 @@ $\OO$ celui des octonions et
 $\FF$ un ensemble de nombres flottants \emph{(notation à préciser suivant le contexte)}.
 
 \begin{latexex}
-$\nullset$ , $\NN$ , $\ZZ$ , $\PP$
+$\nullset$
+
+$\NN$ , $\ZZ$ , $\PP$
 
 $\DD$ , $\QQ$ , $\RR$ , $\CC$
 
@@ -241,11 +243,9 @@ $\FF$
 L'ensemble $\RR$ nous permet de voir tous les cas possibles. 
 
 \begin{latexex}
-$\RRn$ ,
-$\RRp$ ,
-$\RRs$ ,
-$\RRsn$ ou
-$\RRsp$
+$\RRn$ , $\RRp$ , $\RRs$ 
+
+$\RRsn$ , $\RRsp$
 \end{latexex}
 
 
@@ -268,16 +268,11 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
     \begin{center}
         \begin{tabular}{c|c|c|c|c|c}
               & \verb+n+ & \verb+p+ & \verb+s+ & \verb+sn+ & \verb+sp+ \\
-            \hline \macro{NN} &          &          & $\times$ &          &          \\
-            \hline \macro{PP} &          &          &          &          &          \\
-            \hline \macro{ZZ} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \macro{DD} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \macro{QQ} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \macro{RR} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-            \hline \macro{CC} &          &          & $\times$ &          &          \\
-            \hline \macro{HH} &          &          & $\times$ &          &          \\
-            \hline \macro{OO} &          &          & $\times$ &          &          \\
-            \hline \macro{FF} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \makecell{\macro{N}} &          &          & $\times$ &          &          \\
+            \hline \makecell{\macro{P}} &          &          &          &          &          \\
+            \hline \makecell{\macro{Z}\\\macro{D}\\\macro{Q}\\\macro{R}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+            \hline \makecell{\macro{C}\\\macro{H}\\\macro{O}} &          &          & $\times$ &          &          \\
+            \hline \makecell{\macro{F}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
         \end{tabular}
     \end{center}
     \label{table:suffixes-sets}

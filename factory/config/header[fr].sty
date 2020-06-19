@@ -9,6 +9,8 @@
 
 \usepackage{multicol}
 
+\usepackage{makecell}
+
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
@@ -99,8 +101,14 @@
 }
 
 
-\newcommand\inenglish[1]{%
-	\emph{\og #1 \fg} en anglais%
+\newcommand\inenglish{\@ifstar{\@inenglish@star}{\@inenglish@no@star}}
+
+\newcommand\@inenglish@star[1]{%
+	\emph{\og #1 \fg}%
+}
+
+\newcommand\@inenglish@no@star[1]{%
+	\@inenglish@star{#1} en anglais%
 }
 
 

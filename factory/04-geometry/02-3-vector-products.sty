@@ -1,8 +1,13 @@
 % == PACKAGES USED == %
 
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
+
 \RequirePackage{nicematrix}
+\RequirePackage{xstring}
 
 
 % == DEFINITIONS == %
@@ -50,81 +55,254 @@
     \@apply@macro@two@args{\crossprod}{\vect}{#1}{#2}%
 }
 
+
+% Stupid coordinates of the cross product
+
+\newbool{@crossprod@option@p}   % Default.
+\newbool{@crossprod@option@sp}
+\newbool{@crossprod@option@vp}
+
+\newbool{@crossprod@option@b}
+\newbool{@crossprod@option@sb}
+\newbool{@crossprod@option@vb}
+
+\newbool{@crossprod@option@space}   % Default.
+\newbool{@crossprod@option@times}
+\newbool{@crossprod@option@cdot}
+
+
+% Coordinates given like that.
+%
+%    #1    #4
+%    #2    #5
+%    #3    #6
+%
+% #7 : symbol for the product.
+%
+% #8 : one of the macro \coord, \vcoord or \vcoord*.
+%
+% #9 : one of the the option p, sp, vp, b, sb or vb. 
+\newcommand\@apply@coord@crossprod@[9]{%
+    #8[#9]{%
+        #2#7#6 - #3#7#5
+      | #3#7#4 - #1#7#6
+      | #1#7#5 - #2#7#4
+    }%
+}
+
+
+\newcommand\@validate@crossprod@option[1]{
+	\IfEqCase{#1}{%
+		{p}{\booltrue{@crossprod@option@p}}%
+		{sp}{\booltrue{@crossprod@option@sp}}
+		{vp}{\booltrue{@crossprod@option@vp}}
+		%
+		{b}{\booltrue{@crossprod@option@b}}
+		{sb}{\booltrue{@crossprod@option@sb}}
+		{vb}{\booltrue{@crossprod@option@vb}}
+		%
+		{s}{\booltrue{@crossprod@option@space}}%
+		{t}{\booltrue{@crossprod@option@times}}
+		{c}{\booltrue{@crossprod@option@cdot}}
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {}%
+	]
+}
+
+
+\newcommand\coordcrossprod[7][p,s]{%
+	\boolfalse{@crossprod@option@p}
+	\boolfalse{@crossprod@option@sp}
+	\boolfalse{@crossprod@option@vp}
+	\boolfalse{@crossprod@option@b}
+	\boolfalse{@crossprod@option@sb}
+	\boolfalse{@crossprod@option@vb}
+	\boolfalse{@crossprod@option@space}
+	\boolfalse{@crossprod@option@times}
+	\boolfalse{@crossprod@option@cdot}
+	%
+	\def\@coord@option{NOTHING}%
+	\def\@exp@symbol{NOTHING}%
+	%
+	\DoWithCSL\@validate@crossprod@option{#1}
+	%
+	\ifbool{@crossprod@option@p}{%
+		\def\@coord@option{p}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@sp}{%
+		\def\@coord@option{sp}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@vp}{%
+		\def\@coord@option{vp}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@b}{%
+		\def\@coord@option{b}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@sb}{%
+		\def\@coord@option{sb}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@vb}{%
+		\def\@coord@option{vb}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@space}{%
+		\def\@exp@symbol{\,}%	
+	}{}%
+	%
+	\ifbool{@crossprod@option@times}{%
+		\def\@exp@symbol{\times}%	
+	}{}%
+	%
+	\ifbool{@crossprod@option@cdot}{%
+		\def\@exp@symbol{\cdot}%	
+	}{}%
+    %
+    \ifbool{@crossprod@option@sp}{}{%
+    	\ifbool{@crossprod@option@vp}{}{%
+			\ifbool{@crossprod@option@b}{}{%
+				\ifbool{@crossprod@option@sb}{}{%
+					\ifbool{@crossprod@option@vb}{}{%
+						\def\@coord@option{p}% Default
+					}%
+				}%
+			}%
+		}%
+    }%
+    %
+    \ifbool{@crossprod@option@times}{}{%
+    	\ifbool{@crossprod@option@cdot}{}{%
+			\def\@exp@symbol{\,}% Default
+		}%
+    }%
+    %
+    \@apply@coord@crossprod@{#2}{#3}{#4}% Vector 1
+                            {#5}{#6}{#7}% Vector 2
+                            {\@exp@symbol}%
+                            {\coord}{\@coord@option}%
+}
+
+
 % Source
-%	* https://tex.stackexchange.com/a/548662/6880
+%    * https://tex.stackexchange.com/a/548662/6880
 
-\newcommand\ccrossprod[8]{%
-	\begin{vNiceMatrix}[first-row]
-		#1 & #5  \\
-		#2 & #6  \\
-		#3 & #7  \\
-		#4 & #8  \\
-		#2 & #6
-		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (2-1.east) 
-    			  -- node[below = 0.35em,
-			              blue,
-			              circle,
-			              inner sep = 1.25pt]
-			         (minusone) {\tiny$1$}
-			      (2-2.west);
-    		\draw [blue,->]
-     			   let \p1 = ($(minusone.east) - (minusone.center)$) in 
-    	    		   ([xshift = 0.5mm]2-1.east)
-			           to[out = 0, in = 137.5]
-			           (minusone.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]2-1.east-|2-2.west);
-            %%
-     		\path (3-1.east) 
-            	  -- node[below = 0.35em,
-	                      red,
-	                      circle,
-	                      inner sep = 1.25pt] 
-			         (minustwo) {\tiny$2$}
-                  (3-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
-    	    		   ([xshift=0.5mm]3-1.east)
-			           to[out = 0, in = 137.5]
-			           (minustwo.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190] 
-			           ([xshift = -0.3mm]3-1.east-|3-2.west);
-            %%
-    		\path (1-1.east) 
-    			  -- node[below = 0.35em,
-			              orange,
-			              circle,
-			              inner sep = 1.25pt] 
-			         (minus) {\tiny$3$}
-			      (1-2.west);
-    		\draw [orange,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift=0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190] 
-			           ([xshift=-0.3mm]1-1.east-|1-2.west);
-        \end{tikzpicture} 
-	\end{vNiceMatrix}
+\newcommand\@ccrossprod@label@[1]{%
+    {\tiny$\substack{-\\#1}$}%
 }
 
 
-\newcommand\vccrossprod[8]{%
-	\ccrossprod{\vect{#1}}{#2}{#3}{#4}{\vect{#5}}{#6}{#7}{#8}%
+\newcommand\calccrossprod{\@ifstar{\@calccrossprod@star}{\@calccrossprod@no@star}}
+
+
+\newcommand\@calccrossprod@star[9][vec]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\tiny#2}         && {\tiny#6}         \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }[
+        \PackageError{lymath}{unknown option}%
+                             {You can use vec (default) or novec.}
+    ]%
+                #3                && #7                \\
+                #4                && #8                \\
+                #5                && #9                \\
+                {\color{blue} #3} && {\color{blue} #7}
+            \end{vNiceMatrix}
 }
 
 
+\newcommand\@calccrossprod@no@star[9][vec]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\tiny#2}         && {\tiny#6}         \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }[
+        \PackageError{lymath}{unknown option}%
+                             {You can use vec (default) or novec.}
+    ]%
+                   #3                && #7                \\
+                #4                && #8                \\
+                #5                && #9                \\
+                {\color{blue} #3} && {\color{blue} #7}
+                %%
+                \CodeAfter
+                \begin{tikzpicture}
+                    \path (2-1.east) 
+                          -- node[below = 0.3em,
+                                  blue,
+                                  circle,
+                                  inner sep = .4pt]
+                             (minusone) {\@ccrossprod@label@{1}}
+                          (2-3.west);
+                    \draw [blue,->]
+                          let \p1 = ($(minusone.east) - (minusone.center)$) in 
+                               ([xshift = 0.5mm,yshift=-0.05mm]2-1.east)
+                               to[out = 0, in = 137.5]
+                               ([yshift=-0.05mm]minusone.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190]
+                               ([xshift = -0.3mm,yshift=-0.05mm]2-1.east-|2-3.west);
+                    %%
+                     \path (3-1.east) 
+                          -- node[below = 0.3em,
+                                  red,
+                                  circle,
+                                  inner sep = .4pt] 
+                             (minustwo) {\@ccrossprod@label@{2}}
+                          (3-3.west);
+                    \draw [red,->]
+                          let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
+                               ([xshift=0.5mm,yshift=-0.6mm]3-1.east)
+                               to[out = 0, in = 137.5]
+                               ([yshift=-0.6mm]minustwo.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190] 
+                               ([xshift = -0.3mm,yshift=-0.6mm]3-1.east-|3-3.west);
+                    %%
+                    \path (1-1.east) 
+                          -- node[below = 0.3em,
+                                  orange,
+                                  circle,
+                                  inner sep = .4pt] 
+                             (minus) {\@ccrossprod@label@{3}}
+                          (1-3.west);
+                    \draw [orange,->]
+                          let \p1 = ($(minus.east) - (minus.center)$) in 
+                               ([xshift=0.5mm]1-1.east)
+                               to[out = 0, in = 137.5]
+                               (minus.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190] 
+                               ([xshift=-0.3mm]1-1.east-|1-3.west);
+                \end{tikzpicture} 
+            \end{vNiceMatrix}
+}
 
+
+\newcommand\vcalccrossprod{\@ifstar{\@vcalccrossprod@star}{\@vcalccrossprod@no@star}}
+
+\newcommand\@vcalccrossprod@no@star[9][vec]{%
+    \calccrossprod[#1]{\vect{#2}}{#3}{#4}{#5}{\vect{#6}}{#7}{#8}{#9}%
+}
+
+\newcommand\@vcalccrossprod@star[9][vec]{%
+    \calccrossprod*[#1]{\vect{#2}}{#3}{#4}{#5}{\vect{#6}}{#7}{#8}{#9}%
+}
 

@@ -29,6 +29,34 @@ SUFFIXES = {
     '*': "s"
 }
 
+
+def gathersame(setdef):
+    gathered_setdef = {}
+    lastdecos       = ""
+    lastkey         = None
+
+    for oneset in setdef:
+        oneset, *decos = list(oneset)
+
+        if lastkey is None:
+            lastkey   = [oneset]
+            lastdecos = decos
+
+        elif decos == lastdecos:
+            lastkey.append(oneset)
+
+        else:
+            gathered_setdef[tuple(lastkey)] = lastdecos
+
+            lastkey   = [oneset]
+            lastdecos = decos
+
+    if lastdecos != []:
+        gathered_setdef[tuple(lastkey)] = lastdecos
+
+    return gathered_setdef
+
+
 def latex_classical(setdef):
     setname, *suffixes = setdef[::1]
     latexname          = setname*2
@@ -138,14 +166,23 @@ table_header = DECO*3 + "  & {0} \\\\".format(
 
 table_lines = []
 
-for onesetdef in classicalsets:
-    cells = [f"\\macro{{{onesetdef[0]*2}}}"]
+for somesets, decos in gathersame(classicalsets).items():
+    somesets = "\\\\".join(
+        f"\\macro{{{oneset}}}"
+        for oneset in somesets
+    )
+
+    if "\\" in somesets:
+        somesets = f"\\makecell{{{somesets}}}"
+
+
+    cells = [somesets]
 
     for s in suffix_header:
         hassuffix = True
 
         for char in s:
-            if sexiffus[char] not in onesetdef:
+            if sexiffus[char] not in decos:
                 hassuffix = False
                 break
 

@@ -3,63 +3,146 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
+
 \RequirePackage{nicematrix}
+\RequirePackage{xstring}
 
 
 % == DEFINITIONS == %
 
 % Source
-%	* F. Pantigny gives me good advices to use its great package nicematrix.
-%	* https://tex.stackexchange.com/a/548662/6880
+%    * F. Pantigny gives me good advices to use its great package nicematrix.
+%    * https://tex.stackexchange.com/a/548662/6880
 
-\newcommand\cdetplane{\@ifstar{\@cdetplane@star}{\@cdetplane@no@star}}
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
 
-\newcommand\@cdetplane@star[6]{%
-	\begin{vNiceMatrix}[first-row]
-		#1 & #4 \\
-		#2 & #5 \\
-		#3 & #6
-	\end{vNiceMatrix}
-}
-
-\newcommand\@cdetplane@no@star[6]{%
-	\begin{vNiceMatrix}[first-row,columns-width=1.1em]
-		#1 & #4  \\
-		#2 & #5  \\
-		#3 & #6
-   		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (1-1.east) 
-    			  -- node[below = 0.45em,
-			  			  red,
-						  circle,
-						  inner sep = 1pt] 
-			         (minus) {\tiny$-$}
-			      (1-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift = 0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]1-1.east-|1-2.west);
-    	\end{tikzpicture}   
-	\end{vNiceMatrix}
+\newcommand\@abstract@valdetplane[5]{
+    #1 #5 #4 - #2 #5 #3%
 }
 
 
-\newcommand\vcdetplane{\@ifstar{\@vcdetplane@star}{\@vcdetplane@no@star}}
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
 
-\newcommand\@vcdetplane@star[6]{%
-    \@cdetplane@star{\vect#1}{#2}{#3}%
-                    {\vect#4}{#5}{#6}%
+\newcommand\@abstract@calcdetplane@star[7]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\scriptsize#2} & {\scriptsize#5} \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }
+                #3 & #6 \\
+                #4 & #7
+            \end{vNiceMatrix}
 }
 
-\newcommand\@vcdetplane@no@star[6]{%
-    \@cdetplane@no@star{\vect#1}{#2}{#3}%
-                       {\vect#4}{#5}{#6}%
+
+\newcommand\@abstract@calcdetplane@no@star[7]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\scriptsize#2} && {\scriptsize#5} \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }
+                    #3 && #6 \\
+                    #4 && #7
+                    %%
+                    \CodeAfter
+                    \begin{tikzpicture}
+                        \path (1-1.east) 
+                           -- node[below = 0.45em,
+                                   red,
+                                   circle,
+                                   inner sep = 1.25pt] 
+                              (minus) {\tiny$-$}
+                              (1-3.west);
+                        \draw [red,->]
+                            let \p1 = ($(minus.east) - (minus.center)$) in 
+                                ([xshift = 0.5mm]1-1.east)
+                                to[out = 0, in = 137.5]
+                                (minus.50)
+                                arc[start angle = 50,
+                                    end angle = -230,
+                                    radius = \x1] 
+                                to[out = 42.5, in =190]
+                                ([xshift = -0.3mm]1-1.east-|1-3.west);
+                \end{tikzpicture}   
+            \end{vNiceMatrix}
+}
+
+
+\newcommand\calcdetplane{\@ifstar{\@calcdetplane@star}{\@calcdetplane@no@star}}
+
+
+\newcommand\@calcdetplane@no@star[7][vec]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\times}%
+        }{vec}{%
+            \@abstract@calcdetplane@no@star{#1}%
+                                           {#2}{#3}{#4}%
+                                           {#5}{#6}{#7}%
+        }{novec}{%
+            \@abstract@calcdetplane@no@star{#1}%
+                                           {#2}{#3}{#4}%
+                                           {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or sexp.}
+    ]%
+}
+
+
+\newcommand\@calcdetplane@star[7][vec]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\times}%
+        }{vec}{%
+            \@abstract@calcdetplane@star{#1}%
+                                        {#2}{#3}{#4}%
+                                        {#5}{#6}{#7}%
+        }{novec}{%
+            \@abstract@calcdetplane@star{#1}%
+                                        {#2}{#3}{#4}%
+                                        {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or sexp.}
+    ]%
+}
+
+
+\newcommand\vcalcdetplane{\@ifstar{\@vcalcdetplane@star}{\@vcalcdetplane@no@star}}
+
+
+\newcommand\@vcalcdetplane@star[7][vec]{%
+    \@calcdetplane@star[#1]{\vect{#2}}{#3}{#4}%
+                           {\vect{#5}}{#6}{#7}%
+}
+
+
+\newcommand\@vcalcdetplane@no@star[7][vec]{%
+    \@calcdetplane@no@star[#1]{\vect{#2}}{#3}{#4}%
+                              {\vect{#5}}{#6}{#7}%
 }

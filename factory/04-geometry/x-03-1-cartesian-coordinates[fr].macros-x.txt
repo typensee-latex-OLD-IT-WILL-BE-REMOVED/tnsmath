@@ -1,0 +1,5 @@
+macro,coord,1,1
+macro,pcoord,1,2
+macro,pcoord*,1,2
+macro,vcoord,1,2
+macro,vcoord*,1,2

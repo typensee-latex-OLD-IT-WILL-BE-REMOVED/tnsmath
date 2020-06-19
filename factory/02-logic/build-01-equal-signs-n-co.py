@@ -110,6 +110,19 @@ for symbnames, decos in INFOS["todecorate"].items():
     if decos == ":all:":
         decos = ALL_LOCAL_DECOS
 
+    elif decos.startswith(":not:"):
+        toignore = [
+            d.strip()
+            for d in decos[len(":not:"):].split(',')
+        ]
+
+
+        decos = [
+            d
+            for d in ALL_LOCAL_DECOS
+            if d not in toignore
+        ]
+
     else:
         decos = [
             d.strip()
@@ -122,6 +135,7 @@ for symbnames, decos in INFOS["todecorate"].items():
         easydecos[onesymbname] = decos
 
 INFOS["todecorate"] = easydecos
+
 
 # ------------------------- #
 # -- TEMPLATES TO UPDATE -- #

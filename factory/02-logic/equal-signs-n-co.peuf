@@ -1,19 +1,21 @@
 decorations::
+    def
+    id
+    plot
+
     appli
     choice
     cond
     cons
-    def
     hyp
-    id
-    plot
     test
 
 
 todecorate::
-    eq                = :all:
-    neq               = appli , choice , cond , cons , hyp , id , test
-    l , g , leq , geq = appli , choice , cond , cons , hyp      , plot , test
+    eq                        = :all:
+    neq                       = :not: def
+    less , nless , leq , nleq = :not: def , id
+    gtr  , ngtr  , geq , ngeq = :not: def , id
 
 
 stars::
@@ -26,7 +28,14 @@ latex::
     eq  = =
     neq = \neq
 
-    l   = <
-    g   = >
-    leq = \leq
-    geq = \geq
+    less  = <
+    nless = \nless
+
+    gtr  = >
+    ngtr = \ngtr
+
+    leq  = \leq
+    nleq = \nleq
+
+    geq  = \geq
+    ngeq = \ngeq

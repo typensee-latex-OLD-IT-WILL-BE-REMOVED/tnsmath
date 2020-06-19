@@ -9,33 +9,81 @@
 
 \NiceMatrixOptions{transparent}
 
-\newcommand\cdettwo[4]{%
-	\begin{vNiceMatrix}[columns-width=1.1em]
-		#1 & #2  \\
-		#3 & #4
-   		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (1-1.east) 
-    			  -- node[below = 0.45em,
-			  			  red,
-						  circle,
-						  inner sep = 1pt] 
-			         (minus) {\tiny$-$}
-			      (1-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift = 0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]1-1.east-|1-2.west);
-    	\end{tikzpicture}   
-	\end{vNiceMatrix}
+
+\newcommand\calcdettwo{\@ifstar{\@calcdettwo@star}{\@calcdettwo@no@star}}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\@calcdettwo@no@star[5][std]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
+        {exp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\times}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            \@abstract@calcdetplane@no@star{novec}%
+                                           {}{#2}{#4}%
+                                           {}{#3}{#5}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use std (default), exp, cexp or sexp.}
+    ]%
 }
+
+
+\newcommand\@calcdettwo@star[5][std]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
+        {exp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\times}%
+        }{cexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\cdot}%
+        }{sexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\,}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            \@abstract@calcdetplane@star{novec}%
+                                        {}{#2}{#4}%
+                                        {}{#3}{#5}%
+        }%
+    }%
+}
+
 
 
 \newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}

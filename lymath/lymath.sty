@@ -7,6 +7,7 @@
 \RequirePackage{bm}
 \RequirePackage{calc}
 \RequirePackage{centernot}
+\RequirePackage{commado}
 \RequirePackage{dsfont}
 \PassOptionsToPackage{f}{esvect}
 \RequirePackage{esvect}
@@ -15,6 +16,7 @@
 \RequirePackage{forloop}
 \RequirePackage{graphicx}
 \RequirePackage{ifmtarg}
+\RequirePackage{longtable}
 \RequirePackage{mathrsfs}
 \RequirePackage{mathtools}
 \RequirePackage{nicematrix}
@@ -255,61 +257,94 @@
 
 % == Decorated versions - START == %
 
-\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
-\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
-\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
-\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
 \newcommand\eqdef{\@ifstar{\@eqdef@star}{\@eqdef@no@star}}
 \newcommand\@eqdef@no@star{\@over@math@symbol{\textopdef}{=}}
 \newcommand\@eqdef@star{\coloneqq}
 
-\newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqid{\@ifstar{\@eqid@star}{\@eqid@no@star}}
 \newcommand\@eqid@no@star{\@over@math@symbol{\textopid}{=}}
 \newcommand\@eqid@star{\rightleftharpoons}
 
 \newcommand\eqplot{\@over@math@symbol{\textopplot}{=}}
+\newcommand\eqappli{\@over@math@symbol{\textopappli}{=}}
+\newcommand\eqchoice{\@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\@over@math@symbol{\textopcond}{=}}
+\newcommand\eqcons{\@over@math@symbol{\textopcons}{=}}
+\newcommand\eqhyp{\@over@math@symbol{\textophyp}{=}}
 \newcommand\eqtest{\@over@math@symbol{\textoptest}{=}}
 
+\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqplot{\@over@math@symbol{\textopplot}{\neq}}
 \newcommand\neqappli{\@over@math@symbol{\textopappli}{\neq}}
 \newcommand\neqchoice{\@over@math@symbol{\textopchoice}{\neq}}
 \newcommand\neqcond{\@over@math@symbol{\textopcond}{\neq}}
 \newcommand\neqcons{\@over@math@symbol{\textopcons}{\neq}}
 \newcommand\neqhyp{\@over@math@symbol{\textophyp}{\neq}}
-\newcommand\neqid{\@over@math@symbol{\textopid}{\neq}}
 \newcommand\neqtest{\@over@math@symbol{\textoptest}{\neq}}
 
-\newcommand\lappli{\@over@math@symbol{\textopappli}{<}}
-\newcommand\lchoice{\@over@math@symbol{\textopchoice}{<}}
-\newcommand\lcond{\@over@math@symbol{\textopcond}{<}}
-\newcommand\lcons{\@over@math@symbol{\textopcons}{<}}
-\newcommand\lhyp{\@over@math@symbol{\textophyp}{<}}
-\newcommand\lplot{\@over@math@symbol{\textopplot}{<}}
-\newcommand\ltest{\@over@math@symbol{\textoptest}{<}}
+\newcommand\lessplot{\@over@math@symbol{\textopplot}{<}}
+\newcommand\lessappli{\@over@math@symbol{\textopappli}{<}}
+\newcommand\lesschoice{\@over@math@symbol{\textopchoice}{<}}
+\newcommand\lesscond{\@over@math@symbol{\textopcond}{<}}
+\newcommand\lesscons{\@over@math@symbol{\textopcons}{<}}
+\newcommand\lesshyp{\@over@math@symbol{\textophyp}{<}}
+\newcommand\lesstest{\@over@math@symbol{\textoptest}{<}}
 
-\newcommand\gappli{\@over@math@symbol{\textopappli}{>}}
-\newcommand\gchoice{\@over@math@symbol{\textopchoice}{>}}
-\newcommand\gcond{\@over@math@symbol{\textopcond}{>}}
-\newcommand\gcons{\@over@math@symbol{\textopcons}{>}}
-\newcommand\ghyp{\@over@math@symbol{\textophyp}{>}}
-\newcommand\gplot{\@over@math@symbol{\textopplot}{>}}
-\newcommand\gtest{\@over@math@symbol{\textoptest}{>}}
+\newcommand\nlessplot{\@over@math@symbol{\textopplot}{\nless}}
+\newcommand\nlessappli{\@over@math@symbol{\textopappli}{\nless}}
+\newcommand\nlesschoice{\@over@math@symbol{\textopchoice}{\nless}}
+\newcommand\nlesscond{\@over@math@symbol{\textopcond}{\nless}}
+\newcommand\nlesscons{\@over@math@symbol{\textopcons}{\nless}}
+\newcommand\nlesshyp{\@over@math@symbol{\textophyp}{\nless}}
+\newcommand\nlesstest{\@over@math@symbol{\textoptest}{\nless}}
 
+\newcommand\leqplot{\@over@math@symbol{\textopplot}{\leq}}
 \newcommand\leqappli{\@over@math@symbol{\textopappli}{\leq}}
 \newcommand\leqchoice{\@over@math@symbol{\textopchoice}{\leq}}
 \newcommand\leqcond{\@over@math@symbol{\textopcond}{\leq}}
 \newcommand\leqcons{\@over@math@symbol{\textopcons}{\leq}}
 \newcommand\leqhyp{\@over@math@symbol{\textophyp}{\leq}}
-\newcommand\leqplot{\@over@math@symbol{\textopplot}{\leq}}
 \newcommand\leqtest{\@over@math@symbol{\textoptest}{\leq}}
 
+\newcommand\nleqplot{\@over@math@symbol{\textopplot}{\nleq}}
+\newcommand\nleqappli{\@over@math@symbol{\textopappli}{\nleq}}
+\newcommand\nleqchoice{\@over@math@symbol{\textopchoice}{\nleq}}
+\newcommand\nleqcond{\@over@math@symbol{\textopcond}{\nleq}}
+\newcommand\nleqcons{\@over@math@symbol{\textopcons}{\nleq}}
+\newcommand\nleqhyp{\@over@math@symbol{\textophyp}{\nleq}}
+\newcommand\nleqtest{\@over@math@symbol{\textoptest}{\nleq}}
+
+\newcommand\gtrplot{\@over@math@symbol{\textopplot}{>}}
+\newcommand\gtrappli{\@over@math@symbol{\textopappli}{>}}
+\newcommand\gtrchoice{\@over@math@symbol{\textopchoice}{>}}
+\newcommand\gtrcond{\@over@math@symbol{\textopcond}{>}}
+\newcommand\gtrcons{\@over@math@symbol{\textopcons}{>}}
+\newcommand\gtrhyp{\@over@math@symbol{\textophyp}{>}}
+\newcommand\gtrtest{\@over@math@symbol{\textoptest}{>}}
+
+\newcommand\ngtrplot{\@over@math@symbol{\textopplot}{\ngtr}}
+\newcommand\ngtrappli{\@over@math@symbol{\textopappli}{\ngtr}}
+\newcommand\ngtrchoice{\@over@math@symbol{\textopchoice}{\ngtr}}
+\newcommand\ngtrcond{\@over@math@symbol{\textopcond}{\ngtr}}
+\newcommand\ngtrcons{\@over@math@symbol{\textopcons}{\ngtr}}
+\newcommand\ngtrhyp{\@over@math@symbol{\textophyp}{\ngtr}}
+\newcommand\ngtrtest{\@over@math@symbol{\textoptest}{\ngtr}}
+
+\newcommand\geqplot{\@over@math@symbol{\textopplot}{\geq}}
 \newcommand\geqappli{\@over@math@symbol{\textopappli}{\geq}}
 \newcommand\geqchoice{\@over@math@symbol{\textopchoice}{\geq}}
 \newcommand\geqcond{\@over@math@symbol{\textopcond}{\geq}}
 \newcommand\geqcons{\@over@math@symbol{\textopcons}{\geq}}
 \newcommand\geqhyp{\@over@math@symbol{\textophyp}{\geq}}
-\newcommand\geqplot{\@over@math@symbol{\textopplot}{\geq}}
 \newcommand\geqtest{\@over@math@symbol{\textoptest}{\geq}}
+
+\newcommand\ngeqplot{\@over@math@symbol{\textopplot}{\ngeq}}
+\newcommand\ngeqappli{\@over@math@symbol{\textopappli}{\ngeq}}
+\newcommand\ngeqchoice{\@over@math@symbol{\textopchoice}{\ngeq}}
+\newcommand\ngeqcond{\@over@math@symbol{\textopcond}{\ngeq}}
+\newcommand\ngeqcons{\@over@math@symbol{\textopcons}{\ngeq}}
+\newcommand\ngeqhyp{\@over@math@symbol{\textophyp}{\ngeq}}
+\newcommand\ngeqtest{\@over@math@symbol{\textoptest}{\ngeq}}
 
 % == Decorated versions - END == %
 
@@ -324,9 +359,9 @@
 \newcommand\vimplies{\mathrel{\Downarrow}}
 \newcommand\viff{\mathrel{\Updownarrow}}
 
-\newcommand\notvliesimp{\centernot\vliesimp}
-\newcommand\notvimplies{\centernot\vimplies}
-\newcommand\notviff{\centernot\viff}
+\newcommand\nvliesimp{\centernot\vliesimp}
+\newcommand\nvimplies{\centernot\vimplies}
+\newcommand\nviff{\centernot\viff}
 
 
 % Horizontal versions
@@ -335,10 +370,10 @@
 
 % == Decorated versions - START == %
 
-\newcommand\notiff{\centernot\iff}
-\newcommand\notimplies{\centernot\implies}
+\newcommand\niff{\centernot\iff}
+\newcommand\nimplies{\centernot\implies}
 \newcommand\liesimp{\mathrel{\Longleftarrow}}
-\newcommand\notliesimp{\centernot\liesimp}
+\newcommand\nliesimp{\centernot\liesimp}
 
 \newcommand\iffappli{\@over@math@symbol{\textopappli}{\iff}}
 \newcommand\iffchoice{\@over@math@symbol{\textopchoice}{\iff}}
@@ -347,12 +382,12 @@
 \newcommand\iffhyp{\@over@math@symbol{\textophyp}{\iff}}
 \newcommand\ifftest{\@over@math@symbol{\textoptest}{\iff}}
 
-\newcommand\notiffappli{\@over@math@symbol{\textopappli}{\notiff}}
-\newcommand\notiffchoice{\@over@math@symbol{\textopchoice}{\notiff}}
-\newcommand\notiffcond{\@over@math@symbol{\textopcond}{\notiff}}
-\newcommand\notiffcons{\@over@math@symbol{\textopcons}{\notiff}}
-\newcommand\notiffhyp{\@over@math@symbol{\textophyp}{\notiff}}
-\newcommand\notifftest{\@over@math@symbol{\textoptest}{\notiff}}
+\newcommand\niffappli{\@over@math@symbol{\textopappli}{\niff}}
+\newcommand\niffchoice{\@over@math@symbol{\textopchoice}{\niff}}
+\newcommand\niffcond{\@over@math@symbol{\textopcond}{\niff}}
+\newcommand\niffcons{\@over@math@symbol{\textopcons}{\niff}}
+\newcommand\niffhyp{\@over@math@symbol{\textophyp}{\niff}}
+\newcommand\nifftest{\@over@math@symbol{\textoptest}{\niff}}
 
 \newcommand\impliesappli{\@over@math@symbol{\textopappli}{\implies}}
 \newcommand\implieschoice{\@over@math@symbol{\textopchoice}{\implies}}
@@ -361,12 +396,12 @@
 \newcommand\implieshyp{\@over@math@symbol{\textophyp}{\implies}}
 \newcommand\impliestest{\@over@math@symbol{\textoptest}{\implies}}
 
-\newcommand\notimpliesappli{\@over@math@symbol{\textopappli}{\notimplies}}
-\newcommand\notimplieschoice{\@over@math@symbol{\textopchoice}{\notimplies}}
-\newcommand\notimpliescond{\@over@math@symbol{\textopcond}{\notimplies}}
-\newcommand\notimpliescons{\@over@math@symbol{\textopcons}{\notimplies}}
-\newcommand\notimplieshyp{\@over@math@symbol{\textophyp}{\notimplies}}
-\newcommand\notimpliestest{\@over@math@symbol{\textoptest}{\notimplies}}
+\newcommand\nimpliesappli{\@over@math@symbol{\textopappli}{\nimplies}}
+\newcommand\nimplieschoice{\@over@math@symbol{\textopchoice}{\nimplies}}
+\newcommand\nimpliescond{\@over@math@symbol{\textopcond}{\nimplies}}
+\newcommand\nimpliescons{\@over@math@symbol{\textopcons}{\nimplies}}
+\newcommand\nimplieshyp{\@over@math@symbol{\textophyp}{\nimplies}}
+\newcommand\nimpliestest{\@over@math@symbol{\textoptest}{\nimplies}}
 
 \newcommand\liesimpappli{\@over@math@symbol{\textopappli}{\liesimp}}
 \newcommand\liesimpchoice{\@over@math@symbol{\textopchoice}{\liesimp}}
@@ -375,12 +410,12 @@
 \newcommand\liesimphyp{\@over@math@symbol{\textophyp}{\liesimp}}
 \newcommand\liesimptest{\@over@math@symbol{\textoptest}{\liesimp}}
 
-\newcommand\notliesimpappli{\@over@math@symbol{\textopappli}{\notliesimp}}
-\newcommand\notliesimpchoice{\@over@math@symbol{\textopchoice}{\notliesimp}}
-\newcommand\notliesimpcond{\@over@math@symbol{\textopcond}{\notliesimp}}
-\newcommand\notliesimpcons{\@over@math@symbol{\textopcons}{\notliesimp}}
-\newcommand\notliesimphyp{\@over@math@symbol{\textophyp}{\notliesimp}}
-\newcommand\notliesimptest{\@over@math@symbol{\textoptest}{\notliesimp}}
+\newcommand\nliesimpappli{\@over@math@symbol{\textopappli}{\nliesimp}}
+\newcommand\nliesimpchoice{\@over@math@symbol{\textopchoice}{\nliesimp}}
+\newcommand\nliesimpcond{\@over@math@symbol{\textopcond}{\nliesimp}}
+\newcommand\nliesimpcons{\@over@math@symbol{\textopcons}{\nliesimp}}
+\newcommand\nliesimphyp{\@over@math@symbol{\textophyp}{\nliesimp}}
+\newcommand\nliesimptest{\@over@math@symbol{\textoptest}{\nliesimp}}
 
 % == Decorated versions - END == %
 
@@ -399,6 +434,18 @@
 % ---------------------------- %
 % -- CALCULATIONS EXPLAINED -- %
 % ---------------------------- %
+
+% Texts used
+
+\newcommand\textexplainmiddleID{Réf.}
+\newcommand\textexplainmiddlehyp{Je sais que...}
+\newcommand\textexplainmiddleprop{Propriété ou fait utilisé}
+\newcommand\textexplainmiddlecons{Conséquence}
+
+\newcommand\textexplainuniversityhyps{Démonstration sous les hypothèses}
+\newcommand\textexplainuniversityhyp{Démonstration sous l'hypothèse}
+\newcommand\textexplainuniversityccl{Conclusion}
+
 
 % Without a table like writing
 
@@ -566,12 +613,12 @@
 
 \newcommand\explref{\@ifstar{\@explref@star}{\@explref@no@star}}
 
-\newcommand\@explref@no@star[1]{%
+\newcommand\@explref@star[1]{%
     \framebox[1.5em]{#1}%
 }
 
-\newcommand\@explref@star[1]{%
-    \@explref@no@star{\ref{#1}}%
+\newcommand\@explref@no@star[1]{%
+    \@explref@star{\ref{#1}}%
 }
 
 \newcommand\demostep{}
@@ -634,17 +681,17 @@
     \if\relax\hyps\relax\else%
         \if\relax\hyp\relax\else%
             \PackageError{lymath}{hyps and hyp are both used}%
-                                   {use either hyps or hyp, or none of them}
+                                 {use either hyps or hyp, or none of them}
         \fi
     \fi
     %
     \if\relax\hyps\relax\else%
-        \underline{Démonstration sous les hypothèses} : \hyps
+        \underline{\textexplainuniversityhyps} : \hyps
 
         \medskip
     \fi
     \if\relax\hyp\relax\else%
-        \underline{Démonstration sous la seule hypothèse} : \hyp
+        \underline{\textexplainuniversityhyp} : \hyp
 
         \medskip
     \fi
@@ -656,13 +703,9 @@
         
         \medskip
 
-        \underline{Conclusion} : \ccl
+        \underline{\textexplainuniversityccl} : \ccl
     \fi
 }
-
-
-
-
 
 
 %    * Middle school version
@@ -709,10 +752,10 @@
     \small
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
-    	\textbf{\footnotesize Réf.}
-			& \textbf{\footnotesize Je sais que...}
-	        & \textbf{\footnotesize Propriété ou fait utilisé}
-	        & \textbf{\footnotesize Conséquence}
+    	\textbf{\footnotesize\textexplainmiddleID}
+			& \textbf{\footnotesize\textexplainmiddlehyp}
+	        & \textbf{\footnotesize\textexplainmiddleprop}
+	        & \textbf{\footnotesize\textexplainmiddlecons}
 }{
     \end{tabular}
     \renewcommand{\arraystretch}{1}
@@ -1079,9 +1122,21 @@
 %
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 
-
 \let\@old@norm\norm
-\def\norm{\@ifstar{\@old@norm}{\@old@norm*}}
+
+\renewcommand\norm[2][b]{%
+	\IfEqCase{#1}{%
+		{b}{\@old@norm*{#2}}%
+		{s}{\@old@norm{#2}}
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use b (default) or s.}%
+	]
+}
+
+\newcommand\vnorm[2][b]{%
+	\norm[#1]{\vect{#2}}%
+}
 
 
 % --------------------- %
@@ -1131,79 +1186,255 @@
     \@apply@macro@two@args{\crossprod}{\vect}{#1}{#2}%
 }
 
-% Source
-%	* https://tex.stackexchange.com/a/548662/6880
 
-\newcommand\ccrossprod[8]{%
-	\begin{vNiceMatrix}[first-row]
-		#1 & #5  \\
-		#2 & #6  \\
-		#3 & #7  \\
-		#4 & #8  \\
-		#2 & #6
-		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (2-1.east) 
-    			  -- node[below = 0.35em,
-			              blue,
-			              circle,
-			              inner sep = 1.25pt]
-			         (minusone) {\tiny$1$}
-			      (2-2.west);
-    		\draw [blue,->]
-     			   let \p1 = ($(minusone.east) - (minusone.center)$) in 
-    	    		   ([xshift = 0.5mm]2-1.east)
-			           to[out = 0, in = 137.5]
-			           (minusone.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]2-1.east-|2-2.west);
-            %%
-     		\path (3-1.east) 
-            	  -- node[below = 0.35em,
-	                      red,
-	                      circle,
-	                      inner sep = 1.25pt] 
-			         (minustwo) {\tiny$2$}
-                  (3-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
-    	    		   ([xshift=0.5mm]3-1.east)
-			           to[out = 0, in = 137.5]
-			           (minustwo.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190] 
-			           ([xshift = -0.3mm]3-1.east-|3-2.west);
-            %%
-    		\path (1-1.east) 
-    			  -- node[below = 0.35em,
-			              orange,
-			              circle,
-			              inner sep = 1.25pt] 
-			         (minus) {\tiny$3$}
-			      (1-2.west);
-    		\draw [orange,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift=0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190] 
-			           ([xshift=-0.3mm]1-1.east-|1-2.west);
-        \end{tikzpicture} 
-	\end{vNiceMatrix}
+% Stupid coordinates of the cross product
+
+\newbool{@crossprod@option@p}   % Default.
+\newbool{@crossprod@option@sp}
+\newbool{@crossprod@option@vp}
+
+\newbool{@crossprod@option@b}
+\newbool{@crossprod@option@sb}
+\newbool{@crossprod@option@vb}
+
+\newbool{@crossprod@option@space}   % Default.
+\newbool{@crossprod@option@times}
+\newbool{@crossprod@option@cdot}
+
+
+% Coordinates given like that.
+%
+%    #1    #4
+%    #2    #5
+%    #3    #6
+%
+% #7 : symbol for the product.
+%
+% #8 : one of the macro \coord, \vcoord or \vcoord*.
+%
+% #9 : one of the the option p, sp, vp, b, sb or vb. 
+\newcommand\@apply@coord@crossprod@[9]{%
+    #8[#9]{%
+        #2#7#6 - #3#7#5
+      | #3#7#4 - #1#7#6
+      | #1#7#5 - #2#7#4
+    }%
 }
 
 
-\newcommand\vccrossprod[8]{%
-	\ccrossprod{\vect{#1}}{#2}{#3}{#4}{\vect{#5}}{#6}{#7}{#8}%
+\newcommand\@validate@crossprod@option[1]{
+	\IfEqCase{#1}{%
+		{p}{\booltrue{@crossprod@option@p}}%
+		{sp}{\booltrue{@crossprod@option@sp}}
+		{vp}{\booltrue{@crossprod@option@vp}}
+		%
+		{b}{\booltrue{@crossprod@option@b}}
+		{sb}{\booltrue{@crossprod@option@sb}}
+		{vb}{\booltrue{@crossprod@option@vb}}
+		%
+		{s}{\booltrue{@crossprod@option@space}}%
+		{t}{\booltrue{@crossprod@option@times}}
+		{c}{\booltrue{@crossprod@option@cdot}}
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {}%
+	]
+}
+
+
+\newcommand\coordcrossprod[7][p,s]{%
+	\boolfalse{@crossprod@option@p}
+	\boolfalse{@crossprod@option@sp}
+	\boolfalse{@crossprod@option@vp}
+	\boolfalse{@crossprod@option@b}
+	\boolfalse{@crossprod@option@sb}
+	\boolfalse{@crossprod@option@vb}
+	\boolfalse{@crossprod@option@space}
+	\boolfalse{@crossprod@option@times}
+	\boolfalse{@crossprod@option@cdot}
+	%
+	\def\@coord@option{NOTHING}%
+	\def\@exp@symbol{NOTHING}%
+	%
+	\DoWithCSL\@validate@crossprod@option{#1}
+	%
+	\ifbool{@crossprod@option@p}{%
+		\def\@coord@option{p}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@sp}{%
+		\def\@coord@option{sp}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@vp}{%
+		\def\@coord@option{vp}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@b}{%
+		\def\@coord@option{b}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@sb}{%
+		\def\@coord@option{sb}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@vb}{%
+		\def\@coord@option{vb}%
+	}{}%
+	%
+	\ifbool{@crossprod@option@space}{%
+		\def\@exp@symbol{\,}%	
+	}{}%
+	%
+	\ifbool{@crossprod@option@times}{%
+		\def\@exp@symbol{\times}%	
+	}{}%
+	%
+	\ifbool{@crossprod@option@cdot}{%
+		\def\@exp@symbol{\cdot}%	
+	}{}%
+    %
+    \ifbool{@crossprod@option@sp}{}{%
+    	\ifbool{@crossprod@option@vp}{}{%
+			\ifbool{@crossprod@option@b}{}{%
+				\ifbool{@crossprod@option@sb}{}{%
+					\ifbool{@crossprod@option@vb}{}{%
+						\def\@coord@option{p}% Default
+					}%
+				}%
+			}%
+		}%
+    }%
+    %
+    \ifbool{@crossprod@option@times}{}{%
+    	\ifbool{@crossprod@option@cdot}{}{%
+			\def\@exp@symbol{\,}% Default
+		}%
+    }%
+    %
+    \@apply@coord@crossprod@{#2}{#3}{#4}% Vector 1
+                            {#5}{#6}{#7}% Vector 2
+                            {\@exp@symbol}%
+                            {\coord}{\@coord@option}%
+}
+
+
+% Source
+%    * https://tex.stackexchange.com/a/548662/6880
+
+\newcommand\@ccrossprod@label@[1]{%
+    {\tiny$\substack{-\\#1}$}%
+}
+
+
+\newcommand\calccrossprod{\@ifstar{\@calccrossprod@star}{\@calccrossprod@no@star}}
+
+
+\newcommand\@calccrossprod@star[9][vec]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\tiny#2}         && {\tiny#6}         \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }[
+        \PackageError{lymath}{unknown option}%
+                             {You can use vec (default) or novec.}
+    ]%
+                #3                && #7                \\
+                #4                && #8                \\
+                #5                && #9                \\
+                {\color{blue} #3} && {\color{blue} #7}
+            \end{vNiceMatrix}
+}
+
+
+\newcommand\@calccrossprod@no@star[9][vec]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\tiny#2}         && {\tiny#6}         \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }[
+        \PackageError{lymath}{unknown option}%
+                             {You can use vec (default) or novec.}
+    ]%
+                   #3                && #7                \\
+                #4                && #8                \\
+                #5                && #9                \\
+                {\color{blue} #3} && {\color{blue} #7}
+                %%
+                \CodeAfter
+                \begin{tikzpicture}
+                    \path (2-1.east) 
+                          -- node[below = 0.3em,
+                                  blue,
+                                  circle,
+                                  inner sep = .4pt]
+                             (minusone) {\@ccrossprod@label@{1}}
+                          (2-3.west);
+                    \draw [blue,->]
+                          let \p1 = ($(minusone.east) - (minusone.center)$) in 
+                               ([xshift = 0.5mm,yshift=-0.05mm]2-1.east)
+                               to[out = 0, in = 137.5]
+                               ([yshift=-0.05mm]minusone.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190]
+                               ([xshift = -0.3mm,yshift=-0.05mm]2-1.east-|2-3.west);
+                    %%
+                     \path (3-1.east) 
+                          -- node[below = 0.3em,
+                                  red,
+                                  circle,
+                                  inner sep = .4pt] 
+                             (minustwo) {\@ccrossprod@label@{2}}
+                          (3-3.west);
+                    \draw [red,->]
+                          let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
+                               ([xshift=0.5mm,yshift=-0.6mm]3-1.east)
+                               to[out = 0, in = 137.5]
+                               ([yshift=-0.6mm]minustwo.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190] 
+                               ([xshift = -0.3mm,yshift=-0.6mm]3-1.east-|3-3.west);
+                    %%
+                    \path (1-1.east) 
+                          -- node[below = 0.3em,
+                                  orange,
+                                  circle,
+                                  inner sep = .4pt] 
+                             (minus) {\@ccrossprod@label@{3}}
+                          (1-3.west);
+                    \draw [orange,->]
+                          let \p1 = ($(minus.east) - (minus.center)$) in 
+                               ([xshift=0.5mm]1-1.east)
+                               to[out = 0, in = 137.5]
+                               (minus.50)
+                                  arc[start angle = 50,
+                                   end angle = -230,
+                                   radius = \x1] 
+                               to[out = 42.5, in =190] 
+                               ([xshift=-0.3mm]1-1.east-|1-3.west);
+                \end{tikzpicture} 
+            \end{vNiceMatrix}
+}
+
+
+\newcommand\vcalccrossprod{\@ifstar{\@vcalccrossprod@star}{\@vcalccrossprod@no@star}}
+
+\newcommand\@vcalccrossprod@no@star[9][vec]{%
+    \calccrossprod[#1]{\vect{#2}}{#3}{#4}{#5}{\vect{#6}}{#7}{#8}{#9}%
+}
+
+\newcommand\@vcalccrossprod@star[9][vec]{%
+    \calccrossprod*[#1]{\vect{#2}}{#3}{#4}{#5}{\vect{#6}}{#7}{#8}{#9}%
 }
 
 
@@ -1212,59 +1443,140 @@
 % --------------------------- %
 
 % Source
-%	* F. Pantigny gives me good advices to use its great package nicematrix.
-%	* https://tex.stackexchange.com/a/548662/6880
+%    * F. Pantigny gives me good advices to use its great package nicematrix.
+%    * https://tex.stackexchange.com/a/548662/6880
 
-\newcommand\cdetplane{\@ifstar{\@cdetplane@star}{\@cdetplane@no@star}}
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
 
-\newcommand\@cdetplane@star[6]{%
-	\begin{vNiceMatrix}[first-row]
-		#1 & #4 \\
-		#2 & #5 \\
-		#3 & #6
-	\end{vNiceMatrix}
-}
-
-\newcommand\@cdetplane@no@star[6]{%
-	\begin{vNiceMatrix}[first-row,columns-width=1.1em]
-		#1 & #4  \\
-		#2 & #5  \\
-		#3 & #6
-   		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (1-1.east) 
-    			  -- node[below = 0.45em,
-			  			  red,
-						  circle,
-						  inner sep = 1pt] 
-			         (minus) {\tiny$-$}
-			      (1-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift = 0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]1-1.east-|1-2.west);
-    	\end{tikzpicture}   
-	\end{vNiceMatrix}
+\newcommand\@abstract@valdetplane[5]{
+    #1 #5 #4 - #2 #5 #3%
 }
 
 
-\newcommand\vcdetplane{\@ifstar{\@vcdetplane@star}{\@vcdetplane@no@star}}
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
 
-\newcommand\@vcdetplane@star[6]{%
-    \@cdetplane@star{\vect#1}{#2}{#3}%
-                    {\vect#4}{#5}{#6}%
+\newcommand\@abstract@calcdetplane@star[7]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\scriptsize#2} & {\scriptsize#5} \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }
+                #3 & #6 \\
+                #4 & #7
+            \end{vNiceMatrix}
 }
 
-\newcommand\@vcdetplane@no@star[6]{%
-    \@cdetplane@no@star{\vect#1}{#2}{#3}%
-                       {\vect#4}{#5}{#6}%
+
+\newcommand\@abstract@calcdetplane@no@star[7]{%
+    \IfEqCase{#1}{
+        {vec}{
+            \begin{vNiceMatrix}[first-row]
+                {\scriptsize#2} && {\scriptsize#5} \\
+        }{novec}{
+                \begin{vNiceMatrix}
+        }
+    }
+                    #3 && #6 \\
+                    #4 && #7
+                    %%
+                    \CodeAfter
+                    \begin{tikzpicture}
+                        \path (1-1.east) 
+                           -- node[below = 0.45em,
+                                   red,
+                                   circle,
+                                   inner sep = 1.25pt] 
+                              (minus) {\tiny$-$}
+                              (1-3.west);
+                        \draw [red,->]
+                            let \p1 = ($(minus.east) - (minus.center)$) in 
+                                ([xshift = 0.5mm]1-1.east)
+                                to[out = 0, in = 137.5]
+                                (minus.50)
+                                arc[start angle = 50,
+                                    end angle = -230,
+                                    radius = \x1] 
+                                to[out = 42.5, in =190]
+                                ([xshift = -0.3mm]1-1.east-|1-3.west);
+                \end{tikzpicture}   
+            \end{vNiceMatrix}
+}
+
+
+\newcommand\calcdetplane{\@ifstar{\@calcdetplane@star}{\@calcdetplane@no@star}}
+
+
+\newcommand\@calcdetplane@no@star[7][vec]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\times}%
+        }{vec}{%
+            \@abstract@calcdetplane@no@star{#1}%
+                                           {#2}{#3}{#4}%
+                                           {#5}{#6}{#7}%
+        }{novec}{%
+            \@abstract@calcdetplane@no@star{#1}%
+                                           {#2}{#3}{#4}%
+                                           {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or sexp.}
+    ]%
+}
+
+
+\newcommand\@calcdetplane@star[7][vec]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#3}{#4}{#6}{#7}{\times}%
+        }{vec}{%
+            \@abstract@calcdetplane@star{#1}%
+                                        {#2}{#3}{#4}%
+                                        {#5}{#6}{#7}%
+        }{novec}{%
+            \@abstract@calcdetplane@star{#1}%
+                                        {#2}{#3}{#4}%
+                                        {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or sexp.}
+    ]%
+}
+
+
+\newcommand\vcalcdetplane{\@ifstar{\@vcalcdetplane@star}{\@vcalcdetplane@no@star}}
+
+
+\newcommand\@vcalcdetplane@star[7][vec]{%
+    \@calcdetplane@star[#1]{\vect{#2}}{#3}{#4}%
+                           {\vect{#5}}{#6}{#7}%
+}
+
+
+\newcommand\@vcalcdetplane@no@star[7][vec]{%
+    \@calcdetplane@no@star[#1]{\vect{#2}}{#3}{#4}%
+                              {\vect{#5}}{#6}{#7}%
 }
 
 
@@ -1272,35 +1584,54 @@
 % -- CARTESIAN COORDINATES -- %
 % --------------------------- %
 
-\newcommand\coord{\@ifstar{\@coord@star}{\@coord@no@star}}
-
-\newcommand\@coord@no@star[1]{%
-    \left( \,%
+\newcommand\coord[2][p]{%
+    \IfEqCase{#1}{%
+        {p}{%
+		    \left( \,%
 % ARG 1  = Separator: |
 % ARG 2  = All parts: what the user types !
 % ARG 3  = Before   : nothing here
 % ARG 4  = Between  : ;
 % ARG 5  = After    : nothing here
 % OPTION = Ornament : macro to apply to each item
-        \makemultiargument{|}{#1}{}{\lymathsep}{}%
-     \, \right)%
+       			\makemultiargument{|}{#2}{}{\lymathsep}{}%
+     		\, \right)%
+        }{sp}{%
+            (\makemultiargument{|}{#2}{}{\lymathsep}{})%
+        }{b}{%
+		    \left[ \,%
+       			\makemultiargument{|}{#2}{}{\lymathsep}{}%
+     		\, \right]%
+        }{sb}{%
+            [\makemultiargument{|}{#2}{}{\lymathsep}{}]%
+        }{vp}{%
+            \makemultiargument{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+        }{vb}{%
+            \makemultiargument{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use p (default), sp, b, sb, vp or vb.}
+    ]%
 }
 
-\newcommand\@coord@star[1]{%
-    ( \,%
-        \makemultiargument{|}{#1}{}{\lymathsep}{}%
-    \, )%
+
+\newcommand\pcoord{\@ifstar{\@extra@coord}{\@pcoord@no@star}}
+
+\newcommand\@pcoord@no@star[3][p]{%
+	\pt{#2}\coord[#1]{#3}%
 }
 
 
-\newcommand\vcoord{\@ifstar{\@vcoord@star}{\@vcoord@no@star}}
+\newcommand\vcoord{\@ifstar{\@extra@coord}{\@vcoord@no@star}}
 
-\newcommand\@vcoord@no@star[1]{%
-    \makemultiargument{|}{#1}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+\newcommand\@vcoord@no@star[3][p]{%
+	\vect{#2}\coord[#1]{#3}%
 }
 
-\newcommand\@vcoord@star[1]{%
-    \makemultiargument{|}{#1}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+
+\newcommand\@extra@coord[3][p]{%
+	#2\coord[#1]{#3}%
 }
 
 
@@ -1541,14 +1872,18 @@
 %    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
 %    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
 
+
 % dd, partial and pp useful operators
 %
 % Argument #1: the exponent
 % Argument #2: the variable
 % Argument #3: the operator
-\newcommand{\@diffOpe}[3]{%
+% Argument #4: space before exponent
+% Argument #5: space after exponent
+
+\newcommand{\@diffOpe}[5]{%
     #3%
-    \ifx0#1\else^{#1}\!\fi%
+    \ifx0#1\else^{\kern#4#1\kern#5}\!\fi%
     \hspace{0.07em}#2%
 }
 
@@ -1556,87 +1891,237 @@
     \mathop{}\mathopen{}\mathrm{d}
 }
 
-\newcommand\dd[2][0]{\@diffOpe{#1}{#2}{\@dder}}
+\newcommand\dd[2][0]{\@diffOpe{#1}{#2}{\@dder}{.05ex}{0.15ex}}
 
 \let\original@partial\partial
 \renewcommand{\partial}{%
     \original@partial\mathopen{}%
 }
 
-\newcommand\pp[2][0]{\@diffOpe{#1}{#2}{\partial}}
+\newcommand\pp[2][0]{\@diffOpe{#1}{#2}{\partial}{.15ex}{0.15ex}}
 
-% Power writing of total derivate
-\newcommand\derpow{\@ifstar{\@derpow@star}{\@derpow@no@star}}
 
-\newcommand\@derpow@no@star[2][]{
-    \@ifmtarg{#1}{
-        #2^{\left( 1 \right)}
-    }{
-        #2^{\left( #1 \right)}
-    }
+
+% Common tools
+
+\newcounter{@der@prime@counter}
+
+\newcommand\@der@func@no@par[1]{%
+	#1%
 }
 
-\newcounter{@derpow@no@star@counter}
+\newcommand\@der@func@ext@par[1]{%
+	\left( #1 \right)%
+}
 
-\newcommand\@derpow@star[2][]{
-    \@ifmtarg{#1}{
-        #2^{\,\prime}
-    }{
-        #2^{\,%
-            \forloop[1]{@derpow@no@star@counter}{0}{\value{@derpow@no@star@counter} < #1}{%
-                \prime%
-            }
+\newcommand\@der@func@no@ext@par[1]{%
+	( #1 )%
+}
+
+
+\newbool{@der@option@u}   % Default.
+\newbool{@der@option@e}
+\newbool{@der@option@i}
+\newbool{@der@option@f}
+\newbool{@der@option@of}
+\newbool{@der@option@sf}
+\newbool{@der@option@osf}
+\newbool{@der@option@p}
+\newbool{@der@option@sp}
+
+
+\newcommand\@der@usual[3]{%
+	#1{#2}^{%
+		\,%
+       	\forloop[1]{@der@prime@counter}{0}{\value{@der@prime@counter} < #3}{%
+        	\prime%
         }
     }
 }
 
-% Parenthesis versions of a total derivate
-\newcommand\derpar{\@ifstar{\@derpar@star}{\@derpar@no@star}}
 
-\newcommand\@derpar@no@star[2][]{
-    \derpow[#1]{\left( #2 \right)}
+\newcommand\@der@exp[3]{%
+	#1{#2}^{\left( #3 \right)}%
 }
 
-\newcommand\@derpar@star[2][]{
-    \derpow*[#1]{\left( #2 \right)}
+
+\newcommand\@der@indice[3]{
+    \@dder^{\kern.15ex#2\kern.15ex}_{\kern.15ex#3\kern.15ex} #1%
 }
 
-\newcommand\sderpar{\@ifstar{\@sderpar@star}{\@sderpar@no@star}}
 
-\newcommand\@sderpar@no@star[2][]{
-    \derpow[#1]{( #2 )}
+\newcommand\@der@abstract@frac[4]{%
+    #1{\dd[#3]{#2}}{\dd{#4}^{#3}}%
 }
 
-\newcommand\@sderpar@star[2][]{
-    \derpow*[#1]{( #2 )}
+\newcommand\@der@dfrac[3]{%
+    \@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
 }
 
-% Fractional writing of total derivate
-\newcommand\derfrac{\@ifstar{\@derfrac@star}{\@derfrac@no@star}}
-
-\newcommand\@derfrac@no@star[3][]{
-    \@ifmtarg{#1}{
-        \frac{\dd{#2}}{\dd{#3}}
-    }{
-        \frac{\dd[#1]{#2}}{\dd{#3}^{#1}}
-    }
+\newcommand\@der@frac[3]{
+    \@der@abstract@frac{\frac}{#1}{#2}{#3}%
 }
 
-\newcommand\@derfrac@star[3][]{
-    \@derfrac@no@star[#1]{}{#3} #2
+\newcommand\@der@ope@frac[3]{
+    \@der@abstract@frac{\frac}{}{#2}{#3}#1%
 }
 
-% Subscript writing of total derivate
-\newcommand\dersub[3][]{
-% The following command works because xstring traits {...} like a single character.
-    \dd%
-    \@ifmtarg{#1}{
-        ^{\vphantom{\prime}}%
+\newcommand\@der@ope@dfrac[3]{
+    \@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+
+% Total derivate
+
+%     + Simple version (no var. of derivation)
+
+\newcommand\@validate@simple@der@option[1]{
+	\IfEqCase{#1}{%
+		{u}{\booltrue{@der@option@u}}%
+		{e}{\booltrue{@der@option@e}}%
+		{p}{\booltrue{@der@option@p}}%
+		{sp}{\booltrue{@der@option@sp}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use u (default), e , p and sp}%
+	]%
+}
+
+
+\newcommand\sder[3][u]{%
+	\boolfalse{@der@option@u}%
+	\boolfalse{@der@option@e}%
+	\boolfalse{@der@option@p}%
+	\boolfalse{@der@option@sp}%
+	%
+	\DoWithCSL\@validate@simple@der@option{#1}
+	%
+	\ifbool{@der@option@e}{}{%
+		\booltrue{@der@option@u}%
+	}%
+	%
+	\ifbool{@der@option@p}{%
+		\let\parithere\@der@func@ext@par%
+	}{%
+		\ifbool{@der@option@sp}{%
+			\let\parithere\@der@func@no@ext@par%
+		}{%
+			\let\parithere\@der@func@no@par%
+		}%
+	}%
+	%
+	\ifbool{@der@option@u}{%
+		\let\callithere\@der@usual%
     }{%
-        ^{#1}%
-    }%
-    _{#3} #2%
+		\let\callithere\@der@exp%
+	}%
+	\callithere{\parithere}{#2}{#3}%
 }
+
+
+%     + Strict version (this one needs the var. of derivation)
+
+\newcommand\@validatee@der@option[1]{
+	\IfEqCase{#1}{%
+		{u}{\booltrue{@der@option@u}}%
+		{e}{\booltrue{@der@option@e}}%
+		{i}{\booltrue{@der@option@i}}%
+		{f}{\booltrue{@der@option@f}}%
+		{of}{\booltrue{@der@option@of}}%
+		{sf}{\booltrue{@der@option@sf}}%
+		{osf}{\booltrue{@der@option@osf}}%
+		{p}{\booltrue{@der@option@p}}%
+		{sp}{\booltrue{@der@option@sp}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use u (default), e , i , f , sf , oi , of , osf , p and sp}%
+	]%
+}
+
+
+\newcommand\der[4][u]{%
+	\boolfalse{@der@option@u}%
+	\boolfalse{@der@option@e}%
+	\boolfalse{@der@option@i}%
+	\boolfalse{@der@option@f}%
+	\boolfalse{@der@option@of}%
+	\boolfalse{@der@option@sf}%
+	\boolfalse{@der@option@osf}%
+	\boolfalse{@der@option@p}%
+	\boolfalse{@der@option@sp}%
+	%
+	\DoWithCSL\@validatee@der@option{#1}
+	%
+	\ifbool{@der@option@e}{}{%
+		\ifbool{@der@option@i}{}{%
+				\ifbool{@der@option@f}{}{%
+					\ifbool{@der@option@of}{}{%
+						\ifbool{@der@option@sf}{}{%
+							\ifbool{@der@option@osf}{}{%
+								\booltrue{@der@option@u}%
+							}%
+						}%
+					}%
+				}%
+		}%
+	}%
+	% Usual
+	\ifbool{@der@option@u}{%
+		\sder[#1]{#2}{#3}
+	% Exponent
+	}{
+    	\ifbool{@der@option@e}{%
+    		\sder[#1]{#2}{#3}
+    	}{
+    % Indice or fraction like
+        	\ifbool{@der@option@p}{%
+        		\let\parithere\@der@func@ext@par%
+        	}{%
+        		\ifbool{@der@option@sp}{%
+        			\let\parithere\@der@func@no@ext@par%
+        		}{%
+        			\let\parithere\@der@func@no@par%
+        		}%
+        	}%
+	 % Big frac
+	 		\ifbool{@der@option@f}{%
+				\@der@dfrac{\parithere{#2}}{#3}{#4}%
+	 % Small frac
+	 		}{%
+				\ifbool{@der@option@sf}{%
+					\@der@frac{\parithere{#2}}{#3}{#4}%
+	 % Indice
+	 			}{%
+					\ifbool{@der@option@i}{%
+						\@der@indice{\parithere{#2}}{#3}{#4}%
+	% Operators
+					}{
+	%    + Big frac ope
+						\ifbool{@der@option@of}{%
+							\@der@ope@dfrac{\parithere{#2}}{#3}{#4}%
+						}{
+	%    + Big frac ope
+							\ifbool{@der@option@osf}{%
+								\@der@ope@frac{\parithere{#2}}{#3}{#4}%
+							}{}%
+						}%
+					}%
+				}%
+	 		}%
+		}%
+	}%
+}
+
+
+
+
+
+% Power writing of total derivate
+
+
+
+
+
 
 %% Subscript writing of partial derivate
 
@@ -1743,14 +2228,76 @@
     ^{#2}_{#3}#1%
 }
 
-% The hook calculator
-\newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
-\newcommand\@hook@star[3]{\ensuremath{ \left[ \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \right. \!\! #1 \left. \vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}} \!\! \right]_{#2}^{#3} }}
-\newcommand\@hook@no@star[3]{\left[ \vphantom{\text{\relsize{1.1}$#1$}} #1 \right]_{#2}^{#3}}
 
-\newcommand\vhook{\@ifstar{\@vhook@star}{\@vhook@no@star}}
-\newcommand\@vhook@star[3]{#1 {\text{\relsize{1.5}$\rvert$}}_{#2}^{#3}}
-\newcommand\@vhook@no@star[3]{\left. #1 \right\rvert_{#2}^{#3}}
+% Integration
+
+\newcommand\integrate{\@ifstar{\@integrate@star}{\@integrate@no@star}}
+
+\newcommand\@integrate@star[4]{%
+	\int_{#1}^{#2} #3 \dd{#4}%
+}
+
+\newcommand\@integrate@no@star[4]{%
+	\@integrate@star{#4\,=\,#1}{#4\,=\,#2}{#3}{#4}%
+}
+
+
+\newcommand\dintegrate{\@ifstar{\@dintegrate@star}{\@dintegrate@no@star}}
+
+\newcommand\@dintegrate@star[4]{%
+	{\displaystyle\integrate*{#1}{#2}{#3}{#4}}%
+}
+
+\newcommand\@dintegrate@no@star[4]{%
+	{\displaystyle\integrate{#1}{#2}{#3}{#4}}%
+}
+
+
+% The hook operator
+
+\newcommand\@hook@small@vertical@phantom[1]{%
+	\vphantom{\text{\relsize{1.1}$#1$}}%
+}
+
+\newcommand\@hook@big@vertical@phantom{%
+	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
+}
+
+\newcommand\@abstract@hook[4][b]{%
+    \IfEqCase{#1}{%
+        {b}{%
+			\left[%
+				\@hook@small@vertical@phantom{#4}%
+				\,#4\,%
+			\right]%
+        }{sb}{%
+			\left[%
+				\@hook@big@vertical@phantom \right. \!\!%
+				\,#4\,%
+				\left. \@hook@big@vertical@phantom \!\!%
+			\right]%
+        }{r}{%
+            \left. #4\, \right\rvert%
+        }{sr}{%
+            #4\, {\text{\relsize{1.5}$\rvert$}}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use b (default), sb, r or sr.}
+    ]%
+	_{\,#2}^{\,#3}%
+}
+
+
+\newcommand\hook{\@ifstar{\@hook@star}{\@hook@no@star}}
+
+\newcommand\@hook@star[5][b]{%
+	\@abstract@hook[#1]{#2}{#3}{#4}%
+}
+
+\newcommand\@hook@no@star[5][b]{%
+	\@abstract@hook[#1]{#5\,=\,#2}{#5\,=\,#3}{#4}%
+}
 
 
 % ------------ %
@@ -1968,7 +2515,7 @@
 % --------------------- %
 
 \newcommand\divides{\mid}
-\newcommand\notdivides{\nmid}
+\newcommand\ndivides{\nmid}
 
 \newcommand\modulo{\bmod}
 
@@ -2137,33 +2684,81 @@
 
 \NiceMatrixOptions{transparent}
 
-\newcommand\cdettwo[4]{%
-	\begin{vNiceMatrix}[columns-width=1.1em]
-		#1 & #2  \\
-		#3 & #4
-   		%%
-		\CodeAfter
-    	\begin{tikzpicture}
-    		\path (1-1.east) 
-    			  -- node[below = 0.45em,
-			  			  red,
-						  circle,
-						  inner sep = 1pt] 
-			         (minus) {\tiny$-$}
-			      (1-2.west);
-    		\draw [red,->]
-     			   let \p1 = ($(minus.east) - (minus.center)$) in 
-    	    		   ([xshift = 0.5mm]1-1.east)
-			           to[out = 0, in = 137.5]
-			           (minus.50)
-		   			   arc[start angle = 50,
-					       end angle = -230,
-					       radius = \x1] 
-    	    		   to[out = 42.5, in =190]
-			           ([xshift = -0.3mm]1-1.east-|1-2.west);
-    	\end{tikzpicture}   
-	\end{vNiceMatrix}
+
+\newcommand\calcdettwo{\@ifstar{\@calcdettwo@star}{\@calcdettwo@no@star}}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\@calcdettwo@no@star[5][std]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
+        {exp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\,}%
+        }{cexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\cdot}%
+        }{texp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\times}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            \@abstract@calcdetplane@no@star{novec}%
+                                           {}{#2}{#4}%
+                                           {}{#3}{#5}%
+        }%
+    }[
+    	\PackageError{lymath}{unknown option}%
+                             {You can use std (default), exp, cexp or sexp.}
+    ]%
 }
+
+
+\newcommand\@calcdettwo@star[5][std]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%
+%   #1  #3		x  x'
+%   #2  #4      y  y'
+%   
+%   #5 : symbol for the product
+        {exp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\times}%
+        }{cexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\cdot}%
+        }{sexp}{%
+            \@abstract@valdetplane{#2}{#4}{#3}{#5}{\,}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            \@abstract@calcdetplane@star{novec}%
+                                        {}{#2}{#4}%
+                                        {}{#3}{#5}%
+        }%
+    }%
+}
+
 
 
 \newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}

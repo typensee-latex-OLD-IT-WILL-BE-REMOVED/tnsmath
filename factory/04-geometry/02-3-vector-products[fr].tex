@@ -1,10 +1,11 @@
 \documentclass[12pt,a4paper]{article}
 
 \makeatletter
-	\input{../config/header[fr].sty}
-	\input{../01-misc/00-common-tools.sty}
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+    \usepackage{03-1-cartesian-coordinates}
 
-	\usepackage{02-3-vector-products}
+    \usepackage{02-3-vector-products}
 \makeatother
 
 
@@ -19,21 +20,21 @@
 \makeatletter
     \newcommand\pt[1]{\mathrm{#1}}
 
-	\newcommand\@no@point[1]{%
-		\IfStrEq{#1}{i}{%
-			\imath%
-		}{%
-			\IfStrEq{#1}{j}{%
-				\jmath%
-			}{%
-				#1
-			}%
-		}%
-	}
+    \newcommand\@no@point[1]{%
+        \IfStrEq{#1}{i}{%
+            \imath%
+        }{%
+            \IfStrEq{#1}{j}{%
+                \jmath%
+            }{%
+                #1
+            }%
+        }%
+    }
 
-	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
-	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
-	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+    \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+    \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+    \newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
 \makeatother
 
 
@@ -146,7 +147,7 @@ $\vadotprod*{i}{j}$
 
 \subsubsection{Produit vectoriel}
 
-\paragraph{Exemple d'utilisation - Version longue}
+\paragraph{Exemple 1 - Écriture symbolique - Version longue}
 
 \begin{latexex}
 $\crossprod{\dfrac{1}{2} \vect{i}}%
@@ -157,7 +158,7 @@ $\crossprod{\dfrac{1}{2} \vect{i}}%
 % ---------------------- %
 
 
-\paragraph{Exemple d'utilisation - Version courte mais restrictive}
+\paragraph{Exemple 2 - Écriture symbolique - Version courte mais restrictive}
 
 \begin{latexex}
 $\vcrossprod{i}{j}$
@@ -167,16 +168,122 @@ $\vcrossprod{i}{j}$
 % ---------------------- %
 
 
-\paragraph{Exemple d'utilisation - Explication des calculs}
+\paragraph{Exemple 3 - Explication des calculs}
 
-Dans l'exemple suivant, le préfixe \prefix{c}, qui double cette lettre au début, est pour \whyprefix{c}{oordonnées} et \prefix{v} pour \whyprefix{v}{ecteur}.
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\ccrossprod{\vect{u}}{x }{y }{z }%
-            {\vect{v}}{x'}{y'}{z'}
-=
- \vccrossprod{u}{x }{y }{z }%
-             {v}{x'}{y'}{z'}$
+$\calccrossprod{\vect{u}}{x }{y }{z }%
+               {\vect{v}}{x'}{y'}{z'}
+ =
+ \vcalccrossprod{u}{x }{y }{z }%
+                {v}{x'}{y'}{z'}$
+
+$\vcalccrossprod{AB}{x_B - x_A}%
+                    {y_B - y_A}%
+                    {z_B - z_A}%
+                {CD}{x_D - x_C}%
+                    {y_D - y_C}%
+                    {z_D - z_C}$
+\end{latexex}
+
+
+Avec un public averti on peut juste proposer les coordonnées sans les décorations comme ci-après via la version étoilée de \macro{vcalccrossprod} mais ceci fonctionne aussi avec \macro{calccrossprod}.
+
+\begin{latexex}
+$\vcalccrossprod*{u}{x }{y }{z }%
+                 {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+Enfin si les vecteurs vous gênent il suffira d'utiliser l'option \verb+novec+ pour \verb+no+ \whyprefix{vec}{tor} soit \inenglish{pas de vecteur} comme ci-après.
+Ceci fonctionne aussi pour la macro \macro{calccrossprod}.
+Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
+
+\begin{latexex}
+$\vcalccrossprod[novec]{u}{x }{y }{z }%
+                       {v}{x'}{y'}{z'}
+ =
+ \vcalccrossprod*[novec]{u}{x }{y }{z }%
+                        {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\paragraph{Exemple 4 - Les coordonnées  \og détaillées \fg}
+
+Pour avoir le détail directement dans des coordonnées vous pouvez faire appel à la macro \macro{coordcrossprod} où le préfixe \prefix{coord} fait référence à \whyprefix{coord}{onnée}
+\footnote{
+	En coulisse on utilise la macro \macro{coord} présentée dans la section \ref{coordinates} page \pageref{coordinates}. 
+}.
+On peut utiliser des options pour choisir certains paramètres de mise en forme.
+
+\begin{latexex}
+$\coordcrossprod{\dfrac{1}{2}x}{y }{z }%
+                {x'           }{y'}{z'}$
+
+$\coordcrossprod[vb]{x }{y }{z }%
+                      {x'}{y'}{z'}$
+
+$\coordcrossprod[sp,c]%
+                {\dfrac{1}{2}x}{y }{z }%
+                {x'           }{y'}{z'}$
+\end{latexex}
+
+
+Voici les options disponibles. Nous expliquons ensuite comment les utiliser.
+\begin{enumerate}
+	\item \prefix{p} vient de \whyprefix{p}{arenthèses}. Ceci donnera une écriture horizontale.
+
+	\item \prefix{b} vient de \whyprefix{b}{rackets} soit \inenglish{crochets}. Ceci donnera une écriture horizontale.
+
+	\item \prefix{sp} et \prefix{sb} produisent des délimiteurs non extensibles en mode horizontal.
+	      Ici \prefix{s} vient de \whyprefix{s}{mall} soit \inenglish{petit}.
+
+	\item \prefix{vp} et \prefix{vb} produisent des écritures verticales.
+	      Ici \prefix{v} vient de \whyprefix{v}{ertical}.
+
+	\medskip
+
+	\item \prefix{s} tout seul demande d'utiliser un espace pour séparer les facteurs de chaque produit.
+
+	\item \prefix{t} tout seul demande d'utiliser \macro{times} comme opérateur de multiplication.
+
+	\item \prefix{c} tout seul demande d'utiliser \macro{cdot} comme opérateur de multiplication.
+\end{enumerate}
+
+
+On peut indiquer des options vis à vis du mode vertical ou horizontal avec des délimiteurs extensibles ou non éventuellement, ou bien sur le symbole pour les produits. On peut aussi combiner deux de ces typs de choix en les séparant par une virgule ce qui fait un total de $6\times3 = 18$ combinaisons possibles.
+La valeur par défaut est \verb+p,s+.
+
+
+\bigskip
+
+
+\textbf{Attention !}
+Les produits sont produits stupidement. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle ci-dessous.
+    
+\begin{latexex}
+$\coordcrossprod[vb]{x_B - x_A}%
+                    {y_B - y_A}%
+                    {z_B - z_A}%
+                    {x_D - x_C}%
+                    {y_D - y_C}%
+                    {z_D - z_C}$
+\end{latexex}
+
+Ici nous n'avons pas d'autre choix que de corriger le tir nous-même.
+Ceci étant indiqué, ce genre de situation est très rare dans la vraie vie mathématique où l'on évite d'avoir à calculer un produit vectoriel avec des expressions compliquées.
+    
+\begin{latexex}
+$\coordcrossprod[vb]{(x_B - x_A)}%
+                    {(y_B - y_A)}%
+                    {(z_B - z_A)}%
+                    {(x_D - x_C)}%
+                    {(y_D - y_C)}%
+                    {(z_D - z_C)}$
 \end{latexex}
 
 
@@ -208,46 +315,73 @@ $\ccrossprod{\vect{u}}{x }{y }{z }%
 \separation
 
 
-\IDmacro*{ccrossprod}{8}  où \quad \mwhyprefix{c}{oordinates}
+\IDmacro*{calccrossprod}{8}  où \quad \mwhyprefix{calc}{ulate}
+
+\IDmacro*{calccrossprod*}{8}  où \quad \mwhyprefix{calc}{ulate}
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+\IDarg{2..4} les coordonnées du 1\ier{} vecteur.
 
 \IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
-
-\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
-
-\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+\IDarg{6..8} les coordonnées du 2\ieme{} vecteur.
 
 
 \separation
 
 
-\IDmacro*{vccrossprod}{8} où \quad \mwhyprefix{c}{oordinates}
-                                et \mwhyprefix{v}{ector}
+\IDmacro*{vcalccrossprod}{8}  où \quad \mwhyprefix{calc}{ulate}
+                                    et \mwhyprefix{v}{ector}
+
+\IDmacro*{vcalccrossprod*}{8}  où \quad \mwhyprefix{calc}{ulate}
+                                    et \mwhyprefix{v}{ector}
 
 \IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{4} la 3\ieme{} coordonnée du 1\ier{} vecteur.
+\IDarg{2..4} les coordonnées du 1\ier{} vecteur.
 
 \IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{6} la 1\iere{} coordonnée du 2\ieme{} vecteur.
+\IDarg{6..8} les coordonnées du 2\ieme{} vecteur.
 
-\IDarg{7} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
 
-\IDarg{8} la 3\ieme{} coordonnée du 2\ieme{} vecteur.
+\separation
+
+
+\IDmacro{coordcrossprod}{1}{6}  où \quad \mwhyprefix{coord}{inate}
+
+\IDoption{} la valeur par défaut est \verb+p,s+. 
+            Voici les différentes valeurs possibles pour la mise en forme des coordonnées uniquement \emph{(voir la section \ref{coordinates-tech} page \pageref{coordinates-tech})}.
+\begin{enumerate}
+	\item \verb+p+ : écriture horizontale avec des parenthèses extensibles.
+
+	\item \verb+sp+ : écriture horizontale avec des parenthèses non extensibles.
+
+	\item \verb+vp+ : écriture verticale avec des parenthèses.
+
+	\item \verb+b+ : écriture horizontale avec des crochets extensibles.
+
+	\item \verb+sb+ : écriture horizontale avec des crochets non extensibles.
+
+	\item \verb+vb+ : écriture verticale avec des crochets.
+\end{enumerate}
+
+            Pour les produits, voici ce qui est proposé.
+\begin{enumerate}
+	\item \prefix{s} : un espace pour séparer les facteurs de chaque produit.
+
+	\item \prefix{t} : \macro{times} comme opérateur de multiplication.
+
+	\item \prefix{c} : \macro{cdot} comme opérateur de multiplication.
+\end{enumerate}
+
+            On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+p,s+ la valeur par défaut.
+
+
+\IDarg{1..3} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{4..6} les coordonnées du 2\ieme{} vecteur.
 
 
 \end{document}

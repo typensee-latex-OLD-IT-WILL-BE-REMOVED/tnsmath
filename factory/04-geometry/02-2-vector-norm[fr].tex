@@ -39,16 +39,16 @@
 
 \subsubsection{Norme}
 
-\paragraph{Exemple d'utilisation}
+\paragraph{Exemples d'utilisation}
 
 \begin{latexex}
-$\norm{\vect{i}}$
+$\norm{\vect{i}} = \vnorm{i}$
 
 $\displaystyle
  \norm{\frac{2}{7} \vect*{e}{k}}$
- 
+ ou
 $\displaystyle
- \norm*{\frac{2}{7} \vect*{e}{k}}$
+ \norm[s]{\frac{2}{7} \vect*{e}{k}}$
 \end{latexex}
 
 
@@ -64,10 +64,24 @@ $\displaystyle
 
 \paragraph{Norme}
 
-\IDmacro*{norm}{1}
+\IDmacro{norm}{1}{1}
 
-\IDmacro*{norm*}{1}
+\IDoption{} la valeur par défaut est \verb+b+. Deux options disponibles.
+\begin{enumerate}
+	\item \verb+b+ : des doubles barres extensibles sont utilisées.
+
+	\item \verb+s+ : des doubles barres non extensibles sont utilisées.
+\end{enumerate}
+
 
 \IDarg{} le vecteur sur lequel appliquer la norme.
+
+
+\separation
+
+\IDmacro*{vnorm}{1}
+
+\IDarg{} le nom du vecteur sur lequel appliquer la norme.
+
 
 \end{document}

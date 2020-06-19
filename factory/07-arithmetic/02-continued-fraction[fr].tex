@@ -20,7 +20,7 @@
 Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
 \begin{latexex-flat}
-$ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
+ $\contfrac {u_0 | u_1 | u_2 | \dots | u_n}
 = \contfrac*{u_0 | u_1 | u_2 | \dots | u_n}$
 \end{latexex-flat}
 
@@ -49,8 +49,8 @@ $ \contfrac{u_0 | u_1 | u_2 | \dots | u_n}
 Voici comment écrire une fraction continuée généralisée.
 
 \begin{latexex-flat}
-$ \displaystyle
-  \contfracgene{a | b | c | d | e | f | \dots | y | z}
+ $\displaystyle
+  \contfracgene {a | b | c | d | e | f | \dots | y | z}
 = \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
 \end{latexex-flat}
 
@@ -109,14 +109,15 @@ pour les fous\dots :-)
 La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 
 \begin{latexex-flat}
-$ \displaystyle
+ $\displaystyle
   \contfracope_{k=1}^{n} (b_k:c_k)
-= \cfrac{b_1}{\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+= \cfrac{b_1}%
+        {\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
 \end{latexex-flat}
 
 
 \begin{remark}
-    La lettre $\contfracope$ vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
+    La lettre $\contfracope $vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
 \end{remark}
 
 
@@ -126,7 +127,7 @@ $ \displaystyle
 \paragraph{Exemple d'utilisation 2}
 
 \begin{latexex-flat}
-$ \displaystyle
+ $\displaystyle
   u_0 + \contfracope_{k=1}^{n} (1:u_k)
 = \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
 \end{latexex-flat}

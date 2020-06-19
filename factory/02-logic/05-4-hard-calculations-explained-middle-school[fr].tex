@@ -16,7 +16,7 @@
 
 %\subsection{Détailler un raisonnement}
 
-\subsubsection{Détailler un \og vrai \fg{} raisonnement -- Un tableau pour le collège et le lycée}
+\subsubsection{Détailler un \og vrai \fg{} raisonnement -- Un tableau pour le collège et le lycée} \label{explain-hard-proof-for-youngs}
 
 
 \paragraph{Exemple 1 -- Avec les réglages par défaut}
@@ -28,11 +28,12 @@ Notez au passage la possibilité d'utiliser \macro{newline} pour forcer un retou
 \begin{latexex-flat}
 \begin{demoexplain*}
     \demostep
-          $ABC$ est un triangle \newline équilatéral 
+          $ABC$ est un triangle
+          \newline équilatéral 
         & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
         & $\anglein{ABC} = 60$\textdegree     
     \demostep
-          Voir la conséquence \explref{1} .
+          Voir la conséquence \explref*{1} .
         & Simple calcul avec conversion en radians.
         & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
 \end{demoexplain*}
@@ -51,7 +52,7 @@ Par contre \env{demoexplain*} ne propose que \verb+start+ comme clé optionnelle
         & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
         & $\anglein{ABC} = 60$\textdegree     
     \demostep
-          Voir la conséquence \explref*{demo-first-geo-fact} .
+          Voir la conséquence \explref{demo-first-geo-fact} .
         & Simple calcul avec conversion en radians.
         & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
 \end{demoexplain*}
@@ -115,5 +116,25 @@ Par contre \env{demoexplain*} ne propose que \verb+start+ comme clé optionnelle
                              et \mwhyprefix{ref}{erence}
 
 \IDarg{} un texte correspondant à un label global référençant le numéro d'une justification.
+
+
+\paragraph{Détailler un \og vrai \fg{} raisonnement via un tableau - Textes utilisés}
+
+\IDmacro*{textexplainmiddleID}{0}
+
+\IDmacro*{textexplainmiddlehyp}{0}
+
+\IDmacro*{textexplainmiddleprop}{0}
+
+\IDmacro*{textexplainmiddlecons}{0}
+
+\extraspace
+
+\IDmacro*{textexplainuniversityhyps}{0}
+
+\IDmacro*{textexplainuniversityhyp}{0}
+
+\IDmacro*{textexplainuniversityccl}{0}
+
 
 \end{document}
