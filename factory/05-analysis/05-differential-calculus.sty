@@ -28,7 +28,9 @@
 
 \newcommand{\@diffOpe}[5]{%
     #3%
-    \ifx0#1\else^{\kern#4#1\kern#5}\!\fi%
+    \ifx0#1\else%
+    	^{\kern#4#1\kern#5}\!%
+	\fi%
     \hspace{0.07em}#2%
 }
 
@@ -64,7 +66,7 @@
 }
 
 
-\newbool{@der@option@u}   % Default.
+\newbool{@der@option@u}
 \newbool{@der@option@e}
 \newbool{@der@option@i}
 \newbool{@der@option@f}
@@ -74,6 +76,10 @@
 \newbool{@der@option@p}
 \newbool{@der@option@sp}
 
+
+% Total derivate
+
+%     + Abstraction
 
 \newcommand\@der@usual[3]{%
 	#1{#2}^{%
@@ -91,12 +97,29 @@
 
 
 \newcommand\@der@indice[3]{
-    \@dder^{\kern.15ex#2\kern.15ex}_{\kern.15ex#3\kern.15ex} #1%
+    \@dder%
+    \IfStrEq{#2}{1}{}{%
+	    ^{\kern.15ex#2\kern.15ex}%
+	}%
+	_{\kern.15ex#3\kern.15ex} #1%
 }
 
 
 \newcommand\@der@abstract@frac[4]{%
-    #1{\dd[#3]{#2}}{\dd{#4}^{#3}}%
+	#1{%
+		\IfStrEq{#3}{1}{%
+			\dd{#2}%
+		}{%
+			\dd[#3]{#2}%
+		}%
+	}{%
+		{%
+			\dd{#4}%
+			\IfStrEq{#3}{1}{}{%
+				^{#3}%
+			}%
+		}%
+	}%
 }
 
 \newcommand\@der@dfrac[3]{%
@@ -115,8 +138,6 @@
     \@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
 }
 
-
-% Total derivate
 
 %     + Simple version (no var. of derivation)
 
@@ -197,19 +218,23 @@
 	%
 	\DoWithCSL\@validatee@der@option{#1}
 	%
-	\ifbool{@der@option@e}{}{%
-		\ifbool{@der@option@i}{}{%
-				\ifbool{@der@option@f}{}{%
-					\ifbool{@der@option@of}{}{%
-						\ifbool{@der@option@sf}{}{%
-							\ifbool{@der@option@osf}{}{%
-								\booltrue{@der@option@u}%
-							}%
-						}%
-					}%
-				}%
-		}%
-	}%
+	\ifboolexpr{
+		not(
+			bool {@der@option@e}
+			or
+			bool {@der@option@i}
+			or
+			bool {@der@option@f}
+			or
+			bool {@der@option@of}
+			or
+			bool {@der@option@sf}
+			or
+			bool {@der@option@osf}
+		)
+    }{%
+    	\booltrue{@der@option@u}%
+    }{}
 	% Usual
 	\ifbool{@der@option@u}{%
 		\sder[#1]{#2}{#3}
@@ -230,76 +255,73 @@
         	}%
 	 % Big frac
 	 		\ifbool{@der@option@f}{%
-				\@der@dfrac{\parithere{#2}}{#3}{#4}%
+				\let\callithere\@der@dfrac%
 	 % Small frac
 	 		}{%
 				\ifbool{@der@option@sf}{%
-					\@der@frac{\parithere{#2}}{#3}{#4}%
+					\let\callithere\@der@frac%
 	 % Indice
 	 			}{%
 					\ifbool{@der@option@i}{%
-						\@der@indice{\parithere{#2}}{#3}{#4}%
-	% Operators
+						\let\callithere\@der@indice%
+	% Big frac ope
 					}{
-	%    + Big frac ope
 						\ifbool{@der@option@of}{%
-							\@der@ope@dfrac{\parithere{#2}}{#3}{#4}%
+							\let\callithere\@der@ope@dfrac%
 						}{
-	%    + Big frac ope
+	% Small frac ope
 							\ifbool{@der@option@osf}{%
-								\@der@ope@frac{\parithere{#2}}{#3}{#4}%
+								\let\callithere\@der@ope@frac%
 							}{}%
 						}%
 					}%
 				}%
 	 		}%
+	% Let's do the job
+			\callithere{\parithere{#2}}{#3}{#4}%
 		}%
 	}%
 }
 
 
+%     + Operator for total derivations
 
-
-
-% Power writing of total derivate
-
-
-
-
-
-
-%% Subscript writing of partial derivate
-
-\newcommand\@bracketIt[1]{(#1)}
-
-\newcommand\partialsub[2]{
-% The following command works because xstring traits {...} like a single character.
-    \noexpandarg
-    \StrSubstitute{#2}{^}{\@bracketIt}[\@index]
-    \partial%
-    ^{\vphantom{\prime}}%
-    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\,}}%
-    #1%
-    \expandarg
+\newcommand\@validate@der@operator@option[1]{
+	\IfEqCase{#1}{%
+		{f}{\booltrue{@der@option@f}}%
+		{sf}{\booltrue{@der@option@sf}}%
+		{i}{\booltrue{@der@option@i}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use f (default), sf and i}%
+	]%
 }
 
 
-% Prime writing of partial derivate
-\newcommand\partialprime[2]{
-% The following command works because xstring traits {...} like a single character.
-    \noexpandarg
-    \StrSubstitute{#2}{^}{\@bracketIt}[\@index]%
-    \derpow*{#1}%
-    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\,}}
-    \expandarg
+\newcommand\derope[3][f]{%
+	\boolfalse{@der@option@f}%
+	\boolfalse{@der@option@sf}%
+	\boolfalse{@der@option@i}%
+	%
+	\DoWithCSL\@validate@der@operator@option{#1}
+	%
+	\ifbool{@der@option@sf}{}{%
+		\ifbool{@der@option@i}{}{%
+			\booltrue{@der@option@f}%
+		}%
+	}%
+	\der[#1]{}{#2}{#3}%
 }
 
-% Fractional writing of partial derivate
-\newcommand\partialfrac{\@ifstar{\@partialfrac@star}{\@partialfrac@no@star}}
 
-\newcommand\@partialfrac@no@star[3][0]{%
-    \frac{%
-        \pp[#1]{#2}%
+
+% Total derivate
+
+%     + Abstraction
+
+\newcommand\@pder@abstract@frac[4]{%
+    #1{%
+        \pp[#4]{#2}%
     }{%
 % ARG 1 = Separator: |
 % ARG 2 = All parts: what the user types !
@@ -310,7 +332,138 @@
     }
 }
 
-\newcommand\@partialfrac@star[3][\relax]{
-    \@partialfrac@no@star[#1]{}{#3} #2
+\newcommand\@pder@dfrac[3]{%
+	\@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
 }
 
+\newcommand\@pder@frac[3]{%
+	\@pder@abstract@frac{\frac}{#1}{#2}{#3}%
+}
+
+\newcommand\@pder@ope@dfrac[3]{%
+	\@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+\newcommand\@pder@ope@frac[3]{%
+	\@pder@abstract@frac{\frac}{}{#2}{#3}#1%
+}
+
+
+
+\newcommand\@pder@sub[3]{
+% The following command works because xstring traits {...} like a single character.
+    \noexpandarg
+    \StrSubstitute{#2}{^}{\@der@func@no@ext@par}[\@index]
+    \partial%
+    ^{\kern.15ex#3\kern.15ex}%
+    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\,}}%
+    #1%
+    \expandarg
+}
+
+
+%     + With the function given
+
+\newcommand\@validate@pder@option[1]{
+	\IfEqCase{#1}{%
+		{f}{\booltrue{@der@option@f}}%
+		{of}{\booltrue{@der@option@of}}%
+		{sf}{\booltrue{@der@option@sf}}%
+		{osf}{\booltrue{@der@option@osf}}%
+		{i}{\booltrue{@der@option@i}}%
+		{p}{\booltrue{@der@option@p}}%
+		{sp}{\booltrue{@der@option@sp}}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {you can use f (default), sf, of, osf, i, p and sp}%
+	]%
+}
+
+
+\newcommand\pder[4][f]{%
+	\boolfalse{@der@option@f}%
+	\boolfalse{@der@option@of}%
+	\boolfalse{@der@option@sf}%
+	\boolfalse{@der@option@osf}%
+	\boolfalse{@der@option@i}%
+	\boolfalse{@der@option@p}%
+	\boolfalse{@der@option@sp}%
+	%
+	\DoWithCSL\@validate@pder@option{#1}
+	%
+	%
+	\ifboolexpr{
+		not(
+			bool {@der@option@of}
+			or
+			bool {@der@option@sf}
+			or
+			bool {@der@option@osf}
+			or
+			bool {@der@option@i}
+		)
+    }{%
+    	\booltrue{@der@option@f}%
+    }{}%
+    % Parentheses or not
+    \ifbool{@der@option@p}{%
+    	\let\parithere\@der@func@ext@par%
+    }{%
+    	\ifbool{@der@option@sp}{%
+        	\let\parithere\@der@func@no@ext@par%
+        }{%
+        	\let\parithere\@der@func@no@par%
+        }%
+    }%
+    % Expo total
+    \IfStrEq{#4}{1}{%
+    	\def\expotot{}
+    }{%
+    	\def\expotot{#4}
+    }%
+	% Big frac
+	\ifbool{@der@option@f}{%
+		\let\callithere\@pder@dfrac%
+	}{%
+    % Big frac ope
+		\ifbool{@der@option@of}{%
+			\let\callithere\@pder@ope@dfrac%
+		}{%
+	% Small frac
+			\ifbool{@der@option@sf}{%
+				\let\callithere\@pder@frac%
+			}{%
+	% Small frac ope
+				\ifbool{@der@option@osf}{%
+					\let\callithere\@pder@ope@frac%
+				}{%
+	% Indice
+					\ifbool{@der@option@i}{%
+						\let\callithere\@pder@sub%
+					}{}%
+				}%
+			}%
+		}%
+	}%
+	% Let's do the job
+	\callithere{\parithere{#2}}{#3}{\expotot}%
+}
+
+
+
+%     + Operator for partiaal derivations
+
+\newcommand\pderope[3][f]{%
+	\boolfalse{@der@option@f}%
+	\boolfalse{@der@option@sf}%
+	\boolfalse{@der@option@i}%
+	%
+	\DoWithCSL\@validate@der@operator@option{#1}
+	%
+	\ifbool{@der@option@sf}{}{%
+		\ifbool{@der@option@i}{}{%
+			\booltrue{@der@option@f}%
+		}%
+	}%
+	\pder[#1]{}{#2}{#3}%
+}

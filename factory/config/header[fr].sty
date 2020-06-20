@@ -113,3 +113,32 @@
 
 
 \newcommand\ascii{\texttt{ASCII}}
+
+
+% Example
+\newcounter{paraexample}[subsubsection]
+
+\newcommand\@newexample@abstract[2]{%
+	\paragraph{%
+		#1%
+		\if\relax\detokenize{#2}\relax\else {} -- #2\fi%
+	}%
+}
+
+
+
+\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
+
+\newcommand\@newparaexample@no@star[1]{%
+	\refstepcounter{paraexample}%
+	\@newexample@abstract{Exemple \theparaexample}{#1}%
+}
+
+\newcommand\@newparaexample@star[1]{%
+	\@newexample@abstract{Exemple}{#1}%
+}
+
+
+
+
+

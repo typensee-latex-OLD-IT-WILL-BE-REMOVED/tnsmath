@@ -62,7 +62,7 @@ $\displaystyle
 
 \subsubsection{Fiches techniques}
 
-\paragraph{L'opérateur d'intégration standard}
+\paragraph{Le symbole d'intégration standard}
 
 \IDmacro*{stdint}{0}
 
@@ -70,9 +70,9 @@ $\displaystyle
 % ---------------------- %
 
 
-\subsubsection{Une fonctionnelle d'intégration clés en main}
+\subsubsection{Un opérateur d'intégration clés en main}
 
-\paragraph{Exemple 1 - À quoi bon ?}
+\newparaexample{À quoi bon ?}
 
 Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \LaTeX{} mais rappelons que le but de \verb+lymath+ est de rendre les documents facilement modifiables globalement ou localement comme le montre le 2\ieme{} exemple.
 
@@ -88,7 +88,7 @@ Le 1\ier{} exemple qui suit semblera être une hérésie pour les habitués de \
 \end{latexex}
 
 
-\paragraph{Exemple 2 - Le mode \texttt{displaystyle}}
+\newparaexample{Le mode \texttt{displaystyle}}
 
 La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version non étoilée \macro{dintegrate}.
 
@@ -124,22 +124,13 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 \IDarg{4} suivant quoi on intègre.
 
 
-
-
-
-
-
-
-
 % ---------------------- %
 
 
 \subsubsection{L'opérateur crochet}
 
 
-\paragraph{Exemple 1}
-
-Dans l'exemple suivant, il peut sembler un peu lourd de taper \verb+\hook*{a}{b}{F(x)}{x}+ alors que $x$ ne sera pas utilisé mais à l'usage ceci permet des copier-coller très efficaces vis à vis de la macro \macro{integrate}.
+\newparaexample{}
 
 \begin{latexex}
  $\hook{a}{b}{F(x)}{x}
@@ -159,7 +150,7 @@ Dans l'exemple suivant, il peut sembler un peu lourd de taper \verb+\hook*{a}{b}
 % ---------------------- %
 
 
-\paragraph{Exemple 2 - Des crochets non extensibles}
+\newparaexample{Des crochets non extensibles}
 
 Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall} \whyprefix{b}{rackets} soit \inenglish{petits crochets}. Les options sont disponibles à la fois pour \macro{hook} et \macro{hook*}.
 
@@ -176,7 +167,7 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 % ---------------------- %
 
 
-\paragraph{Exemple 3 - Un trait vertical épuré}
+\newparaexample{Un trait vertical épuré}
 
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 

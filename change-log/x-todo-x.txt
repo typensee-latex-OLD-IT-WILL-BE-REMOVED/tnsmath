@@ -221,7 +221,6 @@ réel support multilangue et non juste french/english
 > ---------------------------- <
 
 améliorer espacement
-    ---> des opérateurs de dérivation
     ---> pzrenthèse pour proba !
     ---> les intervalles
 

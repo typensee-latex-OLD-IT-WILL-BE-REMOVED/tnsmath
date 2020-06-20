@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.19)  19 JUN 2020 23:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.19)  21 JUN 2020 00:26
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -131,20 +131,20 @@ Package: forloop 2006/09/18 v3.0 For Loops for LaTeX
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ))
 
-./05-differential-calculus.sty:33: LaTeX Error: Command \@ already defined.
+./05-differential-calculus.sty:35: LaTeX Error: Command \@ already defined.
                Or name \end... illegal, see p.192 of the manual.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.33 }
+l.35 }
       
 ? 
-./05-differential-calculus.sty:33: Emergency stop.
+./05-differential-calculus.sty:35: Emergency stop.
  ...                                              
                                                   
-l.33 }
+l.35 }
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -159,5 +159,5 @@ Here is how much of TeX's memory you used:
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,0n,29p,789b,24s stack positions out of 5000i,500n,10000p,200000b,80000s
-./05-differential-calculus.sty:33:  ==> Fatal error occurred, no output PDF fil
+./05-differential-calculus.sty:35:  ==> Fatal error occurred, no output PDF fil
 e produced!

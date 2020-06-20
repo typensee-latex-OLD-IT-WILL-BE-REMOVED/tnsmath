@@ -21,7 +21,7 @@
 
 \subsubsection{Détailler un raisonnement simple -- Version pour le lycée et après} \label{explain-proof}
 
-\paragraph{Exemple 1 -- Avec les réglages par défaut}
+\newparaexample{Avec les réglages par défaut}
 
 L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement simple en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \whyprefix{expl}{ain} \prefix{next} step \fg} soit \inenglish{expliquer la prochaine étape}
 \footnote{
@@ -73,7 +73,7 @@ Notons au passage que ce type de présentation n'est sûrement pas bien adaptée
 % ---------------------- %
 
 
-\paragraph{Exemple 2 -- Utiliser un autre symbole globalement}
+\newparaexample{Utiliser un autre symbole globalement}
 
 L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ par défaut. Ceci permet de faire ce qui suit sans effort.
 
@@ -92,7 +92,7 @@ L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ pa
 % ---------------------- %
 
 
-\paragraph{Exemple 3 -- Juste utiliser des symboles}
+\newparaexample{Juste utiliser des symboles}
 
 Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché \emph{(ne pas oublier les accolades vides)}. Voici un court exemple de ceci.
 
@@ -108,7 +108,7 @@ Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le sy
 % ---------------------- %
 
 
-\paragraph{Exemple 4 -- Utiliser un autre symbole localement}
+\newparaexample{Utiliser un autre symbole localement}
 
 La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple d'utilisation complètement farfelu bien que correct.
 
@@ -132,7 +132,7 @@ La macro \macro{explnext} possède un argument optionnel qui utilise par défaut
 % ---------------------- %
 
 
-\paragraph{Exemple 5 -- Choisir la mise en forme des explications}
+\newparaexample{Choisir la mise en forme des explications}
 
 Pour la mise en forme des explications à double sens, la macro \macro{explnext} fait appel à la macro \macro{expltxt}.
 Par défaut, le package utilise la définition suivante.

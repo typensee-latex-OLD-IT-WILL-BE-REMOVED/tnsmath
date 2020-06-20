@@ -1,0 +1,156 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+
+    \usepackage{07-tables}
+\makeatother
+
+
+\usepackage{amsmath}
+
+\newcommand\ee{e}
+
+
+\begin{document}
+
+% \section{Analysis}
+
+\subsection{Tableaux de variation et de signe}
+
+\subsubsection{Les bases}
+
+\paragraph{Comment ça marche ?}
+
+Tout le boulot est fait par le package \verb+tkz-tab+ auquel on impose le choix d'une pointe de flèche plus visible via le réglage \verb+\tkzTabSetup[arrowstyle = triangle 60]+.
+
+\medskip
+
+Nous donnons quelques exemples classiques d'utilisation \emph{(les codes ont été mis en forme pour faciliter la compréhension de la syntaxe à suivre)}.
+Si besoin reportez vous à la documentation de \verb+tkz-tab+ pour obtenir des compléments d'information. 
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des signes}
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit{
+        $x$       / 1 ,
+        $\cos(x)$ / 1
+    }{
+                $0$    , $\frac{\pi}{2}$     , $\pi$
+    }
+    \tkzTabLine{   , + , z               , - ,      }
+\end{tikzpicture}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{ Avec des variations}
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit{
+        $x$    / 1   ,
+        $f(x)$ / 1.5
+    }{
+               $-\infty$ , $p$       , $+\infty$
+    }
+    \tkzTabVar{+/        , -/ $f(p)$ , +/       }
+\end{tikzpicture}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Variations via une dérivée}
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit{
+        $x$       / 1   ,
+        $\cos(x)$ / 1   ,
+        $\sin(x)$ / 1.5
+    }{
+                $0$      , $\frac{\pi}{2}$     , $\pi$
+    }
+    \tkzTabLine{     , + , z               , - ,      }
+    \tkzTabVar {-/ 0     , +/ 1                , -/ 0 }
+\end{tikzpicture}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Une image intermédiaire avec une seule flèche}
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit{
+        $x$     / 1   ,
+        $3 x^2$ / 1   ,
+        $x^3$   / 1.5
+    }{
+               $-\infty$         , $0$   , $+\infty$
+    }
+    \tkzTabLine{             , + , 0 , + ,             }
+    \tkzTabVar {-/ $-\infty$     , R     , +/ $+\infty$}
+    %
+    \tkzTabIma{1}{3}{2} % Position entre 1ière et 3ième valeur puis rang entierrelatif.
+              {$0$}     % Valeur de l'image.
+\end{tikzpicture}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Valeurs intermédiaires ou interdites}
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 6]{ % Largeur entre les valeurs du tableau.
+        $x$            /1   ,
+        $\dfrac{1}{x}$ /1.25 ,
+        $\ln$          /1.75
+    }{
+                $0$                , $+\infty$
+    }
+    \tkzTabLine{d              , + ,              }
+    \tkzTabVar {D- / $-\infty$     , + / $+\infty$}
+    %
+    \tkzTabVal{1}{2}{0.35} % Position entre 1ière et 2ième valeur puis en proportion.
+              {1}{0}       % x_1 et f(x_1)
+    \tkzTabVal{1}{2}{0.65} % Position entre 1ière et 2ième valeur puis en proportion.
+              {$\ee$}{1}   % x_2 et f(x_2)
+\end{tikzpicture}
+\end{latexex-flat}
+
+Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
+
+\begin{latexex-flat}
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 4]{
+        $x$     / 1   ,
+        $f'(x)$ / 1   , 
+        $f(x)$  / 1.5
+    }{
+               $0$                 , $e$           , $+\infty$}
+    \tkzTabLine{d              , + , 0         , - ,          }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
+    %
+    \tkzTabVal[draw]{1}{2}{0.5} % Position entre 1ière et 2ième valeur au milieu.
+                    {$1$}{$\dfrac{1}{\ee}$}
+    \tkzTabVal[draw]{2}{3}{0.5} % Position entre 2ième et 3ième valeur au milieu.
+                    {$\ee^2$}{$1$}
+\end{tikzpicture}
+\end{latexex-flat}
+
+\end{document}

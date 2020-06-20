@@ -24,7 +24,7 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 % ---------------------- %
 
 
-\paragraph{Exemple 1 -- Le cas type}
+\newparaexample{Le cas type}
 
 Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
 À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
@@ -52,7 +52,7 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 % ---------------------- %
 
 
-\paragraph{Exemple 2 -- Des poids cachés partout}
+\newparaexample{Des poids cachés partout}
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
 
@@ -69,7 +69,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 % ---------------------- %
 
 
-\paragraph{Exemple 3 -- Des poids cachés localement}
+\newparaexample{Des poids cachés localement}
 
 Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
@@ -89,7 +89,7 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 % ---------------------- %
 
 
-\paragraph{Exemple 4 -- Un signe $=$ et/ou une virgule dans les étiquettes}
+\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
 
 Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
 
@@ -106,7 +106,7 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 % ---------------------- %
 
 
-\paragraph{Exemple 5 -- Des cadres facilement}
+\newparaexample{Des cadres facilement}
 
 Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
@@ -138,7 +138,7 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
 % ---------------------- %
 
 
-\paragraph{Exemple 6 -- Des cadres faits à la main}
+\newparaexample{Des cadres faits à la main}
 
 En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
 

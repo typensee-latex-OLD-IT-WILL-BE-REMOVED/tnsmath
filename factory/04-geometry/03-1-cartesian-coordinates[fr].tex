@@ -43,7 +43,7 @@
 
 \subsection{Coordonnées} \label{coordinates}
 
-\paragraph{Exemple 1 - Des coordonnées seules}
+\newparaexample{Des coordonnées seules}
 
 \verb+lymath+ propose, via un argument optionnel, six façons différentes de rédiger des coordonnées seules \emph{(nous verrons après des macros pour les coordonnées d'un point et celles d'un vecteur afin de produire un code \LaTeX{} plus sémantique)}. Commençons par les écritures horizontales où vous noterez l'utilisation de \verb+|+ pour séparer les coordonnées dont le nombre peut être quelconque.
 
@@ -86,7 +86,7 @@ Voici d'où viennent les noms des options.
 % ---------------------- %
 
 
-\paragraph{Exemple 2 - Coordonnées d'un point}
+\newparaexample{Coordonnées d'un point}
 
 La macro \macro{pcoord} avec \prefix{p} pour  \whyprefix{p}{oint} prend un argument supplémentaire avant les coordonnées qui est le nom d'un point qui sera mis en forme par la macro \macro{pt}. Si vous ne souhaitez pas que \macro{pt} soit appliquée, il suffit de passer via la version étoilée \macro{pcoord*}.
 
@@ -110,7 +110,7 @@ $\pcoord*[b]{\Sigma}{3 | -4 | 0 | 1}$
 % ---------------------- %
 
 
-\paragraph{Exemple 3 - Coordonnées d'un vecteur}
+\newparaexample{Coordonnées d'un vecteur}
 
 Le fonctionnement de \macro{vcoord} est similaire à celui de \macro{pcoord} si ce n'est que c'est la macro \macro{vect} qui sera appliquée si besoin.
 

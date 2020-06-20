@@ -1,5 +1,5 @@
 ==========
-2020-06-20     ??????
+2020-06-      ?????
 ==========
 
 
@@ -7,19 +7,21 @@
 Z!!!!
     ---> mettre à jour chnagelog pour préaper nelle subversion !!!!
 
-**New minor version version::``0.8.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
+**New major version version::``1.0.0-beta`` of ¨lymath:** see all the changes below. There are a lot of backward incompatibilities and the API will ffollow some new rules in the future.
+
+
+
+
+    ???? tab signe décoré !!!!
 
 
 
 
 
 
-
-**Algebra :** here are the changes.
-
-    1) ``\cdettwo`` has been renamed ``\calcdettwo``.
-
-    1) ``\calcdettwo`` has an optional argument to choose the formatting wanted (in backstage the formattings are exactly the same as the ones done by the macro ``\calcdetplane`` without vectors).
+==========
+2020-06-21    OK !!!!!
+==========
 
 
 **Analysis :** there are brand new things.
@@ -33,7 +35,9 @@ Z!!!!
         \hook* juste avec a et b en cohérnece aevvec integrate
 
 
-    1) der total
+    1) \dd* \pp* si besoin du 1 en exposant
+
+        der total
 
         sder et sder[e] avec e pour exponent (cf indice après ) remplace  derpow* et derpow  u = usual don els primes
 
@@ -42,7 +46,7 @@ Z!!!!
         e,p possible
 
 
-        tou ceci vaalabl pour \der qui porpose aussi
+        on a ausspour der  avec var indiqué
 
             of osf  ---> ope frac à côté fonction !
             f  ---> derfrac
@@ -50,25 +54,38 @@ Z!!!!
             i(ndice)---> dersub
 
 
-
-
-    ?????? 1) der total
-
-          ope de der/partial der sous forme fraction
-
-          partialfrac   partial[u] u-sual
-
-          partialfrac   partaila[f] + partial[sf] + version opé
-
-          partialsub    partial[i]
-
-          partialprime  partial[e]
+        derope : come si fonction vide mais avec option f , sf et i (autres sans utilité)
 
 
 
 
+    1) nom de s options en cohérence avec celles de der
+
+          partial déjà utilisé !!!
+
+          partialfrac   partialder[f] + partial[sf] of et osf
+
+          partialsub    partialder[i]
+
+          partialprime reoved !!!
 
 
+
+          partialderope
+
+
+
+
+
+==========
+2020-06-19
+==========
+
+**Algebra :** here are the changes.
+
+    1) ``\cdettwo`` has been renamed ``\calcdettwo``.
+
+    1) ``\calcdettwo`` has an optional argument to choose the formatting wanted (in backstage the formattings are exactly the same as the ones done by the macro ``\calcdetplane`` without vectors).
 
 
 **Arithmetic :** ``\notdivides`` has been renamed ``\ndivides``.
@@ -151,7 +168,14 @@ Z!!!!
 
 
 
-**Documentation:** tables for suffixes and/or ^prefixes will be clearer from now.
+**Documentation:** tables for suffixes and/or prefixes will be clearer from now.
+
+
+
+
+
+
+
 
 
 

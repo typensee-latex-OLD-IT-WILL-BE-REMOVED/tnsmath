@@ -1,4 +1,0 @@
-macro,dd,1,1
-macro,pp,1,1
-macro,sder,1,2
-macro,der,1,3
