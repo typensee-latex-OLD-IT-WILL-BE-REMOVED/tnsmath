@@ -47,14 +47,15 @@
 
 \paragraph{Sans chapeau - Version longue}
 
+L'option par défaut est \prefix{p} pour \whyprefix{p}{arenthèse}.
+Dans \prefix{sp} le \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}.
+ 
 \begin{latexex}
-$\displaystyle
- \angleorient{\frac{1}{2} \vect{i}}%
-             {\vect{j}}$
-ou
-$\displaystyle
- \angleorient*{\frac{1}{2} \vect{i}}%
-              {\vect{j}}$ .
+$\angleorient    {\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
+
+$\angleorient[sp]{\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 \end{latexex}
 
 
@@ -64,12 +65,11 @@ $\displaystyle
 \paragraph{Sans chapeau - Version courte mais restrictive}
 
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur} qui permet de simplifier la saisie quand l'on a juste des vecteurs nommés avec des lettres
-\emph{(notez que la version étoilée n'apporte rien de nouveau)}.
+\emph{(notez que l'option \prefix{sp} n'apporte rien de nouveau)}.
 
 \begin{latexex}
-$\vangleorient{i}{j}$
-ou
-$\vangleorient*{i}{j}$
+$\vangleorient    {i}{j}$ comme
+$\vangleorient[sp]{i}{j}$
 \end{latexex}
 
 
@@ -78,21 +78,18 @@ $\vangleorient*{i}{j}$
 
 \paragraph{Avec un chapeau}
 
-Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{at} soit \inenglish{chapeau}, et \prefix{v} pour \whyprefix{v}{ecteurr}.
-Ceci permet d'avoir les angles orientés avec un chapeau \emph{(la dernière écriture n'apporte rien de neuf mais elle evite de tout reprendre en cas de changement de mise en forme dans un document)}.
+Dans l'exemple suivant, \prefix{h} est pour \whyprefix{h}{at} soit \inenglish{chapeau}.
+Notez au passage que \prefix{sh} produit juste des parenthèses petites mais ce choix de nom simplifie l'utilisation de la macro \emph{(c'est mieux que \prefix{hsp} par exemple)}.
 
 \begin{latexex}
-$\displaystyle
- \hangleorient{\frac{1}{2} \vect{i}}%
-              {\vect{j}}$
- 
-$\displaystyle
- \hangleorient*{\frac{1}{2} \vect{i}}%
-               {\vect{j}}$
+$\angleorient[h] {\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 
-$\hvangleorient{i}{j}$
+$\angleorient[sh]{\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 
-$\hvangleorient*{i}{j}$
+$\vangleorient[h] {i}{j}$ comme
+$\vangleorient[sh]{i}{j}$
 \end{latexex}
 
 
@@ -103,9 +100,18 @@ $\hvangleorient*{i}{j}$
 
 \paragraph{Angles orientés de vecteurs}
 
-\IDmacro*{angleorient}{2}
+\IDmacro{angleorient}{1}{2}
 
-\IDmacro*{hangleorient}{2}  où \quad \mwhyprefix{h}{at}
+\IDoption{} la valeur par défaut est \verb+p+.  Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+p+ : écriture habituelle avec des parenthèses extensibles.
+
+	\item \verb+sp+ : écriture habituelle avec des parenthèses non extensibles.
+
+	\item \verb+h+ : écriture avec un chapeau et des parenthèses extensibles.
+
+	\item \verb+sh+ : écriture avec un chapeau et des parenthèses non extensibles.
+\end{enumerate}
 
 \IDarg{1} le premier vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -115,9 +121,9 @@ $\hvangleorient*{i}{j}$
 \separation
 
 
-\IDmacro*{vangleorient}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vangleorient}{1}{2} où \quad \mwhyprefix{v}{ector}
 
-\IDmacro*{hvangleorient}{2} où \quad \mwhyprefix{h}{at} et \mwhyprefix{v}{ector}
+\IDoption{} voir les explications précédentes données pour \macro{angleorient}.
 
 \IDarg{1} le nom du premier vecteur sans utiliser la macro \macro{vect}.
 

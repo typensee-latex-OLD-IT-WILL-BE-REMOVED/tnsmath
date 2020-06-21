@@ -7,10 +7,6 @@
 \makeatother
 
 
-% == EXTRAS == %
-
-\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
-
 
 \begin{document}
 
@@ -18,11 +14,19 @@
 
 \subsection{Probabilité \og simple \fg}
 
-\newparaexample*{}
+\newparaexample{}
 
 \begin{latexex}
 $\proba{A}$
-ou
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
 $\proba[P]{A}$
 \end{latexex}
 
@@ -36,7 +40,7 @@ $\proba[P]{A}$
 
 \IDmacro{proba}{1}{1}
 
-\IDoption{} le nom de la probabilité.
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
 
 \IDarg{} l'ensemble dont on veut calculer la probabilité.
 
@@ -46,33 +50,41 @@ $\proba[P]{A}$
 
 \subsection{Probabilité conditionnelle}
 
-\newparaexample*{}
+\newparaexample{Les deux écritures classiques}
 
 La 1\iere{} notation, qui est devenue standard, permet de comprendre l'ordre des arguments.
 \begin{latexex}
-$\probacond{B}{A}
- =
- \probacond*{B}{A}
- =
- \probacond**{B}{A}
- =
- \dprobacond**{B}{A}$
+ $\probacond {B}{A}
+= \probacond*{B}{A}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Choisir le nom de la probabilité}
+\newparaexample{Obtenir la formule de définition}
+
+Le suffixe \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}
+\footnote{
+	Pour ne pas alourdir l'utilisation de \macro{probacond}, il a été choisi d'utiliser un suffixe au lieu d'un système de multi-options.
+}.
 
 \begin{latexex}
-$\probacond[P]{B}{A}
- =
- \probacond*[P]{B}{A}
- =
- \probacond**[P]{B}{A}
- =
- \dprobacond**[P]{B}{A}$
+ $\probacondexp {B}{A}
+= \probacondexp*{B}{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
+ $\probacond    [P]{B}{A}
+= \probacond*   [P]{B}{A}
+= \probacondexp*[P]{B}{A}
+= \probacondexp [P]{B}{A}$
 \end{latexex}
 
 
@@ -87,11 +99,14 @@ $\probacond[P]{B}{A}
 
 \IDmacro{probacond*}{1}{2}
 
-\IDmacro{probacond**}{1}{2}
+\extraspace
 
-\IDmacro{dprobacond**}{1}{2}
+\IDmacro{probacondexp}{1}{2}
 
-\IDoption{} le nom de la probabilité.
+\IDmacro{probacondexp*}{1}{2}
+
+
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
 
 \IDarg{1} l'ensemble qui donne la condition.
 
@@ -130,7 +145,7 @@ $\expval[E_1]{X}$
 
 \IDmacro{expval}{1}{1}
 
-\IDoption{} le nom de la fonction espérance.
+\IDoption{} le nom de la fonction espérance. La valeur par défaut est \verb+E+.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'espérance.
 

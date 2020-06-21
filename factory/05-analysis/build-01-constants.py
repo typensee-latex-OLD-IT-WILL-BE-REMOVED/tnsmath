@@ -76,7 +76,7 @@ text_end = text_end.lstrip()
 
 text_auto = [
     r"""
-\newcommand\ct[1]{{%
+\newcommand\param[1]{{%
     \IfStrEqCase{{#1}}{{%
         {0}
     }}[\text{{\textbf{{#1}}}}]
@@ -93,7 +93,7 @@ text_auto = [
 
 for ct in constants["greek"] + constants["roman"]:
     text_auto.append(
-        "\\newcommand\{0[0]}{0}{{\ct{{{0}}}}}".format(ct)
+        "\\newcommand\{0[0]}{0}{{\param{{{0}}}}}".format(ct)
     )
 
 text_auto.append("\n")

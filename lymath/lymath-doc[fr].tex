@@ -256,7 +256,7 @@ Les macros partageant une même fonctionnalité mathématique suivent les règle
 
 \subsubsection{Les formes \og négatives \fg{} des macros}
 
-Les formes \og négatives \fg{} des macros auront un nom préfixé par la lettre \prefix{n} en référence à \whyprefix{n}{ot}.
+Les formes \og négatives \fg{} des macros auront un nom préfixé par la lettre \prefix{n} en référence à \whyprefix{n}{ot}. C'est l'usage dans le mode \LaTeX{} comme par exemple pour \macro{neq}. 
 
 
 % ---------------------- %
@@ -279,19 +279,11 @@ Dans ce cas, les versions standard restent accessibles en utilisant le préfixe 
 % ---------------------- %
 
 
-\subsection{Versions étoilées}
-
-Les versions étoilées proposent des mises en forme correspondant aux cas les moins usuels ou les moins pratiques : par exemple, la macro \macro{integrate} rédige $x = a$ et $x = b$ pour les bornes tandis que la version étoilée affichera juste $a$ et $b$.
-
-
-% ---------------------- %
-
-
 \subsection{Les arguments : deux conventions à connaître}
 
 \subsubsection{Avec un nombre fixé d'arguments}
 
-Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{vdotprod\{u\}\{v\}}.
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{dotprod\{u\}\{v\}}.
 
 
 % ---------------------- %
@@ -576,7 +568,7 @@ $(A \implies B)
 
 \newparaexample{Des opérateurs décorés}
 
-Tout comme pour les égalités, il existe des versions décorées de type test, hypothèse, condition \dots{} 
+Tout comme pour les comparaisons, il existe des versions décorées de type test, hypothèse, condition \dots{} 
 Elles sont toutes présentes dans l'exemple suivant.
 
 \begin{latexex}
@@ -1189,14 +1181,14 @@ $\setgene{1 ; 3 ; 5}$ .
 
 \newparaexample{}
 
+Dans l'exemple suivant on utilise l'option \prefix{sb} pour \whyprefix{s}{mall} \whyprefix{b}{races} soit \inenglish{petites accolades}.
+
 \begin{latexex}
-$\displaystyle
- \setgene{\frac{1}{3} ; \frac{5}{7} ; 
-          \frac{9}{11}}$
-ou
-$\displaystyle
- \setgene*{\frac{1}{3} ; \frac{5}{7} ;
-           \frac{9}{11}}$ .
+$\setgene {\dfrac{1}{3} ; \dfrac{5}{7} ; 
+           \dfrac{9}{11}}$
+
+$\setgene*{\dfrac{1}{3} ; \dfrac{5}{7} ;
+           \dfrac{9}{11}}$
 \end{latexex}
 
 
@@ -1712,18 +1704,16 @@ $\vect*{j}{2}$
 % ---------------------- %
 % \section{Géométrie}
 
-\subsection{Vecteurs}
+%\subsection{Vecteurs}
 
 \subsubsection{Norme}
 
 \begin{latexex}
 $\norm{\vect{i}} = \vnorm{i}$
 
-$\displaystyle
- \norm{\frac{2}{7} \vect*{e}{k}}$
- ou
-$\displaystyle
- \norm[s]{\frac{2}{7} \vect*{e}{k}}$
+$\norm   {\dfrac{2}{7} \vect*{e}{k}}$
+
+$\norm[s]{\dfrac{2}{7} \vect*{e}{k}}$
 \end{latexex}
 
 
@@ -1750,41 +1740,38 @@ $\dotprod{\dfrac{1}{2} \vect{i}}%
 % ---------------------- %
 
 
-\newparaexample{Version courte mais restrictive}
+\newparaexample{Écriture \og à la physicienne \fg}
+
+Dans l'exemple suivant, l'option \prefix{r} est pour \whyprefix{r}{after} soit \inenglish{chevron}, et dans \prefix{sr} le \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}. Les physiciens aiment bien cette notation.
+
+\begin{latexex}
+$\dotprod[r] {\dfrac{1}{2} \vect{i}}%
+             {\vect{j}}$
+
+$\dotprod[sr]{\dfrac{1}{2} \vect{i}}%
+             {\vect{j}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version courtes mais restrictive}
 
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\vdotprod{i}{j}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
-
-Dans l'exemple suivant, le préfixe \prefix{a} est pour \whyprefix{a}{ngle} et  \prefix{v} pour \whyprefix{v}{ecteur}.
-Les physiciens aiment bien cette notation.
-
-\begin{latexex}
-
-$\displaystyle
- \adotprod{\frac{1}{2} \vect{i}}%
-          {\vect{j}}$
-
-$\displaystyle
- \adotprod*{\frac{1}{2} \vect{i}}%
-           {\vect{j}}$
+$\vdotprod    {i}{j}$
  
-$\vadotprod{i}{j}$
-
-$\vadotprod*{i}{j}$
+$\vdotprod[r] {i}{j}$ comme
+$\vdotprod[sr]{i}{j}$
 \end{latexex}
 
 
 % ---------------------- %
+% \section{Géométrie}
 
+%\subsection{Vecteurs}
 
 \subsubsection{Produit vectoriel}
 
@@ -1814,11 +1801,11 @@ $\vcrossprod{i}{j}$
 Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\calccrossprod{\vect{u}}{x }{y }{z }%
-               {\vect{v}}{x'}{y'}{z'}
+$\calccrossprod {\vect{u}}{x }{y }{z }%
+                {\vect{v}}{x'}{y'}{z'}
  =
- \vcalccrossprod{u}{x }{y }{z }%
-                {v}{x'}{y'}{z'}$
+ \vcalccrossprod{u       }{x }{y }{z }%
+                {v       }{x'}{y'}{z'}$
 
 $\vcalccrossprod{AB}{x_B - x_A}%
                     {y_B - y_A}%
@@ -1865,8 +1852,9 @@ On peut utiliser des options pour choisir certains paramètres de mise en forme.
 $\coordcrossprod{\dfrac{1}{2}x}{y }{z }%
                 {x'           }{y'}{z'}$
 
-$\coordcrossprod[vb]{x }{y }{z }%
-                      {x'}{y'}{z'}$
+$\coordcrossprod[vb]%
+                {\dfrac{1}{2}x}{y }{z }%
+                {x'           }{y'}{z'}$
 
 $\coordcrossprod[sp,c]%
                 {\dfrac{1}{2}x}{y }{z }%
@@ -1987,11 +1975,10 @@ Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument option
 
 
 \begin{latexex}
-$\vcalcdetplane[novec]{u}{x }{y }%
-                      {v}{x'}{y'}
- =
- \vcalcdetplane*[novec]{u}{x }{y }%
-                       {v}{x'}{y'}$
+ $\vcalcdetplane[novec] {u}{x }{y }%
+                        {v}{x'}{y'}
+= \vcalcdetplane*[novec]{u}{x }{y }%
+                        {v}{x'}{y'}$
 \end{latexex}
 
 
@@ -2060,25 +2047,18 @@ $\vcalcdetplane[exp]{AB}%
 \verb+lymath+ propose, via un argument optionnel, six façons différentes de rédiger des coordonnées seules \emph{(nous verrons après des macros pour les coordonnées d'un point et celles d'un vecteur afin de produire un code \LaTeX{} plus sémantique)}. Commençons par les écritures horizontales où vous noterez l'utilisation de \verb+|+ pour séparer les coordonnées dont le nombre peut être quelconque.
 
 \begin{latexex}
-$\displaystyle
- \coord{\frac{1}{3} | -4 | 0}$
-ou
-$\displaystyle
- \coord[sp]{\frac{1}{3} | -4 | 0}$
+$\coord    {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sp]{\dfrac{1}{3} | -4 | 0}$
 
-$\displaystyle
- \coord[b]{\frac{1}{3} | -4 | 0}$
-ou
-$\displaystyle
- \coord[sb]{\frac{1}{3} | -4 | 0}$
+$\coord[b] {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sb]{\dfrac{1}{3} | -4 | 0}$
 \end{latexex}
 
 
 Il existe en plus deux versions verticales.
 
 \begin{latexex}
-$\coord[vp]{3 | -4}$
-ou
+$\coord[vp]{3 | -4}$ ou
 $\coord[vb]{3 | -4}$
 \end{latexex}
 
@@ -2103,18 +2083,16 @@ Voici d'où viennent les noms des options.
 La macro \macro{pcoord} avec \prefix{p} pour  \whyprefix{p}{oint} prend un argument supplémentaire avant les coordonnées qui est le nom d'un point qui sera mis en forme par la macro \macro{pt}. Si vous ne souhaitez pas que \macro{pt} soit appliquée, il suffit de passer via la version étoilée \macro{pcoord*}.
 
 \begin{latexex}
-$\pcoord{A}{3 | -4 | 0 | 1}$
-ou
-$\pcoord*{\Sigma}{3 | -4 | 0 | 1}$
+$\pcoord{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*{\Sigma}{7 | 9 | 8}$
 \end{latexex}
 
 
 Toutes les options disponibles avec \macro{coord} le sont aussi avec  \macro{pcoord}. 
 
 \begin{latexex}
-$\pcoord[b]{A}{3 | -4 | 0 | 1}$
-ou
-$\pcoord*[b]{\Sigma}{3 | -4 | 0 | 1}$
+$\pcoord[b]{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*[b]{\Sigma}{7 | 9 | 8}$
 \end{latexex}
 
 
@@ -2127,13 +2105,11 @@ $\pcoord*[b]{\Sigma}{3 | -4 | 0 | 1}$
 Le fonctionnement de \macro{vcoord} est similaire à celui de \macro{pcoord} si ce n'est que c'est la macro \macro{vect} qui sera appliquée si besoin.
 
 \begin{latexex}
-$\vcoord{u}{3 | -4}$
-ou
+$\vcoord{u}{3 | -4}$ ou
 $\vcoord*{\dfrac{1}{2} \vect{u}}%
          {3 | -4}$
 
-$\vcoord[vp]{u}{3 | -4}$
-ou
+$\vcoord[vp]{u}{3 | -4}$ ou
 $\vcoord*[vp]{\dfrac{1}{2} \vect{u}}%
              {3 | -4}$
 \end{latexex}
@@ -2161,14 +2137,12 @@ $\axes{\pt{O} %
 
 Dans l'exemple ci-dessous, on voit que la version étoilée produit des petites parenthèses.
 \begin{latexex}
-$\displaystyle
- \axes{\pt{O} %
-     | \frac{7}{3} \vect{i} %
+$\axes{\pt{O} %
+     | \dfrac{7}{3} \vect{i} %
      | \vect{j}}$
 ou
-$\displaystyle
- \axes*{\pt{O} %
-     | \frac{7}{3} \vect{i} %
+$\axes*{\pt{O} %
+     | \dfrac{7}{3} \vect{i} %
      | \vect{j}}$
 \end{latexex}
 
@@ -2271,19 +2245,21 @@ $\circarc*{j}{2}$
 \newparaexample{}
 
 \begin{latexex}
-$\anglein{ABCDEF}$ ,
-$\anglein*{A}{rot}$ ou
-$\anglein{A_{rot}}$
+$\anglein {ABCDEF}$
+
+$\anglein* {A}{rot}$
+
+$\anglein {A_{rot}}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\newparaexample{}
+\newparaexample{Cacher les points du i et du j}
 
 \begin{latexex}
-$\anglein{i}$ ou
+$\anglein{i}$ et
 $\anglein*{j}{2}$
 \end{latexex}
 
@@ -2297,14 +2273,15 @@ $\anglein*{j}{2}$
 
 \paragraph{Sans chapeau - Version longue}
 
+L'option par défaut est \prefix{p} pour \whyprefix{p}{arenthèse}.
+Dans \prefix{sp} le \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}.
+ 
 \begin{latexex}
-$\displaystyle
- \angleorient{\frac{1}{2} \vect{i}}%
-             {\vect{j}}$
-ou
-$\displaystyle
- \angleorient*{\frac{1}{2} \vect{i}}%
-              {\vect{j}}$ .
+$\angleorient    {\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
+
+$\angleorient[sp]{\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 \end{latexex}
 
 
@@ -2314,12 +2291,11 @@ $\displaystyle
 \paragraph{Sans chapeau - Version courte mais restrictive}
 
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur} qui permet de simplifier la saisie quand l'on a juste des vecteurs nommés avec des lettres
-\emph{(notez que la version étoilée n'apporte rien de nouveau)}.
+\emph{(notez que l'option \prefix{sp} n'apporte rien de nouveau)}.
 
 \begin{latexex}
-$\vangleorient{i}{j}$
-ou
-$\vangleorient*{i}{j}$
+$\vangleorient    {i}{j}$ comme
+$\vangleorient[sp]{i}{j}$
 \end{latexex}
 
 
@@ -2328,28 +2304,25 @@ $\vangleorient*{i}{j}$
 
 \paragraph{Avec un chapeau}
 
-Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{at} soit \inenglish{chapeau}, et \prefix{v} pour \whyprefix{v}{ecteurr}.
-Ceci permet d'avoir les angles orientés avec un chapeau \emph{(la dernière écriture n'apporte rien de neuf mais elle evite de tout reprendre en cas de changement de mise en forme dans un document)}.
+Dans l'exemple suivant, \prefix{h} est pour \whyprefix{h}{at} soit \inenglish{chapeau}.
+Notez au passage que \prefix{sh} produit juste des parenthèses petites mais ce choix de nom simplifie l'utilisation de la macro \emph{(c'est mieux que \prefix{hsp} par exemple)}.
 
 \begin{latexex}
-$\displaystyle
- \hangleorient{\frac{1}{2} \vect{i}}%
-              {\vect{j}}$
- 
-$\displaystyle
- \hangleorient*{\frac{1}{2} \vect{i}}%
-               {\vect{j}}$
+$\angleorient[h] {\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 
-$\hvangleorient{i}{j}$
+$\angleorient[sh]{\dfrac{1}{2} \vect{i}}%
+                 {\vect{j}}$
 
-$\hvangleorient*{i}{j}$
+$\vangleorient[h] {i}{j}$ comme
+$\vangleorient[sh]{i}{j}$
 \end{latexex}
 
 
 % ---------------------- %
 \section{Analyse}
 
-\subsection{Constantes}
+\subsection{Constantes et paramètres}
 
 \subsubsection{Constantes classiques}
 
@@ -2378,8 +2351,10 @@ et $\kk$ où $\ttau = 2 \ppi$
 
 \newparaexample*{}
 
+La macro \macro{param} est surtout là pour une utilisation pédagogique.
+
 \begin{latexex}
-$\ct{a} x^2 + \ct{b} x + \ct{c}$
+$\param{a} x^2 + \param{b} x + \param{c}$
 ou
 $a x^2 + b x + c$
 \end{latexex}
@@ -2394,8 +2369,8 @@ $a x^2 + b x + c$
 
 \begin{latexex}
 $\abs{2}$ ,
-$\displaystyle \abs{\frac{3}{5}}$ ou
-$\displaystyle \abs*{\frac{3}{5}}$
+$\abs {\dfrac{3}{5}}$ ou
+$\abs*{\dfrac{3}{5}}$
 \end{latexex}
 
 
@@ -2805,11 +2780,11 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 
 
 \begin{latexex}
- $\displaystyle
-  \hook*{a}{b}%
-        {\frac{x - 1}{5 + x^2}}{x}
-= \hook*[sb]{a}{b}%
-            {\frac{x - 1}{5 + x^2}}{x}$
+ $\hook*{a}{b}%
+        {\dfrac{x - 1}{5 + x^2}}{x}
+= \hook*[sb]%
+        {a}{b}%
+        {\dfrac{x - 1}{5 + x^2}}{x}$
 \end{latexex}
 
 
@@ -2821,11 +2796,10 @@ Dans l'exemple suivant, on utilise l'option \prefix{sb} pour \whyprefix{s}{mall}
 Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix{r}{ull} soit \inenglish*{petit} et \inenglish{trait}, on obtient ce qui suit.
 
 \begin{latexex}
- $\displaystyle
-  \hook[r]{a}{b}%
-          {\frac{x - 1}{5 + x^2}}{x}
+ $\hook[r] {a}{b}%
+           {\dfrac{x - 1}{5 + x^2}}{x}
 = \hook[sr]{a}{b}%
-           {\frac{x - 1}{5 + x^2}}{x}$
+           {\dfrac{x - 1}{5 + x^2}}{x}$
 \end{latexex}
 
 
@@ -2834,7 +2808,7 @@ Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix
 
 \subsection{Tableaux de variation et de signe}
 
-\subsubsection{Les bases}
+%\subsubsection{Les bases}
 
 \paragraph{Comment ça marche ?}
 
@@ -2972,42 +2946,42 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
 
 %\subsection{Tableaux de variation et de signe}
 
-\subsubsection{Décorer un tableau de signe - TODO}
-
-\paragraph{Motivation}
-
-Considérons le tableau suivant et imaginons que l'on souhaite le justifier tout en l'expliquer à des débutants.
-
-\begin{center}
-    \begin{tikzpicture}
-        \tkzTabInit[
-            lgt   = 3.5, % Il faut de la place pour le dernier produit !
-            espcl = 2.5  % On réduit la largeur des colonnes pour les signes.
-        ]{
-            $x$                             / 1   ,
-            Signe de \\ $2 x - 3$           / 1.5 ,
-            Signe de \\ $-x + 5$            / 1.5 ,
-            Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5 
-        }{
-                    $-\infty$     , $\dfrac{3}{2}$     , $5$     , $+\infty$
-        }
-        \tkzTabLine{          , - , z              , + , t   , + ,          }
-        \tkzTabLine{          , + , t              , + , z   , - ,          }
-        \tkzTabLine{          , - , z              , + , z   , - ,          }
-    \end{tikzpicture}
-\end{center}
-Deux options s'offrent à nous pour justifier comment est rempli le tableau.
-\begin{enumerate}
-    \item Classiquement, on résout les deux inéquations $2 x - 3 > 0$ et $-x + 5 > 0$ par exemple puis on complète les deux premières lignes 
-    \footnote{
-        Notons que cette approche est un peu scandaleuse car il faudrait en toute rigueur aussi résoudre
-        $2 x - 3 < 0$ , $-x + 5 < 0$ , $2 x - 3 = 0$ et $-x + 5 = 0$.
-        Personne ne le fait car l'on pense aux variations d'une fonction affine. Dans ce cas, pourquoi ne pas juste utiliser ce dernier argument. C'est ce que propose la 2\ieme{} méthode. 
-    }
-    pour en déduire la dernière avec la règle du signe d'un produit.
-
-    \item Tout collégien 
-\end{enumerate}
+%\subsubsection{Décorer un tableau de signe - TODO}
+%
+%\paragraph{Motivation}
+%
+%Considérons le tableau suivant et imaginons que l'on souhaite le justifier tout en l'expliquer à des débutants.
+%
+%\begin{center}
+%    \begin{tikzpicture}
+%        \tkzTabInit[
+%            lgt   = 3.5, % Il faut de la place pour le dernier produit !
+%            espcl = 2.5  % On réduit la largeur des colonnes pour les signes.
+%        ]{
+%            $x$                             / 1   ,
+%            Signe de \\ $2 x - 3$           / 1.5 ,
+%            Signe de \\ $-x + 5$            / 1.5 ,
+%            Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5 
+%        }{
+%                    $-\infty$     , $\dfrac{3}{2}$     , $5$     , $+\infty$
+%        }
+%        \tkzTabLine{          , - , z              , + , t   , + ,          }
+%        \tkzTabLine{          , + , t              , + , z   , - ,          }
+%        \tkzTabLine{          , - , z              , + , z   , - ,          }
+%    \end{tikzpicture}
+%\end{center}
+%Deux options s'offrent à nous pour justifier comment est rempli le tableau.
+%\begin{enumerate}
+%    \item Classiquement on résout les deux inéquations $2 x - 3 > 0$ et $-x + 5 > 0$ par exemple puis on complète les deux premières lignes 
+%    \footnote{
+%        Notons que cette approche est un peu scandaleuse car il faudrait en toute rigueur aussi résoudre
+%        $2 x - 3 < 0$ , $-x + 5 < 0$ , $2 x - 3 = 0$ et $-x + 5 = 0$.
+%        Personne ne le fait car l'on pense aux variations d'une fonction affine. Dans ce cas, pourquoi ne pas juste utiliser ce dernier argument. C'est ce que propose la 2\ieme{} méthode. 
+%    }
+%    pour en déduire la dernière via la règle du signe d'un produit.
+%
+%    \item On peut proposer une méthode moins sujette à la critique en s'appuyant ???? 
+%\end{enumerate}
 % \section{Analysis}
 
 \subsection{Comparaison asymptotique de suites et de fonctions}
@@ -3020,8 +2994,7 @@ Deux options s'offrent à nous pour justifier comment est rempli le tableau.
 Les notations suivantes sont dues à Landau.
 
 \begin{latexex}
-$\bigO{}$ ou
-$\smallO{}$
+$\bigO{}$ ou $\smallO{}$
 \end{latexex}
 
 
@@ -3094,11 +3067,19 @@ $f(n) = \bigtheta{g(n)}$
 
 \subsection{Probabilité \og simple \fg}
 
-\newparaexample*{}
+\newparaexample{}
 
 \begin{latexex}
 $\proba{A}$
-ou
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
 $\proba[P]{A}$
 \end{latexex}
 
@@ -3108,33 +3089,41 @@ $\proba[P]{A}$
 
 \subsection{Probabilité conditionnelle}
 
-\newparaexample*{}
+\newparaexample{Les deux écritures classiques}
 
 La 1\iere{} notation, qui est devenue standard, permet de comprendre l'ordre des arguments.
 \begin{latexex}
-$\probacond{B}{A}
- =
- \probacond*{B}{A}
- =
- \probacond**{B}{A}
- =
- \dprobacond**{B}{A}$
+ $\probacond {B}{A}
+= \probacond*{B}{A}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\paragraph{Choisir le nom de la probabilité}
+\newparaexample{Obtenir la formule de définition}
+
+Le suffixe \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}
+\footnote{
+	Pour ne pas alourdir l'utilisation de \macro{probacond}, il a été choisi d'utiliser un suffixe au lieu d'un système de multi-options.
+}.
 
 \begin{latexex}
-$\probacond[P]{B}{A}
- =
- \probacond*[P]{B}{A}
- =
- \probacond**[P]{B}{A}
- =
- \dprobacond**[P]{B}{A}$
+ $\probacondexp {B}{A}
+= \probacondexp*{B}{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
+ $\probacond    [P]{B}{A}
+= \probacond*   [P]{B}{A}
+= \probacondexp*[P]{B}{A}
+= \probacondexp [P]{B}{A}$
 \end{latexex}
 
 
@@ -3365,7 +3354,7 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
 
 \subsection{Opérateurs de base}
 
-Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{ndivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+.
+Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{ndivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+. Un opérateur \macro{nequiv} a été aussi ajouté.
 
 \begin{latexex}
 $10 \divides 150$ au lieu de
@@ -3374,9 +3363,9 @@ $10 | 150$
 $10 \ndivides 154$ au lieu de
 $10 \not| 154$
 
-$a \equiv b \modulo p
+$a \nequiv b \modulo p
  \iff
- p \divides (a - b)$.
+ p \ndivides (a - b)$.
 \end{latexex}
 
 
@@ -3473,8 +3462,7 @@ La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 \newparaexample{Polynômes}
 
 \begin{latexex}
-$\setpoly{\RR}{X}$
-ou
+$\setpoly{\RR}{X}$ ou
 $\setpoly{\RR}{X | Y | Z}$
 \end{latexex}
 
@@ -3485,8 +3473,7 @@ $\setpoly{\RR}{X | Y | Z}$
 \newparaexample{Fractions polynômiales}
 
 \begin{latexex}
-$\setpolyfrac{\QQ}{T}$
-ou
+$\setpolyfrac{\QQ}{T}$ ou
 $\setpolyfrac{\QQ}%
              {S_1 | S_2 | \dots | S_k}$
 \end{latexex}
@@ -3500,8 +3487,7 @@ $\setpolyfrac{\QQ}%
 \newparaexample{Séries formelles}
 
 \begin{latexex}
-$\setserie{\CC}{X}$
-ou
+$\setserie{\CC}{X}$ ou
 $\setserie{\CC}{T | O | P}$
 \end{latexex}
 
@@ -3512,8 +3498,7 @@ $\setserie{\CC}{T | O | P}$
 \newparaexample{Corps des fractions de séries formelles}
 
 \begin{latexex}
-$\setseriefrac{\ZZ}{X}$
-ou
+$\setseriefrac{\ZZ}{X}$ ou
 $\setseriefrac{\ZZ}{Z | T | O | P}$
 \end{latexex}
 
@@ -3586,14 +3571,12 @@ Dans l'exemple suivant, le préfixe \prefix{c} est pour \whyprefix{c}{alculer} e
 }.
 
 \begin{latexex}
-$\calcdettwo*{a}{c}%
-             {b}{d}
- =
- \calcdettwo{a}{c}%
-            {b}{d}
- =
- \calcdettwo[exp]{a}{c}%
-                 {b}{d}$
+ $\calcdettwo*    {a}{c}%
+                  {b}{d}
+= \calcdettwo     {a}{c}%
+                  {b}{d}
+= \calcdettwo[exp]{a}{c}%
+                  {b}{d}$
 \end{latexex}
 
 
@@ -3781,7 +3764,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     		\item Ajout de \macro{stdint} pour rendre public l'opérateur intégral proposé par défaut par \LaTeX.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En géométrie, il y a eu une suppression et trois ajouts.
         \begin{itemize}[itemsep=.5em]
@@ -3794,7 +3779,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item La macro \macro{segment} est utile pour les segments définis par deux points.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En logique, voici les améliorations apportées.
         \begin{itemize}[itemsep=.5em]
@@ -3803,7 +3790,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     		\item Ajout des versions négatives des opérateurs logiques verticaux.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item Pour les probabilités, il y a eu les modifications ci-après.
         \begin{itemize}[itemsep=.5em]
@@ -3821,7 +3810,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item Pour les intervalles, \macro{CSinterval} a été déplacée dans le package \verb+lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En logique, il y a eu les modifications suivantes.
         \begin{itemize}[itemsep=.5em]
@@ -3838,7 +3829,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En analyse, il y a eu les renommages suivants.
         \begin{itemize}[itemsep=.5em]
@@ -3847,7 +3840,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item \macro{suprageo} est devenu \macro{seqsuprageo}.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En géométrie, \macro{notparallel} est devenu \macro{nparallel}.
     \end{itemize}
@@ -3883,7 +3878,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole.
               Ceci s'accompagne de la suppression des macros obsolètes \macro{explain*} et \macro{textexplainspacebefore}.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En probabilité, voici ce qui a évolué.
         \begin{itemize}[itemsep=.5em]
@@ -3893,7 +3890,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
                   La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
         \begin{itemize}[itemsep=.5em]
@@ -3922,15 +3921,21 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En géométrie, la macro \macro{notparallel} a été rajoutée.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \macro{CSinterval} afin d'obtenir quelque chose comme \verb+a..b+.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En logique, il y a deux nouvelles macros sémantiques \macro{neqid} et \macro{eqchoice}.
     \end{itemize}
@@ -3943,11 +3948,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item Ajout des macros \macro{dsum} et \macro{dprod} qui sont vis à vis de \macro{sum} et \macro{prod} des équivalents de \macro{dfrac} pour \macro{frac}.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En arithmétique, ajout des opérateurs \macro{divides}, \macro{notdivides} et \macro{modulo}.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En géométrie, une nouvelle macro et un opérateur modifié.
         \begin{itemize}[itemsep=.5em]
@@ -3956,7 +3965,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item \macro{parallel} utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
         \end{itemize}
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item En logique, il y a les nouveautés suivantes.
         \begin{itemize}[itemsep=.5em]
@@ -3978,11 +3989,15 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \begin{itemize}[itemsep=.5em]
         \item Dans \emph{\og Logique et fondements \fg}, différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item Intégration du package \verb+tkz-tab+ pour rédiger des tableaux de variations et de signes.
     
-        % ------------ %
+    
+    % ------------------------ %
+    
     
         \item Intégration du package \verb+nicematrix+ pour écrire des matrices.
     \end{itemize}
@@ -4365,9 +4380,16 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Ensembles versus accolades}
 
-\IDmacro*{setgene}{1}
+\IDmacro{setgene}{1}{1}
 
-\IDmacro*{setgene*}{1}
+\IDoption{} la valeur par défaut est \verb+b+.  Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+b+ : on utilise des accolades extensibles.
+
+	\item \verb+sb+ : on utilise des accolades non extensibles.
+\end{enumerate}
+
+\IDarg{} la définition de l'ensemble.
 
 \IDarg{} la définition de l'ensemble.
 
@@ -4835,34 +4857,18 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDmacro*{vnorm}{1}
 
 \IDarg{} le nom du vecteur sur lequel appliquer la norme.
-\subsubsection{Produit scalaire -- Écriture minimaliste}
+\subsubsection{Produit scalaire}
 
-\IDmacro*{dotprod}{2}
+\IDmacro{dotprod}{1}{2}
 
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+\IDoption{} la valeur par défaut est \verb+u+ pour \whyprefix{u}{sual} soit \inenglish{habituel}.  Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+u+ : écriture habituelle avec un point.
 
-\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+	\item \verb+r+ : écriture \og à la physicienne \fg{} avec des chevrons extensibles.
 
-
-\separation
-
-
-\IDmacro*{vdotprod}{2} où \quad \mwhyprefix{v}{ector}
-
-\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-
-% ---------------------- %
-
-
-
-\subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
-
-\IDmacro*{adotprod}{2} où \quad \mwhyprefix{a}{ngle}
-
-\IDmacro*{adotprod*}{2}
+	\item \verb+sr+ : écriture \og à la physicienne \fg{} avec des chevrons non extensibles.
+\end{enumerate}
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -4872,18 +4878,13 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vadotprod}{2} où \quad \mwhyprefix{a}{ngle} 
-                              et \mwhyprefix{v}{ector}
+\IDmacro{vdotprod}{1}{2} où \quad \mwhyprefix{v}{ector}
+
+\IDoption{} voir les explications précédentes données pour \macro{dotprod}.
 
 \IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-
-% ---------------------- %
-
-
-
 \subsubsection{Produit vectoriel}
 
 
@@ -5160,7 +5161,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{2} un texte indiquant $down$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 \subsubsection{Angles géométriques \og intérieurs \fg}
 
-\IDmacro*{anglein}{1}
+\IDmacro*{anglein}{1} où \quad \mwhyprefix{in}{terior}
 
 \IDarg{} un texte donnant le nom d'un angle intérieur.
 
@@ -5168,16 +5169,25 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{anglein*}{2}
+\IDmacro*{anglein*}{2} où \quad \mwhyprefix{in}{terior}
 
 \IDarg{1} un texte indiquant $up$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
 \subsubsection{Angles orientés de vecteurs}
 
-\IDmacro*{angleorient}{2}
+\IDmacro{angleorient}{1}{2}
 
-\IDmacro*{hangleorient}{2}  où \quad \mwhyprefix{h}{at}
+\IDoption{} la valeur par défaut est \verb+p+.  Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+p+ : écriture habituelle avec des parenthèses extensibles.
+
+	\item \verb+sp+ : écriture habituelle avec des parenthèses non extensibles.
+
+	\item \verb+h+ : écriture avec un chapeau et des parenthèses extensibles.
+
+	\item \verb+sh+ : écriture avec un chapeau et des parenthèses non extensibles.
+\end{enumerate}
 
 \IDarg{1} le premier vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -5187,9 +5197,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{vangleorient}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vangleorient}{1}{2} où \quad \mwhyprefix{v}{ector}
 
-\IDmacro*{hvangleorient}{2} où \quad \mwhyprefix{h}{at} et \mwhyprefix{v}{ector}
+\IDoption{} voir les explications précédentes données pour \macro{angleorient}.
 
 \IDarg{1} le nom du premier vecteur sans utiliser la macro \macro{vect}.
 
@@ -5219,14 +5229,14 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \subsubsection{Constantes latines personnelles}
 
-\IDmacro*{ct}{1}
+\IDmacro*{param}{1}
 
 \IDarg{} un texte utilisant l'alphabet latin.
 \IDmacro*{abs}{1}
 
 \IDmacro*{abs*}{1}
 
-\IDarg{} l'expression à laquelle on applique la fonction valeur absolue.
+\IDarg{} l'expression sur laquelle appliquer la fonction valeur absolue.
 \subsubsection{Sans paramètre}
 
 % List of functions without parameter - START
@@ -5533,7 +5543,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro{proba}{1}{1}
 
-\IDoption{} le nom de la probabilité.
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
 
 \IDarg{} l'ensemble dont on veut calculer la probabilité.
 
@@ -5548,11 +5558,14 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro{probacond*}{1}{2}
 
-\IDmacro{probacond**}{1}{2}
+\extraspace
 
-\IDmacro{dprobacond**}{1}{2}
+\IDmacro{probacondexp}{1}{2}
 
-\IDoption{} le nom de la probabilité.
+\IDmacro{probacondexp*}{1}{2}
+
+
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
 
 \IDarg{1} l'ensemble qui donne la condition.
 
@@ -5567,7 +5580,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDmacro{expval}{1}{1}
 
-\IDoption{} le nom de la fonction espérance.
+\IDoption{} le nom de la fonction espérance. La valeur par défaut est \verb+E+.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'espérance.
 \subsubsection{Arbres pondérés}
@@ -5592,6 +5605,10 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDmacro*{divides}{0}
 
 \IDmacro*{ndivides}{0}
+
+\extraspace
+
+\IDmacro*{nequiv}{0}
 
 \extraspace
 

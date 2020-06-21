@@ -767,11 +767,21 @@
 % ------------------ %
 
 % General sets
+
 \newcommand\setgene{\@ifstar{\@setgene@star}{\@setgene@no@star}}
-\newcommand\@setgene@no@star[1]{\ensuremath{\@interval@tool@no@star{\{}{#1}{}{}{\}}}}
-\newcommand\@setgene@star[1]{\ensuremath{\@interval@tool@star{\{}{#1}{}{}{\}}}}
+
+
+\newcommand\@setgene@no@star[1]{%
+	\@interval@tool@no@star{\{}{#1}{}{}{\}}%
+}
+
+\newcommand\@setgene@star[1]{%
+	\@interval@tool@star{\{}{#1}{}{}{\}}%
+}
+
 
 % Probabilistic sets
+
 \newcommand\setproba{\@ifstar{\@setproba@star}{\@setproba@no@star}}
 
 \newcommand\@setproba@no@star[1]{
@@ -786,6 +796,7 @@
     \@setproba@no@star{#1}_{#2}
 }
 
+
 % Geometric sets
 %
 % With ''mathscr'', we only have the upper case letters.
@@ -793,6 +804,7 @@
 %
 % Source:
 %    * page 68 de ''The Comprehensive LATEX Symbol List''
+
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
 \newcommand\setgeo{\@ifstar{\@setgeo@star}{\@setgeo@no@star}}
@@ -813,11 +825,13 @@
     \@setgeo@no@star{#1}_{#2}
 }
 
+
 % Sets for algebra
 %
 % Only the upper case letters and also h and k.
 %
 % With ''\mathbb'', there are only the upper case letters.
+
 \newcommand\setalge{\@ifstar{\@setalge@star}{\@setalge@no@star}}
 
 \newcommand\@setalge@no@star[1]{
@@ -832,7 +846,9 @@
     \@setalge@no@star{#1}_{#2}
 }
 
+
 % Tools for classical sets
+
 \newcommand\setpos{\textbf{\tiny+}}
 \newcommand\setneg{\vphantom{\setpos}-}
 \newcommand\set@star{\text{*}}
@@ -859,10 +875,13 @@
     }
 }
 
+
 % The empty set
+
 \newcommand\nullset{%
     \ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}%
 }
+
 
 % List of classical sets - START
 
@@ -1145,35 +1164,45 @@
 
 % The dot product
 
-\newcommand\dotprod[2]{%
-    #1 \cdot #2%
-}
-
-\newcommand\vdotprod[2]{%
-    \@apply@macro@two@args{\dotprod}{\vect}{#1}{#2}%
+\newcommand\@dotprod@abstract@rafter[5]{%
+    #1#2#3#4#5%
 }
 
 
-\newcommand\adotprod{\@ifstar{\@adotprod@star}{\@adotprod@no@star}}
-
-\newcommand\@adotprod@star[2]{%
-    \ensuremath{\langle \, #1 \mid #2 \, \rangle}%
+\newcommand\dotprod[3][u]{%
+	\IfEqCase{#1}{%
+% Usual
+		{u}{%
+			#2 \cdot #3%
+		}%
+% Big raft
+		{r}{%
+			\@dotprod@abstract@rafter{\left\langle\,}%
+								     {#2}
+								     {\,\left|\,\vphantom{#2}}%
+								     {#3}%
+								     {\right.\,\right\rangle}%
+		}%
+% Small raft
+		{sr}{%
+			\@dotprod@abstract@rafter{\langle\,}%
+								     {#2}%
+								     {\mid}%
+								     {#3}%
+								     {\,\rangle}%
+		}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {You can use u (default), a or sa.}%
+	]%
 }
 
-\newcommand\@adotprod@no@star[2]{%
-    \ensuremath{\left\langle \, #1 \, \left| \,  \vphantom{#1} #2 \right. \, \right\rangle}%
+
+
+\newcommand\vdotprod[3][u]{%
+    \dotprod[#1]{\vect{#2}}{\vect{#3}}%
 }
 
-
-\newcommand\vadotprod{\@ifstar{\@vadotprod@star}{\@vadotprod@no@star}}
-
-\newcommand\@vadotprod@star[2]{%
-    \@apply@macro@two@args{\@adotprod@star}{\vect}{#1}{#2}%
-}
-
-\newcommand\@vadotprod@no@star[2]{%
-    \@apply@macro@two@args{\@adotprod@no@star}{\vect}{#1}{#2}%
-}
 
 
 % The cross product
@@ -1712,8 +1741,14 @@
 % --------- %
 
 \newcommand\circarc{\@ifstar{\@circarc@star}{\@circarc@no@star}}
-\newcommand*\@circarc@star[2]{\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}}
-\newcommand*\@circarc@no@star[1]{\wideparen{\@no@point{#1}}}
+
+\newcommand*\@circarc@star[2]{%
+	\wideparen{\@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\@circarc@no@star[1]{%
+	\wideparen{\@no@point{#1}}%
+}
 
 
 % --------------------- %
@@ -1723,55 +1758,47 @@
 % Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
 
 \newcommand\anglein{\@ifstar{\@anglein@star}{\@anglein@no@star}}
-\newcommand*\@anglein@star[2]{\widehat{\@no@point{#1}}\vphantom{#1}_{#2}}
-\newcommand*\@anglein@no@star[1]{\widehat{\@no@point{#1}}}
+
+\newcommand*\@anglein@star[2]{%
+	\widehat{\@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\@anglein@no@star[1]{%
+	\widehat{\@no@point{#1}}%
+}
 
 
 % -------------------- %
 % -- ANGLE ORIENTED -- %
 % -------------------- %
 
-\newcommand\angleorient{\@ifstar{\@angleorient@star}{\@angleorient@no@star}}
-
-\newcommand\@angleorient@star[2]{%
-    \@interval@tool@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
-}
-
-\newcommand\@angleorient@no@star[2]{%
-    \@interval@tool@no@star{(}{\, #1}{\lymathsep}{#2\, }{)}%
-}
-
-
-\newcommand\vangleorient{\@ifstar{\@vangleorient@star}{\@vangleorient@no@star}}
-
-\newcommand\@vangleorient@star[2]{%
-    \@apply@macro@two@args{\@angleorient@star}{\vect}{#1}{#2}%
-}
-
-\newcommand\@vangleorient@no@star[2]{%
-    \@apply@macro@two@args{\@angleorient@no@star}{\vect}{#1}{#2}%
-}
-
-
-\newcommand\hangleorient{\@ifstar{\@hangleorient@star}{\@hangleorient@no@star}}
-
-\newcommand\@hangleorient@star[2]{%
-    \widehat{\@angleorient@star{#1}{#2}}%
-}
-
-\newcommand\@hangleorient@no@star[2]{%
-    \widehat{\@angleorient@no@star{#1}{#2}}%
+\newcommand\angleorient[3][p]{%
+	\IfEqCase{#1}{%
+% Big parenthesis (no hat)
+		{p}{%
+			\@interval@tool@no@star{(}{\, #2}{\lymathsep}{#3\, }{)}%
+		}%
+% Small parenthesis (no hat)
+		{sp}{%
+			\@interval@tool@star{(}{\, #2}{\lymathsep}{#3\, }{)}%
+		}%
+% Hat - Big parenthesis
+		{h}{%
+			\widehat{\angleorient{#2}{#3}}%
+		}%
+% Hat - Small parenthesis
+		{sh}{%
+			\widehat{\angleorient[sp]{#2}{#3}}%
+		}%
+	}[%
+        \PackageError{lymath}{unknown option}%
+                             {You can use p (default), sp, h or sh.}%
+	]%
 }
 
 
-\newcommand\hvangleorient{\@ifstar{\@hvangleorient@star}{\@hvangleorient@no@star}}
-
-\newcommand\@hvangleorient@star[2]{%
-    \@apply@macro@two@args{\@hangleorient@star}{\vect}{#1}{#2}%
-}
-
-\newcommand\@hvangleorient@no@star[2]{%
-    \@apply@macro@two@args{\@hangleorient@no@star}{\vect}{#1}{#2}%
+\newcommand\vangleorient[3][p]{%
+	\angleorient[#1]{\vect{#2}}{\vect{#3}}%
 }
 
 
@@ -1783,7 +1810,7 @@
 
 % User's constants
 
-\newcommand\ct[1]{%
+\newcommand\param[1]{%
     \IfStrEqCase{#1}{%
         {gamma}{\upgamma}%
         {pi}{\uppi}%
@@ -1793,13 +1820,13 @@
 
 % Classical constants
     
-\newcommand\ggamma{\ct{gamma}}
-\newcommand\ppi{\ct{pi}}
-\newcommand\ttau{\ct{tau}}
-\newcommand\ee{\ct{e}}
-\newcommand\ii{\ct{i}}
-\newcommand\jj{\ct{j}}
-\newcommand\kk{\ct{k}}
+\newcommand\ggamma{\param{gamma}}
+\newcommand\ppi{\param{pi}}
+\newcommand\ttau{\param{tau}}
+\newcommand\ee{\param{e}}
+\newcommand\ii{\param{i}}
+\newcommand\jj{\param{j}}
+\newcommand\kk{\param{k}}
 
 % Constants - END
 
@@ -2546,25 +2573,23 @@
 
 
 \newcommand\probacond{\@ifstar{\@probacond@star}{\@probacond@no@star}}
-\newcommand\@probacond@star{\@ifstar{\@probacond@star@star}{\@probacond@one@star}}
 
 \newcommand\@probacond@no@star[3][p]{%
     \proba[#1_{#2}]{#3}%
 }
 
-\newcommand\@probacond@one@star[3][p]{%
+\newcommand\@probacond@star[3][p]{%
     \proba[#1]{#3 \mid #2}%
 }
 
-\newcommand\@probacond@star@star[3][p]{%
+
+\newcommand\probacondexp{\@ifstar{\@probacondexp@star}{\@probacondexp@no@star}}
+
+\newcommand\@probacondexp@star[3][p]{%
     \@abstract@proba@cond{\frac}{#1}{#3}{#2}
 }
 
-
-\newcommand\dprobacond{\@ifstar{\@dprobacond@star}{\@dprobacond@no@star}}
-\newcommand\@dprobacond@star{\@ifstar{\@dprobacond@star@star}{\@dprobacond@one@star}}
-
-\newcommand\@dprobacond@star@star[3][p]{%
+\newcommand\@probacondexp@no@star[3][p]{%
     \@abstract@proba@cond{\dfrac}{#1}{#3}{#2}
 }
 
@@ -2670,6 +2695,9 @@
 
 \newcommand\divides{\mid}
 \newcommand\ndivides{\nmid}
+
+\newcommand\nequiv{\centernot
+\equiv}
 
 \newcommand\modulo{\bmod}
 

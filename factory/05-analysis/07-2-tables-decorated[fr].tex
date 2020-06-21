@@ -18,41 +18,41 @@
 
 %\subsection{Tableaux de variation et de signe}
 
-\subsubsection{Décorer un tableau de signe - TODO}
-
-\paragraph{Motivation}
-
-Considérons le tableau suivant et imaginons que l'on souhaite le justifier tout en l'expliquer à des débutants.
-
-\begin{center}
-    \begin{tikzpicture}
-        \tkzTabInit[
-            lgt   = 3.5, % Il faut de la place pour le dernier produit !
-            espcl = 2.5  % On réduit la largeur des colonnes pour les signes.
-        ]{
-            $x$                             / 1   ,
-            Signe de \\ $2 x - 3$           / 1.5 ,
-            Signe de \\ $-x + 5$            / 1.5 ,
-            Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5 
-        }{
-                    $-\infty$     , $\dfrac{3}{2}$     , $5$     , $+\infty$
-        }
-        \tkzTabLine{          , - , z              , + , t   , + ,          }
-        \tkzTabLine{          , + , t              , + , z   , - ,          }
-        \tkzTabLine{          , - , z              , + , z   , - ,          }
-    \end{tikzpicture}
-\end{center}
-Deux options s'offrent à nous pour justifier comment est rempli le tableau.
-\begin{enumerate}
-    \item Classiquement, on résout les deux inéquations $2 x - 3 > 0$ et $-x + 5 > 0$ par exemple puis on complète les deux premières lignes 
-    \footnote{
-        Notons que cette approche est un peu scandaleuse car il faudrait en toute rigueur aussi résoudre
-        $2 x - 3 < 0$ , $-x + 5 < 0$ , $2 x - 3 = 0$ et $-x + 5 = 0$.
-        Personne ne le fait car l'on pense aux variations d'une fonction affine. Dans ce cas, pourquoi ne pas juste utiliser ce dernier argument. C'est ce que propose la 2\ieme{} méthode. 
-    }
-    pour en déduire la dernière avec la règle du signe d'un produit.
-
-    \item Tout collégien 
-\end{enumerate}
+%\subsubsection{Décorer un tableau de signe - TODO}
+%
+%\paragraph{Motivation}
+%
+%Considérons le tableau suivant et imaginons que l'on souhaite le justifier tout en l'expliquer à des débutants.
+%
+%\begin{center}
+%    \begin{tikzpicture}
+%        \tkzTabInit[
+%            lgt   = 3.5, % Il faut de la place pour le dernier produit !
+%            espcl = 2.5  % On réduit la largeur des colonnes pour les signes.
+%        ]{
+%            $x$                             / 1   ,
+%            Signe de \\ $2 x - 3$           / 1.5 ,
+%            Signe de \\ $-x + 5$            / 1.5 ,
+%            Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5 
+%        }{
+%                    $-\infty$     , $\dfrac{3}{2}$     , $5$     , $+\infty$
+%        }
+%        \tkzTabLine{          , - , z              , + , t   , + ,          }
+%        \tkzTabLine{          , + , t              , + , z   , - ,          }
+%        \tkzTabLine{          , - , z              , + , z   , - ,          }
+%    \end{tikzpicture}
+%\end{center}
+%Deux options s'offrent à nous pour justifier comment est rempli le tableau.
+%\begin{enumerate}
+%    \item Classiquement on résout les deux inéquations $2 x - 3 > 0$ et $-x + 5 > 0$ par exemple puis on complète les deux premières lignes 
+%    \footnote{
+%        Notons que cette approche est un peu scandaleuse car il faudrait en toute rigueur aussi résoudre
+%        $2 x - 3 < 0$ , $-x + 5 < 0$ , $2 x - 3 = 0$ et $-x + 5 = 0$.
+%        Personne ne le fait car l'on pense aux variations d'une fonction affine. Dans ce cas, pourquoi ne pas juste utiliser ce dernier argument. C'est ce que propose la 2\ieme{} méthode. 
+%    }
+%    pour en déduire la dernière via la règle du signe d'un produit.
+%
+%    \item On peut proposer une méthode moins sujette à la critique en s'appuyant ???? 
+%\end{enumerate}
 
 \end{document}

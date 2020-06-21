@@ -45,106 +45,6 @@
 
 %\subsection{Vecteurs}
 
-\subsubsection{Produit scalaire -- Écriture minimaliste}
-
-\newparaexample{Version longue}
-
-\begin{latexex}
-$\dotprod{\dfrac{1}{2} \vect{i}}%
-         {\vect{j}}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Version courte mais restrictive}
-
-Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
-
-\begin{latexex}
-$\vdotprod{i}{j}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiche technique}
-
-\paragraph{Produit scalaire -- Écriture minimaliste}
-
-\IDmacro*{dotprod}{2}
-
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-
-\separation
-
-
-\IDmacro*{vdotprod}{2} où \quad \mwhyprefix{v}{ector}
-
-\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-
-% ---------------------- %
-
-
-\subsubsection{Produit scalaire -- Écriture \og à la physicienne \fg}
-
-Dans l'exemple suivant, le préfixe \prefix{a} est pour \whyprefix{a}{ngle} et  \prefix{v} pour \whyprefix{v}{ecteur}.
-Les physiciens aiment bien cette notation.
-
-\begin{latexex}
-
-$\displaystyle
- \adotprod{\frac{1}{2} \vect{i}}%
-          {\vect{j}}$
-
-$\displaystyle
- \adotprod*{\frac{1}{2} \vect{i}}%
-           {\vect{j}}$
- 
-$\vadotprod{i}{j}$
-
-$\vadotprod*{i}{j}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiche technique}
-
-\paragraph{Produit scalaire -- Écriture \og à la physicienne \fg}
-
-\IDmacro*{adotprod}{2} où \quad \mwhyprefix{a}{ngle}
-
-\IDmacro*{adotprod*}{2}
-
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-
-\separation
-
-
-\IDmacro*{vadotprod}{2} où \quad \mwhyprefix{a}{ngle} 
-                              et \mwhyprefix{v}{ector}
-
-\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-
-% ---------------------- %
-
-
 \subsubsection{Produit vectoriel}
 
 \paragraph{Exemple 1 - Écriture symbolique - Version longue}
@@ -173,11 +73,11 @@ $\vcrossprod{i}{j}$
 Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\calccrossprod{\vect{u}}{x }{y }{z }%
-               {\vect{v}}{x'}{y'}{z'}
+$\calccrossprod {\vect{u}}{x }{y }{z }%
+                {\vect{v}}{x'}{y'}{z'}
  =
- \vcalccrossprod{u}{x }{y }{z }%
-                {v}{x'}{y'}{z'}$
+ \vcalccrossprod{u       }{x }{y }{z }%
+                {v       }{x'}{y'}{z'}$
 
 $\vcalccrossprod{AB}{x_B - x_A}%
                     {y_B - y_A}%
@@ -224,8 +124,9 @@ On peut utiliser des options pour choisir certains paramètres de mise en forme.
 $\coordcrossprod{\dfrac{1}{2}x}{y }{z }%
                 {x'           }{y'}{z'}$
 
-$\coordcrossprod[vb]{x }{y }{z }%
-                      {x'}{y'}{z'}$
+$\coordcrossprod[vb]%
+                {\dfrac{1}{2}x}{y }{z }%
+                {x'           }{y'}{z'}$
 
 $\coordcrossprod[sp,c]%
                 {\dfrac{1}{2}x}{y }{z }%

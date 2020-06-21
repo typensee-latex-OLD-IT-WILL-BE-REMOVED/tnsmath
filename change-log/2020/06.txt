@@ -1,19 +1,52 @@
 ==========
-2020-06-      ?????
+2020-06-2      ?????
 ==========
 
-
-
-Z!!!!
-    ---> mettre à jour chnagelog pour préaper nelle subversion !!!!
-
-**New major version version::``1.0.0-beta`` of ¨lymath:** see all the changes below. There are a lot of backward incompatibilities and the API will ffollow some new rules in the future.
+?????    changelog < 2020-06-08
 
 
 
 
-    ???? tab signe décoré !!!!
 
+
+**New major version version::``1.0.0-beta`` of ¨lymath:** the change to a new major version is motivated by the new stricter rules for the ¨API.
+As a consequence there are a lot of backward incompatibilities. See all the changes below.
+
+
+**Analysis :**
+
+    ct ---> param   plus logique !!!!
+
+
+**Arithmetic :**
+
+    nequiv en plus
+
+
+**Probability :**
+
+    \probacond**  ---> \probacondexp*
+
+    \dprobacond** ---> probacondexp
+
+
+**Geometry :**
+
+    dotproduct : option au leiu de préfixe pour diffrente mise en forme !!!
+
+        \dotprod   ---> \dotprod[u] avaec u-sual
+
+        \adotprod   ---> \dotprod[a]
+
+        \adotprod*   ---> \dotprod[sa]
+
+
+    angles orientés : option au leiu de préfixe pour diffrente mise en forme !!!
+
+    \angleorient   ---> \dotprod[p]
+    \angleorient*   ---> \dotprod[sp]
+    \hangleorient   ---> \dotprod[h]
+    \hangleorient*   ---> \dotprod[sh]
 
 
 
@@ -168,15 +201,7 @@ Z!!!!
 
 
 
-**Documentation:** tables for suffixes and/or prefixes will be clearer from now.
-
-
-
-
-
-
-
-
+**Documentation:** tables for suffixes and/or prefixes have been simplified.
 
 
 ==========
@@ -250,6 +275,20 @@ Z!!!!
     1) Calculation explained of the determinant of two vectors in a plane : see ``\cdetplane``, ``\cdetplane*``, ``\vcdetplane`` and ``\vcdetplane*``.
 
     1) Calculation explained of the cross product of two vectors of the 3D space : see ``\ccrossprod`` and ``\vccrossprod``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ==========

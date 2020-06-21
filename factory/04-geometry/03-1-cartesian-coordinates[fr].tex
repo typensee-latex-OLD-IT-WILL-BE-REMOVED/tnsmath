@@ -48,25 +48,18 @@
 \verb+lymath+ propose, via un argument optionnel, six façons différentes de rédiger des coordonnées seules \emph{(nous verrons après des macros pour les coordonnées d'un point et celles d'un vecteur afin de produire un code \LaTeX{} plus sémantique)}. Commençons par les écritures horizontales où vous noterez l'utilisation de \verb+|+ pour séparer les coordonnées dont le nombre peut être quelconque.
 
 \begin{latexex}
-$\displaystyle
- \coord{\frac{1}{3} | -4 | 0}$
-ou
-$\displaystyle
- \coord[sp]{\frac{1}{3} | -4 | 0}$
+$\coord    {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sp]{\dfrac{1}{3} | -4 | 0}$
 
-$\displaystyle
- \coord[b]{\frac{1}{3} | -4 | 0}$
-ou
-$\displaystyle
- \coord[sb]{\frac{1}{3} | -4 | 0}$
+$\coord[b] {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sb]{\dfrac{1}{3} | -4 | 0}$
 \end{latexex}
 
 
 Il existe en plus deux versions verticales.
 
 \begin{latexex}
-$\coord[vp]{3 | -4}$
-ou
+$\coord[vp]{3 | -4}$ ou
 $\coord[vb]{3 | -4}$
 \end{latexex}
 
@@ -91,18 +84,16 @@ Voici d'où viennent les noms des options.
 La macro \macro{pcoord} avec \prefix{p} pour  \whyprefix{p}{oint} prend un argument supplémentaire avant les coordonnées qui est le nom d'un point qui sera mis en forme par la macro \macro{pt}. Si vous ne souhaitez pas que \macro{pt} soit appliquée, il suffit de passer via la version étoilée \macro{pcoord*}.
 
 \begin{latexex}
-$\pcoord{A}{3 | -4 | 0 | 1}$
-ou
-$\pcoord*{\Sigma}{3 | -4 | 0 | 1}$
+$\pcoord{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*{\Sigma}{7 | 9 | 8}$
 \end{latexex}
 
 
 Toutes les options disponibles avec \macro{coord} le sont aussi avec  \macro{pcoord}. 
 
 \begin{latexex}
-$\pcoord[b]{A}{3 | -4 | 0 | 1}$
-ou
-$\pcoord*[b]{\Sigma}{3 | -4 | 0 | 1}$
+$\pcoord[b]{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*[b]{\Sigma}{7 | 9 | 8}$
 \end{latexex}
 
 
@@ -115,13 +106,11 @@ $\pcoord*[b]{\Sigma}{3 | -4 | 0 | 1}$
 Le fonctionnement de \macro{vcoord} est similaire à celui de \macro{pcoord} si ce n'est que c'est la macro \macro{vect} qui sera appliquée si besoin.
 
 \begin{latexex}
-$\vcoord{u}{3 | -4}$
-ou
+$\vcoord{u}{3 | -4}$ ou
 $\vcoord*{\dfrac{1}{2} \vect{u}}%
          {3 | -4}$
 
-$\vcoord[vp]{u}{3 | -4}$
-ou
+$\vcoord[vp]{u}{3 | -4}$ ou
 $\vcoord*[vp]{\dfrac{1}{2} \vect{u}}%
              {3 | -4}$
 \end{latexex}
