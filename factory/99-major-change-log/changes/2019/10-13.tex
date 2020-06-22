@@ -1,26 +1,7 @@
 Nouvelle version sous-mineure \verb+0.6.1-beta+.
 
 \begin{itemize}[itemsep=.5em]
-    \item En logique, la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole.
-          Ceci s'accompagne de la suppression des macros obsolètes \macro{explain*} et \macro{textexplainspacebefore}.
-
-
-% ------------------------ %
-
-
-    \item En probabilité, voici ce qui a évolué.
-    \begin{itemize}[itemsep=.5em]
-        \item Les macros \macro{probacond} et \macro{probacond*} n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \macro{probacond**} ou \macro{dprobacond**}.
-
-        \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
-              La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
-    \end{itemize}
-
-
-% ------------------------ %
-
-
-    \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
+    \item \topic{Ensembles}
     \begin{itemize}[itemsep=.5em]
         \item \macro{algeset} est devenu \macro{setalge}.
 
@@ -31,5 +12,25 @@ Nouvelle version sous-mineure \verb+0.6.1-beta+.
         \item \macro{probaset} est devenu \macro{setproba}.
 
         \item \macro{specialset} est devenu \macro{setspecial}.
+    \end{itemize}
+
+
+% ------------------------ %
+
+
+    \item \topic*{Logique}
+	      la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole.
+          Ceci s'accompagne de la suppression des macros obsolètes \macro{explain*} et \macro{textexplainspacebefore}.
+
+
+% ------------------------ %
+
+
+    \item \topic{Probabilité}
+    \begin{itemize}[itemsep=.5em]
+        \item Les macros \macro{probacond} et \macro{probacond*} n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \macro{probacond**} ou \macro{dprobacond**}.
+
+        \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
+              La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
     \end{itemize}
 \end{itemize}

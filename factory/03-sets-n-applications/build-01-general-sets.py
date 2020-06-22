@@ -168,7 +168,7 @@ table_lines = []
 
 for somesets, decos in gathersame(classicalsets).items():
     somesets = "\\\\".join(
-        f"\\macro{{{oneset}}}"
+        f"\\macro{{{oneset*2}}}"
         for oneset in somesets
     )
 

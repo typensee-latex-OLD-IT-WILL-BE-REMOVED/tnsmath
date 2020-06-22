@@ -13,6 +13,8 @@
 \newcommand\RR{RR}
 \newcommand\CC{CC}
 
+\newcommand\eqdef{:=}
+
 
 
 \begin{document}
@@ -77,13 +79,12 @@ $\setseriefrac{\ZZ}{Z | T | O | P}$
 Ci-dessous, la notation $\setpolylaurent{\RR}{X_1 | X_2}$ n'est pas standard.
 
 \begin{latexex}
- $\setpolylaurent{\RR}{X}
-= \setpoly{\RR}{X | X^{-1}}$
+$\setpolylaurent{\RR}{X} \eqdef
+ \setpoly{\RR}{X | X^{-1}}$
 
- $\setpolylaurent{\RR}{X_1 | X_2}
-= \setpoly{\RR}%
-          {X_1 | X_1^{-1} %
-         | X_2 | X_2^{-1}}$
+$\setpolylaurent{\RR}{X_1 | X_2} \eqdef
+ \setpoly{\RR}{X_1 | X_1^{-1} %
+             | X_2 | X_2^{-1}}$
 \end{latexex}
 
 
@@ -95,13 +96,12 @@ Ci-dessous, la notation $\setpolylaurent{\RR}{X_1 | X_2}$ n'est pas standard.
 Ci-dessous, la notation $\setserielaurent{\QQ}{X_1 | X_2}$ n'est pas standard.
 
 \begin{latexex}
- $\setserielaurent{\QQ}{X}
-= \setserie{\QQ}{X | X^{-1}}$
+$\setserielaurent{\QQ}{X} \eqdef
+ \setserie{\QQ}{X | X^{-1}}$
 
- $\setserielaurent{\QQ}{X_1 | X_2} 
-= \setserie{\QQ}%
-           {X_1 | X_1^{-1} %
-          | X_2 | X_2^{-1}}$
+$\setserielaurent{\QQ}{X_1 | X_2} \eqdef
+ \setserie{\QQ}{X_1 | X_1^{-1} %
+              | X_2 | X_2^{-1}}$
 \end{latexex}
 
 
