@@ -22,6 +22,40 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item Suppression des environnements \env{aexplain} et \env{aexplain*}.
+    
+                  \smallskip
+    
+                  Leurs mises en forme restent accessibles respectivement via les options \verb+style = ar+ et \verb+style = sar+ de l'environnement \env{explain}.
+    
+    
+            \item L'environnement \env{explain} propose des options de type \texttt{clé-valeur}.
+    
+    
+            \item Ajout de petits commentaires pour les étapes via \macro{comthis} et si besoin \macro{comthis*}.
+    
+    
+            \item Modification de \macro{explnext*} pour le mode universitaire sans flèche via l'ajout de \macro{exptxtupdown} qui gère la mise en forme de deux explications non vides.
+                  Ceci a pour effet l'alignement du rendu avec l'opérateur.
+    
+    
+            \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+    \end{itemize}
+
+% ------------------------ %
+
+    \medskip
     \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
     
     \begin{itemize}[itemsep=.5em]

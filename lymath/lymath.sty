@@ -431,137 +431,254 @@
 \newcommand\nexistmulti[1]{\nexists_{\kern0.1em #1}}
 
 
-% ---------------------------- %
-% -- CALCULATIONS EXPLAINED -- %
-% ---------------------------- %
+% -------------------- %
+% -- CALC EXPLAINED -- %
+% -------------------- %
 
-% Texts used
+% Common tools
 
-\newcommand\textexplainmiddleID{Réf.}
-\newcommand\textexplainmiddlehyp{Je sais que...}
-\newcommand\textexplainmiddleprop{Propriété ou fait utilisé}
-\newcommand\textexplainmiddlecons{Conséquence}
-
-\newcommand\textexplainuniversityhyps{Démonstration sous les hypothèses}
-\newcommand\textexplainuniversityhyp{Démonstration sous l'hypothèse}
-\newcommand\textexplainuniversityccl{Conclusion}
-
-
-% Without a table like writing
-
-%    * Common tools
-\newcommand\expltxt[1]{%
-    \text{\color{blue} \footnotesize \itshape \{ #1 \}}%
+\newcommand\explcom[1]{%
+    \text{\color{purple}[\kern.225em{\footnotesize \itshape #1}\kern.3em]}%
 }
 
-\newcommand\expltxtup[1]{%
-    \expltxt{$\uparrow$ #1 $\uparrow$}%
-}
-
-\newcommand\expltxtdown[1]{%
-    \expltxt{$\downarrow$ #1 $\downarrow$}%
-}
 
 \newcommand\explnext{\@ifstar{\@explnext@star}{\@explnext@no@star}}
 \newcommand\@explnext@no@star{}
 \newcommand\@explnext@star{}
 
-\newcommand\@explain@sep@{=}
+\newcommand\@explain@ope@{=}
 
 
-%    * University version 
+\newcommand\comthis{\@ifstar{\@comthis@star}{\@comthis@no@star}}
+\newcommand\@comthis@no@star{}
 
-\newcommand\@explnext@university@no@star[2][\@explain@sep@]{
-    &&\\
-    &
+\newcommand\@comthis@star[1]{%
+	\ifbool{@start@explain@arrow@}{%
+    	\PackageError{lymath}{comment can't be use to start explain[style = sar]}%
+                             {No comment for the 1st part of explain[style = sar]}
+    }{%
+    	\kern\expltxtspacein\explcom{#1}%
+	}%
+}
+
+\newcommand\@comthis@aligned[1]{%
+	\global\booltrue{@com@this@no@star@used@}%
+    &%
+    \@comthis@star{#1}%
+}
+
+
+\newcommand\@explnext@extra@column{}
+
+
+% Wrapper env with key-val options 
+
+\setKVdefault[@calc@explain@keys]{%
+    ope   = {=},
+    style = u,
+    com   = nal
+}
+
+\newenvironment{explain}[1][]{%
+	\useKVdefault[@calc@explain@keys]%
+	\setKV[@calc@explain@keys]{#1}%
+	\def\style{\useKV[@calc@explain@keys]{style}}%
+% Comments
+	\IfStrEq{\useKV[@calc@explain@keys]{com}}{al}{%
+		\renewcommand\@comthis@no@star\@comthis@aligned%
+		\renewcommand\@explnext@extra@column{&}
+	}{%
+		\renewcommand\@comthis@no@star\@comthis@star%
+		\renewcommand\@explnext@extra@column{}
+	}%
+	\IfEqCase{\style}{%
+% University
+		{u}{%
+			\begin{@explain@university}%
+		}%
+% Arrows (long)
+		{ar}{%
+			\begin{@explain@arrow}%
+		}%
+% Arrows (short)
+		{sar}{%
+			\begin{@explain@short@arrow}%
+		}%
+	}[%
+        \PackageError{lymath}{unknown style}%
+                             {You can use u (default), ar or sar.}%
+	]%
+}{%
+	\IfEqCase{\style}{%
+% University
+		{u}{%
+			\end{@explain@university}%
+		}%
+% Arrows (long)
+		{ar}{%
+			\end{@explain@arrow}%
+		}%
+% Arrows (short)
+		{sar}{%
+			\end{@explain@short@arrow}%
+		}%
+	}%
+}
+    
+    
+% University version
+
+% For the good extra lengths, see :
+%	* https://tex.stackexchange.com/a/550837/6880
+
+\newcommand\dimmax[2]{%
+  \ifdim#1>#2 #1\else #2\fi
+}
+
+\newlength{\@upper@text@size}
+\newlength{\@lower@text@size}
+
+\newcommand\samesizeas[2]{%
+	\settowidth\@upper@text@size{#1}%
+ 	\settowidth\@lower@text@size{#2}%
+  	\makebox[\dimmax{\@upper@text@size}{\@lower@text@size}][c]{#1}%
+}
+
+
+
+\newcommand\expltxt[1]{%
+    \text{\color{blue}\footnotesize \{\,{\itshape #1}\,\} }%
+}
+
+\newcommand\expltxtup[1]{%
+    $\uparrow$ #1 $\uparrow$%
+}
+
+\newcommand\expltxtdown[1]{%
+    $\downarrow$ #1 $\downarrow$%
+}
+
+\newcommand\expltxtupdown[2]{{%
+	\displaystyle\footnotesize\color{blue}%
+	\left\{\,%
+		\genfrac{}{}{0pt}{}{%
+			\text{\itshape\expltxtdown{\samesizeas{#1}{#2}}}%
+		}{%
+			\text{\itshape\expltxtup{\samesizeas{#2}{#1}}}%
+		}%
+	\,\right\}%
+}}
+
+
+
+\newcommand\@explnext@university@no@star[2][\@explain@ope@]{
+    \\&
     {#1}
     \if\relax\detokenize{#2}\relax\else
         {} \kern\expltxtspacein \expltxt{#2}
     \fi
-    &&\\
-    &
+    \\&
 }
 
 \newcommand\@explnext@university@separation{
-    &&\\
-    &
+    \\&
 }
 
-\newcommand\@explnext@university@star[3][\@explain@sep@]{
+
+
+\newcommand\@explnext@university@star[3][\@explain@ope@]{
     \if\relax\detokenize{#2}\relax%
         \if\relax\detokenize{#3}\relax%
             \PackageError{lymath}{two empty arguments}%
                                  {at least one none empty text is needed}
         \fi%
     \fi%
-    \if\relax\detokenize{#2}\relax\else
-        \@explnext@university@separation{}
-        {#1}\kern\expltxtspacein{}\expltxtdown{#2}
-    \fi%
-    \if\relax\detokenize{#3}\relax\else%
-        \@explnext@university@separation{}
-        \if\relax\detokenize{#2}\relax%
-            {#1}%
-        \else%
-            \phantom{#1}%
-        \fi
-        \kern\expltxtspacein \expltxtup{#3}
-    \fi%
+    %
+    \@explnext@university@separation{}%
+    \if\relax\detokenize{#2}\relax%
+% Up empty
+%     + Down none empty
+		{#1}\kern\expltxtspacein%
+		\expltxt{\expltxtup{\samesizeas{#3}{#2}}}%
+    \else%
+% Up none empty
+%     + Down empty
+    	\if\relax\detokenize{#3}\relax%
+			{#1}\kern\expltxtspacein{}%
+			\expltxt{\expltxtdown{\samesizeas{#2}{#3}}}%
+%     + Down none empty
+		\else%
+			{#1}\kern\expltxtspacein{}%
+			\expltxtupdown{#2}{#3}%
+		\fi%
+	\fi%
+    \@explnext@extra@column{}
     \@explnext@university@separation{}
 }
 
-\newenvironment{explain}[1][=]{
+\newenvironment{@explain@university}{
     \setlength{\abovedisplayskip}{0pt}%
     \setlength{\belowdisplayskip}{0pt}%
-    \renewcommand\@explain@sep@{#1}%
+    \renewcommand\@explain@ope@{\useKV[@calc@explain@keys]{ope}}%
     \renewcommand\@explnext@no@star\@explnext@university@no@star%
     \renewcommand\@explnext@star\@explnext@university@star%
-    \csname flalign*\endcsname
-        &
-}{
-    \csname endflalign*\endcsname
+	\IfStrEq{\useKV[@calc@explain@keys]{com}}{al}{%
+		$\WithArrows[format = rll]
+	}{%
+		$\WithArrows[format = rl]
+	}
+            &
+}{%
+	\endWithArrows$
 }
 
 
-%    * Middle school version
+% Middle school version
 
-\newcommand\@explnext@middle@school@no@star[2][\@explain@sep@]{
-    \ifbool{@aexplain@starred@}{%
-        \ifbool{@start@aexplain@}{%
+\newcommand\@explnext@middle@school@no@star[2][\@explain@ope@]{%
+	\ifbool{@com@this@no@star@used@}{}{%
+    	\@explnext@extra@column{}%
+    }%
+    \global\boolfalse{@com@this@no@star@used@}%
+    %
+    %
+    \ifbool{@inside@explain@short@arrow@}{%
+        \ifbool{@start@explain@arrow@}{%
             \if\relax\detokenize{#2}\relax\else
-                \PackageError{lymath}{illegal argument to start aexplain*}%
-                                     {no argument for the first use of explnext in aexplain*}
+                \PackageError{lymath}{illegal argument to start explain[style = sar]}%
+                                     {no argument for the first use of explnext in [style = sar]}
             \fi
-            \global\boolfalse{@start@aexplain@}%
+            \global\boolfalse{@start@explain@arrow@}%
         }{
-        \if\relax\detokenize{#2}\relax\else
-            \Arrow[tikz = <->]{#2}
-        \fi
-        \\
+        	\if\relax\detokenize{#2}\relax\else
+        	    \Arrow[tikz = <->]{#2}
+        	\fi
+    		\\
         }
     }{
          \if\relax\detokenize{#2}\relax\else
             \Arrow[tikz = <->]{#2}
         \fi
-        \\
+    	\\
     }%
-    &#1
+    &#1%
 }
 
 % Source
-%    * https://tex.stackexchange.com/a/549370/6880
+% https://tex.stackexchange.com/a/550754/6880
 
-\ExplSyntaxOn
-\NewDocumentCommand \@double@arrow@ { m m }
-  {
-    \hbox_set:Nn \l_tmpa_box { #1 }
-    \dim_set:Nn \l_tmpa_dim { \box_wd:N \l_tmpa_box + 1.5em }
-    \Arrow [tikz = ->] { #1 }
-    \use:x { \Arrow [xoffset=\dim_use:N \l_tmpa_dim , tikz = <-] } { #2 }
-  }
-\ExplSyntaxOff
+\NewDocumentCommand \@double@arrow@{O {} m m}{
+    \Arrow[   tikz = -> , #1]{#2}%
+    \Arrow[o, tikz = <- , #1]{#3}
+}
+ 
 
-\newcommand\@explnext@middle@school@star[3][\@explain@sep@]{
+\newcommand\@explnext@middle@school@star[3][\@explain@ope@]{
+    \ifbool{@com@this@no@star@used@}{}{%
+    	\@explnext@extra@column{}%
+    }%
+    \global\boolfalse{@com@this@no@star@used@}%
+    %
     \if\relax\detokenize{#2}\relax%
         \if\relax\detokenize{#3}\relax%
             \PackageError{lymath}{two empty arguments}%
@@ -577,37 +694,68 @@
         \fi%
     \fi%
     \\
-    &#1
+    &#1%
 }
 
-\newbool{@start@aexplain@} 
-\newbool{@aexplain@starred@} 
+\newbool{@com@this@no@star@used@} 
 
-\newenvironment{aexplain}[1][=]{
+\newbool{@start@explain@arrow@} 
+\newbool{@inside@explain@short@arrow@} 
+
+\newenvironment{@explain@arrow}{
     \renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
     \renewcommand\@explnext@star\@explnext@middle@school@star%
-    \renewcommand\@explain@sep@{#1}%
-    \boolfalse{@aexplain@starred@}%
-    \boolfalse{@start@aexplain@}%
-    $\WithArrows[tikz=blue]
-        &\phantom{{}\@explain@sep@{}}
-}{
+    \renewcommand\@explain@ope@{\useKV[@calc@explain@keys]{ope}}%
+    %
+    \boolfalse{@inside@explain@short@arrow@}%
+    \boolfalse{@start@explain@arrow@}%
+    \boolfalse{@com@this@no@star@used@}%
+    %
+	\IfStrEq{\useKV[@calc@explain@keys]{com}}{al}{%
+		$\WithArrows[tikz = blue, groups, format = rll]
+	}{%
+		$\WithArrows[tikz = blue, groups, format = rl]
+	}
+        	&\phantom{{}\@explain@ope@{}}
+}{%
     \endWithArrows$
 }
 
-\newenvironment{aexplain*}[1][=]{
+\newenvironment{@explain@short@arrow}{
     \renewcommand\@explnext@no@star\@explnext@middle@school@no@star%
     \renewcommand\@explnext@star\@explnext@middle@school@star%
-    \renewcommand\@explain@sep@{#1}%
-    \booltrue{@aexplain@starred@}%
-    \booltrue{@start@aexplain@}%
-    $\WithArrows[tikz=blue]
-}{
+    \renewcommand\@explain@ope@{\useKV[@calc@explain@keys]{ope}}%
+    %
+    \booltrue{@inside@explain@short@arrow@}%
+    \booltrue{@start@explain@arrow@}%
+    \boolfalse{@com@this@no@star@used@}%
+    %
+    %
+	\IfStrEq{\useKV[@calc@explain@keys]{com}}{al}{%
+		$\WithArrows[tikz = blue, groups, format = rll]%
+	}{%
+		$\WithArrows[tikz = blue, groups, format = rl]%
+	}%
+}{%
     \endWithArrows$
 }
 
 
-% With a table like writing
+% -------------------- %
+% -- DEMO EXPLAINED -- %
+% -------------------- %
+
+%    * Texts used
+
+\newcommand\textexplainmiddleID{Réf.}
+\newcommand\textexplainmiddlehyp{Je sais que...}
+\newcommand\textexplainmiddleprop{Propriété ou fait utilisé}
+\newcommand\textexplainmiddlecons{Conséquence}
+
+\newcommand\textexplainuniversityhyps{Démonstration sous les hypothèses}
+\newcommand\textexplainuniversityhyp{Démonstration sous l'hypothèse}
+\newcommand\textexplainuniversityccl{Conclusion}
+
 
 %    * Common tools
 
@@ -686,31 +834,34 @@
     \fi
     %
     \if\relax\hyps\relax\else%
-        \underline{\textexplainuniversityhyps} : \hyps
-
-        \medskip
-    \fi
+        \underline{\textexplainuniversityhyps\vphantom{p\textexplainuniversityccl}} : \hyps
+		\vspace{-.25em}
+	\fi
     \if\relax\hyp\relax\else%
-        \underline{\textexplainuniversityhyp} : \hyp
-
-        \medskip
+        \underline{\textexplainuniversityhyp\vphantom{p\textexplainuniversityccl}} : \hyp
+		\vspace{-.25em}
     \fi
     \booltrue{@start@demo@explain@}
-    \begin{tabular}{lll}
+    \begin{longtable}{lll}
 }{
-    \end{tabular}
+    \end{longtable}
     \if\relax\ccl\relax\else%
-        
-        \medskip
-
-        \underline{\textexplainuniversityccl} : \ccl
+		\vspace{-.25em}
+        \underline{\textexplainuniversityccl\vphantom{\textexplainuniversityhyps}} : \ccl
     \fi
 }
 
 
 %    * Middle school version
 
+\newbool{@start@demo@explain@star@}
+
 \newcounter{@demo@explain@star@id}
+
+
+\newcommand\@demo@extra[1]{%
+	{\footnotesize#1}%
+}
 
 
 \newcommand\@expl@star@id[1]{%
@@ -724,9 +875,13 @@
 
 
 \newcommand\@demostep@star[1][]{%
-    \\
-    \hline
-    \@expl@star@id{#1}
+	\ifbool{@start@demo@explain@star@}{%
+		\global\boolfalse{@start@demo@explain@star@}%
+	}{%
+	    \\
+	    \hline%
+	}%
+    \@expl@star@id{#1}%
     &
 }
 
@@ -749,15 +904,31 @@
     }{%
         \setcounter{@demo@explain@star@id}{\useKV[@demo@explain@star@keys]{start}}%
     }%
+    \booltrue{@start@demo@explain@star@}
     \small
     \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
-    	\textbf{\footnotesize\textexplainmiddleID}
-			& \textbf{\footnotesize\textexplainmiddlehyp}
-	        & \textbf{\footnotesize\textexplainmiddleprop}
-	        & \textbf{\footnotesize\textexplainmiddlecons}
+    \begin{longtable}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
+    	\textbf{\@demo@extra{\textexplainmiddleID}}
+			& \textbf{\@demo@extra{\textexplainmiddlehyp}}
+	        & \textbf{\@demo@extra{\textexplainmiddleprop}}
+	        & \textbf{\@demo@extra{\textexplainmiddlecons}}
+	    \\ \hline
+	    \endfirsthead
+	    
+    	\textbf{\@demo@extra{\textexplainmiddleID}}
+			& \textbf{\@demo@extra{\textexplainmiddlehyp}}
+	        & \textbf{\@demo@extra{\textexplainmiddleprop}}
+	        & \textbf{\@demo@extra{\textexplainmiddlecons}}
+	    \\ \hline
+	    \endhead
+
+		\multicolumn{4}{r}{{\textit{\@demo@extra{La suite page suivante...}}}}
+		\\
+		\endfoot
+
+		\endlastfoot
 }{
-    \end{tabular}
+    \end{longtable}
     \renewcommand{\arraystretch}{1}
 }
 

@@ -1,4 +1,44 @@
 ==========
+2020-06-27
+==========
+
+**New minor version version::``1.1.0-beta`` of ¨lymath:** this change of minor version comes from the new API of the environments for explaining calculus or simple reasonnings.
+
+
+**Logic:** new changes for the explanation of a calculus or a simple reasonning.
+
+    1) The environments ``aexplain`` and ``aexplain*`` have been removed. Their formatting is obtained now by using the environment ``explain`` with the options ``style = ar`` and ``style = sar`` respectively.
+
+    1) The environment ``explain`` has now several key-value options.
+
+    1) Two new macros ``comthis`` and ``comthis*`` can be used to add very little comment.
+
+    1) The university version of ``\explnext*`` has been modified.
+
+        * When bottom-up explications are given, the contents are aligned and big braces are used for the both contents : the "hard" job is done by ``\exptxtupdown``.
+        The mechanism used doesn't change the way to customize the macros ``\expltxtdown`` and ``\expltxtup``.
+
+        * The braces are straight and not italic now (this looks prettier).
+
+    1) The environments ``demoexplain`` and ``demoexplain*`` use ``longtable`` in backstage such as to allow a table to be printed on several pages.
+
+
+
+
+==========
+2020-06-23
+==========
+
+**Logic:** some little important enhancements have been done to explain calculus or reasonnings.
+
+    1) The environments ``explain``, ``aexplain`` and  ``aexplain*`` have the same automatic vertical spacings. This has been acheived simply by just using the environment ``WithArrows`` for ``explain``.
+
+    1) The new version of ``witharrows`` is used to obtain simply the double arrows feature.
+
+    1) With the environments ``demoexplain`` and ``demoexplain*`` the hypothesis and the conclusion are now underlined with the same minimal vertical gap (this is simply obtained by using ``\vphantom``).
+
+
+==========
 2020-06-21
 ==========
 

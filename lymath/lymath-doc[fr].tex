@@ -170,10 +170,10 @@
 	Le package \texttt{lymath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-math}.}\\%
-{\footnotesize Version \texttt{1.0.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.1.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-06-21}
+\date{2020-06-27}
 
 \maketitle
 
@@ -691,25 +691,25 @@ $\nexists$ vient de \verb+amssymb+.
 % ---------------------- %
 %\section{Logique et fondements}
 
-\subsection{Détailler un raisonnement}
+\subsection{Détailler un raisonnement simple}
 
-\subsubsection{Détailler un raisonnement simple -- Version pour le lycée et après} \label{explain-proof}
+\subsubsection{Version pour le lycée et après} \label{explain-proof}
 
 \newparaexample{Avec les réglages par défaut}
 
 L'environnement \env{explain} permet de détailler les étapes principales d'un calcul ou d'un raisonnement simple en s'appuyant sur la macro \macro{explnext} dont le nom vient de \emph{\og \whyprefix{expl}{ain} \prefix{next} step \fg} soit \inenglish{expliquer la prochaine étape}
 \footnote{
-    Le gros du travail est fait par l'environnement \env{flalign} du package \texttt{amsmath} qui est automatiquement chargé par \texttt{lymath}.
+    Cet environnement utilise aussi le package \texttt{witharrows} qui est très sympathique pour expliquer des étapes de calcul.
 }.
 On dispose aussi de \macro{explnext*} pour des explications descendantes et/ou montantes 
 \footnote{
-    Les explications données ne doivent pas être trop longues car ce serait contre productif.
+    Les explications données ne doivent pas être trop longues car ce serait contre-productif.
 }.
 
 \medskip
 
 
-Ci-dessous se trouve un exemple, un peu farfelu vers la fin, où l'on utilise les réglages par défaut.
+Ci-dessous se trouve un exemple, très farfelu vers la fin, où l'on utilise les réglages par défaut.
 Notons au passage que ce type de présentation n'est sûrement pas bien adaptée à un jeune public pour lequel une 2\ieme{} façon de détailler des calculs et/ou un raisonnement simple est proposée plus bas dans la section \ref{explain-proof-for-youngs}.
 
 \begin{latexex-flat}
@@ -718,7 +718,7 @@ Notons au passage que ce type de présentation n'est sûrement pas bien adaptée
         \explnext{On utilise $x^2 = x \cdot x$.}
     (a + b) (a + b)
         \explnext*{Double développement depuis la parenthèse gauche.}%
-                  {Double factorisation non nécessairement évidente.}
+                  {Double factorisation pas facile.}
     a^2 + a b + b a + b^2
         \explnext*{}%
                   {Commutativité du produit.}
@@ -731,12 +731,39 @@ Notons au passage que ce type de présentation n'est sûrement pas bien adaptée
 
 
 \begin{remark}
+    Il faut savoir que la mise en forme est celle d'une formule ce qui peut rendre service comme dans l'exemple suivant.
+
+\begin{latexex}
+Un calcul avec un placement pouvant être 
+utile :
+\begin{explain}
+    (a + b)^2
+        \explnext{Identité remarquable.}
+    a^2 + b^2 + 2 a b
+\end{explain}
+\end{latexex}
+
+Avec un retour à la ligne, il faudra donc si besoin gérer l'espacement vertical.
+
+\begin{latexex}
+Mon calcul pas trop proche.
+
+\medskip
+\begin{explain}
+    (a + b)^2
+        \explnext{Identité remarquable.}
+    a^2 + b^2 + 2 a b
+\end{explain}
+\end{latexex}
+\end{remark}
+
+
+\begin{remark}
     Voici des petites choses à connaître sur les macros \macro{explnext} et \macro{explnext*}.
     \begin{enumerate}
         \item \macro{expltxt} est utilisée par \macro{explnext} pour mettre en forme le texte d'explication.
 
-        \item \macro{expltxtup} et \macro{expltxtdown} sont utilisées par  \macro{explnext*} pour mettre en forme les textes d'explication.
-              Ces macros s'appliquent sur \macro{expltxt}.
+        \item \macro{expltxtup} et \macro{expltxtdown} sont utilisées par \macro{explnext*} décorer les textes d'explication juste avant leur mise en forme finale via \macro{expltxtupdown}.
 
         \item \macro{explnext} et \macro{explnext*} utilisent la macro constante \macro{expltxtspacein} pour l'espacement entre le symbole et la courte explication. Par défaut, cette macro vaut \verb+2em+.
     \end{enumerate}
@@ -749,10 +776,10 @@ Notons au passage que ce type de présentation n'est sûrement pas bien adaptée
 
 \newparaexample{Utiliser un autre symbole globalement}
 
-L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ par défaut. Ceci permet de faire ce qui suit sans effort.
+L'environnement \env{explain} possède plusieurs options dont l'une est \verb+ope+ qui vaut \verb+{=}+ par défaut. Ceci permet de faire ce qui suit sans effort.
 
 \begin{latexex}
-\begin{explain}[\viff]
+\begin{explain}[ope = \viff]
     x^2 + 10 x + 25 = 0
         \explnext{Identité remarquable.}
     (x + 5)^2 = 0
@@ -771,7 +798,7 @@ L'environnement \env{explain} possède un argument optionnel qui est \verb+=+ pa
 Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le symbole est affiché \emph{(ne pas oublier les accolades vides)}. Voici un court exemple de ceci.
 
 \begin{latexex}
-\begin{explain}[\viff]
+\begin{explain}[ope = \viff]
     a^2 = b^2
         \explnext{}
     a = \pm b
@@ -787,7 +814,7 @@ Si l'argument obligatoire de la macro \macro{explnext} est vide alors seul le sy
 La macro \macro{explnext} possède un argument optionnel qui utilise par défaut celui de l'environment. En utilisant cette option, on choisit alors localement le symbole à employer. Voici un exemple d'utilisation complètement farfelu bien que correct.
 
 \begin{latexex}
-\begin{explain}[\viff]
+\begin{explain}[ope = \viff]
     0 \leq a < b
         \explnext[\vimplies]%
                  {Croissance de $x^2$ 
@@ -813,28 +840,42 @@ Par défaut, le package utilise la définition suivante.
 
 \begin{latexex-alone}
 \newcommand\expltxt[1]{%
-    \text{\color{blue} \footnotesize \itshape \{ #1 \}}%
+    \text{\color{blue}\footnotesize \{\,{\itshape #1}\,\} }%
 }
 \end{latexex-alone}
 
 
-Pour la mise en forme des explications à sens unique, la macro \macro{explnext*} fait appel aux macros \macro{expltxtup} et \macro{expltxtdown}.
-Par défaut, le package utilise les définitions suivantes qui fait appel à \macro{expltxt}.
+Pour la mise en forme des explications à sens unique, la macro \macro{explnext*} fait appel aux macros \macro{expltxtup}, \macro{expltxtdown} et \macro{expltxtupdown}.
+Par défaut le package utilise les définitions suivantes.
 
 \begin{latexex-alone}
 \newcommand\expltxtup[1]{%
-    \expltxt{$\uparrow$ #1 $\uparrow$}%
+    $\uparrow$ #1 $\uparrow$%
 }
 
 \newcommand\expltxtdown[1]{%
-    \expltxt{$\downarrow$ #1 $\downarrow$}%
+    $\downarrow$ #1 $\downarrow$%
 }
+
+\newcommand\expltxtupdown[2]{{%
+    \displaystyle\footnotesize\color{blue}%
+    \left\{\,%
+        \genfrac{}{}{0pt}{}{%
+            \text{\itshape\expltxtdown{\samesizeas{#1}{#2}}}%
+        }{%
+            \text{\itshape\expltxtup{\samesizeas{#2}{#1}}}%
+        }%
+    \,\right\}%
+}}
 \end{latexex-alone}
 
 
-Voici un exemple un peu moche montrant que l'on peut adapter si besoin la mise en forme \emph{(ne pas oublier de passer en mode texte via \macro{text})}.
+Nous allons expliquer comment obtenir l'affreux exemple ci-dessous montrant que l'on peut adapter si besoin la mise en forme \emph{(ne pas oublier de passer en mode texte via \macro{text})}.
 
-\begin{latexex-flat}
+% ==================== %
+
+\bgroup
+
 \newcommand\myexpltxt[2]{%
     \text{\color{#1} \footnotesize \itshape \bfseries #2}%
 }
@@ -851,33 +892,79 @@ Voici un exemple un peu moche montrant que l'on peut adapter si besoin la mise e
     \myexpltxt{red}{$\Downarrow$ #1 $\Downarrow$}%
 }
 
+\renewcommand\expltxtupdown[2]{%
+    \displaystyle\color{blue!20!black!30!green}\genfrac{\langle}{\rangle}{1pt}{}{%
+        \expltxtdown{\samesizeas{#1}{#2}}%
+    }{%
+        \expltxtup{\samesizeas{#2}{#1}}%
+    }%
+}
+
+
+\begin{latexex}
 \begin{explain}
     (a + b) (a + b)
         \explnext{Se souvenir de $P\cdot P = P^2$.}%
     (a + b)^2
-        \explnext*{Identité remarquable pour développer.}%
-                  {Identité remarquable pour factoriser.}
+        \explnext*{Id. Rm. - Dév.}%
+                  {Id. Rm. - Facto.}
     a^2 + 2 a b + b^2
 \end{explain}
-\end{latexex-flat}
+\end{latexex}
+
+\egroup
+
+
+La mise en forme a été obtenue en utilisant le code \LaTeX{} suivant où la macro \macro{samesizeas\{\#1\}\{\#2\}} rend le texte \verb+#1+ aussi large que \verb+#2+ en ajoutant des espaces supplémentaires tout en centrant le résultat final si besoin.
+
+\begin{latexex-alone}
+\newcommand\myexpltxt[2]{%
+    \text{\color{#1} \footnotesize \itshape \bfseries #2}%
+}
+
+\renewcommand\expltxt[1]{%
+    \myexpltxt{gray}{$\Downarrow$ #1 $\Uparrow$}%
+}
+
+\renewcommand\expltxtup[1]{%
+    \myexpltxt{orange}{$\Uparrow$ #1 $\Uparrow$}%
+}
+
+\renewcommand\expltxtdown[1]{%
+    \myexpltxt{red}{$\Downarrow$ #1 $\Downarrow$}%
+}
+
+\renewcommand\expltxtupdown[2]{%
+    \displaystyle\color{blue!20!black!30!green}%
+    \genfrac{\langle}{\rangle}{1pt}{}{%
+        \expltxtdown{\samesizeas{#1}{#2}}%
+    }{%
+        \expltxtup{\samesizeas{#2}{#1}}%
+    }%
+}
+\end{latexex-alone}
+
+
+% ==================== %
 %\section{Logique et fondements}
 
-%\subsection{Détailler un raisonnement}
+%\subsection{Détailler un raisonnement simple}
 
-\subsubsection{Détailler un raisonnement simple -- Version pour les collégiens} \label{explain-proof-for-youngs}
+\subsubsection{Version pour les collégiens} \label{explain-proof-for-youngs}
 
-L'environnement \env{aexplain}
+L'environnement \env{explain} avec l'option \verb+style = ar+
 \footnote{
-    Cet environnement utilise le package \texttt{witharrows} qui est très sympathique pour expliquer des étapes de calcul.
+    Cet environnement utilise aussi le package \texttt{witharrows}.
 }
 utilise des flèches pour indiquer les explications
-\emph{(\prefix{a} est pour \whyprefix{a}{rrow} soit \inenglish{flèche})}.
-Son fonctionnement est similaire à celui de \env{explain} si ce n'est que la macro \macro{explnext*} permet d'avoir une flèche unidirectionnelle, vers le haut ou le bas au choix, ou bien d'écrire deux indications dont l'une est montante et l'autre descendante.
+\emph{(\prefix{ar} est pour \whyprefix{ar}{row} soit \inenglish{flèche})}.
+Dans ce cas d'utilisation, la macro \macro{explnext*} permet d'avoir une flèche unidirectionnelle, vers le haut ou le bas au choix, ou bien d'écrire deux indications dont l'une est montante et l'autre descendante.
 
 \medskip
 
-Il existe aussi l'environnement \env{aexplain*} lorsque la toute 1\iere{} étape n'est pas expliquée.
-Par contre ceci nécessite au tout début de l'environnement l'usage de la macro très spéciale \macro{explnext} sans aucun contenu !
+Il existe aussi l'option \verb+style = sar+ lorsque la toute 1\iere{} étape n'est pas expliquée
+\emph{(\prefix{s} est pour \whyprefix{s}{hort} soit \inenglish{court})}.
+Attention car forcément ceci nécessite au tout début de l'environnement l'usage de la macro \macro{explnext} sans aucun contenu !
 
 
 % ---------------------- %
@@ -886,13 +973,13 @@ Par contre ceci nécessite au tout début de l'environnement l'usage de la macro
 \newparaexample{Flèche à double sens ou sans flèche}
 
 \begin{latexex}
-\begin{aexplain}
+\begin{explain}[style = ar]
     (a + b)^2
         \explnext{Identité remarquable}
     a^2 + 2 a b + b^2
         \explnext{}
     a^2 + b^2 + 2 a b
-\end{aexplain}
+\end{explain}
 \end{latexex}
 
 
@@ -904,7 +991,7 @@ Par contre ceci nécessite au tout début de l'environnement l'usage de la macro
 Ce qui suit est juste là comme démo. car les explications y sont un peu farfelues.
 
 \begin{latexex-flat}
-\begin{aexplain}
+\begin{explain}[style = ar]
     (a + b)^2
         \explnext*{Via $P^2 = P \cdot P$.}
                   {Via $P \cdot P = P^2$.}
@@ -918,7 +1005,7 @@ Ce qui suit est juste là comme démo. car les explications y sont un peu farfel
         \explnext*{}%
                   {Commutativité de l'addition.}
     a^2 + b^2 + 2 a b
-\end{aexplain}
+\end{explain}
 \end{latexex-flat}
 
 
@@ -927,16 +1014,17 @@ Ce qui suit est juste là comme démo. car les explications y sont un peu farfel
 
 \newparaexample{Ne pas expliquer le tout début}
 
-L'environnement étoilé \env{aexplain*} débute différemment la mise en forme.
+L'environnement étoilé \env{explain} avec l'option \verb+style = sar+ débute différemment la mise en forme.
+Bien entendu ici le tout premier \explnext{} doit avoir un argument vide !
 
 \begin{latexex-flat}
-\begin{aexplain*}
+\begin{explain}[style = sar]
     (a + b) (a + b)
         \explnext{}
     (a + b)^2
         \explnext{Identité remarquable.}
     a^2 + b^2 + 2 a b
-\end{aexplain*}
+\end{explain}
 \end{latexex-flat}
 
 
@@ -945,88 +1033,214 @@ L'environnement étoilé \env{aexplain*} débute différemment la mise en forme.
 
 \newparaexample{Choisir son symbole}
 
-Voici comment faire avec la version non étoilée où l'implication finale est juste là pour la démo. \emph{(on notera une petite bidouille un peu sale à faire pour avoir un alignement à peu près correct)}.
+Voici comment faire où l'implication finale est juste là pour la démonstration \emph{(on notera une petite bidouille un peu sale à faire pour avoir un alignement à peu près correct)}.
 
 \begin{latexex}
-\begin{aexplain}[\iff]
+\begin{explain}[style = ar, ope = \iff]
     a^2 + 2 a b + b^2 = 0
         \explnext{}
     (a + b)^2 = 0
         \explnext[\:\implies]%
                  {$P^2 = 0$ ssi $P = 0$.}
     a + b = 0
-\end{aexplain}
+\end{explain}
 \end{latexex}
 
 
-Avec la version étoilée, on obtient ce qui suit.
+Avec la version courte, on obtient ce qui suit.
 
 \begin{latexex-flat}
-\begin{aexplain*}[\iff]
+\begin{explain}[style = sar, ope = \iff]
     a^2 + 2 a b + b^2 = 0
         \explnext{}
     (a + b)^2 = 0
         \explnext[\:\implies]%
                  {$P^2 = 0$ ssi $P = 0$.}
     a + b = 0
-\end{aexplain*}
+\end{explain}
 \end{latexex-flat}
+%\section{Logique et fondements}
+
+%\subsection{Détailler un raisonnement simple}
+
+\subsubsection{De courts commentaires}
+
+\newparaexample{Sans alignement}
+
+Il est possible d'ajouter de petits commentaires via \macro{comthis} où \prefix{comthis} est pour \whyprefix{com}{ment} \prefix{this} soit \inenglish{commenter ceci}.
+ 
+\begin{latexex}
+\begin{explain}
+    (a + b)^2
+        \comthis{Forme facto.}
+        \explnext*{Id.Rq. -- Dév.}%
+                  {Id.Rq. -- Facto.}
+    a^2 + 2 a b + b^2
+        \comthis{Forme dév.}
+\end{explain}
+\end{latexex}
+
+
+\begin{remark}
+	La mise en forme du texte des commentaires est fait via la macro personnalisable \macro{explcom}.
+	Quant à l'espacement ajouté entre le texte et son commentaire il est défini par la macro \macro{expltxtspacein} qui est égale à \verb+2em+ par défaut.
+\end{remark}
 
 
 % ---------------------- %
 
 
-\subsubsection{Un mini hack très utile pour des \emph{\og étapes alignées \fg}}
+\newparaexample{Tout aligner}
 
-Vous pouvez écrire très facilement des calculs ou raisonnement simples alignés comme suit sans trop vous fatiguez \emph{(chacune des trois solutions présentées laisse toujours la possibilité de changer de symbole ainsi que d'expliquer une étape intermédiaire après coup)}.
+Il peut être utile d'aligner tous les commentaires. Ceci s'obtient via l'option \verb+com = al+ où \prefix{al} est pour \whyprefix{al}{igné} \emph{(par défaut \prefix{com = nal} avec le préfixe \prefix{n} pour \whyprefix{n}{on})}.
 
 \begin{latexex}
-\begin{aexplain*}
+\begin{explain}[com = al]
+    (a + b)^2
+        \comthis{Forme facto.}
+        \explnext*{Id.Rq - Dév.}%
+                  {Id.Rq - Facto.}
+    a^2 + 2 a b + b^2
+        \comthis{Forme dév.}
+\end{explain}
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Le meilleur des deux mondes}
+
+Dans d'autres situations, utilisez les deux types d'alignement peut faire sens. Ceci s'obtient via l'option \verb+com = al+ et l'emploi de la macro étoilée \macro{comthis*} à chaque fois que l'on souhaite "coller" un comentaire le plus à gauche possible.
+
+\begin{latexex}
+\begin{explain}[com = al]
+    (a + b) (a + b)
+        \comthis{Forme facto.}
+        \explnext{Via $x^2 = x \cdot x$.}
+    (a + b)^2
+        \comthis*{Au passage...}
+        \explnext*{Id.Rq - Dév.}%
+                  {Id.Rq - Facto.}
+    a^2 + 2 a b + b^2
+        \comthis{Forme dév.}
+\end{explain}
+\end{latexex}
+
+
+\begin{remark}
+	Si l'alignement n'est pas activé, les macros \macro{comthis*} et \macro{comthis} auront toutes les deux le même effet.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Ceci marche aussi avec le style \og fléché \fg}
+
+Voici ce que donne le mode mixte lorsque des flèches sont utilisées pour les explications. Il semble moins pertinent ici de mixer les modes \og alignement \fg{} et \og non alignement \fg{} mais chacun pris séparément peut avoir son utilité.
+
+\begin{latexex-flat}
+\begin{explain}[style = ar, com = al]
+    (a + b) (a + b)
+        \comthis{Forme facto.}
+        \explnext{Via $x^2 = x \cdot x$.}
+    (a + b)^2
+        \comthis*{Au passage...}
+        \explnext*{Id.Rq - Dév.}%
+                  {Id.Rq - Facto.}
+    a^2 + 2 a b + b^2
+        \comthis{Forme dév.}
+\end{explain}
+\end{latexex-flat}
+
+
+\begin{remark}
+	Bien entendu il est impossible de commenter le tout début en mode fléché court.
+\end{remark}
+%\section{Logique et fondements}
+
+%\subsection{Détailler un raisonnement simple}
+
+\subsubsection{Un mini hack très utile pour des \emph{\og étapes alignées \fg}}
+
+Vous pouvez écrire très facilement des calculs ou raisonnement simples alignés comme suit sans trop vous fatiguez.
+
+\begin{latexex}
+\begin{explain}[style = sar]
     (a + b) (a + b)
         \explnext{}
     (a + b)^2
         \explnext{}
     a^2 + b^2 + 2 a b
+        \comthis{Pourquoi ?}
         \explnext{}
     a^2 + 2 a b + b^2
-\end{aexplain*}
+\end{explain}
 \end{latexex}
 
 On a accès à une autre mise en forme \emph{(ceci peut rendre aussi service)}. 
 
 \begin{latexex}
-\begin{aexplain}
+\begin{explain}[style = ar]
     (a + b) (a + b)
         \explnext{}
     (a + b)^2
-        \explnext{}
-    a^2 + b^2 + 2 a b
-        \explnext{}
-    a^2 + 2 a b + b^2
-\end{aexplain}
-\end{latexex}
-
-Enfin dans le cadre de calculs à faire expliquer par des élèves, ce qui suit peut être utile.
-
-\begin{latexex}
-\begin{explain}
-    (a + b) (a + b)
-        \explnext{}
-    (a + b)^2
-        \explnext{}
+        \explnext{Pourquoi ?}
     a^2 + b^2 + 2 a b
         \explnext{}
     a^2 + 2 a b + b^2
 \end{explain}
 \end{latexex}
 
+Enfin dans le cadre de calculs à faire expliquer par des élèves, ce qui suit peut être utile.
+
+\begin{latexex}
+Donner les justifications J1, J2 et J3.
+
+\medskip
+\begin{explain}
+    (a + b) (a + b)
+        \explnext{J1}
+    (a + b)^2
+        \explnext{J2}
+    a^2 + b^2 + 2 a b
+        \explnext{J3}
+    a^2 + 2 a b + b^2
+\end{explain}
+\end{latexex}
+
 
 % ---------------------- %
+
+
+\subsubsection{Un conseil de mise en forme}
+
+Voici un style de codage que nous trouvons très facile à relire et maintenir.
+
+\begin{latexex}
+\begin{explain}[com = al]
+    (a + b) (a + b)
+    	\comthis{Forme facto.}
+    	\explnext{Via $x^2 = x \cdot x$.}
+    %
+    (a + b)^2
+    	\comthis*{Au passage...}
+    	\explnext*{Id.Rq - Dév.}%
+                  {Id.Rq - Facto.}
+    %
+    a^2 + 2 a b + b^2
+    	\comthis{Forme dév.}
+\end{explain}
+\end{latexex}
 %\section{Logique et fondements}
 
-%\subsection{Détailler un raisonnement}
+%\subsection{Détailler un raisonnement simple}
+%\section{Logique et fondements}
 
-\subsubsection{Détailler un \og vrai \fg{} raisonnement -- Un tableau pour le post-bac}
+\subsection{Détailler un \og vrai \fg{} raisonnement}
+
+\subsubsection{Un tableau pour le post-bac}
 
 
 \newparaexample{Le minimum avec les réglages par défaut}
@@ -1041,16 +1255,16 @@ Dans cet exemple en deux morceaux, pour montrer au passage comment continuer la 
 \begin{latexex}
 \begin{demoexplain}
     \demostep
-          Hypothèse & $A$     
+        Hypothèse & $A$     
     \demostep
-          Axiome 1  & $A \implies B$
+        Axiome 1  & $A \implies B$
     \demostep
-          m.p. sur
-          \explref*{1} et \explref*{2}
-        & $B$
+        m.p. sur
+        \explref*{1} et \explref*{2}
+      & $B$
     \demostep
-          \explref*{1} et \explref*{3}
-        & $A \wedge B$
+        \explref*{1} et \explref*{3}
+      & $A \wedge B$
 \end{demoexplain}
 \end{latexex}
 
@@ -1060,12 +1274,12 @@ Il est possible de couper sa démonstration en morceaux en indiquant à l'enviro
 \begin{latexex}
 \begin{demoexplain}[start = last]
     \demostep
-          Axiome 3
-        & $(A \wedge B) \implies C$
+        Axiome 3
+      & $(A \wedge B) \implies C$
     \demostep
-          m.p. sur
-          \explref*{4} et \explref*{5}
-        & $C$
+        m.p. sur
+        \explref*{4} et \explref*{5}
+      & $C$
 \end{demoexplain}
 \end{latexex}
 
@@ -1080,15 +1294,15 @@ L'argument optionnel de \macro{demostep} permet de définir un label qui ensuite
 \begin{latexex}
 \begin{demoexplain}
     \demostep[demo-my-hyp]
-          Hypothèse & $A$     
+        Hypothèse & $A$     
     \demostep[demo-use-axiom-1]
-          Axiome 1  & $A \implies B$
+        Axiome 1  & $A \implies B$
     \demostep
-          m.p. sur
-          \explref{demo-my-hyp}
-          et
-          \explref{demo-use-axiom-1}
-        & $B$
+        m.p. sur
+        \explref{demo-my-hyp}
+        et
+        \explref{demo-use-axiom-1}
+      & $B$
 \end{demoexplain}
 \end{latexex}
 
@@ -1109,13 +1323,13 @@ Les clés optionnelles \verb+hyps+ pour plusieurs hypothèses, \verb+hyp+ pour u
 \begin{latexex}
 \begin{demoexplain}[hyp = $A$, ccl = $B$]
     \demostep
-          Hypothèse & $A$     
+        Hypothèse & $A$     
     \demostep
-          Axiome 1  & $A \implies B$
+        Axiome 1  & $A \implies B$
     \demostep
-          m.p. sur
-          \explref*{1} et \explref*{2}
-        & $B$
+        m.p. sur
+        \explref*{1} et \explref*{2}
+      & $B$
 \end{demoexplain}
 \end{latexex}
 
@@ -1126,28 +1340,31 @@ Les clés optionnelles \verb+hyps+ pour plusieurs hypothèses, \verb+hyp+ pour u
 \end{remark}
 %\section{Logique et fondements}
 
-%\subsection{Détailler un raisonnement}
+%\subsection{Détailler un \og vrai \fg{} raisonnement}
 
-\subsubsection{Détailler un \og vrai \fg{} raisonnement -- Un tableau pour le collège et le lycée} \label{explain-hard-proof-for-youngs}
+\subsubsection{Un tableau pour le collège et le lycée} \label{explain-hard-proof-for-youngs}
 
 
 \newparaexample{Avec les réglages par défaut}
 
-L'environnement étoilé \env{demoexplain*} est différent de l'environnement \env{demoexplain} puisqu'il sert à indiquer trois choses et non juste deux comme le montre l'exemple suivant.
+L'environnement étoilé \env{demoexplain*} est différent de l'environnement \env{demoexplain} puisqu'il sert à indiquer trois choses et non juste deux comme le montre l'exemple suivant
+\footnote{
+	C'est pour cela qu'est proposé une version étoilée de l'environnement et non l'utilisation d'une option de l'environnement non étoilé. 
+}.
 Par contre, la syntaxe est très similaire.
 Notez au passage la possibilité d'utiliser \macro{newline} pour forcer un retour à la ligne dans une cellule.
 
 \begin{latexex-flat}
 \begin{demoexplain*}
     \demostep
-          $ABC$ est un triangle
-          \newline équilatéral 
-        & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
-        & $\anglein{ABC} = 60$\textdegree     
+        $ABC$ est un triangle
+        \newline équilatéral 
+      & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
+      & $\anglein{ABC} = 60$\textdegree     
     \demostep
-          Voir la conséquence \explref*{1} .
-        & Simple calcul avec conversion en radians.
-        & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
+        Voir la conséquence \explref*{1} .
+      & Simple calcul avec conversion en radians.
+      & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
 \end{demoexplain*}
 \end{latexex-flat}
 
@@ -1163,18 +1380,18 @@ Par contre \env{demoexplain*} ne propose que \verb+start+ comme clé optionnelle
 \begin{latexex-flat}
 \begin{demoexplain*}[start = last]
     \demostep[demo-first-geo-fact]
-          $ABC$ est un triangle \newline équilatéral 
-        & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
-        & $\anglein{ABC} = 60$\textdegree     
+        $ABC$ est un triangle \newline équilatéral 
+      & Dans un triangle équilatéral, les trois angles mesurent $60$\textdegree. 
+      & $\anglein{ABC} = 60$\textdegree     
     \demostep
-          Voir la conséquence \explref{demo-first-geo-fact} .
-        & Simple calcul avec conversion en radians.
-        & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
+        Voir la conséquence \explref{demo-first-geo-fact} .
+      & Simple calcul avec conversion en radians.
+      & $\dfrac{1}{3} \anglein{ABC} = \dfrac{\pi}{9}$
 \end{demoexplain*}
 \end{latexex-flat}
+%\section{Logique et fondements}
 
-
-% ---------------------- %
+%\subsection{Détailler un raisonnement}
 \section{Ensembles et applications}
 
 \subsection{Différents types d'ensembles}
@@ -3770,6 +3987,40 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item Suppression des environnements \env{aexplain} et \env{aexplain*}.
+    
+                  \smallskip
+    
+                  Leurs mises en forme restent accessibles respectivement via les options \verb+style = ar+ et \verb+style = sar+ de l'environnement \env{explain}.
+    
+    
+            \item L'environnement \env{explain} propose des options de type \texttt{clé-valeur}.
+    
+    
+            \item Ajout de petits commentaires pour les étapes via \macro{comthis} et si besoin \macro{comthis*}.
+    
+    
+            \item Modification de \macro{explnext*} pour le mode universitaire sans flèche via l'ajout de \macro{exptxtupdown} qui gère la mise en forme de deux explications non vides.
+                  Ceci a pour effet l'alignement du rendu avec l'opérateur.
+    
+    
+            \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+    \end{itemize}
+
+% ------------------------ %
+
+    \medskip
     \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
@@ -4454,15 +4705,36 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 \IDmacro*{nexistsone}{0}
 
+
+
+
 \subsubsection{Détailler un raisonnement simple} 
 
 \IDenv{explain}{1}
 
-\IDenv{aexplain}{1}  où \quad \mwhyprefix{a}{rrow}
+\IDoption{} la valeur utilise une syntaxe de type clé-valeur. Voici les différentes clés disponibles.
 
-\IDenv{aexplain*}{1}  où \quad \mwhyprefix{a}{rrow}
+\begin{enumerate}
+	\item \verb+ope+ sert à définir l'opérateur utilisé dans tout l'environnement qui sera rédigé en mode mathématique. 
+	      La valeur par défaut est \verb+{=}+ \emph{(et non juste \texttt{=})}.
 
-\IDoption{} le symbole à utiliser dans l'environnement, la valeur par défaut étant \verb+=+ .
+	\item \verb+style+ sert à définir le style de mise en forme. Voici les différentes valeurs possibles.
+	      \begin{enumerate}
+	      		\item \prefix{u}, la valeur par défaut, est pour \whyprefix{u}{niversity}.
+
+	      		\item \prefix{ar} est pour \whyprefix{ar}{row}.
+
+	      		\item \prefix{sar} est pour \whyprefix{s}{hort} \whyprefix{ar}{row}.
+	      \end{enumerate}
+
+	\item \verb+com+ permet de demander l'alignement ou non des commentaires non étoilés entre eux.
+	      \begin{enumerate}
+	      		\item \prefix{nal}, la valeur par défaut, est pour \whyprefix{n}{ot} \whyprefix{al}{igned}.
+
+	      		\item \prefix{al} est pour \whyprefix{al}{igned}.
+
+	      \end{enumerate}
+\end{enumerate}
 
 
 \separation
@@ -4493,6 +4765,17 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 \IDarg{2} le texte de l'explication pour la 2\ieme{} ligne.
           Ce texte peut être vide \emph{(voir l'environnement \env{aexplain} pour la raison de ceci)}.
+
+
+\separation
+
+
+\IDmacro*{comthis}{1} où \quad \mwhyprefix{com}{ment}
+
+\IDmacro*{comthis*}{1} où \quad \mwhyprefix{com}{ment}
+
+
+\IDarg{} le texte d'un court commentaire.
 
 
 % ---------------------- %
@@ -4531,6 +4814,26 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro*{expltxtup}{1} où \quad \mwhyprefix{expl}{ain}
 
 \IDarg{} le texte de l'explication du bas vers le haut que l'on veut mettre en forme.
+
+
+\separation
+
+
+\IDmacro*{expltxtupdown}{2} où \quad \mwhyprefix{expl}{ain}
+
+\IDarg{1} le texte de l'explication du haut vers le bas que l'on veut mettre en forme.
+
+\IDarg{1} le texte de l'explication du bas vers le haut que l'on veut mettre en forme.
+
+
+\separation
+
+
+\IDmacro*{explcom}{1} où \quad \mwhyprefix{expl}{ain}
+                            et \mwhyprefix{com}{ment}
+
+\IDarg{} le texte d'un court commentaire.
+
 
 \subsubsection{Détailler un \og vrai \fg{} raisonnement via un tableau}
 
