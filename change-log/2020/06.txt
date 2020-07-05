@@ -1,13 +1,38 @@
 ==========
+2020-06-29
+==========
+
+**Documentation :** two useful examples of tables of variations and signs have been added.
+
+
+==========
+2020-06-28
+==========
+
+**Logic :** some tunings have been done for the calculus and the proofs explained.
+
+    1) All the macros for texts have been renamed.
+
+    1) One macro indicating that one long table continues on the next page has been added.
+
+    1) The preceding text is also added in the case of use of the university mode.
+
+    1) Two pictures show in the documentation long tables broken on two pages.
+
+
+**Special spacings :** the special macro ``\sqrt`` will use from now ``\leftroot{4}\uproot{2}`` instead of ``\leftroot{3}`` to obtain a better output.
+
+
+==========
 2020-06-27
 ==========
 
-**New minor version version::``1.1.0-beta`` of ¨lymath:** this change of minor version comes from the new API of the environments for explaining calculus or simple reasonnings.
+**New minor version version::``1.1.0-beta`` of ¨lymath :** this change of minor version comes from the new API of the environments for explaining calculus or simple reasonnings.
 
 
-**Logic:** new changes for the explanation of a calculus or a simple reasonning.
+**Logic :** new changes especially for the explanation of a calculus or a simple reasonning.
 
-    1) The environments ``aexplain`` and ``aexplain*`` have been removed. Their formatting is obtained now by using the environment ``explain`` with the options ``style = ar`` and ``style = sar`` respectively.
+    1) The environments ``aexplain`` and ``aexplain*`` have been removed. Their formattings are still available by using the environment ``explain`` with the options ``style = ar`` and ``style = sar`` respectively.
 
     1) The environment ``explain`` has now several key-value options.
 
@@ -15,7 +40,7 @@
 
     1) The university version of ``\explnext*`` has been modified.
 
-        * When bottom-up explications are given, the contents are aligned and big braces are used for the both contents : the "hard" job is done by ``\exptxtupdown``.
+        * When bottom-up explications are given, the contents are centered and big braces are used for the both contents (the "hard" job is done by ``\exptxtupdown``).
         The mechanism used doesn't change the way to customize the macros ``\expltxtdown`` and ``\expltxtup``.
 
         * The braces are straight and not italic now (this looks prettier).
@@ -23,13 +48,11 @@
     1) The environments ``demoexplain`` and ``demoexplain*`` use ``longtable`` in backstage such as to allow a table to be printed on several pages.
 
 
-
-
 ==========
 2020-06-23
 ==========
 
-**Logic:** some little important enhancements have been done to explain calculus or reasonnings.
+**Logic :** some little important enhancements have been done to explain calculus or reasonnings.
 
     1) The environments ``explain``, ``aexplain`` and  ``aexplain*`` have the same automatic vertical spacings. This has been acheived simply by just using the environment ``WithArrows`` for ``explain``.
 
@@ -42,7 +65,7 @@
 2020-06-21
 ==========
 
-**New major version version::``1.0.0-beta`` of ¨lymath:** the change to a new major version is motivated by the new stricter rules for the ¨API.
+**New major version version::``1.0.0-beta`` of ¨lymath :** the change to a new major version is motivated by the new stricter rules for the ¨API.
 As a consequence there are a lot of backward incompatibilities. See all the changes below.
 
 
@@ -196,7 +219,7 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
     ``\explref`` and ``\explref*`` have been switched (this is necuse in ¨lymath the starred macros use to do less work).
 
 
-**Documentation:** tables for suffixes and/or prefixes have been simplified.
+**Documentation :** tables for suffixes and/or prefixes have been simplified.
 
 
 ==========
@@ -210,7 +233,7 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
 2020-06-14
 ==========
 
-**Logic and fundations:** here are the new features.
+**Logic and fundations :** here are the new features.
 
     1) The standard operator ``\neg`` works now with a thin space after it. The standard behaviour is obtained by using ``\stdneg``.
 
@@ -237,7 +260,7 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
 **Geometry :** an almost "perfect" formatting of the calculations explained of the determinant of two 2D-vectors and the cross product of two 3D-vectors.
 
 
-**Logic and fundations:** here are the new features.
+**Logic and fundations :** here are the new features.
 
     1) Two environments ``aexplain`` and ``aexplain*`` allows to use arrows to indicate explanations (examples have also been added to show how to use ``explain``, ``aexplain`` or ``aexplain*`` suchas to to do step by step manipulations with alignment regarding one or several symbols).
 
@@ -258,7 +281,7 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
 **Geometry :** better formatting, but not still perfect, of calculations explained of the determinant of two 2D-vectors and of the cross product of two 3D-vectors.
 
 
-**Logic and fundations:** the macro ``\explain`` has been deleted. Now you must use the environment ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
+**Logic and fundations :** the macro ``\explain`` has been deleted. Now you must use the environment ``explain`` associated to the macro ``\explnext``. This simplifies a lot the writting !
 
 
 ==========
@@ -276,7 +299,7 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
 2020-06-08
 ==========
 
-**New minor version version::``0.7.0-beta`` of ¨lymath:** see all the changes below. There are some backward incompatibilities.
+**New minor version version::``0.7.0-beta`` of ¨lymath :** see all the changes below. There are some backward incompatibilities.
 
 
 **Analysis :** here are the new features.
@@ -311,10 +334,10 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
     1) ``\probacond`` has a new signature which is more logical.
 
 
-**One internal update regarding to ``amsmath``:** the macro ``\DeclareMathMacro`` has been changed to ``\DeclareMathOperator``.
+**One internal update regarding to ``amsmath`` :** the macro ``\DeclareMathMacro`` has been changed to ``\DeclareMathOperator``.
 
 
-**Simplification of the documentation:** the ¨latex codes just show now the use of the macros outside any context such as to see directly what is proposed by the package. Another thing : the technical informations have been moved to a dedicated section.
+**Simplification of the documentation :** the ¨latex codes just show now the use of the macros outside any context such as to see directly what is proposed by the package. Another thing : the technical informations have been moved to a dedicated section.
 
 
 **A better way to manage internally the changes for the log :** see the folder path::``factory/99-major-change-log``.

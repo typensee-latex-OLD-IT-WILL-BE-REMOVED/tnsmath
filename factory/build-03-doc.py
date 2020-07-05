@@ -67,6 +67,17 @@ def closetechsec(text, section):
     return False
 
 
+# ---------------------- #
+# -- COPYING PICTURES -- #
+# ---------------------- #
+
+for img in THIS_DIR.walk("file::**\[fr\].png"):
+    img.copy_to(
+        DIR_DOC_PATH / img.name,
+        safemode = False
+    )
+
+
 # ------------ #
 # -- HEADER -- #
 # ------------ #

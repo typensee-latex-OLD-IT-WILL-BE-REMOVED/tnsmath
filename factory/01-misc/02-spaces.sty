@@ -8,18 +8,24 @@
 % Fractions
 
 \let\stdfrac\frac
-\renewcommand\frac[2]{\stdfrac{\, #1 \,}{\, #2 \,}}
+\renewcommand\frac[2]{%
+	\stdfrac{\, #1 \,}{\, #2 \,}%
+}
 
 \let\stddfrac\dfrac
-\renewcommand\dfrac[2]{\stddfrac{\, #1 \,}{\, #2 \,}}
+\renewcommand\dfrac[2]{%
+	\stddfrac{\, #1 \,}{\, #2 \,}%
+}
 
 
 % Square roots
 
 \let\stdsqrt\sqrt
 \renewcommand\sqrt[2][]{%
-    \if\relax\detokenize{#1}\relax\stdsqrt{#2\,}%
-    \else\stdsqrt[\leftroot{3}#1]{#2\,}%
+    \if\relax\detokenize{#1}\relax%
+    	\stdsqrt{#2\,}%
+    \else%
+    	\stdsqrt[\leftroot{4}\uproot{2}#1]{#2\,}%
     \fi%
 }
 
@@ -28,5 +34,5 @@
 
 \let\stdneg\neg
 \renewcommand\neg{%
-    \stdneg\,
+    \stdneg\,%
 }

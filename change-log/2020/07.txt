@@ -1,0 +1,11 @@
+==========
+2020-07-05
+==========
+
+**New minor version version::``1.2.0-beta`` of ¨lymath:** see all the changes below.
+
+
+**Analysis :** the tables of signs can be now decorated with a short text or a very small graph to explain the signs of an affine function or a parabolic one (this works also with the table of variations).
+
+
+**Backstage machinery : ** the way to manage the import of packages with their options and special dependancies like the use of ``\usetikzlibrary`` has been improved (a new small tool should born from this improvment).

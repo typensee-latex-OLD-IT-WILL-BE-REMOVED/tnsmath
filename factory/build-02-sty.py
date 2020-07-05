@@ -1,20 +1,21 @@
 #! /usr/bin/env python3
 
 from collections import defaultdict
+from json import load
 
 from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 from mistool.term_use import ALL_FRAMES, withframe
-from orpyste.data import ReadBlock
 
-# ----------------------- #
-# -- TOOLS & CONSTANTS -- #
-# ----------------------- #
+
+# --------------- #
+# -- CONSTANTS -- #
+# --------------- #
 
 THIS_DIR = PPath( __file__ ).parent
 
-STY_PATH   = THIS_DIR.parent / "lymath" / "lymath.sty"
-
+STY_PATH      = THIS_DIR.parent / "lymath" / "lymath.sty"
+JSON_DEP_PATH = THIS_DIR / "dep.json"
 
 DECO = " "*4
 
@@ -23,6 +24,10 @@ MYFRAME = lambda x: withframe(
     frame = ALL_FRAMES['latex_pretty']
 )
 
+
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
 
 def path2title(onepath):
     onepath = relative_path.stem.replace('-', ' ').upper()
@@ -47,66 +52,56 @@ def cleansource(text):
     return "\n".join(text)
 
 
-def organize_packages(packages):
-    global DECO
+# ----------------- #
+# -- THE IMPORTS -- #
+# ----------------- #
 
-    packages_found = defaultdict(list)
+with JSON_DEP_PATH.open(
+    mode     = "r",
+    encoding = "utf-8"
+) as jsonfile:
+    ALL_IMPORTS_N_TIKZ_LIBS = load(jsonfile)
 
-    for texpackdef in packages:
-        if texpackdef:
-            options = between(
-                text = texpackdef,
-                seps = ["[", "]"]
+
+ALL_IMPORTS = []
+lastfirst = ""
+
+for pack, opts in ALL_IMPORTS_N_TIKZ_LIBS["packages"].items():
+    newfirst = pack[0]
+
+    if newfirst != lastfirst:
+        ALL_IMPORTS.append(f"% {newfirst.upper()}")
+        lastfirst = newfirst
+
+    ALL_IMPORTS.append(f"\\RequirePackage{{{pack}}}")
+
+    if opts:
+        for oneoption in opts:
+            ALL_IMPORTS.append(
+                f"\\PassOptionsToPackage{{{oneoption}}}"
+                f"{{{pack}}}"
             )
 
-            if options:
-                _, options, texpackdef = options
+if ALL_IMPORTS_N_TIKZ_LIBS["tikzlibs"]:
+    ALL_IMPORTS.append('')
+    ALL_IMPORTS.append('% TikZ libraries')
 
-                options = [x.strip() for x in options.split(",")]
+    for onelib in ALL_IMPORTS_N_TIKZ_LIBS["tikzlibs"]:
+        ALL_IMPORTS.append(f"\\usetikzlibrary{{{onelib}}}")
 
-            else:
-                options = []
-
-            _, names, _ = between(
-                text = texpackdef,
-                seps = ["{", "}"]
-            )
-
-            for onename in names.split(","):
-                packages_found[onename.strip()] += options
-
-    allnames = sorted(packages_found.keys())
-
-    packages_ok = []
-
-    for onename in allnames:
-        options = packages_found[onename]
-        options = set(options)
-
-        if options:
-            options = f'{",".join(options)}'
-
-            packages_ok.append(f"\\PassOptionsToPackage{{{options}}}{{{onename}}}")
-
-        packages_ok.append(f"\\RequirePackage{{{onename}}}")
-
-    print(f"{DECO}* Declaration of packages organized.")
-
-
-    print(f"{DECO}* Declaration of packages organized.")
-
-    return packages_ok
+ALL_IMPORTS = "\n".join(ALL_IMPORTS)
 
 
 # ---------------- #
-# -- NEW THINGS -- #
+# -- THE MACROS -- #
 # ---------------- #
 
-ALL_PACKAGES       = []
 ALL_MACROS         = []
 ALL_LOCAL_SETTINGS = []
 
+
 paths_found = []
+
 for subdir in THIS_DIR.walk("dir::"):
     subdir_name = str(subdir.name)
 
@@ -125,7 +120,7 @@ for latexfile in paths_found:
     relative_path = latexfile - THIS_DIR
     parentname    = latexfile.parent.name
 
-    print(f"{DECO}* Analyzing << {relative_path} >>")
+    print(f"{DECO}* Extracting macros from << {relative_path} >>")
 
     with open(
         file     = latexfile,
@@ -140,14 +135,7 @@ for latexfile in paths_found:
             keepseps = False
         )
 
-    ALL_PACKAGES += [
-        x.strip()
-        for x in packages.strip().split("\n")
-    ]
-
-
     definitions = cleansource(definitions)
-
 
     if definitions.strip():
         if ALL_MACROS:
@@ -163,22 +151,13 @@ for latexfile in paths_found:
 ALL_MACROS = "\n".join(ALL_MACROS)
 
 
-# --------------------------------- #
-# -- ORGANIZING LIST OF PACKAGES -- #
-# --------------------------------- #
-
-ALL_PACKAGES = organize_packages(ALL_PACKAGES)
-
-
 # ------------------------------ #
 # -- UPDATE THE MAIN STY FILE -- #
 # ------------------------------ #
 
-ALL_PACKAGES = "\n".join(ALL_PACKAGES)
+source = f"""{MYFRAME("IMPORTS REQUIRED")}
 
-source = f"""{MYFRAME("PACKAGES REQUIRED")}
-
-{ALL_PACKAGES}
+{ALL_IMPORTS}
 
 
 {ALL_MACROS}

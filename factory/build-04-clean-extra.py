@@ -8,22 +8,25 @@ from mistool.os_use import PPath
 # -- TOOLS & CONSTANTS -- #
 # ----------------------- #
 
-FACTORY_DIR = PPath( __file__ ).parent
-LYXAM_DIR   = FACTORY_DIR.parent / "lymath"
+THIS_DIR  = PPath( __file__ ).parent
+LYXAM_DIR = THIS_DIR.parent / "lymath"
 
 
 # ----------------------- #
 # -- CLEAN BEFORE PUSH -- #
 # ----------------------- #
 
-for toremove in FACTORY_DIR.walk("file::**.macros-x.txt"):
+JSON_DEP_PATH = THIS_DIR / "dep.json"
+JSON_DEP_PATH.remove()
+
+for toremove in THIS_DIR.walk("file::**.macros-x.txt"):
     toremove.remove()
 
 for toremove in LYXAM_DIR.walk("file::*.macros-x.txt"):
     toremove.remove()
 
-for toremove in FACTORY_DIR.walk("file::**.pdf"):
+for toremove in THIS_DIR.walk("file::**.pdf"):
     toremove.remove()
 
-for toremove in FACTORY_DIR.walk("dir::*"):
+for toremove in THIS_DIR.walk("dir::*"):
     latexclean(toremove)

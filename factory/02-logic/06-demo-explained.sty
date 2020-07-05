@@ -14,14 +14,16 @@
 
 %    * Texts used
 
-\newcommand\textexplainmiddleID{Réf.}
-\newcommand\textexplainmiddlehyp{Je sais que...}
-\newcommand\textexplainmiddleprop{Propriété ou fait utilisé}
-\newcommand\textexplainmiddlecons{Conséquence}
+\newcommand\textdemoID{Réf.}
+\newcommand\textdemoKNOWN{Je sais que...}
+\newcommand\textdemoPROP{Propriété ou fait utilisé}
+\newcommand\textdemoCONS{Conséquence}
 
-\newcommand\textexplainuniversityhyps{Démonstration sous les hypothèses}
-\newcommand\textexplainuniversityhyp{Démonstration sous l'hypothèse}
-\newcommand\textexplainuniversityccl{Conclusion}
+\newcommand\textdemoHYPS{Démonstration sous les hypothèses}
+\newcommand\textdemoHYP{Démonstration sous l'hypothèse}
+\newcommand\textdemoCCL{Conclusion}
+
+\newcommand\textdemoNEXTPAGE{Suite de la démo. page suivante...}
 
 
 %    * Common tools
@@ -101,20 +103,27 @@
     \fi
     %
     \if\relax\hyps\relax\else%
-        \underline{\textexplainuniversityhyps\vphantom{p\textexplainuniversityccl}} : \hyps
+        \underline{\textdemoHYPS\vphantom{p\textdemoCCL}} : \hyps
 		\vspace{-.25em}
 	\fi
     \if\relax\hyp\relax\else%
-        \underline{\textexplainuniversityhyp\vphantom{p\textexplainuniversityccl}} : \hyp
+        \underline{\textdemoHYP\vphantom{p\textdemoCCL}} : \hyp
 		\vspace{-.25em}
     \fi
     \booltrue{@start@demo@explain@}
     \begin{longtable}{lll}
+	    \multicolumn{3}{c}{}
+		\\[-.5em]
+	    \multicolumn{3}{c}{%
+	    	\textit{\@demo@extra{\textdemoNEXTPAGE}}%
+		}
+		\endfoot
+		\endlastfoot
 }{
     \end{longtable}
     \if\relax\ccl\relax\else%
 		\vspace{-.25em}
-        \underline{\textexplainuniversityccl\vphantom{\textexplainuniversityhyps}} : \ccl
+        \underline{\textdemoCCL\vphantom{\textdemoHYPS}} : \ccl
     \fi
 }
 
@@ -175,21 +184,25 @@
     \small
     \renewcommand{\arraystretch}{1.5}
     \begin{longtable}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
-    	\textbf{\@demo@extra{\textexplainmiddleID}}
-			& \textbf{\@demo@extra{\textexplainmiddlehyp}}
-	        & \textbf{\@demo@extra{\textexplainmiddleprop}}
-	        & \textbf{\@demo@extra{\textexplainmiddlecons}}
+    	\textbf{\@demo@extra{\textdemoID}}
+			& \textbf{\@demo@extra{\textdemoKNOWN}}
+	        & \textbf{\@demo@extra{\textdemoPROP}}
+	        & \textbf{\@demo@extra{\textdemoCONS}}
 	    \\ \hline
 	    \endfirsthead
-	    
-    	\textbf{\@demo@extra{\textexplainmiddleID}}
-			& \textbf{\@demo@extra{\textexplainmiddlehyp}}
-	        & \textbf{\@demo@extra{\textexplainmiddleprop}}
-	        & \textbf{\@demo@extra{\textexplainmiddlecons}}
+	    %
+    	\textbf{\@demo@extra{\textdemoID}}
+			& \textbf{\@demo@extra{\textdemoKNOWN}}
+	        & \textbf{\@demo@extra{\textdemoPROP}}
+	        & \textbf{\@demo@extra{\textdemoCONS}}
 	    \\ \hline
 	    \endhead
-
-		\multicolumn{4}{r}{{\textit{\@demo@extra{La suite page suivante...}}}}
+		%
+	    \multicolumn{3}{c}{}
+		\\[-1.25em]
+		\multicolumn{4}{c}{%
+			\textit{\@demo@extra{\textdemoNEXTPAGE}}%
+		}
 		\\
 		\endfoot
 
