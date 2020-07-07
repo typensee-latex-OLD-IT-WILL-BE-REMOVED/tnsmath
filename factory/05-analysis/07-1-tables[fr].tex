@@ -127,10 +127,10 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
     \tkzTabLine{d              , + ,              }
     \tkzTabVar {D- / $-\infty$     , + / $+\infty$}
     %
-    \tkzTabVal{1}{2}{0.35}  % Position entre les 1re et 2e valeurs puis en proportion.
-              {1}{0}        % x_1 et f(x_1)
-    \tkzTabVal{1}{2}{0.65}  % Position entre les 1re et 2e valeurs puis en proportion.
-              {$\ee$}{1}    % x_2 et f(x_2)
+    \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
+              {1}{0}       % x_1 et f(x_1)
+    \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
+              {$\ee$}{1}   % x_2 et f(x_2)
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -148,9 +148,9 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
     \tkzTabLine{d              , + , 0         , - ,          }
     \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
     %
-    \tkzTabVal[draw]{1}{2}{0.5}  % Position entre les 1re et 2e valeurs au milieu.
+    \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
                     {$1$}{$\frac{1}{\ee}$}
-    \tkzTabVal[draw]{2}{3}{0.5}  % Position entre les 2e et 3e valeurs au milieu.
+    \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
                     {$\ee^2$}{$1$}
 \end{tikzpicture}
 \end{latexex-flat}
@@ -189,7 +189,7 @@ On en déduit le signe de la fonction $f$.
         $x$    / 0.75 ,
         $f(x)$ / 1
     }{
-        $-\infty$ , , , $+\infty$  % ATTENTION ! Ne pas oublier de virgules.
+        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
     }
     %
     \node at ($(N31)!0.5!(N40)$){$3$};
@@ -257,7 +257,7 @@ Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiq
         $x$    / 0.75 ,
         $f(x)$ / 1
     }{
-        $-\infty$ , , , $+\infty$  % ATTENTION ! Ne pas oublier de virgules.
+        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
     }
     %
     \node at ($(N31)!0.5!(N40)$){$3$};
@@ -278,7 +278,7 @@ Voici un autre exemple s'utilisant la machinerie TikZ afin d'indiquer dans les v
 \begin{center}
 \begin{tikzpicture}
     \tkzTabInit[
-        espcl = 3
+        espcl = 3,
 %        help       % <-- Pour voir les noms des noeuds.
     ]{
         $x$   / 0.75 ,
@@ -317,7 +317,7 @@ Le code utilisé est le suivant.
 \begin{latexex-alone}
 \begin{tikzpicture}
     \tkzTabInit[
-        espcl = 3
+        espcl = 3,
 %        help       % <-- Pour voir les noms des noeuds.
     ]{
         $x$   / 0.75 ,

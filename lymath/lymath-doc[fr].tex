@@ -1672,7 +1672,7 @@ $\displaystyle
 % ---------------------- %
 
 
-\subsubsection{Intervalles réels - Notation américaine}
+\subsubsection{Intervalles réels -- Notation américaine}
 
 \newparaexample*{}
 
@@ -2010,8 +2010,8 @@ $\dotprod{\dfrac{1}{2} \vect{u}}%
 Dans l'exemple suivant, l'option \prefix{r} est pour \whyprefix{r}{after} soit \inenglish{chevron}, et dans \prefix{sr} le \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}. Les physiciens aiment bien cette notation.
 
 \begin{latexex}
-$\dotprod[r] {\dfrac{1}{2} \vect{u}}%
-             {\vect{v}}$
+$\dotprod[r]{\dfrac{1}{2} \vect{u}}%
+            {\vect{v}}$
 
 $\dotprod[sr]{\dfrac{1}{2} \vect{u}}%
              {\vect{v}}$
@@ -2026,7 +2026,7 @@ $\dotprod[sr]{\dfrac{1}{2} \vect{u}}%
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\vdotprod    {u}{v}$
+$\vdotprod{u}{v}$
  
 $\vdotprod[r] {u}{v}$ comme
 $\vdotprod[sr]{u}{v}$
@@ -2083,8 +2083,8 @@ $\vcrossprod{i}{j}$
 Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\calccrossprod {\vect{u}}{x }{y }{z }%
-                {\vect{v}}{x'}{y'}{z'}
+$\calccrossprod{\vect{u}}{x }{y }{z }%
+               {\vect{v}}{x'}{y'}{z'}
  =
  \vcalccrossprod{u       }{x }{y }{z }%
                 {v       }{x'}{y'}{z'}$
@@ -2888,7 +2888,12 @@ Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ a
  $\derope    {k}{x}
 = \derope[sf]{k}{x}
 = \derope[i] {k}{x}$
+\end{latexex}
 
+
+Ici non plus il n'y a pas de uns inutiles.
+
+\begin{latexex}
  $\derope    {1}{x}
 = \derope[sf]{1}{x}
 = \derope[i] {1}{x}$
@@ -2957,7 +2962,7 @@ ou
 \subsubsection{L'opérateur de dérivation partielle}
 
 Ce qui suit peut rendre service au niveau universitaire.
-Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{der}.
+Les options possibles sont \verb+f+, valeur par défaut, \verb+sf+ et \verb+i+ avec les mêmes significations que pour la macro \macro{pder}.
 
 \begin{latexex}
  $\pderope    {x | y^2}{3}
@@ -3198,10 +3203,10 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
     \tkzTabLine{d              , + ,              }
     \tkzTabVar {D- / $-\infty$     , + / $+\infty$}
     %
-    \tkzTabVal{1}{2}{0.35}  % Position entre les 1re et 2e valeurs puis en proportion.
-              {1}{0}        % x_1 et f(x_1)
-    \tkzTabVal{1}{2}{0.65}  % Position entre les 1re et 2e valeurs puis en proportion.
-              {$\ee$}{1}    % x_2 et f(x_2)
+    \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
+              {1}{0}       % x_1 et f(x_1)
+    \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
+              {$\ee$}{1}   % x_2 et f(x_2)
 \end{tikzpicture}
 \end{latexex-flat}
 
@@ -3219,9 +3224,9 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
     \tkzTabLine{d              , + , 0         , - ,          }
     \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
     %
-    \tkzTabVal[draw]{1}{2}{0.5}  % Position entre les 1re et 2e valeurs au milieu.
+    \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
                     {$1$}{$\frac{1}{\ee}$}
-    \tkzTabVal[draw]{2}{3}{0.5}  % Position entre les 2e et 3e valeurs au milieu.
+    \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
                     {$\ee^2$}{$1$}
 \end{tikzpicture}
 \end{latexex-flat}
@@ -3260,7 +3265,7 @@ On en déduit le signe de la fonction $f$.
         $x$    / 0.75 ,
         $f(x)$ / 1
     }{
-        $-\infty$ , , , $+\infty$  % ATTENTION ! Ne pas oublier de virgules.
+        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
     }
     %
     \node at ($(N31)!0.5!(N40)$){$3$};
@@ -3328,7 +3333,7 @@ Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiq
         $x$    / 0.75 ,
         $f(x)$ / 1
     }{
-        $-\infty$ , , , $+\infty$  % ATTENTION ! Ne pas oublier de virgules.
+        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
     }
     %
     \node at ($(N31)!0.5!(N40)$){$3$};
@@ -3349,7 +3354,7 @@ Voici un autre exemple s'utilisant la machinerie TikZ afin d'indiquer dans les v
 \begin{center}
 \begin{tikzpicture}
     \tkzTabInit[
-        espcl = 3
+        espcl = 3,
 %        help       % <-- Pour voir les noms des noeuds.
     ]{
         $x$   / 0.75 ,
@@ -3388,7 +3393,7 @@ Le code utilisé est le suivant.
 \begin{latexex-alone}
 \begin{tikzpicture}
     \tkzTabInit[
-        espcl = 3
+        espcl = 3,
 %        help       % <-- Pour voir les noms des noeuds.
     ]{
         $x$   / 0.75 ,
@@ -3533,9 +3538,7 @@ L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whypre
 Cette macro possède un argument optionnel et deux obligatoires.
 
 \begin{enumerate}
-    \item \textbf{L'argument optionnel.}
-          \,\,
-          Il permet de choisir la couleur du texte.
+    \item \textbf{\emph{L'argument optionnel : choix de la couleur du texte.}}
           
           \smallskip
           
@@ -3543,18 +3546,20 @@ Cette macro possède un argument optionnel et deux obligatoires.
 
 
     \medskip
-    \item \textbf{Le 1\ier{} argument.}
-          \,\,
-          Il donne le numéro de ligne avec la convention de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
+    \item \textbf{\emph{Le 1\ier{} argument : numéro de ligne.}}
           
           \smallskip
           
-          \verb#\comLine{3}{...}# correspond donc à la 3\ieme{} ligne de signes ou moins intuitivement à la 4\ieme{} ligne pour un humain non codeur.
+          Par convention $0$ est le numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
+          \verb#\comLine{3}{...}# correspond donc à la 3\ieme{} ligne de signes ou moins intuitivement à la (3+1)\ieme{} ligne pour un humain non codeur.
 
     \medskip
-    \item \textbf{Le 2\ieme{} argument.}
-          \,\,
-          Il contient le texte du commentaire sans retour à la ligne possible. Voir page \pageref{grapgsign-com-two-lines} le tout dernier exemple de cette section qui montre comment écrire sur deux lignes.
+    \item \textbf{\emph{Le 2\ieme{} argument : texte du commentaire.}}
+          
+          \smallskip
+          
+          Par défaut aucun retour à la ligne n'est possible.
+          Si besoin se reporter à la  page \pageref{grapgsign-com-two-lines} où est montré comment écrire sur plusieurs lignes \emph{(voir le tout dernier exemple de cette section)}.
 \end{enumerate}
 
 
@@ -3599,17 +3604,16 @@ Rappelons au passage que la convention est de prendre $0$ pour numéro de la tou
           \smallskip
 
           Voici comment coder ceci.
-          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne le graphique d'un trinôme du 2\ieme{} degré, via le code \verb#ax2+bx+c# sans espace, avec les conditions $a < 0$ et $\Delta > 0$, via \prefix{an} et \prefix{dp}, le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
+          Par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}# indique d'ajouter dans la 5\ieme{} ligne de signe le graphique d'un trinôme du 2\ieme{} degré via le code \verb#ax2+bx+c# sans espace, avec les conditions $a < 0$ et $\Delta > 0$ via \prefix{an} et \prefix{dp}, le trinôme ayant $r_1$ et $r_2$ pour racines réelles.
 
           \smallskip
 
           En plus de \prefix{dn} et \prefix{dp}, il y a \prefix{dz} pour \prefix{discriminant zéro}.
-          Ainsi pour indiquer dans la 3\ieme{} ligne le graphique associé à $f(x) = - 4 x^2$, on utilisera \verb#\graphSign{3}{ax2+bx+c, an, dz}{$0$}#.
+          Ainsi pour indiquer dans la 3\ieme{} ligne de signe la courbe relative à $f(x) = - 4 x^2$, on utilisera \verb#\graphSign{3}{ax2+bx+c, an, dz}{$0$}#.
 
           \smallskip
 
-          Enfin le graphique associé au trinôme $f(x) = 7 x^2 + 3$, qui est sans racine réelle, s'obtiendra dans la 4\ieme{} ligne via \verb#\graphSign{4}{ax2+bx+c, ap, dn}#.
-
+          Enfin le graphique associé au trinôme $f(x) = 7 x^2 + 3$, qui est sans racine réelle, s'obtiendra dans la 4\ieme{} ligne de signe via \verb#\graphSign{4}{ax2+bx+c, ap, dn}#.
 \end{enumerate}
 
 
@@ -3655,7 +3659,7 @@ Il devient très facile de proposer un tableau décoré comme le suivant.
 \end{center}
 
 
-En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte.
+En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg}.
 
 \medskip
 
@@ -3682,7 +3686,7 @@ En plus des deux exemples de schémas de paraboles, il faut noter dans le code s
 \newparaexample{Commenter des variations} \label{grapgsign-com-two-lines}
 
 Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
-Voici un exemple possible d'utilisation où le retour à la ligne a été obtenue affreusement, ou pas, via \verb#\parbox{12em}{Les limites sont hors programme pour cette année.}#.
+Voici un exemple possible d'utilisation où le retour à la ligne a été obtenue affreusement, ou pas, via \verb#\parbox{11.5em}{Les limites sont hors programme pour cette année.}#.
 
 \begin{center}
 \begin{tikzpicture}
@@ -3698,7 +3702,7 @@ Voici un exemple possible d'utilisation où le retour à la ligne a été obtenu
     %
 
     \comLine{2}{%
-    	\parbox{12em}{Les limites sont hors programme pour cette année.}%
+    	\parbox{11.5em}{Les limites sont hors programme pour cette année.}%
 	}
 \end{tikzpicture}
 \end{center}
@@ -5551,7 +5555,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} l'ensemble à "suffixer".
 
 \IDarg{2} l'un des suffixes \prefix{n}, \prefix{p}, \prefix{s}, \prefix{sn} ou \prefix{sp}.
-\subsubsection{Intervalles réels - Notation française (?\,)}
+\subsubsection{Intervalles réels -- Notation française (?\,)}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
 
@@ -5612,7 +5616,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\subsubsection{Intervalles réels - Notation américaine}
+\subsubsection{Intervalles réels -- Notation américaine}
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
 
@@ -6363,7 +6367,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\subsubsection{Dérivations totales}
+\subsubsection{Dérivation totale}
 
 \IDmacro{der}{1}{3}
 
@@ -6421,7 +6425,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
-\subsubsection{Dérivations partielles}
+\subsubsection{Dérivation partielle}
 
 \IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
 
@@ -6523,28 +6527,55 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDarg{4} la variable pour les calculs.
 
-\subsubsection{Commenter une ligne}
+\subsubsection{Tableaux de signes -- Commentaires et graphiques explicatifs}
 
-\IDmacro{calcdetplane}{1}{6}  où \quad \mwhyprefix{calc}{ulate}
+\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
 
 
-\IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le commentaire, $0$ étant le 1\ier{} numéro.
+
+\IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{graphSign}{1}{2..4}
+
+
+\IDoption{} couleur au format TikZ.
+
+
+\IDarg{1} le numéro de ligne où placer le graphique, $0$ étant le 1\ier{} numéro.
+
+
+\IDarg{2} le type de fonctions avec des contraintes en utilisant la virgule comme séparateur d'informations.
+
 \begin{enumerate}
-	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+	\item \verb@ax+b@ sans espace indique une fonction affine avec un unique paramètre \verb@a@ non nul à caractériser.
 
-	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+	\item \verb@ax2+bx+c@ sans espace indique une fonction trinôme du 2\ieme{} degré avec une paramètre \verb@a@ non nul à caractériser ainsi que \verb@d@ pour son discriminant.
 
-	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+    % ==================== %
 
-	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+	\smallskip
+	
+	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
 
-	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
 \end{enumerate}
 
 
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+\IDarg{supplémentaire pour ax+b} la racine de $ax + b$.
 
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{\!s supplémentaires pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines, on donnera toutes les racines de la plus petite à la plus grande
+\footnote{
+	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
+}.
 \subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
                           {Les notations "grand O" et "petit O"}}
 

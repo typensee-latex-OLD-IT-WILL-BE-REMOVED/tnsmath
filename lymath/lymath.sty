@@ -47,9 +47,9 @@
 \RequirePackage{yhmath}
 
 % TikZ libraries
-\usetikzlibrary{calc}
-\usetikzlibrary{babel}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
 
 
 % ------------------ %
@@ -2203,7 +2203,7 @@
 }
 
 
-\newcommand\@der@indice[3]{
+\newcommand\@der@sub[3]{
     \@dder%
     \IfStrEq{#2}{1}{}{%
 	    ^{\kern.15ex#2\kern.15ex}%
@@ -2370,7 +2370,7 @@
 	 % Indice
 	 			}{%
 					\ifbool{@der@option@i}{%
-						\let\callithere\@der@indice%
+						\let\callithere\@der@sub%
 	% Big frac ope
 					}{
 						\ifbool{@der@option@of}{%
@@ -2463,7 +2463,7 @@
     \StrSubstitute{#2}{^}{\@der@func@no@ext@par}[\@index]
     \partial%
     ^{\kern.15ex#3\kern.15ex}%
-    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\,}}%
+    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\kern.05em,\kern.05em}}%
     #1%
     \expandarg
 }
@@ -3055,7 +3055,7 @@
 	\@abtrasct@sign@parabola@dn{#1}{#2}          %
                                {-.55}            % y of the axe
                                {.57}{-.4}        % 1st and 2nd ordinates
-                               {$+$}{.35}{below} % The sign, its ordinate and its position
+                               {$+$}{.3}{below} % The sign, its ordinate and its position
 }
 
 
@@ -3064,7 +3064,7 @@
 	\@abtrasct@sign@parabola@dn{#1}{#2}           %
                                {.55}              % y of the axe
                                {-.57}{.4}         % 1st and 2nd ordinates
-                               {$-$}{-.35}{above} % The sign, its ordinate and its position
+                               {$-$}{-.3}{above} % The sign, its ordinate and its position
 }
 
 

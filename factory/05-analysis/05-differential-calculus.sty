@@ -96,7 +96,7 @@
 }
 
 
-\newcommand\@der@indice[3]{
+\newcommand\@der@sub[3]{
     \@dder%
     \IfStrEq{#2}{1}{}{%
 	    ^{\kern.15ex#2\kern.15ex}%
@@ -263,7 +263,7 @@
 	 % Indice
 	 			}{%
 					\ifbool{@der@option@i}{%
-						\let\callithere\@der@indice%
+						\let\callithere\@der@sub%
 	% Big frac ope
 					}{
 						\ifbool{@der@option@of}{%
@@ -356,7 +356,7 @@
     \StrSubstitute{#2}{^}{\@der@func@no@ext@par}[\@index]
     \partial%
     ^{\kern.15ex#3\kern.15ex}%
-    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\,}}%
+    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\kern.05em,\kern.05em}}%
     #1%
     \expandarg
 }

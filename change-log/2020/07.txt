@@ -1,11 +1,21 @@
 ==========
+2020-07-07
+==========
+
+**Analysis :** the indice version of the partial derivation uses comas to separate the different variables (for example, this avoids confusion between `xy` and `x y`).
+
+
+**Documentation :** the technical informations of the macros ``\comLine`` and ``\graphSign`` for decorating tables of signs were missing.
+
+
+==========
 2020-07-05
 ==========
 
 **New minor version version::``1.2.0-beta`` of ¨lymath:** see all the changes below.
 
 
-**Analysis :** the tables of signs can be now decorated with a short text or a very small graph to explain the signs of an affine function or a parabolic one (this works also with the table of variations).
+**Analysis :** the tables of signs can be now decorated with a short text or a very small graph to explain the signs of an affine function or a parabolic one (this works also with the tables of variations).
 
 
-**Backstage machinery : ** the way to manage the import of packages with their options and special dependancies like the use of ``\usetikzlibrary`` has been improved (a new small tool should born from this improvment).
+**Machinery in backstage : ** improvment of the way to manage the imports of packages with their options and special dependancies like the use of ``\usetikzlibrary`` (a new small tool should born from this improvment in the future).
