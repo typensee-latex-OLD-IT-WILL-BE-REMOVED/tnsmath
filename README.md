@@ -1,4 +1,4 @@
-About ``tnscom``
+About ``tnsmath``
 ================
 
 ***If you want more informations and examples than thereafter, just take
