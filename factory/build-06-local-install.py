@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
 
-from collections import defaultdict
-
 from mistool.latex_use import install, PPath
+
+
+PROJECT_NAME = "tnsmath"
 
 DECO = " "*4
 
@@ -12,7 +13,7 @@ if answer.lower() == "y":
     THIS_DIR = PPath( __file__ ).parent
 
     install(
-        ppath   = THIS_DIR.parent / "lymath",
+        ppath   = THIS_DIR.parent / f"{PROJECT_NAME}",
         regpath = "file not::**.macros-x.txt"
     )
 

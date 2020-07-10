@@ -4,9 +4,9 @@ from collections import defaultdict
 from json import dumps
 import re
 
-from mistool.latex_use import about, OS_MAC
+from mistool.latex_use import about
 from mistool.os_use import PPath
-from mistool.string_use import between, joinand
+from mistool.string_use import between
 from mistool.term_use import ALL_FRAMES, withframe
 
 
@@ -14,9 +14,10 @@ from mistool.term_use import ALL_FRAMES, withframe
 # -- CONSTANTS -- #
 # --------------- #
 
-THIS_DIR = PPath( __file__ ).parent
+THIS_DIR = PPath(__file__).parent
 
-JSON_DEP_PATH = THIS_DIR / "dep.json"
+JSON_DEP_PATH = THIS_DIR / "x-dep-x.json"
+
 
 DECO = " "*4
 
@@ -32,6 +33,7 @@ PATTERN_IN_CURLY = re.compile("^\\{(.+?)\\}(.*)$")
 ABOUT_LATEX = about()
 
 PACKAGE_ID, TIKZLIB_ID, KIND_ID, NAMES_ID, OPTIONS_ID = range(5)
+
 
 # ----------- #
 # -- TOOLS -- #
@@ -54,11 +56,9 @@ def analyze(info, nobug = False):
         if nobug:
             return None
 
-        print("Illegal initial value:", info)
-        BUG
+        raise Exception("Illegal initial value:", info)
 
     kind = m.group(1)
-
     info = info[len(kind)+1:].strip()
 
     if kind in ['RequirePackage', 'usepackage']:
@@ -71,9 +71,7 @@ def analyze(info, nobug = False):
         if nobug:
             return None
 
-        print("Illegal kind:", info)
-        BUG
-
+        raise Exception("Illegal kind:", info)
 
 # Removed the latex comments.
     i = info.find('%')
@@ -97,7 +95,7 @@ def analyze(info, nobug = False):
 
 # No curly braces
 #
-# WARNING ! Extra infos insod ignored m.group(2).
+# WARNING ! Extra infos ignored m.group(2).
     m = PATTERN_IN_CURLY.match(info)
 
     names = m.group(1)
@@ -105,6 +103,7 @@ def analyze(info, nobug = False):
         n.strip()
         for n in names.split(',')
     ]
+
 # All the job has been done.
     meta = {
         KIND_ID : kind,
@@ -232,7 +231,7 @@ for subdir in THIS_DIR.walk("dir::"):
 
     if subdir_name in [
         "config",
-    ] or subdir_name[:2] == "x-":
+    ] or subdir_name.startswith("x-"):
         continue
 
     for onestyfile in subdir.walk("file::*.sty"):

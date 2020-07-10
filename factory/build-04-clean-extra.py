@@ -9,20 +9,19 @@ from mistool.os_use import PPath
 # ----------------------- #
 
 THIS_DIR  = PPath( __file__ ).parent
-LYXAM_DIR = THIS_DIR.parent / "lymath"
+
+PROJECT_NAME = "tnsmath"
+PROJECT_DIR  = THIS_DIR.parent / f"{PROJECT_NAME}"
 
 
 # ----------------------- #
 # -- CLEAN BEFORE PUSH -- #
 # ----------------------- #
 
-JSON_DEP_PATH = THIS_DIR / "dep.json"
-JSON_DEP_PATH.remove()
-
 for toremove in THIS_DIR.walk("file::**.macros-x.txt"):
     toremove.remove()
 
-for toremove in LYXAM_DIR.walk("file::*.macros-x.txt"):
+for toremove in PROJECT_DIR.walk("file::*.macros-x.txt"):
     toremove.remove()
 
 for toremove in THIS_DIR.walk("file::**.pdf"):

@@ -1,22 +1,26 @@
 #! /usr/bin/env python3
 
-from collections import defaultdict
-
 from mistool.latex_use import Build, clean as latexclean
-from mistool.os_use import cd, PPath, runthis
-from mistool.string_use import between, case, joinand, MultiReplace
+from mistool.os_use import PPath
+from mistool.string_use import between, MultiReplace
 from mistool.term_use import ALL_FRAMES, withframe
 from orpyste.data import ReadBlock
 
+
+# --------------- #
+# -- CONSTANTS -- #
+# --------------- #
+
 THIS_DIR = PPath( __file__ ).parent
 
+PROJECT_NAME  = "tnsmath"
 TEMPLATE_PATH = THIS_DIR / "config" / "doc[fr].tex"
-DIR_DOC_PATH  = THIS_DIR.parent / "lymath"
-DOC_PATH      = DIR_DOC_PATH / "lymath-doc[fr].tex"
+DIR_DOC_PATH  = THIS_DIR.parent / f"{PROJECT_NAME}"
+DOC_PATH      = DIR_DOC_PATH / f"{PROJECT_NAME}-doc[fr].tex"
 
 DOUBLE_BRACES = MultiReplace({
-    '{': '{{',
-    '}': '}}'
+    '{': '{'*2,
+    '}': '}'*2
 })
 
 PYFORMAT = MultiReplace({
@@ -25,9 +29,9 @@ PYFORMAT = MultiReplace({
 })
 
 
-# ----------------------- #
-# -- TOOLS & CONSTANTS -- #
-# ----------------------- #
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
 
 DECO = " "*4
 
@@ -72,6 +76,9 @@ def closetechsec(text, section):
 # ---------------------- #
 
 for img in THIS_DIR.walk("file::**\[fr\].png"):
+    if img.stem.endswith("-nodoc[fr]"):
+        continue
+
     img.copy_to(
         DIR_DOC_PATH / img.name,
         safemode = False
@@ -106,8 +113,9 @@ for subdir in THIS_DIR.walk("dir::"):
         continue
 
     LATEXFILES += [
-        l for l in subdir.walk("file::*\[fr\].tex")
-        if not l.stem.endswith("-nodoc[fr]")
+        lat
+        for lat in subdir.walk("file::*\[fr\].tex")
+        if not lat.stem.endswith("-nodoc[fr]")
     ]
 
 

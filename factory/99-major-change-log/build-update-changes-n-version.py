@@ -4,7 +4,12 @@
 from mistool.os_use import PPath
 from mistool.string_use import between, joinand
 
-THIS_DIR = PPath(__file__).parent
+
+# --------------- #
+# -- CONSTANTS -- #
+# --------------- #
+
+THIS_DIR    = PPath(__file__).parent
 CHANGES_DIR = THIS_DIR / 'changes'
 
 CHANGE_LOG_TEX_FILE   = THIS_DIR / "01-change-log[fr].tex"
@@ -59,7 +64,7 @@ with lastppath.open(
 allppaths.sort(reverse = True)
 
 with CHANGE_LOG_TEX_FILE.open(
-    mode = "r",
+    mode     = "r",
     encoding = "utf-8"
 ) as f:
     text_start, _, text_end = between(
@@ -75,7 +80,7 @@ content = ["\n"*2]
 
 for ppath in allppaths:
     with ppath.open(
-        mode = "r",
+        mode     = "r",
         encoding = "utf-8"
     ) as f:
         firstline = True
@@ -113,13 +118,13 @@ with MAIN_DOC_LOG_TEX_FILE.open(
 before, after = content.split("\\date{")
 _, after      = after.split("}", maxsplit = 1)
 
-content = f"{before}\\date{{{lastdate}}}{after}"
+content = before + "\\date{" + lastdate + "}{" + after
 
 
 before, after = content.split("Version \\texttt{")
 _, after      = after.split("}", maxsplit = 1)
 
-content = f"{before}Version \\texttt{{{lastversion}}}{after}"
+content = before + "Version \\texttt{" + lastversion + "}" + after
 
 
 

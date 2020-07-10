@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
 
-from collections import defaultdict
 from json import load
 
 from mistool.os_use import PPath
-from mistool.string_use import between, joinand
+from mistool.string_use import between
 from mistool.term_use import ALL_FRAMES, withframe
 
 
@@ -12,10 +11,11 @@ from mistool.term_use import ALL_FRAMES, withframe
 # -- CONSTANTS -- #
 # --------------- #
 
-THIS_DIR = PPath( __file__ ).parent
+THIS_DIR = PPath(__file__).parent
 
-STY_PATH      = THIS_DIR.parent / "lymath" / "lymath.sty"
-JSON_DEP_PATH = THIS_DIR / "dep.json"
+PROJECT_NAME  = "tnsmath"
+STY_PATH      = THIS_DIR.parent / f"{PROJECT_NAME}" / f"{PROJECT_NAME}.sty"
+JSON_DEP_PATH = THIS_DIR / "x-dep-x.json"
 
 DECO = " "*4
 
@@ -73,13 +73,12 @@ for pack, opts in ALL_IMPORTS_N_TIKZ_LIBS["packages"].items():
         ALL_IMPORTS.append(f"% {newfirst.upper()}")
         lastfirst = newfirst
 
-    ALL_IMPORTS.append(f"\\RequirePackage{{{pack}}}")
+    ALL_IMPORTS.append("\\RequirePackage{" + pack + "}")
 
     if opts:
         for oneoption in opts:
             ALL_IMPORTS.append(
-                f"\\PassOptionsToPackage{{{oneoption}}}"
-                f"{{{pack}}}"
+                "\\PassOptionsToPackage{" + oneoption + "}" + pack
             )
 
 if ALL_IMPORTS_N_TIKZ_LIBS["tikzlibs"]:
@@ -87,7 +86,7 @@ if ALL_IMPORTS_N_TIKZ_LIBS["tikzlibs"]:
     ALL_IMPORTS.append('% TikZ libraries')
 
     for onelib in ALL_IMPORTS_N_TIKZ_LIBS["tikzlibs"]:
-        ALL_IMPORTS.append(f"\\usetikzlibrary{{{onelib}}}")
+        ALL_IMPORTS.append("\\usetikzlibrary{" + onelib + "}")
 
 ALL_IMPORTS = "\n".join(ALL_IMPORTS)
 
@@ -107,7 +106,7 @@ for subdir in THIS_DIR.walk("dir::"):
 
     if subdir_name in [
         "config",
-    ] or subdir_name[:2] == "x-":
+    ] or subdir_name.startswith("x-"):
         continue
 
     for latexfile in subdir.walk("file::*.sty"):

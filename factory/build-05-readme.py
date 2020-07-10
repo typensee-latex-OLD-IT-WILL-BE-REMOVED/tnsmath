@@ -5,9 +5,9 @@ from pathlib import Path
 # -- TOOLS & CONSTANTS -- #
 # ----------------------- #
 
-LYMATH_DIR   = Path(__file__).parent.parent
-ABOUT_README = LYMATH_DIR / 'about' / 'readme' / 'main.md'
-README       = LYMATH_DIR / 'README.md'
+PROJECT_DIR  = Path(__file__).parent.parent
+ABOUT_README = PROJECT_DIR / 'about' / 'readme' / 'main.md'
+README       = PROJECT_DIR / 'README.md'
 
 
 # ------------------------ #

@@ -1,8 +1,98 @@
 ==========
+2020-07-???
+==========
+
+**New minor version version::``1.3.0-beta`` of ¨lymath:** the package has been renamed ¨tnsmath with a change of ¨github repositery
+((
+    ``tns`` is for "type and see".
+)).
+This new version will just import packages developped separitely in the future. This choice allows users to just use one feature of the preceding package ¨lymath without having all the machinery. Here is the list of the very new "small" packages that have just born.
+
+
+    1) ``tnscom`` contains common tools and settings used by all the `tns...` packages. It contains the following old parts of ¨lymath.
+
+        * path::``01-misc/00-common-tools.sty`` (all the meta programming and the separartors)
+        * path::``01-misc/01-spaces-semi-colon.sty``
+        * path::``01-misc/02-spaces.sty`` (except the extra space for the not symbol)
+
+
+    1) ``tnsana`` tries to simplify the writting of basic analysis. It contains the following old parts of ¨lymath.
+
+        * path::``05-analysis/01-constants.sty``
+        * path::``05-analysis/02-abs-function.sty``
+        * path::``05-analysis/03-named-functions.sty``
+        * path::``05-analysis/05-differential-calculus.sty``
+        * path::``05-analysis/07-tables.sty``
+        * path::``05-analysis/06-integral-calculus.sty``
+
+
+    1) ``tnsarith`` helps in writing basic arithmetic. It contains the following old parts of ¨lymath.
+
+        * path::``07-arithmetic/01-basic-operators.sty``
+        * path::``07-arithmetic/02-continued-fraction.sty``
+
+
+    1) ``tnsgeo`` contains macros to write efficiently standard geometry. It contains the following old parts of ¨lymath.
+
+        * path::``04-geometry/01-point-n-line.sty``
+        * path::``04-geometry/02-1-vector.sty``
+        * path::``04-geometry/02-2-vector-norm.sty``
+        * path::``04-geometry/02-3-vector-products.sty``
+        * path::``04-geometry/02-4-vector-2D-colinearity.sty``
+        * path::``04-geometry/03-1-cartesian-coordinates.sty``
+        * path::``04-geometry/03-2-cartesian-axes.sty``
+        * path::``04-geometry/04-arc.sty``
+        * path::``04-geometry/05-1-angle-geometric.sty``
+        * path::``04-geometry/05-2-angle-oriented.sty``
+
+
+    1) ``tnslinalg`` allows to write efficiently matrices. It contains the following old part of ¨lymath.
+
+        * path::``08-algebra/02-matrices.sty``
+
+
+    1) ``tnslog`` simplifies the ways to write more or less formal reasonings. It contains the following old parts of ¨lymath.
+
+        * path::``01-misc/02-spaces.sty`` (only the extra space for the not symbol)
+        * path::``02-logic/01-equal-signs-n-co.sty``
+        * path::``02-logic/02-operators.sty``
+        * path::``02-logic/04-quantifiers.sty``
+        * path::``02-logic/05-calc-explained.sty``
+        * path::``02-logic/06-demo-explained.sty``
+
+
+    1) ``tnspoly`` helps to write sets of polynomials and formal series. It contains the following old parts of ¨lymath.
+
+        * path::``08-algebra/01-polynomial-and-co.sty``
+
+
+    1) ``tnsproba`` helps the writing of probablities. It contains the following old parts of ¨lymath.
+
+        * path::``06-probability/01-base.sty``
+        * path::``06-probability/02-tree.sty``
+
+
+    1) ``tnsseq`` is for writing sequences. It contains the following old parts of ¨lymath.
+
+        * path::``01-misc/03-dsum-dprod.sty``
+        * path::``05-analysis/04-sequences.sty``
+        * path::``05-analysis/08-big-small-O-and-co.sty``
+
+
+    1) ``tnssets`` is for general theory of sets and applications. It contains the following old parts of ¨lymath.
+
+        * path::``03-sets-n-applications/01-general-sets.sty``
+        * path::``03-sets-n-applications/02-intervals.sty``
+        * path::``03-sets-n-applications/03-operators.sty``
+        * path::``03-sets-n-applications/04-image-n-co.sty``
+        * path::``03-sets-n-applications/05-applicatons.sty``
+
+
+==========
 2020-07-07
 ==========
 
-**Analysis :** the indice version of the partial derivation uses comas to separate the different variables (for example, this avoids confusion between `xy` and `x y`).
+**Analysis :** the indice version of the partial derivation adds comas to separate the different variables (this avoids confusion between `xy` and `x y` for example).
 
 
 **Documentation :** the technical informations of the macros ``\comLine`` and ``\graphSign`` for decorating tables of signs were missing.

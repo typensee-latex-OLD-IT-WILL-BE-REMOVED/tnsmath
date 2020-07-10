@@ -1,5 +1,11 @@
 How to launch this factory ?
 ============================
 
-You have to install Python and then to add the packages
-[orPyste](https://github.com/bc-python-tools/orpyste) and [misTool](https://github.com/bc-python-tools/mistool) (you can use ``pip`` to do that).
+The factory needs all the following packages. You can use ``pip`` to install them.
+
+
+  1. [misTool](https://github.com/bc-python/mistool)
+
+  1. [orPyste](https://github.com/bc-python/orpyste)
+
+
