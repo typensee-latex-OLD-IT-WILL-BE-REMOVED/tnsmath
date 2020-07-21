@@ -1,0 +1,16 @@
+% == PACKAGES USED == %
+
+\RequirePackage{yhmath}
+
+
+% == DEFINITIONS == %
+
+\newcommand\circarc{\@ifstar{\tnsgeo@circ@arc@star}{\tnsgeo@circ@arc@no@star}}
+
+\newcommand*\tnsgeo@circ@arc@star[2]{%
+    \wideparen{\tnsgeo@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\tnsgeo@circ@arc@no@star[1]{%
+    \wideparen{\tnsgeo@no@point{#1}}%
+}

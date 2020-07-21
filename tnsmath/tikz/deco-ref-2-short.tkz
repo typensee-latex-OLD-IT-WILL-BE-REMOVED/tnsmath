@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    % ---------------------------------------------------- %
+    % -- Code tkz-tab pour les signes non reproduit ici -- %
+    % ---------------------------------------------------- %
+
+    \graphSign        {1}{1/x}
+    \graphSign[purple]{2}{abs}
+    \graphSign[gray]  {3}{ln}
+\end{tikzpicture}

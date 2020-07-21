@@ -1,0 +1,195 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-cartesian-coordinates}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+    \newcommand\pt[1]{\mathrm{#1}}
+
+	\newcommand\@no@point[1]{%
+		\IfStrEq{#1}{i}{%
+			\imath%
+		}{%
+			\IfStrEq{#1}{j}{%
+				\jmath%
+			}{%
+				#1
+			}%
+		}%
+	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+\begin{document}
+
+\section{Géométrie cartésienne}
+
+\subsection{Coordonnées} \label{tnsgeo-coordinates}
+
+\newparaexample{Des coordonnées seules}
+
+\verb+tnsgeo+ propose, via un argument optionnel, six façons différentes de rédiger des coordonnées seules \emph{(nous verrons après des macros pour les coordonnées d'un point et celles d'un vecteur afin de produire un code \LaTeX{} plus sémantique)}. Commençons par les écritures horizontales où vous noterez l'utilisation de \verb+|+ pour séparer les coordonnées dont le nombre peut être quelconque.
+
+\begin{latexex}
+$\coord    {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sp]{\dfrac{1}{3} | -4 | 0}$
+
+$\coord[b] {\dfrac{1}{3} | -4 | 0}$ ou
+$\coord[sb]{\dfrac{1}{3} | -4 | 0}$
+\end{latexex}
+
+
+Il existe en plus deux versions verticales.
+
+\begin{latexex}
+$\coord[vp]{3 | -4}$ ou
+$\coord[vb]{3 | -4}$
+\end{latexex}
+
+
+Voici d'où viennent les noms des options.
+\begin{enumerate}
+	\item \prefix{p}, qui est aussi la valeur par défaut, vient de \whyprefix{p}{arenthèses}.
+
+	\item \prefix{b} vient de \whyprefix{b}{rackets} soit \inenglish{crochets}.
+
+	\item \prefix{s} pour \whyprefix{s}{mall} soit \inenglish{petit} permet d'avoir des délimiteurs non extensibles en mode horizontal car par défaut ils le sont.
+
+	\item \prefix{v} pour \whyprefix{v}{ertical} demande de produire une écriture verticale.
+\end{enumerate}
+
+
+% ---------------------- %
+
+
+\newparaexample{Coordonnées d'un point}
+
+La macro \macro{pcoord} avec \prefix{p} pour  \whyprefix{p}{oint} prend un argument supplémentaire avant les coordonnées qui est le nom d'un point qui sera mis en forme par la macro \macro{pt}. Si vous ne souhaitez pas que \macro{pt} soit appliquée, il suffit de passer via la version étoilée \macro{pcoord*}.
+
+\begin{latexex}
+$\pcoord{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*{\Sigma}{7 | 9 | 8}$
+\end{latexex}
+
+
+Toutes les options disponibles avec \macro{coord} le sont aussi avec  \macro{pcoord}. 
+
+\begin{latexex}
+$\pcoord[b]{A}{3 | -4 | 0 | -1}$ ou
+$\pcoord*[b]{\Sigma}{7 | 9 | 8}$
+\end{latexex}
+
+
+
+% ---------------------- %
+
+
+\newparaexample{Coordonnées d'un vecteur}
+
+Le fonctionnement de \macro{vcoord} est similaire à celui de \macro{pcoord} si ce n'est que c'est la macro \macro{vect} qui sera appliquée si besoin.
+
+\begin{latexex}
+$\vcoord{u}{3 | -4}$ ou
+$\vcoord*{\dfrac{1}{2} \vect{u}}%
+         {3 | -4}$
+
+$\vcoord[vp]{u}{3 | -4}$ ou
+$\vcoord*[vp]{\dfrac{1}{2} \vect{u}}%
+             {3 | -4}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\label{tnsgeo-coordinates-tech}
+
+\IDmacro{coord}{1}{1}
+
+
+\IDoption{} la valeur par défaut est \verb+p+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+p + : écriture horizontale avec des parenthèses extensibles.
+
+	\item \verb+sp+ : écriture horizontale avec des parenthèses non extensibles.
+
+	\item \verb+vp+ : écriture verticale avec des parenthèses.
+
+	\item \verb+b + : écriture horizontale avec des crochets extensibles.
+
+	\item \verb+sb+ : écriture horizontale avec des crochets non extensibles.
+
+	\item \verb+vb+ : écriture verticale avec des crochets.
+\end{enumerate}
+
+
+\IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+ , chaque morceau étant une coordonnée. Il peut n'y avoir qu'un seul morceau.
+
+
+\separation
+
+
+\IDmacro{pcoord}{1}{2} où \quad \mwhyprefix{v}{ertical}
+
+\IDoption{} voir les indications données pour la macro \macro{coord}.
+
+\IDarg{1} le point auquel sera appliqué automatiquement la macro \macro{pt}.
+
+\IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
+
+
+\separation
+
+
+\IDmacro{pcoord*}{1}{2} où \quad \mwhyprefix{v}{ertical}
+
+\IDoption{} voir les indications données pour la macro \macro{coord}.
+
+\IDarg{1} le point auquel ne sera pas appliqué automatiquement la macro \macro{pt}.
+
+\IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
+
+
+\separation
+
+
+\IDmacro{vcoord}{1}{2} où \quad \mwhyprefix{v}{ertical}
+
+\IDoption{} voir les indications données pour la macro \macro{coord}.
+
+\IDarg{1} le vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
+
+
+\separation
+
+
+\IDmacro{vcoord*}{1}{2} où \quad \mwhyprefix{v}{ertical}
+
+\IDoption{} voir les indications données pour la macro \macro{coord}.
+
+\IDarg{1} le vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
+
+
+\end{document}

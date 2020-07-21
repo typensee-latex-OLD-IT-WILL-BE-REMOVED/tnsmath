@@ -89,7 +89,6 @@ As a consequence there are a lot of backward incompatibilities. See all the chan
 
         * ``\sder`` and ``\sder[e]`` replace ``\derpow*`` and ``\derpow`` (there are two options to add parenthesis).
 
-
         * ``\der`` must be used with also the variable of derivation. This macro has several options for different kinds of formattings (the output made by ``\derfrac``, ``\derfrac*`` and ``\dersub`` before are still possible).
 
         * ``\derope`` allows to write a functional operator.

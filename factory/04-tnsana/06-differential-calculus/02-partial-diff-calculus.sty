@@ -1,0 +1,201 @@
+% == PACKAGES USED == %
+
+
+% == DEFINITIONS == %
+
+% Partial derivate
+
+%     + Abstraction
+
+\newcommand\tnsana@pder@abstract@frac[4]{%
+    #1{%
+        \pp[#4]{#2}%
+    }{%
+% ARG 1 = Separator: |
+% ARG 2 = All parts: what the user types !
+% ARG 3 = Before   : nothing here
+% ARG 4 = Between  : ;
+% ARG 5 = After    : nothing here
+        \tns@multi@args{|}{#3}{\partial}{\,\partial}{}%
+    }
+}
+
+\newcommand\tnsana@pder@dfrac[3]{%
+    \tnsana@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
+}
+
+\newcommand\tnsana@pder@frac[3]{%
+    \tnsana@pder@abstract@frac{\frac}{#1}{#2}{#3}%
+}
+
+\newcommand\tnsana@pder@ope@dfrac[3]{%
+    \tnsana@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+\newcommand\tnsana@pder@ope@frac[3]{%
+    \tnsana@pder@abstract@frac{\frac}{}{#2}{#3}#1%
+}
+
+
+\newcommand\tnsana@pder@sub[3]{
+% The following command works because xstring traits {...} like a single character.
+    \noexpandarg%
+    \StrSubstitute{#2}{^}{\tnsana@der@func@no@ext@par}[\@index]%
+    \partial%
+    ^{\kern.15ex#3\kern.15ex}%
+    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\kern.05em,\kern.05em}}%
+    #1%
+    \expandarg%
+}
+
+
+
+\newcommand\tnsana@hack@subit[2]{%
+	{#1}_{#2\kern-.075em}%
+}
+
+\ExplSyntaxOn
+	\NewDocumentCommand\tnsana@pder@expanded@sub{mmm}{
+		\tnsana@hack@subit{#1}{%
+			\projetmbc_test:n{\expandafter\StrSubstitute\expandafter{#2}{|}{\kern.075em}}%
+		}%
+	}
+
+	\tl_new:N \l__projetmbc_test_tl
+
+	\cs_new_protected:Nn \projetmbc_test:n {
+  		\tl_set:Nn \l__projetmbc_test_tl { #1 }
+  		\regex_replace_all:nnN
+   			{ (\cB. .*? \cE.|[[:alpha:]])\^ } % search a braced group or single letter followed by ^
+   			{ \c{projetmbc_power:nn} \1 } % prepend \projetmbc_power:nn and remove ^
+   		\l__projetmbc_test_tl
+   		\ensuremath { \tl_use:N \l__projetmbc_test_tl }
+ 	}
+
+	\cs_new:Nn \projetmbc_power:nn {
+  		\prg_replicate:nn { #2 } { #1\kern.075em }
+ 	}
+\ExplSyntaxOff
+
+
+
+
+
+
+
+
+
+
+
+
+%     + With the function given
+
+\newcommand\tnsana@validate@pder@option[1]{
+    \IfEqCase{#1}{%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {ei}{\booltrue{tnsana@der@option@ei}}%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use f (default), sf, of, osf, i, ei, p and sp}%
+    ]%
+}
+
+
+\newcommand\pder[4][f]{%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@ei}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@pder@option{#1}
+    %
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+            or
+            bool {tnsana@der@option@i}
+            or
+            bool {tnsana@der@option@ei}
+        )
+    }{%
+        \booltrue{tnsana@der@option@f}%
+    }{}%
+    % Parentheses or not
+    \ifbool{tnsana@der@option@p}{%
+        \let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@der@option@sp}{%
+            \let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    % Expo total
+    \IfStrEq{#4}{1}{%
+        \def\expotot{}
+    }{%
+        \def\expotot{#4}
+    }%
+    % Big frac
+    \ifbool{tnsana@der@option@f}{%
+        \let\callithere\tnsana@pder@dfrac%
+    }{%
+    % Big frac ope
+        \ifbool{tnsana@der@option@of}{%
+            \let\callithere\tnsana@pder@ope@dfrac%
+        }{%
+    % Small frac
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@pder@frac%
+            }{%
+    % Small frac ope
+                \ifbool{tnsana@der@option@osf}{%
+                    \let\callithere\tnsana@pder@ope@frac%
+                }{%
+    % Indice
+                    \ifbool{tnsana@der@option@i}{%
+                        \let\callithere\tnsana@pder@sub%
+                    }{%
+                    	\let\callithere\tnsana@pder@expanded@sub%
+                    }%
+                }%
+            }%
+        }%
+    }%
+    % Let's do the job
+    \callithere{\parithere{#2}}{#3}{\expotot}%
+}
+
+
+
+%     + Operator for partiaal derivations
+
+\newcommand\pderope[3][f]{%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \pder[#1]{}{#2}{#3}%
+}

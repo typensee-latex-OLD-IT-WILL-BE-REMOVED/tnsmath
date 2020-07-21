@@ -1,0 +1,39 @@
+% == PACKAGES USED == %
+
+\RequirePackage{xstring}
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+
+\newcommand\angleorient[3][p]{%
+    \IfEqCase{#1}{%
+% Big parenthesis (no hat)
+        {p}{%
+            \tns@generic@interval@ext{(}{\, #2}{\tnsmathsep}{#3\, }{)}%
+        }%
+% Small parenthesis (no hat)
+        {sp}{%
+            \tns@generic@interval@semi@ext{(}{\, #2}{\tnsmathsep}{#3\, }{)}%
+        }%
+% Hat - Big parenthesis
+        {h}{%
+            \widehat{\angleorient{#2}{#3}}%
+        }%
+% Hat - Small parenthesis
+        {sh}{%
+            \widehat{\angleorient[sp]{#2}{#3}}%
+        }%
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use p (default), sp, h or sh.}%
+    ]%
+}
+
+
+\newcommand\vangleorient[3][p]{%
+    \angleorient[#1]{\vect{#2}}{\vect{#3}}%
+}
+

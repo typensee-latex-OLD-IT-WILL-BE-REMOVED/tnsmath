@@ -1,0 +1,77 @@
+% == PACKAGES USED == %
+
+\RequirePackage{ifmtarg}
+\RequirePackage{trimspaces}
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+% Sources : see the sources of the macros for continued fractions.
+
+% General naming of axes
+\def\tnsgeo@axes@comafy@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsmathsubsep{} \tnsgeo@axes@comafy@#2\@nil%
+    }%
+}
+
+\newcommand\axes{\@ifstar{\tnsgeo@axes@star}{\tnsgeo@axes@no@star}}
+
+\newcommand\tnsgeo@axes@no@star[1]{%
+    \tnsgeo@axes@no@star@splitter@#1|\@nil%
+}
+\def\tnsgeo@axes@no@star@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@#2\@nil}{)}}%
+}
+
+\newcommand\tnsgeo@axes@star[1]{%
+    \tnsgeo@axes@star@splitter@#1|\@nil%
+}
+\def\tnsgeo@axes@star@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@semi@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@#2\@nil}{)}}%
+}
+
+% Geometric points for naming some axes
+\def\tnsgeo@axes@comafy@gptify@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        \pt{#1}%
+    }{%
+        \pt{#1} \tnsmathsubsep{} \tnsgeo@axes@comafy@gptify@#2\@nil%
+    }%
+}
+
+\newcommand\paxes[1]{%
+    \tnsgeo@paxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@paxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{\pt{#1}}{\tnsmathsep{}}{\tnsgeo@axes@comafy@gptify@#2\@nil}{)}}%
+}
+
+% Vectors for naming some axes
+\def\tnsgeo@axes@comafy@vectify@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        \vect{\trim@spaces{#1}}%
+    }{%
+        \vect{\trim@spaces{#1}} \tnsmathsubsep{} \tnsgeo@axes@comafy@vectify@#2\@nil%
+    }%
+}
+
+\newcommand\vaxes[1]{%
+    \tnsgeo@vaxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@vaxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@vectify@#2\@nil}{)}}%
+}
+
+% Geometric points and vectors for naming some axes
+\newcommand\pvaxes[1]{%
+    \tnsgeo@pvaxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@pvaxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{\pt{#1}}{\tnsmathsep{}}{\tnsgeo@axes@comafy@vectify@#2\@nil}{)}}%
+}
+

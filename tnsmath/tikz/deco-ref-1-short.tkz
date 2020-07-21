@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    % ---------------------------------------------------- %
+    % -- Code tkz-tab pour les signes non reproduit ici -- %
+    % ---------------------------------------------------- %
+
+    \graphSign        {1}{x2}
+    \graphSign[purple]{2}{sqrt}
+    \graphSign[gray]  {3}{exp}
+\end{tikzpicture}

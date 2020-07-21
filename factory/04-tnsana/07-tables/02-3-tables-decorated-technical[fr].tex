@@ -1,0 +1,106 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-constants/01-constants.sty}
+    \input{../03-abs-function/01-abs-function.sty}
+	\usepackage{amsmath}
+
+    \usepackage{01-tables}
+\makeatother
+
+
+\begin{document}
+
+%% \section{Analysis}
+%
+%\section{Tableaux de variation et de signe}
+
+\section{Fiche technique}
+
+\subsection{Coloriser le fond}
+
+\IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
+
+
+\IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+gray!30+.
+
+
+\IDarg{1} les numéros de ligne séparés par des virgules, $0$ étant le 1\ier{} numéro.
+
+
+% ---------------------- %
+
+
+\subsection{Commentaires}
+
+\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+
+
+\IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+blue+.
+
+
+\IDarg{1} le numéro de ligne, $0$ étant le 1\ier{} numéro.
+
+\IDarg{2} le texte du commentaire.
+
+
+% ---------------------- %
+
+
+\subsection{Graphiques explicatifs}
+
+\IDmacro{graphSign}{1}{2..4}
+
+
+\IDoption{} couleur au format TikZ.
+            La valeur par défaut est \verb+blue+.
+
+
+\IDarg{1} le numéro de ligne, $0$ étant le 1\ier{} numéro.
+
+
+\IDarg{2} le type de fonctions avec des contraintes éventuelles en utilisant la virgule comme séparateur d'informations.
+
+\begin{enumerate}
+	\item \verb@x2  @ sans espace indique $f(x) = x^2$.
+
+	\item \verb@srqt@ sans espace indique $f(x) = \sqrt{x}$.
+
+	\item \verb@1/x @ sans espace indique $f(x) = \frac{1}{x}$.
+
+	\item \verb@abs @ sans espace indique $f(x) = \abs{x}$.
+
+	\item \verb@exp @ sans espace indique $f(x) = \exp x$.
+
+	\item \verb@ln  @ sans espace indique $f(x) = \ln x$.
+
+    % ==================== %
+
+	\medskip
+	
+	\item \verb@ax+b    @ sans espace indique $f(x) = ax + b$ avec $a \neq 0$ à caractériser.
+
+	\item \verb@ax2+bx+c@ sans espace indique $f(x) = ax^2 + bx + c$ avec $a \neq 0$ et le discriminant $d$ à caractériser.
+
+    % ==================== %
+
+	\medskip
+	
+	\item \verb@ap@ et \verb@an@ indiquent respectivement les conditions $a > 0$ et $a < 0$.
+
+	\item \verb@dp@, \verb@dz@ et \verb@dn@ indiquent respectivement les conditions $d > 0$, $d = 0$ et $d < 0$.
+\end{enumerate}
+
+
+\IDarg{3 supplémentaire pour ax+b} la racine réelle de $ax + b$.
+
+
+\IDarg{$\!$s supplémentaires éventuels pour ax2+bx+c} si $ax^2 + bx + c$ admet une ou deux racines réelles, on donnera toutes les racines de la plus petite à la plus grande
+\footnote{
+	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
+}.
+
+\end{document}

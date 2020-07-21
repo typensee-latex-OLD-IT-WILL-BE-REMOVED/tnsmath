@@ -1,0 +1,270 @@
+Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
+
+
+% -------------- %
+% -- tnsana -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.1.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.2.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Symboles} les nouvelles macros \macro{symvar} et \macro{symvar*} produisent un disque plein et un carré plein permettant par exemple d'indiquer symboliquement une ou des variables.
+    
+    
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.3.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic{Dérivation}
+    \begin{itemize}[itemsep=.5em]
+        \item Dérivation pointée à la physicienne via \verb+d+ et \verb+bd+ deux nouvelles options de \macro{der}.
+
+        \item La dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
+    \end{itemize}
+
+% ------------------------ %
+
+
+    
+
+
+    \item \topic{Tableaux de signe et de variation}
+    \begin{itemize}[itemsep=.5em]
+        \item Ajout de \macro{backLine} pour changer la couleur de fond d'une ou plusieurs lignes.
+
+
+        \item \macro{graphSign} propose des fonctions de référence \emph{(sans paramètre)}.
+    \end{itemize}
+
+% ------------------------ %
+
+
+    
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.4.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Limite}
+          ajout de \macro{limit} pour l'écriture de limites de fonctions à une seule variable.
+
+% ------------------------ %
+
+    
+
+    \item \topic*{Dérivation}
+          par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
+
+% ------------------------ %
+
+    
+
+    \item \topic*{Intégration}
+          par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
+          Il en va de même pour \macro{hook}.
+
+% ------------------------ %
+
+    
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsarith -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Arithmétique [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Arithmétique [0.1.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Fonctions nommées} ajout de \macro{pgcd}, \macro{ppcm} et \macro{lcm}.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsgeo -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Géométrie [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Géométrie [0.1.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Produit scalaire}
+          trois nouvelles options pour \macro{dotprod} et \macro{vdotprod}.
+    \begin{itemize}[itemsep=.5em]
+        \item \verb+p+ et \verb+sp+ donnent une écriture parenthésée.
+
+        \item \verb+b+ utilise une puce au lieu d'un point.
+    \end{itemize}
+
+
+	
+
+
+    \item \topic*{Produit vectoriel}
+          un nouvel argument optionnel pour \macro{crossprod} et \macro{vcrossprod} afin d'obtenir aussi une mise en forme avec le symbole $\times$ .
+
+
+    
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnslinalg -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Algèbre linéaire [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnslog -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Méthode formelle en logique [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnspoly -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Polynômes et séries formelles [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsproba -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Probabilité [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsseq -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Suites [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnssets -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Théorie générale des ensembles [0.0.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item Simple migration depuis l'ancien code de \verb+lymath+.
+\end{itemize}
+
+
+\separation

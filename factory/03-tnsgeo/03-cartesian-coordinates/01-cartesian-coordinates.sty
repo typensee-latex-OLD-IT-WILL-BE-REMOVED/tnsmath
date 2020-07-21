@@ -1,0 +1,61 @@
+% == PACKAGES USED == %
+
+\RequirePackage{nicematrix}
+\RequirePackage{xstring}
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+\newcommand\coord[2][p]{%
+    \IfEqCase{#1}{%
+        {p}{%
+            \left( \,%
+% ARG 1  = Separator: |
+% ARG 2  = All parts: what the user types !
+% ARG 3  = Before   : nothing here
+% ARG 4  = Between  : ;
+% ARG 5  = After    : nothing here
+% OPTION = Ornament : macro to apply to each item
+                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+             \, \right)%
+        }{sp}{%
+            (\tns@multi@args{|}{#2}{}{\tnsmathsep}{})%
+        }{b}{%
+            \left[ \,%
+                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+             \, \right]%
+        }{sb}{%
+            [\tns@multi@args{|}{#2}{}{\tnsmathsep}{}]%
+        }{vp}{%
+            \tns@multi@args{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+        }{vb}{%
+            \tns@multi@args{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+        }%
+    }[
+        \PackageError{ynsgeo}{unknown option}%
+                             {You can use p (default), sp, b, sb, vp or vb.}
+    ]%
+}
+
+
+\newcommand\tnsgeo@extra@coord[3][p]{%
+    #2\coord[#1]{#3}%
+}
+
+
+\newcommand\pcoord{\@ifstar{\tnsgeo@extra@coord}{\tnsgeo@pcoord@no@star}}
+
+\newcommand\tnsgeo@pcoord@no@star[3][p]{%
+    \pt{#2}\coord[#1]{#3}%
+}
+
+
+\newcommand\vcoord{\@ifstar{\tnsgeo@extra@coord}{\tnsgeo@vcoord@no@star}}
+
+\newcommand\tnsgeo@vcoord@no@star[3][p]{%
+    \vect{#2}\coord[#1]{#3}%
+}
+
+

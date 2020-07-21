@@ -1,0 +1,34 @@
+\documentclass[12pt,a4paper]{book}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\subsection{Les arguments : deux conventions à connaître}
+
+\subsubsection{Avec un nombre fixé d'arguments}
+
+Dans ce cas, c'est la syntaxe \LaTeX{} usuelle qui sera à utiliser comme dans \macro{dotprod\{u\}\{v\}}.
+
+
+% ---------------------- %
+
+
+\subsubsection{Avec un nombre variable d'arguments}
+
+Certaines macros offrent la possibilité de fournir un nombre variable d'arguments comme dans \macro{coord\{x | y | z | t\}} et \macro{coord\{x | y\}}.
+Ceci se fait en utilisant un seul argument, au sens de \LaTeX{}, dont le contenu est formé de morceaux séparés par des traits verticaux \verb+|+.
+Ainsi dans \macro{coord\{x | y | z | t\}} l'unique argument \verb+x | y | z | t+, au sens de \LaTeX{}, sera analysé par \verb+tnsmath+ comme étant formé des quatre arguments \verb+x+ , \verb+y+ , \verb+z+ et \verb+t+.
+
+
+% ---------------------- %
+
+
+\subsubsection{Des arguments pas toujours affichés}
+
+Certaines macros pourront demander des arguments non utilisés pour la mise en forme. Pourquoi cela ? Tout simplement pour permettre des copier-coller lors de la rédaction : voir par exemple le calcul du déterminant de deux vecteurs du plan pour vérifier leur colinéarité \emph{(ceci est présenté dans la section \ref{tnsgeo-colinearity-criteria})}.
+
+\end{document}

@@ -1,0 +1,323 @@
+% == PACKAGES USED == %
+
+
+\RequirePackage{amsmath}
+\RequirePackage{witharrows}
+
+\RequirePackage{etoolbox}
+\RequirePackage{simplekv}
+
+
+% == DEFINITIONS == %
+
+% Space
+
+\newcommand\expltxtspacein{2em}
+
+
+% Common tools
+
+\newcommand\explcom[1]{%
+    \text{\color{purple}[\kern.225em{\footnotesize \itshape #1}\kern.3em]}%
+}
+
+
+\newcommand\explnext{\@ifstar{\tnslog@expl@next@star}{\tnslog@expl@next@no@star}}
+\newcommand\tnslog@expl@next@no@star{}
+\newcommand\tnslog@expl@next@star{}
+
+\newcommand\tnslog@explain@ope{=}
+
+
+\newcommand\comthis{\@ifstar{\tnslog@com@this@star}{\tnslog@com@this@no@star}}
+\newcommand\tnslog@com@this@no@star{}
+
+\newcommand\tnslog@com@this@star[1]{%
+    \ifbool{tnslog@starttnslog@explain@arrow@}{%
+        \PackageError{tnslog}{comment can't be use to start explain[style = sar]}%
+                             {No comment for the 1st part of explain[style = sar]}
+    }{%
+        \kern\expltxtspacein\explcom{#1}%
+    }%
+}
+
+\newcommand\tnslog@com@this@aligned[1]{%
+    \global\booltrue{tnslog@com@this@no@star@used}%
+    &%
+    \tnslog@com@this@star{#1}%
+}
+
+
+\newcommand\tnslog@expl@next@extra@column{}
+
+
+% Wrapper env with key-val options 
+
+\setKVdefault[tnslog@calc@explain@keys]{%
+    ope   = {=},
+    style = u,
+    com   = nal
+}
+
+\newenvironment{explain}[1][]{%
+    \useKVdefault[tnslog@calc@explain@keys]%
+    \setKV[tnslog@calc@explain@keys]{#1}%
+    \def\style{\useKV[tnslog@calc@explain@keys]{style}}%
+% Comments
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        \renewcommand\tnslog@com@this@no@star\tnslog@com@this@aligned%
+        \renewcommand\tnslog@expl@next@extra@column{&}
+    }{%
+        \renewcommand\tnslog@com@this@no@star\tnslog@com@this@star%
+        \renewcommand\tnslog@expl@next@extra@column{}
+    }%
+    \IfEqCase{\style}{%
+% University
+        {u}{%
+            \begin{tnslog@explain@university}%
+        }%
+% Arrows (long)
+        {ar}{%
+            \begin{tnslog@explain@arrow}%
+        }%
+% Arrows (short)
+        {sar}{%
+            \begin{tnslog@explain@short@arrow}%
+        }%
+    }[%
+        \PackageError{tnslog}{unknown style}%
+                             {You can use u (default), ar or sar.}%
+    ]%
+}{%
+    \IfEqCase{\style}{%
+% University
+        {u}{%
+            \end{tnslog@explain@university}%
+        }%
+% Arrows (long)
+        {ar}{%
+            \end{tnslog@explain@arrow}%
+        }%
+% Arrows (short)
+        {sar}{%
+            \end{tnslog@explain@short@arrow}%
+        }%
+    }%
+}
+    
+    
+% University version
+
+% For the good extra lengths, see :
+%    * https://tex.stackexchange.com/a/550837/6880
+
+\newcommand\dimmax[2]{%
+    \ifdim#1>#2 #1\else #2\fi
+}
+
+\newlength{\tnslog@upper@text@size}
+\newlength{\tnslog@lower@text@size}
+
+\newcommand\samesizeas[2]{%
+    \settowidth\tnslog@upper@text@size{#1}%
+    \settowidth\tnslog@lower@text@size{#2}%
+    \makebox[\dimmax{\tnslog@upper@text@size}{\tnslog@lower@text@size}][c]{#1}%
+}
+
+
+
+\newcommand\expltxt[1]{%
+    \text{\color{blue}\footnotesize \{\,{\itshape #1}\,\} }%
+}
+
+\newcommand\expltxtup[1]{%
+    $\uparrow$ #1 $\uparrow$%
+}
+
+\newcommand\expltxtdown[1]{%
+    $\downarrow$ #1 $\downarrow$%
+}
+
+\newcommand\expltxtupdown[2]{{%
+    \displaystyle\footnotesize\color{blue}%
+    \left\{\,%
+        \genfrac{}{}{0pt}{}{%
+            \text{\itshape\expltxtdown{\samesizeas{#1}{#2}}}%
+        }{%
+            \text{\itshape\expltxtup{\samesizeas{#2}{#1}}}%
+        }%
+    \,\right\}%
+}}
+
+
+
+\newcommand\tnslog@expl@next@university@no@star[2][\tnslog@explain@ope]{
+    \\&
+    {#1}
+    \if\relax\detokenize{#2}\relax\else
+        {} \kern\expltxtspacein \expltxt{#2}
+    \fi
+    \\&
+}
+
+\newcommand\tnslog@expl@next@university@separation{
+    \\&
+}
+
+
+
+\newcommand\tnslog@expl@next@university@star[3][\tnslog@explain@ope]{
+    \if\relax\detokenize{#2}\relax%
+        \if\relax\detokenize{#3}\relax%
+            \PackageError{tnslog}{two empty arguments}%
+                                 {at least one none empty text is needed}
+        \fi%
+    \fi%
+    %
+    \tnslog@expl@next@university@separation{}%
+    \if\relax\detokenize{#2}\relax%
+% Up empty
+%     + Down none empty
+        {#1}\kern\expltxtspacein%
+        \expltxt{\expltxtup{\samesizeas{#3}{#2}}}%
+    \else%
+% Up none empty
+%     + Down empty
+        \if\relax\detokenize{#3}\relax%
+            {#1}\kern\expltxtspacein{}%
+            \expltxt{\expltxtdown{\samesizeas{#2}{#3}}}%
+%     + Down none empty
+        \else%
+            {#1}\kern\expltxtspacein{}%
+            \expltxtupdown{#2}{#3}%
+        \fi%
+    \fi%
+    \tnslog@expl@next@extra@column{}
+    \tnslog@expl@next@university@separation{}
+}
+
+
+\newenvironment{tnslog@explain@university}{
+    \setlength{\abovedisplayskip}{0pt}%
+    \setlength{\belowdisplayskip}{0pt}%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@university@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@university@star%
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[format = rll]
+    }{%
+        $\WithArrows[format = rl]
+    }
+            &
+}{%
+         \endWithArrows$
+}
+
+
+% Middle school version
+
+\newcommand\tnslog@expl@next@middle@school@no@star[2][\tnslog@explain@ope]{%
+    \ifbool{tnslog@com@this@no@star@used}{}{%
+        \tnslog@expl@next@extra@column{}%
+    }%
+    \global\boolfalse{tnslog@com@this@no@star@used}%
+    %
+    %
+    \ifbool{tnslog@insidetnslog@explain@short@arrow@}{%
+        \ifbool{tnslog@starttnslog@explain@arrow@}{%
+            \if\relax\detokenize{#2}\relax\else
+                \PackageError{tnslog}{illegal argument to start explain[style = sar]}%
+                                     {no argument for the first use of explnext in [style = sar]}
+            \fi
+            \global\boolfalse{tnslog@starttnslog@explain@arrow@}%
+        }{
+            \if\relax\detokenize{#2}\relax\else
+                \Arrow[tikz = <->]{#2}
+            \fi
+            \\
+        }
+    }{
+        \if\relax\detokenize{#2}\relax\else
+            \Arrow[tikz = <->]{#2}
+        \fi
+        \\
+    }%
+    &#1%
+}
+
+% Source
+% https://tex.stackexchange.com/a/550754/6880
+
+\NewDocumentCommand \@double@arrow@{O {} m m}{
+    \Arrow[   tikz = -> , #1]{#2}%
+    \Arrow[o, tikz = <- , #1]{#3}
+}
+ 
+
+\newcommand\tnslog@expl@next@middle@school@star[3][\tnslog@explain@ope]{
+    \ifbool{tnslog@com@this@no@star@used}{}{%
+        \tnslog@expl@next@extra@column{}%
+    }%
+    \global\boolfalse{tnslog@com@this@no@star@used}%
+    %
+    \if\relax\detokenize{#2}\relax%
+        \if\relax\detokenize{#3}\relax%
+            \PackageError{tnslog}{two empty arguments}%
+                                 {at least one none empty text is needed}
+        \else%
+            \Arrow[tikz = <-]{#3}%
+        \fi%
+    \else%
+        \if\relax\detokenize{#3}\relax%
+            \Arrow[tikz = ->]{#2}%
+        \else%
+            \@double@arrow@{#2}{#3}
+        \fi%
+    \fi%
+    \\
+    &#1%
+}
+
+\newbool{tnslog@com@this@no@star@used} 
+
+\newbool{tnslog@starttnslog@explain@arrow@} 
+\newbool{tnslog@insidetnslog@explain@short@arrow@} 
+
+\newenvironment{tnslog@explain@arrow}{
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@middle@school@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@middle@school@star%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    %
+    \boolfalse{tnslog@insidetnslog@explain@short@arrow@}%
+    \boolfalse{tnslog@starttnslog@explain@arrow@}%
+    \boolfalse{tnslog@com@this@no@star@used}%
+    %
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[tikz = blue, groups, format = rll]
+    }{%
+        $\WithArrows[tikz = blue, groups, format = rl]
+    }
+            &\phantom{{}\tnslog@explain@ope{}}
+}{%
+         \endWithArrows$
+}
+
+\newenvironment{tnslog@explain@short@arrow}{
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@middle@school@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@middle@school@star%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    %
+    \booltrue{tnslog@insidetnslog@explain@short@arrow@}%
+    \booltrue{tnslog@starttnslog@explain@arrow@}%
+    \boolfalse{tnslog@com@this@no@star@used}%
+    %
+    %
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[tikz = blue, groups, format = rll]%
+    }{%
+        $\WithArrows[tikz = blue, groups, format = rl]%
+    }%
+}{%
+         \endWithArrows$
+}
+

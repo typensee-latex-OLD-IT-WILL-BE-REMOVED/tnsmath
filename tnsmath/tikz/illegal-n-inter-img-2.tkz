@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 4]{
+        $x$     / 0.75 ,
+        $f'(x)$ / 1    ,
+        $f(x)$  / 1.5
+    }{
+                $0$                , $\ee$     , $+\infty$
+    }
+    \tkzTabLine{d              , + , 0         , - ,          }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$ , - / $0$  }
+    %
+    \tkzTabVal[draw]{1}{2}{0.5} % Position entre les 1re et 2e valeurs au milieu.
+                    {$1$}{$\frac{1}{\ee}$}
+    \tkzTabVal[draw]{2}{3}{0.5} % Position entre les 2e et 3e valeurs au milieu.
+                    {$\ee^2$}{$1$}
+\end{tikzpicture}

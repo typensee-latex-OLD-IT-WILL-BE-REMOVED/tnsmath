@@ -1,0 +1,411 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+\RequirePackage{mathtools}
+
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+\RequirePackage{forloop}
+\RequirePackage{ifmtarg}
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+% Sources :
+%    * http://forum.mathematex.net/latex-f6/en-tete-de-ds-t12933.html#p124908
+%    * http://forum.mathematex.net/latex-f6/derivee-avec-un-d-droit-et-espace-t12932.html#p124930
+%    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
+%    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
+%    * https://tex.stackexchange.com/a/42445/6880
+%    * https://tex.stackexchange.com/a/553843/6880
+
+
+% dd, partial and pp useful operators
+%
+% Argument #1: the exponent
+% Argument #2: the variable
+% Argument #3: the operator
+% Argument #4: space before exponent
+% Argument #5: space after exponent
+
+\newcommand{\tnsana@diff@ope}[5]{%
+    #3%
+    \ifx0#1\else%
+        ^{\kern#4#1\kern#5}\!%
+    \fi%
+    \hspace{0.07em}#2%
+}
+
+
+\DeclareRobustCommand\@dder{
+    \mathop{}\mathopen{}\mathrm{d}
+}
+
+
+\newcommand\dd[2][0]{\tnsana@diff@ope{#1}{#2}{\@dder}{.05ex}{0.15ex}}
+
+
+\let\tnsana@original@partial\partial
+
+\renewcommand{\partial}{%
+    \tnsana@original@partial\mathopen{}%
+}
+
+
+\newcommand\pp[2][0]{\tnsana@diff@ope{#1}{#2}{\partial}{.15ex}{0.15ex}}
+
+
+% Common tools
+
+\newcounter{tnsana@der@prime@counter}
+
+\newcommand\tnsana@der@func@no@par[1]{%
+    #1%
+}
+
+\newcommand\tnsana@der@func@ext@par[1]{%
+    \left( #1 \right)%
+}
+
+\newcommand\tnsana@der@func@no@ext@par[1]{%
+    ( #1 )%
+}
+
+\newcommand\tnsana@der@func@under@bracket[1]{%
+    \overbracket[.75pt]{#1}%
+}
+
+
+\newbool{tnsana@der@option@u}
+\newbool{tnsana@der@option@e}
+\newbool{tnsana@der@option@d}
+\newbool{tnsana@der@option@bd}
+
+\newbool{tnsana@der@option@i}
+\newbool{tnsana@der@option@ei}
+
+\newbool{tnsana@der@option@f}
+\newbool{tnsana@der@option@of}
+\newbool{tnsana@der@option@sf}
+\newbool{tnsana@der@option@osf}
+
+\newbool{tnsana@der@option@p}
+\newbool{tnsana@der@option@sp}
+
+
+% Total derivate
+
+%     + Abstraction
+%
+%    #1 : macro applied to the function
+%    #2 : the function
+%    #3 : order of derivation
+
+\newcommand\tnsana@der@usual[3]{%
+    #1{#2}^{%
+        \,%
+        \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+            \prime%
+        }%
+    }%
+}
+
+
+\newcommand\tnsana@der@exp[3]{%
+    #1{#2}^{\left( #3 \right)}%
+}
+
+
+\newcommand\tnsana@der@dot[3]{%
+    \mathop{%
+        \kern\z@{#1{#2}}%
+    }\limits^{%
+        \vbox to-1.4\ex@{%
+            \kern-\tw@\ex@%
+            \hbox{\normalfont%
+                %
+                \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+                    .%
+                }%
+            }%
+            \vss%
+        }%
+    }%
+}
+
+
+\newcommand\tnsana@der@bracket@dot[3]{%
+    \tnsana@der@dot{\tnsana@der@func@under@bracket}{#1{#2}}{#3}%
+}
+
+
+
+\newcommand\tnsana@der@sub[3]{
+    \@dder%
+    \IfStrEq{#3}{1}{}{%
+        ^{\kern.15ex#3\kern.15ex}%
+    }%
+    _{\kern.15ex#2\kern.15ex} #1%
+}
+
+
+%    #1 : \frac or \dfrac 
+%    #2 : the function
+%    #3 : the variable
+%    #4 : order of derivation
+
+\newcommand\tnsana@der@abstract@frac[4]{%
+    #1{%
+        \IfStrEq{#4}{1}{%
+            \dd{#2}%
+        }{%
+            \dd[#4]{#2}%
+        }%
+    }{%
+        {%
+            \dd{#3}%
+            \IfStrEq{#4}{1}{}{%
+                ^{#4}%
+            }%
+        }%
+    }%
+}
+
+
+%    #1 : the function
+%    #2 : the variable
+%    #3 : order of derivation
+
+\newcommand\tnsana@der@dfrac[3]{%
+    \tnsana@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
+}
+
+
+\newcommand\tnsana@der@frac[3]{
+    \tnsana@der@abstract@frac{\frac}{#1}{#2}{#3}%
+}
+
+
+\newcommand\tnsana@der@ope@frac[3]{
+    \tnsana@der@abstract@frac{\frac}{}{#2}{#3}#1%
+}
+
+
+\newcommand\tnsana@der@ope@dfrac[3]{
+    \tnsana@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+
+%     + Simple version (no var. of derivation)
+
+\newcommand\tnsana@validate@simple@der@option[1]{
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use u (default), e , t , d , bd , p and sp}%
+    ]%
+}
+
+
+%    #1 : option of formating
+%    #2 : the  function (no var. here)
+%    #3 : order of derivation
+
+\newcommand\sder[3][u]{%
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@simple@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
+        )
+    }{%
+        \booltrue{tnsana@der@option@u}%
+    }{}%   
+    %
+    \ifbool{tnsana@der@option@p}{%
+    	\let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@der@option@sp}{%
+    		\let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+    \ifbool{tnsana@der@option@u}{%
+        \let\callithere\tnsana@der@usual%
+    }{%
+        \ifbool{tnsana@der@option@e}{%
+            \let\callithere\tnsana@der@exp%
+        }{%
+        	\ifbool{tnsana@der@option@d}{%
+            	\let\callithere\tnsana@der@dot%
+			}{%
+				\let\callithere\tnsana@der@bracket@dot%
+			}%
+        }%
+    }%
+    \callithere{\parithere}{#2}{#3}%
+}
+
+
+%     + Strict version (this one needs the var. of derivation)
+
+\newcommand\tnsana@validate@der@option[1]{
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use u (default), e , i , f , sf , oi , of , osf , p and sp}%
+    ]%
+}
+
+
+\newcommand\der[4][u]{%
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
+            or
+            bool {tnsana@der@option@i}
+            or
+            bool {tnsana@der@option@f}
+            or
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+        )
+    }{%
+        \booltrue{tnsana@der@option@u}%
+    }{}
+    % Usual, exponent or dot
+    \ifboolexpr{
+        bool {tnsana@der@option@u}
+        or
+        bool {tnsana@der@option@e}
+        or
+        bool {tnsana@der@option@d}
+        or
+        bool {tnsana@der@option@bd}
+    }{%
+        \sder[#1]{#2}{#4}
+    }{%    
+    % Indice or fraction like
+        \ifbool{tnsana@der@option@p}{%
+                \let\parithere\tnsana@der@func@ext@par%
+        }{%
+            \ifbool{tnsana@der@option@sp}{%
+                \let\parithere\tnsana@der@func@no@ext@par%
+            }{%
+                \let\parithere\tnsana@der@func@no@par%
+            }%
+        }%
+     % Big frac
+        \ifbool{tnsana@der@option@f}{%
+            \let\callithere\tnsana@der@dfrac%
+     % Small frac
+        }{%
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@der@frac%
+     % Indice
+            }{%
+                \ifbool{tnsana@der@option@i}{%
+                    \let\callithere\tnsana@der@sub%
+    % Big frac ope
+                }{
+                    \ifbool{tnsana@der@option@of}{%
+                        \let\callithere\tnsana@der@ope@dfrac%
+                    }{
+    % Small frac ope
+                        \ifbool{tnsana@der@option@osf}{%
+                            \let\callithere\tnsana@der@ope@frac%
+                        }{}%
+                    }%
+                }%
+             }%
+        }%
+    % Let's do the job
+        \callithere{\parithere{#2}}{#3}{#4}%
+    }%
+}
+
+
+%     + Operator for total derivations
+
+\newcommand\tnsana@validate@der@operator@option[1]{
+    \IfEqCase{#1}{%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use f (default), sf and i}%
+    ]%
+}
+
+
+\newcommand\derope[3][f]{%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \der[#1]{}{#2}{#3}%
+}
+

@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{01-det}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Matrices}
+
+\subsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+                           {Calculs expliqués des déterminants 2x2}} \label{tnslinalg-2D-det}
+
+\newparaexample*{}
+
+\begin{latexex}
+ $\calcdettwo*    {a}{c}%
+                  {b}{d}
+= \calcdettwo     {a}{c}%
+                  {b}{d}
+= \calcdettwo[exp]{a}{c}%
+                  {b}{d}$
+\end{latexex}
+
+
+\begin{remark}
+	Il existe deux autres types de développement.
+	\begin{enumerate}
+		\item $\calcdettwo[cexp]{a}{c}{b}{d}$ s'obtient via l'option \verb+cexp+.
+		
+		\item $\calcdettwo[texp]{a}{c}{b}{d}$ s'obtient via l'option \verb+texp+
+	\end{enumerate}
+	\prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\IDmacro{calcdettwo }{1}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDmacro{calcdettwo*}{1}{4}  où \quad \mwhyprefix{c}{alculate}
+
+\IDoption{} la valeur par défaut est \verb+std+ pour \verb+standard+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+std + : on utilise l'écriture matricielle.
+
+	\item \verb+exp + : ceci demande d'afficher une formule développée en utilisant $\times$ pour les produits.
+
+	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+	\item \verb+sexp+ : comme \verb+exp+ mais avec un espace pour séparer les facteurs de chaque produit.
+\end{enumerate}
+
+\IDarg{1} l'entrée à la position $(1, 1)$
+
+\IDarg{2} l'entrée à la position $(1, 2)$
+
+\extraspace
+
+\IDarg{3} l'entrée à la position $(2, 1)$
+
+\IDarg{4} l'entrée à la position $(2, 2)$                   
+
+
+
+
+
+
+
+
+%% ---------------------- %
+%
+%
+%\subsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                              {Calculs expliqués des déterminants 3x3}}
+%
+%Dans les exemples suivants, le préfixe \prefix{c} reste pour \whyprefix{c}{alculer} et \prefix{three} est pour \inenglish{trois}.
+%
+%
+%% ---------------------- %
+%
+%
+%\paragraph{Exemple 1 -- Bien pour les débutants}
+%
+%\begin{latexex}
+%$\calcdetthree{a}{c}{c}%
+%           {x}{y}{z}%
+%           {r}{s}{t}$
+%\end{latexex}         
+%
+%
+%% ---------------------- %
+%
+%
+%\paragraph{Exemple 2 -- Plus efficace à l'usage}
+%
+%\begin{latexex}
+%$\calcdetthree*{a}{c}{c}%
+%            {x}{y}{z}%
+%            {r}{s}{t}$
+%\end{latexex}                      
+%
+%
+%% ---------------------- %
+%
+%
+%\subsection{Fi    ches techniques}
+%
+%\paragraph{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%                          {Calculs expliqués des déterminants 3x3}}
+%
+%\IDmacro*{calcdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDmacro*{calcdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
+%
+%\IDarg{1} l'entrée à la position $(1, 1)$
+%
+%\IDarg{2} l'entrée à la position $(1, 2)$
+%
+%\IDarg{3} l'entrée à la position $(1, 3)$
+%
+%\extraspace
+%
+%\IDarg{4} l'entrée à la position $(2, 1)$
+%
+%\IDarg{5} l'entrée à la position $(2, 2)$
+%
+%\IDarg{6} l'entrée à la position $(2, 3)$
+%
+%\extraspace
+%
+%\IDarg{7} l'entrée à la position $(3, 1)$
+%
+%\IDarg{8} l'entrée à la position $(3, 2)$
+%
+%\IDarg{9} l'entrée à la position $(3, 3)$
+%
+
+\end{document}

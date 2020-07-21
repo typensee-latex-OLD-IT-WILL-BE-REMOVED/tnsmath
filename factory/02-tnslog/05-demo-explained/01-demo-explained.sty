@@ -1,0 +1,213 @@
+% == PACKAGES USED == %
+
+
+\RequirePackage{amsmath}
+\RequirePackage{witharrows}
+
+\RequirePackage{etoolbox}
+\RequirePackage{simplekv}
+
+\RequirePackage{longtable}
+
+
+% == DEFINITIONS == %
+
+%    * Texts used
+
+\newcommand\textdemoID{Réf.}
+\newcommand\textdemoKNOWN{Je sais que...}
+\newcommand\textdemoPROP{Propriété ou fait utilisé}
+\newcommand\textdemoCONS{Conséquence}
+
+\newcommand\textdemoHYPS{Démonstration sous les hypothèses}
+\newcommand\textdemoHYP{Démonstration sous l'hypothèse}
+\newcommand\textdemoCCL{Conclusion}
+
+\newcommand\textdemoNEXTPAGE{Suite de la démo. page suivante...}
+
+
+%    * Common tools
+
+\newcommand\explref{\@ifstar{\tnslog@expl@ref@star}{\tnslog@expl@ref@no@star}}
+
+\newcommand\tnslog@expl@ref@star[1]{%
+    \framebox[1.5em]{#1}%
+}
+
+\newcommand\tnslog@expl@ref@no@star[1]{%
+    \tnslog@expl@ref@star{\ref{#1}}%
+}
+
+\newcommand\demostep{}
+
+
+%    * University version 
+
+\newcounter{tnslog@demo@explain@id}
+
+
+\newcommand\@expl@id[1]{%
+    \framebox[1.5em]{\thetnslog@demo@explain@id}%
+    \if\relax\detokenize{#1}\relax\else%
+        \addtocounter{tnslog@demo@explain@id}{-1}%
+        \refstepcounter{tnslog@demo@explain@id}\label{#1}
+    \fi
+    \stepcounter{tnslog@demo@explain@id}%
+}
+
+
+\newbool{tnslog@start@demo@explain} 
+
+
+\newcommand\@demostep@no@star[1][]{%
+    \ifbool{tnslog@start@demo@explain}{%
+        \global\boolfalse{tnslog@start@demo@explain}%
+    }{%
+        \\
+    }%
+    \@expl@id{#1}
+    &
+}
+
+
+\setKVdefault[tnslog@demo@explain@keys]{%
+    start = 1,
+    hyps  = {},
+    hyp   = {},
+    ccl   = {}
+}
+
+
+\newenvironment{demoexplain}[1][]{
+    \renewcommand\demostep\@demostep@no@star
+    \useKVdefault[tnslog@demo@explain@keys]
+    \setKV[tnslog@demo@explain@keys]{#1}
+    %
+    \ifthenelse{\equal{\useKV[tnslog@demo@explain@keys]{start}}{last}}{
+    % If no environment has been used before !
+        \ifnum\value{tnslog@demo@explain@id}<1
+            \setcounter{tnslog@demo@explain@id}{1}
+        \fi
+    }{%
+        \setcounter{tnslog@demo@explain@id}{\useKV[tnslog@demo@explain@keys]{start}}%
+    }%
+    \def\hyps{\useKV[tnslog@demo@explain@keys]{hyps}}
+    \def\hyp{\useKV[tnslog@demo@explain@keys]{hyp}}
+    \edef\ccl{\useKV[tnslog@demo@explain@keys]{ccl}}
+    %
+    \if\relax\hyps\relax\else%
+        \if\relax\hyp\relax\else%
+            \PackageError{tnslog}{hyps and hyp are both used}%
+                                 {use either hyps or hyp, or none of them}
+        \fi
+    \fi
+    %
+    \if\relax\hyps\relax\else%
+        \underline{\textdemoHYPS\vphantom{p\textdemoCCL}} : \hyps
+        \vspace{-.25em}
+    \fi
+    \if\relax\hyp\relax\else%
+        \underline{\textdemoHYP\vphantom{p\textdemoCCL}} : \hyp
+        \vspace{-.25em}
+    \fi
+    \booltrue{tnslog@start@demo@explain}
+    \begin{longtable}{lll}
+        \multicolumn{3}{c}{}
+        \\[-.5em]
+        \multicolumn{3}{c}{%
+            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+        }
+        \endfoot
+        \endlastfoot
+}{
+    \end{longtable}
+    \if\relax\ccl\relax\else%
+        \vspace{-.25em}
+        \underline{\textdemoCCL\vphantom{\textdemoHYPS}} : \ccl
+    \fi
+}
+
+
+%    * Middle school version
+
+\newbool{tnslog@start@demo@explain@star}
+
+\newcounter{tnslog@demo@explain@star@id}
+
+
+\newcommand\tnslog@demo@extra[1]{%
+    {\footnotesize#1}%
+}
+
+
+\newcommand\tnslog@expl@star@id[1]{%
+    \thetnslog@demo@explain@star@id%
+    \if\relax\detokenize{#1}\relax\else%
+        \addtocounter{tnslog@demo@explain@star@id}{-1}%
+        \refstepcounter{tnslog@demo@explain@star@id}\label{#1}
+    \fi
+    \stepcounter{tnslog@demo@explain@star@id}%
+}
+
+
+\newcommand\tnslog@demostep@star[1][]{%
+    \ifbool{tnslog@start@demo@explain@star}{%
+        \global\boolfalse{tnslog@start@demo@explain@star}%
+    }{%
+        \\
+        \hline%
+    }%
+    \tnslog@expl@star@id{#1}%
+    &
+}
+
+
+\setKVdefault[tnslog@demo@explain@star@keys]{%
+    start = 1
+}
+
+
+\newenvironment{demoexplain*}[1][]{
+    \renewcommand\demostep\tnslog@demostep@star
+    \useKVdefault[tnslog@demo@explain@star@keys]
+    \setKV[tnslog@demo@explain@star@keys]{#1}
+    %
+    \ifthenelse{\equal{\useKV[tnslog@demo@explain@star@keys]{start}}{last}}{
+    % If no environment has been used before !
+        \ifnum\value{tnslog@demo@explain@star@id}<1
+            \setcounter{tnslog@demo@explain@star@id}{1}
+        \fi
+    }{%
+        \setcounter{tnslog@demo@explain@star@id}{\useKV[tnslog@demo@explain@star@keys]{start}}%
+    }%
+    \booltrue{tnslog@start@demo@explain@star}
+    \small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{longtable}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
+        \textbf{\tnslog@demo@extra{\textdemoID}}
+            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \\ \hline
+        \endfirsthead
+        %
+        \textbf{\tnslog@demo@extra{\textdemoID}}
+            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \\ \hline
+        \endhead
+        %
+        \multicolumn{3}{c}{}
+        \\[-1.25em]
+        \multicolumn{4}{c}{%
+            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+        }
+        \\
+        \endfoot
+
+        \endlastfoot
+}{
+    \end{longtable}
+    \renewcommand{\arraystretch}{1}
+}

@@ -1,0 +1,20 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+
+
+% == DEFINITIONS == %
+
+
+
+
+\newcommand\card{\@ifstar{\tnssets@card@star}{\tnssets@card@no@star}}
+
+\DeclareMathOperator{\tnssets@card@no@star}{\operatorname{card}}
+
+\newcommand\tnssets@card@star{\#}
+
+
+\DeclareMathOperator{\im}{\operatorname{im}}
+\DeclareMathOperator{\dom}{\operatorname{dom}}
+\DeclareMathOperator{\codom}{\operatorname{codom}}

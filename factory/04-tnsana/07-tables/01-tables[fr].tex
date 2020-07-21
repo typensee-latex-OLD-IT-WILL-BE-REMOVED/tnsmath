@@ -1,0 +1,209 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-constants/01-constants.sty}
+	\usepackage{amsmath}
+	
+    \usepackage{01-tables}
+\makeatother
+
+
+\begin{document}
+
+% \section{Analysis}
+
+\section{Tableaux de variation et de signe}
+
+\subsection{Les bases de \texttt{tkz-tab}}
+
+\paragraph{Comment ça marche ?}
+
+Pour les tableaux de variation et de signe non décorés, tout le boulot est fait par le package \verb+tkz-tab+.
+Ce package est utilisé avec les réglages par défaut \emph{\og maison \fg} suivants via l'utilisation de \macro{tkzTabSetup}.
+
+\begin{enumerate}
+	\item \verb+arrowstyle = triangle 60+ permet d'obtenir des pointes de flèche plus visibles.
+	
+	\item \verb+doubledistance = 3pt+ améliore la visibilité des doubles barres pour les valeurs interdites.
+\end{enumerate}
+
+
+ 
+
+\medskip
+
+Nous donnons quelques exemples classiques d'utilisation proches ou identiques de certains proposés dans la documentation de \verb+tkz-tab+ \emph{(les codes ont été mis en forme pour faciliter la compréhension de la syntaxe à suivre)}.
+Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'information : vous y trouverez des réglages très fins.
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des signes}
+
+\inputlatexexcodeafter{tikz/cos-sign.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des variations (sans cadre)}
+
+\inputlatexexcodeafter{tikz/basic-var.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Variations via une dérivée (sans cadre)}
+
+\inputlatexexcodeafter{tikz/sin-var-via-cos.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Une image intermédiaire avec une seule flèche}
+
+\inputlatexexcodeafter{tikz/inter-img.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Valeurs interdites et valeurs supplémentaires}
+
+\inputlatexexcodeafter{tikz/illegal-n-inter-img-1.tkz}
+
+
+Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
+
+\inputlatexexcodeafter{tikz/illegal-n-inter-img-2.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Signe à partir des variations (un peu de pédagogie...)}
+
+Il est assez facile de produire des choses très utiles pédagogiquement comme ce qui suit en se salissant un peu les mains avec du code TikZ.
+
+\begin{center}
+	\input{tikz/align-sign-from-var-1.tkz}
+\end{center}
+
+On déduit du tableau précédent le signe de la fonction $f$.
+
+\begin{center}
+	\input{tikz/align-sign-from-var-2.tkz}
+\end{center}
+
+
+Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu entre $2$ et $+\infty$ va nous simplifier le travail pour le 2\ieme{} tableau.
+
+\medskip
+
+\inputlatexexalone{tikz/align-sign-from-var-1.tkz}
+
+
+Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
+Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
+\footnote{
+    C'est grâce à ce mécanisme que \prefix{tnsana} peut proposer des outils explicatifs des tableaux de signe : voir la section suivante.
+}.
+	
+
+\inputlatexexcodeafter{tikz/node-name.tkz}
+
+
+Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
+Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
+
+\inputlatexexalone{tikz/align-sign-from-var-2.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Convexité et concavité symbolisées dans les variations}
+
+Voici un autre exemple s'utilisant la machinerie TikZ afin d'indiquer dans les variations la convexité et la concavité via des flèches incurvées \emph{(cette convention est proposée dans la sous-section \emph{\og Exemple utilisant l'option \macro{help} \fg} de la section \emph{\og Gallerie \fg}  de la documentation de \prefix{tkz-tab})}.
+
+\begin{center}
+\begin{tikzpicture}
+    \tkzTabInit[
+        espcl = 3,
+%        help       % <-- Pour voir les noms des noeuds.
+    ]{
+        $x$   / 0.75 ,
+        $f''$ / 1    ,
+        $f'$  / 2    ,
+        $f$   / 3
+    }{
+                $-\infty$          , $0$          , $+\infty$
+    }
+    \tkzTabLine{               , - , z        , + ,              }
+    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
+
+    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
+    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
+
+    \begin{scope}[->, > = triangle 60]
+        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
+        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
+        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
+        \path (N13) -- (N23) node[midway,below=6pt](N){};
+        %
+        \draw ([above=6pt]Middle1)
+              to [bend left=45] ([left=1pt]N);
+        \draw ([right=3pt]N)
+              to [bend left=45] ([above=6pt]Middle2) ;
+        \draw ([below right=3pt]Middle2)
+              to [bend left=-45] ([above=6pt]M24) ;
+        \draw ([above right=6pt]M24)
+              to [bend right=40] ([below left=6pt]Middle3);
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+Le code utilisé est le suivant.
+
+\begin{latexex-alone}
+\begin{tikzpicture}
+    \tkzTabInit[
+        espcl = 3,
+%        help       % <-- Pour voir les noms des noeuds.
+    ]{
+        $x$   / 0.75 ,
+        $f''$ / 1    ,
+        $f'$  / 2    ,
+        $f$   / 3
+    }{
+                $-\infty$          , $0$          , $+\infty$
+    }
+    \tkzTabLine{               , - , z        , + ,              }
+    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
+
+    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
+    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
+
+    \begin{scope}[->, > = triangle 60]
+        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
+        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
+        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
+        \path (N13) -- (N23) node[midway,below=6pt](N){};
+        %
+        \draw ([above=6pt]Middle1)
+              to [bend left=45] ([left=1pt]N);
+        \draw ([right=3pt]N)
+              to [bend left=45] ([above=6pt]Middle2) ;
+        \draw ([below right=3pt]Middle2)
+              to [bend left=-45] ([above=6pt]M24) ;
+        \draw ([above right=6pt]M24)
+              to [bend right=40] ([below left=6pt]Middle3);
+    \end{scope}
+\end{tikzpicture}
+\end{latexex-alone}
+
+\end{document}

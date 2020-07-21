@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{02-vector-norm}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+
+\makeatletter
+	\newcommand\@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+
+	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Vecteurs}
+
+\subsection{Norme}
+
+Ci-dessous l'argument optionnel de \macro{vnorm} vaut \prefix{b} par défaut pour \whyprefix{b}{ig} soit \inenglish{gros} mais l'on peut aussi utiliser \prefix{s} pour \whyprefix{s}{mall} soit \inenglish*{petit}. Par contre \macro{vnorm} n'a pas d'option.
+
+\begin{latexex}
+ $\norm{\vect{i}} = \vnorm{i}$
+
+ $\norm   {\dfrac{2}{7} \vect*{e}{k}}
+= \norm[s]{\dfrac{2}{7} \vect*{e}{k}}$
+\end{latexex}
+
+
+\begin{remark}
+	Le code \LaTeX{} pour des doubles barres extensibles ou non vient directement de ce message : \url{https://tex.stackexchange.com/a/43009/6880}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro{norm}{1}{1}
+
+\IDoption{} la valeur par défaut est \verb+b+. Deux options disponibles.
+\begin{enumerate}
+	\item \verb+b+ : des doubles barres extensibles sont utilisées.
+
+	\item \verb+s+ : des doubles barres non extensibles sont utilisées.
+\end{enumerate}
+
+
+\IDarg{} le vecteur sur lequel appliquer la norme.
+
+
+\separation
+
+\IDmacro*{vnorm}{1}
+
+\IDarg{} le nom du vecteur sur lequel appliquer la norme.
+
+
+\end{document}

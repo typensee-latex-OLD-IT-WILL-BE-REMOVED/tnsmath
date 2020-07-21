@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+    % ---------------------------------------------------- %
+    % -- Code tkz-tab pour les signes non reproduit ici -- %
+    % ---------------------------------------------------- %
+
+    \backLine{0, 5}
+
+    \comLine[gray]{0}{\kern1.75em Schémas}
+
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+
+    \comLine[gray]{5}{$\leftarrow$ Conclusion}
+\end{tikzpicture}

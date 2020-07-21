@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-constants/01-constants.sty}
+    \input{../03-abs-function/01-abs-function.sty}
+	\usepackage{amsmath}
+
+    \usepackage{01-tables}
+\makeatother
+
+
+\begin{document}
+
+%% \section{Analysis}
+%
+%\section{Tableaux de variation et de signe}
+
+\subsubsection{Quelques exemples}  \label{tnsana-graphsign-examples}
+
+\newparaexample{Avec une parabole}
+
+Il devient très facile de proposer un tableau décoré comme le suivant.
+
+\begin{center}
+	\input{tikz/deco-parabola.tkz}
+\end{center}
+
+
+En plus des deux exemples de schémas de paraboles, il faut noter dans le code supplémentaire ajouté l'utilisation de \verb#\kern1.75em# dans \verb#\comLine[gray]{0}{\kern1.75em Schémas}# afin de mettre un espace horizontal précis pour centrer à la main le texte \emph{\og Schémas \fg} \emph{(un peu sâle mais ça marche)}.
+
+\medskip
+
+\inputlatexexalone{tikz/deco-parabola-short.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des fonctions sans paramètre}
+
+Voici un 1\ier{} tableau avec certaines des fonctions sans paramètre.
+
+\begin{center}
+	\input{tikz/deco-ref-1.tkz}
+\end{center}
+
+Le code correspondant est le suivant.
+
+\medskip
+
+\inputlatexexalone{tikz/deco-ref-1-short.tkz}
+
+\medskip
+
+Voici un 2\ieme{} tableau avec les fonctions sans paramètre manquantes ci-dessus.
+
+\begin{center}
+	\input{tikz/deco-ref-2.tkz}
+\end{center}
+
+Le code correspondant est le suivant.
+
+\medskip
+
+\inputlatexexalone{tikz/deco-ref-2-short.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Commenter des variations} \label{tnsana-graphsign-com-two-lines}
+
+Pour finir, indiquons que les outils de décoration marchent aussi pour les tableaux de variation.
+Voici un exemple possible d'utilisation où les retours à la ligne ont été obtenus affreusement, ou pas, via \verb#\parbox{11.5em}{...}#.
+
+\begin{center}
+	\input{tikz/deco-var.tkz}
+\end{center}
+
+\end{document}

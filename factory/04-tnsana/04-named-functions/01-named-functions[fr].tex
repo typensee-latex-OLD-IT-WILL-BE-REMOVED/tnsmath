@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-named-functions}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Fonctions nommées spéciales}
+
+\subsection{Sans paramètre}
+
+Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
+
+\begin{latexex}
+$\fch x = \cosh x$ ou
+$\lg x$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+% List of functions without parameter - START
+
+\foreach \k in {acos, asin, atan}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {arccosh, arcsinh, arctanh}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {acosh, asinh, atanh}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {fch, fsh, fth}{
+
+    \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
+}
+                
+\separation
+
+\foreach \k in {afch, afsh, afth}{
+
+    \IDmacro*{\k}{0}
+}
+
+% List of functions without parameter - END
+
+
+% ---------------------- %
+
+
+\subsection{Avec un paramètre}
+
+Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
+
+\begin{latexex}
+$\logb{2} x = \lg x$ ou
+$\expb{6} y = 6^y$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+% List of functions with parameters - START
+
+\IDmacro*{expb}{1}
+
+\IDarg{} la base de l'exponentielle
+
+\separation
+
+\IDmacro*{logb}{1}
+
+\IDarg{} la base du logarithme
+
+% List of functions with parameters - END
+
+
+% ---------------------- %
+
+
+\subsection{Toutes les fonctions nommées en plus} \label{tnsana-all-named-functions}
+
+\vspace{-1em}
+
+\begin{multicols}{2}
+% Table of all - START
+    \verb+acos+ : $\acos\dots$
+
+    \verb+asin+ : $\asin\dots$
+
+    \verb+atan+ : $\atan\dots$
+
+    \verb+arccosh+ : $\arccosh\dots$
+
+    \verb+arcsinh+ : $\arcsinh\dots$
+
+    \verb+arctanh+ : $\arctanh\dots$
+
+    \verb+acosh+ : $\acosh\dots$
+
+    \verb+asinh+ : $\asinh\dots$
+
+    \verb+atanh+ : $\atanh\dots$
+
+    \verb+fch+ : $\fch\dots$
+
+    \verb+fsh+ : $\fsh\dots$
+
+    \verb+fth+ : $\fth\dots$
+
+    \verb+afch+ : $\afch\dots$
+
+    \verb+afsh+ : $\afsh\dots$
+
+    \verb+afth+ : $\afth\dots$
+
+    \verb+expb{p}+ : $\expb{p}\dots$
+
+    \verb+logb{p}+ : $\logb{p}\dots$
+% Table of all - END
+\end{multicols}
+
+\end{document}

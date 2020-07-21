@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-polynomial-and-co}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Polynômes et séries formelles de Laurent}
+
+\newparaexample{Polynômes de Laurent}
+
+Ci-dessous, la notation $\setpolylaurent{R}{X_1 | X_2}$ n'est pas standard.
+
+\begin{latexex}
+$\setpolylaurent{R}{X} =
+ \setpoly{R}{X | X^{-1}}$
+
+$\setpolylaurent{R}{X_1 | X_2} =
+ \setpoly{R}{X_1 | X_1^{-1} %
+           | X_2 | X_2^{-1}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Séries formelles de Laurent}
+
+Ci-dessous, la notation $\setserielaurent{Q}{X_1 | X_2}$ n'est pas standard.
+
+\begin{latexex}
+$\setserielaurent{Q}{X} =
+ \setserie{Q}{X | X^{-1}}$
+
+$\setserielaurent{Q}{X_1 | X_2} =
+ \setserie{Q}{X_1 | X_1^{-1} %
+            | X_2 | X_2^{-1}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\section{Fiches techniques}
+
+\IDmacro*{setpolylaurent }{2}
+
+\IDmacro*{setserielaurent}{2}
+
+\IDarg{1} l'ensemble auquel les coefficients appartiennent.
+
+\IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
+
+\end{document}

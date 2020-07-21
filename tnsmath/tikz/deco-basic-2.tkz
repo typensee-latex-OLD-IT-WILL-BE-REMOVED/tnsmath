@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+    \tkzTabInit[
+        lgt   = 3.5,  % Il faut de la place pour le dernier produit !
+        espcl = 2.5   % On réduit la largeur des colonnes pour les signes.
+    ]{
+        $x$                             / 0.75 ,
+        Signe de \\ $2 x - 3$           / 1.5  ,
+        Signe de \\ $-x + 5$            / 1.5  ,
+        Signe de \\ $(2 x - 3)(-x + 5)$ / 1.5
+    }{
+                $-\infty$     , $\frac{3}{2}$     , $5$     , $+\infty$
+    }
+    \tkzTabLine{          , - , z              , + , t   , + ,          }
+    \tkzTabLine{          , + , t              , + , z   , - ,          }
+    \tkzTabLine{          , - , z              , + , z   , - ,          }
+
+    \backLine{0, 3}
+
+    \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
+
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
+
+    \comLine[gray]{3}{$\leftarrow$ Signe du produit.}
+\end{tikzpicture}

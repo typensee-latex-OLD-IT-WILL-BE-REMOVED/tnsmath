@@ -1,0 +1,71 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+\makeatother
+
+\usepackage{01-arc}
+
+
+\makeatletter
+	\newcommand\tnsgeo@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+\section{Arcs circulaires}
+
+\newparaexample{}
+
+\begin{latexex}
+$\circarc{ABCDEF}$ ,
+$\circarc*{A}{rot}$ ou
+$\circarc{A_{rot}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex}
+$\circarc{i}$ ou
+$\circarc*{j}{2}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\section{Fiche technique}
+
+\IDmacro*{circarc}{1} où \quad \mwhyprefix{circ}{ular}
+
+\IDarg{} un texte donnant le nom d'un arc circulaire.
+
+
+\separation
+
+
+\IDmacro*{circarc*}{2} où \quad \mwhyprefix{circ}{ular}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
+
+\end{document}

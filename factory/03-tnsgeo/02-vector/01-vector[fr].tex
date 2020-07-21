@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-vector}
+\makeatother
+
+
+\begin{document}
+
+\section{Vecteurs}
+
+\subsection{Les écrire}
+
+\newparaexample{}
+
+\begin{latexex}
+$\vect{ABCDEF}$  ,
+$\vect*{e}{rot}$ ou
+$\vect{e_{rot}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex}
+$\vect{i}$ ou
+$\vect*{j}{2}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro*{vect}{1}
+
+\IDarg{} un texte donnant le nom d'un vecteur.
+
+
+\separation
+
+
+\IDmacro*{vect*}{2}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\vect*{up}{down}$ d'un vecteur.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
+
+\end{document}

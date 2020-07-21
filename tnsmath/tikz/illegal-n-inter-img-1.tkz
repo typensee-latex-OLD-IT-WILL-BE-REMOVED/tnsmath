@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 6]{    % Largeur entre les valeurs du tableau.
+        $x$            / 0.75 ,
+        $\frac{1}{x}$ / 1.25 ,
+        $\ln$          / 1.75
+    }{
+                $0$                , $+\infty$
+    }
+    \tkzTabLine{d              , + ,              }
+    \tkzTabVar {D- / $-\infty$     , + / $+\infty$}
+    %
+    \tkzTabVal{1}{2}{0.35} % Position entre les 1re et 2e valeurs puis en proportion.
+              {1}{0}       % x_1 et f(x_1)
+    \tkzTabVal{1}{2}{0.65} % Position entre les 1re et 2e valeurs puis en proportion.
+              {$\ee$}{1}   % x_2 et f(x_2)
+\end{tikzpicture}

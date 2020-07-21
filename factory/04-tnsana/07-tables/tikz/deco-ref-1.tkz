@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+    \tkzTabInit[
+        lgt   = 3   , % Il faut de la place pour le dernier produit !
+        espcl = 2.5   % On réduit la largeur des colonnes pour les signes.
+    ]{
+        $x$                    / 0.5 ,
+        $x^2$                  / 1.5 ,
+        $\sqrt{x}$             / 1.5 ,
+        $\exp x$               / 1.5 ,
+        $x^2 \sqrt{x} \exp x$  / 1.5
+    }{
+                $0$     , $+\infty$
+    }
+    \tkzTabLine{ z  , + ,          }
+    \tkzTabLine{ z  , + ,          }
+    \tkzTabLine{ t  , + ,          }
+    \tkzTabLine{ z  , + ,          }
+
+    \graphSign        {1}{x2}
+    \graphSign[purple]{2}{sqrt}
+    \graphSign[gray]  {3}{exp}
+\end{tikzpicture}

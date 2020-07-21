@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    \tkzTabInit[nocadre]{
+        $x$    / 0.75 ,
+        $f(x)$ / 1.5
+    }{
+               $-\infty$ , $p$        , $+\infty$
+    }
+    \tkzTabVar{+ /       , - / $f(p)$ , + /      } % Variations via position / valeur.
+\end{tikzpicture}

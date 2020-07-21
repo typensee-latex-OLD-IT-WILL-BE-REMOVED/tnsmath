@@ -1,0 +1,18 @@
+% == PACKAGES USED == %
+
+\RequirePackage{yhmath}
+
+
+% == DEFINITIONS == %
+
+% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
+
+\newcommand\anglein{\@ifstar{\tnsgeo@anglein@star}{\tnsgeo@anglein@no@star}}
+
+\newcommand*\tnsgeo@anglein@star[2]{%
+    \widehat{\tnsgeo@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\tnsgeo@anglein@no@star[1]{%
+    \widehat{\tnsgeo@no@point{#1}}%
+}

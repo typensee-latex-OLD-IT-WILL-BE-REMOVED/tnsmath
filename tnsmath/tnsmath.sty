@@ -1,0 +1,3828 @@
+% ---------------------- %
+% -- IMPORTS REQUIRED -- %
+% ---------------------- %
+
+% A
+\RequirePackage{amssymb}
+% B
+\RequirePackage{bm}
+% C
+\RequirePackage{centernot}
+\RequirePackage{circledsteps}
+\RequirePackage{commado}
+% D
+\RequirePackage{dsfont}
+% E
+\RequirePackage{esvect}
+\PassOptionsToPackage{f}{esvect}
+% F
+\RequirePackage{forest}
+\RequirePackage{forloop}
+% I
+\RequirePackage{ifmtarg}
+% L
+\RequirePackage{longtable}
+% M
+\RequirePackage{mathrsfs}
+\RequirePackage{mathtools}
+% N
+\RequirePackage{nicematrix}
+% P
+\RequirePackage{pgfplots}
+% R
+\RequirePackage{relsize}
+% S
+\RequirePackage{simplekv}
+\RequirePackage{stackengine}
+\RequirePackage{stmaryrd}
+% T
+\RequirePackage{tkz-tab}
+\RequirePackage{tnscom}
+\RequirePackage{trimspaces}
+% U
+\RequirePackage{upgreek}
+\PassOptionsToPackage{Symbolsmallscale}{upgreek}
+% W
+\RequirePackage{witharrows}
+% X
+\RequirePackage{xstring}
+% Y
+\RequirePackage{yhmath}
+
+% TikZ libraries
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{babel}
+\usetikzlibrary{arrows.meta}
+
+
+% ------------------ %
+% -- GENERAL SETS -- %
+% ------------------ %
+
+% General sets
+
+\newcommand\setgene{\@ifstar{\tnssets@set@gene@star}{\tnssets@set@gene@no@star}}
+
+
+\newcommand\tnssets@set@gene@no@star[1]{%
+    \tns@generic@interval@ext{\{}{#1}{}{}{\}}%
+}
+
+\newcommand\tnssets@set@gene@star[1]{%
+    \tns@generic@interval@semi@ext{\{}{#1}{}{}{\}}%
+}
+
+
+% Probabilistic sets
+
+\newcommand\setproba{\@ifstar{\tnssets@set@proba@star}{\tnssets@set@proba@no@star}}
+
+\newcommand\tnssets@set@proba@no@star[1]{
+    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        \mathcal{#1}
+    }{%
+        \PackageError{tnssets}{Command << setproba >> only accepts single upper case letters}%
+    }
+}
+
+\newcommand\tnssets@set@proba@star[2]{%
+    \tnssets@set@proba@no@star{#1}_{#2}
+}
+
+
+% Geometric sets
+%
+% With ''mathscr'', we only have the upper case letters.
+% So we use the following trick for lower case letters.
+%
+% Source:
+%    * page 68 de ''The Comprehensive LATEX Symbol List''
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand\setgeo{\@ifstar{\tnssets@set@geo@star}{\tnssets@set@geo@no@star}}
+
+\newcommand\tnssets@set@geo@no@star[1]{
+    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}{,#1,}{
+        \mathscr{#1}
+    }{%
+        \IfSubStr{,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,}{,#1,}{
+            \mathpzc{#1}
+        }{%
+            \PackageError{tnssets}{Command << fieldset >> only accepts single h, k or upper case letter}%
+        }
+    }
+}
+
+\newcommand\tnssets@set@geo@star[2]{%
+    \tnssets@set@geo@no@star{#1}_{#2}
+}
+
+
+% Sets for algebra
+%
+% Only the upper case letters and also h and k.
+%
+% With ''\mathbb'', there are only the upper case letters.
+
+\newcommand\setalge{\@ifstar{\tnssets@set@alge@star}{\tnssets@set@alge@no@star}}
+
+\newcommand\tnssets@set@alge@no@star[1]{
+    \IfSubStr{,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,h,k,}{,#1,}{
+        \mathds{#1}
+    }{%
+        \PackageError{tnssets}{Command << fieldset >> only accepts letters h or k alone, and upper case letters}%
+    }
+}
+
+\newcommand\tnssets@set@alge@star[2]{%
+    \tnssets@set@alge@no@star{#1}_{#2}
+}
+
+
+% Tools for classical sets
+
+\newcommand\setpos{\textbf{\tiny+}}
+\newcommand\setneg{\vphantom{\setpos}-}
+\newcommand\set@star{\text{*}}
+
+\newcommand\setspecial{\@ifstar{\tnssets@set@special@star}{\tnssets@set@special@no@star}}
+
+\newcommand\tnssets@set@special@no@star[2]{
+    \IfEqCase{#2}{
+        {s}{ #1^{\set@star} }
+        {n}{ #1^{\phantom{\set@star}}_{\setneg} }
+        {p}{ #1^{\phantom{\set@star}}_{\setpos} }
+        {sn}{ #1^{\set@star}_{\setneg} }
+        {sp}{ #1^{\set@star}_{\setpos} }
+    }
+}
+
+\newcommand\tnssets@set@special@star[2]{
+    \IfEqCase{#2}{
+        {s}{ #1_{\neq 0} }
+        {n}{ #1_{\le 0} }
+        {p}{ #1_{\ge 0} }
+        {sn}{ #1_{< 0} }
+        {sp}{ #1_{> 0} }
+    }
+}
+
+
+% The empty set
+
+\newcommand\nullset{%
+    \ensuremath{\text{\scalebox{1.2}{$\varnothing$}}}%
+}
+
+
+% List of classical sets - START
+
+\newcommand\NN{\ensuremath{\setalge{N}}}
+\newcommand\NNs{\ensuremath{\setspecial{\NN}{s}}}
+
+\newcommand\PP{\ensuremath{\setalge{P}}}
+
+\newcommand\ZZ{\ensuremath{\setalge{Z}}}
+\newcommand\ZZp{\ensuremath{\setspecial{\ZZ}{p}}}
+\newcommand\ZZn{\ensuremath{\setspecial{\ZZ}{n}}}
+\newcommand\ZZs{\ensuremath{\setspecial{\ZZ}{s}}}
+\newcommand\ZZsn{\ensuremath{\setspecial{\ZZ}{sn}}}
+\newcommand\ZZsp{\ensuremath{\setspecial{\ZZ}{sp}}}
+
+\newcommand\DD{\ensuremath{\setalge{D}}}
+\newcommand\DDp{\ensuremath{\setspecial{\DD}{p}}}
+\newcommand\DDn{\ensuremath{\setspecial{\DD}{n}}}
+\newcommand\DDs{\ensuremath{\setspecial{\DD}{s}}}
+\newcommand\DDsn{\ensuremath{\setspecial{\DD}{sn}}}
+\newcommand\DDsp{\ensuremath{\setspecial{\DD}{sp}}}
+
+\newcommand\QQ{\ensuremath{\setalge{Q}}}
+\newcommand\QQp{\ensuremath{\setspecial{\QQ}{p}}}
+\newcommand\QQn{\ensuremath{\setspecial{\QQ}{n}}}
+\newcommand\QQs{\ensuremath{\setspecial{\QQ}{s}}}
+\newcommand\QQsn{\ensuremath{\setspecial{\QQ}{sn}}}
+\newcommand\QQsp{\ensuremath{\setspecial{\QQ}{sp}}}
+
+\newcommand\RR{\ensuremath{\setalge{R}}}
+\newcommand\RRp{\ensuremath{\setspecial{\RR}{p}}}
+\newcommand\RRn{\ensuremath{\setspecial{\RR}{n}}}
+\newcommand\RRs{\ensuremath{\setspecial{\RR}{s}}}
+\newcommand\RRsn{\ensuremath{\setspecial{\RR}{sn}}}
+\newcommand\RRsp{\ensuremath{\setspecial{\RR}{sp}}}
+
+\newcommand\CC{\ensuremath{\setalge{C}}}
+\newcommand\CCs{\ensuremath{\setspecial{\CC}{s}}}
+
+\newcommand\HH{\ensuremath{\setalge{H}}}
+\newcommand\HHs{\ensuremath{\setspecial{\HH}{s}}}
+
+\newcommand\OO{\ensuremath{\setalge{O}}}
+\newcommand\OOs{\ensuremath{\setspecial{\OO}{s}}}
+
+\newcommand\FF{\ensuremath{\setalge{F}}}
+\newcommand\FFp{\ensuremath{\setspecial{\FF}{p}}}
+\newcommand\FFn{\ensuremath{\setspecial{\FF}{n}}}
+\newcommand\FFs{\ensuremath{\setspecial{\FF}{s}}}
+\newcommand\FFsn{\ensuremath{\setspecial{\FF}{sn}}}
+\newcommand\FFsp{\ensuremath{\setspecial{\FF}{sp}}}
+
+% List of classical sets - END
+
+
+% --------------- %
+% -- INTERVALS -- %
+% --------------- %
+
+% Macros for intervals - START
+
+% Macros for french real intervals
+
+\newcommand\intervalCO{\@ifstar{\tnssets@intervalCO@star}{\tnssets@intervalCO@no@star}}
+\newcommand\tnssets@intervalCO@no@star[2]{\ensuremath{\tns@generic@interval@ext{[}{#1}{\tnsmathsep}{#2}{[}}}
+\newcommand\tnssets@intervalCO@star[2]{\ensuremath{\tns@generic@interval@semi@ext{[}{#1}{\tnsmathsep}{#2}{[}}}
+
+\newcommand\intervalC{\@ifstar{\tnssets@intervalC@star}{\tnssets@intervalC@no@star}}
+\newcommand\tnssets@intervalC@no@star[2]{\ensuremath{\tns@generic@interval@ext{[}{#1}{\tnsmathsep}{#2}{]}}}
+\newcommand\tnssets@intervalC@star[2]{\ensuremath{\tns@generic@interval@semi@ext{[}{#1}{\tnsmathsep}{#2}{]}}}
+
+\newcommand\intervalO{\@ifstar{\tnssets@intervalO@star}{\tnssets@intervalO@no@star}}
+\newcommand\tnssets@intervalO@no@star[2]{\ensuremath{\tns@generic@interval@ext{]}{#1}{\tnsmathsep}{#2}{[}}}
+\newcommand\tnssets@intervalO@star[2]{\ensuremath{\tns@generic@interval@semi@ext{]}{#1}{\tnsmathsep}{#2}{[}}}
+
+\newcommand\intervalOC{\@ifstar{\tnssets@intervalOC@star}{\tnssets@intervalOC@no@star}}
+\newcommand\tnssets@intervalOC@no@star[2]{\ensuremath{\tns@generic@interval@ext{]}{#1}{\tnsmathsep}{#2}{]}}}
+\newcommand\tnssets@intervalOC@star[2]{\ensuremath{\tns@generic@interval@semi@ext{]}{#1}{\tnsmathsep}{#2}{]}}}
+
+% Macros for american real intervals
+
+\newcommand\intervalCP{\@ifstar{\tnssets@intervalCP@star}{\tnssets@intervalCP@no@star}}
+\newcommand\tnssets@intervalCP@no@star[2]{\ensuremath{\tns@generic@interval@ext{[}{#1}{\tnsmathsep}{#2}{)}}}
+\newcommand\tnssets@intervalCP@star[2]{\ensuremath{\tns@generic@interval@semi@ext{[}{#1}{\tnsmathsep}{#2}{)}}}
+
+\newcommand\intervalP{\@ifstar{\tnssets@intervalP@star}{\tnssets@intervalP@no@star}}
+\newcommand\tnssets@intervalP@no@star[2]{\ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep}{#2}{)}}}
+\newcommand\tnssets@intervalP@star[2]{\ensuremath{\tns@generic@interval@semi@ext{(}{#1}{\tnsmathsep}{#2}{)}}}
+
+\newcommand\intervalPC{\@ifstar{\tnssets@intervalPC@star}{\tnssets@intervalPC@no@star}}
+\newcommand\tnssets@intervalPC@no@star[2]{\ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep}{#2}{]}}}
+\newcommand\tnssets@intervalPC@star[2]{\ensuremath{\tns@generic@interval@semi@ext{(}{#1}{\tnsmathsep}{#2}{]}}}
+
+% Macros for discrete intervals
+
+\newcommand\ZintervalCO{\@ifstar{\tnssets@ZintervalCO@star}{\tnssets@ZintervalCO@no@star}}
+\newcommand\tnssets@ZintervalCO@no@star[2]{\ensuremath{\tns@generic@interval@ext{\llbracket}{#1}{\tnsmathsep}{#2}{\llbracket}}}
+\newcommand\tnssets@ZintervalCO@star[2]{\ensuremath{\tns@generic@interval@semi@ext{\llbracket}{#1}{\tnsmathsep}{#2}{\llbracket}}}
+
+\newcommand\ZintervalC{\@ifstar{\tnssets@ZintervalC@star}{\tnssets@ZintervalC@no@star}}
+\newcommand\tnssets@ZintervalC@no@star[2]{\ensuremath{\tns@generic@interval@ext{\llbracket}{#1}{\tnsmathsep}{#2}{\rrbracket}}}
+\newcommand\tnssets@ZintervalC@star[2]{\ensuremath{\tns@generic@interval@semi@ext{\llbracket}{#1}{\tnsmathsep}{#2}{\rrbracket}}}
+
+\newcommand\ZintervalO{\@ifstar{\tnssets@ZintervalO@star}{\tnssets@ZintervalO@no@star}}
+\newcommand\tnssets@ZintervalO@no@star[2]{\ensuremath{\tns@generic@interval@ext{\rrbracket}{#1}{\tnsmathsep}{#2}{\llbracket}}}
+\newcommand\tnssets@ZintervalO@star[2]{\ensuremath{\tns@generic@interval@semi@ext{\rrbracket}{#1}{\tnsmathsep}{#2}{\llbracket}}}
+
+\newcommand\ZintervalOC{\@ifstar{\tnssets@ZintervalOC@star}{\tnssets@ZintervalOC@no@star}}
+\newcommand\tnssets@ZintervalOC@no@star[2]{\ensuremath{\tns@generic@interval@ext{\rrbracket}{#1}{\tnsmathsep}{#2}{\rrbracket}}}
+\newcommand\tnssets@ZintervalOC@star[2]{\ensuremath{\tns@generic@interval@semi@ext{\rrbracket}{#1}{\tnsmathsep}{#2}{\rrbracket}}}
+
+% Macros for intervals - END
+
+
+% --------------- %
+% -- OPERATORS -- %
+% --------------- %
+
+\newcommand\@display@this[3]{\mathop{\raisebox{#1}{\scalebox{#2}{$#3$}}}\limits}
+
+\newcommand\dcup{\@display@this{.05em}{0.8}{\bigcup}}
+\newcommand\dsqcup{\@display@this{.05em}{0.8}{\bigsqcup}}
+\newcommand\dcap{\@display@this{.05em}{0.8}{\bigcap}}
+
+
+% ---------------- %
+% -- IMAGE N CO -- %
+% ---------------- %
+
+\newcommand\card{\@ifstar{\tnssets@card@star}{\tnssets@card@no@star}}
+
+\DeclareMathOperator{\tnssets@card@no@star}{\operatorname{card}}
+
+\newcommand\tnssets@card@star{\#}
+
+
+\DeclareMathOperator{\im}{\operatorname{im}}
+\DeclareMathOperator{\dom}{\operatorname{dom}}
+\DeclareMathOperator{\codom}{\operatorname{codom}}
+
+
+% ----------------- %
+% -- APPLICATONS -- %
+% ----------------- %
+
+\newcommand\@rel@scale[3]{\mathrel{\scalebox{#1}[#2]{$#3$}}}
+
+\newcommand\onetoone{\@rel@scale{1.1}{1.3}{\rightarrowtail}}
+\newcommand\onto{\@rel@scale{1.1}{1.3}{\twoheadrightarrow}}
+\newcommand\biject{\mathrel{\mathrlap{\onetoone}\mkern0.9mu\onto}}
+ 
+    
+\newcommand\tnsgeo@partial@deco[3]{\stackMath\mathrel{\stackinset{c}{#1}{c}{#2}{\scalebox{1}[0.4]{$\vert$}}{#3}}}
+
+\newcommand\pto{\tnsgeo@partial@deco{-0.1ex}{0.15ex}{\to}}
+\newcommand\ponetoone{\tnsgeo@partial@deco{0ex}{0ex}{\onetoone}}
+\newcommand\ponto{\tnsgeo@partial@deco{-0.3ex}{0ex}{\onto}}
+\newcommand\pbiject{\tnsgeo@partial@deco{-0.25ex}{0ex}{\biject}}
+
+
+% --------------------- %
+% -- SPACE LOGIC NEG -- %
+% --------------------- %
+
+% Logic negation roots
+
+\let\stdneg\neg
+\renewcommand\neg{%
+    \stdneg\,%
+}
+
+
+% ---------------------- %
+% -- EQUAL SIGNS N CO -- %
+% ---------------------- %
+
+% Settable texts
+\@ifpackagewith{babel}{french}{
+% == Decorations - FRENCH - START == %
+    \newcommand\textopappli{appli}
+    \newcommand\textopchoice{choix}
+    \newcommand\textopcond{cond}
+    \newcommand\textopcons{cons}
+    \newcommand\textopdef{déf}
+    \newcommand\textopplot{graph}
+    \newcommand\textophyp{hyp}
+    \newcommand\textopid{id}
+    \newcommand\textoptest{?}
+% == Decorations - FRENCH - END == %
+}{
+% == Decorations - ENGLISH - START == %
+    \newcommand\textopappli{appli}
+    \newcommand\textopchoice{choice}
+    \newcommand\textopcond{cond}
+    \newcommand\textopcons{cons}
+    \newcommand\textopdef{def}
+    \newcommand\textopplot{plot}
+    \newcommand\textophyp{hyp}
+    \newcommand\textopid{id}
+    \newcommand\textoptest{?}
+% == Decorations - ENGLISH - END == %
+}
+
+
+% == Decorated versions - START == %
+
+\newcommand\eqdef{\@ifstar{\tnslog@eqdef@star}{\tnslog@eqdef@no@star}}
+\newcommand\tnslog@eqdef@no@star{\tns@over@math@symbol{\textopdef}{=}}
+\newcommand\tnslog@eqdef@star{\coloneqq}
+
+\newcommand\eqid{\@ifstar{\tnslog@eqid@star}{\tnslog@eqid@no@star}}
+\newcommand\tnslog@eqid@no@star{\tns@over@math@symbol{\textopid}{=}}
+\newcommand\tnslog@eqid@star{\rightleftharpoons}
+
+\newcommand\eqplot{\tns@over@math@symbol{\textopplot}{=}}
+\newcommand\eqappli{\tns@over@math@symbol{\textopappli}{=}}
+\newcommand\eqchoice{\tns@over@math@symbol{\textopchoice}{=}}
+\newcommand\eqcond{\tns@over@math@symbol{\textopcond}{=}}
+\newcommand\eqcons{\tns@over@math@symbol{\textopcons}{=}}
+\newcommand\eqhyp{\tns@over@math@symbol{\textophyp}{=}}
+\newcommand\eqtest{\tns@over@math@symbol{\textoptest}{=}}
+
+\newcommand\neqid{\tns@over@math@symbol{\textopid}{\neq}}
+\newcommand\neqplot{\tns@over@math@symbol{\textopplot}{\neq}}
+\newcommand\neqappli{\tns@over@math@symbol{\textopappli}{\neq}}
+\newcommand\neqchoice{\tns@over@math@symbol{\textopchoice}{\neq}}
+\newcommand\neqcond{\tns@over@math@symbol{\textopcond}{\neq}}
+\newcommand\neqcons{\tns@over@math@symbol{\textopcons}{\neq}}
+\newcommand\neqhyp{\tns@over@math@symbol{\textophyp}{\neq}}
+\newcommand\neqtest{\tns@over@math@symbol{\textoptest}{\neq}}
+
+\newcommand\lessplot{\tns@over@math@symbol{\textopplot}{<}}
+\newcommand\lessappli{\tns@over@math@symbol{\textopappli}{<}}
+\newcommand\lesschoice{\tns@over@math@symbol{\textopchoice}{<}}
+\newcommand\lesscond{\tns@over@math@symbol{\textopcond}{<}}
+\newcommand\lesscons{\tns@over@math@symbol{\textopcons}{<}}
+\newcommand\lesshyp{\tns@over@math@symbol{\textophyp}{<}}
+\newcommand\lesstest{\tns@over@math@symbol{\textoptest}{<}}
+
+\newcommand\nlessplot{\tns@over@math@symbol{\textopplot}{\nless}}
+\newcommand\nlessappli{\tns@over@math@symbol{\textopappli}{\nless}}
+\newcommand\nlesschoice{\tns@over@math@symbol{\textopchoice}{\nless}}
+\newcommand\nlesscond{\tns@over@math@symbol{\textopcond}{\nless}}
+\newcommand\nlesscons{\tns@over@math@symbol{\textopcons}{\nless}}
+\newcommand\nlesshyp{\tns@over@math@symbol{\textophyp}{\nless}}
+\newcommand\nlesstest{\tns@over@math@symbol{\textoptest}{\nless}}
+
+\newcommand\leqplot{\tns@over@math@symbol{\textopplot}{\leq}}
+\newcommand\leqappli{\tns@over@math@symbol{\textopappli}{\leq}}
+\newcommand\leqchoice{\tns@over@math@symbol{\textopchoice}{\leq}}
+\newcommand\leqcond{\tns@over@math@symbol{\textopcond}{\leq}}
+\newcommand\leqcons{\tns@over@math@symbol{\textopcons}{\leq}}
+\newcommand\leqhyp{\tns@over@math@symbol{\textophyp}{\leq}}
+\newcommand\leqtest{\tns@over@math@symbol{\textoptest}{\leq}}
+
+\newcommand\nleqplot{\tns@over@math@symbol{\textopplot}{\nleq}}
+\newcommand\nleqappli{\tns@over@math@symbol{\textopappli}{\nleq}}
+\newcommand\nleqchoice{\tns@over@math@symbol{\textopchoice}{\nleq}}
+\newcommand\nleqcond{\tns@over@math@symbol{\textopcond}{\nleq}}
+\newcommand\nleqcons{\tns@over@math@symbol{\textopcons}{\nleq}}
+\newcommand\nleqhyp{\tns@over@math@symbol{\textophyp}{\nleq}}
+\newcommand\nleqtest{\tns@over@math@symbol{\textoptest}{\nleq}}
+
+\newcommand\gtrplot{\tns@over@math@symbol{\textopplot}{>}}
+\newcommand\gtrappli{\tns@over@math@symbol{\textopappli}{>}}
+\newcommand\gtrchoice{\tns@over@math@symbol{\textopchoice}{>}}
+\newcommand\gtrcond{\tns@over@math@symbol{\textopcond}{>}}
+\newcommand\gtrcons{\tns@over@math@symbol{\textopcons}{>}}
+\newcommand\gtrhyp{\tns@over@math@symbol{\textophyp}{>}}
+\newcommand\gtrtest{\tns@over@math@symbol{\textoptest}{>}}
+
+\newcommand\ngtrplot{\tns@over@math@symbol{\textopplot}{\ngtr}}
+\newcommand\ngtrappli{\tns@over@math@symbol{\textopappli}{\ngtr}}
+\newcommand\ngtrchoice{\tns@over@math@symbol{\textopchoice}{\ngtr}}
+\newcommand\ngtrcond{\tns@over@math@symbol{\textopcond}{\ngtr}}
+\newcommand\ngtrcons{\tns@over@math@symbol{\textopcons}{\ngtr}}
+\newcommand\ngtrhyp{\tns@over@math@symbol{\textophyp}{\ngtr}}
+\newcommand\ngtrtest{\tns@over@math@symbol{\textoptest}{\ngtr}}
+
+\newcommand\geqplot{\tns@over@math@symbol{\textopplot}{\geq}}
+\newcommand\geqappli{\tns@over@math@symbol{\textopappli}{\geq}}
+\newcommand\geqchoice{\tns@over@math@symbol{\textopchoice}{\geq}}
+\newcommand\geqcond{\tns@over@math@symbol{\textopcond}{\geq}}
+\newcommand\geqcons{\tns@over@math@symbol{\textopcons}{\geq}}
+\newcommand\geqhyp{\tns@over@math@symbol{\textophyp}{\geq}}
+\newcommand\geqtest{\tns@over@math@symbol{\textoptest}{\geq}}
+
+\newcommand\ngeqplot{\tns@over@math@symbol{\textopplot}{\ngeq}}
+\newcommand\ngeqappli{\tns@over@math@symbol{\textopappli}{\ngeq}}
+\newcommand\ngeqchoice{\tns@over@math@symbol{\textopchoice}{\ngeq}}
+\newcommand\ngeqcond{\tns@over@math@symbol{\textopcond}{\ngeq}}
+\newcommand\ngeqcons{\tns@over@math@symbol{\textopcons}{\ngeq}}
+\newcommand\ngeqhyp{\tns@over@math@symbol{\textophyp}{\ngeq}}
+\newcommand\ngeqtest{\tns@over@math@symbol{\textoptest}{\ngeq}}
+
+% == Decorated versions - END == %
+
+
+% --------------- %
+% -- OPERATORS -- %
+% --------------- %
+
+% Vertical versions 
+
+\newcommand\vliesimp{\mathrel{\Uparrow}}
+\newcommand\vimplies{\mathrel{\Downarrow}}
+\newcommand\viff{\mathrel{\Updownarrow}}
+
+\newcommand\nvliesimp{\centernot\vliesimp}
+\newcommand\nvimplies{\centernot\vimplies}
+\newcommand\nviff{\centernot\viff}
+
+
+% Horizontal versions
+
+
+
+% == Decorated versions - START == %
+
+\newcommand\niff{\centernot\iff}
+\newcommand\nimplies{\centernot\implies}
+\newcommand\liesimp{\mathrel{\Longleftarrow}}
+\newcommand\nliesimp{\centernot\liesimp}
+
+\newcommand\iffappli{\tns@over@math@symbol{\textopappli}{\iff}}
+\newcommand\iffchoice{\tns@over@math@symbol{\textopchoice}{\iff}}
+\newcommand\iffcond{\tns@over@math@symbol{\textopcond}{\iff}}
+\newcommand\iffcons{\tns@over@math@symbol{\textopcons}{\iff}}
+\newcommand\iffhyp{\tns@over@math@symbol{\textophyp}{\iff}}
+\newcommand\ifftest{\tns@over@math@symbol{\textoptest}{\iff}}
+
+\newcommand\niffappli{\tns@over@math@symbol{\textopappli}{\niff}}
+\newcommand\niffchoice{\tns@over@math@symbol{\textopchoice}{\niff}}
+\newcommand\niffcond{\tns@over@math@symbol{\textopcond}{\niff}}
+\newcommand\niffcons{\tns@over@math@symbol{\textopcons}{\niff}}
+\newcommand\niffhyp{\tns@over@math@symbol{\textophyp}{\niff}}
+\newcommand\nifftest{\tns@over@math@symbol{\textoptest}{\niff}}
+
+\newcommand\impliesappli{\tns@over@math@symbol{\textopappli}{\implies}}
+\newcommand\implieschoice{\tns@over@math@symbol{\textopchoice}{\implies}}
+\newcommand\impliescond{\tns@over@math@symbol{\textopcond}{\implies}}
+\newcommand\impliescons{\tns@over@math@symbol{\textopcons}{\implies}}
+\newcommand\implieshyp{\tns@over@math@symbol{\textophyp}{\implies}}
+\newcommand\impliestest{\tns@over@math@symbol{\textoptest}{\implies}}
+
+\newcommand\nimpliesappli{\tns@over@math@symbol{\textopappli}{\nimplies}}
+\newcommand\nimplieschoice{\tns@over@math@symbol{\textopchoice}{\nimplies}}
+\newcommand\nimpliescond{\tns@over@math@symbol{\textopcond}{\nimplies}}
+\newcommand\nimpliescons{\tns@over@math@symbol{\textopcons}{\nimplies}}
+\newcommand\nimplieshyp{\tns@over@math@symbol{\textophyp}{\nimplies}}
+\newcommand\nimpliestest{\tns@over@math@symbol{\textoptest}{\nimplies}}
+
+\newcommand\liesimpappli{\tns@over@math@symbol{\textopappli}{\liesimp}}
+\newcommand\liesimpchoice{\tns@over@math@symbol{\textopchoice}{\liesimp}}
+\newcommand\liesimpcond{\tns@over@math@symbol{\textopcond}{\liesimp}}
+\newcommand\liesimpcons{\tns@over@math@symbol{\textopcons}{\liesimp}}
+\newcommand\liesimphyp{\tns@over@math@symbol{\textophyp}{\liesimp}}
+\newcommand\liesimptest{\tns@over@math@symbol{\textoptest}{\liesimp}}
+
+\newcommand\nliesimpappli{\tns@over@math@symbol{\textopappli}{\nliesimp}}
+\newcommand\nliesimpchoice{\tns@over@math@symbol{\textopchoice}{\nliesimp}}
+\newcommand\nliesimpcond{\tns@over@math@symbol{\textopcond}{\nliesimp}}
+\newcommand\nliesimpcons{\tns@over@math@symbol{\textopcons}{\nliesimp}}
+\newcommand\nliesimphyp{\tns@over@math@symbol{\textophyp}{\nliesimp}}
+\newcommand\nliesimptest{\tns@over@math@symbol{\textoptest}{\nliesimp}}
+
+% == Decorated versions - END == %
+
+
+% ----------------- %
+% -- QUANTIFIERS -- %
+% ----------------- %
+
+\newcommand\existsone{\exists\kern0.1em !}
+\newcommand\nexistsone{\nexists\kern0.1em !}
+
+\newcommand\existmulti[1]{\exists_{\kern0.1em #1}}
+\newcommand\nexistmulti[1]{\nexists_{\kern0.1em #1}}
+
+
+% -------------------- %
+% -- CALC EXPLAINED -- %
+% -------------------- %
+
+% Space
+
+\newcommand\expltxtspacein{2em}
+
+
+% Common tools
+
+\newcommand\explcom[1]{%
+    \text{\color{purple}[\kern.225em{\footnotesize \itshape #1}\kern.3em]}%
+}
+
+
+\newcommand\explnext{\@ifstar{\tnslog@expl@next@star}{\tnslog@expl@next@no@star}}
+\newcommand\tnslog@expl@next@no@star{}
+\newcommand\tnslog@expl@next@star{}
+
+\newcommand\tnslog@explain@ope{=}
+
+
+\newcommand\comthis{\@ifstar{\tnslog@com@this@star}{\tnslog@com@this@no@star}}
+\newcommand\tnslog@com@this@no@star{}
+
+\newcommand\tnslog@com@this@star[1]{%
+    \ifbool{tnslog@starttnslog@explain@arrow@}{%
+        \PackageError{tnslog}{comment can't be use to start explain[style = sar]}%
+                             {No comment for the 1st part of explain[style = sar]}
+    }{%
+        \kern\expltxtspacein\explcom{#1}%
+    }%
+}
+
+\newcommand\tnslog@com@this@aligned[1]{%
+    \global\booltrue{tnslog@com@this@no@star@used}%
+    &%
+    \tnslog@com@this@star{#1}%
+}
+
+
+\newcommand\tnslog@expl@next@extra@column{}
+
+
+% Wrapper env with key-val options 
+
+\setKVdefault[tnslog@calc@explain@keys]{%
+    ope   = {=},
+    style = u,
+    com   = nal
+}
+
+\newenvironment{explain}[1][]{%
+    \useKVdefault[tnslog@calc@explain@keys]%
+    \setKV[tnslog@calc@explain@keys]{#1}%
+    \def\style{\useKV[tnslog@calc@explain@keys]{style}}%
+% Comments
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        \renewcommand\tnslog@com@this@no@star\tnslog@com@this@aligned%
+        \renewcommand\tnslog@expl@next@extra@column{&}
+    }{%
+        \renewcommand\tnslog@com@this@no@star\tnslog@com@this@star%
+        \renewcommand\tnslog@expl@next@extra@column{}
+    }%
+    \IfEqCase{\style}{%
+% University
+        {u}{%
+            \begin{tnslog@explain@university}%
+        }%
+% Arrows (long)
+        {ar}{%
+            \begin{tnslog@explain@arrow}%
+        }%
+% Arrows (short)
+        {sar}{%
+            \begin{tnslog@explain@short@arrow}%
+        }%
+    }[%
+        \PackageError{tnslog}{unknown style}%
+                             {You can use u (default), ar or sar.}%
+    ]%
+}{%
+    \IfEqCase{\style}{%
+% University
+        {u}{%
+            \end{tnslog@explain@university}%
+        }%
+% Arrows (long)
+        {ar}{%
+            \end{tnslog@explain@arrow}%
+        }%
+% Arrows (short)
+        {sar}{%
+            \end{tnslog@explain@short@arrow}%
+        }%
+    }%
+}
+    
+    
+% University version
+
+% For the good extra lengths, see :
+%    * https://tex.stackexchange.com/a/550837/6880
+
+\newcommand\dimmax[2]{%
+    \ifdim#1>#2 #1\else #2\fi
+}
+
+\newlength{\tnslog@upper@text@size}
+\newlength{\tnslog@lower@text@size}
+
+\newcommand\samesizeas[2]{%
+    \settowidth\tnslog@upper@text@size{#1}%
+    \settowidth\tnslog@lower@text@size{#2}%
+    \makebox[\dimmax{\tnslog@upper@text@size}{\tnslog@lower@text@size}][c]{#1}%
+}
+
+
+
+\newcommand\expltxt[1]{%
+    \text{\color{blue}\footnotesize \{\,{\itshape #1}\,\} }%
+}
+
+\newcommand\expltxtup[1]{%
+    $\uparrow$ #1 $\uparrow$%
+}
+
+\newcommand\expltxtdown[1]{%
+    $\downarrow$ #1 $\downarrow$%
+}
+
+\newcommand\expltxtupdown[2]{{%
+    \displaystyle\footnotesize\color{blue}%
+    \left\{\,%
+        \genfrac{}{}{0pt}{}{%
+            \text{\itshape\expltxtdown{\samesizeas{#1}{#2}}}%
+        }{%
+            \text{\itshape\expltxtup{\samesizeas{#2}{#1}}}%
+        }%
+    \,\right\}%
+}}
+
+
+
+\newcommand\tnslog@expl@next@university@no@star[2][\tnslog@explain@ope]{
+    \\&
+    {#1}
+    \if\relax\detokenize{#2}\relax\else
+        {} \kern\expltxtspacein \expltxt{#2}
+    \fi
+    \\&
+}
+
+\newcommand\tnslog@expl@next@university@separation{
+    \\&
+}
+
+
+
+\newcommand\tnslog@expl@next@university@star[3][\tnslog@explain@ope]{
+    \if\relax\detokenize{#2}\relax%
+        \if\relax\detokenize{#3}\relax%
+            \PackageError{tnslog}{two empty arguments}%
+                                 {at least one none empty text is needed}
+        \fi%
+    \fi%
+    %
+    \tnslog@expl@next@university@separation{}%
+    \if\relax\detokenize{#2}\relax%
+% Up empty
+%     + Down none empty
+        {#1}\kern\expltxtspacein%
+        \expltxt{\expltxtup{\samesizeas{#3}{#2}}}%
+    \else%
+% Up none empty
+%     + Down empty
+        \if\relax\detokenize{#3}\relax%
+            {#1}\kern\expltxtspacein{}%
+            \expltxt{\expltxtdown{\samesizeas{#2}{#3}}}%
+%     + Down none empty
+        \else%
+            {#1}\kern\expltxtspacein{}%
+            \expltxtupdown{#2}{#3}%
+        \fi%
+    \fi%
+    \tnslog@expl@next@extra@column{}
+    \tnslog@expl@next@university@separation{}
+}
+
+
+\newenvironment{tnslog@explain@university}{
+    \setlength{\abovedisplayskip}{0pt}%
+    \setlength{\belowdisplayskip}{0pt}%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@university@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@university@star%
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[format = rll]
+    }{%
+        $\WithArrows[format = rl]
+    }
+            &
+}{%
+         \endWithArrows$
+}
+
+
+% Middle school version
+
+\newcommand\tnslog@expl@next@middle@school@no@star[2][\tnslog@explain@ope]{%
+    \ifbool{tnslog@com@this@no@star@used}{}{%
+        \tnslog@expl@next@extra@column{}%
+    }%
+    \global\boolfalse{tnslog@com@this@no@star@used}%
+    %
+    %
+    \ifbool{tnslog@insidetnslog@explain@short@arrow@}{%
+        \ifbool{tnslog@starttnslog@explain@arrow@}{%
+            \if\relax\detokenize{#2}\relax\else
+                \PackageError{tnslog}{illegal argument to start explain[style = sar]}%
+                                     {no argument for the first use of explnext in [style = sar]}
+            \fi
+            \global\boolfalse{tnslog@starttnslog@explain@arrow@}%
+        }{
+            \if\relax\detokenize{#2}\relax\else
+                \Arrow[tikz = <->]{#2}
+            \fi
+            \\
+        }
+    }{
+        \if\relax\detokenize{#2}\relax\else
+            \Arrow[tikz = <->]{#2}
+        \fi
+        \\
+    }%
+    &#1%
+}
+
+% Source
+% https://tex.stackexchange.com/a/550754/6880
+
+\NewDocumentCommand \@double@arrow@{O {} m m}{
+    \Arrow[   tikz = -> , #1]{#2}%
+    \Arrow[o, tikz = <- , #1]{#3}
+}
+ 
+
+\newcommand\tnslog@expl@next@middle@school@star[3][\tnslog@explain@ope]{
+    \ifbool{tnslog@com@this@no@star@used}{}{%
+        \tnslog@expl@next@extra@column{}%
+    }%
+    \global\boolfalse{tnslog@com@this@no@star@used}%
+    %
+    \if\relax\detokenize{#2}\relax%
+        \if\relax\detokenize{#3}\relax%
+            \PackageError{tnslog}{two empty arguments}%
+                                 {at least one none empty text is needed}
+        \else%
+            \Arrow[tikz = <-]{#3}%
+        \fi%
+    \else%
+        \if\relax\detokenize{#3}\relax%
+            \Arrow[tikz = ->]{#2}%
+        \else%
+            \@double@arrow@{#2}{#3}
+        \fi%
+    \fi%
+    \\
+    &#1%
+}
+
+\newbool{tnslog@com@this@no@star@used} 
+
+\newbool{tnslog@starttnslog@explain@arrow@} 
+\newbool{tnslog@insidetnslog@explain@short@arrow@} 
+
+\newenvironment{tnslog@explain@arrow}{
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@middle@school@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@middle@school@star%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    %
+    \boolfalse{tnslog@insidetnslog@explain@short@arrow@}%
+    \boolfalse{tnslog@starttnslog@explain@arrow@}%
+    \boolfalse{tnslog@com@this@no@star@used}%
+    %
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[tikz = blue, groups, format = rll]
+    }{%
+        $\WithArrows[tikz = blue, groups, format = rl]
+    }
+            &\phantom{{}\tnslog@explain@ope{}}
+}{%
+         \endWithArrows$
+}
+
+\newenvironment{tnslog@explain@short@arrow}{
+    \renewcommand\tnslog@expl@next@no@star\tnslog@expl@next@middle@school@no@star%
+    \renewcommand\tnslog@expl@next@star\tnslog@expl@next@middle@school@star%
+    \renewcommand\tnslog@explain@ope{\useKV[tnslog@calc@explain@keys]{ope}}%
+    %
+    \booltrue{tnslog@insidetnslog@explain@short@arrow@}%
+    \booltrue{tnslog@starttnslog@explain@arrow@}%
+    \boolfalse{tnslog@com@this@no@star@used}%
+    %
+    %
+    \IfStrEq{\useKV[tnslog@calc@explain@keys]{com}}{al}{%
+        $\WithArrows[tikz = blue, groups, format = rll]%
+    }{%
+        $\WithArrows[tikz = blue, groups, format = rl]%
+    }%
+}{%
+         \endWithArrows$
+}
+
+
+% -------------------- %
+% -- DEMO EXPLAINED -- %
+% -------------------- %
+
+%    * Texts used
+
+\newcommand\textdemoID{Réf.}
+\newcommand\textdemoKNOWN{Je sais que...}
+\newcommand\textdemoPROP{Propriété ou fait utilisé}
+\newcommand\textdemoCONS{Conséquence}
+
+\newcommand\textdemoHYPS{Démonstration sous les hypothèses}
+\newcommand\textdemoHYP{Démonstration sous l'hypothèse}
+\newcommand\textdemoCCL{Conclusion}
+
+\newcommand\textdemoNEXTPAGE{Suite de la démo. page suivante...}
+
+
+%    * Common tools
+
+\newcommand\explref{\@ifstar{\tnslog@expl@ref@star}{\tnslog@expl@ref@no@star}}
+
+\newcommand\tnslog@expl@ref@star[1]{%
+    \framebox[1.5em]{#1}%
+}
+
+\newcommand\tnslog@expl@ref@no@star[1]{%
+    \tnslog@expl@ref@star{\ref{#1}}%
+}
+
+\newcommand\demostep{}
+
+
+%    * University version 
+
+\newcounter{tnslog@demo@explain@id}
+
+
+\newcommand\@expl@id[1]{%
+    \framebox[1.5em]{\thetnslog@demo@explain@id}%
+    \if\relax\detokenize{#1}\relax\else%
+        \addtocounter{tnslog@demo@explain@id}{-1}%
+        \refstepcounter{tnslog@demo@explain@id}\label{#1}
+    \fi
+    \stepcounter{tnslog@demo@explain@id}%
+}
+
+
+\newbool{tnslog@start@demo@explain} 
+
+
+\newcommand\@demostep@no@star[1][]{%
+    \ifbool{tnslog@start@demo@explain}{%
+        \global\boolfalse{tnslog@start@demo@explain}%
+    }{%
+        \\
+    }%
+    \@expl@id{#1}
+    &
+}
+
+
+\setKVdefault[tnslog@demo@explain@keys]{%
+    start = 1,
+    hyps  = {},
+    hyp   = {},
+    ccl   = {}
+}
+
+
+\newenvironment{demoexplain}[1][]{
+    \renewcommand\demostep\@demostep@no@star
+    \useKVdefault[tnslog@demo@explain@keys]
+    \setKV[tnslog@demo@explain@keys]{#1}
+    %
+    \ifthenelse{\equal{\useKV[tnslog@demo@explain@keys]{start}}{last}}{
+    % If no environment has been used before !
+        \ifnum\value{tnslog@demo@explain@id}<1
+            \setcounter{tnslog@demo@explain@id}{1}
+        \fi
+    }{%
+        \setcounter{tnslog@demo@explain@id}{\useKV[tnslog@demo@explain@keys]{start}}%
+    }%
+    \def\hyps{\useKV[tnslog@demo@explain@keys]{hyps}}
+    \def\hyp{\useKV[tnslog@demo@explain@keys]{hyp}}
+    \edef\ccl{\useKV[tnslog@demo@explain@keys]{ccl}}
+    %
+    \if\relax\hyps\relax\else%
+        \if\relax\hyp\relax\else%
+            \PackageError{tnslog}{hyps and hyp are both used}%
+                                 {use either hyps or hyp, or none of them}
+        \fi
+    \fi
+    %
+    \if\relax\hyps\relax\else%
+        \underline{\textdemoHYPS\vphantom{p\textdemoCCL}} : \hyps
+        \vspace{-.25em}
+    \fi
+    \if\relax\hyp\relax\else%
+        \underline{\textdemoHYP\vphantom{p\textdemoCCL}} : \hyp
+        \vspace{-.25em}
+    \fi
+    \booltrue{tnslog@start@demo@explain}
+    \begin{longtable}{lll}
+        \multicolumn{3}{c}{}
+        \\[-.5em]
+        \multicolumn{3}{c}{%
+            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+        }
+        \endfoot
+        \endlastfoot
+}{
+    \end{longtable}
+    \if\relax\ccl\relax\else%
+        \vspace{-.25em}
+        \underline{\textdemoCCL\vphantom{\textdemoHYPS}} : \ccl
+    \fi
+}
+
+
+%    * Middle school version
+
+\newbool{tnslog@start@demo@explain@star}
+
+\newcounter{tnslog@demo@explain@star@id}
+
+
+\newcommand\tnslog@demo@extra[1]{%
+    {\footnotesize#1}%
+}
+
+
+\newcommand\tnslog@expl@star@id[1]{%
+    \thetnslog@demo@explain@star@id%
+    \if\relax\detokenize{#1}\relax\else%
+        \addtocounter{tnslog@demo@explain@star@id}{-1}%
+        \refstepcounter{tnslog@demo@explain@star@id}\label{#1}
+    \fi
+    \stepcounter{tnslog@demo@explain@star@id}%
+}
+
+
+\newcommand\tnslog@demostep@star[1][]{%
+    \ifbool{tnslog@start@demo@explain@star}{%
+        \global\boolfalse{tnslog@start@demo@explain@star}%
+    }{%
+        \\
+        \hline%
+    }%
+    \tnslog@expl@star@id{#1}%
+    &
+}
+
+
+\setKVdefault[tnslog@demo@explain@star@keys]{%
+    start = 1
+}
+
+
+\newenvironment{demoexplain*}[1][]{
+    \renewcommand\demostep\tnslog@demostep@star
+    \useKVdefault[tnslog@demo@explain@star@keys]
+    \setKV[tnslog@demo@explain@star@keys]{#1}
+    %
+    \ifthenelse{\equal{\useKV[tnslog@demo@explain@star@keys]{start}}{last}}{
+    % If no environment has been used before !
+        \ifnum\value{tnslog@demo@explain@star@id}<1
+            \setcounter{tnslog@demo@explain@star@id}{1}
+        \fi
+    }{%
+        \setcounter{tnslog@demo@explain@star@id}{\useKV[tnslog@demo@explain@star@keys]{start}}%
+    }%
+    \booltrue{tnslog@start@demo@explain@star}
+    \small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{longtable}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
+        \textbf{\tnslog@demo@extra{\textdemoID}}
+            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \\ \hline
+        \endfirsthead
+        %
+        \textbf{\tnslog@demo@extra{\textdemoID}}
+            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \\ \hline
+        \endhead
+        %
+        \multicolumn{3}{c}{}
+        \\[-1.25em]
+        \multicolumn{4}{c}{%
+            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+        }
+        \\
+        \endfoot
+
+        \endlastfoot
+}{
+    \end{longtable}
+    \renewcommand{\arraystretch}{1}
+}
+
+
+% ------------------ %
+% -- POINT N LINE -- %
+% ------------------ %
+
+% Points
+
+\newcommand\pt{\@ifstar{\tnsgeo@pt@star}{\tnsgeo@pt@no@star}}
+
+\newcommand\tnsgeo@pt@no@star[1]{\mathrm{#1}}
+
+\newcommand\tnsgeo@pt@star[2]{%
+    \tnsgeo@pt@no@star{#1}_{#2}
+}
+
+
+% Lines
+
+\newcommand\gline[3][O]{%
+    \IfStrEqCase{#1}{%
+        {O}{%
+        	\def\leftdelim {\left(}%
+        	\def\rightdelim{\right)}%
+	    }%
+        {C}{%
+        	\def\leftdelim {\left[}%
+        	\def\rightdelim{\right]}%
+	    }%
+        {OC}{%
+        	\def\leftdelim {\left(}%
+        	\def\rightdelim{\right]}%
+	    }%
+        {CO}{%
+        	\def\leftdelim {\left[}%
+        	\def\rightdelim{\right)}%
+	    }%
+	}[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {you can use O (default) C, OC or CO.}%
+	]
+    \leftdelim{} #2 #3 \rightdelim{}%
+}
+
+\newcommand\pgline[3][O]{%
+    \gline[#1]{\pt{#2}}{\pt{#3}}%
+}
+
+
+\newcommand\hgline[2]{%
+    \gline[CO]{#1}{#2}%
+}
+
+\newcommand\phgline[2]{%
+    \pgline[CO]{#1}{#2}%
+}
+
+
+\newcommand\segment[2]{%
+    \gline[C]{#1}{#2}%
+}
+
+\newcommand\psegment[2]{%
+    \pgline[C]{#1}{#2}%
+}
+
+
+% Source
+%    * https://tex.stackexchange.com/questions/511495
+\let\stdparallel\parallel
+\renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
+
+\let\stdnparallel\nparallel
+\renewcommand{\nparallel}{%
+  \mathrel{\mathpalette\tnsgeo@not@parallel\relax}%
+}
+\newcommand{\tnsgeo@not@parallel}[2]{%
+  \ooalign{\reflectbox{$\m@th#1\smallsetminus$}\cr\hfil$\m@th#1\parallel$\cr}%
+}
+
+
+% ------------ %
+% -- VECTOR -- %
+% ------------ %
+
+\newcommand\tnsgeo@no@point[1]{%
+    \if#1i%
+        \imath%
+    \else%
+        \if#1j%
+            \jmath%
+        \else%
+            #1
+        \fi%
+    \fi%
+}
+
+\newcommand\vect{\@ifstar{\tnsgeo@vect@star}{\tnsgeo@vect@no@star}}
+\newcommand*\tnsgeo@vect@star[1]{\vv*{\tnsgeo@no@point{#1}}}
+\newcommand*\tnsgeo@vect@no@star[1]{\vv{\tnsgeo@no@point{#1}}}
+
+
+% ----------------- %
+% -- VECTOR NORM -- %
+% ----------------- %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\let\tnsgeo@old@norm\norm
+
+\renewcommand\norm[2][b]{%
+    \IfEqCase{#1}{%
+        {b}{\tnsgeo@old@norm*{#2}}%
+        {s}{\tnsgeo@old@norm{#2}}%
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {you can use b (default) or s.}%
+    ]
+}
+
+\newcommand\vnorm[2][b]{%
+    \norm[#1]{\vect{#2}}%
+}
+
+
+% --------------------- %
+% -- VECTOR PRODUCTS -- %
+% --------------------- %
+
+% DOT PRODUCT
+
+%    #1 : 1st delimiter
+%    #2 : 1st vector
+%    #3 : inner separator
+%    #4 : 2nd vector
+%    #5 : 2nd delimiter
+
+\newcommand\tnsgeo@dotprod@abstract@rafter[5]{%
+    #1#2#3#4#5%
+}
+
+
+\newcommand\dotprod[3][u]{%
+    \IfEqCase{#1}{%
+% Usual
+        {u}{%
+            #2 \cdot #3%
+        }%
+% Bullet
+        {b}{%
+            #2 \mathbin{\text{\raisebox{.05em}{$\mathsmaller\symvar$}}} #3%
+        }%
+% Big parenthesis
+        {p}{%
+            \tnsgeo@dotprod@abstract@rafter{\left(\,}%
+                                           {#2}
+                                           {\,\left|\,\vphantom{#2}}%
+                                           {#3}%
+                                           {\right.\,\right)}%
+        }%
+% Small parenthesis
+        {sp}{%
+            \tnsgeo@dotprod@abstract@rafter{(\,}%
+                                           {#2}%
+                                           {\mid}%
+                                           {#3}%
+                                           {\,)}%
+        }%
+% Big raft
+        {r}{%
+            \tnsgeo@dotprod@abstract@rafter{\left\langle\,}%
+                                           {#2}
+                                           {\,\left|\,\vphantom{#2}}%
+                                           {#3}%
+                                           {\right.\,\right\rangle}%
+        }%
+% Small raft
+        {sr}{%
+            \tnsgeo@dotprod@abstract@rafter{\langle\,}%
+                                           {#2}%
+                                           {\mid}%
+                                           {#3}%
+                                           {\,\rangle}%
+        }%
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use u (default), p , sp , r or sr.}%
+    ]%
+}
+
+
+
+\newcommand\vdotprod[3][u]{%
+    \dotprod[#1]{\vect{#2}}{\vect{#3}}%
+}
+
+
+% The dot product - TO KEEP !!!!!!!
+
+%    #1 : 1st vector
+%    #2 : 2nd vector
+%    #3 : operator for the products
+
+%\newcommand\tnsgeo@dotprod@abstract@exp[3]{%
+%    x_{#1} #3 x_{#2} + y_{#1} #3 y_{#2}%
+%}
+
+
+
+
+% CROSS PRODUCT
+
+%    #1 : option for the operator
+%    #2 : 1st vector
+%    #3 : 2nd vector
+\newcommand\crossprod[3][w]{%
+    #2 %
+    \IfEqCase{#1}{%
+        {w}{\wedge}
+        {t}{\times}
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use w (default) or t.}%
+    ]%
+    #3
+}
+
+%    #1 : option for the operator
+%    #2 : 1st vector
+%    #3 : 2nd vector
+\newcommand\vcrossprod[3][w]{%
+    \crossprod[#1]{\vect{#2}}{\vect{#3}}%
+}
+
+
+
+% Stupid coordinates of the cross product
+
+\newbool{tnsgeo@crossprod@option@p}   % Default.
+\newbool{tnsgeo@crossprod@option@sp}
+\newbool{tnsgeo@crossprod@option@vp}
+
+\newbool{tnsgeo@crossprod@option@b}
+\newbool{tnsgeo@crossprod@option@sb}
+\newbool{tnsgeo@crossprod@option@vb}
+
+\newbool{tnsgeo@crossprod@option@space}   % Default.
+\newbool{tnsgeo@crossprod@option@times}
+\newbool{tnsgeo@crossprod@option@cdot}
+
+
+% Coordinates given like that.
+%
+%    #1    #4
+%    #2    #5
+%    #3    #6
+%
+% #7 : symbol for the product.
+%
+% #8 : one of the macro \coord, \vcoord or \vcoord*.
+%
+% #9 : one of the the option p, sp, vp, b, sb or vb. 
+\newcommand\tnsgeo@apply@coord@crossprod[9]{%
+    #8[#9]{%
+    	\tns@prop@prod{#7}{#2}{#5}%
+	                      {#3}{#6}
+      | \tns@prop@prod{#7}{#3}{#6}%
+	                      {#1}{#4}
+      | \tns@prop@prod{#7}{#1}{#4}%
+	                      {#2}{#5}
+    }%
+}
+
+
+\newcommand\tnsgeo@validate@crossprod@option[1]{
+    \IfEqCase{#1}{%
+        {p}{\booltrue{tnsgeo@crossprod@option@p}}%
+        {sp}{\booltrue{tnsgeo@crossprod@option@sp}}
+        {vp}{\booltrue{tnsgeo@crossprod@option@vp}}
+        %
+        {b}{\booltrue{tnsgeo@crossprod@option@b}}
+        {sb}{\booltrue{tnsgeo@crossprod@option@sb}}
+        {vb}{\booltrue{tnsgeo@crossprod@option@vb}}
+        %
+        {s}{\booltrue{tnsgeo@crossprod@option@space}}%
+        {t}{\booltrue{tnsgeo@crossprod@option@times}}
+        {c}{\booltrue{tnsgeo@crossprod@option@cdot}}
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use p, sp, vp, b, sb, vb, s, t or c.}%
+    ]
+}
+
+
+\newcommand\coordcrossprod[7][p,s]{%
+    \boolfalse{tnsgeo@crossprod@option@p}
+    \boolfalse{tnsgeo@crossprod@option@sp}
+    \boolfalse{tnsgeo@crossprod@option@vp}
+    \boolfalse{tnsgeo@crossprod@option@b}
+    \boolfalse{tnsgeo@crossprod@option@sb}
+    \boolfalse{tnsgeo@crossprod@option@vb}
+    \boolfalse{tnsgeo@crossprod@option@space}
+    \boolfalse{tnsgeo@crossprod@option@times}
+    \boolfalse{tnsgeo@crossprod@option@cdot}
+    %
+    \def\@coord@option{NOTHING}%
+    \def\@exp@symbol{NOTHING}%
+    %
+    \DoWithCSL\tnsgeo@validate@crossprod@option{#1}
+    %
+    \ifbool{tnsgeo@crossprod@option@p}{%
+        \def\@coord@option{p}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@sp}{%
+        \def\@coord@option{sp}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@vp}{%
+        \def\@coord@option{vp}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@b}{%
+        \def\@coord@option{b}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@sb}{%
+        \def\@coord@option{sb}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@vb}{%
+        \def\@coord@option{vb}%
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@space}{%
+        \def\@exp@symbol{\,}%    
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@times}{%
+        \def\@exp@symbol{\times}%    
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@cdot}{%
+        \def\@exp@symbol{\cdot}%    
+    }{}%
+    %
+    \ifbool{tnsgeo@crossprod@option@sp}{}{%
+        \ifbool{tnsgeo@crossprod@option@vp}{}{%
+            \ifbool{tnsgeo@crossprod@option@b}{}{%
+                \ifbool{tnsgeo@crossprod@option@sb}{}{%
+                    \ifbool{tnsgeo@crossprod@option@vb}{}{%
+                        \def\@coord@option{p}% Default
+                    }%
+                }%
+            }%
+        }%
+    }%
+    %
+    \ifbool{tnsgeo@crossprod@option@times}{}{%
+        \ifbool{tnsgeo@crossprod@option@cdot}{}{%
+            \def\@exp@symbol{\,}% Default
+        }%
+    }%
+    %
+    \tnsgeo@apply@coord@crossprod{#2}{#3}{#4}% Vector 1
+                                 {#5}{#6}{#7}% Vector 2
+                                 {\@exp@symbol}%
+                                 {\coord}{\@coord@option}%
+}
+
+
+% Abstraction
+
+% Source
+%    * https://tex.stackexchange.com/a/548662/6880
+
+\newcommand\tnsgeo@calc@crossprod@label[1]{%
+    {\tiny$\substack{-\\#1}$}%
+}
+
+
+\newcommand\calccrossprod{\@ifstar{\tnsgeo@calc@crossprod@star}{\tnsgeo@calc@crossprod@no@star}}
+
+
+\newcommand\tnsgeo@calc@crossprod@star[9][vec]{%
+    \tns@det@plane@open{#1}{&}{#2}{#6}%
+        \tns@det@plane@entries{&}{#3}{#4}{#7}{#8} \\
+        %
+        #5                & #9                    \\
+        {\color{blue} #3} & {\color{blue} #7}
+    \end{vNiceMatrix}
+}
+
+% Source: https://tex.stackexchange.com/a/554468/6880
+\newcommand\tnsgeo@calc@crossprod@no@star[9][vec]{%
+    \makeatletter% Babel TikZ library doesn't help me here but it does in other places.
+        \tnsgeo@calc@crossprod@no@star@aux{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}%
+    \makeatother%
+}
+
+\newcommand\tnsgeo@calc@crossprod@no@star@aux[9]{%
+    \tns@det@plane@open{#1}{&&}{#2}{#6}%
+        \tns@det@plane@entries{&&}{#3}{#4}{#7}{#8} \\
+        %
+        #5                && #9                    \\
+        {\color{blue} #3} && {\color{blue} #7}
+        %%
+        \CodeAfter
+        \begin{tikzpicture}
+            \path (2-1.east) 
+                  -- node[below = 0.3em,
+                          blue,
+                          circle,
+                          inner sep = .4pt]
+                     (minusone) {\tnsgeo@calc@crossprod@label{1}}
+                  (2-3.west);
+            \draw [blue,->]
+                  let \p1 = ($(minusone.east) - (minusone.center)$) in 
+                      ([xshift = 0.5mm,yshift=-0.05mm]2-1.east)
+                      to[out = 0, in = 137.5]
+                      ([yshift=-0.05mm]minusone.50)
+                      arc[start angle = 50,
+                          end angle = -230,
+                          radius = \x1] 
+                      to[out = 42.5, in =190]
+                      ([xshift = -0.3mm,yshift=-0.05mm]2-1.east-|2-3.west);
+            %%
+            \path (3-1.east) 
+                  -- node[below = 0.3em,
+                          red,
+                          circle,
+                          inner sep = .4pt] 
+                     (minustwo) {\tnsgeo@calc@crossprod@label{2}}
+                  (3-3.west);
+            \draw [red,->]
+                  let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
+                      ([xshift=0.5mm,yshift=-0.6mm]3-1.east)
+                      to[out = 0, in = 137.5]
+                      ([yshift=-0.6mm]minustwo.50)
+                      arc[start angle = 50,
+                          end angle = -230,
+                          radius = \x1] 
+                      to[out = 42.5, in =190] 
+                      ([xshift = -0.3mm,yshift=-0.6mm]3-1.east-|3-3.west);
+            %%
+            \path (1-1.east) 
+                  -- node[below = 0.3em,
+                          orange,
+                          circle,
+                          inner sep = .4pt] 
+                     (minus) {\tnsgeo@calc@crossprod@label{3}}
+                  (1-3.west);
+            \draw [orange,->]
+                  let \p1 = ($(minus.east) - (minus.center)$) in 
+                      ([xshift=0.5mm]1-1.east)
+                      to[out = 0, in = 137.5]
+                      (minus.50)
+                      arc[start angle = 50,
+                          end angle = -230,
+                          radius = \x1] 
+                      to[out = 42.5, in =190] 
+                      ([xshift=-0.3mm]1-1.east-|1-3.west);
+        \end{tikzpicture} 
+    \end{vNiceMatrix}
+}
+
+
+\newcommand\vcalccrossprod{\@ifstar{\tnsgeo@vcalc@crossprod@star}{\tnsgeo@vcalc@crossprod@no@star}}
+
+\newcommand\tnsgeo@vcalc@crossprod@no@star[9][vec]{%
+    \calccrossprod[#1]{\vect{#2}}{#3}{#4}{#5}%
+                      {\vect{#6}}{#7}{#8}{#9}%
+}
+
+\newcommand\tnsgeo@vcalc@crossprod@star[9][vec]{%
+    \calccrossprod*[#1]{\vect{#2}}{#3}{#4}{#5}
+                       {\vect{#6}}{#7}{#8}{#9}%
+}
+
+
+% --------------------------- %
+% -- VECTOR 2D COLINEARITY -- %
+% --------------------------- %
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\calcdetplane{\@ifstar{\tnsgeo@calc@detplane@star}{\tnsgeo@calc@detplane@no@star}}
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\tnsgeo@calc@detplane@no@star[7][vec]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+        {exp}{%
+            \tns@prop@prod{\,}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{cexp}{%
+            \tns@prop@prod{\cdot}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{texp}{%
+            \tns@prop@prod{\times}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{vec}{%
+            \tns@det@plane@deco{#1}%
+                               {#2}{#3}{#4}%
+                               {#5}{#6}{#7}%
+        }{novec}{%
+            \tns@det@plane@deco{#1}%
+                               {#2}{#3}{#4}%
+                               {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{tnsgeo}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or texp.}
+    ]%
+}
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\tnsgeo@calc@detplane@star[7][vec]{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+    \IfEqCase{#1}{%
+        {exp}{%
+            \tns@prop@prod{\,}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{cexp}{%
+            \tns@prop@prod{\cdot}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{texp}{%
+            \tns@prop@prod{\times}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{vec}{%
+            \tns@det@plane@no@deco{#1}%
+                                  {#2}{#3}{#4}%
+                                  {#5}{#6}{#7}%
+        }{novec}{%
+            \tns@det@plane@no@deco{#1}%
+                                  {#2}{#3}{#4}%
+                                  {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{tnsgeo}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or texp.}
+    ]%
+}
+
+
+\newcommand\vcalcdetplane{\@ifstar{\tnsgeo@vcalc@detplane@star}{\tnsgeo@vcalc@detplane@no@star}}
+
+
+\newcommand\tnsgeo@vcalc@detplane@star[7][vec]{%
+    \tnsgeo@calc@detplane@star[#1]{\vect{#2}}{#3}{#4}%
+                                  {\vect{#5}}{#6}{#7}%
+}
+
+
+\newcommand\tnsgeo@vcalc@detplane@no@star[7][vec]{%
+    \tnsgeo@calc@detplane@no@star[#1]{\vect{#2}}{#3}{#4}%
+                                     {\vect{#5}}{#6}{#7}%
+}
+
+
+% --------------------------- %
+% -- CARTESIAN COORDINATES -- %
+% --------------------------- %
+
+\newcommand\coord[2][p]{%
+    \IfEqCase{#1}{%
+        {p}{%
+            \left( \,%
+% ARG 1  = Separator: |
+% ARG 2  = All parts: what the user types !
+% ARG 3  = Before   : nothing here
+% ARG 4  = Between  : ;
+% ARG 5  = After    : nothing here
+% OPTION = Ornament : macro to apply to each item
+                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+             \, \right)%
+        }{sp}{%
+            (\tns@multi@args{|}{#2}{}{\tnsmathsep}{})%
+        }{b}{%
+            \left[ \,%
+                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+             \, \right]%
+        }{sb}{%
+            [\tns@multi@args{|}{#2}{}{\tnsmathsep}{}]%
+        }{vp}{%
+            \tns@multi@args{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+        }{vb}{%
+            \tns@multi@args{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+        }%
+    }[
+        \PackageError{ynsgeo}{unknown option}%
+                             {You can use p (default), sp, b, sb, vp or vb.}
+    ]%
+}
+
+
+\newcommand\tnsgeo@extra@coord[3][p]{%
+    #2\coord[#1]{#3}%
+}
+
+
+\newcommand\pcoord{\@ifstar{\tnsgeo@extra@coord}{\tnsgeo@pcoord@no@star}}
+
+\newcommand\tnsgeo@pcoord@no@star[3][p]{%
+    \pt{#2}\coord[#1]{#3}%
+}
+
+
+\newcommand\vcoord{\@ifstar{\tnsgeo@extra@coord}{\tnsgeo@vcoord@no@star}}
+
+\newcommand\tnsgeo@vcoord@no@star[3][p]{%
+    \vect{#2}\coord[#1]{#3}%
+}
+
+
+% -------------------- %
+% -- CARTESIAN AXES -- %
+% -------------------- %
+
+% Sources : see the sources of the macros for continued fractions.
+
+% General naming of axes
+\def\tnsgeo@axes@comafy@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsmathsubsep{} \tnsgeo@axes@comafy@#2\@nil%
+    }%
+}
+
+\newcommand\axes{\@ifstar{\tnsgeo@axes@star}{\tnsgeo@axes@no@star}}
+
+\newcommand\tnsgeo@axes@no@star[1]{%
+    \tnsgeo@axes@no@star@splitter@#1|\@nil%
+}
+\def\tnsgeo@axes@no@star@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@#2\@nil}{)}}%
+}
+
+\newcommand\tnsgeo@axes@star[1]{%
+    \tnsgeo@axes@star@splitter@#1|\@nil%
+}
+\def\tnsgeo@axes@star@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@semi@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@#2\@nil}{)}}%
+}
+
+% Geometric points for naming some axes
+\def\tnsgeo@axes@comafy@gptify@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        \pt{#1}%
+    }{%
+        \pt{#1} \tnsmathsubsep{} \tnsgeo@axes@comafy@gptify@#2\@nil%
+    }%
+}
+
+\newcommand\paxes[1]{%
+    \tnsgeo@paxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@paxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{\pt{#1}}{\tnsmathsep{}}{\tnsgeo@axes@comafy@gptify@#2\@nil}{)}}%
+}
+
+% Vectors for naming some axes
+\def\tnsgeo@axes@comafy@vectify@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        \vect{\trim@spaces{#1}}%
+    }{%
+        \vect{\trim@spaces{#1}} \tnsmathsubsep{} \tnsgeo@axes@comafy@vectify@#2\@nil%
+    }%
+}
+
+\newcommand\vaxes[1]{%
+    \tnsgeo@vaxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@vaxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{#1}{\tnsmathsep{}}{\tnsgeo@axes@comafy@vectify@#2\@nil}{)}}%
+}
+
+% Geometric points and vectors for naming some axes
+\newcommand\pvaxes[1]{%
+    \tnsgeo@pvaxes@splitter@#1|\@nil%
+}
+\def\tnsgeo@pvaxes@splitter@#1|#2\@nil{%
+    \ensuremath{\tns@generic@interval@ext{(}{\pt{#1}}{\tnsmathsep{}}{\tnsgeo@axes@comafy@vectify@#2\@nil}{)}}%
+}
+
+
+% --------- %
+% -- ARC -- %
+% --------- %
+
+\newcommand\circarc{\@ifstar{\tnsgeo@circ@arc@star}{\tnsgeo@circ@arc@no@star}}
+
+\newcommand*\tnsgeo@circ@arc@star[2]{%
+    \wideparen{\tnsgeo@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\tnsgeo@circ@arc@no@star[1]{%
+    \wideparen{\tnsgeo@no@point{#1}}%
+}
+
+
+% --------------------- %
+% -- ANGLE GEOMETRIC -- %
+% --------------------- %
+
+% Source : http://forum.mathematex.net/latex-f6/arc-dont-le-nom-comporte-un-indice-t12392.html#p120204
+
+\newcommand\anglein{\@ifstar{\tnsgeo@anglein@star}{\tnsgeo@anglein@no@star}}
+
+\newcommand*\tnsgeo@anglein@star[2]{%
+    \widehat{\tnsgeo@no@point{#1}}\vphantom{#1}_{#2}%
+}
+
+\newcommand*\tnsgeo@anglein@no@star[1]{%
+    \widehat{\tnsgeo@no@point{#1}}%
+}
+
+
+% -------------------- %
+% -- ANGLE ORIENTED -- %
+% -------------------- %
+
+\newcommand\angleorient[3][p]{%
+    \IfEqCase{#1}{%
+% Big parenthesis (no hat)
+        {p}{%
+            \tns@generic@interval@ext{(}{\, #2}{\tnsmathsep}{#3\, }{)}%
+        }%
+% Small parenthesis (no hat)
+        {sp}{%
+            \tns@generic@interval@semi@ext{(}{\, #2}{\tnsmathsep}{#3\, }{)}%
+        }%
+% Hat - Big parenthesis
+        {h}{%
+            \widehat{\angleorient{#2}{#3}}%
+        }%
+% Hat - Small parenthesis
+        {sh}{%
+            \widehat{\angleorient[sp]{#2}{#3}}%
+        }%
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use p (default), sp, h or sh.}%
+    ]%
+}
+
+
+\newcommand\vangleorient[3][p]{%
+    \angleorient[#1]{\vect{#2}}{\vect{#3}}%
+}
+
+
+% --------------- %
+% -- CONSTANTS -- %
+% --------------- %
+
+% Constants - START
+
+% User's constants
+
+\newcommand\param[1]{%
+    \IfStrEqCase{#1}{%
+        {gamma}{\upgamma}%
+        {pi}{\uppi}%
+        {tau}{\uptau}%
+    }[\text{\textbf{#1}}]
+}
+
+% Classical constants
+    
+\newcommand\ggamma{\param{gamma}}
+\newcommand\ppi{\param{pi}}
+\newcommand\ttau{\param{tau}}
+\newcommand\ee{\param{e}}
+\newcommand\ii{\param{i}}
+\newcommand\jj{\param{j}}
+\newcommand\kk{\param{k}}
+
+% Constants - END
+
+
+% ------------------ %
+% -- ABS FUNCTION -- %
+% ------------------ %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+\let\tnsana@old@abs\abs
+\def\abs{\@ifstar{\tnsana@old@abs}{\tnsana@old@abs*}}
+
+
+% --------------------- %
+% -- NAMED FUNCTIONS -- %
+% --------------------- %
+
+% Classical functions - START
+
+\DeclareMathOperator{\acos}{\operatorname{acos}}
+\DeclareMathOperator{\asin}{\operatorname{asin}}
+\DeclareMathOperator{\atan}{\operatorname{atan}}
+\DeclareMathOperator{\arccosh}{\operatorname{arccosh}}
+\DeclareMathOperator{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathOperator{\arctanh}{\operatorname{arctanh}}
+\DeclareMathOperator{\acosh}{\operatorname{acosh}}
+\DeclareMathOperator{\asinh}{\operatorname{asinh}}
+\DeclareMathOperator{\atanh}{\operatorname{atanh}}
+\DeclareMathOperator{\fch}{\operatorname{ch}}
+\DeclareMathOperator{\fsh}{\operatorname{sh}}
+\DeclareMathOperator{\fth}{\operatorname{th}}
+\DeclareMathOperator{\afch}{\operatorname{ach}}
+\DeclareMathOperator{\afsh}{\operatorname{ash}}
+\DeclareMathOperator{\afth}{\operatorname{ath}}
+
+\newcommand\expb[1]{\exp_{#1}}
+\newcommand\logb[1]{\log_{#1}}
+
+% Classical functions - END
+
+
+% ----------- %
+% -- LIMIT -- %
+% ----------- %
+
+% Note: some macros in the STY for total derivation are used.
+
+\newbool{tnsana@lim@option@asit}
+\newbool{tnsana@lim@option@p}
+\newbool{tnsana@lim@option@sp}
+
+
+% Argument #1: parenthesis or not
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\tnsana@limit@abstract[4]{%
+    \lim\limits_{%
+		\scriptsize%
+		\tns@multi@args{|}%
+		               {#3\kern0.25ex{\rightarrow}\kern0.25ex#4}%
+		               {\begin{NiceArray}{c}}%
+		               {\\ }%
+		               {\end{NiceArray}}%
+	}#1{#2}%
+}
+
+
+% Argument #1: option s or sp
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\limit[4][asit]{%
+    \boolfalse{tnsana@lim@option@asit}%
+    \boolfalse{tnsana@lim@option@p}%
+    \boolfalse{tnsana@lim@option@sp}%
+    %
+    \IfEqCase{#1}{%
+        {asit}{\booltrue{tnsana@lim@option@asit}}%
+        {p}{\booltrue{tnsana@lim@option@p}}%
+        {sp}{\booltrue{tnsana@lim@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use asit (default), p and sp}%
+    ]%
+    %
+    \ifbool{tnsana@lim@option@p}{%
+    	\let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@lim@option@sp}{%
+    		\let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+	\tnsana@limit@abstract{\parithere}{#2}{#3}{#4}%
+}
+
+
+% ------------------------- %
+% -- TOTAL DIFF CALCULUS -- %
+% ------------------------- %
+
+% Sources :
+%    * http://forum.mathematex.net/latex-f6/en-tete-de-ds-t12933.html#p124908
+%    * http://forum.mathematex.net/latex-f6/derivee-avec-un-d-droit-et-espace-t12932.html#p124930
+%    * http://forum.mathematex.net/latex-f6/remplacer-des-espaces-par-autre-chose-t12952.html#p125062
+%    * http://forum.mathematex.net/latex-f6/probleme-de-remplacement-de-cdots-t13047.html#p125782
+%    * https://tex.stackexchange.com/a/42445/6880
+%    * https://tex.stackexchange.com/a/553843/6880
+
+
+% dd, partial and pp useful operators
+%
+% Argument #1: the exponent
+% Argument #2: the variable
+% Argument #3: the operator
+% Argument #4: space before exponent
+% Argument #5: space after exponent
+
+\newcommand{\tnsana@diff@ope}[5]{%
+    #3%
+    \ifx0#1\else%
+        ^{\kern#4#1\kern#5}\!%
+    \fi%
+    \hspace{0.07em}#2%
+}
+
+
+\DeclareRobustCommand\@dder{
+    \mathop{}\mathopen{}\mathrm{d}
+}
+
+
+\newcommand\dd[2][0]{\tnsana@diff@ope{#1}{#2}{\@dder}{.05ex}{0.15ex}}
+
+
+\let\tnsana@original@partial\partial
+
+\renewcommand{\partial}{%
+    \tnsana@original@partial\mathopen{}%
+}
+
+
+\newcommand\pp[2][0]{\tnsana@diff@ope{#1}{#2}{\partial}{.15ex}{0.15ex}}
+
+
+% Common tools
+
+\newcounter{tnsana@der@prime@counter}
+
+\newcommand\tnsana@der@func@no@par[1]{%
+    #1%
+}
+
+\newcommand\tnsana@der@func@ext@par[1]{%
+    \left( #1 \right)%
+}
+
+\newcommand\tnsana@der@func@no@ext@par[1]{%
+    ( #1 )%
+}
+
+\newcommand\tnsana@der@func@under@bracket[1]{%
+    \overbracket[.75pt]{#1}%
+}
+
+
+\newbool{tnsana@der@option@u}
+\newbool{tnsana@der@option@e}
+\newbool{tnsana@der@option@d}
+\newbool{tnsana@der@option@bd}
+
+\newbool{tnsana@der@option@i}
+\newbool{tnsana@der@option@ei}
+
+\newbool{tnsana@der@option@f}
+\newbool{tnsana@der@option@of}
+\newbool{tnsana@der@option@sf}
+\newbool{tnsana@der@option@osf}
+
+\newbool{tnsana@der@option@p}
+\newbool{tnsana@der@option@sp}
+
+
+% Total derivate
+
+%     + Abstraction
+%
+%    #1 : macro applied to the function
+%    #2 : the function
+%    #3 : order of derivation
+
+\newcommand\tnsana@der@usual[3]{%
+    #1{#2}^{%
+        \,%
+        \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+            \prime%
+        }%
+    }%
+}
+
+
+\newcommand\tnsana@der@exp[3]{%
+    #1{#2}^{\left( #3 \right)}%
+}
+
+
+\newcommand\tnsana@der@dot[3]{%
+    \mathop{%
+        \kern\z@{#1{#2}}%
+    }\limits^{%
+        \vbox to-1.4\ex@{%
+            \kern-\tw@\ex@%
+            \hbox{\normalfont%
+                %
+                \forloop[1]{tnsana@der@prime@counter}{0}{\value{tnsana@der@prime@counter} < #3}{%
+                    .%
+                }%
+            }%
+            \vss%
+        }%
+    }%
+}
+
+
+\newcommand\tnsana@der@bracket@dot[3]{%
+    \tnsana@der@dot{\tnsana@der@func@under@bracket}{#1{#2}}{#3}%
+}
+
+
+
+\newcommand\tnsana@der@sub[3]{
+    \@dder%
+    \IfStrEq{#3}{1}{}{%
+        ^{\kern.15ex#3\kern.15ex}%
+    }%
+    _{\kern.15ex#2\kern.15ex} #1%
+}
+
+
+%    #1 : \frac or \dfrac 
+%    #2 : the function
+%    #3 : the variable
+%    #4 : order of derivation
+
+\newcommand\tnsana@der@abstract@frac[4]{%
+    #1{%
+        \IfStrEq{#4}{1}{%
+            \dd{#2}%
+        }{%
+            \dd[#4]{#2}%
+        }%
+    }{%
+        {%
+            \dd{#3}%
+            \IfStrEq{#4}{1}{}{%
+                ^{#4}%
+            }%
+        }%
+    }%
+}
+
+
+%    #1 : the function
+%    #2 : the variable
+%    #3 : order of derivation
+
+\newcommand\tnsana@der@dfrac[3]{%
+    \tnsana@der@abstract@frac{\dfrac}{#1}{#2}{#3}%
+}
+
+
+\newcommand\tnsana@der@frac[3]{
+    \tnsana@der@abstract@frac{\frac}{#1}{#2}{#3}%
+}
+
+
+\newcommand\tnsana@der@ope@frac[3]{
+    \tnsana@der@abstract@frac{\frac}{}{#2}{#3}#1%
+}
+
+
+\newcommand\tnsana@der@ope@dfrac[3]{
+    \tnsana@der@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+
+%     + Simple version (no var. of derivation)
+
+\newcommand\tnsana@validate@simple@der@option[1]{
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use u (default), e , t , d , bd , p and sp}%
+    ]%
+}
+
+
+%    #1 : option of formating
+%    #2 : the  function (no var. here)
+%    #3 : order of derivation
+
+\newcommand\sder[3][u]{%
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@simple@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
+        )
+    }{%
+        \booltrue{tnsana@der@option@u}%
+    }{}%   
+    %
+    \ifbool{tnsana@der@option@p}{%
+    	\let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@der@option@sp}{%
+    		\let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+    \ifbool{tnsana@der@option@u}{%
+        \let\callithere\tnsana@der@usual%
+    }{%
+        \ifbool{tnsana@der@option@e}{%
+            \let\callithere\tnsana@der@exp%
+        }{%
+        	\ifbool{tnsana@der@option@d}{%
+            	\let\callithere\tnsana@der@dot%
+			}{%
+				\let\callithere\tnsana@der@bracket@dot%
+			}%
+        }%
+    }%
+    \callithere{\parithere}{#2}{#3}%
+}
+
+
+%     + Strict version (this one needs the var. of derivation)
+
+\newcommand\tnsana@validate@der@option[1]{
+    \IfEqCase{#1}{%
+        {u}{\booltrue{tnsana@der@option@u}}%
+        {e}{\booltrue{tnsana@der@option@e}}%
+        {d}{\booltrue{tnsana@der@option@d}}%
+        {bd}{\booltrue{tnsana@der@option@bd}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use u (default), e , i , f , sf , oi , of , osf , p and sp}%
+    ]%
+}
+
+
+\newcommand\der[4][u]{%
+    \boolfalse{tnsana@der@option@u}%
+    \boolfalse{tnsana@der@option@e}%
+    \boolfalse{tnsana@der@option@d}%
+    \boolfalse{tnsana@der@option@bd}%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@der@option{#1}
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@e}
+            or
+            bool {tnsana@der@option@d}
+            or
+            bool {tnsana@der@option@bd}
+            or
+            bool {tnsana@der@option@i}
+            or
+            bool {tnsana@der@option@f}
+            or
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+        )
+    }{%
+        \booltrue{tnsana@der@option@u}%
+    }{}
+    % Usual, exponent or dot
+    \ifboolexpr{
+        bool {tnsana@der@option@u}
+        or
+        bool {tnsana@der@option@e}
+        or
+        bool {tnsana@der@option@d}
+        or
+        bool {tnsana@der@option@bd}
+    }{%
+        \sder[#1]{#2}{#4}
+    }{%    
+    % Indice or fraction like
+        \ifbool{tnsana@der@option@p}{%
+                \let\parithere\tnsana@der@func@ext@par%
+        }{%
+            \ifbool{tnsana@der@option@sp}{%
+                \let\parithere\tnsana@der@func@no@ext@par%
+            }{%
+                \let\parithere\tnsana@der@func@no@par%
+            }%
+        }%
+     % Big frac
+        \ifbool{tnsana@der@option@f}{%
+            \let\callithere\tnsana@der@dfrac%
+     % Small frac
+        }{%
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@der@frac%
+     % Indice
+            }{%
+                \ifbool{tnsana@der@option@i}{%
+                    \let\callithere\tnsana@der@sub%
+    % Big frac ope
+                }{
+                    \ifbool{tnsana@der@option@of}{%
+                        \let\callithere\tnsana@der@ope@dfrac%
+                    }{
+    % Small frac ope
+                        \ifbool{tnsana@der@option@osf}{%
+                            \let\callithere\tnsana@der@ope@frac%
+                        }{}%
+                    }%
+                }%
+             }%
+        }%
+    % Let's do the job
+        \callithere{\parithere{#2}}{#3}{#4}%
+    }%
+}
+
+
+%     + Operator for total derivations
+
+\newcommand\tnsana@validate@der@operator@option[1]{
+    \IfEqCase{#1}{%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {i}{\booltrue{tnsana@der@option@i}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use f (default), sf and i}%
+    ]%
+}
+
+
+\newcommand\derope[3][f]{%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \der[#1]{}{#2}{#3}%
+}
+
+
+% --------------------------- %
+% -- PARTIAL DIFF CALCULUS -- %
+% --------------------------- %
+
+% Partial derivate
+
+%     + Abstraction
+
+\newcommand\tnsana@pder@abstract@frac[4]{%
+    #1{%
+        \pp[#4]{#2}%
+    }{%
+% ARG 1 = Separator: |
+% ARG 2 = All parts: what the user types !
+% ARG 3 = Before   : nothing here
+% ARG 4 = Between  : ;
+% ARG 5 = After    : nothing here
+        \tns@multi@args{|}{#3}{\partial}{\,\partial}{}%
+    }
+}
+
+\newcommand\tnsana@pder@dfrac[3]{%
+    \tnsana@pder@abstract@frac{\dfrac}{#1}{#2}{#3}%
+}
+
+\newcommand\tnsana@pder@frac[3]{%
+    \tnsana@pder@abstract@frac{\frac}{#1}{#2}{#3}%
+}
+
+\newcommand\tnsana@pder@ope@dfrac[3]{%
+    \tnsana@pder@abstract@frac{\dfrac}{}{#2}{#3}#1%
+}
+
+\newcommand\tnsana@pder@ope@frac[3]{%
+    \tnsana@pder@abstract@frac{\frac}{}{#2}{#3}#1%
+}
+
+
+\newcommand\tnsana@pder@sub[3]{
+% The following command works because xstring traits {...} like a single character.
+    \noexpandarg%
+    \StrSubstitute{#2}{^}{\tnsana@der@func@no@ext@par}[\@index]%
+    \partial%
+    ^{\kern.15ex#3\kern.15ex}%
+    _{\expandafter\StrSubstitute\expandafter{\@index}{|}{\kern.05em,\kern.05em}}%
+    #1%
+    \expandarg%
+}
+
+
+
+\newcommand\tnsana@hack@subit[2]{%
+	{#1}_{#2\kern-.075em}%
+}
+
+\ExplSyntaxOn
+	\NewDocumentCommand\tnsana@pder@expanded@sub{mmm}{
+		\tnsana@hack@subit{#1}{%
+			\projetmbc_test:n{\expandafter\StrSubstitute\expandafter{#2}{|}{\kern.075em}}%
+		}%
+	}
+
+	\tl_new:N \l__projetmbc_test_tl
+
+	\cs_new_protected:Nn \projetmbc_test:n {
+  		\tl_set:Nn \l__projetmbc_test_tl { #1 }
+  		\regex_replace_all:nnN
+   			{ (\cB. .*? \cE.|[[:alpha:]])\^ } % search a braced group or single letter followed by ^
+   			{ \c{projetmbc_power:nn} \1 } % prepend \projetmbc_power:nn and remove ^
+   		\l__projetmbc_test_tl
+   		\ensuremath { \tl_use:N \l__projetmbc_test_tl }
+ 	}
+
+	\cs_new:Nn \projetmbc_power:nn {
+  		\prg_replicate:nn { #2 } { #1\kern.075em }
+ 	}
+\ExplSyntaxOff
+
+
+
+
+
+
+
+
+
+
+
+
+%     + With the function given
+
+\newcommand\tnsana@validate@pder@option[1]{
+    \IfEqCase{#1}{%
+        {i}{\booltrue{tnsana@der@option@i}}%
+        {ei}{\booltrue{tnsana@der@option@ei}}%
+        {f}{\booltrue{tnsana@der@option@f}}%
+        {of}{\booltrue{tnsana@der@option@of}}%
+        {sf}{\booltrue{tnsana@der@option@sf}}%
+        {osf}{\booltrue{tnsana@der@option@osf}}%
+        {p}{\booltrue{tnsana@der@option@p}}%
+        {sp}{\booltrue{tnsana@der@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use f (default), sf, of, osf, i, ei, p and sp}%
+    ]%
+}
+
+
+\newcommand\pder[4][f]{%
+    \boolfalse{tnsana@der@option@i}%
+    \boolfalse{tnsana@der@option@ei}%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@of}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@osf}%
+    \boolfalse{tnsana@der@option@p}%
+    \boolfalse{tnsana@der@option@sp}%
+    %
+    \DoWithCSL\tnsana@validate@pder@option{#1}
+    %
+    %
+    \ifboolexpr{
+        not(
+            bool {tnsana@der@option@of}
+            or
+            bool {tnsana@der@option@sf}
+            or
+            bool {tnsana@der@option@osf}
+            or
+            bool {tnsana@der@option@i}
+            or
+            bool {tnsana@der@option@ei}
+        )
+    }{%
+        \booltrue{tnsana@der@option@f}%
+    }{}%
+    % Parentheses or not
+    \ifbool{tnsana@der@option@p}{%
+        \let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@der@option@sp}{%
+            \let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    % Expo total
+    \IfStrEq{#4}{1}{%
+        \def\expotot{}
+    }{%
+        \def\expotot{#4}
+    }%
+    % Big frac
+    \ifbool{tnsana@der@option@f}{%
+        \let\callithere\tnsana@pder@dfrac%
+    }{%
+    % Big frac ope
+        \ifbool{tnsana@der@option@of}{%
+            \let\callithere\tnsana@pder@ope@dfrac%
+        }{%
+    % Small frac
+            \ifbool{tnsana@der@option@sf}{%
+                \let\callithere\tnsana@pder@frac%
+            }{%
+    % Small frac ope
+                \ifbool{tnsana@der@option@osf}{%
+                    \let\callithere\tnsana@pder@ope@frac%
+                }{%
+    % Indice
+                    \ifbool{tnsana@der@option@i}{%
+                        \let\callithere\tnsana@pder@sub%
+                    }{%
+                    	\let\callithere\tnsana@pder@expanded@sub%
+                    }%
+                }%
+            }%
+        }%
+    }%
+    % Let's do the job
+    \callithere{\parithere{#2}}{#3}{\expotot}%
+}
+
+
+
+%     + Operator for partiaal derivations
+
+\newcommand\pderope[3][f]{%
+    \boolfalse{tnsana@der@option@f}%
+    \boolfalse{tnsana@der@option@sf}%
+    \boolfalse{tnsana@der@option@i}%
+    %
+    \DoWithCSL\tnsana@validate@der@operator@option{#1}
+    %
+    \ifbool{tnsana@der@option@sf}{}{%
+        \ifbool{tnsana@der@option@i}{}{%
+            \booltrue{tnsana@der@option@f}%
+        }%
+    }%
+    \pder[#1]{}{#2}{#3}%
+}
+
+
+% ------------ %
+% -- TABLES -- %
+% ------------ %
+
+% Better style for arrowhead !
+
+\tkzTabSetup[%
+    arrowstyle     = triangle 60,%
+    doubledistance = 3pt%
+]
+
+
+% Graph Sign to decorate tkzTables.
+%
+% Sources
+%    + https://tex.stackexchange.com/a/549546/6880
+%    + https://groups.google.com/forum/#!topic/fr.comp.text.tex/X6aIq-SZDFA
+%    + https://tex.stackexchange.com/a/91424/6880
+%    + https://tex.stackexchange.com/a/159132/6880
+
+% Single highlight a line
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@back@line[2]{
+    \begin{scope}[on background layer]
+        \path [fill=#1] (T0#2) rectangle (T2\the\numexpr#2+1\relax);
+    \end{scope}
+}  
+
+% Highlight a line
+%
+%    #1 : color
+%    #2 : nb of the line
+
+\ExplSyntaxOn
+    \NewDocumentCommand\backLine{O{gray!30}m}{
+        \clist_map_inline:nn{#2}{\tnsana@back@line{#1}{##1}}
+    }
+\ExplSyntaxOff
+
+
+% For comments and graphs
+
+\newcommand\@tkzdeco@node@middle[1]{
+    \coordinate (M) at ($(T2#1)!.5!(T2\the\numexpr#1+1\relax)$)
+}
+
+% Comment a line
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : text
+\newcommand\comLine[3][blue]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.6,0) node[right, #1]{\footnotesize#3}
+    ;
+}
+
+
+% Options : gso = graphtnsana@sign@option
+
+\newcounter{tnsana@gso@nb@functions}
+\newcommand\tnsana@gso@function{}
+
+\newcounter{tnsana@gso@nb@a@constraints}
+\newcommand\tnsana@gso@a@constraints{}
+
+\newcounter{tnsana@gso@nb@d@constraints}
+\newcommand\tnsana@gso@d@constraints{}
+
+
+\newcommand\tnsana@validate@graphtnsana@sign@option[1]{%
+    % Parameter a
+    \IfSubStr{an,ap}{#1}{%
+        \stepcounter{tnsana@gso@nb@a@constraints}%
+        \renewcommand\tnsana@gso@a@constraints{@#1}%
+    }{%
+    % Parameter d
+        \IfSubStr{dn,dp,dz}{#1}{%
+            \stepcounter{tnsana@gso@nb@d@constraints}%
+            \renewcommand\tnsana@gso@d@constraints{@#1}%
+        }{%
+    % Functions with parameters
+            \IfEqCase{#1}{%
+                {ax+b}{%
+                    \renewcommand\tnsana@gso@function{line}%
+                }%
+                {ax2+bx+c}{%
+                    \renewcommand\tnsana@gso@function{parabola}%
+                }%
+                {x2}{%
+                    \renewcommand\tnsana@gso@function{square}%
+                }%
+                {sqrt}{%
+                    \renewcommand\tnsana@gso@function{sqrt}%
+                }%
+                {1/x}{%
+                    \renewcommand\tnsana@gso@function{inv}%
+                }%
+                {abs}{%
+                    \renewcommand\tnsana@gso@function{abs}%
+                }%
+                {exp}{%
+                    \renewcommand\tnsana@gso@function{exp}%
+                }%
+                {ln}{%
+                    \renewcommand\tnsana@gso@function{ln}%
+                }%
+            }[%
+                \PackageError{tnsana}{unknown option for graphSign}%
+                                     {Illegal option given for graphSign : #1 .}%
+            ]%
+            \stepcounter{tnsana@gso@nb@functions}%
+        }% END OF ELSE for parameter d 
+    }% END OF ELSE for parameter a 
+}
+
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : kind of graph
+\newcommand\graphSign[3][blue]{%
+    \renewcommand\tnsana@gso@function{}
+    \renewcommand\tnsana@gso@a@constraints{}
+    \renewcommand\tnsana@gso@d@constraints{}
+    % Processing the options
+    \setcounter{tnsana@gso@nb@functions}{0}
+    \setcounter{tnsana@gso@nb@a@constraints}{0}
+    \setcounter{tnsana@gso@nb@d@constraints}{0}
+    %
+    \DoWithCSL\tnsana@validate@graphtnsana@sign@option{#3}
+    % Only one kind of function ?
+    \ifnum\value{tnsana@gso@nb@functions}=1\else%
+        \PackageError{tnsana}{only one kind of function can be given graphSign}%
+                             {Number of kinds of function given to graphSign = \thetnsana@gso@nb@functions. This is illegal !}%
+    \fi%
+    % Line need only one constraint for a.
+    \IfStrEq{\tnsana@gso@function}{line}{%
+        \ifnum\value{tnsana@gso@nb@d@constraints}=0\else%
+            \PackageError{tnsana}{constraints for d with lines are nonsense for graphSign}%
+                                 {Lines for graphSign need only one constraint for a.}%
+        \fi%
+        %
+        \ifnum\value{tnsana@gso@nb@a@constraints}=1\else%
+            \PackageError{tnsana}{one single constraint for a with lines is needed for graphSign}%
+                                 {Number of constraints for a given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+        \fi%
+    }{%
+    % Parabola need only one constraint for a and also one for d.
+        \IfStrEq{\tnsana@gso@function}{parabola}{%
+            \ifnum\value{tnsana@gso@nb@d@constraints}=1\else%
+                \PackageError{tnsana}{one single constraint for d with parabolas is needed for graphSign}%
+                                     {Number of constraints for d given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+            \fi%
+            %
+            \ifnum\value{tnsana@gso@nb@a@constraints}=1\else%
+                \PackageError{tnsana}{one single constraint for a with lines is needed for graphSign}%
+                                     {Number of constraints for a given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+            \fi%
+        %
+        }{%
+    % No constraint for reference function
+            \ifnum\value{tnsana@gso@nb@a@constraints}=0\else%
+                \PackageError{tnsana}{one constraint for a with reference function are nonsense for graphSign}%
+                                     {Reference functions for graphSign don't need any constraint.}%
+            \fi%
+            \ifnum\value{tnsana@gso@nb@d@constraints}=0\else%
+                \PackageError{tnsana}{one constraint for d with reference function are nonsense for graphSign}%
+                                     {Reference functions for graphSign don't need any constraint.}%
+            \fi%
+        }%
+    }%
+    % Call of the good function
+    \csname  tnsana@sign@\tnsana@gso@function\tnsana@gso@a@constraints\tnsana@gso@d@constraints\endcsname{#1}{#2}
+    % Looking for invalid options 
+    % Everything is ok.
+}
+
+
+
+% LINES
+%
+% ax+b , ap  -->  \tnsana@sign@line@ap
+% ax+b , an  -->  \tnsana@sign@line@an
+
+
+% Abstraction for the lines
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+%    #4 : 1st ordinate
+%    #5 : 2nd ordinate
+%    #6 : 1st sign
+%    #7 : 2nd sign
+%    #8 : 1st shifts
+%    #9 : 2nd shifts
+\newcommand\tnsana@abstract@sign@line[9]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                % Plot of the function with the signs.
+                \draw[#1, thick]
+                    (0, #4)   node[xshift = -1.5mm, yshift =#8]
+                              {\CircledText{\scriptsize#6}}
+                    --
+                    (2.5, #5) node[xshift = -4.5mm, yshift = #9]
+                              {\CircledText{\scriptsize#7}};
+                % 1 root
+                \path (1.25,0) node[above, #1]{\footnotesize#3};
+        }
+    };
+}
+
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+\newcommand\tnsana@sign@line@an[3]{
+    \tnsana@abstract@sign@line{#1}{#2}{#3}  %
+                              {.65} {-.65}  % 1st and 2nd ordinates
+                              {$+$} {$-$}   % 1st and 2nd signs
+                              {-4mm}{3.5mm} % 1st and 2nd y shifts
+}
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+\newcommand\tnsana@sign@line@ap[3]{
+    \tnsana@abstract@sign@line{#1}{#2}{#3}   %
+                              {-.65}{.65}    % 1st and 2nd ordinates
+                              {$-$} {$+$}    % 1st and 2nd signs
+                              {4mm} {-3.5mm} % 1st and 2nd y shifts
+}
+
+
+
+% PARABOLAS
+
+% ax2+bx+c , ap , dp  -->  \tnsana@sign@parabola@ap@dp
+% ax2+bx+c , ap , dn  -->  \tnsana@sign@parabola@ap@dn
+% ax2+bx+c , ap , dz  -->  \tnsana@sign@parabola@ap@dz
+% ...etc
+
+
+% a > 0 and delta > 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : smaller root
+%    #4 : bigger root
+\newcommand\tnsana@sign@parabola@ap@dp[4]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                % Plot of the function.
+                \draw[#1, thick] (0.25,.6) parabola bend (1.25,-.6) (2.25,.6);
+                % The signs.
+                \path (.4,.3)     node[left, #1]
+                                  {\CircledText{\scriptsize$+$}};
+                \path (1.25,0.03) node[below, #1]
+                                  {\CircledText{\scriptsize$-$}};
+                \path (2.1,.3)    node[right, #1]
+                                  {\CircledText{\scriptsize$+$}};
+                % 2 roots
+                \path (.32,0)  node[below, #1]
+                               {\footnotesize#3};
+                \path (2.18,0) node[below, #1]
+                               {\footnotesize#4};
+            }
+        };
+}
+
+
+% a < 0 and delta > 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : smaller root
+%    #4 : bigger root
+\newcommand\tnsana@sign@parabola@an@dp[4]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                % Plot of the function.
+                \draw[#1, thick] (0.25,-.6) parabola bend (1.25,.6) (2.25,-.6);
+                % The signs.
+                \path (.4,-.3)     node[left, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                \path (1.25,-0.03) node[above, #1]
+                                   {\CircledText{\scriptsize$+$}};
+                \path (2.1,-.3)    node[right, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                % 2 roots
+                \path (.32,0)  node[above, #1]
+                               {\footnotesize#3};
+                \path (2.18,0) node[above, #1]
+                               {\footnotesize#4};
+            }
+        };
+}
+
+
+% Abstraction for the parabolas with delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+%    #4 : y shift
+%    #5 : 1st ordinate
+%    #6 : 2nd ordinate
+%    #7 : sign
+%    #8 : position
+\newcommand\tnsana@abstract@sign@parabola@dz[8]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \draw[->, -Latex, #1] (-0.1,#6) --+ (0:2.7);
+                % Plot of the function.
+                \draw[#1, thick] (0.25,#5) parabola bend (1.25,#6) (2.25,#5);
+                % The signs.
+                \path (.5,#8) node[left, #1]
+                              {\CircledText{\scriptsize#7}};
+                \path (2,#8)  node[right, #1]
+                              {\CircledText{\scriptsize#7}};
+                % 1 root
+                \path (1.25,#6) node[yshift = #4, #1]
+                                {\footnotesize#3};
+            }
+        };
+}
+
+
+% a > 0 and delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : root
+\newcommand\tnsana@sign@parabola@ap@dz[3]{
+    \tnsana@abstract@sign@parabola@dz{#1}{#2}         %
+                                     {#3}{0mm, above} % The root and its y shift
+                                     {.6}{-.6}        % 1st and 2nd ordinates
+                                     {$+$}{-.3}       % The sign and its position
+}
+
+
+% a < 0 and delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : root
+\newcommand\tnsana@sign@parabola@an@dz[3]{
+    \tnsana@abstract@sign@parabola@dz{#1}{#2}           %
+                                     {#3}{-.1mm, below} % The root and its y shift
+                                     {-.6}{.6}          % 1st and 2nd ordinates
+                                     {$-$}{.3}          % The sign and its position
+}
+
+
+% Abstraction for the parabolas with delta < 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : y of the axe
+%    #4 : 1st ordinate
+%    #5 : 2nd ordinate
+%    #6 : sign
+%    #7 : ordinate
+%    #8 : position
+\newcommand\tnsana@abstract@sign@parabola@dn[8]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \draw[->, -Latex, #1] (-0.1,#3) --+ (0:2.7);
+                % Plot of the function.
+                \draw[#1, thick] (0.35,#4) parabola bend (1.25,#5) (2.15,#4);
+                % The sign.
+                \path (1.25,#7) node[#8, #1]
+                                {\CircledText{\scriptsize#6}};
+            }
+        };
+}
+
+
+% a > 0 and delta < 0
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@parabola@ap@dn[2]{
+    \tnsana@abstract@sign@parabola@dn{#1}{#2}         %
+                                     {-.55}           % y of the axe
+                                     {.57}{-.4}       % 1st and 2nd ordinates
+                                     {$+$}{.3}{below} % The sign, its ordinate and its position
+}
+
+
+
+\newcommand\tnsana@sign@parabola@an@dn[2]{
+    \tnsana@abstract@sign@parabola@dn{#1}{#2}          %
+                                     {.55}             % y of the axe
+                                     {-.57}{.4}        % 1st and 2nd ordinates
+                                     {$-$}{-.3}{above} % The sign, its ordinate and its position
+}
+
+
+% REFERENCE
+
+% x2    -->  \tnsana@sign@square
+% srqt  -->  \tnsana@sign@square@root
+% 1/x   -->  \tnsana@sign@inv
+% abs   -->  \tnsana@sign@abs
+%
+% exp   -->  \tnsana@sign@exp
+% ln    -->  \tnsana@sign@ln
+
+
+% x^2
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@square[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,-.4) --+ (0:2.7);
+                \draw[->, -Latex, #1] (1.25,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick] (0.25,.6) parabola bend (1.25,-.4) (2.25,.6);
+                % The signs.
+                \path (.5,-.1) node[left, #1]
+                               {\CircledText{\scriptsize$+$}};
+                \path (2,-.1)  node[right, #1]
+                               {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% abs x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@abs[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,-.4) --+ (0:2.7);
+                \draw[->, -Latex, #1] (1.25,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick] (0.1,.6) --++ (1.15,-1) --+ (1.15,1);
+                % The signs.
+                \path (.5,-.1) node[left, #1]
+                               {\CircledText{\scriptsize$+$}};
+                \path (2,-.1)  node[right, #1]
+                               {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% sqrt x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@sqrt[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,-.4) --+ (0:2.7);
+                \draw[->, -Latex, #1] (0.1,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick, domain = 0.1:2.5] 
+                    % 2.5**-.5 = 0.63
+                    plot ({\x}, {.6*sqrt(\x - .1) - .4});
+                % The signs.
+                \path (.9125,-0.1) node[right, #1]
+                                   {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% 1/x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@inv[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                \draw[->, -Latex, #1] (1.25,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick, domain = 1.35:2.35]
+                    % .1*.6 * 1.25 = .075
+                    %
+                    % .065 / (x - 1.25) = .6  <==>  x - 1.25 = .065/.6
+                    %                         <==>  x = 1.25 + .065/.6 = 1.358 
+                    plot ({\x}, {.065 / (\x - 1.25)});
+                \draw[#1, thick, domain = 0.1:1.15]
+                    plot ({\x}, {.065 / (\x - 1.25)});
+                % The signs.
+                    % Cf. parabolas : (1.25 + 2.1)/2 = 1.675
+                \path (1.5,.425) node[right, #1]
+                                 {\CircledText{\scriptsize$+$}};
+                \path (1,-.425)  node[left, #1]
+                                 {\CircledText{\scriptsize$-$}};
+            }
+        };
+}
+
+
+% exp x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@exp[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,-.4) --+ (0:2.7);
+                \draw[->, -Latex, #1] (1.25,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick, domain = -0.1:1.645] 
+                    %       .3*exp(3*(x - 1.25)) - .35 = .6
+                    % <==>  .3*exp(3*(x - 1.25)) = .95
+                    % <==>  x = 1.25 + ln(9.5/3)/3 = 1.634
+                    plot ({\x}, {.3*exp(3*(\x - 1.25)) - .35});
+                % The signs.
+                \path (1,.1) node[left, #1]
+                             {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% ln x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@ln[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                \draw[->, -Latex, #1] (0.1,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick, domain = 0.225:2.55]
+                    plot ({\x}, {.3*ln((\x - .1))});
+                % The signs.
+                \path (1.25,.4)    node[right, #1]
+                                   {\CircledText{\scriptsize$+$}};
+                \path (1.05,-.475) node[left, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                % 1 root
+                \path (1.05,0) node[#1,above]
+                               {\footnotesize$1$};
+            }
+        };
+}
+
+
+% ----------------------- %
+% -- INTEGRAL CALCULUS -- %
+% ----------------------- %
+
+% Source for minimizing spaces between consecutive integrals :
+%    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
+
+% Consecutive integrals
+
+\let\stdint\int
+\DeclareRobustCommand{\int}{%
+    \stdint\tnsana@ope@followup{\@ifnextchar{\int}{\!\!}{}}%
+}
+
+\def\tnsana@ope@followup#1{%
+    \@ifnextchar{^}{\tnsana@ope@followup@sup{#1}}%
+        {\tnsana@ope@followup@nosup{#1}}%
+}
+
+\def\tnsana@ope@followup@sup#1^#2{%
+    \@ifnextchar{_}{\tnsana@ope@followup@sup@sub{#1}^{#2}}%
+        {\tnsana@ope@followup@sup@nosub{#1}^{#2}}%
+}
+
+\def\tnsana@ope@followup@sup@sub#1^#2_#3{%
+    \tnsana@ope@followup@{#1}{#2}{#3}%
+}
+
+\def\tnsana@ope@followup@sup@nosub#1^#2{%
+    \tnsana@ope@followup@{#1}{#2}{}%
+}
+
+\def\tnsana@ope@followup@nosup#1{%
+    \@ifnextchar{_}{\tnsana@ope@followup@nosup@sub{#1}}
+        {\tnsana@ope@followup@nosup@nosub{#1}}%
+}
+
+\def\tnsana@ope@followup@nosup@sub#1_#2{%
+    \@ifnextchar{^}{\tnsana@ope@followup@nosup@sub@sup{#1}_{#2}}
+        {\tnsana@ope@followup@nosup@sub@nosup{#1}_{#2}}%
+}
+
+\def\tnsana@ope@followup@nosup@sub@sup#1_#2^#3{%
+    \tnsana@ope@followup@{#1}{#3}{#2}%
+}
+
+\def\tnsana@ope@followup@nosup@sub@nosup#1_#2{%
+    \tnsana@ope@followup@{#1}{}{#2}%
+}
+
+\def\tnsana@ope@followup@nosup@nosub#1{%
+    \tnsana@ope@followup@{#1}{}{}%
+}
+
+\def\tnsana@ope@followup@#1#2#3{%
+    ^{#2}_{#3}#1%
+}
+
+
+% Integration
+
+\newcommand\integrate{\@ifstar{\tnsana@integrate@star}{\tnsana@integrate@no@star}}
+
+\newcommand\tnsana@integrate@star[4]{%
+	\int_{#3}^{#4} #1 \dd{#2}%
+}
+
+\newcommand\tnsana@integrate@no@star[4]{%
+	\tnsana@integrate@star{#1}{#2}{#2\,=\,#3}{#2\,=\,#4}%
+}
+
+
+\newcommand\dintegrate{\@ifstar{\tnsana@dintegrate@star}{\tnsana@dintegrate@no@star}}
+
+\newcommand\tnsana@dintegrate@star[4]{%
+	{\displaystyle\integrate*{#1}{#2}{#3}{#4}}%
+}
+
+\newcommand\tnsana@dintegrate@no@star[4]{%
+	{\displaystyle\integrate{#1}{#2}{#3}{#4}}%
+}
+
+
+% The hook operator
+
+\newcommand\tnsana@hook@small@vertical@phantom[1]{%
+	\vphantom{\text{\relsize{1.1}$#1$}}%
+}
+
+\newcommand\tnsana@hook@big@vertical@phantom{%
+	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
+}
+
+\newcommand\tnsana@hook@abstract[4][b]{%
+    \IfEqCase{#1}{%
+        {b}{%
+			\left[%
+				\tnsana@hook@small@vertical@phantom{#2}%
+				\,#2\,%
+			\right]%
+        }{sb}{%
+			\left[%
+				\tnsana@hook@big@vertical@phantom \right. \!\!%
+				\,#2\,%
+				\left. \tnsana@hook@big@vertical@phantom \!\!%
+			\right]%
+        }{r}{%
+            \left. #2\, \right\rvert%
+        }{sr}{%
+            #2\, {\text{\relsize{1.5}$\rvert$}}%
+        }%
+    }[
+    	\PackageError{tnsana}{unknown option}%
+                             {You can use b (default), sb, r or sr.}
+    ]%
+	_{\,#3}^{\,#4}%
+}
+
+
+\newcommand\hook{\@ifstar{\tnsana@hook@star}{\tnsana@hook@no@star}}
+
+\newcommand\tnsana@hook@star[5][b]{%
+	\tnsana@hook@abstract[#1]{#2}{#4}{#5}%
+}
+
+\newcommand\tnsana@hook@no@star[5][b]{%
+	\tnsana@hook@abstract[#1]{#2}{#3\,=\,#4}{#3\,=\,#5}%
+}
+
+
+% --------------- %
+% -- SEQUENCES -- %
+% --------------- %
+
+\newcommand\seqsuprageo[5]{%
+	\prescript{#5}{#2}{#1}_{#3}^{#4}%
+}
+
+\newcommand\seqhypergeo[3]{%
+    \seqsuprageo{#1}{#2}{#3}{}{}%
+}
+
+\newcommand\seqplus[3]{%
+    \seqsuprageo{#1}{}{#2}{#3}{}%
+}
+
+
+% ---------------- %
+% -- DSUM DPROD -- %
+% ---------------- %
+
+\newcommand\dprod{\prod\limits}
+\newcommand\dsum{\sum\limits}
+
+
+% ---------------------- %
+% -- BIG SMALL O N CO -- %
+% ---------------------- %
+
+% Sources :
+%     1) http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
+%     2) http://tex.stackexchange.com/questions/30944/mathcalo-and-font-size
+%     3) https://tex.stackexchange.com/a/53091/6880
+
+\newcommand\tnsseq@big@asympto@ope[2]{%
+    \ensuremath{%
+        \if\relax\detokenize{#2}\relax
+            #1%
+        \else
+            \mathop{}\mathopen{}#1\mathopen{}\left( #2 \right)%
+        \fi
+    }%
+}
+
+\newcommand\bigomega[1]{%
+    \tnsseq@big@asympto@ope{\bm{\Omega}}{#1}%
+}
+
+\newcommand\bigtheta[1]{%
+    \tnsseq@big@asympto@ope{\bm{\Theta}}{#1}%
+}
+
+\newcommand\bigO[1]{%
+    \tnsseq@big@asympto@ope{\mathcal{O}}{#1}%
+}
+
+\newcommand\smallO[1]{%
+    \if\relax\detokenize{#1}\relax
+        \mathchoice{% * Display style
+            {\scriptstyle\mathcal{O}}%
+        }{%           * Text style
+            {\scriptstyle\mathcal{O}}%
+        }{%           * Script style
+            {\scriptscriptstyle\mathcal{O}}%
+        }{%           * Script script style
+            %\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}%
+        }
+    \else
+        \mathchoice{% * Display style
+            \operatorname{\scriptstyle\mathcal{O}}\!\left(#1\right)%
+        }{%           * Text style
+            \operatorname{\scriptstyle\mathcal{O}}\!\left(#1\right)%
+        }{%           * Script style
+            \operatorname{\scriptscriptstyle\mathcal{O}}\left(#1\right)%
+        }{%           * Script script style
+            \operatorname{\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}}\left(#1\right)%
+        }
+    \fi
+}
+
+
+% ---------- %
+% -- BASE -- %
+% ---------- %
+
+% Semantic probability
+
+\newcommand\proba[2][p]{%
+    \mathchoice{% * Display style
+        #1\mskip-.65\medmuskip\left( #2 \right)%
+    }{%           * Text style
+        #1\mskip-.65\medmuskip\left( #2 \right)%
+    }{%           * Script style
+        #1\left( #2 \right)%
+    }{%           * Script script style
+        #1\left( #2 \right)%
+    }
+}
+
+
+% Conditional probability
+
+\newcommand\tnsproba@abstract@proba@cond[4]{%
+    #1{\proba[#2]{#3 \cap #4}}{\proba[#2]{#4}}%
+}
+
+
+\newcommand\probacond{\@ifstar{\tnsproba@proba@cond@star}{\tnsproba@proba@cond@no@star}}
+
+\newcommand\tnsproba@proba@cond@no@star[3][p]{%
+    \proba[#1_{#2}]{#3}%
+}
+
+\newcommand\tnsproba@proba@cond@star[3][p]{%
+    \proba[#1]{#3 \mid #2}%
+}
+
+
+\newcommand\probacondexp{\@ifstar{\tnsproba@proba@cond@exp@star}{\tnsproba@proba@cond@exp@no@star}}
+
+\newcommand\tnsproba@proba@cond@exp@star[3][p]{%
+    \tnsproba@abstract@proba@cond{\frac}{#1}{#3}{#2}
+}
+
+\newcommand\tnsproba@proba@cond@exp@no@star[3][p]{%
+    \tnsproba@abstract@proba@cond{\dfrac}{#1}{#3}{#2}
+}
+
+
+% Expected value 
+
+\newcommand\expval[2][E]{%
+    \proba[\mathrm{#1}]{#2}%
+}
+
+
+% ---------- %
+% -- TREE -- %
+% ---------- %
+
+\useforestlibrary{linguistics}
+\forestset{
+    declare count   = {connections}{1},
+    frame/.style    = {tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
+    apweight/.style = {edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
+    bpweight/.style = {edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
+    pweight/.style  = {edge label={node[midway, fill=white]{#1}}},
+    pweight*/.style = {}
+}
+% Sources
+%    * ???? (all settings)
+%    * https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
+
+\newcommand\tnsproba@tree[1]{
+    \begin{forest}
+        for tree = {%
+            sn edges,
+            grow'  = 0,
+            l      = 2.5cm,
+            s sep  = 1.2cm,
+            anchor = parent,
+        },
+        before typesetting nodes = {%
+            where connections = 1{}{%
+                if = {isodd(connections())}{%
+                    edge path' = {%
+                        foreach \i [
+                            count    = \j from 0,
+                            evaluate = \noexpand\j
+                            as \noexpand\k
+                            using \noexpand {
+                                (\j == 0) ?
+                                0pt :
+                                ((isodd(\j)) ?
+                                (\j*4pt) :
+                                ((-\j + 1)*4pt))
+                            }
+                        ]
+                        in {%
+                            1, ..., \foresteoption{connections}
+                        }{
+                            (!u.parent anchor)
+                            --
+                            ([yshift = \noexpand\k].child anchor)
+                        }
+                    },
+                }{%
+                    edge path' = {%
+                        foreach \i [
+                            count    = \j,
+                            evaluate = \noexpand\j
+                            as \noexpand\k
+                            using {
+                                (isodd(\j)) ?
+                                (\j*4pt) :
+                                ((-\j + 1)*4pt)
+                            }
+                        ]
+                        in {1,...,\foresteoption{connections}}
+                        {
+                            (!u.parent anchor)
+                            --
+                            ([yshift = \noexpand\k].child anchor)
+                        }
+                    },
+                },
+            },
+        },
+        #1
+    \end{forest}
+}
+
+% Source: https://stackoverflow.com/a/1873617/4589608
+\newenvironment{probatree}{\startprobatree}{}
+\def\startprobatree#1\end{\tnsproba@tree{#1}\end}
+
+\newenvironment{probatree*}{
+    \forestset{pweight/.style={}}
+    \begin{probatree}
+}{
+    \end{probatree}
+}
+
+
+% --------------------- %
+% -- BASIC OPERATORS -- %
+% --------------------- %
+
+\newcommand\divides{\mid}
+\newcommand\ndivides{\nmid}
+
+\newcommand\nequiv{\centernot\equiv}
+
+\newcommand\modulo{\bmod}
+
+
+% --------------------- %
+% -- NAMED FUNCTIONS -- %
+% --------------------- %
+
+% Classical functions - START
+
+\DeclareMathOperator{\pgcd}{\operatorname{pgcd}}
+\DeclareMathOperator{\ppcm}{\operatorname{ppcm}}
+\DeclareMathOperator{\lcm}{\operatorname{lcm}}
+
+% Classical functions - END
+
+
+% ------------------------ %
+% -- CONTINUED FRACTION -- %
+% ------------------------ %
+
+% Sources :
+%    * https://groups.google.com/forum/?hl=fr&fromgroups#!topic/fr.comp.text.tex/UrUZiurKwm0
+%    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
+%    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
+
+% Operator
+\newcommand\contfracope{%
+    \operatornamewithlimits{%
+        \mathchoice{% * Display style
+            \vcenter{\hbox{\huge $\mathcal{K}$}}%
+        }{%           * Text style
+            \vcenter{\hbox{\Large $\mathcal{K}$}}%
+        }{%           * Script style
+            \mathrm{\mathcal{K}}%
+        }{%           * Script script style
+            \mathrm{\mathcal{K}}%
+        }
+    }
+}
+
+% Single continued fraction (useful ?)
+\newcommand\singlecontfrac[2]{%
+    \begin{array}{@{}c@{}}%
+        \multicolumn{1}{c|}{#1}%
+        \\%
+        \hline%
+        \multicolumn{1}{|c}{#2}%
+    \end{array}%
+}
+
+% Standard continued fraction
+\newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
+
+\newcommand\tnsarith@contfrac@no@star[1]{%
+    \tnsarith@contfrac@no@star@recu@#1|\@nil%
+}
+\def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
+    }%
+}
+
+\newcommand\tnsarith@contfrac@star[1]{%
+    \tnsarith@contfrac@star@before@#1|\@nil%
+}
+\def\tnsarith@contfrac@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsarith@contfrac@star@recu@#2\@nil%
+    }%
+}
+\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        + \singlecontfrac{1}{#1}%
+    }{%
+        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
+    }%
+}
+
+% Generalized continued fraction
+\newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
+
+\newcommand\tnsarith@contfracgene@no@star[1]{%
+    \tnsarith@contfracgene@no@star@recu@#1||\@nil%
+}
+\def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
+    }%
+}
+
+
+\newcommand\tnsarith@contfracgene@star[1]{%
+    \tnsarith@contfracgene@star@before@#1|\@nil%
+}
+\def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsarith@contfracgene@star@recu@#2\@nil%
+    }%
+}
+\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#3}{%
+        + \singlecontfrac{#1}{#2}%
+    }{%
+        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+    }%
+}
+
+
+% -------------- %
+% -- MATRICES -- %
+% -------------- %
+
+\NiceMatrixOptions{transparent}
+
+
+% --------- %
+% -- DET -- %
+% --------- %
+
+% Abstraction
+%
+%   #1 : option for the formatting
+%   #2 : macro with deco or not for the formatting
+%
+%   #3  #4		a  b
+%   #5  #6		c  d
+
+\newcommand\tnslinalg@calc@det@two@abstract[6]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \def\ope{\,}%
+        }{cexp}{%
+            \def\ope{\cdot}%
+        }{texp}{%
+            \def\ope{\times}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            #2{}{#3}{#5}%
+              {}{#4}{#6}%
+        }%
+    }[
+    	\PackageError{tnslinalg}{unknown option}%
+                                {You can use std (default), exp, cexp or sexp.}
+    ]%
+    \IfStrEq{#1}{std}{}{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+        \tns@prop@prod{\ope}%
+                      {#3}{#4}%
+                      {#5}{#6}%
+    }
+}
+
+
+
+\newcommand\calcdettwo{\@ifstar{\tnslinalg@calc@det@two@star}{\tnslinalg@calc@det@two@no@star}}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\tnslinalg@calc@det@two@no@star[5][std]{%
+    \tnslinalg@calc@det@two@abstract{#1}%
+                                    {\tns@det@plane@deco{novec}}%
+                                    {#2}{#3}%
+                                    {#4}{#5}%
+}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\tnslinalg@calc@det@two@star[5][std]{%
+    \tnslinalg@calc@det@two@abstract{#1}%
+                                    {\tns@det@plane@no@deco{novec}}%
+                                    {#2}{#3}%
+                                    {#4}{#5}%
+}
+
+
+
+%\newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}
+%
+%
+%\newcommand\@cdetthree@star[9]{%
+%	STAR
+%}
+%
+%
+%\newcommand\@cdetthree@no@star[9]{%
+%	NO STAR
+%}
+%
+
+
+% ----------------------- %
+% -- POLYNOMIAL AND CO -- %
+% ----------------------- %
+
+% Argument 1: the set
+% Argument 2: the variable(s)
+% Argument 3: the 1st decorator
+% Argument 4: the 2nd decorator
+% Argument 5: the number of decorators
+\newcommand\tnspoly@set@special@algebra[5]{%
+    \ensuremath{%
+        #1 \! %
+        \ifx1#5%
+            \tns@generic@interval@semi@ext{#3}{}{%
+                \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+            }{\!}{#4}%
+        \else%
+            \tns@generic@interval@semi@ext{#3}{}{%
+                \tns@generic@interval@semi@ext{#3}{}{%
+                    \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                }{}{#4}\!%
+            }{}{#4}%
+        \fi
+    }%
+}
+
+
+\newcommand\setpoly[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{[}{]}{1}%
+}
+
+
+\newcommand\setpolyfrac[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{(}{)}{1}%
+}
+
+
+\newcommand\setserie[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{[}{]}{2}%
+}
+
+
+\newcommand\setseriefrac[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{(}{)}{2}%
+}
+
+
+\newcommand\setpolylaurent[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{1}%
+}
+
+\newcommand\setserielaurent[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{2}%
+}

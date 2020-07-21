@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+    \tkzTabInit[nocadre]{
+        $x$       / 0.75 ,
+        $\cos(x)$ / 1    ,
+        $\sin(x)$ / 1.5
+    }{
+                $0$       , $\frac{\pi}{2}$ ,     $\pi$
+    }
+    \tkzTabLine{      , + , z               , - ,      }
+    \tkzTabVar {- / 0     , + / 1               , - / 0}
+\end{tikzpicture}

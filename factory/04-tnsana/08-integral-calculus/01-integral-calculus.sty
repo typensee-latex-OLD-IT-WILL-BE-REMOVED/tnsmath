@@ -1,0 +1,133 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+\RequirePackage{relsize}
+\RequirePackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Source for minimizing spaces between consecutive integrals :
+%    * http://forum.mathematex.net/latex-f6/integrale-triple-t13312.html#p128016
+
+% Consecutive integrals
+
+\let\stdint\int
+\DeclareRobustCommand{\int}{%
+    \stdint\tnsana@ope@followup{\@ifnextchar{\int}{\!\!}{}}%
+}
+
+\def\tnsana@ope@followup#1{%
+    \@ifnextchar{^}{\tnsana@ope@followup@sup{#1}}%
+        {\tnsana@ope@followup@nosup{#1}}%
+}
+
+\def\tnsana@ope@followup@sup#1^#2{%
+    \@ifnextchar{_}{\tnsana@ope@followup@sup@sub{#1}^{#2}}%
+        {\tnsana@ope@followup@sup@nosub{#1}^{#2}}%
+}
+
+\def\tnsana@ope@followup@sup@sub#1^#2_#3{%
+    \tnsana@ope@followup@{#1}{#2}{#3}%
+}
+
+\def\tnsana@ope@followup@sup@nosub#1^#2{%
+    \tnsana@ope@followup@{#1}{#2}{}%
+}
+
+\def\tnsana@ope@followup@nosup#1{%
+    \@ifnextchar{_}{\tnsana@ope@followup@nosup@sub{#1}}
+        {\tnsana@ope@followup@nosup@nosub{#1}}%
+}
+
+\def\tnsana@ope@followup@nosup@sub#1_#2{%
+    \@ifnextchar{^}{\tnsana@ope@followup@nosup@sub@sup{#1}_{#2}}
+        {\tnsana@ope@followup@nosup@sub@nosup{#1}_{#2}}%
+}
+
+\def\tnsana@ope@followup@nosup@sub@sup#1_#2^#3{%
+    \tnsana@ope@followup@{#1}{#3}{#2}%
+}
+
+\def\tnsana@ope@followup@nosup@sub@nosup#1_#2{%
+    \tnsana@ope@followup@{#1}{}{#2}%
+}
+
+\def\tnsana@ope@followup@nosup@nosub#1{%
+    \tnsana@ope@followup@{#1}{}{}%
+}
+
+\def\tnsana@ope@followup@#1#2#3{%
+    ^{#2}_{#3}#1%
+}
+
+
+% Integration
+
+\newcommand\integrate{\@ifstar{\tnsana@integrate@star}{\tnsana@integrate@no@star}}
+
+\newcommand\tnsana@integrate@star[4]{%
+	\int_{#3}^{#4} #1 \dd{#2}%
+}
+
+\newcommand\tnsana@integrate@no@star[4]{%
+	\tnsana@integrate@star{#1}{#2}{#2\,=\,#3}{#2\,=\,#4}%
+}
+
+
+\newcommand\dintegrate{\@ifstar{\tnsana@dintegrate@star}{\tnsana@dintegrate@no@star}}
+
+\newcommand\tnsana@dintegrate@star[4]{%
+	{\displaystyle\integrate*{#1}{#2}{#3}{#4}}%
+}
+
+\newcommand\tnsana@dintegrate@no@star[4]{%
+	{\displaystyle\integrate{#1}{#2}{#3}{#4}}%
+}
+
+
+% The hook operator
+
+\newcommand\tnsana@hook@small@vertical@phantom[1]{%
+	\vphantom{\text{\relsize{1.1}$#1$}}%
+}
+
+\newcommand\tnsana@hook@big@vertical@phantom{%
+	\vphantom{\relsize{1.25}{\text{$\displaystyle F_1^2$}}}%
+}
+
+\newcommand\tnsana@hook@abstract[4][b]{%
+    \IfEqCase{#1}{%
+        {b}{%
+			\left[%
+				\tnsana@hook@small@vertical@phantom{#2}%
+				\,#2\,%
+			\right]%
+        }{sb}{%
+			\left[%
+				\tnsana@hook@big@vertical@phantom \right. \!\!%
+				\,#2\,%
+				\left. \tnsana@hook@big@vertical@phantom \!\!%
+			\right]%
+        }{r}{%
+            \left. #2\, \right\rvert%
+        }{sr}{%
+            #2\, {\text{\relsize{1.5}$\rvert$}}%
+        }%
+    }[
+    	\PackageError{tnsana}{unknown option}%
+                             {You can use b (default), sb, r or sr.}
+    ]%
+	_{\,#3}^{\,#4}%
+}
+
+
+\newcommand\hook{\@ifstar{\tnsana@hook@star}{\tnsana@hook@no@star}}
+
+\newcommand\tnsana@hook@star[5][b]{%
+	\tnsana@hook@abstract[#1]{#2}{#4}{#5}%
+}
+
+\newcommand\tnsana@hook@no@star[5][b]{%
+	\tnsana@hook@abstract[#1]{#2}{#3\,=\,#4}{#3\,=\,#5}%
+}

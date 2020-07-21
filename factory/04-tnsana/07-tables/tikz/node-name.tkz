@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+    \tkzTabInit[
+        espcl = 4,
+        help       % <-- Pour voir les noms des noeuds.
+    ]{
+        $x$    / 0.75 ,
+        $f(x)$ / 1
+    }{
+       $-\infty$ , $-1$ , $2$ , $+\infty$
+    }
+\end{tikzpicture}

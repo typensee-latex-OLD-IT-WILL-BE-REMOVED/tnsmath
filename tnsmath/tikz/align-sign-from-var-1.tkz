@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 4]{
+        $x$    / 0.75 ,
+        $f(x)$ / 1.5
+    }{
+               $-\infty$ , $-1$     , $2$ , $+\infty$
+    }
+    \tkzTabVar{- /       , + / $-9$ , - / , + /      }
+    %
+    \tkzTabVal[draw]{3}{4}{0.5} % Position entre les 3e et 4e valeurs au milieu.
+              {$3$}{$0$}
+\end{tikzpicture}

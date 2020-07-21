@@ -1,0 +1,9 @@
+tnssets   = Théorie générale des ensembles
+tnslog    = Méthodes formelles en logique
+tnsgeo    = Géométrie
+tnsana    = Analyse
+tnsseq    = Suites
+tnsproba  = Probabilité
+tnsarith  = Arithmétique
+tnslinalg = Algèbre linéaire
+tnspoly   = Polynômes et séries formelles

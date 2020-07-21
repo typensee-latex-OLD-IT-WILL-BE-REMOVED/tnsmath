@@ -1,0 +1,77 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-angle-geometric}
+\makeatother
+
+
+% == EXTRA == %
+
+\makeatletter
+	\newcommand\tnsgeo@no@point[1]{%
+		\if#1i%
+			\imath%
+		\else%
+			\if#1j%
+				\jmath%
+			\else%
+				#1
+			\fi%
+		\fi%
+	}
+\makeatother
+
+
+
+\begin{document}
+
+% \section{Géométrie}
+
+\section{Angles}
+
+\subsection{Angles géométriques \og intérieurs \fg}
+
+\newparaexample{}
+
+\begin{latexex}
+$\anglein {ABCDEF}$
+
+$\anglein* {A}{rot}$
+
+$\anglein {A_{rot}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Cacher les points du i et du j}
+
+\begin{latexex}
+$\anglein{i}$ et
+$\anglein*{j}{2}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro*{anglein}{1} où \quad \mwhyprefix{in}{terior}
+
+\IDarg{} un texte donnant le nom d'un angle intérieur.
+
+
+\separation
+
+
+\IDmacro*{anglein*}{2} où \quad \mwhyprefix{in}{terior}
+
+\IDarg{1} un texte indiquant $up$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
+
+\IDarg{2} un texte indiquant $down$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
+
+\end{document}

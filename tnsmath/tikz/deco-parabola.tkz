@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+    \tkzTabInit[
+        lgt   = 3   , % Il faut de la place pour le dernier produit !
+        espcl = 1.5
+    ]{
+        $x$                        / 0.75 ,
+        Signe de \\ $-x+3$         / 1.5  ,
+        Signe de \\ $f(x)$         / 1.5  ,
+        Signe de \\ $x^2 + 3x - 4$ / 1.5  ,
+        Signe de \\ $-x^2 + x - 4$ / 1.5  ,
+        Signe du \\ produit        / 1.5
+    }{%
+                $-\infty$     , $-4$     , $1$     , $3$ , $+\infty$
+    }
+
+    \tkzTabLine{          , + , t    , + , t   , + , z   , -        }
+    \tkzTabLine{          , - , z    , + , z   , + , z   , -        }
+    \tkzTabLine{          , + , z    , - , z   , + , t   , +        }
+    \tkzTabLine{          , - , t    , - , t   , - , t   , -        }
+
+    \tkzTabLine{          , + , z    , + , z   , - , z   , -        }
+
+    \backLine{0, 5}
+
+    \comLine[gray]{0}{\kern1.75em Schémas}
+
+    \graphSign        {1}{ax+b, an}{$3$}
+    \comLine[purple]  {2}{Voir Q.1-a)}
+    \graphSign        {3}{ax2+bx+c, ap, dp}{$-4$}{$1$} % Deux racines réelles.
+    \graphSign[purple]{4}{ax2+bx+c, an, dn}            % Aucune racine réelle.
+
+    \comLine[gray]{5}{$\leftarrow$ Conclusion}
+\end{tikzpicture}

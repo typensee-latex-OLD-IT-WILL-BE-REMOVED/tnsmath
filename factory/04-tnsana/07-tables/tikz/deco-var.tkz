@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+    \tkzTabInit[espcl = 3]{
+        $x$     / 0.75 ,
+        $f'(x)$ / 1.25 ,
+        $f(x)$  / 1.5
+    }{
+                $0$                , $\ee$         , $+\infty$
+    }
+    \tkzTabLine{d              , + , 0         , - ,          }
+    \tkzTabVar {D- / $-\infty$     , + / $\ee$     , - / $0$  }
+    %
+
+    \backLine{1}
+
+    \comLine[gray]{1}{%
+    	\parbox{11.5em}{Sur un intervalle le signe de $f'(x)$ implique les variations de $f(x)$.}%
+	}
+    \comLine{2}{%
+    	\parbox{11.5em}{Les limites sont hors programme pour cette année.}%
+	}
+\end{tikzpicture}

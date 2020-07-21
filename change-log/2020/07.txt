@@ -1,19 +1,28 @@
+// Added : 2020-07-21 [11:53:54]
 ==========
-2020-07-???
+2020-07-21
 ==========
 
-**New minor version version::``1.3.0-beta`` of ¨lymath:** the package has been renamed ¨tnsmath with a change of ¨github repositery
+**New minor version version::``1.3.0-beta`` of ¨tnsmath the new name of ¨lymath:** the package ¨lymath has changed its name
 ((
     ``tns`` is for "type and see".
-)).
-This new version will just import packages developped separitely in the future. This choice allows users to just use one feature of the preceding package ¨lymath without having all the machinery. Here is the list of the very new "small" packages that have just born.
+))
+and its ¨github repositery but not its versioning number.
+
+
+This new version will just agregate several smaller packages that will be developped separately
+((
+    The details of the logs will not be reproduced here : see below.
+))
+and it will have a dependancy to the package ¨tnscom.
+This choice allows users to just use one feature of the preceding package ¨lymath without having to load all the big machinery. Here is the list of the new "small" packages that have just borned.
 
 
     1) ``tnscom`` contains common tools and settings used by all the `tns...` packages. It contains the following old parts of ¨lymath.
 
-        * path::``01-misc/00-common-tools.sty`` (all the meta programming and the separartors)
+        * path::``01-misc/00-common-tools.sty`` (all the meta programming and the mathematical separators)
         * path::``01-misc/01-spaces-semi-colon.sty``
-        * path::``01-misc/02-spaces.sty`` (except the extra space for the not symbol)
+        * path::``01-misc/02-spaces.sty`` (except the extra space for the logical negation symbol)
 
 
     1) ``tnsana`` tries to simplify the writting of basic analysis. It contains the following old parts of ¨lymath.
@@ -22,8 +31,8 @@ This new version will just import packages developped separitely in the future. 
         * path::``05-analysis/02-abs-function.sty``
         * path::``05-analysis/03-named-functions.sty``
         * path::``05-analysis/05-differential-calculus.sty``
-        * path::``05-analysis/07-tables.sty``
         * path::``05-analysis/06-integral-calculus.sty``
+        * path::``05-analysis/07-tables.sty``
 
 
     1) ``tnsarith`` helps in writing basic arithmetic. It contains the following old parts of ¨lymath.
@@ -86,6 +95,45 @@ This new version will just import packages developped separitely in the future. 
         * path::``03-sets-n-applications/03-operators.sty``
         * path::``03-sets-n-applications/04-image-n-co.sty``
         * path::``03-sets-n-applications/05-applicatons.sty``
+
+
+**¨tnsana:** the folowing versions have been added.
+
+    1) Version version::``0.0.0-beta`` published at date::``2020-07-10``.
+    2) Version version::``0.1.0-beta`` published at date::``2020-07-12``.
+    3) Version version::``0.2.0-beta`` published at date::``2020-07-15``.
+    4) Version version::``0.3.0-beta`` published at date::``2020-07-17``.
+    5) Version version::``0.4.0-beta`` published at date::``2020-07-21``.
+
+
+**¨tnsarith:** the folowing versions have been added.
+
+    1) Version version::``0.0.0-beta`` published at date::``2020-07-10``.
+    2) Version version::``0.1.0-beta`` published at date::``2020-07-12``.
+
+
+**¨tnsgeo:** the folowing versions have been added.
+
+    1) Version version::``0.0.0-beta`` published at date::``2020-07-10``.
+    2) Version version::``0.1.0-beta`` published at date::``2020-07-17``.
+
+
+**¨tnslinalg:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
+
+
+**¨tnslog:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
+
+
+**¨tnspoly:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
+
+
+**¨tnsproba:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
+
+
+**¨tnsseq:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
+
+
+**¨tnssets:** addition of the version version::``0.0.0-beta`` published at date::``2020-07-10``.
 
 
 ==========

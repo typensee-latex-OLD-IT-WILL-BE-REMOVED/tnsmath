@@ -1,0 +1,93 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-operators}
+\makeatother
+
+
+	
+\begin{document}
+
+\section{Unions et intersections en mode ligne}
+
+\LaTeX{} permet d'afficher sans souci $\cup_{k=1}^{n}$ mais ne propose pas $\dcup_{k=1}^{n}$.
+Les macros \macro{dcap}, \macro{dcup} et \macro{dsqcup} donnent accès à ce type de fonctionnalité pour $\cap$ , $\cup$ et $\sqcup$ respectivement.
+Voici des exemples d'utilisation.
+
+
+% ---------------------- %
+
+
+\newparaexample{Les symboles \og seuls \fg}
+
+\begin{latexex}
+$A \dcap B = C \cap D$
+
+$A \dcup B = C \cup D$
+
+$A \dsqcup B = C \sqcup D$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des intersections indicées}
+
+Ci-dessous est utilisée la macro \macro{bigcap} proposée par le package \verb+amssymb+.
+
+\begin{latexex}
+$\cap_{k=1}^{n}    A_k$ ,
+$\dcap_{k=1}^{n}   B_k$ ,
+$\bigcap_{k=1}^{n} C_k$ ,
+$\displaystyle%
+ \bigcap_{k=1}^{n} D_k$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des unions indicées}
+
+Ci-dessous est utilisée la macro \macro{bigcup} proposée par le package \verb+amssymb+.
+
+\begin{latexex}
+$\cup_{k=1}^{n}    A_k$ ,
+$\dcup_{k=1}^{n}   B_k$ ,
+$\bigcup_{k=1}^{n} C_k$ ,
+$\displaystyle%
+ \bigcup_{k=1}^{n} D_k$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des unions disjointes indicées}
+
+Ci-dessous sont utilisées les macros \macro{sqcup} et \macro{bigsqcup} proposée par le package \verb+amssymb+.
+
+\begin{latexex}
+$\sqcup_{k=1}^{n}    A_k$ ,
+$\dsqcup_{k=1}^{n}   B_k$ ,
+$\bigsqcup_{k=1}^{n} C_k$ ,
+$\displaystyle%
+ \bigsqcup_{k=1}^{n} D_k$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\section{Fiches techniques}
+
+\IDmacro*{dcap}{0}
+
+\IDmacro*{dcup}{0}
+
+\IDmacro*{dsqcup}{0}
+
+\end{document}

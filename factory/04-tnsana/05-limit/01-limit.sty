@@ -1,0 +1,62 @@
+% == PACKAGES USED == %
+
+\RequirePackage{nicematrix}
+
+
+% == DEFINITIONS == %
+
+% Note: some macros in the STY for total derivation are used.
+
+\newbool{tnsana@lim@option@asit}
+\newbool{tnsana@lim@option@p}
+\newbool{tnsana@lim@option@sp}
+
+
+% Argument #1: parenthesis or not
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\tnsana@limit@abstract[4]{%
+    \lim\limits_{%
+		\scriptsize%
+		\tns@multi@args{|}%
+		               {#3\kern0.25ex{\rightarrow}\kern0.25ex#4}%
+		               {\begin{NiceArray}{c}}%
+		               {\\ }%
+		               {\end{NiceArray}}%
+	}#1{#2}%
+}
+
+
+% Argument #1: option s or sp
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\limit[4][asit]{%
+    \boolfalse{tnsana@lim@option@asit}%
+    \boolfalse{tnsana@lim@option@p}%
+    \boolfalse{tnsana@lim@option@sp}%
+    %
+    \IfEqCase{#1}{%
+        {asit}{\booltrue{tnsana@lim@option@asit}}%
+        {p}{\booltrue{tnsana@lim@option@p}}%
+        {sp}{\booltrue{tnsana@lim@option@sp}}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use asit (default), p and sp}%
+    ]%
+    %
+    \ifbool{tnsana@lim@option@p}{%
+    	\let\parithere\tnsana@der@func@ext@par%
+    }{%
+        \ifbool{tnsana@lim@option@sp}{%
+    		\let\parithere\tnsana@der@func@no@ext@par%
+        }{%
+            \let\parithere\tnsana@der@func@no@par%
+        }%
+    }%
+    %
+	\tnsana@limit@abstract{\parithere}{#2}{#3}{#4}%
+}

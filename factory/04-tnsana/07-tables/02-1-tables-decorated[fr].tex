@@ -1,0 +1,251 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-constants/01-constants.sty}
+    \input{../03-abs-function/01-abs-function.sty}
+	\usepackage{amsmath}
+
+    \usepackage{01-tables}
+\makeatother
+
+
+\begin{document}
+
+%% \section{Analysis}
+%
+%\section{Tableaux de variation et de signe}
+
+\subsection{Décorer facilement un tableau}
+
+\subsubsection{Motivation}
+
+Considérons le tableau suivant et imaginons que nous voulions l'expliquer à un débutant.
+
+\begin{center}
+	\input{tikz/deco-basic-1.tkz}
+\end{center}
+
+Deux options s'offrent à nous pour justifier comment a été rempli le tableau.
+
+\begin{enumerate}
+    \item Classiquement on résout par exemple juste les deux inéquations $2 x - 3 > 0$ et $-x + 5 > 0$ puis on complète les deux premières lignes
+    \footnote{
+        Notons que cette approche est un peu scandaleuse car il faudrait en toute rigueur aussi résoudre
+        $2 x - 3 < 0$ , $-x + 5 < 0$ , $2 x - 3 = 0$ et $-x + 5 = 0$.
+        Personne ne le fait car l'on pense aux variations d'une fonction affine. Dans ce cas pourquoi ne pas juste utiliser ce dernier argument?
+        C'est ce que propose la 2\ieme{} méthode.
+    }
+    pour en déduire la dernière via la règle des signes d'un produit.
+
+    \item On peut proposer une méthode moins sujette à la critique qui s'appuie sur la représentation graphique d'une fonction affine en produisant le tableau suivant.
+\end{enumerate}
+
+\begin{center}
+	\input{tikz/deco-basic-2.tkz}
+\end{center}
+
+
+Pour produire le 2\ieme{} tableau, en plus du code \verb#tkz-tab# pour le tableau de signe
+\footnote{
+	Nous avons utilisé les réglages optionnels
+	\texttt{lgt = 3.5} et \texttt{espcl = 2.5} de \macro{tkzTabInit}
+	pour avoir de la place dans la 1\iere{} colonne pour le dernier produit
+	et aussi réduire la largeur des colonnes pour les signes.
+},
+il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros     \macro{backLine}, \macro{graphSign} et \macro{comLine} proposées par \verb+tnsana+ \emph{(la syntaxe simple à suivre sera expliquée dans les trois sections suivantes)}.
+	Indiquons que les lignes pour les signes doivent utiliser un coefficient minimal de \texttt{1.5} pour la hauteur afin d'éviter la superposition des graphiques.
+
+\medskip
+
+\inputlatexexalone{tikz/deco-basic-2-short.tkz}
+
+
+\begin{remark}
+	Il est aussi possible de décorer une ligne de variation comme cela sera montré dans l'exemple \ref{tnsana-graphsign-com-two-lines} page \pageref{tnsana-graphsign-com-two-lines}. 
+\end{remark}
+
+
+% ---------------------- %
+
+
+\subsubsection{Ajouter une couleur de fond à une ligne}
+
+La modification de la couleur de fond d'une ligne se fait via la macro \macro{backLine}
+\footnote{
+    L'auteur de \prefix{tnsana} n'est absolument pas un fan de la casse en bosses de chameau mais par souci de cohérence avec ce que propose \prefix{tkz-tab} le nom \macro{backLine} a été proposé à la place de \macro{backline}.
+}
+pour \whyprefix{back}{ground} \prefix{of the line} soit \inenglish{fond de la ligne}.
+Cette macro possède un argument optionnel et un obligatoire.
+
+\begin{itemize}[label=\small\textbullet, itemsep=.25em]
+    \item \textit{L'argument optionnel : choix de la couleur de fond.}
+          
+          \smallskip
+          
+          Ci-dessus nous avons utilisé la couleur par défaut qui est  \verb#gray!30#.
+
+
+    \medskip
+    \item \textit{L'argument obligatoire : les numéros de ligne séparés par des virgules.}
+          
+          \smallskip
+          
+          La numérotation des lignes commence à $0$ comme en informatique. Ainsi \verb#\backLine{0,3}# ajoute une couleur de fond à la ligne des valeurs utiles de $x$ et à la 3\ieme{} ligne de signes, ou moins intuitivement à la (3+1)\ieme{} ligne du tableau.
+\end{itemize}
+
+
+
+% ---------------------- %
+
+
+\subsubsection{Commenter une ligne}
+
+L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a} \prefix{line} soit \inenglish{commenter une ligne}.
+Cette macro possède un argument optionnel et deux obligatoires.
+
+\begin{itemize}[label=\small\textbullet, itemsep=.25em]
+    \item \textit{L'argument optionnel : choix de la couleur du texte.}
+          
+          \smallskip
+          
+          Ci-dessus nous avons utilisé \verb#\comLine[gray]{0}{...}# pour avoir un texte en gris.
+
+
+    \item \textit{Le 1\ier{} argument : le numéro de ligne \emph{(comme pour \macro{backLine})}.}
+
+
+    \item \textit{Le 2\ieme{} argument : texte du commentaire.}
+          
+          \smallskip
+          
+          Par défaut aucun retour à la ligne n'est possible.
+          Si besoin se reporter à l'exemple \ref{tnsana-graphsign-com-two-lines},  page \pageref{tnsana-graphsign-com-two-lines} section \ref{tnsana-graphsign-examples}, où est montré comment écrire sur plusieurs lignes.
+\end{itemize}
+
+
+% ---------------------- %
+
+
+\subsubsection{Graphiques pour expliquer des signes}
+
+Pour le moment, la macro \macro{graphSign} propose différents types de graphiques de fonctions dites de référence.
+Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
+
+\begin{enumerate}
+    \item \textbf{\itshape Fonctions affines non constantes avec une contrainte.}
+          
+          \smallskip
+
+          Pour les fonctions du type $f(x) = a x + b$ avec $a \neq 0$, nous devons connaître le signe de $a$ et la racine $r$ de $f$.
+          Le codage est simple : considérons par exemple \verb#\graphSign{2}{ax+b, an}{$5$}#.
+		  %
+          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
+          		\item \textit{1\ier{} argument $2$.}
+
+		              \smallskip
+		              Ceci indique d'ajouter le graphique dans la 2\ieme{} ligne de signes.
+
+
+          		\item \textit{\texttt{ax+b} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code sans espace indique une fonction affine.
+		              
+
+          		\item \textit{\texttt{an} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code venant de \prefix{a négatif} ajoute la condition $a < 0$.
+
+		
+				\item \textit{3\ieme{} argument $5$.}
+
+		              \smallskip
+		              Ceci donne la racine.
+          \end{itemize}
+
+          Donc pour ajouter dans la 4\ieme{} ligne de signe le graphique de $f(x) = 3x$, on utilisera dans ce cas \verb#\graphSign{4}{ax+b, ap}{$0$}# où \prefix{ap} pour \prefix{a positif} code la condition $a > 0$.
+
+
+    % ==================== %
+
+
+    \bigskip
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec deux contraintes.}
+          
+          \smallskip
+
+          Pour les fonctions du type $f(x) = a x^2 + b x + c$ avec $a \neq 0$, en plus du signe de $a$ nous devons connaître celui du discriminant $\Delta = b^2 - 4ac$, ce dernier pouvant être nul, sans oublier les racines réelles éventuelles.
+		  Voyons comment coder ce genre de chose via par exemple \verb#\graphSign{5}{ax2+bx+c, an, dp}{$r_1$}{$r_2$}#.
+		  %
+          \begin{itemize}[label=\small\textbullet, itemsep=.25em]
+          		\item \textit{1\ier{} argument $5$.}
+
+		              \smallskip
+		              On indique la 5\ieme{} ligne de signes.
+
+          		\item \textit{\texttt{ax2+bx+c} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code sans espace indique un trinôme du 2\ieme{} degré.
+
+
+          		\item \textit{\texttt{an} dans le 2\ieme{} argument \emph{(comme avant).}}
+
+
+          		\item \textit{\texttt{dp} dans le 2\ieme{} argument.}
+
+		              \smallskip
+		              Ce code venant de \prefix{discriminant positif} ajoute la condition $\Delta > 0$.
+		              En plus de \prefix{dn} et \prefix{dp} il y a aussi \prefix{dz} pour \prefix{discriminant zéro}.
+		
+		
+				\item \textit{3\ieme{} et 4\ieme{} arguments $r_1$ et $r_2$.}
+
+		              \smallskip
+		              Ceci donne les deux racines réelles avec obligatoirement $r_1 < r_2$.
+          \end{itemize}
+
+
+          Ainsi pour indiquer dans la 3\ieme{} ligne de signe la courbe relative à $f(x) = - 4 x^2$, on utilisera \verb#\graphSign{3}{ax2+bx+c, an, dz}{$0$}#.
+
+
+          \smallskip
+
+          Enfin le graphique associé au trinôme $f(x) = 7 x^2 + 3$, qui est sans racine réelle, s'obtiendra dans la 4\ieme{} ligne de signe via \verb#\graphSign{4}{ax2+bx+c, ap, dn}#.
+
+
+    % ==================== %
+
+
+    \bigskip
+    \item \textbf{\itshape Fonctions sans contrainte.}
+          
+          \smallskip
+
+          Voici ce qui est disponible via \verb#\graphSign{noligne}{codefonc}# où les valeurs possibles de \verb#codefonc# sont les suivantes.
+          
+		  \begin{center}
+		  	  \begin{tabular}{r|c|c|c|c|c|c}
+				  \verb+codefonc+
+				      &  \verb#x2#
+				      &  \verb#sqrt#
+				      &  \verb#1/x#
+				      &  \verb#abs#
+				      &  \verb#exp#
+				      &  \verb#ln#
+				  \\
+				  \hline
+				  $f(x)$
+				      &  $x^{2\vphantom{X^{X^X}}}$
+				      &  $\sqrt x$
+				      &  $\frac1x$
+				      &  $\abs x$
+				      &  $\exp x$
+				      &  $\ln x$ 
+		  	  \end{tabular}
+		  \end{center}
+\end{enumerate}
+
+\end{document}

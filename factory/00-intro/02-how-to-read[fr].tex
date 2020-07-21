@@ -1,0 +1,32 @@
+\documentclass[12pt,a4paper]{book}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+
+\newcommand\dintegrate[5]{%
+  \int_{#2}^{#3} #4 d#5%
+}
+
+\newcommand\hook[5]{%
+	\left[ #4 \right]_{#5=#2}^{#5=#3}%
+}
+
+
+
+\begin{document}
+
+\section{Comment lire cette documentation ?}
+
+Le choix a été fait de fournir des exemples comme documentation du package et de donner des fiches techniques des macros-commandes dans la section dédiée \ref{techincal-ids}.
+Les exemples se présentent comme ci-dessous et sont généralement très courts.
+
+\begin{latexex}
+$\dintegrate*{a}{b}{cos(x^2)}{x}
+ =
+ \hook*{a}{b}{f(x)}{x}$
+\end{latexex}
+
+
+\end{document}

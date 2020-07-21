@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+    % ---------------------------------------------------- %
+    % -- Code tkz-tab pour les signes non reproduit ici -- %
+    % ---------------------------------------------------- %
+
+    \backLine{0, 3}
+
+    \comLine[gray]{0}{$\leftarrow$ Valeurs utiles de $x$}
+
+    \graphSign        {1}{ax+b, ap}{$\frac{3}{2}$}
+    \graphSign[purple]{2}{ax+b, an}{$5$}
+
+    \comLine[gray]{3}{$\leftarrow$ Signe du produit.}
+\end{tikzpicture}

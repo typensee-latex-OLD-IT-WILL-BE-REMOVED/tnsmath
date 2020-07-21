@@ -1,0 +1,22 @@
+% == PACKAGES USED == %
+
+\RequirePackage[f]{esvect}
+
+
+% == DEFINITIONS == %
+
+\newcommand\tnsgeo@no@point[1]{%
+    \if#1i%
+        \imath%
+    \else%
+        \if#1j%
+            \jmath%
+        \else%
+            #1
+        \fi%
+    \fi%
+}
+
+\newcommand\vect{\@ifstar{\tnsgeo@vect@star}{\tnsgeo@vect@no@star}}
+\newcommand*\tnsgeo@vect@star[1]{\vv*{\tnsgeo@no@point{#1}}}
+\newcommand*\tnsgeo@vect@no@star[1]{\vv{\tnsgeo@no@point{#1}}}

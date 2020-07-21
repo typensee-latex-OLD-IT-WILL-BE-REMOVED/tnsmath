@@ -1,3 +1,20 @@
+How to use this factory ?
+=========================
+
+You need to have the following orgranization of the folders.
+
+```
++ tnscom
++ tnsmath
++ tnsmath-parts
+    + tnsana
+    + tnsarith
+    + tnsgeo
+    + tnsproba
+    + tnsseq
+    + tnssets
+```
+
 How to launch this factory ?
 ============================
 
@@ -7,5 +24,3 @@ The factory needs all the following packages. You can use ``pip`` to install the
   1. [misTool](https://github.com/bc-python/mistool)
 
   1. [orPyste](https://github.com/bc-python/orpyste)
-
-

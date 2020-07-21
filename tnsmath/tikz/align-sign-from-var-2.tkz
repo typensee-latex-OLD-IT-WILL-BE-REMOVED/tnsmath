@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+    \tkzTabInit[
+        espcl = 4,
+%        help       % <-- Pour voir les noms des noeuds.
+    ]{
+        $x$    / 0.75 ,
+        $f(x)$ / 1
+    }{
+        $-\infty$ , , , $+\infty$ % ATTENTION ! Ne pas oublier de virgules.
+    }
+    %
+    \node at ($(N31)!0.5!(N40)$){$3$};
+    \node at ($(M31)!0.5!(M32)$){$0$};
+    \node at ($(M31)!0.5!(N42)$){$+$};
+    \node at ($(N11)!0.5!(M32)$){$-$};
+\end{tikzpicture}

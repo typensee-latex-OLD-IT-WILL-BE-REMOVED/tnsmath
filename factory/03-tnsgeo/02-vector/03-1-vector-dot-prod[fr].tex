@@ -1,0 +1,191 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \usepackage{../03-cartesian-coordinates/01-cartesian-coordinates}
+
+    \usepackage{03-vector-products}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+    \newcommand\pt[1]{\mathrm{#1}}
+
+    \newcommand\@no@point[1]{%
+        \IfStrEq{#1}{i}{%
+            \imath%
+        }{%
+            \IfStrEq{#1}{j}{%
+                \jmath%
+            }{%
+                #1
+            }%
+        }%
+    }
+
+    \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+    \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+    \newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Vecteurs}
+
+\subsection{Produit scalaire}
+
+Les 1\iers{} exemples utilisent une syntaxe longue mais adaptables à toutes les situations.
+Voir l'exemple \ref{tnsgeo-long-dot-prod} un peu plus bas pour une écriture rapide utilisable dans certains cas.
+
+
+% ---------------------- %
+
+
+\newparaexample{Version classique}
+
+\begin{latexex}
+$\dotprod{\dfrac{1}{2} \vect{u}}%
+         {\vect{v}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version \og pédagogique mais pas écolo. \fg}
+
+Dans l'exemple suivant l'option \prefix{b} est pour \whyprefix{b}{ullet} soit \inenglish{puce}.
+Cette écriture peut être utile avec des débutants mais elle est peu pratique pour une écriture manuscrite.
+
+\begin{latexex}
+$\dotprod[b]{\dfrac{1}{2} \vect{u}}%
+            {\vect{v}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture \og universitaire \fg}
+
+Dans l'exemple suivant l'option \prefix{p} est pour \whyprefix{p}{arenthèse} et dans \prefix{sp} le \prefix{s} est pour \whyprefix{s}{mall} soit \inenglish{petit}. On rencontre souvent cette écriture dans les cursus mathématiques universitaires.
+
+\begin{latexex}
+$\dotprod[p]{\dfrac{1}{2} \vect{u}}%
+            {\vect{v}}$
+
+$\dotprod[sp]{\dfrac{1}{2} \vect{u}}%
+             {\vect{v}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture \og à la physicienne \fg}
+
+Dans l'exemple suivant \prefix{r} est pour \whyprefix{r}{after} soit \inenglish{chevron}. Les physiciens aiment bien cette notation.
+
+\begin{latexex}
+$\dotprod[r]{\dfrac{1}{2} \vect{u}}%
+            {\vect{v}}$
+
+$\dotprod[sr]{\dfrac{1}{2} \vect{u}}%
+             {\vect{v}}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version courte mais restrictive} \label{tnsgeo-long-dot-prod}
+
+Dans l'exemple suivant le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
+Notons que dans ce cas les options \prefix{sp} et \prefix{sr} n'apportent rien de nouveau.
+
+\begin{latexex}
+ $\vdotprod   {u}{v}
+= \vdotprod[b]{u}{v}$
+ 
+ $\vdotprod[r]{u}{v}
+= \vdotprod[p]{u}{v}$
+\end{latexex}
+
+
+% ---------------------- %
+
+%
+%\newparaexample{Écriture formelle développée}
+%
+%Ce qui suit peut rendre service... ou pas.
+%Dans l'exemple ci-dessous \prefix{exp} est pour \whyprefix{exp}{and} c'est à dire \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
+%
+%\begin{latexex}
+%$\dotprod[exp]{\vect{u}}{\vect{v}}$
+%
+%$\vdotprod[cexp]{u}{v}$
+%
+%$\vdotprod[texp]{u}{v}$
+%\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro{dotprod}{1}{2}
+
+\IDoption{} la valeur par défaut est \verb+u+ pour \whyprefix{u}{sual} soit \inenglish{habituel}.  Voici les différentes valeurs possibles.
+
+\begin{enumerate}
+	\item \verb+u + : écriture habituelle avec un point.
+
+	\item \verb+b + : écriture habituelle mais avec une puce.
+
+	\medskip
+	
+	\item \verb+p + : écriture \og universitaire \fg{} avec des parenthèses extensibles.
+
+	\item \verb+sp+ : écriture \og universitaire \fg{} avec des parenthèses non extensibles.
+
+	\medskip
+	
+	\item \verb+r + : écriture \og à la physicienne \fg{} avec des chevrons extensibles.
+
+	\item \verb+sr+ : écriture \og à la physicienne \fg{} avec des chevrons non extensibles.
+
+%	\item \verb+exp+ : une formule développée avec un espace pour séparer les facteurs de chaque produit.
+%
+%	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+%
+%	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+\end{enumerate}
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDarg{2} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+
+\separation
+
+
+\IDmacro{vdotprod}{1}{2} où \quad \mwhyprefix{v}{ector}
+
+\IDoption{} voir les explications précédentes données pour \macro{dotprod}.
+
+\IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\end{document}

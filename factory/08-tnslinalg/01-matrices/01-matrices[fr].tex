@@ -1,0 +1,163 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{01-matrices}
+\makeatother
+
+
+
+\begin{document}
+
+\chapter{Algèbre linéaire}
+
+\section{Matrices via \texttt{nicematrix}}
+
+Le gros du boulot est fait par l'excellent package \verb+nicematrix+
+\footnote{
+	On impose l'option \texttt{transparent}.
+}.
+\verb+tnslinalg+ propose en plus une macro
+%de deux macros
+à but pédagogique : voir la section \ref{tnslinalg-2D-det} page \pageref{tnslinalg-2D-det}.
+Veuillez vous reporter à la documentation de \verb+nicematrix+ pour savoir comment s'y prendre en général.
+
+
+% ---------------------- %
+
+
+\subsection{Quelques exemples pour bien démarrer}
+
+\newparaexample{Vu dans la documentation de \texttt{nicematrix}}
+
+\begin{latexex}
+$\begin{pmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{pmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex}
+$\begin{vmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{vmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex}
+$\begin{bmatrix}
+    1      & \cdots & \cdots & 1      \\
+    0      & \ddots &        & \vdots \\
+    \vdots & \ddots & \ddots & \vdots \\
+    0      & \cdots & 0      & 1
+\end{bmatrix}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Vu dans la documentation de \texttt{nicematrix}}
+
+\begin{latexex}
+$\begin{pNiceMatrix}[name = mymatrix]
+     1 & 2 & 3 \\
+     4 & 5 & 6 \\
+     7 & 8 & 9
+ \end{pNiceMatrix}$
+
+ \tikz[remember picture,
+       overlay]
+ \draw[red]
+     (mymatrix-2-2) circle (2.5mm);
+\end{latexex}
+%
+
+% ---------------------- %
+
+
+\newparaexample{Vu dans la documentation de \texttt{nicematrix}}
+
+\begin{latexex}
+$\left(
+     \begin{NiceArray}{cccc:c}
+         1  & 2  & 3  & 4  & 5  \\
+         6  & 7  & 8  & 9  & 10 \\
+         11 & 12 & 13 & 14 & 15
+     \end{NiceArray}
+ \right)$
+\end{latexex}$
+
+
+% ---------------------- %
+
+
+\newparaexample{Proposition de l'auteur de \texttt{nicematrix} suite à une discussion par mail}
+
+\begin{latexex}
+% Besoin du package ``ifthen``.
+\newcommand\aij{%
+  a_{\arabic{iRow}\arabic{jCol}}%
+}
+
+$\begin{bNiceArray}{*{5}{>{%
+     \ifthenelse{\value{iRow}>0}{\aij}{}%
+ }c}}[
+     first-col,
+     first-row,
+     code-for-first-row
+       = \mathbf{\arabic{jCol}},
+     code-for-first-col
+       = \mathbf{\arabic{iRow}}
+   ]
+       & & & & & \\
+       & & & & & \\
+       & & & & &
+ \end{bNiceArray}$
+\end{latexex}$
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des calculs automatiques}
+
+\begin{latexex}
+\newcounter{cntaij}
+\newcommand\aij{%
+    \setcounter{cntaij}{\value{iRow}}%
+    \addtocounter{cntaij}{\value{jCol}}%
+    \addtocounter{cntaij}{-1}%
+    \arabic{cntaij}%
+}
+
+Si $a_{ij} = i + j - 1$ alors
+
+$(a_{ij})_{1 \leq i \leq 3 ,
+           1 \leq j \leq 5}
+ =
+ \begin{bNiceArray}{*{5}{>{\aij}c}}
+     & & & & \\
+     & & & & \\
+     & & & &
+ \end{bNiceArray}$
+\end{latexex}
+
+\end{document}

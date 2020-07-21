@@ -1,0 +1,28 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+\RequirePackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Source :
+%    * https://tex.stackexchange.com/a/43009/6880
+%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\let\tnsgeo@old@norm\norm
+
+\renewcommand\norm[2][b]{%
+    \IfEqCase{#1}{%
+        {b}{\tnsgeo@old@norm*{#2}}%
+        {s}{\tnsgeo@old@norm{#2}}%
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {you can use b (default) or s.}%
+    ]
+}
+
+\newcommand\vnorm[2][b]{%
+    \norm[#1]{\vect{#2}}%
+}

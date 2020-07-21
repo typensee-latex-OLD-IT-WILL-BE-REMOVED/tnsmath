@@ -1,0 +1,83 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% Points
+
+\newcommand\pt{\@ifstar{\tnsgeo@pt@star}{\tnsgeo@pt@no@star}}
+
+\newcommand\tnsgeo@pt@no@star[1]{\mathrm{#1}}
+
+\newcommand\tnsgeo@pt@star[2]{%
+    \tnsgeo@pt@no@star{#1}_{#2}
+}
+
+
+% Lines
+
+\newcommand\gline[3][O]{%
+    \IfStrEqCase{#1}{%
+        {O}{%
+        	\def\leftdelim {\left(}%
+        	\def\rightdelim{\right)}%
+	    }%
+        {C}{%
+        	\def\leftdelim {\left[}%
+        	\def\rightdelim{\right]}%
+	    }%
+        {OC}{%
+        	\def\leftdelim {\left(}%
+        	\def\rightdelim{\right]}%
+	    }%
+        {CO}{%
+        	\def\leftdelim {\left[}%
+        	\def\rightdelim{\right)}%
+	    }%
+	}[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {you can use O (default) C, OC or CO.}%
+	]
+    \leftdelim{} #2 #3 \rightdelim{}%
+}
+
+\newcommand\pgline[3][O]{%
+    \gline[#1]{\pt{#2}}{\pt{#3}}%
+}
+
+
+\newcommand\hgline[2]{%
+    \gline[CO]{#1}{#2}%
+}
+
+\newcommand\phgline[2]{%
+    \pgline[CO]{#1}{#2}%
+}
+
+
+\newcommand\segment[2]{%
+    \gline[C]{#1}{#2}%
+}
+
+\newcommand\psegment[2]{%
+    \pgline[C]{#1}{#2}%
+}
+
+
+% Source
+%    * https://tex.stackexchange.com/questions/511495
+\let\stdparallel\parallel
+\renewcommand{\parallel}{\mathrel{/\mkern-5mu/}}
+
+\let\stdnparallel\nparallel
+\renewcommand{\nparallel}{%
+  \mathrel{\mathpalette\tnsgeo@not@parallel\relax}%
+}
+\newcommand{\tnsgeo@not@parallel}[2]{%
+  \ooalign{\reflectbox{$\m@th#1\smallsetminus$}\cr\hfil$\m@th#1\parallel$\cr}%
+}

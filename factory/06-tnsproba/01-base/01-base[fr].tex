@@ -1,0 +1,149 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-base}
+\makeatother
+
+
+
+\begin{document}
+
+\chapter{Probabilité}
+
+\section{Probabilité}
+
+\subsection{Probabilité \og simple \fg}
+
+\newparaexample{}
+
+\begin{latexex}
+$\proba{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
+$\proba[P]{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\IDmacro{proba}{1}{1}
+
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
+
+\IDarg{} l'ensemble dont on veut calculer la probabilité.
+
+
+% ---------------------- %
+
+
+\subsection{Probabilité conditionnelle}
+
+\newparaexample{Les deux écritures classiques}
+
+La 1\iere{} notation, qui est devenue standard, permet de comprendre l'ordre des arguments.
+\begin{latexex}
+ $\probacond {B}{A}
+= \probacond*{B}{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Obtenir la formule de définition}
+
+Le suffixe \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}
+\footnote{
+	Pour ne pas alourdir l'utilisation de \macro{probacond}, il a été choisi d'utiliser un suffixe au lieu d'un système de multi-options.
+}.
+
+\begin{latexex}
+ $\probacondexp {B}{A}
+= \probacondexp*{B}{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de la probabilité}
+
+\begin{latexex}
+ $\probacond    [P]{B}{A}
+= \probacond*   [P]{B}{A}
+= \probacondexp*[P]{B}{A}
+= \probacondexp [P]{B}{A}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\IDmacro{probacond   }{1}{2}
+
+\IDmacro{probacond*  }{1}{2}
+
+\extraspace
+
+\IDmacro{probacondexp}{1}{2}
+
+\IDmacro{probacondexp*}{1}{2}
+
+
+\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
+
+\IDarg{1} l'ensemble qui donne la condition.
+
+\IDarg{2} l'ensemble dont on veut calculer la probabilité.
+
+
+% ---------------------- %
+
+
+\subsection{Espérance}
+
+\newparaexample{}
+
+\prefix{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
+\begin{latexex}
+$\expval{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de l'espérance}
+
+\begin{latexex}
+$\expval[E_1]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\IDmacro{expval}{1}{1}
+
+\IDoption{} le nom de la fonction espérance. La valeur par défaut est \verb+E+.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'espérance.
+
+
+\end{document}

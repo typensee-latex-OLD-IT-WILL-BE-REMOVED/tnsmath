@@ -1,0 +1,60 @@
+% == PACKAGES USED == %
+
+\RequirePackage{tnscom}
+
+
+
+% == DEFINITIONS == %
+
+% Argument 1: the set
+% Argument 2: the variable(s)
+% Argument 3: the 1st decorator
+% Argument 4: the 2nd decorator
+% Argument 5: the number of decorators
+\newcommand\tnspoly@set@special@algebra[5]{%
+    \ensuremath{%
+        #1 \! %
+        \ifx1#5%
+            \tns@generic@interval@semi@ext{#3}{}{%
+                \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+            }{\!}{#4}%
+        \else%
+            \tns@generic@interval@semi@ext{#3}{}{%
+                \tns@generic@interval@semi@ext{#3}{}{%
+                    \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                }{}{#4}\!%
+            }{}{#4}%
+        \fi
+    }%
+}
+
+
+\newcommand\setpoly[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{[}{]}{1}%
+}
+
+
+\newcommand\setpolyfrac[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{(}{)}{1}%
+}
+
+
+\newcommand\setserie[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{[}{]}{2}%
+}
+
+
+\newcommand\setseriefrac[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{(}{)}{2}%
+}
+
+
+\newcommand\setpolylaurent[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{1}%
+}
+
+\newcommand\setserielaurent[2]{%
+    \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{2}%
+}
+
+

@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{book}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\section{A propos des macros}
+
+\subsection{Règles de nommage}
+
+\subsubsection{Les macros de même \og type \fg}
+
+Les macros partageant une même fonctionnalité mathématique suivent les règles suivantes.
+
+\begin{enumerate}[itemsep = .5em]
+	\item Un nom de base explicite est choisi comme par exemple \prefix{dotproduct} pour \inenglish{produit scalaire} ou \prefix{set} pour \inenglish{ensemble}.
+
+	\item Si besoin on spécialise du point de vue sémantique avec un préfixe et/ou un suffixe. Voici deux exemples.
+	\begin{enumerate}
+		\item Dans \macro{vdotproduct}, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur} car cette macro s'utilise avec des noms de vecteurs \verb+u+ et \verb+v+ et non directement des vecteurs \verb+\vect{u}+ et \verb+\vect{v}+, autrement dit c'est \macro{vdotproduct} qui se charge d'appliquer \verb+\vect+ à \verb+u+ et \verb+v+.
+
+		\item Dans \macro{setproba}, le suffixe \prefix{proba} est pour \whyprefix{proba}{bilité} car cette macro sert à écrire des ensembles munis d'une probabilité
+	      \footnote{
+	      	Ce choix est assumé même si on obtient un nom faisant penser à \emph{\og régler ... \fg} au lieu de \emph{\og ensemble de type ... \fg}.
+		  }.
+	\end{enumerate}
+
+	\item Si l'on propose différentes mises en forme pour une même signification sémantique alors ceci se fera via des versions étoilées et/ou par le biais d'option(s) comme dans \macro{dotproduct[r]} pour obtenir des produits scalaires utilisant des chevrons $\langle$ et $\rangle$ \emph{(\prefix{r} est pour \whyprefix{r}{after} soit \inenglish{chevron})}.
+\end{enumerate}
+
+
+% ---------------------- %
+
+
+\subsubsection{Les formes \og négatives \fg{} des macros}
+
+Les formes \og négatives \fg{} des macros auront un nom préfixé par la lettre \prefix{n} en référence à \whyprefix{n}{ot}. C'est l'usage dans le monde \LaTeX{} comme par exemple pour \macro{neq}. 
+
+
+% ---------------------- %
+
+
+\subsubsection{Les macros en mode \texttt{displaystyle}}
+
+Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom préfixé par la lettre \prefix{d} comme par exemple pour \macro{dintegrate}.
+
+
+% ---------------------- %
+
+
+\subsubsection{Les macros standards redéfinies}
+
+Certaines macros comme \verb+\frac+ sont un peu revues par \verb+tnsmath+.
+Dans ce cas, les versions standard restent accessibles en utilisant le préfixe \prefix{std} ce qui donne ici la macro \macro{stdfrac}.
+
+\end{document}

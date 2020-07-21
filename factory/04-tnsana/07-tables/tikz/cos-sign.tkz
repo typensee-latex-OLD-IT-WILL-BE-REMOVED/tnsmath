@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    \tkzTabInit{
+        $x$       / 0.75 , % Facteur d'échelle de 0.75 pour la hauteur de la 1er ligne.
+        $\cos(x)$ / 1      % Facteur d'échelle de  1   pour la hauteur de la 2e ligne.
+    }{
+                $0$     , $\frac{\pi}{2}$     , $\pi$  % Valeurs utiles de x.
+    }
+    \tkzTabLine{    , + , z               , - ,      } % Signes et zéro.
+\end{tikzpicture}

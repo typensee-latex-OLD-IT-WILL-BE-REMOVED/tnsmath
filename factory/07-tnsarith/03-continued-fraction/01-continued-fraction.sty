@@ -1,0 +1,102 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+\RequirePackage{ifmtarg}
+
+
+% == DEFINITIONS == %
+
+% Sources :
+%    * https://groups.google.com/forum/?hl=fr&fromgroups#!topic/fr.comp.text.tex/UrUZiurKwm0
+%    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
+%    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
+
+% Operator
+\newcommand\contfracope{%
+    \operatornamewithlimits{%
+        \mathchoice{% * Display style
+            \vcenter{\hbox{\huge $\mathcal{K}$}}%
+        }{%           * Text style
+            \vcenter{\hbox{\Large $\mathcal{K}$}}%
+        }{%           * Script style
+            \mathrm{\mathcal{K}}%
+        }{%           * Script script style
+            \mathrm{\mathcal{K}}%
+        }
+    }
+}
+
+% Single continued fraction (useful ?)
+\newcommand\singlecontfrac[2]{%
+    \begin{array}{@{}c@{}}%
+        \multicolumn{1}{c|}{#1}%
+        \\%
+        \hline%
+        \multicolumn{1}{|c}{#2}%
+    \end{array}%
+}
+
+% Standard continued fraction
+\newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
+
+\newcommand\tnsarith@contfrac@no@star[1]{%
+    \tnsarith@contfrac@no@star@recu@#1|\@nil%
+}
+\def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
+    }%
+}
+
+\newcommand\tnsarith@contfrac@star[1]{%
+    \tnsarith@contfrac@star@before@#1|\@nil%
+}
+\def\tnsarith@contfrac@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsarith@contfrac@star@recu@#2\@nil%
+    }%
+}
+\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        + \singlecontfrac{1}{#1}%
+    }{%
+        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
+    }%
+}
+
+% Generalized continued fraction
+\newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
+
+\newcommand\tnsarith@contfracgene@no@star[1]{%
+    \tnsarith@contfracgene@no@star@recu@#1||\@nil%
+}
+\def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
+    }%
+}
+
+
+\newcommand\tnsarith@contfracgene@star[1]{%
+    \tnsarith@contfracgene@star@before@#1|\@nil%
+}
+\def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \tnsarith@contfracgene@star@recu@#2\@nil%
+    }%
+}
+\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#3}{%
+        + \singlecontfrac{#1}{#2}%
+    }{%
+        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+    }%
+}

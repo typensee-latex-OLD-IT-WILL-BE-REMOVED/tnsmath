@@ -1,0 +1,100 @@
+% == PACKAGES USED == %
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+% Abstraction
+%
+%   #1 : option for the formatting
+%   #2 : macro with deco or not for the formatting
+%
+%   #3  #4		a  b
+%   #5  #6		c  d
+
+\newcommand\tnslinalg@calc@det@two@abstract[6]{%
+    \IfEqCase{#1}{%
+        {exp}{%
+            \def\ope{\,}%
+        }{cexp}{%
+            \def\ope{\cdot}%
+        }{texp}{%
+            \def\ope{\times}%
+% WARNING !
+%
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+        }{std}{%
+            #2{}{#3}{#5}%
+              {}{#4}{#6}%
+        }%
+    }[
+    	\PackageError{tnslinalg}{unknown option}%
+                                {You can use std (default), exp, cexp or sexp.}
+    ]%
+    \IfStrEq{#1}{std}{}{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+        \tns@prop@prod{\ope}%
+                      {#3}{#4}%
+                      {#5}{#6}%
+    }
+}
+
+
+
+\newcommand\calcdettwo{\@ifstar{\tnslinalg@calc@det@two@star}{\tnslinalg@calc@det@two@no@star}}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\tnslinalg@calc@det@two@no@star[5][std]{%
+    \tnslinalg@calc@det@two@abstract{#1}%
+                                    {\tns@det@plane@deco{novec}}%
+                                    {#2}{#3}%
+                                    {#4}{#5}%
+}
+
+
+% We use the macros for the colinearity.
+
+%   #1 : option for the formatting
+%
+%   #2  #3		a  b
+%   #4  #5		c  d
+
+\newcommand\tnslinalg@calc@det@two@star[5][std]{%
+    \tnslinalg@calc@det@two@abstract{#1}%
+                                    {\tns@det@plane@no@deco{novec}}%
+                                    {#2}{#3}%
+                                    {#4}{#5}%
+}
+
+
+
+%\newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}
+%
+%
+%\newcommand\@cdetthree@star[9]{%
+%	STAR
+%}
+%
+%
+%\newcommand\@cdetthree@no@star[9]{%
+%	NO STAR
+%}
+%
