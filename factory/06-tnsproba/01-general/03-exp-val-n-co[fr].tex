@@ -1,0 +1,89 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-general}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Généralités}
+
+\subsection{Espérance, variance et écart-type}
+
+\newparaexample{Espérance}
+
+\macro{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
+\begin{latexex}
+$\expval{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Choisir le nom de l'espérance}
+
+\begin{latexex}
+$\expval[E_1]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Variance}
+
+\begin{latexex}
+$\var   {X}$ ou
+$\var[v]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écart-type}
+
+\macro{stddev} vient de \whyprefix{st}{andar-}\prefix{d} \whyprefix{dev}{iation} soit \inenglish{écart-type}.
+\begin{latexex}
+$\stddev   {X}$ ou
+$\stddev[s]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+\IDmacro{expval}{1}{1}
+
+\IDoption{} le nom de la fonction espérance. La valeur par défaut est $\mathrm{E}$ obtenue via \verb#\mathrm{E}#.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'espérance.
+
+
+\separation
+
+
+\IDmacro{var}{1}{1}
+
+\IDoption{} le nom de la fonction variance. La valeur par défaut est $\mathrm{V}$ obtenue via \verb#\mathrm{V}#.
+
+\IDarg{} la variable aléatoire dont on veut calculer la variance.
+
+
+\separation
+
+
+\IDmacro{stddev}{1}{1}
+
+\IDoption{} le nom de la fonction écart-type. La valeur par défaut est $\sigma$ obtenue via \verb#\sigma#.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'écart-type.
+
+\end{document}

@@ -225,10 +225,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.3.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.4.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-21}{{
+\date{2020-07-22}{{
 
 \maketitle
 
@@ -287,7 +287,7 @@ Ce package dépend de \verb+tnscom+
 \footnote{
 	Lui est aussi en version \texttt{beta}.
 }
-disponible sur \url{https://github.com/typensee-latex/tnscom.git} et à installer localement.
+disponible sur \url{https://github.com/typensee-latex/tnscom.git} pour une installation locale.
 \section{Comment lire cette documentation ?}
 
 Le choix a été fait de fournir des exemples comme documentation du package et de donner des fiches techniques des macros-commandes dans la section dédiée \ref{techincal-ids}.
@@ -2761,6 +2761,49 @@ $\expb{6} y = 6^y$
     \verb+logb{p}+ : $\logb{p}\dots$
 % Table of all - END
 \end{multicols}
+\section{Définition explicite d'une fonction}
+
+\newparaexample{Écriture par défaut}
+
+\begin{latexex}
+$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+\end{latexex}
+
+
+\begin{remark}
+	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
+	$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+    mais c'est un peu affreux.
+\end{remark}
+
+% ---------------------- %
+
+
+\newparaexample{Écriture alternative}
+
+On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
+
+\begin{latexex}
+$\funcdef[s]{f}{x}{x^2 + 3}%
+               {I}{J}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne}
+
+Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+\begin{latexex}
+Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+                    {I}{J}$.
+\end{latexex}
+
+
+% ---------------------- %
 \section{Limite}
 
 \newparaexample{Cas minimaliste}
@@ -3805,7 +3848,7 @@ $f(n) = \bigtheta{g(n)}$
 % ---------------------- %
 \chapter{Probabilité}
 
-\section{Probabilité}
+\section{Généralités}
 
 \subsection{Probabilité \og simple \fg}
 
@@ -3845,14 +3888,14 @@ La 1\iere{} notation, qui est devenue standard, permet de comprendre l'ordre des
 
 \newparaexample{Obtenir la formule de définition}
 
-Le suffixe \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}
+Le préfixe \prefix{e} est pour \whyprefix{e}{xpand} soit \inenglish{développer}
 \footnote{
-	Pour ne pas alourdir l'utilisation de \macro{probacond}, il a été choisi d'utiliser un suffixe au lieu d'un système de multi-options.
+	Pour ne pas alourdir l'utilisation de \macro{probacond}, il a été choisi d'utiliser un préfixe au lieu d'un système de multi-options.
 }.
 
 \begin{latexex}
- $\probacondexp {B}{A}
-= \probacondexp*{B}{A}$
+ $\eprobacond {B}{A}
+= \eprobacond*{B}{A}$
 \end{latexex}
 
 
@@ -3862,21 +3905,32 @@ Le suffixe \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développe
 \newparaexample{Choisir le nom de la probabilité}
 
 \begin{latexex}
- $\probacond    [P]{B}{A}
-= \probacond*   [P]{B}{A}
-= \probacondexp*[P]{B}{A}
-= \probacondexp [P]{B}{A}$
+ $\probacond  [P]{B}{A}
+= \probacond* [P]{B}{A}
+= \eprobacond*[P]{B}{A}
+= \eprobacond [P]{B}{A}$
 \end{latexex}
 
 
 % ---------------------- %
+%\section{Généralités}
+
+\subsection{Évènement contraire}
+
+\macro{nevent} vient de \whyprefix{n}{ot} \prefix{event} qui est une pseudo-traduction de \inenglish{évènement contraire}.
+\begin{latexex}
+$\nevent{A}$
+\end{latexex}
 
 
-\subsection{Espérance}
+% ---------------------- %
+%\section{Généralités}
 
-\newparaexample{}
+\subsection{Espérance, variance et écart-type}
 
-\prefix{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
+\newparaexample{Espérance}
+
+\macro{expval} vient de \whyprefix{exp}{ected} \whyprefix{val}{ue} soit \inenglish{espérance}.
 \begin{latexex}
 $\expval{X}$
 \end{latexex}
@@ -3889,6 +3943,29 @@ $\expval{X}$
 
 \begin{latexex}
 $\expval[E_1]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Variance}
+
+\begin{latexex}
+$\var   {X}$ ou
+$\var[v]{X}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écart-type}
+
+\macro{stddev} vient de \whyprefix{st}{andar-}\prefix{d} \whyprefix{dev}{iation} soit \inenglish{écart-type}.
+\begin{latexex}
+$\stddev   {X}$ ou
+$\stddev[s]{X}$
 \end{latexex}
 
 
@@ -4486,6 +4563,68 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.5.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              ajout de \macro{funcdef}.
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Probabilité conditionnelle}
+              \macro{probacondexp} renommée en  \macro{eprobacond}.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{Évènement contraire}
+              ajout de \macro{nevent}.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{variance et écart-type}
+              ajout de \macro{var} et \macro{stddev}.
+    
+    % ------------------------ %
+    
+        
+    
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
+
+    \medskip
     \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
     
     
@@ -4532,7 +4671,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \begin{itemize}[itemsep=.5em]
             \item Dérivation pointée à la physicienne via \verb+d+ et \verb+bd+ deux nouvelles options de \macro{der}.
     
-            \item La dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
+            \item Dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
         \end{itemize}
     
     % ------------------------ %
@@ -6652,6 +6791,31 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 % ---------------------- %
+\section{Définition explicite d'une fonction}
+
+
+\IDmacro{funcdef}{1}{5}
+
+
+\IDoption{}  la valeur par défaut \verb+u+. 
+\begin{enumerate}
+	\item \verb+u+ : écriture empilée avec un trait vertical.
+	
+	\item \verb+s+ : écriture empilée sans trait vertical.
+
+	\item \verb+h+ : écriture horizontale en ligne.
+\end{enumerate}
+
+
+\IDarg{1} la fonction.
+
+\IDarg{2} la variable.
+
+\IDarg{3} la formule de définition.
+
+\IDarg{4} ensemble de départ.
+
+\IDarg{5} ensemble d'arrivée.
 \section{Limite}
 
 
@@ -7044,14 +7208,14 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDmacro*{bigtheta}{1}
 
 \IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
-\section{Probabilité}
+\section{Généralités}
 
 \subsection{Probabilité \og simple \fg}
 
 
 \IDmacro{proba}{1}{1}
 
-\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
+\IDoption{} le nom de la probabilité. La valeur par défaut est $p$.
 
 \IDarg{} l'ensemble dont on veut calculer la probabilité.
 
@@ -7062,35 +7226,56 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \subsection{Probabilité conditionnelle}
 
 
-\IDmacro{probacond   }{1}{2}
+\IDmacro{probacond  }{1}{2}
 
-\IDmacro{probacond*  }{1}{2}
+\IDmacro{probacond* }{1}{2}
 
 \extraspace
 
-\IDmacro{probacondexp}{1}{2}
+\IDmacro{eprobacond }{1}{2}
 
-\IDmacro{probacondexp*}{1}{2}
+\IDmacro{eprobacond*}{1}{2}
 
 
-\IDoption{} le nom de la probabilité. La valeur par défaut est \verb+p+.
+\IDoption{} le nom de la probabilité. La valeur par défaut est $p$.
 
 \IDarg{1} l'ensemble qui donne la condition.
 
 \IDarg{2} l'ensemble dont on veut calculer la probabilité.
+\subsection{Évènement contraire}
 
 
-% ---------------------- %
+\IDmacro*{nevent}{1}
 
-
-\subsection{Espérance}
+\IDarg{} l'ensemble dont on veut indiquer le contraire.
+\subsection{Espérance, variance et écart-type}
 
 
 \IDmacro{expval}{1}{1}
 
-\IDoption{} le nom de la fonction espérance. La valeur par défaut est \verb+E+.
+\IDoption{} le nom de la fonction espérance. La valeur par défaut est $\mathrm{E}$ obtenue via \verb#\mathrm{E}#.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'espérance.
+
+
+\separation
+
+
+\IDmacro{var}{1}{1}
+
+\IDoption{} le nom de la fonction variance. La valeur par défaut est $\mathrm{V}$ obtenue via \verb#\mathrm{V}#.
+
+\IDarg{} la variable aléatoire dont on veut calculer la variance.
+
+
+\separation
+
+
+\IDmacro{stddev}{1}{1}
+
+\IDoption{} le nom de la fonction écart-type. La valeur par défaut est $\sigma$ obtenue via \verb#\sigma#.
+
+\IDarg{} la variable aléatoire dont on veut calculer l'écart-type.
 \section{Arbres pondérés}
 
 

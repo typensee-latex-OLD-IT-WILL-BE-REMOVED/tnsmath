@@ -38,7 +38,7 @@
 }
 
 
-\newcommand\probacondexp{\@ifstar{\tnsproba@proba@cond@exp@star}{\tnsproba@proba@cond@exp@no@star}}
+\newcommand\eprobacond{\@ifstar{\tnsproba@proba@cond@exp@star}{\tnsproba@proba@cond@exp@no@star}}
 
 \newcommand\tnsproba@proba@cond@exp@star[3][p]{%
     \tnsproba@abstract@proba@cond{\frac}{#1}{#3}{#2}
@@ -49,8 +49,24 @@
 }
 
 
-% Expected value 
+% "Not" event
 
-\newcommand\expval[2][E]{%
-    \proba[\mathrm{#1}]{#2}%
+\newcommand\nevent[1]{%
+    \overline{\kern.15ex#1\vphantom{#1^{x}}\kern.15ex}%
 }
+
+
+% Expected value - Variance - Standard deviation
+
+\newcommand\expval[2][\mathrm{E}]{%
+    \proba[#1]{#2}%
+}
+
+\newcommand\var[2][\mathrm{V}]{%
+    \proba[#1]{#2}%
+}
+
+\newcommand\stddev[2][\sigma]{%
+    \proba[#1]{#2}%
+}
+

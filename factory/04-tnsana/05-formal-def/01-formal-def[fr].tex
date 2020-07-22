@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper]{article}
+
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../03-abs-function/01-abs-function.sty}
+    \input{../07-differential-calculus/01-total-diff-calculus.sty}
+
+    \usepackage{01-formal-def}
+
+
+   
+\begin{document}
+
+\section{Définition explicite d'une fonction}
+
+\newparaexample{Écriture par défaut}
+
+\begin{latexex}
+$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+\end{latexex}
+
+
+\begin{remark}
+	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
+	$\funcdef{f}{x}{x^2 + 3}%
+            {I}{J}$
+    mais c'est un peu affreux.
+\end{remark}
+
+% ---------------------- %
+
+
+\newparaexample{Écriture alternative}
+
+On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
+
+\begin{latexex}
+$\funcdef[s]{f}{x}{x^2 + 3}%
+               {I}{J}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne}
+
+Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+\begin{latexex}
+Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+                    {I}{J}$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\section{Fiches techniques}
+
+\IDmacro{funcdef}{1}{5}
+
+
+\IDoption{}  la valeur par défaut \verb+u+. 
+\begin{enumerate}
+	\item \verb+u+ : écriture empilée avec un trait vertical.
+	
+	\item \verb+s+ : écriture empilée sans trait vertical.
+
+	\item \verb+h+ : écriture horizontale en ligne.
+\end{enumerate}
+
+
+\IDarg{1} la fonction.
+
+\IDarg{2} la variable.
+
+\IDarg{3} la formule de définition.
+
+\IDarg{4} ensemble de départ.
+
+\IDarg{5} ensemble d'arrivée.
+
+\end{document}

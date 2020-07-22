@@ -1,3 +1,17 @@
+// Added : 2020-07-22 [11:10:50]
+==========
+2020-07-22
+==========
+
+**New minor version version::``1.4.0-beta``:** see the changes below.
+
+
+**¨tnsana:** addition of the version version::``0.5.0-beta`` published at date::``2020-07-22``.
+
+
+**¨tnsproba:** addition of the version version::``0.1.0-beta`` published at date::``2020-07-22``.
+
+
 // Added : 2020-07-21 [11:53:54]
 ==========
 2020-07-21
