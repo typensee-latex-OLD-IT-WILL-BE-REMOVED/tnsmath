@@ -151,20 +151,6 @@ def extracttechtitle(level):
     return content_tiles
 
 
-# ------------------------- #
-# -- COPYING EXTRA FILES -- #
-# ------------------------- #
-
-for img in THIS_DIR.walk("file::**\[fr\].png"):
-    if img.stem.endswith("-nodoc[fr]"):
-        continue
-
-    img.copy_to(
-        DIR_DOC_PATH / img.name,
-        safemode = False
-    )
-
-
 # ------------ #
 # -- HEADER -- #
 # ------------ #
