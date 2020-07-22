@@ -126,6 +126,7 @@ for partname, versions in MAIN_INFOS.items():
 # Destination dir. musts not exist.
     if destdir.is_dir():
         print(f"{DECO*3}--> Deletion of << {destdir.stem} >>.")
+        # TODO
         continue
 
 # Let's copy all the usefull dir. No builder here !

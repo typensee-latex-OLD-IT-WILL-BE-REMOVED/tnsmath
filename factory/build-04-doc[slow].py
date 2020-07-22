@@ -31,14 +31,24 @@ PYFORMAT = MultiReplace({
 LATEX_SECTIONS = [
     section
     for section in """
+\\chapter
 \\section
 \\subsection
 \\subsubsection
 \\paragraph
+\\textit
     """.strip().split("\n")
 ]
 
-LATEX_LOWER_SECTIONS = {}
+LATEX_LOWER_SECTIONS = {
+    section: LATEX_SECTIONS[len(LATEX_SECTIONS) - i]
+    for i, section in enumerate(LATEX_SECTIONS[::-1][1:], 1)
+}
+
+LATEX_SECTIONS.pop(-1)
+
+NB_SECTIONS     = len(LATEX_SECTIONS)
+LAST_HUMAN_SECS = [("", "")]*NB_SECTIONS
 
 
 DECO = " "*4
@@ -58,17 +68,11 @@ def startingtech(text):
         or "{Fiche technique}" in text
 
 
-def closetechsec(line, level):
-    thislevel = extractlevel(line.strip())
-
-    return (
-        thislevel
-        and
-        LATEX_SECTIONS.index(level) >= LATEX_SECTIONS.index(thislevel)
-    )
+def levelsmaller(level_1, level_2):
+    return LATEX_SECTIONS.index(level_1) >= LATEX_SECTIONS.index(level_2)
 
 
-def extractlevel(line):
+def extract_level(line):
     for level in LATEX_SECTIONS:
         if line.startswith(level):
             return level
@@ -76,7 +80,13 @@ def extractlevel(line):
     return ""
 
 
-def extracttitle(level, lines, i):
+def close_techsec(line, level):
+    thislevel = extract_level(line.strip())
+
+    return (thislevel and levelsmaller(level, thislevel))
+
+
+def extract_title(level, lines, i):
     infos = lines[i]
 
 # We have to take care of the following case.
@@ -92,22 +102,53 @@ def extracttitle(level, lines, i):
     return i, title
 
 
-def extracttechtitle(level, line):
-    global LAST_HUMAN_SEC
-
-    i = len(LAST_HUMAN_SEC) - 1
-
-    while(LAST_HUMAN_SEC[i][0] != level):
-        i -= 1
-
-    return LAST_HUMAN_SEC[i][0] + LAST_HUMAN_SEC[i][1]
-
-
-def updatelevels(techcontent):
+def downgrade_levels(techcontent):
     for old, new in LATEX_LOWER_SECTIONS.items():
         techcontent = techcontent.replace(old, new)
 
     return techcontent
+
+
+def update_humansecs(seclevel, title):
+    global LAST_HUMAN_SECS
+
+    pos = LATEX_SECTIONS.index(seclevel)
+
+    LAST_HUMAN_SECS = LAST_HUMAN_SECS[:pos+1] \
+                    + [("", "")]*(NB_SECTIONS - 1 - pos)
+
+    LAST_HUMAN_SECS[pos] = (seclevel, title)
+
+
+def extracttechtitle(level):
+    global LAST_HUMAN_SECS
+
+    goodpos = - 1
+
+    for pos, (prevlevel, prevtitle) in enumerate(LAST_HUMAN_SECS):
+        if level == prevlevel:
+            goodpos = pos
+            break
+
+    if goodpos == -1:
+        raise Exception("Illegal use of a title for a technical section.")
+
+    content_tiles = []
+
+    for i in range(goodpos+1):
+        if LAST_HUMAN_SECS[i][0]:
+            latex, title = LAST_HUMAN_SECS[i]
+
+            content_tiles += [
+                f"{latex}{title}",
+                ""
+            ]
+
+            LAST_HUMAN_SECS[i] = ('', '')
+
+    content_tiles = "\n".join(content_tiles)
+
+    return content_tiles
 
 
 # ------------------------- #
@@ -139,9 +180,7 @@ with open(
 # -- LOOKING FOR DOCS -- #
 # ---------------------- #
 
-HUMAN_CONTENTS   = []
-TECHNIC_CONTENTS = []
-LATEXFILES       = []
+LATEXFILES = []
 
 for subdir in THIS_DIR.walk("dir::"):
     subdir_name = str(subdir.name)
@@ -160,11 +199,12 @@ for subdir in THIS_DIR.walk("dir::"):
 
 LATEXFILES.sort()
 
-LAST_HUMAN_SEC = []
-LAST_SECTION   = ""
 
+TECHNIC_CONTENTS = []
+HUMAN_CONTENTS   = []
 
 for latexfile in LATEXFILES:
+# Content
     with latexfile.open(
         mode     = "r",
         encoding = "utf-8"
@@ -178,10 +218,14 @@ for latexfile in LATEXFILES:
         )
 
     content = content.strip()
-    lines   = content.split("\n")
-# We need i in case of use of \texorpdfstring.
-    i       = 0
 
+# Lines
+#
+# We need i in case of use of \texorpdfstring.
+    lines = content.split("\n")
+    i     = 0
+
+# Our "local" variables.
     humancontent = []
 
     techcontent   = []
@@ -191,28 +235,16 @@ for latexfile in LATEXFILES:
     for i, aline in enumerate(lines):
 # New section for technical infos
         if startingtech(aline):
-            addtotech = True
-
-            if LAST_SECTION:
-                techcontent += [LAST_SECTION, ""]
-                LAST_SECTION  = ""
-
-            lasttechlevel = extractlevel(aline)
-
-            if lasttechlevel != "\\section":
-                techcontent += [
-                    extracttechtitle(lasttechlevel, aline),
-                    ""
-                ]
-
-            LAST_HUMAN_SEC = []
+            addtotech     = True
+            lasttechlevel = extract_level(aline)
+            techcontent  += [extracttechtitle(lasttechlevel), ""]
 
             continue
 
 # A line to add.
 #
 # Dow have to close a technical section ?
-        if addtotech and closetechsec(aline, lasttechlevel):
+        if addtotech and close_techsec(aline, lasttechlevel):
             addtotech = False
 
 # A technical line.
@@ -221,13 +253,13 @@ for latexfile in LATEXFILES:
 
 # A human line.
         else:
-            seclevel = extractlevel(aline)
+            seclevel = extract_level(aline)
 
             if seclevel:
 # i can change because of the use of \texorpdfstring.
                 iold = i
 
-                i, title = extracttitle(
+                i, title = extract_title(
                     seclevel,
                     lines,
                     i
@@ -236,10 +268,7 @@ for latexfile in LATEXFILES:
                 if i != iold:
                     aline += lines[i]
 
-                LAST_HUMAN_SEC.append((seclevel, title))
-
-                if seclevel == "\\section":
-                    LAST_SECTION = aline
+                update_humansecs(seclevel, title)
 
             humancontent.append(aline)
 
@@ -248,14 +277,14 @@ for latexfile in LATEXFILES:
     techcontent = techcontent.strip()
 
     if techcontent:
-        techcontent = updatelevels(techcontent)
+        techcontent = downgrade_levels(techcontent)
 
 # Clean the human content.
     humancontent = "\n".join(humancontent)
     humancontent = humancontent.strip()
 
 # Store the contents.
-    TECHNIC_CONTENTS.append(techcontent)
+    TECHNIC_CONTENTS += ["", "", techcontent]
     HUMAN_CONTENTS.append(humancontent)
 
 

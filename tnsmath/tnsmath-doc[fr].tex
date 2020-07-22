@@ -38,6 +38,16 @@
 \usepackage{cbdevtool}
 
 
+% Sections numbering
+
+\renewcommand\thechapter{\Roman{chapter}.}
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\alph{subsection}.}
+\renewcommand\thesubsubsection{\roman{subsubsection}.}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
 
 % MISC
 
@@ -290,7 +300,7 @@ Ce package dépend de \verb+tnscom+
 disponible sur \url{https://github.com/typensee-latex/tnscom.git} pour une installation locale.
 \section{Comment lire cette documentation ?}
 
-Le choix a été fait de fournir des exemples comme documentation du package et de donner des fiches techniques des macros-commandes dans la section dédiée \ref{techincal-ids}.
+Le choix a été fait de fournir des exemples comme documentation du package et de donner des fiches techniques des macros-commandes dans le chapitre dédié \ref{techincal-ids}.
 Les exemples se présentent comme ci-dessous et sont généralement très courts.
 
 \begin{latexex}
@@ -4544,9 +4554,7 @@ $\setserielaurent{Q}{X_1 | X_2} =
 
 
 % ---------------------- %
-\chapter{Le coin des codeurs}
-
-\section{Historique}
+\chapter{Historique}
 
 Nous ne donnons ici qu'un très bref historique récent
 \footnote{
@@ -5401,7 +5409,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 \newpage
-\section{Toutes les fiches techniques} \label{techincal-ids}
+\chapter{Toutes les fiches techniques} \label{techincal-ids}
 
 
 
@@ -5409,9 +5417,24 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\section{Ensembles}
 
-\subsection{Ensembles versus accolades}
+
+
+
+
+
+
+
+
+
+
+
+\section{Théorie générale des ensembles}
+
+\subsection{Ensembles}
+
+\subsubsection{Ensembles versus accolades}
+
 
 
 \IDmacro{setgene}{1}{1}
@@ -5431,7 +5454,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsection{Ensembles pour la géométrie} \label{set-geo}
+\subsubsection{Ensembles pour la géométrie} \label{set-geo}
+
 
 
 \IDmacro*{setgeo}{1}
@@ -5452,7 +5476,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsection{Ensembles probabilistes}
+\subsubsection{Ensembles probabilistes}
+
 
 
 \IDmacro*{setproba}{1}
@@ -5473,7 +5498,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsection{Ensembles pour l'algèbre générale}
+\subsubsection{Ensembles pour l'algèbre générale}
+
 
 
 \IDmacro*{setalge}{1}
@@ -5494,7 +5520,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsection{Ensembles classiques suffixés}
+\subsubsection{Ensembles classiques suffixés}
+
 
 
 % == Docs for classical sets - START == %
@@ -5564,7 +5591,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsection{Des suffixes à la carte}
+\subsubsection{Des suffixes à la carte}
+
 
 
 \IDmacro*{setspecial}{2}
@@ -5574,9 +5602,12 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDarg{1} l'ensemble à "suffixer".
 
 \IDarg{2} l'un des suffixes \prefix{n}, \prefix{p}, \prefix{s}, \prefix{sn} ou \prefix{sp}.
-\section{Intervalles}
 
-\subsection{Intervalles réels - Notation française (?\,)}
+
+\subsection{Intervalles}
+
+\subsubsection{Intervalles réels - Notation française (?\,)}
+
 
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
@@ -5637,7 +5668,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
-\subsection{Intervalles réels -- Notation américaine}
+\subsubsection{Intervalles réels -- Notation américaine}
+
 
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
@@ -5686,7 +5718,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
-\subsection{Intervalles discrets d'entiers}
+\subsubsection{Intervalles discrets d'entiers}
+
 
 
 Pour toutes les macros ci-dessous, la version non étoilée produit des délimiteurs qui s'étirent si besoin verticalement, tandis que la version étoilée ne le fait pas.
@@ -5742,7 +5775,10 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDarg{2} borne supérieure $b$ de l'intervalle $\ZintervalOC{a}{b}$.
 
 % Docs for discrete intervals - END
-\section{Unions et intersections en mode ligne}
+
+
+\subsection{Unions et intersections en mode ligne}
+
 
 
 \IDmacro*{dcap}{0}
@@ -5750,9 +5786,12 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDmacro*{dcup}{0}
 
 \IDmacro*{dsqcup}{0}
-\section{Applications}
 
-\subsection{Cardinal, image et compagnie}
+
+\subsection{Applications}
+
+\subsubsection{Cardinal, image et compagnie}
+
 
 
 \IDmacro*{card}{0}
@@ -5768,7 +5807,10 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDmacro*{codom}{0}
 
 \IDmacro*{im}{0}
-\subsection{Application totale, partielle, injective, surjective et/ou bijective}
+
+
+\subsubsection{Application totale, partielle, injective, surjective et/ou bijective}
+
 
 
 \vspace{-.75em}
@@ -5789,16 +5831,24 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
     
     \IDmacro*{pbiject}{0}
 \end{multicols}
-\section{Espace après la négation logique}
+
+
+\section{Méthodes formelles en logique}
+
+\subsection{Espace après la négation logique}
+
 
 
 \IDmacro*{neg   }{0}
 
 \IDmacro*{stdneg}{0}
-\section{Différents types de comparaisons \og standard \fg}
 
 
-\subsection{Opérateurs décorés -- Les textes}
+\subsection{Différents types de comparaisons \og standard \fg}
+
+
+
+\subsubsection{Opérateurs décorés -- Les textes}
 
 % == Technical infos - Texts - START == %
 
@@ -5814,7 +5864,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
-\subsection{Opérateurs de comparaison supplémentaires}
+\subsubsection{Opérateurs de comparaison supplémentaires}
 
 % == Technical infos - Operators - START == %
 
@@ -5880,9 +5930,12 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 }
                 
 % == Technical infos - Operators - END == %
-\section{Équivalences et implications}
 
-\subsection{Des symboles logiques supplémentaires}
+
+\subsection{Équivalences et implications}
+
+\subsubsection{Des symboles logiques supplémentaires}
+
 
 
 % == Decorated versions - START == %
@@ -5933,7 +5986,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
-\subsection{Équivalences et implications verticales}
+\subsubsection{Équivalences et implications verticales}
+
 
 
 % == Vertical versions - START == %
@@ -5949,7 +6003,12 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 % == Vertical versions - END == %
 
-\section{Des versions alternatives du quantificateur existentiel}
+
+
+
+
+\subsection{Des versions alternatives du quantificateur existentiel}
+
 
 
 \IDmacro*{existmulti }{1}
@@ -5969,10 +6028,21 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\section{Détailler un raisonnement simple}
 
 
-\subsection{Détailler un raisonnement simple} 
+
+
+
+
+
+
+
+
+\subsection{Détailler un raisonnement simple}
+
+
+
+\subsubsection{Détailler un raisonnement simple} 
 
 \IDenv{explain}{1}
 
@@ -6045,7 +6115,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
-\subsection{Détailler un raisonnement simple -- Mise en forme du texte}
+\subsubsection{Détailler un raisonnement simple -- Mise en forme du texte}
 
 Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
@@ -6099,10 +6169,17 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{} le texte d'un court commentaire.
 
 
-\section{Détailler un \og vrai \fg{} raisonnement}
 
 
-\subsection{Détailler un \og vrai \fg{} raisonnement via un tableau}
+
+
+
+
+\subsection{Détailler un \og vrai \fg{} raisonnement}
+
+
+
+\subsubsection{Détailler un \og vrai \fg{} raisonnement via un tableau}
 
 \IDenv{demoexplain}{4}
 
@@ -6154,7 +6231,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{} un texte correspondant à un label global référençant le numéro d'une justification.
 
 
-\subsection{Détailler un \og vrai \fg{} raisonnement via un tableau - Textes utilisés}
+\subsubsection{Détailler un \og vrai \fg{} raisonnement via un tableau - Textes utilisés}
 
 \IDmacro*{textdemoID}{0}     où \quad \mwhyprefix{ID}{entifier}
 
@@ -6175,9 +6252,14 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \extraspace
 
 \IDmacro*{textdemoNEXTPAGE}{0}
-\section{Points et lignes}
 
-\subsection{Points}
+
+\section{Géométrie}
+
+\subsection{Points et lignes}
+
+\subsubsection{Points}
+
 
 
 \IDmacro*{pt}{1}
@@ -6198,7 +6280,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Lignes}
+\subsubsection{Lignes}
+
 
 
 \IDmacro{gline }{1}{2}   où \quad \mwhyprefix{g}{eometry}
@@ -6237,7 +6320,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Droites parallèles ou non}
+\subsubsection{Droites parallèles ou non}
+
 
 
 \IDmacro*{parallel    }{0}
@@ -6249,9 +6333,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro*{stdparallel }{0}
 
 \IDmacro*{stdnparallel}{0}
-\section{Vecteurs}
 
-\subsection{Les écrire}
+
+\subsection{Vecteurs}
+
+\subsubsection{Les écrire}
+
 
 
 \IDmacro*{vect}{1}
@@ -6267,7 +6354,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} un texte indiquant $up$ dans le nom $\vect*{up}{down}$ d'un vecteur.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
-\subsection{Norme}
+
+
+\subsubsection{Norme}
+
 
 
 \IDmacro{norm}{1}{1}
@@ -6288,7 +6378,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro*{vnorm}{1}
 
 \IDarg{} le nom du vecteur sur lequel appliquer la norme.
-\subsection{Produit scalaire}
+
+
+\subsubsection{Produit scalaire}
+
 
 
 \IDmacro{dotprod}{1}{2}
@@ -6334,7 +6427,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} le nom du 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-\subsubsection{Écriture symbolique}
+
+
+\subsubsection{Produit vectoriel}
+
+\paragraph{Écriture symbolique}
+
 
 
 \IDmacro{crossprod}{1}{2}
@@ -6368,7 +6466,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsubsection{Explication du mode de calcul}
+\paragraph{Explication du mode de calcul}
+
 
 
 \IDmacro*{calccrossprod }{8}  où \quad \mwhyprefix{calc}{ulate}
@@ -6404,7 +6503,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
-\subsubsection{Les coordonnées}
+\paragraph{Les coordonnées}
+
 
 
 \IDmacro{coordcrossprod}{1}{6}  où \quad \mwhyprefix{coord}{inate}
@@ -6442,7 +6542,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1..3} les coordonnées du 1\ier{} vecteur.
 
 \IDarg{4..6} les coordonnées du 2\ieme{} vecteur.
-\subsection{Plan -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+
+
+\subsubsection{Plan -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+
 
 
 \IDmacro{calcdetplane }{1}{6} où \quad \mwhyprefix{calc}{ulate}
@@ -6490,9 +6593,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
 
 \IDarg{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
-\section{Géométrie cartésienne}
 
-\subsection{Coordonnées} \label{tnsgeo-coordinates}
+
+\subsection{Géométrie cartésienne}
+
+\subsubsection{Coordonnées} \label{tnsgeo-coordinates}
+
 
 
 \label{tnsgeo-coordinates-tech}
@@ -6565,7 +6671,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} le vecteur qu'il faut taper via la macro \macro{vect}.
 
 \IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
-\subsection{Nommer un repère}
+
+
+\subsubsection{Nommer un repère}
+
 
 
 \IDmacro*{axes }{1}
@@ -6618,7 +6727,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 	\item Viennent ensuite les noms des vecteurs "définissant" chaque axe. Pour chacun de ces vecteurs la macro-commande \macro{vect} sera automatiquement appliquée.
 \end{itemize}
-\section{Arcs circulaires}
+
+
+\subsection{Arcs circulaires}
+
 
 
 \IDmacro*{circarc}{1} où \quad \mwhyprefix{circ}{ular}
@@ -6634,9 +6746,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} un texte indiquant $up$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
-\section{Angles}
 
-\subsection{Angles géométriques \og intérieurs \fg}
+
+\subsection{Angles}
+
+\subsubsection{Angles géométriques \og intérieurs \fg}
+
 
 
 \IDmacro*{anglein}{1} où \quad \mwhyprefix{in}{terior}
@@ -6652,7 +6767,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} un texte indiquant $up$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
-\subsection{Angles orientés de vecteurs}
+
+
+\subsubsection{Angles orientés de vecteurs}
+
 
 
 \IDmacro{angleorient}{1}{2}
@@ -6683,9 +6801,14 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} le nom du premier vecteur sans utiliser la macro \macro{vect}.
 
 \IDarg{2} le nom du second vecteur sans utiliser la macro \macro{vect}.
-\section{Constantes et paramètres}
 
-\subsection{Constantes classiques}
+
+\section{Analyse}
+
+\subsection{Constantes et paramètres}
+
+\subsubsection{Constantes classiques}
+
 
 
 \vspace{-1em}
@@ -6706,19 +6829,26 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Constantes latines personnelles}
+\subsubsection{Constantes latines personnelles}
+
 
 
 \IDmacro*{param}{1}
 
 \IDarg{} un texte utilisant l'alphabet latin.
-\section{Une variable \og symbolique \fg{}}
+
+
+\subsection{Une variable \og symbolique \fg{}}
+
 
 
 \IDmacro*{symvar }{0}
 
 \IDmacro*{symvar*}{0}
-\section{La fonction valeur absolue}
+
+
+\subsection{La fonction valeur absolue}
+
 
 
 \IDmacro*{abs}{1}
@@ -6726,9 +6856,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro*{abs*}{1}
 
 \IDarg{} l'expression sur laquelle appliquer la fonction valeur absolue.
-\section{Fonctions nommées spéciales}
 
-\subsection{Sans paramètre}
+
+\subsection{Fonctions nommées spéciales}
+
+\subsubsection{Sans paramètre}
+
 
 
 % List of functions without parameter - START
@@ -6772,7 +6905,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Avec un paramètre}
+\subsubsection{Avec un paramètre}
+
 
 
 % List of functions with parameters - START
@@ -6791,7 +6925,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 % ---------------------- %
-\section{Définition explicite d'une fonction}
+
+
+\subsection{Définition explicite d'une fonction}
+
 
 
 \IDmacro{funcdef}{1}{5}
@@ -6816,7 +6953,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{4} ensemble de départ.
 
 \IDarg{5} ensemble d'arrivée.
-\section{Limite}
+
+
+\subsection{Limite}
+
 
 
 \IDmacro{limit}{1}{3}
@@ -6837,10 +6977,13 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} la variable qui va tendre vers quelque chose.
 
 \IDarg{3} la valeur limite suivie éventuellement de conditions en utilisant la barre verticale \verb+|+ pour séparer ces différentes informations.
-\section{Calcul différentiel}
 
-\subsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
+
+\subsection{Calcul différentiel}
+
+\subsubsection{\texorpdfstring{Les opérateurs $\pp{}$ et $\dd{}$}%
                            {Les opérateurs "d rond" et "d droit"}}
+
 
 
 \IDmacro{dd}{1}{1}
@@ -6855,7 +6998,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Dérivations totales d'une fonction -- Version longue avec une variable}
+\subsubsection{Dérivations totales d'une fonction -- Version longue avec une variable}
+
 
 
 \IDmacro{der}{1}{3}
@@ -6900,7 +7044,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
+\subsubsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
+
 
 
 \IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
@@ -6915,7 +7060,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
+\subsubsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
+
 
 
 \IDmacro{derope}{1}{2} où \quad \mwhyprefix{ope}{rator}
@@ -6925,7 +7071,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{1} la fonction à dériver.
 
 \IDarg{2} l'ordre de dérivation.
-\subsection{Dérivations partielles}
+
+
+\subsubsection{Dérivations partielles}
+
 
 
 \IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
@@ -6964,7 +7113,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
+\subsubsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
+
 
 
 \IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
@@ -6978,10 +7128,19 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\section{Tableaux de variation et de signe}
 
 
-\subsection{Coloriser le fond}
+
+
+
+
+
+
+\subsection{Tableaux de variation et de signe}
+
+
+
+\subsubsection{Coloriser le fond}
 
 \IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
 
@@ -6996,7 +7155,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Commentaires}
+\subsubsection{Commentaires}
 
 \IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
 
@@ -7013,7 +7172,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Graphiques explicatifs}
+\subsubsection{Graphiques explicatifs}
 
 \IDmacro{graphSign}{1}{2..4}
 
@@ -7065,9 +7224,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \footnote{
 	Notant $\Delta = b^2 - 4 ac$, si $\Delta < 0$ il n'y aura pas d'argument supplémentaire, si $\Delta = 0$ il y en aura un seul et enfin si $\Delta > 0$ il faudra en donner deux, le 1\ier{} étant le plus petit.
 }.
-\section{Calcul intégral}
 
-\subsection{Le symbole standard revisité}
+
+\subsection{Calcul intégral}
+
+\subsubsection{Le symbole standard revisité}
+
 
 
 \IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
@@ -7076,7 +7238,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{Un opérateur d'intégration clés en main}
+\subsubsection{Un opérateur d'intégration clés en main}
+
 
 
 \IDmacro*{integrate  }{4}
@@ -7103,7 +7266,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsection{L'opérateur \og crochet \fg}
+\subsubsection{L'opérateur \og crochet \fg}
+
 
 
 \IDmacro{hook }{1}{4}
@@ -7129,7 +7293,12 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{3} valeur initiale à substituer qui apparait en bas du crochet fermant ou de la barre verticale.
 
 \IDarg{4} valeur finale à substituer qui apparait en haut du crochet fermant ou de la barre verticale.
-\section{Des notations complémentaires pour des suites spéciales}
+
+
+\section{Suites}
+
+\subsection{Des notations complémentaires pour des suites spéciales}
+
 
 
 \IDmacro*{seqplus}{2}
@@ -7161,7 +7330,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{3} l'exposant à droite.
 
 \IDarg{4} l'exposant à gauche.
-\section{Sommes et produits en mode ligne}
+
+
+\subsection{Sommes et produits en mode ligne}
+
 
 
 Les macros suivantes sans argument ont un comportement spécifique vis à vis des mises en index et en exposant. 
@@ -7173,10 +7345,13 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDmacro*{dprod}{0}
 
 \IDmacro*{dsum }{0}
-\section{Comparaison asymptotique de suites et de fonctions}
 
-\subsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
+
+\subsection{Comparaison asymptotique de suites et de fonctions}
+
+\subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
                            {Les notations "grand O" et "petit O"}}
+
 
 
 \IDmacro*{bigO  }{1}
@@ -7189,8 +7364,9 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{La notation $\bigomega{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
                            {La notation "grand Omega"}}
+
 
 
 \IDmacro*{bigomega}{1}
@@ -7201,16 +7377,22 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{La notation $\bigtheta{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
                            {La notation "grand Theta"}}
+
 
 
 \IDmacro*{bigtheta}{1}
 
 \IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
-\section{Généralités}
 
-\subsection{Probabilité \og simple \fg}
+
+\section{Probabilité}
+
+\subsection{Généralités}
+
+\subsubsection{Probabilité \og simple \fg}
+
 
 
 \IDmacro{proba}{1}{1}
@@ -7223,7 +7405,8 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{Probabilité conditionnelle}
+\subsubsection{Probabilité conditionnelle}
+
 
 
 \IDmacro{probacond  }{1}{2}
@@ -7242,13 +7425,19 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDarg{1} l'ensemble qui donne la condition.
 
 \IDarg{2} l'ensemble dont on veut calculer la probabilité.
-\subsection{Évènement contraire}
+
+
+\subsubsection{Évènement contraire}
+
 
 
 \IDmacro*{nevent}{1}
 
 \IDarg{} l'ensemble dont on veut indiquer le contraire.
-\subsection{Espérance, variance et écart-type}
+
+
+\subsubsection{Espérance, variance et écart-type}
+
 
 
 \IDmacro{expval}{1}{1}
@@ -7276,7 +7465,10 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDoption{} le nom de la fonction écart-type. La valeur par défaut est $\sigma$ obtenue via \verb#\sigma#.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'écart-type.
-\section{Arbres pondérés}
+
+
+\subsection{Arbres pondérés}
+
 
 
 \IDenv*{probatree }
@@ -7292,7 +7484,12 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
 
 \IDkey{frame} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
-\section{Opérateurs de base}
+
+
+\section{Arithmétique}
+
+\subsection{Opérateurs de base}
+
 
 
 \IDmacro*{divides}{0}
@@ -7306,7 +7503,10 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \extraspace
 
 \IDmacro*{modulo}{0}
-\section{Fonctions nommées spéciales}
+
+
+\subsection{Fonctions nommées spéciales}
+
 
 
 % List of functions without parameter - START
@@ -7324,9 +7524,12 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 }
 
 % List of functions without parameter - END
-\section{Fractions continuées}
 
-\subsection{Fractions continuées standard}
+
+\subsection{Fractions continuées}
+
+\subsubsection{Fractions continuées standard}
+
 
 
 \IDmacro*{contfrac}{1}
@@ -7339,7 +7542,8 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{Fractions continuées généralisées}
+\subsubsection{Fractions continuées généralisées}
+
 
 
 \IDmacro*{contfracgene}{1}
@@ -7352,7 +7556,8 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{Comme une fraction continuée isolée}
+\subsubsection{Comme une fraction continuée isolée}
+
 
 
 \IDmacro*{singlecontfrac}{2}
@@ -7365,8 +7570,9 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{L'opérateur $\contfracope$}%
+\subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
                            {L'opérateur K}}
+
 
 
 La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
@@ -7377,10 +7583,17 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 
 \IDmacro*{contfracope}{0}
 
-\section{Matrices via \texttt{nicematrix}}
 
-\subsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
+
+
+
+\section{Algèbre linéaire}
+
+\subsection{Matrices via \texttt{nicematrix}}
+
+\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
                            {Calculs expliqués des déterminants 2x2}} \label{tnslinalg-2D-det}
+
 
 
 \IDmacro{calcdettwo }{1}{4}  où \quad \mwhyprefix{c}{alculate}
@@ -7418,7 +7631,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %% ---------------------- %
 %
 %
-%\subsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%\subsubsection{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
 %                              {Calculs expliqués des déterminants 3x3}}
 %
 %Dans les exemples suivants, le préfixe \prefix{c} reste pour \whyprefix{c}{alculer} et \prefix{three} est pour \inenglish{trois}.
@@ -7427,7 +7640,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %% ---------------------- %
 %
 %
-%\paragraph{Exemple 1 -- Bien pour les débutants}
+%\textit{Exemple 1 -- Bien pour les débutants}
 %
 %\begin{latexex}
 %$\calcdetthree{a}{c}{c}%
@@ -7439,7 +7652,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %% ---------------------- %
 %
 %
-%\paragraph{Exemple 2 -- Plus efficace à l'usage}
+%\textit{Exemple 2 -- Plus efficace à l'usage}
 %
 %\begin{latexex}
 %$\calcdetthree*{a}{c}{c}%
@@ -7451,9 +7664,9 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %% ---------------------- %
 %
 %
-%\subsection{Fi    ches techniques}
+%\subsubsection{Fi    ches techniques}
 %
-%\paragraph{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
+%\textit{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
 %                          {Calculs expliqués des déterminants 3x3}}
 %
 %\IDmacro*{calcdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
@@ -7482,19 +7695,30 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %
 %\IDarg{9} l'entrée à la position $(3, 3)$
 %
-\section{Polynômes}
+
+
+\section{Polynômes et séries formelles}
+
+\subsection{Polynômes}
+
 
 
 \IDmacro*{setpoly    }{2}
 
 \IDmacro*{setpolyfrac}{2}
-\section{Séries formelles classiques}
+
+
+\subsection{Séries formelles classiques}
+
 
 
 \IDmacro*{setserie    }{2}
 
 \IDmacro*{setseriefrac}{2}
-\section{Polynômes et séries formelles de Laurent}
+
+
+\subsection{Polynômes et séries formelles de Laurent}
+
 
 
 \IDmacro*{setpolylaurent }{2}
@@ -7504,6 +7728,8 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \IDarg{1} l'ensemble auquel les coefficients appartiennent.
 
 \IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
+
+
 
 
 \end{document}
