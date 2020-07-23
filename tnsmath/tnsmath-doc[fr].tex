@@ -35,7 +35,7 @@
 
 \usepackage{ifthen}
 
-\usepackage{cbdevtool}
+\usepackage{macroenvsign}
 
 
 % Sections numbering
@@ -235,10 +235,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.4.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.5.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-22}{{
+\date{2020-07-23}{{
 
 \maketitle
 
@@ -937,23 +937,23 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 % == All texts - START == %
 
 \begin{multicols}{2}
-    \macro{textopappli} donne \emph{\og \textopappli \fg}
+    \macro{textopappli\{\}} donne \emph{\og \textopappli \fg}
 
-    \macro{textopchoice} donne \emph{\og \textopchoice \fg}
+    \macro{textopchoice\{\}} donne \emph{\og \textopchoice \fg}
 
-    \macro{textopcond} donne \emph{\og \textopcond \fg}
+    \macro{textopcond\{\}} donne \emph{\og \textopcond \fg}
 
-    \macro{textopcons} donne \emph{\og \textopcons \fg}
+    \macro{textopcons\{\}} donne \emph{\og \textopcons \fg}
 
-    \macro{textopdef} donne \emph{\og \textopdef \fg}
+    \macro{textopdef\{\}} donne \emph{\og \textopdef \fg}
 
-    \macro{textophyp} donne \emph{\og \textophyp \fg}
+    \macro{textophyp\{\}} donne \emph{\og \textophyp \fg}
 
-    \macro{textopid} donne \emph{\og \textopid \fg}
+    \macro{textopid\{\}} donne \emph{\og \textopid \fg}
 
-    \macro{textopplot} donne \emph{\og \textopplot \fg}
+    \macro{textopplot\{\}} donne \emph{\og \textopplot \fg}
 
-    \macro{textoptest} donne \emph{\og \textoptest \fg}
+    \macro{textoptest\{\}} donne \emph{\og \textoptest \fg}
 \vfill\null\end{multicols}
 
 % == All texts - END == %
@@ -2344,7 +2344,7 @@ $\vcalcdetplane[exp]{AB}%
                     {y_D - y_C}$
 \end{latexex}
 
-Ici nous n'avons pas d'autre choix que de régler le problème à la amin. Ce genre de situation n'est pas rare dans la vraie vie mathématique.
+Ici nous n'avons pas d'autre choix que de régler le problème à la main. Ce genre de situation n'est pas rare dans la vraie vie mathématique.
     
 \begin{latexex}
 $\vcalcdetplane[exp]{AB}%
@@ -2643,9 +2643,9 @@ $\vangleorient[sh]{i}{j}$
 
 \section{Constantes et paramètres}
 
-\subsection{Constantes classiques}
+\subsection{Constantes classiques ajoutées}
 
-\paragraph{La liste complète}
+Les macros ci-dessous ne nécessitent pas d'accolades.
 
 % List of classical constants - START
 
@@ -2782,7 +2782,7 @@ $\funcdef{f}{x}{x^2 + 3}%
 
 
 \begin{remark}
-	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
+	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
 	$\funcdef{f}{x}{x^2 + 3}%
             {I}{J}$
     mais c'est un peu affreux.
@@ -2811,6 +2811,18 @@ Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du te
 Soit $\funcdef[h]{f}{x}{x^2 + 3}%
                     {I}{J}$.
 \end{latexex}
+
+
+%% ---------------------- %
+%
+%
+%\newparaexample{Écriture en ligne sans ensemble}
+%
+%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+%\begin{latexex}
+%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+%                    {I}{J}$.
+%\end{latexex}
 
 
 % ---------------------- %
@@ -4022,7 +4034,7 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 \newparaexample{Des poids cachés partout}
 
-On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
+On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX.
 
 \begin{latexex}
 \begin{probatree*}
@@ -4039,7 +4051,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \begin{latexex}
 \begin{probatree}
@@ -4059,7 +4071,8 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 
 \newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
 
-Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches.
+Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette dans des accolades.
 
 \begin{latexex}
 \begin{probatree}
@@ -4078,7 +4091,11 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 
 \newparaexample{Des cadres facilement}
 
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre final
+\footnote{
+	Un sous-arbre sera dit final si toutes ses feuilles correspondent à des feuilles de l'arbre initial. 
+}
+comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
 \begin{latexex}
 \begin{probatree}
@@ -4110,11 +4127,14 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
 
 \newparaexample{Des cadres faits à la main}
 
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
+
+La macro \macro{ptreeFrame} permet facilement d'encadrer un sous-arbre non final.
+Ceci nécessite de nommer les noeuds mais c'est facile à faire.
+Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine et des deux noeuds finaux le plus haut et le plus bas.
 
 \begin{latexex}
 \begin{probatree}
-    [
+    [{}, name = nU
         [$A$, pweight = $a$,
               name    = nA
             [$B$, pweight = $b$,
@@ -4125,12 +4145,11 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
             [$F$, pweight = $f$,
                   name    = nF]
         ]
-        [$G$, pweight = $g$]
+        [$G$, pweight = $g$,
+              name    = nG]
     ]
-    \node[draw = orange,
-          thick,
-          rounded corners,
-          fit = (nA)(nB)(nF)] {};
+    \ptreeFrame        {nU}{nA}{nG}]
+    \ptreeFrame[orange]{nA}{nB}{nF}]
 \end{probatree}
 \end{latexex}
 
@@ -4569,6 +4588,31 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \begin{description}
 % Changes shown - START
+
+    \medskip
+    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre}
+              ajout de la macro \macro{ptreeFrame} pour tracer facilement des sous cadres non \og finaux \fg.
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
 
     \medskip
     \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
@@ -5527,63 +5571,63 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % == Docs for classical sets - START == %
 \foreach \k in {NN, NNs}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {PP}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {ZZ, ZZn, ZZp, ZZs, ZZsn, ZZsp}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {DD, DDn, DDp, DDs, DDsn, DDsp}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {QQ, QQn, QQp, QQs, QQsn, QQsp}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {RR, RRn, RRp, RRs, RRsn, RRsp}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {CC, CCs}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {HH, HHs}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {OO, OOs}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 % == Docs for classical sets - END == %
 
@@ -5781,11 +5825,11 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\IDmacro*{dcap}{0}
+\IDope{dcap}
 
-\IDmacro*{dcup}{0}
+\IDope{dcup}
 
-\IDmacro*{dsqcup}{0}
+\IDope{dsqcup}
 
 
 \subsection{Applications}
@@ -5794,19 +5838,19 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\IDmacro*{card}{0}
+\IDope{card}
 
-\IDmacro*{card*}{0}
+\IDope{card*}
 
 
 \separation
 
 
-\IDmacro*{dom}{0}
+\IDope{dom}
 
-\IDmacro*{codom}{0}
+\IDope{codom}
 
-\IDmacro*{im}{0}
+\IDope{im}
 
 
 \subsubsection{Application totale, partielle, injective, surjective et/ou bijective}
@@ -5815,21 +5859,21 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \vspace{-.75em}
 \begin{multicols}{2}
-    \IDmacro*{to}{0}
+    \IDope{to}
     
-    \IDmacro*{onetoone}{0}
+    \IDope{onetoone}
     
-    \IDmacro*{onto}{0}
+    \IDope{onto}
     
-    \IDmacro*{biject}{0}
+    \IDope{biject}
     
-    \IDmacro*{pto}{0}
+    \IDope{pto}
     
-    \IDmacro*{ponetoone}{0}
+    \IDope{ponetoone}
     
-    \IDmacro*{ponto}{0}
+    \IDope{ponto}
     
-    \IDmacro*{pbiject}{0}
+    \IDope{pbiject}
 \end{multicols}
 
 
@@ -5839,9 +5883,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 
 
-\IDmacro*{neg   }{0}
+\IDope{neg}
 
-\IDmacro*{stdneg}{0}
+\IDope{stdneg} (pour retrouver le symbole par défaut)
 
 
 \subsection{Différents types de comparaisons \og standard \fg}
@@ -5854,7 +5898,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \foreach \k in {textopappli, textopchoice, textopcond, textopcons, textopdef, textophyp, textopid, textopplot, textoptest}{
 
-	\IDmacro*{\k}{0}
+	\IDmacro**{\k}
 
 }
 
@@ -5870,63 +5914,63 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \foreach \k in {eqdef, eqdef*, eqid, eqid*, eqplot, eqappli, eqchoice, eqcond, eqcons, eqhyp, eqtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {neqid, neqplot, neqappli, neqchoice, neqcond, neqcons, neqhyp, neqtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {lessplot, lessappli, lesschoice, lesscond, lesscons, lesshyp, lesstest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {nlessplot, nlessappli, nlesschoice, nlesscond, nlesscons, nlesshyp, nlesstest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {leqplot, leqappli, leqchoice, leqcond, leqcons, leqhyp, leqtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {nleqplot, nleqappli, nleqchoice, nleqcond, nleqcons, nleqhyp, nleqtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {gtrplot, gtrappli, gtrchoice, gtrcond, gtrcons, gtrhyp, gtrtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {ngtrplot, ngtrappli, ngtrchoice, ngtrcond, ngtrcons, ngtrhyp, ngtrtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {geqplot, geqappli, geqchoice, geqcond, geqcons, geqhyp, geqtest}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 % == Technical infos - Operators - END == %
@@ -5941,42 +5985,42 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % == Decorated versions - START == %
 
 \foreach \k in {iff, iffappli, iffchoice, iffcond, iffcons, iffhyp, ifftest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
 \separation
 
 \foreach \k in {niff, niffappli, niffchoice, niffcond, niffcons, niffhyp, nifftest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
 \separation
 
 \foreach \k in {implies, impliesappli, implieschoice, impliescond, impliescons, implieshyp, impliestest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
 \separation
 
 \foreach \k in {nimplies, nimpliesappli, nimplieschoice, nimpliescond, nimpliescons, nimplieshyp, nimpliestest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
 \separation
 
 \foreach \k in {liesimp, liesimpappli, liesimpchoice, liesimpcond, liesimpcons, liesimphyp, liesimptest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
 \separation
 
 \foreach \k in {nliesimp, nliesimpappli, nliesimpchoice, nliesimpcond, nliesimpcons, nliesimphyp, nliesimptest}{
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
     
@@ -5994,9 +6038,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \foreach \k in {viff, vimplies, vliesimp}{
 
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
-	\IDmacro*{n\k}{0}
+	\IDope{n\k}
 
     \extraspace
 }
@@ -6021,9 +6065,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{existsone }{0}
+\IDope{existsone}
 
-\IDmacro*{nexistsone}{0}
+\IDope{nexistsone}
 
 
 
@@ -6074,13 +6118,13 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\emph{\textbf{ATTENTION !} La macro \macro{explnext} est à utiliser sans argument au tout début de l'environnement \env{aexplain*}.}
+\emph{\textbf{ATTENTION !} La macro \macro{explnext} est à utiliser sans argument au tout début du contenu de l'environnement \env{aexplain*}.}
 
 \extraspace
 
 \extraspace
 
-\IDmacro{explnext}{1}{1} où \quad \mwhyprefix{expl}{ain}
+\IDmacro{explnext}{1}{1} \hfill \mwhyprefix{expl}{ain}
 
 \IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
 
@@ -6090,7 +6134,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro{explnext*}{1}{2} où \quad \mwhyprefix{expl}{ain}
+\IDmacro{explnext*}{1}{2} \hfill \mwhyprefix{expl}{ain}
 
 \IDoption{} le symbole à utiliser pour une explication, la valeur par défaut étant celle du symbole de l'environnement \env{explain} où \macro{explnext} est utilisé.
 
@@ -6104,9 +6148,9 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \separation
 
 
-\IDmacro*{comthis}{1} où \quad \mwhyprefix{com}{ment}
+\IDmacro*{comthis}{1} \hfill \mwhyprefix{com}{ment}
 
-\IDmacro*{comthis*}{1} où \quad \mwhyprefix{com}{ment}
+\IDmacro*{comthis*}{1} \hfill \mwhyprefix{com}{ment}
 
 
 \IDarg{} le texte d'un court commentaire.
@@ -6129,7 +6173,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{expltxt}{1} où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{expltxt}{1} \hfill \mwhyprefix{expl}{ain}
 
 \IDarg{} le texte de l'explication que l'on veut mettre en forme.
 
@@ -6137,7 +6181,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{expltxtdown}{1} où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{expltxtdown}{1} \hfill \mwhyprefix{expl}{ain}
 
 \IDarg{} le texte de l'explication du haut vers le bas que l'on veut mettre en forme.
 
@@ -6145,7 +6189,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{expltxtup}{1} où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{expltxtup}{1} \hfill \mwhyprefix{expl}{ain}
 
 \IDarg{} le texte de l'explication du bas vers le haut que l'on veut mettre en forme.
 
@@ -6153,7 +6197,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{expltxtupdown}{2} où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{expltxtupdown}{2} \hfill \mwhyprefix{expl}{ain}
 
 \IDarg{1} le texte de l'explication du haut vers le bas que l'on veut mettre en forme.
 
@@ -6163,7 +6207,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{explcom}{1} où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{explcom}{1} \hfill \mwhyprefix{expl}{ain}
                             et \mwhyprefix{com}{ment}
 
 \IDarg{} le texte d'un court commentaire.
@@ -6216,7 +6260,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{explref}{1}  où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{explref}{1}  \hfill \mwhyprefix{expl}{ain}
                              et \mwhyprefix{ref}{erence}
 
 \IDarg{} un numéro de $1$ ou $2$ chiffres qui sera encadré comme le sont les numérotations des indications.
@@ -6225,7 +6269,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{explref*}{1}  où \quad \mwhyprefix{expl}{ain}
+\IDmacro*{explref*}{1}  \hfill \mwhyprefix{expl}{ain}
                               et \mwhyprefix{ref}{erence}
 
 \IDarg{} un texte correspondant à un label global référençant le numéro d'une justification.
@@ -6233,21 +6277,21 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Détailler un \og vrai \fg{} raisonnement via un tableau - Textes utilisés}
 
-\IDmacro*{textdemoID}{0}     où \quad \mwhyprefix{ID}{entifier}
+\IDmacro*{textdemoID}{0}     \hfill \mwhyprefix{ID}{entifier}
 
 \IDmacro*{textdemoKNOWN}{0}
 
-\IDmacro*{textdemoPROP}{0}   où \quad \mwhyprefix{PROP}{osition}
+\IDmacro*{textdemoPROP}{0}   \hfill \mwhyprefix{PROP}{osition}
 
-\IDmacro*{textdemoCONS}{0}   où \quad \mwhyprefix{CONS}{equence}
+\IDmacro*{textdemoCONS}{0}   \hfill \mwhyprefix{CONS}{equence}
 
 \extraspace
 
-\IDmacro*{textdemoHYPS}{0}   où \quad \prefix{HYPS = HYP-othesis (S-everal ones)} 
+\IDmacro*{textdemoHYPS}{0}   \hfill \prefix{HYPS = HYP-othesis (S-everal ones)} 
 
-\IDmacro*{textdemoHYP}{0}    où \quad \prefix{HYP = HYP-othesis (just one)}
+\IDmacro*{textdemoHYP}{0}    \hfill \prefix{HYP = HYP-othesis (just one)}
 
-\IDmacro*{textdemoCCL}{0}    où \quad \prefix{CCL = C-on-CL-usion}
+\IDmacro*{textdemoCCL}{0}    \hfill \prefix{CCL = C-on-CL-usion}
 
 \extraspace
 
@@ -6284,9 +6328,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{gline }{1}{2}   où \quad \mwhyprefix{g}{eometry}
+\IDmacro{gline }{1}{2}   \hfill \mwhyprefix{g}{eometry}
 
-\IDmacro{pgline}{1}{2}  où \quad \mwhyprefix{p}{oint}
+\IDmacro{pgline}{1}{2}  \hfill \mwhyprefix{p}{oint}
                               et \mwhyprefix{g}{eometry}
 
 \IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \prefix{O}, valeur par défaut, \prefix{C}, \prefix{CO} et \prefix{OC}.
@@ -6299,18 +6343,16 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{hgline  }{2}   où \quad \mwhyprefix{h}{alf}
+\IDmacro*{hgline  }{2}   \hfill \mwhyprefix{h}{alf}
                              et \mwhyprefix{g}{eometry}
 
-\IDmacro*{phgline }{2}  où \quad \mwhyprefix{p}{oint},
-                                \mwhyprefix{h}{alf}
-                             et \mwhyprefix{g}{eometry}
+\IDmacro*{phgline }{2}  \hfill \prefix{phg = p + h + g}
 
 \extraspace
 
 \IDmacro*{segment }{2}
 
-\IDmacro*{psegment}{2}  où \quad \mwhyprefix{p}{oint}
+\IDmacro*{psegment}{2}  \hfill \mwhyprefix{p}{oint}
 
 \IDarg{1} le 1\ier{} point géométrique.
 
@@ -6324,15 +6366,15 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{parallel    }{0}
+\IDope{parallel}
 
-\IDmacro*{nparallel   }{0}
+\IDope{nparallel}
 
 \extraspace
 
-\IDmacro*{stdparallel }{0}
+\IDope{stdparallel} (pour utiliser le symbole par défaut)
 
-\IDmacro*{stdnparallel}{0}
+\IDope{stdnparallel} (pour utiliser le symbole proposé par \verb+amssymb+)
 
 
 \subsection{Vecteurs}
@@ -6375,7 +6417,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \separation
 
-\IDmacro*{vnorm}{1}
+\IDmacro*{vnorm}{1} \hfill \mwhyprefix{v}{ector}
 
 \IDarg{} le nom du vecteur sur lequel appliquer la norme.
 
@@ -6420,7 +6462,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vdotprod}{1}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vdotprod}{1}{2} \hfill \mwhyprefix{v}{ector}
 
 \IDoption{} voir les explications précédentes données pour \macro{dotprod}.
 
@@ -6454,7 +6496,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcrossprod}{1}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vcrossprod}{1}{2} \hfill \mwhyprefix{v}{ector}
 
 \IDoption{} voir les explications précédentes données pour \macro{crossprod}.
 
@@ -6470,9 +6512,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{calccrossprod }{8}  où \quad \mwhyprefix{calc}{ulate}
+\IDmacro*{calccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
 
-\IDmacro*{calccrossprod*}{8}  où \quad \mwhyprefix{calc}{ulate}
+\IDmacro*{calccrossprod*}{8}  \hfill \mwhyprefix{calc}{ulate}
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -6486,10 +6528,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{vcalccrossprod }{8}  où \quad \mwhyprefix{calc}{ulate}
+\IDmacro*{vcalccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
                                     et \mwhyprefix{v}{ector}
 
-\IDmacro*{vcalccrossprod*}{8}  où \quad \mwhyprefix{calc}{ulate}
+\IDmacro*{vcalccrossprod*}{8}  \hfill \mwhyprefix{calc}{ulate}
                                     et \mwhyprefix{v}{ector}
 
 \IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
@@ -6507,7 +6549,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{coordcrossprod}{1}{6}  où \quad \mwhyprefix{coord}{inate}
+\IDmacro{coordcrossprod}{1}{6}  \hfill \mwhyprefix{coord}{inate}
 
 \IDoption{} la valeur par défaut est \verb+p,s+. 
             Voici les différentes valeurs possibles pour la mise en forme des coordonnées uniquement \emph{(voir la section \ref{tnsgeo-coordinates-tech} page \pageref{tnsgeo-coordinates-tech})}.
@@ -6548,9 +6590,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{calcdetplane }{1}{6} où \quad \mwhyprefix{calc}{ulate}
+\IDmacro{calcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
 
-\IDmacro{calcdetplane*}{1}{6} où \quad \mwhyprefix{calc}{ulate}
+\IDmacro{calcdetplane*}{1}{6} \hfill \mwhyprefix{calc}{ulate}
 
 
 \IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
@@ -6583,11 +6625,11 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcalcdetplane }{1}{6} où \quad \mwhyprefix{calc}{ulate}
-                                     et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
+                                   et \mwhyprefix{v}{ector}
 
-\IDmacro{vcalcdetplane*}{1}{6} où \quad \mwhyprefix{calc}{ulate}
-                                     et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane*}{1}{6} \hfill \mwhyprefix{calc}{ulate}
+                                   et \mwhyprefix{v}{ector}
 
 
 \IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
@@ -6628,7 +6670,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{pcoord}{1}{2} où \quad \mwhyprefix{v}{ertical}
+\IDmacro{pcoord}{1}{2} \hfill \mwhyprefix{p}{oint}
 
 \IDoption{} voir les indications données pour la macro \macro{coord}.
 
@@ -6640,7 +6682,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{pcoord*}{1}{2} où \quad \mwhyprefix{v}{ertical}
+\IDmacro{pcoord*}{1}{2} \hfill \mwhyprefix{p}{oint}
 
 \IDoption{} voir les indications données pour la macro \macro{coord}.
 
@@ -6652,7 +6694,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcoord}{1}{2} où \quad \mwhyprefix{v}{ertical}
+\IDmacro{vcoord}{1}{2} \hfill \mwhyprefix{v}{ertical}
 
 \IDoption{} voir les indications données pour la macro \macro{coord}.
 
@@ -6664,7 +6706,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcoord*}{1}{2} où \quad \mwhyprefix{v}{ertical}
+\IDmacro{vcoord*}{1}{2} \hfill \mwhyprefix{v}{ertical}
 
 \IDoption{} voir les indications données pour la macro \macro{coord}.
 
@@ -6692,7 +6734,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \separation
 
-\IDmacro*{paxes}{1} où \quad \mwhyprefix{p}{oint}
+\IDmacro*{paxes}{1} \hfill \mwhyprefix{p}{oint}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -6705,7 +6747,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \separation
 
-\IDmacro*{vaxes}{1} où \quad \mwhyprefix{v}{ector}
+\IDmacro*{vaxes}{1} \hfill \mwhyprefix{v}{ector}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -6718,7 +6760,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \separation
 
-\IDmacro*{pvaxes}{3} où \quad \prefix{pv = p + v}
+\IDmacro*{pvaxes}{3} \hfill \prefix{pv = p + v}
 
 \IDarg{} l'argument est une suite de "morceaux" séparés par des barres \verb+|+.
 
@@ -6733,7 +6775,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{circarc}{1} où \quad \mwhyprefix{circ}{ular}
+\IDmacro*{circarc}{1} \hfill \mwhyprefix{circ}{ular}
 
 \IDarg{} un texte donnant le nom d'un arc circulaire.
 
@@ -6741,7 +6783,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{circarc*}{2} où \quad \mwhyprefix{circ}{ular}
+\IDmacro*{circarc*}{2} \hfill \mwhyprefix{circ}{ular}
 
 \IDarg{1} un texte indiquant $up$ dans le nom $\circarc*{up}{down}$ d'un arc circulaire.
 
@@ -6754,7 +6796,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{anglein}{1} où \quad \mwhyprefix{in}{terior}
+\IDmacro*{anglein}{1} \hfill \mwhyprefix{in}{terior}
 
 \IDarg{} un texte donnant le nom d'un angle intérieur.
 
@@ -6762,7 +6804,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro*{anglein*}{2} où \quad \mwhyprefix{in}{terior}
+\IDmacro*{anglein*}{2} \hfill \mwhyprefix{in}{terior}
 
 \IDarg{1} un texte indiquant $up$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
 
@@ -6794,7 +6836,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vangleorient}{1}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vangleorient}{1}{2} \hfill \mwhyprefix{v}{ector}
 
 \IDoption{} voir les explications précédentes données pour \macro{angleorient}.
 
@@ -6807,7 +6849,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsection{Constantes et paramètres}
 
-\subsubsection{Constantes classiques}
+\subsubsection{Constantes classiques ajoutées}
 
 
 
@@ -6817,7 +6859,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \foreach \k in {ggamma, ppi, ttau, ee, ii, jj, kk}{
 
-	\IDmacro*{\k}{0}
+	\IDope{\k}
 
 }
 
@@ -6842,16 +6884,16 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{symvar }{0}
+\IDmacro**{symvar }
 
-\IDmacro*{symvar*}{0}
+\IDmacro**{symvar*}
 
 
 \subsection{La fonction valeur absolue}
 
 
 
-\IDmacro*{abs}{1}
+\IDmacro*{abs }{1}
 
 \IDmacro*{abs*}{1}
 
@@ -6868,35 +6910,35 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \foreach \k in {acos, asin, atan}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {arccosh, arcsinh, arctanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {acosh, asinh, atanh}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
                 
 \separation
 
 \foreach \k in {fch, fsh, fth}{
 
-    \IDmacro*{\k}{0}  où \quad \mwhyprefix{{f}}{{rench}}
+    \IDope{\k} \hfill \mwhyprefix{{f}}{{rench}}
 }
                 
 \separation
 
 \foreach \k in {afch, afsh, afth}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k} 
 }
 
 % List of functions without parameter - END
@@ -6950,7 +6992,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDarg{3} la formule de définition.
 
-\IDarg{4} ensemble de départ.
+\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
 \IDarg{5} ensemble d'arrivée.
 
@@ -6962,13 +7004,13 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro{limit}{1}{3}
 
 
-\IDoption{}  la valeur par défaut \verb+asit+ n'a pas lieu d'être utilisée. 
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas vocation à être utilisée. 
 \begin{enumerate}
 	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p   + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp  + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -7006,31 +7048,31 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDoption{} la valeur par défaut est \verb+u+. 
 \begin{enumerate}
-	\item \verb+u+ : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
+	\item \verb+u  + : écriture usuelle avec des primes \emph{(ceci nécessite d'avoir une valeur entière naturelle connue du nombre de dérivations successives)}.
 
-	\item \verb+e+ : écriture via un exposant entre des parenthèses.
+	\item \verb+e  + : écriture via un exposant entre des parenthèses.
 	
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+d+ : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
+	\item \verb+d  + : écriture pointée à la physicienne \emph{(cf. la dérivation par rapport au temps)}.
 
-	\item \verb+bd+ : écriture pointée avec un crochet entre les points et la fonction.
+	\item \verb+bd + : écriture pointée avec un crochet entre les points et la fonction.
 
 	\medskip
 	
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 	
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -7048,7 +7090,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{sder}{1}{2} où \quad \mwhyprefix{s}{imple}
+\IDmacro{sder}{1}{2} \hfill \mwhyprefix{s}{imple}
 
 \IDoption{} la valeur par défaut est \verb+u+. Les options disponibles sont \verb+u+, \verb+e+, \verb+d+, \verb+bd+, \verb+p+ et \verb+sp+ : voir la fiche technique de \macro{sder} ci-dessus.
 
@@ -7064,7 +7106,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{derope}{1}{2} où \quad \mwhyprefix{ope}{rator}
+\IDmacro{derope}{1}{2} \hfill \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{der} donnée un peu plus haut.
 
@@ -7077,29 +7119,29 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{pder}{1}{2} où \quad \mwhyprefix{p}{artial}
+\IDmacro{pder}{1}{2} \hfill \mwhyprefix{p}{artial}
 
 \IDoption{} la valeur par défaut est \verb+f+. 
 \begin{enumerate}
-	\item \verb+f+ : écriture via une fraction en mode display.
+	\item \verb+f  + : écriture via une fraction en mode display.
 
-	\item \verb+sf+ : écriture via une fraction en mode non display.
+	\item \verb+sf + : écriture via une fraction en mode non display.
 
-	\item \verb+of+ : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
+	\item \verb+of + : écriture via une fraction en mode display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\item \verb+osf+ : écriture via une fraction en mode non display sous la forme d'un opérateur \emph{(la fonction est à côté de la fraction)}.
 
 	\medskip
 
-	\item \verb+i+ : écriture via un indice.
+	\item \verb+i  + : écriture via un indice.
 
-	\item \verb+ei+ : écriture via un indice mais en \emph{\og développant \fg}.
+	\item \verb+ei + : écriture via un indice mais en \emph{\og développant \fg}.
 
 	\medskip
 
-	\item \verb+p+ : ajout de parenthèses extensibles autour de la fonction.
+	\item \verb+p  + : ajout de parenthèses extensibles autour de la fonction.
 
-	\item \verb+sp+ : ajout de parenthèses non extensibles autour de la fonction.
+	\item \verb+sp + : ajout de parenthèses non extensibles autour de la fonction.
 \end{enumerate}
 
 
@@ -7117,8 +7159,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{pderope}{1}{2} où \quad \mwhyprefix{p}{artial}
-                              et \mwhyprefix{ope}{rator}
+\IDmacro{pderope}{1}{2} \hfill \mwhyprefix{p}{artial}
+                            et \mwhyprefix{ope}{rator}
 
 \IDoption{} la valeur par défaut est \verb+f+. Les options disponibles sont \verb+f+, \verb+sf+ et \verb+i+ : voir la fiche technique de \macro{pder} juste avant.
 
@@ -7142,7 +7184,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Coloriser le fond}
 
-\IDmacro{backLine}{1}{1}  où \quad \mwhyprefix{back}{ground}
+\IDmacro{backLine}{1}{1} \hfill \mwhyprefix{back}{ground}
 
 
 \IDoption{} couleur au format TikZ.
@@ -7157,7 +7199,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Commentaires}
 
-\IDmacro{comLine}{1}{2}  où \quad \mwhyprefix{com}{ment}
+\IDmacro{comLine}{1}{2} \hfill \mwhyprefix{com}{ment}
 
 
 \IDoption{} couleur au format TikZ.
@@ -7174,7 +7216,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Graphiques explicatifs}
 
-\IDmacro{graphSign}{1}{2..4}
+\IDmacro{graphSign}{1}{4}
 
 
 \IDoption{} couleur au format TikZ.
@@ -7232,7 +7274,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
+\IDope{stdint} (pour retrouver le comportement par défaut)
 
 
 % ---------------------- %
@@ -7248,9 +7290,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \extraspace
 
-\IDmacro*{dintegrate }{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate }{4} \hfill \mwhyprefix{d}{isplaystyle}
 
-\IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate*}{4} \hfill \mwhyprefix{d}{isplaystyle}
 
 
 \IDarg{1} la fonction intégrée.
@@ -7277,11 +7319,11 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+b+ : des crochets extensibles sont utilisés.
+	\item \verb+b + : des crochets extensibles sont utilisés.
 
 	\item \verb+sb+ : des crochets non extensibles sont utilisés.
 
-	\item \verb+r+ : un unique trait vertical extensible est utilisé à droite.
+	\item \verb+r + : un unique trait vertical extensible est utilisé à droite.
 
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}
@@ -7336,15 +7378,15 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-Les macros suivantes sans argument ont un comportement spécifique vis à vis des mises en index et en exposant. 
+Les opérateurs suivants ont un comportement spécifique vis à vis des mises en index et en exposant. 
 
 
 \separation
 
 
-\IDmacro*{dprod}{0}
+\IDope{dprod}
 
-\IDmacro*{dsum }{0}
+\IDope{dsum }
 
 
 \subsection{Comparaison asymptotique de suites et de fonctions}
@@ -7486,23 +7528,33 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 \IDkey{frame} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
 
 
+\separation
+
+
+\IDmacro{ptreeFrame}{1}{3} \hfill \mwhyprefix{p}{robabilty}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+
+\IDarg{$\!$s 1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). Ici l'ordre n'est pas important.
+
+
 \section{Arithmétique}
 
 \subsection{Opérateurs de base}
 
 
 
-\IDmacro*{divides}{0}
+\IDope{divides}
 
-\IDmacro*{ndivides}{0}
-
-\extraspace
-
-\IDmacro*{nequiv}{0}
+\IDope{ndivides}
 
 \extraspace
 
-\IDmacro*{modulo}{0}
+\IDope{nequiv}
+
+\extraspace
+
+\IDope{modulo}
 
 
 \subsection{Fonctions nommées spéciales}
@@ -7513,14 +7565,14 @@ Les macros suivantes sans argument ont un comportement spécifique vis à vis de
 
 \foreach \k in {pgcd, ppcm}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {lcm}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
 
 % List of functions without parameter - END
@@ -7581,7 +7633,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \separation
 
 
-\IDmacro*{contfracope}{0}
+\IDope{contfracope}
 
 
 
@@ -7596,9 +7648,9 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 
 
 
-\IDmacro{calcdettwo }{1}{4}  où \quad \mwhyprefix{c}{alculate}
+\IDmacro{calcdettwo }{1}{4} \hfill \mwhyprefix{c}{alculate}
 
-\IDmacro{calcdettwo*}{1}{4}  où \quad \mwhyprefix{c}{alculate}
+\IDmacro{calcdettwo*}{1}{4} \hfill \mwhyprefix{c}{alculate}
 
 \IDoption{} la valeur par défaut est \verb+std+ pour \verb+standard+. Voici les différentes valeurs possibles.
 \begin{enumerate}
@@ -7669,9 +7721,9 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %\textit{\texorpdfstring{Calculs expliqués des déterminants $3 \times 3$}%
 %                          {Calculs expliqués des déterminants 3x3}}
 %
-%\IDmacro*{calcdetthree}{9}  où \quad \mwhyprefix{c}{alculate}
+%\IDmacro*{calcdetthree}{9} \hfill \mwhyprefix{c}{alculate}
 %
-%\IDmacro*{calcdetthree*}{9}  où \quad \mwhyprefix{c}{alculate}
+%\IDmacro*{calcdetthree*}{9} \hfill \mwhyprefix{c}{alculate}
 %
 %\IDarg{1} l'entrée à la position $(1, 1)$
 %
@@ -7707,6 +7759,10 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 
 \IDmacro*{setpolyfrac}{2}
 
+\IDarg{1} l'ensemble auquel les coefficients appartiennent.
+
+\IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
+
 
 \subsection{Séries formelles classiques}
 
@@ -7715,6 +7771,10 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \IDmacro*{setserie    }{2}
 
 \IDmacro*{setseriefrac}{2}
+
+\IDarg{1} l'ensemble auquel les coefficients appartiennent.
+
+\IDarg{2} cet argument est une suite de "morceaux" séparés par des barres \verb+|+, chaque morceau étant une variable formelle.
 
 
 \subsection{Polynômes et séries formelles de Laurent}

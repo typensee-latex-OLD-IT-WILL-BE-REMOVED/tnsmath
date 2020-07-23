@@ -54,7 +54,7 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 \newparaexample{Des poids cachés partout}
 
-On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à retaper un arbre où les pondérations ont déjà été indiquées.
+On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX.
 
 \begin{latexex}
 \begin{probatree*}
@@ -71,7 +71,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \begin{latexex}
 \begin{probatree}
@@ -91,7 +91,8 @@ Pour ne cacher que certains poids, il faudra utiliser, à la main, le style \ver
 
 \newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
 
-Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches. L'astuce pour contourner cette limitation consiste juste à mettre le contenu de l'étiquette dans des accolades.
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches.
+Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette dans des accolades.
 
 \begin{latexex}
 \begin{probatree}
@@ -110,7 +111,11 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 
 \newparaexample{Des cadres facilement}
 
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
+Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre final
+\footnote{
+	Un sous-arbre sera dit final si toutes ses feuilles correspondent à des feuilles de l'arbre initial. 
+}
+comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
 \begin{latexex}
 \begin{probatree}
@@ -142,11 +147,14 @@ Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre comme le m
 
 \newparaexample{Des cadres faits à la main}
 
-En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de probabilité comme ci-dessous où le cadre s'appuie sur trois noeuds nommés. Notons que cet exemple est tout simplement infaisable avec la clé \verb+frame+.
+
+La macro \macro{ptreeFrame} permet facilement d'encadrer un sous-arbre non final.
+Ceci nécessite de nommer les noeuds mais c'est facile à faire.
+Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine et des deux noeuds finaux le plus haut et le plus bas.
 
 \begin{latexex}
 \begin{probatree}
-    [
+    [{}, name = nU
         [$A$, pweight = $a$,
               name    = nA
             [$B$, pweight = $b$,
@@ -157,12 +165,11 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
             [$F$, pweight = $f$,
                   name    = nF]
         ]
-        [$G$, pweight = $g$]
+        [$G$, pweight = $g$,
+              name    = nG]
     ]
-    \node[draw = orange,
-          thick,
-          rounded corners,
-          fit = (nA)(nB)(nF)] {};
+    \ptreeFrame        {nU}{nA}{nG}]
+    \ptreeFrame[orange]{nA}{nB}{nF}]
 \end{probatree}
 \end{latexex}
 
@@ -230,5 +237,15 @@ En utilisant la machinerie de \verb+TiKz+ il est facile de décorer un arbre de 
 \IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
 
 \IDkey{frame} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
+
+
+\separation
+
+
+\IDmacro{ptreeFrame}{1}{3} \hfill \mwhyprefix{p}{robabilty}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+
+\IDarg{$\!$s 1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). Ici l'ordre n'est pas important.
 
 \end{document}

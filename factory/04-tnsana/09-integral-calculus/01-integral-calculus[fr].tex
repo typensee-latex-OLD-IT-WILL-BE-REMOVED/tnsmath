@@ -2,7 +2,7 @@
 
 \makeatletter
 	\input{../../config/header[fr].sty}
-	\input{../06-differential-calculus/01-total-diff-calculus.sty}
+	\input{../07-differential-calculus/01-total-diff-calculus.sty}
 
 	\usepackage{01-integral-calculus}
 \makeatother
@@ -49,7 +49,7 @@ $\displaystyle
 
 \subsection{Fiches techniques}
 
-\IDmacro*{stdint}{0} (pour retrouver le comportement par défaut)
+\IDope{stdint} (pour retrouver le comportement par défaut)
 
 
 % ---------------------- %
@@ -93,9 +93,9 @@ La macro \macro{dintegrate*} présentée ci-dessous possède aussi une version n
 
 \extraspace
 
-\IDmacro*{dintegrate }{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate }{4} \hfill \mwhyprefix{d}{isplaystyle}
 
-\IDmacro*{dintegrate*}{4}  où \quad \mwhyprefix{d}{isplaystyle}
+\IDmacro*{dintegrate*}{4} \hfill \mwhyprefix{d}{isplaystyle}
 
 
 \IDarg{1} la fonction intégrée.
@@ -174,11 +174,11 @@ Via les options \prefix{r} et \prefix{sr} pour \whyprefix{s}{mall} et \whyprefix
 
 \IDoption{} la valeur par défaut est \verb+b+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+b+ : des crochets extensibles sont utilisés.
+	\item \verb+b + : des crochets extensibles sont utilisés.
 
 	\item \verb+sb+ : des crochets non extensibles sont utilisés.
 
-	\item \verb+r+ : un unique trait vertical extensible est utilisé à droite.
+	\item \verb+r + : un unique trait vertical extensible est utilisé à droite.
 
 	\item \verb+sr+ : un unique trait vertical non extensible est utilisé à droite.
 \end{enumerate}

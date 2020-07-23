@@ -89,3 +89,14 @@
     \end{probatree}
 }
 
+
+% #1 : color
+% #2 : left start corner
+% #3 : right up   corner
+% #4 : right down corner
+\newcommand\ptreeFrame[4][blue]{
+    \node[draw = #1,
+          thick,
+          rounded corners,
+          fit = (#2)(#3)(#4)] {};
+}

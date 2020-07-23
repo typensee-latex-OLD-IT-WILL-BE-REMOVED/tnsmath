@@ -1,10 +1,11 @@
 #! /usr/bin/env python3
 
+import argparse
+
 from csv import reader
-from collections import defaultdict
 import json
 
-from mistool.os_use import PPath, cd , runthis
+from mistool.os_use import PPath
 
 
 # --------------- #
@@ -45,6 +46,30 @@ EXT_FOR_EXTRA = {
 
 DECO = " "*4
 
+
+# ---------------- #
+# -- CLI SET UP -- #
+# ---------------- #
+
+DESC  = "This file copies new sub projects by default but you can force to copy all via the option -f or --force."
+
+parser = argparse.ArgumentParser(
+    description = DESC,
+)
+
+parser.add_argument(
+    '-f', '--force',
+    action  = "store_true",
+    default = False,
+    help    = "force to copy all the sub projects."
+)
+
+ARGS = parser.parse_args()
+
+
+# ----------- #
+# -- TOOLS -- #
+# ----------- #
 
 def extractcontent(ppath):
     with ppath.open(
@@ -113,7 +138,7 @@ for partname, versions in MAIN_INFOS.items():
         continue
 
 # To be ignored.
-    if not partname in (NEWTHINGS):
+    if not ARGS.force and not partname in (NEWTHINGS):
         print(f"{DECO*2}- << {partname} >> ignored : no new things.")
         continue
 
@@ -125,9 +150,8 @@ for partname, versions in MAIN_INFOS.items():
 
 # Destination dir. musts not exist.
     if destdir.is_dir():
-        print(f"{DECO*3}--> Deletion of << {destdir.stem} >>.")
-        # TODO
-        continue
+        print(f"{DECO*3}--> Deletion of << {destdir.stem} >> has been done.")
+        destdir.remove()
 
 # Let's copy all the usefull dir. No builder here !
     partdirfactory = PARTS_DIR / partname / 'factory'

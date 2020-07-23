@@ -23,7 +23,7 @@ $\funcdef{f}{x}{x^2 + 3}%
 
 
 \begin{remark}
-	Même si cela est peu utile, vous pouvez utilisez la mise en forme dans du texte pour obtenir
+	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
 	$\funcdef{f}{x}{x^2 + 3}%
             {I}{J}$
     mais c'est un peu affreux.
@@ -54,6 +54,18 @@ Soit $\funcdef[h]{f}{x}{x^2 + 3}%
 \end{latexex}
 
 
+%% ---------------------- %
+%
+%
+%\newparaexample{Écriture en ligne sans ensemble}
+%
+%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+%\begin{latexex}
+%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
+%                    {I}{J}$.
+%\end{latexex}
+
+
 % ---------------------- %
 
 
@@ -78,7 +90,7 @@ Soit $\funcdef[h]{f}{x}{x^2 + 3}%
 
 \IDarg{3} la formule de définition.
 
-\IDarg{4} ensemble de départ.
+\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
 
 \IDarg{5} ensemble d'arrivée.
 

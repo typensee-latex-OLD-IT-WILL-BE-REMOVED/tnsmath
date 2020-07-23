@@ -5,7 +5,7 @@
 \RequirePackage{xstring}
 
 \RequirePackage{tikz}
-\usetikzlibrary{calc, babel}
+\usetikzlibrary{calc, babel} % babel is unuseful here except that it changes the catcode of @.
 
 \RequirePackage{nicematrix}
 \RequirePackage{mathtools}
@@ -281,12 +281,6 @@
 
 % Source: https://tex.stackexchange.com/a/554468/6880
 \newcommand\tnsgeo@calc@crossprod@no@star[9][vec]{%
-    \makeatletter% Babel TikZ library doesn't help me here but it does in other places.
-        \tnsgeo@calc@crossprod@no@star@aux{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}%
-    \makeatother%
-}
-
-\newcommand\tnsgeo@calc@crossprod@no@star@aux[9]{%
     \tns@det@plane@open{#1}{&&}{#2}{#6}%
         \tns@det@plane@entries{&&}{#3}{#4}{#7}{#8} \\
         %
@@ -300,7 +294,7 @@
                           blue,
                           circle,
                           inner sep = .4pt]
-                     (minusone) {\tnsgeo@calc@crossprod@label{1}}
+                     (minusone) {\csname tnsgeo@calc@crossprod@label\endcsname{1}}
                   (2-3.west);
             \draw [blue,->]
                   let \p1 = ($(minusone.east) - (minusone.center)$) in 
@@ -318,7 +312,7 @@
                           red,
                           circle,
                           inner sep = .4pt] 
-                     (minustwo) {\tnsgeo@calc@crossprod@label{2}}
+                     (minustwo) {\csname tnsgeo@calc@crossprod@label\endcsname{2}}
                   (3-3.west);
             \draw [red,->]
                   let \p1 = ($(minustwo.east) - (minustwo.center)$) in 
@@ -336,13 +330,13 @@
                           orange,
                           circle,
                           inner sep = .4pt] 
-                     (minus) {\tnsgeo@calc@crossprod@label{3}}
+                     (minusthree) {\csname tnsgeo@calc@crossprod@label\endcsname{3}}
                   (1-3.west);
             \draw [orange,->]
-                  let \p1 = ($(minus.east) - (minus.center)$) in 
+                  let \p1 = ($(minusthree.east) - (minusthree.center)$) in 
                       ([xshift=0.5mm]1-1.east)
                       to[out = 0, in = 137.5]
-                      (minus.50)
+                      (minusthree.50)
                       arc[start angle = 50,
                           end angle = -230,
                           radius = \x1] 

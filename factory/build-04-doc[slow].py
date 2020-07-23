@@ -83,7 +83,7 @@ def extract_level(line):
 def close_techsec(line, level):
     thislevel = extract_level(line.strip())
 
-    return (thislevel and levelsmaller(level, thislevel))
+    return (thislevel and level and levelsmaller(level, thislevel))
 
 
 def extract_title(level, lines, i):

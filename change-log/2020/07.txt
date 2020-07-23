@@ -1,3 +1,21 @@
+// Added : 2020-07-23 [14:39:58]
+==========
+2020-07-23
+==========
+
+**New minor version version::``1.5.0-beta``:** see the changes below.
+
+
+**¨tnsproba:** addition of the version version::``0.2.0-beta`` published at date::``2020-07-23``.
+
+
+**Internal machinery for the technical ¨infos:** two new things.
+
+    1) The printing uses now ¨macroenvsign the new version of ¨cbdevtools (this tool is still in alpha version).
+
+    1) The import of of all the sub parts can be forced via the ¨cli option term::``-f`` or term::``--force``.
+
+
 // Added : 2020-07-22 [11:10:50]
 ==========
 2020-07-22

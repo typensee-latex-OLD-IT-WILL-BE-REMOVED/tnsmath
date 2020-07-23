@@ -30,8 +30,8 @@
 	}
 
 	\newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
-	\newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
-	\newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+	\newcommand*\@vect@star[1]{\vv*{\tnsgeo@no@point{#1}}}
+	\newcommand*\@vect@no@star[1]{\vv{\tnsgeo@no@point{#1}}}
 \makeatother
 
 
@@ -118,7 +118,7 @@ $\vangleorient[sh]{i}{j}$
 \separation
 
 
-\IDmacro{vangleorient}{1}{2} où \quad \mwhyprefix{v}{ector}
+\IDmacro{vangleorient}{1}{2} \hfill \mwhyprefix{v}{ector}
 
 \IDoption{} voir les explications précédentes données pour \macro{angleorient}.
 
