@@ -56,4 +56,24 @@ Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom préfix�
 Certaines macros comme \verb+\frac+ sont un peu revues par \verb+tnsmath+.
 Dans ce cas, les versions standard restent accessibles en utilisant le préfixe \prefix{std} ce qui donne ici la macro \macro{stdfrac}.
 
+
+% ---------------------- %
+
+
+\subsubsection{Casse utilisée pour les lettres}
+
+Les macros à usage graphique utiliseront une casse en bosses de chameau comme c'est le cas par exemple
+pour \macro{ptreeFrame} qui trace des cadres sur des arbres de probabilité,
+ou pour \macro{graphSign} qui ajoute des graphiques de signe près d'une ligne d'un tableau de signe
+\footnote{
+	La raison qui a poussé à ce choix est expliqué dans la présentation des outils de décoration des tableaux de signe : voir la présentation de la macro \macro{backLine}.
+}.
+
+\medskip
+
+Les macros non graphiques n'utiliseront que des minuscules. L'auteur de \verb#tnsmath# préfère cette convention car elle est plus efficace à utiliser lors de la saisie et qu'elle impose aussi aux concepteurs de ne pas proposer des noms de macro à rallonge
+\footnote{
+	Cette pratique n'est pas inutile en interne pour autant par exemple pour nommer de façon compréhensible des macros privées.
+}.
+
 \end{document}
