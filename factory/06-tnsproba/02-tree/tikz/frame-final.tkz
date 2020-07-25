@@ -1,0 +1,21 @@
+\begin{probatree}
+    [{}, s sep = 1.3cm
+     % Astuce pour espacer les cadres.
+        [$A$, pweight = $a$,
+              pframe  = red
+            [$B$, pweight = $b$]
+            [$C$, pweight = $c$]
+        ]
+        [$D$, pweight = $d$,
+              pframe  = blue
+            [$E$, pweight = $e$
+                [$F$, pweight = $f$]
+                [$G$, pweight = $g$]
+            ]
+            [$H$, pweight = $h$
+                [$I$, pweight = $i$]
+                [$J$, pweight = $j$]
+            ]
+        ]
+    ]
+\end{probatree}

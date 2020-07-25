@@ -235,10 +235,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.5.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.6.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-23}{{
+\date{2020-07-25}{{
 
 \maketitle
 
@@ -4016,13 +4016,15 @@ $\stddev[s]{X}$
 
 \subsection{Que se passe-t-il en coulisse ?}
 
-Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme nous allons le voir ci-dessous.
+Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme ci-dessous à moindre coût neuronal.
+
+\inputlatexexcodeafter{tikz/showcase.tkz}
 
 
 % ---------------------- %
 
 
-\subsection{Sans cadre}
+\subsection{Les bases}
 
 \newparaexample{Le cas type}
 
@@ -4033,20 +4035,7 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
     Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
 }.
 
-\begin{latexex}
-\begin{probatree}
-    [
-        [$A$, pweight = $a$
-            [$B$, pweight = $b$]
-            [$C$, pweight = $c$]
-        ]
-        [$D$, bpweight = $d$
-            [$E$, apweight = $e$]
-            [$F$, bpweight = $f$]
-        ]
-    ]
-\end{probatree}
-\end{latexex}
+\inputlatexex{tikz/weight-placement.tkz}
 
 
 % ---------------------- %
@@ -4056,14 +4045,7 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX.
 
-\begin{latexex}
-\begin{probatree*}
-    [$A$, pweight = $a$
-        [$B$, pweight = $b$]
-        [$C$, pweight = $c$]
-    ]
-\end{probatree*}
-\end{latexex}
+\inputlatexex{tikz/weight-hide-all.tkz}
 
 
 % ---------------------- %
@@ -4073,17 +4055,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
-\begin{latexex}
-\begin{probatree}
-    [
-        [$A$, pweight = $a$
-            [$B$, pweight* = $b$]
-            [$C$, pweight  = $c$]
-        ]
-        [$D$, pweight* = $d$]
-    ]
-\end{probatree}
-\end{latexex}
+\inputlatexex{tikz/weight-hide-locally.tkz}
 
 
 % ---------------------- %
@@ -4094,132 +4066,49 @@ Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+
 Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches.
 Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette dans des accolades.
 
-\begin{latexex}
-\begin{probatree}
-    [
-        [$A$, apweight = {$a = 0,1$}]
-        [$B$, bpweight = $b$]
-    ]
-\end{probatree}
-\end{latexex}
+\inputlatexex{tikz/weight-coma-equal.tkz}
+%\section{Arbres pondérés}
+
+\subsection{Commenter les racines}
+
+Que ce soit pour expliquer un arbre de probabilité  ou raisonner dessus, l'effet suivant est très utile.
+Noter qu'ici il a fallu utiliser des accolades pour cacher à TikZ les signes $=$ dans les commentaires.
 
 
-% ---------------------- %
+\inputlatexexflat{tikz/comment.tkz}
 
+
+\begin{remark}
+	Commenter un noeud interne ne provoquera pas d'erreur même si \verb#pcomment# n'a pas été conçu pour ceci.
+	Ceci a été utilisé dans l'exemple d'introduction mais ça reste un petit hack.
+\end{remark}
+%\section{Arbres pondérés}
 
 \subsection{Avec des cadres}
 
-\newparaexample{Des cadres facilement}
+\newparaexample{Des cadres finaux}
 
-Via la clé \verb+frame+, il est très aisé d'encadrer un sous-arbre final
+Via la clé \verb+pframe+, il est très aisé d'encadrer un sous-arbre final
 \footnote{
 	Un sous-arbre sera dit final si toutes ses feuilles correspondent à des feuilles de l'arbre initial. 
 }
 comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
-\begin{latexex}
-\begin{probatree}
-    [{}, s sep = 1.3cm 
-     % Astuce pour espacer les cadres.
-        [$A$, pweight = $a$,
-              frame   = red
-            [$B$, pweight = $b$]
-            [$C$, pweight = $c$]
-        ]
-        [$D$, pweight = $d$,
-              frame   = blue
-            [$E$, pweight = $e$
-                [$F$, pweight = $f$]
-                [$G$, pweight = $g$]
-            ]
-            [$H$, pweight = $h$
-                [$I$, pweight = $i$]
-                [$J$, pweight = $j$]
-            ]
-        ]
-    ]
-\end{probatree}
-\end{latexex}
+\inputlatexex{tikz/frame-final.tkz}
 
 
 % ---------------------- %
 
 
-\newparaexample{Des cadres faits à la main}
+\newparaexample{Des cadres non finaux}
 
 
 La macro \macro{ptreeFrame} permet facilement d'encadrer un sous-arbre non final.
 Ceci nécessite de nommer les noeuds mais c'est facile à faire.
-Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine et des deux noeuds finaux le plus haut et le plus bas.
+Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine via \verb#{}, name = nU#, et des deux noeuds finaux le plus haut et le plus bas de façon similaire.
 
-\begin{latexex}
-\begin{probatree}
-    [{}, name = nU
-        [$A$, pweight = $a$,
-              name    = nA
-            [$B$, pweight = $b$,
-                  name    = nB
-                [$C$, pweight = $c$]
-                [$D$, pweight = $d$]
-               ]
-            [$F$, pweight = $f$,
-                  name    = nF]
-        ]
-        [$G$, pweight = $g$,
-              name    = nG]
-    ]
-    \ptreeFrame        {nU}{nA}{nG}]
-    \ptreeFrame[orange]{nA}{nB}{nF}]
-\end{probatree}
-\end{latexex}
-
-
-
-
-
-
-
-% ---------------------- %
-
-
-%\paragraph{Exemple 7 -- Indiquer un chemin}
-%
-%L'exemple suivant demande un peu plus d'implication mais de nouveau tout est obtenu via la machinerie de \verb+TiKz+.
-%
-%\begin{latexex}
-%\begin{probatree}
-%    [{}, name = start
-%        [$A$, pweight = $a$, 
-%              name    = nA
-%            [$B$, pweight = $b$]
-%            [$C$, pweight = $c$,
-%                  name    = nC]
-%        ]
-%        [$D$, pweight = $d$,
-%            [$E$, pweight = $e$]    
-%            [$F$, pweight = $f$]
-%        ]
-%    ]
-%    \draw[blue,
-%          rounded corners,
-%          dashed,
-%          line width=0.7pt]          
-%    (start.90) --
-%    (nA.135) --
-%    (nA.45) --
-%    (nC.45) --
-%    (nC.315) --
-%    (nC.225) --
-%    (nA.315) --
-%    (nA.225) --
-%    (start.315) --
-%    (start.180) --
-%    (start.90);
-%\end{probatree}
-%\end{latexex}
-
-
-% ---------------------- %
+\inputlatexex{tikz/frame-not-final.tkz}
+%\section{Arbres pondérés}
 \chapter{Arithmétique}
 
 \section{Opérateurs de base}
@@ -4608,6 +4497,35 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \begin{description}
 % Changes shown - START
+
+    \medskip
+    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre}
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout du style \prefix{pcomment} pour placer du texte à la droite d'une feuille.
+    
+            \item Le style \prefix{frame} a été renommé \prefix{pframe}.
+        \end{itemize}
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
 
     \medskip
     \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
@@ -7529,23 +7447,40 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 \IDarg{} la variable aléatoire dont on veut calculer l'écart-type.
 
 
+
+
+
+
+
+
+
+
+
 \subsection{Arbres pondérés}
 
 
 
-\IDenv*{probatree }
+\IDenv*{probatree}
 
 \IDenv*{probatree*}
 
 \Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
 
-\IDkey{pweight } pour écrire un poids sur le milieu d'une branche.
+\extraspace
+
+\IDkey{pweight}  pour écrire un poids sur le milieu d'une branche.
 
 \IDkey{apweight} pour écrire un poids au-dessus le milieu d'une branche.
 
 \IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
 
-\IDkey{frame} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
+\extraspace
+
+\IDkey{pcomment} pour ajouter un commentaire à la droite d'une feuille en utilisant le même alignement horizontal pour tous les commentaires.
+
+\extraspace
+
+\IDkey{pframe} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
 
 
 \separation
@@ -7555,7 +7490,7 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
 
-\IDarg{$\!$s 1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). Ici l'ordre n'est pas important.
+\IDargs{1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). Ici l'ordre n'est pas important.
 
 
 \section{Arithmétique}

@@ -1,0 +1,32 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-tree}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\subsection{Commenter les racines}
+
+Que ce soit pour expliquer un arbre de probabilité  ou raisonner dessus, l'effet suivant est très utile.
+Noter qu'ici il a fallu utiliser des accolades pour cacher à TikZ les signes $=$ dans les commentaires.
+
+
+\inputlatexexflat{tikz/comment.tkz}
+
+
+\begin{remark}
+	Commenter un noeud interne ne provoquera pas d'erreur même si \verb#pcomment# n'a pas été conçu pour ceci.
+	Ceci a été utilisé dans l'exemple d'introduction mais ça reste un petit hack.
+\end{remark}
+
+\end{document}

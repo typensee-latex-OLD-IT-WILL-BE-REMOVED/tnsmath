@@ -1,0 +1,9 @@
+\begin{probatree}
+    [
+        [$A$
+            [$B$, pcomment = {$\leftarrow \proba{A \cap B} = ...$}]
+            [$C$, pcomment = {$\leftarrow \proba{A \cap C} = ...$}]
+        ]
+        [$D$, pcomment = {$\leftarrow \proba{D} = ...$}]
+    ]
+\end{probatree}

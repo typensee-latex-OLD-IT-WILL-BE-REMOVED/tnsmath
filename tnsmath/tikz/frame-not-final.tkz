@@ -1,0 +1,19 @@
+\begin{probatree}
+    [{}, name = nU
+     % La racine a un texte vide.
+        [$A$, pweight = $a$,
+              name    = nA
+            [$B$, pweight = $b$,
+                  name    = nB
+                [$C$, pweight = $c$]
+                [$D$, pweight = $d$]
+               ]
+            [$F$, pweight = $f$,
+                  name    = nF]
+        ]
+        [$G$, pweight = $g$,
+              name    = nG]
+    ]
+    \ptreeFrame        {nU}{nA}{nG}]
+    \ptreeFrame[orange]{nA}{nB}{nF}]
+\end{probatree}

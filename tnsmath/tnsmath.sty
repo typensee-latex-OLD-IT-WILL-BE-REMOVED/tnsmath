@@ -50,10 +50,10 @@
 \RequirePackage{yhmath}
 
 % TikZ libraries
-\usetikzlibrary{babel}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{babel}
 
 
 % ------------------ %
@@ -3551,17 +3551,35 @@
 % ---------- %
 
 \useforestlibrary{linguistics}
+
+% Global settings
+
 \forestset{
-    declare count   = {connections}{1},
-    frame/.style    = {tikz={\node [draw, #1, thick, rounded corners,fit to=tree]{};}},
-    apweight/.style = {edge label={node[pos=.5,sloped,above, fill=white]{#1}}},
-    bpweight/.style = {edge label={node[pos=.5,sloped,below, fill=white]{#1}}},
-    pweight/.style  = {edge label={node[midway, fill=white]{#1}}},
-    pweight*/.style = {}
+    declare count = {connections}{1}, 
+	%
+    apweight/.style = {
+    	edge label = {
+				node[pos=.5,sloped,above, fill=white]{#1}
+			}
+		},
+    bpweight/.style = {
+    	edge label = {
+				node[pos=.5,sloped,below, fill=white]{#1}
+			}
+		},
+    pweight/.style = {
+    	edge label={
+				node[midway, fill=white]{#1}
+			}
+		},
+    pweight*/.style = {},
 }
+
+
 % Sources
 %    * ???? (all settings)
 %    * https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
+%    * https://tex.stackexchange.com/questions/554843/tikz-forest-align-pcomment*-contents-added-on-the-right-of-the-final-nodes/554855#554855
 
 \newcommand\tnsproba@tree[1]{
     \begin{forest}
@@ -3618,6 +3636,20 @@
                 },
             },
         },
+        %
+        pframe/.style = {
+        	tikz = {
+				\node [draw, ##1, thick, rounded corners,fit to=tree]{};
+			}
+		},
+		pcomment/.style={
+		    tikz+={
+		        \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
+	    	},
+		},
+		tikz+={
+    		\coordinate (pcomment coord) at (current bounding box.east);
+		}
         #1
     \end{forest}
 }

@@ -1,0 +1,15 @@
+\begin{probatree}
+    [{}
+        [$A$, pweight  = $a$,
+              pframe   = blue,
+              pcomment = \textcolor{blue}%
+                                   {$\leftarrow$ Un sous-arbre \og conditionnel \fg}
+            [$B$, apweight = $b$]
+            [$C$, bpweight = $c$]
+        ]
+        [$D$, pweight = $d$
+            [$E$, apweight = $e$]
+            [$F$, bpweight = $f$]
+        ]
+    ]
+\end{probatree}

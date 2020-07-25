@@ -1,0 +1,71 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{01-tree}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+\section{Arbres pondérés}
+
+\subsection{Que se passe-t-il en coulisse ?}
+
+Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme ci-dessous à moindre coût neuronal.
+
+\inputlatexexcodeafter{tikz/showcase.tkz}
+
+
+% ---------------------- %
+
+
+\subsection{Les bases}
+
+\newparaexample{Le cas type}
+
+Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
+À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+\footnote{
+    \texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
+    Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
+}.
+
+\inputlatexex{tikz/weight-placement.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des poids cachés partout}
+
+On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX.
+
+\inputlatexex{tikz/weight-hide-all.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des poids cachés localement}
+
+Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+
+\inputlatexex{tikz/weight-hide-locally.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
+
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches.
+Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette dans des accolades.
+
+\inputlatexex{tikz/weight-coma-equal.tkz}
+
+\end{document}
