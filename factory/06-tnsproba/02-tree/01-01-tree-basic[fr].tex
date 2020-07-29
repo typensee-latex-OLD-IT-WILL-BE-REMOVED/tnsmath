@@ -18,7 +18,7 @@
 
 Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme ci-dessous à moindre coût neuronal.
 
-\inputlatexexcodeafter{tikz/showcase.tkz}
+\inputlatexexcodeafter{tikz/probatree-showcase.tkz}
 
 
 % ---------------------- %
@@ -28,14 +28,24 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 
 \newparaexample{Le cas type}
 
-Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui nommé \verb+forest+ du package \verb+forest+. Des réglages spécifiques sont faits pour obtenir le résultat ci-après.
-À cela s'ajoutent les styles spéciaux \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+Commençons par un arbre nu pour voir comment utiliser l'environnement \verb+probatree+ qui s'appuie en coulisse sur celui nommé \verb+forest+ du package éponyme.
+L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de l'arbre qui sont propres à \verb+probatree+.
+
+\inputlatexex{tikz/probatree-undecorated.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Ajouter des pondérations}
+
+Dans le code suivant, ce sont les styles spéciaux supplémentaires \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
 \footnote{
-    \texttt{pweight} vient de \emph{\og probability \fg} et \emph{\og weight\fg} soit \emph{\og probabilité \fg} et \emph{\og poids\fg} en anglais.
-    Quant à \texttt{a} et \texttt{b} au début de \texttt{apweight} et \texttt{bpweight} respectivement, ils viennent de \emph{\og above \fg} et \emph{\og below\fg} soit \emph{\og dessus \fg} et \emph{\og dessous\fg} en anglais.
+    \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
+    Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
 }.
 
-\inputlatexex{tikz/weight-placement.tkz}
+\inputlatexex{tikz/probatree-weight-placement.tkz}
 
 
 % ---------------------- %
@@ -43,9 +53,9 @@ Dans le code suivant l'environnement \verb+probatree+ utilise en coulisse celui 
 
 \newparaexample{Des poids cachés partout}
 
-On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX.
+On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX{} \emph{(ceci peut être utile lors de la rédaction d'exercices)}.
 
-\inputlatexex{tikz/weight-hide-all.tkz}
+\inputlatexex{tikz/probatree-weight-hide-all.tkz}
 
 
 % ---------------------- %
@@ -53,9 +63,9 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
-\inputlatexex{tikz/weight-hide-locally.tkz}
+\inputlatexex{tikz/probatree-weight-hide-locally.tkz}
 
 
 % ---------------------- %
@@ -63,9 +73,12 @@ Pour ne cacher que certains poids, il faudra utiliser localement le style \verb+
 
 \newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
 
-Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches.
-Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette dans des accolades.
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
+\footnote{
+	Ces deux symboles font partie de la syntaxe TikZ.
+}.
+Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
 
-\inputlatexex{tikz/weight-coma-equal.tkz}
+\inputlatexex{tikz/probatree-weight-coma-equal.tkz}
 
 \end{document}

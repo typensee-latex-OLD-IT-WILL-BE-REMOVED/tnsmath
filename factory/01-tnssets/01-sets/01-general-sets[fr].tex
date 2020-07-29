@@ -95,7 +95,7 @@ $\setgeo*{C}{2}$
 
 \subsection{Fiches techniques}
 
-\IDmacro*{setgeo}{1}
+\IDmacro[a]{setgeo}{1}
 
 \IDarg{} un seul caractère \ascii{} indiquant un ensemble géométrique.
 
@@ -103,7 +103,7 @@ $\setgeo*{C}{2}$
 \separation
 
 
-\IDmacro*{setgeo*}{2}
+\IDmacro[a]{setgeo*}{2}
 
 \IDarg{1} un seul caractère \ascii{} indiquant $\setgeo{U}$ dans le nom $\setgeo*{U}{d}$ d'un ensemble géométrique.
 
@@ -143,7 +143,7 @@ $\setproba*{E}{2}$
 
 \subsection{Fiches techniques}
 
-\IDmacro*{setproba}{1}
+\IDmacro[a]{setproba}{1}
 
 \IDarg{} un seul caractère \ascii{} majuscule indiquant un ensemble probabiliste.
 
@@ -151,7 +151,7 @@ $\setproba*{E}{2}$
 \separation
 
 
-\IDmacro*{setproba*}{2}
+\IDmacro[a]{setproba*}{2}
 
 \IDarg{1} un seul caractère \ascii{} majuscule indiquant $\setproba{U}$ dans le nom $\setproba*{U}{d}$ d'un ensemble probabiliste.
 
@@ -192,7 +192,7 @@ $\setalge*{k}{1}$ ou $\setalge*{k}{2}$
 
 \subsection{Fiches techniques}
 
-\IDmacro*{setalge}{1}
+\IDmacro[a]{setalge}{1}
 
 \IDarg{} soit l'une des lettres  \texttt{h} et \texttt{k}, soit un seul caractère \ascii{} majuscule indiquant un ensemble de type anneau ou corps.
 
@@ -200,7 +200,7 @@ $\setalge*{k}{1}$ ou $\setalge*{k}{2}$
 \separation
 
 
-\IDmacro*{setalge*}{2}
+\IDmacro[a]{setalge*}{2}
 
 \IDarg{1} un seul caractère \ascii{} indiquant $\setalge{U}$ dans le nom $\setalge*{U}{d}$ d'un ensemble de type anneau ou corps.
 
@@ -286,64 +286,55 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 
 % == Docs for classical sets - START == %
 \foreach \k in {NN, NNs}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {PP}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {ZZ, ZZn, ZZp, ZZs, ZZsn, ZZsp}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {DD, DDn, DDp, DDs, DDsn, DDsp}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {QQ, QQn, QQp, QQs, QQsn, QQsp}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {RR, RRn, RRp, RRs, RRsn, RRsp}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {CC, CCs}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {HH, HHs}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 
 \separation
 
 \foreach \k in {OO, OOs}{
-
-    \IDope{\k}
+    \IDope{\k} \quad
 }
                 % == Docs for classical sets - END == %
 
@@ -367,9 +358,9 @@ $\setspecial*{\setproba{P}}{n}$
 
 \subsection{Fiches techniques}
 
-\IDmacro*{setspecial}{2}
+\IDmacro[a]{setspecial }{2}
 
-\IDmacro*{setspecial*}{2}
+\IDmacro[a]{setspecial*}{2}
 
 \IDarg{1} l'ensemble à "suffixer".
 

@@ -42,7 +42,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des signes}
 
-\inputlatexexcodeafter{tikz/cos-sign.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-cos-sign.tkz}
 
 
 % ---------------------- %
@@ -50,7 +50,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Avec des variations (sans cadre)}
 
-\inputlatexexcodeafter{tikz/basic-var.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-basic-var.tkz}
 
 
 % ---------------------- %
@@ -58,7 +58,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Variations via une dérivée (sans cadre)}
 
-\inputlatexexcodeafter{tikz/sin-var-via-cos.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-sin-var-via-cos.tkz}
 
 
 % ---------------------- %
@@ -66,7 +66,7 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Une image intermédiaire avec une seule flèche}
 
-\inputlatexexcodeafter{tikz/inter-img.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-inter-img.tkz}
 
 
 % ---------------------- %
@@ -74,12 +74,12 @@ Reportez vous à la documentation de \verb+tkz-tab+ pour des compléments d'info
 
 \newparaexample{Valeurs interdites et valeurs supplémentaires}
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-1.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-1.tkz}
 
 
 Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec en plus l'option \verb+draw+ qui peut rendre service.
 
-\inputlatexexcodeafter{tikz/illegal-n-inter-img-2.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-illegal-n-inter-img-2.tkz}
 
 
 % ---------------------- %
@@ -90,13 +90,13 @@ Voici un autre exemple pour comprendre comment utiliser \macro{tkzTabVal} avec e
 Il est assez facile de produire des choses très utiles pédagogiquement comme ce qui suit en se salissant un peu les mains avec du code TikZ.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-1.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-1.tkz}
 \end{center}
 
 On déduit du tableau précédent le signe de la fonction $f$.
 
 \begin{center}
-	\input{tikz/align-sign-from-var-2.tkz}
+	\input{tikz/tabsignvar-align-sign-from-var-2.tkz}
 \end{center}
 
 
@@ -104,7 +104,7 @@ Voici le code du 1\ier{} tableau où le placement de la valeur $3$ au milieu ent
 
 \medskip
 
-\inputlatexexalone{tikz/align-sign-from-var-1.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-1.tkz}
 
 
 Pour produire le code du 2\ieme{} tableau il a fallu utiliser au préalable ce qui suit en activant l'option \verb@help@ qui demande à \verb@tkz-tab@ d'afficher les noms de noeuds au sens TikZ qui ont été créés.
@@ -114,13 +114,13 @@ Ceci permet alors d'utiliser ces noeuds pour des dessins TikZ faits maison
 }.
 	
 
-\inputlatexexcodeafter{tikz/node-name.tkz}
+\inputlatexexcodeafter{tikz/tabsignvar-node-name.tkz}
 
 
 Maintenant que les noms des noeuds sont connus, il devient facile de produire le code ci-après.
 Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiques \verb@\node at ($(A)!0.5!(B)$)@ permettant de placer un noeud au milieu entre les deux noeuds \verb@A@ et \verb@B@. 
 
-\inputlatexexalone{tikz/align-sign-from-var-2.tkz}
+\inputlatexexalone{tikz/tabsignvar-align-sign-from-var-2.tkz}
 
 
 % ---------------------- %

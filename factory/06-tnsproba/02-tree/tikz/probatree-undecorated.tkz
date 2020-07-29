@@ -1,0 +1,12 @@
+\begin{probatree}
+    [  % Noeud racine sans texte
+        [A  % Sous-noeud nommé
+            [B]  % Sous-sous-noeud nommé
+            [C]  % Sous-sous-noeud nommé
+        ]
+        [D  % Sous-noeud nommé
+            [E]  % Sous-sous-noeud nommé
+            [F]  % Sous-sous-noeud nommé
+        ]
+    ]
+\end{probatree}

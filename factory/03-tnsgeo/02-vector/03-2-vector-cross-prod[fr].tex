@@ -22,14 +22,14 @@
     \newcommand\@no@point[1]{%
         \IfStrEq{#1}{i}{%
             \imath%
-        }{%
+    }{%
             \IfStrEq{#1}{j}{%
                 \jmath%
-            }{%
+        }{%
                 #1
-            }%
         }%
-    }
+    }%
+}
 
     \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
     \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
@@ -119,10 +119,10 @@ $\vcrossprod[t]{i}{j}$
 Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\calccrossprod{\vect{u}}{x }{y }{z }%
+$\calccrossprod{\vect{u}}{x}{y}{z}%
                {\vect{v}}{x'}{y'}{z'}
  =
- \vcalccrossprod{u}{x }{y }{z }%
+ \vcalccrossprod{u}{x}{y}{z}%
                 {v}{x'}{y'}{z'}$
 
 $\vcalccrossprod{AB}{x_B - x_A}%
@@ -137,7 +137,7 @@ $\vcalccrossprod{AB}{x_B - x_A}%
 Avec un public averti on peut juste proposer les coordonnées sans les décorations comme ci-après via la version étoilée de \macro{vcalccrossprod} mais ceci fonctionne aussi avec \macro{calccrossprod}.
 
 \begin{latexex}
-$\vcalccrossprod*{u}{x }{y }{z }%
+$\vcalccrossprod*{u}{x}{y}{z}%
                  {v}{x'}{y'}{z'}$
 \end{latexex}
 
@@ -147,10 +147,10 @@ Ceci fonctionne aussi pour la macro \macro{calccrossprod}.
 Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
 
 \begin{latexex}
-$\vcalccrossprod[novec]{u}{x }{y }{z }%
+$\vcalccrossprod[novec]{u}{x}{y}{z}%
                        {v}{x'}{y'}{z'}
  =
- \vcalccrossprod*[novec]{u}{x }{y }{z }%
+ \vcalccrossprod*[novec]{u}{x}{y}{z}%
                         {v}{x'}{y'}{z'}$
 \end{latexex}
 
@@ -160,9 +160,9 @@ $\vcalccrossprod[novec]{u}{x }{y }{z }%
 
 \subsubsection{Fiche technique}
 
-\IDmacro*{calccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
+\IDmacro[a]{calccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
 
-\IDmacro*{calccrossprod*}{8}  \hfill \mwhyprefix{calc}{ulate}
+\IDmacro[a]{calccrossprod*}{8}
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
@@ -176,11 +176,10 @@ $\vcalccrossprod[novec]{u}{x }{y }{z }%
 \separation
 
 
-\IDmacro*{vcalccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
-                                    et \mwhyprefix{v}{ector}
+\IDmacro[a]{vcalccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
+                                     et \mwhyprefix{v}{ector}
 
-\IDmacro*{vcalccrossprod*}{8}  \hfill \mwhyprefix{calc}{ulate}
-                                    et \mwhyprefix{v}{ector}
+\IDmacro[a]{vcalccrossprod*}{8}
 
 \IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
@@ -204,15 +203,15 @@ Pour avoir le détail directement dans des coordonnées vous pouvez faire appel 
 On peut utiliser des options pour choisir certains paramètres de mise en forme.
 
 \begin{latexex}
-$\coordcrossprod{\dfrac{1}{2}x}{y }{z }%
+$\coordcrossprod{\dfrac{1}{2}x}{y}{z}%
                            {x'}{y'}{z'}$
 
 $\coordcrossprod[vb]%
-                {\dfrac{1}{2}x}{y }{z }%
+                {\dfrac{1}{2}x}{y}{z}%
                            {x'}{y'}{z'}$
 
 $\coordcrossprod[sp,c]%
-                {\dfrac{1}{2}x}{y }{z }%
+                {\dfrac{1}{2}x}{y}{z}%
                            {x'}{y'}{z'}$
 \end{latexex}
 

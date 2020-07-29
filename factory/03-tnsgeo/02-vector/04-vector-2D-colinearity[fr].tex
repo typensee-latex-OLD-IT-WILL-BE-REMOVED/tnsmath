@@ -21,14 +21,14 @@
     \newcommand\@no@point[1]{%
         \IfStrEq{#1}{i}{%
             \imath%
-        }{%
+      }{%
             \IfStrEq{#1}{j}{%
                 \jmath%
-            }{%
+          }{%
                 #1
-            }%
-        }%
-    }
+          }%
+      }%
+  }
 
     \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
     \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
@@ -48,7 +48,7 @@
 Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler}.
 
 \begin{latexex}
-$\calcdetplane{\vect{u}}{x }{y }%
+$\calcdetplane{\vect{u}}{x}{y}%
               {\vect{v}}{x'}{y'}$
 ou
 $\calcdetplane{\vect{AB}}%
@@ -64,7 +64,7 @@ $\calcdetplane{\vect{AB}}%
 \newparaexample{Version non décorée}
 
 \begin{latexex}
-$\calcdetplane*{\vect{u}}{x }{y }%
+$\calcdetplane*{\vect{u}}{x}{y}%
                {\vect{v}}{x'}{y'}$
 \end{latexex}
 
@@ -77,10 +77,10 @@ $\calcdetplane*{\vect{u}}{x }{y }%
 Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
 
 \begin{latexex}
-$\vcalcdetplane{u}{x }{y }%
+$\vcalcdetplane{u}{x}{y}%
                {v}{x'}{y'}
  =
- \vcalcdetplane*{u}{x }{y }%
+ \vcalcdetplane*{u}{x}{y}%
                 {v}{x'}{y'}$
 \end{latexex}
 
@@ -95,9 +95,9 @@ Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument option
 
 
 \begin{latexex}
- $\vcalcdetplane[novec] {u}{x }{y }%
+ $\vcalcdetplane[novec] {u}{x}{y}%
                         {v}{x'}{y'}
-= \vcalcdetplane*[novec]{u}{x }{y }%
+= \vcalcdetplane*[novec]{u}{x}{y}%
                         {v}{x'}{y'}$
 \end{latexex}
 
@@ -117,13 +117,13 @@ où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \pr
 Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
 
 \begin{latexex}
-$\vcalcdetplane[exp]{u}{x }{y }%
+$\vcalcdetplane[exp]{u}{x}{y}%
                     {v}{x'}{y'}$
 
-$\vcalcdetplane[cexp]{u}{x }{y }%
+$\vcalcdetplane[cexp]{u}{x}{y}%
                      {v}{x'}{y'}$
 
-$\vcalcdetplane[texp]{u}{x }{y }%
+$\vcalcdetplane[texp]{u}{x}{y}%
                      {v}{x'}{y'}$
 \end{latexex}
 
@@ -164,7 +164,7 @@ $\vcalcdetplane[exp]{AB}%
 
 \IDmacro{calcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
 
-\IDmacro{calcdetplane*}{1}{6} \hfill \mwhyprefix{calc}{ulate}
+\IDmacro{calcdetplane*}{1}{6}
 
 
 \IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
@@ -200,8 +200,7 @@ $\vcalcdetplane[exp]{AB}%
 \IDmacro{vcalcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
                                    et \mwhyprefix{v}{ector}
 
-\IDmacro{vcalcdetplane*}{1}{6} \hfill \mwhyprefix{calc}{ulate}
-                                   et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane*}{1}{6}
 
 
 \IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
