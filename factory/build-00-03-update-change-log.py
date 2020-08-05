@@ -271,7 +271,7 @@ relpath = f"{THIS_YEAR}/{THIS_MONTH}.txt"
 logfile = CHANGE_LOGTXT_DIR / relpath
 
 if not logfile.is_file():
-    print(f"{DECO*2}- New log file << {relpath}.txt >> added.")
+    print(f"{DECO*2}- New log file << {relpath} >> added.")
     logfile.create('file')
 
 
@@ -380,7 +380,7 @@ if logfile.is_file():
     )
 
 else:
-    print(f"{DECO*2}- New log file << {relpath}.tex >> added.")
+    print(f"{DECO*2}- New log file << {relpath} >> added.")
     logfile.create('file')
 
     content = []

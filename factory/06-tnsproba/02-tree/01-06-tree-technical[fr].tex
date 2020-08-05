@@ -1,0 +1,72 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{01-tree}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\section{Fiches techniques}
+
+\IDenv[n]{probatree}
+
+\IDenv[n]{probatree*}
+
+\Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+
+\extraspace
+
+\IDkey{pweight}  pour écrire un poids sur le milieu d'une branche.
+
+\IDkey{apweight} pour écrire un poids au-dessus le milieu d'une branche.
+
+\IDkey{bpweight} pour écrire un poids en-dessous du milieu d'une branche.
+
+\extraspace
+
+\IDkey{pframe} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
+
+
+\separation
+
+
+\IDmacro{ptreeFrame}{1}{3} \hfill \mwhyprefix{p}{robabilty}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+
+\IDargs{1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). En fait l'ordre n'est pas important ici.
+
+
+\separation
+
+
+\IDmacro{ptreeComment}{1}{2}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#black#.
+
+\IDarg{1} le nom de la feuille.
+
+\IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{ptreeFocus  }{1}{1}
+
+\IDmacro{ptreeFocus* }{1}{1}
+
+\IDmacro{ptreeFocus**}{1}{1}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+
+\IDarg{} les noms des noeuds dans le bon ordre et séparés par des barres verticales \verb#|#.
+\end{document}

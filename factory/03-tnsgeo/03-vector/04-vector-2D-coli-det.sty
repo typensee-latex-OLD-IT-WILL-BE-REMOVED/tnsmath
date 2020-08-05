@@ -1,0 +1,144 @@
+% == PACKAGES USED == %
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\colicriteria[7][vec]{%
+    \IfEqCase{#1}{%
+        {vec}{}%
+        {novec}{}%
+    }[
+    	\PackageError{tnsgeo}{unknown option}%
+                             {You can use vec (default) or novec.}
+    ]%
+    \tns@det@plane@deco@cross{#1}%
+                             {#2}{#3}{#4}%
+                             {#5}{#6}{#7}%
+}
+
+
+\newcommand\vcolicriteria[7][vec]{%
+    \colicriteria[#1]{\vect{#2}}{#3}{#4}%
+                     {\vect{#5}}{#6}{#7}%
+}
+
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\calcdetplane{\@ifstar{\tnsgeo@calc@detplane@star}{\tnsgeo@calc@detplane@no@star}}
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\tnsgeo@calc@detplane@no@star[7][vec]{%
+    \IfEqCase{#1}{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+        {exp}{%
+            \tns@prop@prod{\,}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{cexp}{%
+            \tns@prop@prod{\cdot}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{texp}{%
+            \tns@prop@prod{\times}%
+                          {#3}{#4}%
+                          {#6}{#7}%
+        }{vec}{%
+            \tns@det@plane@deco@loop{#1}%
+                                    {#2}{#3}{#4}%
+                                    {#5}{#6}{#7}%
+        }{novec}{%
+            \tns@det@plane@deco@loop{#1}%
+                                    {#2}{#3}{#4}%
+                                    {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{tnsgeo}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or texp.}
+    ]%
+}
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\tnsgeo@calc@detplane@star[7][vec]{%
+% WARNING !
+%   
+%   #1 : symbol for the product
+%
+%   #2  #3		x  x'
+%   #4  #5      y  y'
+    \IfEqCase{#1}{%
+        {exp}{%
+            \tns@prop@prod{\,}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{cexp}{%
+            \tns@prop@prod{\cdot}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{texp}{%
+            \tns@prop@prod{\times}%
+                          {#3}{#6}%
+                          {#4}{#7}%
+        }{vec}{%
+            \tns@det@plane@no@deco{#1}%
+                                  {#2}{#3}{#4}%
+                                  {#5}{#6}{#7}%
+        }{novec}{%
+            \tns@det@plane@no@deco{#1}%
+                                  {#2}{#3}{#4}%
+                                  {#5}{#6}{#7}%
+        }%
+    }[
+    	\PackageError{tnsgeo}{unknown option}%
+                             {You can use vec (default), novec, exp, cexp or texp.}
+    ]%
+}
+
+
+\newcommand\vcalcdetplane{\@ifstar{\tnsgeo@vcalc@detplane@star}{\tnsgeo@vcalc@detplane@no@star}}
+
+
+\newcommand\tnsgeo@vcalc@detplane@star[7][vec]{%
+    \tnsgeo@calc@detplane@star[#1]{\vect{#2}}{#3}{#4}%
+                                  {\vect{#5}}{#6}{#7}%
+}
+
+
+\newcommand\tnsgeo@vcalc@detplane@no@star[7][vec]{%
+    \tnsgeo@calc@detplane@no@star[#1]{\vect{#2}}{#3}{#4}%
+                                     {\vect{#5}}{#6}{#7}%
+}

@@ -1,0 +1,42 @@
+% == PACKAGES USED == %
+
+\RequirePackage{amsmath}
+
+
+% == DEFINITIONS == %
+
+% Classical functions - START
+
+\DeclareMathOperator{\acos}{\operatorname{acos}}
+\DeclareMathOperator{\asin}{\operatorname{asin}}
+\DeclareMathOperator{\atan}{\operatorname{atan}}
+\DeclareMathOperator{\arccosh}{\operatorname{arccosh}}
+\DeclareMathOperator{\arcsinh}{\operatorname{arcsinh}}
+\DeclareMathOperator{\arctanh}{\operatorname{arctanh}}
+\DeclareMathOperator{\acosh}{\operatorname{acosh}}
+\DeclareMathOperator{\asinh}{\operatorname{asinh}}
+\DeclareMathOperator{\atanh}{\operatorname{atanh}}
+\DeclareMathOperator{\fch}{\operatorname{ch}}
+\DeclareMathOperator{\fsh}{\operatorname{sh}}
+\DeclareMathOperator{\fth}{\operatorname{th}}
+\DeclareMathOperator{\afch}{\operatorname{ach}}
+\DeclareMathOperator{\afsh}{\operatorname{ash}}
+\DeclareMathOperator{\afth}{\operatorname{ath}}
+
+\let\stdexp\exp
+\renewcommand\exp[1][]{%
+	\stdexp%
+	\if\relax\detokenize{#1}\relax\else%
+		_{#1}%
+	\fi%
+}
+
+\let\stdlog\log
+\renewcommand\log[1][]{%
+	\stdlog%
+	\if\relax\detokenize{#1}\relax\else%
+		_{#1}%
+	\fi%
+}
+
+% Classical functions - END

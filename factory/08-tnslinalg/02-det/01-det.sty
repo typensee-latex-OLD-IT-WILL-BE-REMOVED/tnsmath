@@ -21,14 +21,6 @@
             \def\ope{\cdot}%
         }{texp}{%
             \def\ope{\times}%
-% WARNING !
-%
-%   #1 : option for the formatting
-%
-%   #2  #5		u  v
-%   
-%   #3  #6		x  x'
-%   #4  #7      y  y'
         }{std}{%
             #2{}{#3}{#5}%
               {}{#4}{#6}%
@@ -64,7 +56,7 @@
 
 \newcommand\tnslinalg@calc@det@two@no@star[5][std]{%
     \tnslinalg@calc@det@two@abstract{#1}%
-                                    {\tns@det@plane@deco{novec}}%
+                                    {\tns@det@plane@deco@loop{novec}}%
                                     {#2}{#3}%
                                     {#4}{#5}%
 }

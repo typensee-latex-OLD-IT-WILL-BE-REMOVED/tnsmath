@@ -1,0 +1,30 @@
+// Added : 2020-08-06 [00:08:45]
+==========
+2020-08-06
+==========
+
+**New minor version version::``1.7.0-beta``:** see the changes below.
+
+
+**¨tnsana:** the folowing versions have been added.
+
+    1) Version version::``0.6.0-beta`` published at date::``2020-07-30``.
+    2) Version version::``0.7.0-beta`` published at date::``2020-08-05``.
+
+
+**¨tnsgeo:** addition of the version version::``0.2.0-beta`` published at date::``2020-07-30``.
+
+
+**¨tnsproba:** the folowing versions have been added.
+
+    1) Version version::``0.4.0-beta`` published at date::``2020-07-31``.
+    2) Version version::``0.5.0-beta`` published at date::``2020-08-05``.
+
+
+**¨tnssets:** the folowing versions have been added.
+
+    1) Version version::``0.2.0-beta`` published at date::``2020-07-30``.
+    2) Version version::``0.3.0-beta`` published at date::``2020-08-05``.
+
+
+**One bug fixed:** the package ``bm`` using a lot of alphabets, we have to use a trick found on the web to make the whole package ¨tnsmath works. This trick will used in all the ¨tns packages (when it will be needed).

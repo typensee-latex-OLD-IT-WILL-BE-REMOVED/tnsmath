@@ -41,8 +41,8 @@
 % Sections numbering
 
 \renewcommand\thechapter{\Roman{chapter}.}
-\renewcommand\thesection{\arabic{section}.}
-\renewcommand\thesubsection{\alph{subsection}.}
+\renewcommand\thesection{\Alph{section}.}
+\renewcommand\thesubsection{\arabic{subsection}.}
 \renewcommand\thesubsubsection{\roman{subsubsection}.}
 
 \setcounter{tocdepth}{3}
@@ -235,10 +235,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.6.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.7.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-28}{{
+\date{2020-08-06}{{
 
 \maketitle
 
@@ -291,13 +291,11 @@ Même si certaines commandes sont plus longues à écrire que ce que permet \LaT
 % ---------------------- %
 
 
-\section{Béta-dépendance}
+% tnscom used - START
+\section{Beta-dépendance}
 
-Ce package dépend de \verb+tnscom+
-\footnote{
-	Lui est aussi en version \texttt{beta}.
-}
-disponible sur \url{https://github.com/typensee-latex/tnscom.git} pour une installation locale.
+\verb#tnscom# qui est disponible sur \url{https://github.com/typensee-latex/tnscom.git} est un package utilisé en coulisse.
+% tnscom used - END
 \section{Comment lire cette documentation ?}
 
 Le choix a été fait de fournir des exemples comme documentation du package et de donner des fiches techniques des macros-commandes dans le chapitre dédié \ref{techincal-ids}.
@@ -402,6 +400,41 @@ Certaines macros pourront demander des arguments non utilisés pour la mise en f
 \section{Couleurs}
 
 Certaines macros utilisent de la couleur. Les choix faits sont tels que l'impression en noir et blanc ne soit pas impactée.
+% List of packages - START
+\section{Packages utilisés}
+
+La roue ayant déjà été inventée, le package \verb#tnsmath# réutilise les packages suivants sans aucun scrupule.
+
+\begin{multicols}{4}
+    \begin{itemize}
+        \item \verb#amssymb#
+        \item \verb#bm#
+        \item \verb#centernot#
+        \item \verb#circledsteps#
+        \item \verb#commado#
+        \item \verb#dsfont#
+        \item \verb#esvect#
+        \item \verb#forest#
+        \item \verb#forloop#
+        \item \verb#ifmtarg#
+        \item \verb#longtable#
+        \item \verb#mathrsfs#
+        \item \verb#mathtools#
+        \item \verb#nicematrix#
+        \item \verb#pgfplots#
+        \item \verb#relsize#
+        \item \verb#simplekv#
+        \item \verb#stackengine#
+        \item \verb#stmaryrd#
+        \item \verb#tkz-tab#
+        \item \verb#trimspaces#
+        \item \verb#upgreek#
+        \item \verb#witharrows#
+        \item \verb#xstring#
+        \item \verb#yhmath#
+    \end{itemize}
+\end{multicols}
+% List of packages - END
 \chapter{Théorie générale des ensembles}
 
 \section{Ensembles}
@@ -546,7 +579,7 @@ $\FF$
 % ---------------------- %
 
 
-\subsection{Ensembles classiques suffixés}
+\subsubsection{Ensembles classiques suffixés}
 
 L'ensemble $\RR$ nous permet de voir tous les cas possibles. 
 
@@ -592,7 +625,7 @@ Notez qu'il est interdit d'utiliser \verb+$\CCn$+ pour $\setspecial{\CC}{n}$ car
 % ---------------------- %
 
 
-\subsection{Des suffixes à la carte}
+\subsubsection{Des suffixes à la carte}
 
 Dans l'exemple suivant, il faut savoir que le 2\ieme{} argument ne peut prendre que les valeurs \prefix{n}, \prefix{p}, \prefix{s}, \prefix{sn} ou \prefix{sp}.
 
@@ -810,6 +843,164 @@ $s: E \ponto F$ est une application partielle surjective.
 
 $b: G \pbiject H$ est une application partielle bijective.
 \end{latexex-flat}
+
+
+% ---------------------- %
+%\section{Applications}
+
+\subsection{Fonction identité}
+
+\begin{latexex}
+$\id_A$ vérifie par définition
+$\forall x \in A$, $\id(x) = x$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fonction caractéristique}
+
+\newparaexample{Version très utilisée}
+
+\begin{latexex}
+$\caract_A$ vérifie par définition
+$\forall x \in A$, $\caract_A(x) = 1$ et
+$\forall x \notin A$, $\caract_A(x) = 0$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version alternative}
+
+\begin{latexex}
+$\caractone_A = \caract_A$
+\end{latexex}
+
+
+% ---------------------- %
+%\section{Applications}
+
+\subsection{Définition explicite d'une fonction}
+
+\newparaexample{Écriture par défaut}
+
+\begin{latexex}
+$\funcdef{f}{x}{x^2}%
+            {I}{J}$
+\end{latexex}
+
+
+\begin{remark}
+	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
+	$\funcdef{f}{x}{x^2}%
+            {I}{J}$
+    mais c'est un peu affreux.
+\end{remark}
+
+% ---------------------- %
+
+
+\newparaexample{Écriture alternative}
+
+On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
+
+\begin{latexex}
+$\funcdef[s]{f}{x}{x^2}%
+               {I}{J}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne}
+
+Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
+\begin{latexex}
+Soit $\funcdef[h]{f}{x}{x^2}%
+                    {I}{J}$ ...
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture en ligne incomplète}
+
+En mode horizontal, les ensembles peuvent être de valeur vide pour ne pas les indiquer.
+
+\begin{latexex}
+$\funcdef[h]{f}{x}{x^2}{}{J}$
+
+$\funcdef[h]{f}{x}{x^2}{I}{}$
+
+$\funcdef[h]{f}{x}{x^2}{}{}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Écriture textuelle}
+
+On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} où \prefix{txt} est pour \prefix{texte}.
+Cette macro  ne s'utilise pas en mode mathématique et elle accepte l'omission des ensembles.
+
+\begin{latexex}
+\txtfuncdef{f}{x}{x^2}{I}{J}
+
+\txtfuncdef{f}{x}{x^2}{}{J}
+
+\txtfuncdef{f}{x}{x^2}{I}{}
+
+\txtfuncdef{f}{x}{x^2}{}{}
+\end{latexex}
+
+
+
+% ---------------------- %
+%\section{Applications}
+
+\subsection{Composition}
+
+\newparaexample{Opérateur}
+
+La macro \macro{compo} est juste une version un peu plus petite de \macro{circ}.
+
+\begin{latexex}
+$f \compo g$ et non
+$f \circ g$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Compositions successives}
+
+La macro \macro{multicompo} sert à indiquer la composition d'une application plusieurs fois de suite par elle-même
+\footnote{
+	Une telle fonction $f$ doit vérifier $\im f \subseteq \dom f$.
+}.
+Voici toutes les mises en forme disponibles où l'option \verb#exp# nécessite que le nombre d'applications composées soit un naturel non nul connu.
+Vous noterez que l'écriture par défaut, qui n'est pas standard, n'est pas $f^{(p)}$ car cette notation est traditionnellement utilisée pour indiquer la dérivée p\ieme{} d'une application.
+
+\begin{latexex}
+ $\multicompo     {g}{5}
+= \multicompo[exp]{g}{5}$
+
+ $\multicompo     {f}{p}
+= \multicompo[dot]{f}{p}$
+\end{latexex}
+
+
+\begin{remark}
+	La convention retenue est analogue à ce que l'on fait avec les puissances de nombres réels.
+	En particulier, $\multicompo{f}{1} = \multicompo[exp]{f}{1}$ et $\multicompo{f}{0} = \id_{\dom f}$ .
+\end{remark}
 
 
 % ---------------------- %
@@ -1836,6 +2027,15 @@ Un tableau devant utiliser plusieurs pages sera scindé comme ci-dessous sans pe
 %\section{Détailler un raisonnement}
 \chapter{Géométrie}
 
+\section{Utiliser des unités S.I.}
+
+Comme l'excellent package \verb#siunitx# est chargé par \verb+tnscom+, il devient facile de travailler avec des unités de mesure tout en respectant \textbf{les conventions d'écriture sont françaises dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}} comme c'est le cas pour cette documentation.
+
+\begin{latexex}
+$\ang{180} = \SI{\pi}{\radian}$
+et
+$\SI{1}{km} = \SI{1e3}{m}$
+\end{latexex}
 \section{Points et lignes}
 
 \subsection{Points}
@@ -2090,7 +2290,7 @@ Notons que dans ce cas les options \prefix{sp} et \prefix{sr} n'apportent rien d
 % ---------------------- %
 %\section{Vecteurs}
 
-\subsection{Produit vectoriel}
+\subsection{3D -- Produit vectoriel}
 
 \subsubsection{Écriture symbolique}
 
@@ -2135,11 +2335,8 @@ Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler
 
 \begin{latexex}
 $\calccrossprod{\vect{u}}{x}{y}{z}%
-               {\vect{v}}{x'}{y'}{z'}
- =
- \vcalccrossprod{u}{x}{y}{z}%
-                {v}{x'}{y'}{z'}$
-
+               {\vect{v}}{x'}{y'}{z'}$
+ou
 $\vcalccrossprod{AB}{x_B - x_A}%
                     {y_B - y_A}%
                     {z_B - z_A}%
@@ -2149,11 +2346,14 @@ $\vcalccrossprod{AB}{x_B - x_A}%
 \end{latexex}
 
 
-Avec un public averti on peut juste proposer les coordonnées sans les décorations comme ci-après via la version étoilée de \macro{vcalccrossprod} mais ceci fonctionne aussi avec \macro{calccrossprod}.
+Avec un public averti on peut juste proposer des croix voir juste les coordonnées sans les décorations comme ci-après via les versions simplement et doublement étoilées de \macro{vcalccrossprod} \emph{(ceci fonctionne aussi avec \macro{calccrossprod})}.
 
 \begin{latexex}
-$\vcalccrossprod*{u}{x}{y}{z}%
-                 {v}{x'}{y'}{z'}$
+$\vcalccrossprod* {u}{x}{y}{z}%
+                  {v}{x'}{y'}{z'}
+ =
+ \vcalccrossprod**{u}{x}{y}{z}%
+                  {v}{x'}{y'}{z'}$
 \end{latexex}
 
 
@@ -2162,11 +2362,14 @@ Ceci fonctionne aussi pour la macro \macro{calccrossprod}.
 Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
 
 \begin{latexex}
-$\vcalccrossprod[novec]{u}{x}{y}{z}%
-                       {v}{x'}{y'}{z'}
+$\vcalccrossprod[novec]  {u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}
  =
- \vcalccrossprod*[novec]{u}{x}{y}{z}%
-                        {v}{x'}{y'}{z'}$
+ \vcalccrossprod*[novec] {u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}
+ =
+ \vcalccrossprod**[novec]{u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}$
 \end{latexex}
 
 
@@ -2252,7 +2455,55 @@ $\coordcrossprod[vb]%
 % ---------------------- %
 %\section{Vecteurs}
 
-\subsection{Plan -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+\subsection{2D -- Critère de colinéarité de deux vecteurs}
+
+\newparaexample{Version complète}
+
+Dans l'exemple suivant, le préfixe \prefix{coli} est pour \whyprefix{colin}{éarité} et \prefix{criteria} signifie \inenglish{critère}.
+
+\begin{latexex}
+$\colicriteria{\vect{u}}{x}{y}%
+              {\vect{v}}{x'}{y'}$
+ou
+$\colicriteria{\vect{AB}}%
+              {x_B - x_A}{y_B - y_A}%
+              {\vect{CD}}%
+              {x_D - x_C}{y_D - y_C}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Rédaction raccourcie pour les vecteurs}
+
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
+
+\begin{latexex}
+$\vcolicriteria{u}{x}{y}%
+               {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Versions sans les vecteurs}
+
+Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument optionnel de \macro{vcolicriteria} qui par défaut est \verb+vec+ pour pour \whyprefix{vec}{teur}.
+À l'usage ceci permet des copier-coller très efficaces !
+
+
+\begin{latexex}
+ $\vcolicriteria[novec]{u}{x}{y}%
+                       {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+%\section{Vecteurs}
+
+\subsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
 
 \newparaexample{Version décorée}
 
@@ -2285,8 +2536,6 @@ $\calcdetplane*{\vect{u}}{x}{y}%
 
 \newparaexample{Rédaction raccourcie pour les vecteurs}
 
-Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
-
 \begin{latexex}
 $\vcalcdetplane{u}{x}{y}%
                {v}{x'}{y'}
@@ -2300,10 +2549,6 @@ $\vcalcdetplane{u}{x}{y}%
 
 
 \newparaexample{Versions sans les vecteurs}
-
-Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument optionnel de \macro{vcalcdetplane} qui par défaut est \verb+vec+ pour pour \whyprefix{vec}{teur}.
-À l'usage ceci permet des copier-coller très efficaces !
-
 
 \begin{latexex}
  $\vcalcdetplane[novec] {u}{x}{y}%
@@ -2692,7 +2937,15 @@ $a x^2 + b x + c$
 % ---------------------- %
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
+
+\begin{latexex}
+$\symvar = \symvar[1]$ ou
+$\symvar[2]$ ou
+$\symvar[3]$
+\end{latexex}
+
+Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -2718,11 +2971,11 @@ $\abs*{\dfrac{3}{5}}$
 
 \subsection{Sans paramètre}
 
-Quelques fonctions nommées supplémentaires où le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix a été fait pour éviter des incompatibilités avec quelques autres packages)}. La liste complète des fonctions nommées est donnée un peu plus bas dans la section  \ref{tnsana-all-named-functions}.
+Quelques fonctions nommées ont été ajoutées en plus de celles fournies par le package \verb#amsmath#  qui est chargé en coulisse et propose par exemple $\lg x$ et $\ln x$ via les macros \macro{lg} et \macro{ln}.
+Ci-dessous le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix sert à éviter des incompatibilités avec d'autres packages)}. La liste complète des fonctions nommées est donnée plus bas dans la section  \ref{tnsana-all-named-functions}
 
 \begin{latexex}
-$\fch x = \cosh x$ ou
-$\lg x$
+$\fch x = \cosh x$ ou $\acos x$
 \end{latexex}
 
 
@@ -2731,11 +2984,11 @@ $\lg x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions avec un paramètre. Les voici.
+Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
 
 \begin{latexex}
-$\logb{2} x = \lg x$ ou
-$\expb{6} y = 6^y$
+$\log[2] x = \lg x$ ou
+$\exp[6] y = 6^y$
 \end{latexex}
 
 
@@ -2748,96 +3001,45 @@ $\expb{6} y = 6^y$
 
 \begin{multicols}{2}
 % Table of all - START
-    \verb+acos+ : $\acos\dots$
+    \macro{acos x} : $\acos x$
 
-    \verb+asin+ : $\asin\dots$
+    \macro{asin x} : $\asin x$
 
-    \verb+atan+ : $\atan\dots$
+    \macro{atan x} : $\atan x$
 
-    \verb+arccosh+ : $\arccosh\dots$
+    \macro{arccosh x} : $\arccosh x$
 
-    \verb+arcsinh+ : $\arcsinh\dots$
+    \macro{arcsinh x} : $\arcsinh x$
 
-    \verb+arctanh+ : $\arctanh\dots$
+    \macro{arctanh x} : $\arctanh x$
 
-    \verb+acosh+ : $\acosh\dots$
+    \macro{acosh x} : $\acosh x$
 
-    \verb+asinh+ : $\asinh\dots$
+    \macro{asinh x} : $\asinh x$
 
-    \verb+atanh+ : $\atanh\dots$
+    \macro{atanh x} : $\atanh x$
 
-    \verb+fch+ : $\fch\dots$
+    \macro{fch x} : $\fch x$
 
-    \verb+fsh+ : $\fsh\dots$
+    \macro{fsh x} : $\fsh x$
 
-    \verb+fth+ : $\fth\dots$
+    \macro{fth x} : $\fth x$
 
-    \verb+afch+ : $\afch\dots$
+    \macro{afch x} : $\afch x$
 
-    \verb+afsh+ : $\afsh\dots$
+    \macro{afsh x} : $\afsh x$
 
-    \verb+afth+ : $\afth\dots$
+    \macro{afth x} : $\afth x$
 
-    \verb+expb{p}+ : $\expb{p}\dots$
+    \macro{exp x} : $\exp x$
 
-    \verb+logb{p}+ : $\logb{p}\dots$
+    \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{log x} : $\log x$
+
+    \macro{log[p] x} : $\log[p] x$
 % Table of all - END
 \end{multicols}
-\section{Définition explicite d'une fonction}
-
-\newparaexample{Écriture par défaut}
-
-\begin{latexex}
-$\funcdef{f}{x}{x^2 + 3}%
-            {I}{J}$
-\end{latexex}
-
-
-\begin{remark}
-	Même si cela est peu utile, vous pouvez utiliser la mise en forme dans du texte pour obtenir
-	$\funcdef{f}{x}{x^2 + 3}%
-            {I}{J}$
-    mais c'est un peu affreux.
-\end{remark}
-
-% ---------------------- %
-
-
-\newparaexample{Écriture alternative}
-
-On peut cacher le trait vertical via l'option \prefix{s} pour \whyprefix{s}{hort} soit \inenglish{court}.
-
-\begin{latexex}
-$\funcdef[s]{f}{x}{x^2 + 3}%
-               {I}{J}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Écriture en ligne}
-
-Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
-\begin{latexex}
-Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-                    {I}{J}$.
-\end{latexex}
-
-
-%% ---------------------- %
-%
-%
-%\newparaexample{Écriture en ligne sans ensemble}
-%
-%Pour avoir tout sur une ligne, ce qui est l'idéal pour une insertion dans du texte, il suffit d'utiliser l'option \prefix{h} pour \whyprefix{h}{orizontal}.
-%\begin{latexex}
-%Soit $\funcdef[h]{f}{x}{x^2 + 3}%
-%                    {I}{J}$.
-%\end{latexex}
-
-
-% ---------------------- %
 \section{Limite}
 
 \newparaexample{Cas minimaliste}
@@ -2853,6 +3055,7 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
 	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
 	$\limit{f(x)}{x}{0}$ ci-dessus.
+	La version \macro{limit} utilise un petit peu plus d'espace sous le mot lim.
 \end{remark}
 
 
@@ -2862,10 +3065,11 @@ $\limit{f(x)}{x}{0} = \frac{1}{2}$
 
 \newparaexample{Avec des conditions}
 
-Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions comme le montre la 2\ieme{} limite
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions
 \footnote{
 	En pratique, on utilise généralement au maximum une condition.
-}.
+}
+comme le montre la 2\ieme{} limite ci-après.
 
 \begin{latexex}
 $\limit{f(x)}{x}{0 | x > 0}$ ou
@@ -3091,9 +3295,15 @@ Notez qu'avec l'option \verb+ei+ l'exposant total n'est pas imprimé et que les 
 \end{latexex}
 
 
-\begin{remark}
-	L'option \verb+ei+ ne marche pas avec des variables indicées pour le moment.
-\end{remark}
+\medskip
+
+
+Les options \verb+i+ et \verb+ei+ marchent avec des variables indicées à condition de bien mettre les dites variables entre des accolades.
+
+\begin{latexex}
+ $\pder[i] {f}{x_1 | {x_2}^2}{3}
+= \pder[ei]{f}{x_1 | {x_2}^2}{3}$
+\end{latexex}
 
 
 \medskip
@@ -3104,8 +3314,10 @@ Ci-dessous on montre aussi une écriture du type \emph{\og opérateur fonctionne
 
 \begin{latexex}
  $\pder[of,sp] {u + v}{x | y^2}{}
-= \pder[osf,sp]{u + v}{x | y^2}{}
-= \pder[i,sp]  {u + v}{x | y^2}{}$
+= \pder[osf,sp]{u + v}{x | y^2}{}$
+
+ $\pder[i,sp]  {u + v}{x | y^2}{}
+= \pder[ei,sp] {u + v}{x | y^2}{}$
 \end{latexex}
 
 
@@ -4006,11 +4218,18 @@ $\stddev[s]{X}$
 % ---------------------- %
 \section{Arbres pondérés}
 
-\subsection{Que se passe-t-il en coulisse ?}
+\subsection{Au commencement était la forêt...}
 
-Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme ci-dessous à moindre coût neuronal.
+Le gros du travail est fait par le package \verb+forest+ qui s'appuie \verb+TikZ+ dont on peut utiliser toute la machinerie afin d'obtenir des choses sympathiques comme ci-dessous et ceci à moindre coût neuronal comme vont le montrer les explications données dans les sections suivantes.
 
-\inputlatexexcodeafter{tikz/probatree-showcase.tkz}
+\inputlatexexcodeafter{TikZ/probatree-showcase.tkz}
+
+
+\begin{remark}
+	Jusqu'à la section \ref{tnsproba-autonum-forest} page \pageref{tnsproba-autonum-forest}, nous nommerons à la main les noeuds des arbres via \verb#name = ...# lorsque cela sera nécessaire.
+	Dans la section indiquée nous verrons comment utiliser les noms automatiques donnés par le package \verb#forest#.
+\end{remark}
+
 
 
 % ---------------------- %
@@ -4023,7 +4242,7 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 Commençons par un arbre nu pour voir comment utiliser l'environnement \verb+probatree+ qui s'appuie en coulisse sur celui nommé \verb+forest+ du package éponyme.
 L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de l'arbre qui sont propres à \verb+probatree+.
 
-\inputlatexex{tikz/probatree-undecorated.tkz}
+\inputlatexex{TikZ/probatree-undecorated.tkz}
 
 
 % ---------------------- %
@@ -4031,13 +4250,16 @@ L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de 
 
 \newparaexample{Ajouter des pondérations}
 
-Dans le code suivant, ce sont les styles spéciaux supplémentaires \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+Dans le code suivant, ce sont les clés
 \footnote{
-    \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
-    Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
-}.
+	En fait du point de vue de TikZ, ce sont des styles.
+}
+\verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches.
+Indiquons que \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
+Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
 
-\inputlatexex{tikz/probatree-weight-placement.tkz}
+
+\inputlatexex{TikZ/probatree-weight-placement.tkz}
 
 
 % ---------------------- %
@@ -4047,7 +4269,7 @@ Dans le code suivant, ce sont les styles spéciaux supplémentaires \verb+pweigh
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX{} \emph{(ceci peut être utile lors de la rédaction d'exercices)}.
 
-\inputlatexex{tikz/probatree-weight-hide-all.tkz}
+\inputlatexex{TikZ/probatree-weight-hide-all.tkz}
 
 
 % ---------------------- %
@@ -4055,51 +4277,78 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous \emph{(ceci aussi peut servir à rédiger des exercices)}.
 
-\inputlatexex{tikz/probatree-weight-hide-locally.tkz}
-
-
-% ---------------------- %
+\inputlatexex{TikZ/probatree-weight-hide-locally.tkz}
 
 
-\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
-
-Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
-\footnote{
-	Ces deux symboles font partie de la syntaxe TikZ.
-}.
-Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
-
-\inputlatexex{tikz/probatree-weight-coma-equal.tkz}
+%% ---------------------- %
+%
+%
+%\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
+%
+%Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
+%\footnote{
+%	Ces deux symboles font partie de la syntaxe TikZ.
+%}.
+%Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
+%
+%\inputlatexex{TikZ/probatree-weight-coma-equal.tkz}
+%
 %\section{Arbres pondérés}
 
 \subsection{Commenter les racines}
 
-Que ce soit pour expliquer un arbre de probabilité  ou raisonner dessus, l'effet suivant est très utile.
-Noter qu'ici il a fallu utiliser des accolades pour cacher à TikZ les signes $=$ dans les commentaires.
+\newparaexample{Tout aligner}
+
+Que ce soit pour expliquer un arbre de probabilité, ou bien pour raisonner sur ce dernier, l'effet suivant est très utile
+\footnote{
+	Le package \texttt{forest} permet d'indiquer directement des mises en forme dans le code de l'arbre.
+	L'auteur du présent package trouve bien plus efficace à l'usage de ne pas toucher au code minimal d'un arbre.
+	Ceci explique donc le choix retenu de donner les décorations supplémentaires après le code de l'arbre.
+}.
 
 
 \inputlatexexflat{tikz/probatree-comment.tkz}
 
 
 \begin{remark}
-	Commenter un noeud interne ne provoquera pas d'erreur même si \verb#pcomment# n'a pas été conçu pour ceci.
+	Commenter un noeud interne ne provoquera pas d'erreur même si \macro{ptreeComment} n'a pas été conçu pour ceci.
 	Ceci a été utilisé dans l'exemple d'introduction mais ça reste un petit hack.
 \end{remark}
+
+
+
+\newparaexample{Coller au plus près}
+
+En utilisant \macro{ptreeComment*} au lieu de \macro{ptreeComment}, les commentaires seront proches des noeuds et donc non alignés verticalement. 
+Avec l'exemple précédent on obtient la mise en forme qui suit.
+
+\medskip
+
+\input{tikz/probatree-comment-leftmost.tkz}
 %\section{Arbres pondérés}
 
 \subsection{Avec des cadres}
 
 \newparaexample{Des cadres finaux}
 
-Via la clé \verb+pframe+, il est très aisé d'encadrer un sous-arbre final
-\footnote{
+Via la clé \verb#pframe# il est très aisé d'encadrer un sous-arbre final
+\footnote{ 
 	Un sous-arbre sera dit final si toutes ses feuilles correspondent à des feuilles de l'arbre initial. 
 }
-comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
+comme le montre l'exemple suivant
+\footnote{ 
+	Ce type de cadre est très utile d'un point de vue pédagogique. 
+}.
+Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui évite que les cadres se superposent.
 
 \inputlatexex{tikz/probatree-frame-final.tkz}
+
+
+\begin{remark}
+	La clé \verb#pframe# est un cas particulier car tous les autres décorations se font en dehors de la définition de l'arbre
+\end{remark}
 
 
 % ---------------------- %
@@ -4107,12 +4356,121 @@ comme le montre l'exemple suivant. Dans l'exemple ci-après nous utilisons la bi
 
 \newparaexample{Des cadres non finaux}
 
-
 La macro \macro{ptreeFrame} permet facilement d'encadrer un sous-arbre non final.
-Ceci nécessite de nommer les noeuds mais c'est facile à faire.
-Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine via \verb#{}, name = nU#, et des deux noeuds finaux le plus haut et le plus bas de façon similaire.
+Ceci nécessite d'utiliser des noms de noeuds.
+Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine et des deux noeuds finaux le plus haut et le plus bas.
 
 \inputlatexex{tikz/probatree-frame-not-final.tkz}
+%\section{Arbres pondérés}
+
+
+
+
+
+
+\subsection{Mettre en valeur des chemins}
+
+\newparaexample{Juste avec deux noeuds}
+
+Il est relativement aisé de mettre en valeur un chemin particulier comme dans l'exemple ci-après qui est une simple démo. montrant les différences entre \macro{ptreeFocus},  \macro{ptreeFocus*} et \macro{ptreeFocus**}.
+Notez que les noms des noeuds sont séparés par des barres verticales \verb#|# et  qu'il est possible d'utiliser des espaces pour améliorer la lisibilité du code. 
+
+\inputlatexex{tikz/probatree-focus-edge.tkz}
+
+Voici ce qu'il faut retenir.
+
+\begin{enumerate}
+	\item \macro{ptreeFocus} encadre tous les noeuds.
+
+	\item \macro{ptreeFocus*} n'encadre pas le tout premier noeud \emph{(typiquement cela est utile pour un chemin partant de la racine de l'arbre si celle-ci n'est pas nommée comme on le fait très souvent)}.
+
+	\item \macro{ptreeFocus**} n'encadre aucun des noeuds.
+	
+	\item La couleur peut être changée via l'argument optionnel en utilisant les couelurs de type TikZ. Par défaut le bleu est utilisé.
+\end{enumerate}
+
+
+% ---------------------- %
+
+
+\newparaexample{Plusieurs noeuds d'un coup}
+
+Rien de bien compliqué à condition de bien respecter l'ordre de saisie des noeuds.
+
+\inputlatexexflat{tikz/probatree-focus-edge-long-star.tkz}
+
+
+Avec \macro{ptreeFocus} on obtient l'arbre suivant où le mini disque initial
+\footnote{
+	Ce disque est en fait un carré aux coins arrondis autour d'un texte vide.
+	\macro{ptreeFocus} sera utile si l'univers est indiqué au départ de l'arbre.
+}
+n'est pas forcément souhaité.
+
+\input{tikz/probatree-focus-edge-long-no-star.tkz}
+
+
+Avec \macro{ptreeFocus**} on obtient l'arbre ci-dessous.
+
+\input{tikz/probatree-focus-edge-long-star-star.tkz}
+
+
+%% ---------------------- %
+%
+%
+%\newparaexample{De la racine à un noeud}
+%
+%Comme il est très courant de vouloir indiquer un chemin de la racine à une feuille, cette fonctionnalité est proposé par le package via les macros \macro{ptreeFocusAll},  \macro{ptreeFocusAll*} et  \macro{ptreeFocusAll**} qui prennent comme unique argument obligatoire le noeud final du chemin
+%\footnote{
+%	Rien n'interdit de prendre un noeud interne au lieu d'u racine même si cela ne semble pas très utile a priori.
+%}
+%indiqué via le nom automatique fourni par \verb#forest#.
+%On peut alors utiliser le code suivant très rapide à taper : voir la section \ref{tnsproba-autonum-forest} page \pageref{tnsproba-autonum-forest} où est expliqué d'où vient le nom \verb#!xxxxx# utilisé ci-après.
+%
+%\inputlatexexflat{tikz/probatree-focus-edge-all.tkz}
+
+
+% TESTING !!!
+%\ptreeFocusAll[red]{!1312}
+%\inputlatexexflat{tikz/probatree-focus-edge-all.tkz}
+%\section{Arbres pondérés}
+
+\subsection{Utiliser les noms automatiques donnés par \texttt{forest}} \label{tnsproba-autonum-forest}
+
+Voyons comment obtenir le résultat suivant en indiquant tous les noeuds via les noms automatiques fabriqués par \verb@forest@.
+%\footnote{
+%	Le même rendu peut se taper bien plus efficacement via la macro à un argument \macro{ptreeFocusAll*} comme cela est expliqué dans la section précédente.
+%}.
+
+\inputlatexexcodeafter{tikz/probatree-autonum.tkz}
+
+
+On comprend alors la logique utilisée.
+
+\begin{enumerate}
+	\item Chaque nom automatique commence par \texttt{!} .
+
+	\item La racine est nommée \texttt{!} .
+
+	\item Pour voir ce qu'il faut faire pour un noeud autre que la racine, considérons par exemple \texttt{!1321}. On indique en fait le chemin à suivre en partant de la racine \fbox{\texttt{!}} pour arriver au noeud voulu.
+	\begin{itemize}
+		\item Aller d'abord au \fbox{1}\,\ier{} noeud du niveau 1 qui ici est $A$.
+
+		\item Aller ensuite au \fbox{3}\,\ieme{} noeud du niveau 2 qui ici est $D$.
+
+		\item Aller après au \fbox{2}\,\ieme{} noeud du niveau 3 qui ici est $F$.
+		
+		\item Aller enfin au \fbox{1}\,\ier{} noeud du niveau 4 qui ici est $G$. C'est notre noeud nommé \fbox{\texttt{!1321}}.
+	\end{itemize}
+\end{enumerate}
+
+
+\begin{remark}
+	Utilisez de préférence les noms automatiques car cela facilitera la maintenance de vos arbres sur le long terme.
+	Si on reprend le tout premier exemple d'arbre décoré, il est bien plus simple de faire comme suit car on ne touche pas à la structure minimale du code de l'arbre.
+	
+	\inputlatexexflat{tikz/probatree-showcase-autonum.tkz}
+\end{remark}
 %\section{Arbres pondérés}
 \chapter{Arithmétique}
 
@@ -4500,11 +4858,169 @@ de \verb+tnsmath+
 à destination de l'utilisateur principalement.
 Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+tnsmath+ sur \verb+github+.
 
-\begin{description}
+
 % Changes shown - START
 
-    \medskip
-    \item[2020-07-28] Nouvelle version mineure \verb+1.6.0-beta+.
+\begin{description}    \item[2020-08-06] Nouvelle version mineure \verb+1.7.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.6.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.7.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              les macros \macro{funcdef} et \macro{txtfuncdef} ont été déplacées dans \verb#tnssets# qui est disponible sur \url{https://github.com/typensee-latex/tnssets.git}.
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Critère de colinéarité}
+              ajout de la macro \macro{colicriteria}.
+    
+    	% -------------- %
+    
+        \item \topic*{Produit vectoriel} changement de l'API.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{vcalccrossprod*} devient \macro{vcalccrossprod**}.
+    
+            \item \macro{vcalccrossprod*} dessine des produits en croix à la place des boucles.
+        \end{itemize}
+    
+    	% -------------- %
+    
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.4.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre}
+        	  possibilité de mettre en valeur un chemin via \macro{ptreeFocus},  \macro{ptreeFocus*} ou \macro{ptreeFocus**}.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.5.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre de probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{ptreeFocus}, \macro{ptreeFocus*} et \macro{ptreeFocus**} fonctionnent avec un multi-argument pour pourvoir indiquer un chemin sur plusieurs noeuds.
+            
+            \item Suppression de la clé \macro{pcomment}.
+            
+            \item Ajout des macros \macro{ptreeComment} et \macro{ptreeComment*} qui simplifient la saisie.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % ------------- %
+    % -- tnssets -- %
+    % ------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Composition d'applications}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{compo} est un opérateur de composition de deux applications.
+    
+            \item \macro{multicomp} permet d'indiquer des compositions successives d'une application par elle-même.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              intégration de deux macros proposées avant par \verb#tnsana# disponible sur \url{https://github.com/typensee-latex/tnsana.git}.
+    
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{funcdef} peut produire trois versions symboliques.
+    
+            \item \macro{txtfuncdef} produit une version textuelle courte.
+        \end{itemize}
+    
+    
+        \item \topic{Fonctions spéciales}
+    
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout de \macro{id} pour la fonction identité.
+    
+            \item Ajout de \macro{caract} et \macro{caractone} pour deux versions de la fonction caratéristque d'un ensemble.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
     
     
     % -------------- %
@@ -4529,40 +5045,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
-    
-    
-    % -------------- %
-    % -- tnsproba -- %
-    % -------------- %
-    
-    
-    \begin{center}
-        \textbf{\textsc{Probabilité [0.3.0-beta]}}
-    \end{center}
-    
-    \begin{itemize}[itemsep=.5em]
-        \item \topic{Arbre}
-        \begin{itemize}[itemsep=.5em]
-            \item Ajout du style \prefix{pcomment} pour placer du texte à la droite d'une feuille.
-    
-            \item Le style \prefix{frame} a été renommé \prefix{pframe}.
-        \end{itemize}
-    
-        
-    \end{itemize}
-    
-    
-    \separation
-
-% ------------------------ %
-
-    \medskip
-    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
+\begin{description}    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
     
     
     % -------------- %
@@ -4583,11 +5069,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
+\begin{description}    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
     
     
     % -------------- %
@@ -4645,11 +5130,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
+\begin{description}    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
     
     
     % -------------- %
@@ -4919,20 +5403,18 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
+\begin{description}    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Tableaux de signe et de variation}
               il est maintenant possible d'ajouter des graphiques expliquant le signe d'une fonction affine ou d'une fonction trinômiale du 2\ieme{} degré.
-    \end{itemize}
+    \end{itemize}\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+\begin{description}    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Logique}
@@ -4957,11 +5439,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
+\begin{description}    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item Le changement vers une nouvelle version majeure se justifie par de nouvelles règles strictes pour définir les signatures des macros. À l'avenir ces règles seront appliquées tout le temps sauf dans de très rares cas.
@@ -5141,11 +5622,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \end{itemize}
     \end{itemize}
     
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
+\begin{description}    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -5205,11 +5685,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     		\item Le comportement de \macro{probacond} a été modifié pour le rendre plus logique.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+\begin{description}    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -5252,11 +5731,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+\begin{description}    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Algèbre}
@@ -5274,11 +5752,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+\begin{description}    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Ensembles}
@@ -5314,11 +5791,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
                   La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
+\begin{description}    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Ensembles}
@@ -5349,11 +5825,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
+\begin{description}    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Arithmétique}
@@ -5392,11 +5867,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
+\begin{description}    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Algèbre linéaire}
@@ -5417,15 +5891,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
               différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
     
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-% Changes shown - END 
-\end{description}
+% Changes shown - END
 
 
 \newpage
 \chapter{Toutes les fiches techniques} \label{techincal-ids}
+
+
+
 
 
 
@@ -5536,7 +6012,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Ensembles classiques suffixés}
+\subsubsection{Ensembles classiques en mathématiques et en informatique théorique} 
+
+\paragraph{Ensembles classiques suffixés}
 
 
 
@@ -5598,7 +6076,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Des suffixes à la carte}
+\paragraph{Des suffixes à la carte}
 
 
 
@@ -5838,6 +6316,90 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
     
     \IDope{pbiject}
 \end{multicols}
+
+
+\subsubsection{Fonction identité}
+
+
+
+\IDope{id}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fonction caractéristique}
+
+
+
+\IDope{caract}
+
+\IDope{caractone}
+
+
+\subsubsection{Définition explicite d'une fonction}
+
+
+
+\IDmacro{funcdef}{1}{5}
+
+
+\IDoption{}  la valeur par défaut \verb+u+. 
+\begin{enumerate}
+	\item \verb+u+ : écriture empilée avec un trait vertical.
+	
+	\item \verb+s+ : écriture empilée sans trait vertical.
+
+	\item \verb+h+ : écriture horizontale en ligne.
+\end{enumerate}
+
+
+\IDarg{1} la fonction.
+
+\IDarg{2} la variable.
+
+\IDarg{3} la formule explicite de définition.
+
+\IDarg{4} l'ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
+
+\IDarg{5} l'ensemble d'arrivée.
+
+
+\separation
+
+
+\IDmacro[a]{txtfuncdef}{5}
+
+
+\IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
+
+
+\subsubsection{Composition}
+
+
+
+\IDope{compo}  \hfill \mwhyprefix{compo}{sition}
+
+
+\separation
+
+\IDmacro{multicompo}{1}{2}
+
+\IDoption{} la valeur par défaut est \verb+r+. 
+            Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+r  + : écriture utilisant des chevrons.  \hfill \mwhyprefix{r}{after}.
+
+	\extraspace 
+	
+	\item \verb+exp+ : écriture développée.  \hfill \mwhyprefix{exp}{and}.
+
+	\item \verb+dot+ : écriture faussement développée utilisant des points de suspension.
+\end{enumerate}
+
+\IDarg{1} l'application.
+
+\IDarg{2} le nombre d'applications composées.
 
 
 \section{Méthodes formelles en logique}
@@ -6273,6 +6835,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDmacro[n]{textdemoNEXTPAGE}
 
 
+
+
+
 \section{Géométrie}
 
 \subsection{Points et lignes}
@@ -6444,7 +7009,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
-\subsubsection{Produit vectoriel}
+\subsubsection{3D -- Produit vectoriel}
 
 \paragraph{Écriture symbolique}
 
@@ -6485,34 +7050,43 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro[a]{calccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
+\IDmacro[a]{calccrossprod  }{9}  \hfill \mwhyprefix{calc}{ulate}
 
-\IDmacro[a]{calccrossprod*}{8}
+\IDmacro[a]{calccrossprod* }{9}
 
-\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+\IDmacro[a]{calccrossprod**}{9}
 
-\IDarg{2..4} les coordonnées du 1\ier{} vecteur.
 
-\IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
 
-\IDarg{6..8} les coordonnées du 2\ieme{} vecteur.
+\IDarg{2} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{6} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
 
 
 \separation
 
 
-\IDmacro[a]{vcalccrossprod }{8}  \hfill \mwhyprefix{calc}{ulate}
+\IDmacro[a]{vcalccrossprod  }{8}  \hfill \mwhyprefix{calc}{ulate}
                                      et \mwhyprefix{v}{ector}
 
-\IDmacro[a]{vcalccrossprod*}{8}
+\IDmacro[a]{vcalccrossprod* }{8}
 
-\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+\IDmacro[a]{vcalccrossprod**}{8}
 
-\IDarg{2..4} les coordonnées du 1\ier{} vecteur.
+\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
 
-\IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+\IDarg{2} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDarg{6..8} les coordonnées du 2\ieme{} vecteur.
+\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{6} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
 
 
 % ---------------------- %
@@ -6553,12 +7127,47 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
             On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+p,s+ la valeur par défaut de l'option.
 
 
-\IDarg{1..3} les coordonnées du 1\ier{} vecteur.
+\IDargs{1..3} les coordonnées du 1\ier{} vecteur.
 
-\IDarg{4..6} les coordonnées du 2\ieme{} vecteur.
+\IDargs{4..6} les coordonnées du 2\ieme{} vecteur.
 
 
-\subsubsection{Plan -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+\subsubsection{2D -- Critère de colinéarité de deux vecteurs}
+
+
+
+\IDmacro{colicriteria }{1}{6} \hfill \mwhyprefix{coli}{nearity}
+
+
+\IDoption{} la valeur par défaut est \verb+vec+. Voici les deux valeurs possibles.
+\begin{enumerate}
+	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+
+	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+\end{enumerate}
+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{2..3} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{5..6} les coordonnées du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro{vcolicriteria }{1}{6} \hfill \mwhyprefix{v}{ector}
+
+
+\IDoption{} voir les indications données pour la macro \macro{colicriteria}.
+
+\IDargs{1..6} voir les indications données pour la macro \macro{colicriteria}.
+
+
+\subsubsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
 
 
 
@@ -6583,15 +7192,11 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{2} la 1\iere{} coordonnée du 1\ier{} vecteur.
-
-\IDarg{3} la 2\ieme{} coordonnée du 1\ier{} vecteur.
+\IDargs{2..3} les coordonnées du 1\ier{} vecteur.
 
 \IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-\IDarg{5} la 1\iere{} coordonnée du 2\ieme{} vecteur.
-
-\IDarg{6} la 2\ieme{} coordonnée du 2\ieme{} vecteur.
+\IDargs{5..6} les coordonnées du 2\ieme{} vecteur.
 
 
 \separation
@@ -6605,7 +7210,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
 
-\IDarg{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+\IDargs{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
 
 
 \subsection{Géométrie cartésienne}
@@ -6855,9 +7460,15 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro[n]{symvar }
+\IDmacro[o]{symvar}{1}
 
-\IDmacro[n]{symvar*}
+\IDoption{} le numéro du symbole qui vaut \verb#1# par défaut.
+\begin{itemize}
+	\item \verb#1# donne $\symvar[1]$ .
+	\item \verb#2# donne $\symvar[2]$ .
+	\item \verb#3# donne $\symvar[3]$ .
+%	\item \verb#4# donne $\symvar[4]$ .
+\end{itemize}
 
 
 \subsection{La fonction valeur absolue}
@@ -6924,48 +7535,20 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % List of functions with parameters - START
 
-\IDmacro[a]{expb}{1}
+\IDmacro[o]{exp}{1}
 
-\IDarg{} la base de l'exponentielle
+\IDoption{} la base de l'exponentielle
 
 \separation
 
-\IDmacro[a]{logb}{1}
+\IDmacro[o]{log}{1}
 
-\IDarg{} la base du logarithme
+\IDoption{} la base du logarithme
 
 % List of functions with parameters - END
 
 
 % ---------------------- %
-
-
-\subsection{Définition explicite d'une fonction}
-
-
-
-\IDmacro{funcdef}{1}{5}
-
-
-\IDoption{}  la valeur par défaut \verb+u+. 
-\begin{enumerate}
-	\item \verb+u+ : écriture empilée avec un trait vertical.
-	
-	\item \verb+s+ : écriture empilée sans trait vertical.
-
-	\item \verb+h+ : écriture horizontale en ligne.
-\end{enumerate}
-
-
-\IDarg{1} la fonction.
-
-\IDarg{2} la variable.
-
-\IDarg{3} la formule de définition.
-
-\IDarg{4} ensemble de départ. Cet argument peut être vide si le mode \verb+h+ est activé
-
-\IDarg{5} ensemble d'arrivée.
 
 
 \subsection{Limite}
@@ -7489,6 +8072,12 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 
 
+
+
+
+
+
+
 \subsection{Arbres pondérés}
 
 
@@ -7509,10 +8098,6 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \extraspace
 
-\IDkey{pcomment} pour ajouter un commentaire à la droite d'une feuille en utilisant le même alignement horizontal pour tous les commentaires.
-
-\extraspace
-
 \IDkey{pframe} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
 
 
@@ -7523,7 +8108,33 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
 
-\IDargs{1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). Ici l'ordre n'est pas important.
+\IDargs{1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). En fait l'ordre n'est pas important ici.
+
+
+\separation
+
+
+\IDmacro{ptreeComment}{1}{2}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#black#.
+
+\IDarg{1} le nom de la feuille.
+
+\IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{ptreeFocus  }{1}{1}
+
+\IDmacro{ptreeFocus* }{1}{1}
+
+\IDmacro{ptreeFocus**}{1}{1}
+
+\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+
+\IDarg{} les noms des noeuds dans le bon ordre et séparés par des barres verticales \verb#|#.
 
 
 \section{Arithmétique}

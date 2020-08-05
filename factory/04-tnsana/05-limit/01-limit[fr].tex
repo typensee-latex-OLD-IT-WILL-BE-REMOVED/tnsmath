@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper]{article}
+
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../03-abs-function/01-abs-function.sty}
+    \input{../07-differential-calculus/01-total-diff-calculus.sty}
+
+    \usepackage{01-limit}
+
+
+   
+\begin{document}
+
+\section{Limite}
+
+\newparaexample{Cas minimaliste}
+
+Notez ci-dessous que le rendu de la limite via \macro{limit} se fait toujours en mode \macro{displaystyle} pour l'opérateur de limite.
+
+\begin{latexex}
+$\limit{f(x)}{x}{0} = \frac{1}{2}$
+\end{latexex}
+
+
+\begin{remark}
+	\verb#\lim\limits_{x \rightarrow 0} f(x)# produit 
+	$\lim\limits_{x \rightarrow 0} f(x)$ contre 
+	$\limit{f(x)}{x}{0}$ ci-dessus.
+	La version \macro{limit} utilise un petit peu plus d'espace sous le mot lim.
+\end{remark}
+
+
+
+% ---------------------- %
+
+
+\newparaexample{Avec des conditions}
+
+Ce 2\ieme{} exemple devrait rendre intéressante la macro \macro{limit} qui permet d'ajouter facilement plusieurs conditions
+\footnote{
+	En pratique, on utilise généralement au maximum une condition.
+}
+comme le montre la 2\ieme{} limite ci-après.
+
+\begin{latexex}
+$\limit{f(x)}{x}{0 | x > 0}$ ou
+$\limit{f(z)}{z}%
+       {0 | z \in \Omega | \abs{z} < 3}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Ajout de parenthèses}
+
+Les options \verb#p# et \verb#sp# permettent d'ajouter facilement des parenthèses extensibles ou non autour de la fonction. 
+Indiquons que \prefix{sp} est pour \whyprefix{s}{mall} \whyprefix{p}{arenthesis} soit \inenglish{petites parenthèses}.
+
+\begin{latexex}
+$\displaystyle\limit[p] {\frac{1}{x}}{x}
+                        {0 | x > 0}$
+ou
+$\displaystyle\limit[sp]{\frac{1}{x}}{x}
+                        {0 | x > 0}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\section{Fiches techniques}
+
+\IDmacro{limit}{1}{3}
+
+
+\IDoption{}  la valeur par défaut \verb+asit+ n'a pas vocation à être utilisée. 
+\begin{enumerate}
+	\item \verb+asit+ : rien n'est appliqué sur la fonction qui reste donc tel quelle.
+	
+	\item \verb+p   + : ajout de parenthèses extensibles autour de la fonction.
+
+	\item \verb+sp  + : ajout de parenthèses non extensibles autour de la fonction.
+\end{enumerate}
+
+
+\IDarg{1} la fonction dont on indique la limite.
+
+\IDarg{2} la variable qui va tendre vers quelque chose.
+
+\IDarg{3} la valeur limite suivie éventuellement de conditions en utilisant la barre verticale \verb+|+ pour séparer ces différentes informations.
+
+\end{document}

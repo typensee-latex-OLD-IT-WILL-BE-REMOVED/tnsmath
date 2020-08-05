@@ -1,0 +1,43 @@
+% == PACKAGES USED == %
+
+\RequirePackage{nicematrix}
+
+
+% == DEFINITIONS == %
+
+% Note: some macros of the STY for total derivation are used here.
+
+% Argument #1: parenthesis or not
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\tnsana@limit@abstract[4]{%
+    \lim\limits_{%
+		\scriptsize%
+		\tns@multi@args{|}%
+		               {#3\kern0.25ex{\rightarrow}\kern0.25ex#4}%
+		               {\begin{NiceArray}{c}}%
+		               {\\ }%
+		               {\end{NiceArray}}%
+	}#1{#2}%
+}
+
+
+% Argument #1: option s or sp
+% Argument #2: function
+% Argument #3: variable
+% Argument #4: multi-argument
+
+\newcommand\limit[4][asit]{%
+    \IfEqCase{#1}{%
+        {asit}{\let\parithere\tnsana@der@func@no@par}%
+        {p}{\let\parithere\tnsana@der@func@ext@par}%
+        {sp}{\let\parithere\tnsana@der@func@no@ext@par}%
+    }[%
+        \PackageError{tnsana}{unknown option}%
+                             {you can use asit (default), p and sp}%
+    ]%
+    %
+	\tnsana@limit@abstract{\parithere}{#2}{#3}{#4}%
+}

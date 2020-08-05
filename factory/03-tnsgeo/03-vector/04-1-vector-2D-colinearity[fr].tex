@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{04-vector-2D-coli-det}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+    \newcommand\pt[1]{\mathrm{#1}}
+
+    \newcommand\@no@point[1]{%
+        \IfStrEq{#1}{i}{%
+            \imath%
+      }{%
+            \IfStrEq{#1}{j}{%
+                \jmath%
+          }{%
+                #1
+          }%
+      }%
+  }
+
+    \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+    \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+    \newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Vecteurs}
+
+\subsection{2D -- Critère de colinéarité de deux vecteurs}
+
+\newparaexample{Version complète}
+
+Dans l'exemple suivant, le préfixe \prefix{coli} est pour \whyprefix{colin}{éarité} et \prefix{criteria} signifie \inenglish{critère}.
+
+\begin{latexex}
+$\colicriteria{\vect{u}}{x}{y}%
+              {\vect{v}}{x'}{y'}$
+ou
+$\colicriteria{\vect{AB}}%
+              {x_B - x_A}{y_B - y_A}%
+              {\vect{CD}}%
+              {x_D - x_C}{y_D - y_C}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Rédaction raccourcie pour les vecteurs}
+
+Dans l'exemple suivant, le préfixe \prefix{v} est pour \whyprefix{v}{ecteur}.
+
+\begin{latexex}
+$\vcolicriteria{u}{x}{y}%
+               {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Versions sans les vecteurs}
+
+Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument optionnel de \macro{vcolicriteria} qui par défaut est \verb+vec+ pour pour \whyprefix{vec}{teur}.
+À l'usage ceci permet des copier-coller très efficaces !
+
+
+\begin{latexex}
+ $\vcolicriteria[novec]{u}{x}{y}%
+                       {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro{colicriteria }{1}{6} \hfill \mwhyprefix{coli}{nearity}
+
+
+\IDoption{} la valeur par défaut est \verb+vec+. Voici les deux valeurs possibles.
+\begin{enumerate}
+	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+
+	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+\end{enumerate}
+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{2..3} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{5..6} les coordonnées du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro{vcolicriteria }{1}{6} \hfill \mwhyprefix{v}{ector}
+
+
+\IDoption{} voir les indications données pour la macro \macro{colicriteria}.
+
+\IDargs{1..6} voir les indications données pour la macro \macro{colicriteria}.
+
+\end{document}

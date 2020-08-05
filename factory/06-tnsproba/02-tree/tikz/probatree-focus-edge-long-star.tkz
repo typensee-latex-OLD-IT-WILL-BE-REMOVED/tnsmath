@@ -1,0 +1,19 @@
+\begin{probatree}
+    [{}, name = nU
+        [$A$, name = nA
+            [$B$, name = nB]
+            [$C$, name = nC
+                [$D$, name = nD
+                    [$E$, name = nE]
+                    [$F$, name = nF
+                        [$G$, name = nG]
+                        [$H$, name = nH]
+                    ]
+                ]
+            ]
+        ]
+        [$I$]
+    ]
+    %
+    \ptreeFocus*[red]{nU | nA | nC | nD | nF | nG}
+\end{probatree}

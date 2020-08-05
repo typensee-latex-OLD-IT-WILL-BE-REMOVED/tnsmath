@@ -20,11 +20,169 @@ de \verb+tnsmath+
 à destination de l'utilisateur principalement.
 Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+tnsmath+ sur \verb+github+.
 
-\begin{description}
+
 % Changes shown - START
 
-    \medskip
-    \item[2020-07-28] Nouvelle version mineure \verb+1.6.0-beta+.
+\begin{description}    \item[2020-08-06] Nouvelle version mineure \verb+1.7.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.6.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.7.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              les macros \macro{funcdef} et \macro{txtfuncdef} ont été déplacées dans \verb#tnssets# qui est disponible sur \url{https://github.com/typensee-latex/tnssets.git}.
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Critère de colinéarité}
+              ajout de la macro \macro{colicriteria}.
+    
+    	% -------------- %
+    
+        \item \topic*{Produit vectoriel} changement de l'API.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{vcalccrossprod*} devient \macro{vcalccrossprod**}.
+    
+            \item \macro{vcalccrossprod*} dessine des produits en croix à la place des boucles.
+        \end{itemize}
+    
+    	% -------------- %
+    
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.4.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre}
+        	  possibilité de mettre en valeur un chemin via \macro{ptreeFocus},  \macro{ptreeFocus*} ou \macro{ptreeFocus**}.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.5.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre de probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{ptreeFocus}, \macro{ptreeFocus*} et \macro{ptreeFocus**} fonctionnent avec un multi-argument pour pourvoir indiquer un chemin sur plusieurs noeuds.
+            
+            \item Suppression de la clé \macro{pcomment}.
+            
+            \item Ajout des macros \macro{ptreeComment} et \macro{ptreeComment*} qui simplifient la saisie.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % ------------- %
+    % -- tnssets -- %
+    % ------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Composition d'applications}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{compo} est un opérateur de composition de deux applications.
+    
+            \item \macro{multicomp} permet d'indiquer des compositions successives d'une application par elle-même.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              intégration de deux macros proposées avant par \verb#tnsana# disponible sur \url{https://github.com/typensee-latex/tnsana.git}.
+    
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{funcdef} peut produire trois versions symboliques.
+    
+            \item \macro{txtfuncdef} produit une version textuelle courte.
+        \end{itemize}
+    
+    
+        \item \topic{Fonctions spéciales}
+    
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout de \macro{id} pour la fonction identité.
+    
+            \item Ajout de \macro{caract} et \macro{caractone} pour deux versions de la fonction caratéristque d'un ensemble.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
     
     
     % -------------- %
@@ -49,40 +207,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
-    
-    
-    % -------------- %
-    % -- tnsproba -- %
-    % -------------- %
-    
-    
-    \begin{center}
-        \textbf{\textsc{Probabilité [0.3.0-beta]}}
-    \end{center}
-    
-    \begin{itemize}[itemsep=.5em]
-        \item \topic{Arbre}
-        \begin{itemize}[itemsep=.5em]
-            \item Ajout du style \prefix{pcomment} pour placer du texte à la droite d'une feuille.
-    
-            \item Le style \prefix{frame} a été renommé \prefix{pframe}.
-        \end{itemize}
-    
-        
-    \end{itemize}
-    
-    
-    \separation
-
-% ------------------------ %
-
-    \medskip
-    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
+\begin{description}    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
     
     
     % -------------- %
@@ -103,11 +231,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
+\begin{description}    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
     
     
     % -------------- %
@@ -165,11 +292,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
+\begin{description}    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
     
     
     % -------------- %
@@ -439,20 +565,18 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
+\begin{description}    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Tableaux de signe et de variation}
               il est maintenant possible d'ajouter des graphiques expliquant le signe d'une fonction affine ou d'une fonction trinômiale du 2\ieme{} degré.
-    \end{itemize}
+    \end{itemize}\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+\begin{description}    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Logique}
@@ -477,11 +601,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
+\begin{description}    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item Le changement vers une nouvelle version majeure se justifie par de nouvelles règles strictes pour définir les signatures des macros. À l'avenir ces règles seront appliquées tout le temps sauf dans de très rares cas.
@@ -661,11 +784,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \end{itemize}
     \end{itemize}
     
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
+\begin{description}    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -725,11 +847,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     		\item Le comportement de \macro{probacond} a été modifié pour le rendre plus logique.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+\begin{description}    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -772,11 +893,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+\begin{description}    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Algèbre}
@@ -794,11 +914,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+\begin{description}    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Ensembles}
@@ -834,11 +953,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
                   La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
+\begin{description}    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Ensembles}
@@ -869,11 +987,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
+\begin{description}    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Arithmétique}
@@ -912,11 +1029,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
         \end{itemize}
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
-    \medskip
-    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
+\begin{description}    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Algèbre linéaire}
@@ -937,10 +1053,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
               différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
     
     \end{itemize}
-
+\end{description}
 % ------------------------ %
 
 % Changes shown - END 
-\end{description}
 
 \end{document}

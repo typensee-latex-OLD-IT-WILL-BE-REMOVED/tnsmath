@@ -17,16 +17,35 @@
 
 \subsection{Commenter les racines}
 
-Que ce soit pour expliquer un arbre de probabilité  ou raisonner dessus, l'effet suivant est très utile.
-Noter qu'ici il a fallu utiliser des accolades pour cacher à TikZ les signes $=$ dans les commentaires.
+\newparaexample{Tout aligner}
+
+Que ce soit pour expliquer un arbre de probabilité, ou bien pour raisonner sur ce dernier, l'effet suivant est très utile
+\footnote{
+	Le package \texttt{forest} permet d'indiquer directement des mises en forme dans le code de l'arbre.
+	L'auteur du présent package trouve bien plus efficace à l'usage de ne pas toucher au code minimal d'un arbre.
+	Ceci explique donc le choix retenu de donner les décorations supplémentaires après le code de l'arbre.
+}.
 
 
 \inputlatexexflat{tikz/probatree-comment.tkz}
 
 
 \begin{remark}
-	Commenter un noeud interne ne provoquera pas d'erreur même si \verb#pcomment# n'a pas été conçu pour ceci.
+	Commenter un noeud interne ne provoquera pas d'erreur même si \macro{ptreeComment} n'a pas été conçu pour ceci.
 	Ceci a été utilisé dans l'exemple d'introduction mais ça reste un petit hack.
 \end{remark}
 
+
+
+\newparaexample{Coller au plus près}
+
+En utilisant \macro{ptreeComment*} au lieu de \macro{ptreeComment}, les commentaires seront proches des noeuds et donc non alignés verticalement. 
+Avec l'exemple précédent on obtient la mise en forme qui suit.
+
+\medskip
+
+\input{tikz/probatree-comment-leftmost.tkz}
+
 \end{document}
+
+

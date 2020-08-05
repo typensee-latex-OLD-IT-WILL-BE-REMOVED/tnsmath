@@ -1,0 +1,149 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+
+	\usepackage{01-named-functions}
+\makeatother
+
+
+\begin{document}
+
+\section{Fonctions nommées spéciales}
+
+\subsection{Sans paramètre}
+
+Quelques fonctions nommées ont été ajoutées en plus de celles fournies par le package \verb#amsmath#  qui est chargé en coulisse et propose par exemple $\lg x$ et $\ln x$ via les macros \macro{lg} et \macro{ln}.
+Ci-dessous le \prefix{f} dans \prefix{fch} est pour \whyprefix{f}{rench} soit \inenglish{français} \emph{(ce choix sert à éviter des incompatibilités avec d'autres packages)}. La liste complète des fonctions nommées est donnée plus bas dans la section  \ref{tnsana-all-named-functions}
+
+\begin{latexex}
+$\fch x = \cosh x$ ou $\acos x$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+% List of functions without parameter - START
+
+\foreach \k in {acos, asin, atan}{
+
+    \IDope{\k} 
+}
+                
+\separation
+
+\foreach \k in {arccosh, arcsinh, arctanh}{
+
+    \IDope{\k} 
+}
+                
+\separation
+
+\foreach \k in {acosh, asinh, atanh}{
+
+    \IDope{\k} 
+}
+                
+\separation
+
+\foreach \k in {fch, fsh, fth}{
+
+    \IDope{\k} \hfill \mwhyprefix{{f}}{{rench}}
+}
+                
+\separation
+
+\foreach \k in {afch, afsh, afth}{
+
+    \IDope{\k} 
+}
+
+% List of functions without parameter - END
+
+
+% ---------------------- %
+
+
+\subsection{Avec un paramètre}
+
+Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
+
+\begin{latexex}
+$\log[2] x = \lg x$ ou
+$\exp[6] y = 6^y$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiches techniques}
+
+% List of functions with parameters - START
+
+\IDmacro[o]{exp}{1}
+
+\IDoption{} la base de l'exponentielle
+
+\separation
+
+\IDmacro[o]{log}{1}
+
+\IDoption{} la base du logarithme
+
+% List of functions with parameters - END
+
+
+% ---------------------- %
+
+
+\subsection{Toutes les fonctions nommées en plus} \label{tnsana-all-named-functions}
+
+\vspace{-1em}
+
+\begin{multicols}{2}
+% Table of all - START
+    \macro{acos x} : $\acos x$
+
+    \macro{asin x} : $\asin x$
+
+    \macro{atan x} : $\atan x$
+
+    \macro{arccosh x} : $\arccosh x$
+
+    \macro{arcsinh x} : $\arcsinh x$
+
+    \macro{arctanh x} : $\arctanh x$
+
+    \macro{acosh x} : $\acosh x$
+
+    \macro{asinh x} : $\asinh x$
+
+    \macro{atanh x} : $\atanh x$
+
+    \macro{fch x} : $\fch x$
+
+    \macro{fsh x} : $\fsh x$
+
+    \macro{fth x} : $\fth x$
+
+    \macro{afch x} : $\afch x$
+
+    \macro{afsh x} : $\afsh x$
+
+    \macro{afth x} : $\afth x$
+
+    \macro{exp x} : $\exp x$
+
+    \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{log x} : $\log x$
+
+    \macro{log[p] x} : $\log[p] x$
+% Table of all - END
+\end{multicols}
+
+\end{document}

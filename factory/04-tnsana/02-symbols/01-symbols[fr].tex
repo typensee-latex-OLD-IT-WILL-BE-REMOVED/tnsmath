@@ -11,7 +11,15 @@
 
 \section{Une variable \og symbolique \fg{}}
 
-Le package \verb+tnscom+ propose les macros \macro{symvar} et \macro{symvar*} qui produisent les symboles $\symvar$ et $\symvar*$ . Le nom utilisé vient de \prefix{symvar} pour \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
+Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
+
+\begin{latexex}
+$\symvar = \symvar[1]$ ou
+$\symvar[2]$ ou
+$\symvar[3]$
+\end{latexex}
+
+Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
 Ces symboles sont utiles pour indiquer un argument symboliquement sans faire référence précisément à une ou des variables nommées.
 
 
@@ -20,8 +28,14 @@ Ces symboles sont utiles pour indiquer un argument symboliquement sans faire ré
 
 \section{Fiches techniques}
 
-\IDmacro[n]{symvar }
+\IDmacro[o]{symvar}{1}
 
-\IDmacro[n]{symvar*}
+\IDoption{} le numéro du symbole qui vaut \verb#1# par défaut.
+\begin{itemize}
+	\item \verb#1# donne $\symvar[1]$ .
+	\item \verb#2# donne $\symvar[2]$ .
+	\item \verb#3# donne $\symvar[3]$ .
+%	\item \verb#4# donne $\symvar[4]$ .
+\end{itemize}
 
 \end{document}

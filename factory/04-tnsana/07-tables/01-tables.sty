@@ -1,0 +1,619 @@
+% == PACKAGES USED == %
+
+\RequirePackage{commado}
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+
+\RequirePackage{amsmath}
+\RequirePackage{circledsteps}
+
+\RequirePackage{tkz-tab}
+\RequirePackage{pgfplots}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{babel} % IMPORTANT !
+\usetikzlibrary{arrows.meta, backgrounds}
+
+
+% == DEFINITIONS == %
+
+% Better style for arrowhead !
+
+\tkzTabSetup[%
+    arrowstyle     = triangle 60,%
+    doubledistance = 3pt%
+]
+
+
+% Graph Sign to decorate tkzTables.
+%
+% Sources
+%    + https://tex.stackexchange.com/a/549546/6880
+%    + https://groups.google.com/forum/#!topic/fr.comp.text.tex/X6aIq-SZDFA
+%    + https://tex.stackexchange.com/a/91424/6880
+%    + https://tex.stackexchange.com/a/159132/6880
+
+% Single highlight a line
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@back@line[2]{
+    \begin{scope}[on background layer]
+        \path [fill=#1] (T0#2) rectangle (T2\the\numexpr#2+1\relax);
+    \end{scope}
+}  
+
+% Highlight a line
+%
+%    #1 : color
+%    #2 : nb of the line
+
+\ExplSyntaxOn
+    \NewDocumentCommand\backLine{O{gray!30}m}{
+        \clist_map_inline:nn{#2}{\tnsana@back@line{#1}{##1}}
+    }
+\ExplSyntaxOff
+
+
+% For comments and graphs
+
+\newcommand\@tkzdeco@node@middle[1]{
+    \coordinate (M) at ($(T2#1)!.5!(T2\the\numexpr#1+1\relax)$)
+}
+
+% Comment a line
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : text
+\newcommand\comLine[3][blue]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.6,0) node[right, #1]{\footnotesize#3}
+    ;
+}
+
+
+% Options : gso = graphtnsana@sign@option
+
+\newcounter{tnsana@gso@nb@functions}
+\newcommand\tnsana@gso@function{}
+
+\newcounter{tnsana@gso@nb@a@constraints}
+\newcommand\tnsana@gso@a@constraints{}
+
+\newcounter{tnsana@gso@nb@d@constraints}
+\newcommand\tnsana@gso@d@constraints{}
+
+
+\newcommand\tnsana@validate@graphtnsana@sign@option[1]{%
+    % Parameter a
+    \IfSubStr{an,ap}{#1}{%
+        \stepcounter{tnsana@gso@nb@a@constraints}%
+        \renewcommand\tnsana@gso@a@constraints{@#1}%
+    }{%
+    % Parameter d
+        \IfSubStr{dn,dp,dz}{#1}{%
+            \stepcounter{tnsana@gso@nb@d@constraints}%
+            \renewcommand\tnsana@gso@d@constraints{@#1}%
+        }{%
+    % Functions with parameters
+            \IfEqCase{#1}{%
+                {ax+b}{%
+                    \renewcommand\tnsana@gso@function{line}%
+                }%
+                {ax2+bx+c}{%
+                    \renewcommand\tnsana@gso@function{parabola}%
+                }%
+                {x2}{%
+                    \renewcommand\tnsana@gso@function{square}%
+                }%
+                {sqrt}{%
+                    \renewcommand\tnsana@gso@function{sqrt}%
+                }%
+                {1/x}{%
+                    \renewcommand\tnsana@gso@function{inv}%
+                }%
+                {abs}{%
+                    \renewcommand\tnsana@gso@function{abs}%
+                }%
+                {exp}{%
+                    \renewcommand\tnsana@gso@function{exp}%
+                }%
+                {ln}{%
+                    \renewcommand\tnsana@gso@function{ln}%
+                }%
+            }[%
+                \PackageError{tnsana}{unknown option for graphSign}%
+                                     {Illegal option given for graphSign : #1 .}%
+            ]%
+            \stepcounter{tnsana@gso@nb@functions}%
+        }% END OF ELSE for parameter d 
+    }% END OF ELSE for parameter a 
+}
+
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : kind of graph
+\newcommand\graphSign[3][blue]{%
+    \renewcommand\tnsana@gso@function{}
+    \renewcommand\tnsana@gso@a@constraints{}
+    \renewcommand\tnsana@gso@d@constraints{}
+    % Processing the options
+    \setcounter{tnsana@gso@nb@functions}{0}
+    \setcounter{tnsana@gso@nb@a@constraints}{0}
+    \setcounter{tnsana@gso@nb@d@constraints}{0}
+    %
+    \DoWithCSL\tnsana@validate@graphtnsana@sign@option{#3}
+    % Only one kind of function ?
+    \ifnum\value{tnsana@gso@nb@functions}=1\else%
+        \PackageError{tnsana}{only one kind of function can be given graphSign}%
+                             {Number of kinds of function given to graphSign = \thetnsana@gso@nb@functions. This is illegal !}%
+    \fi%
+    % Line need only one constraint for a.
+    \IfStrEq{\tnsana@gso@function}{line}{%
+        \ifnum\value{tnsana@gso@nb@d@constraints}=0\else%
+            \PackageError{tnsana}{constraints for d with lines are nonsense for graphSign}%
+                                 {Lines for graphSign need only one constraint for a.}%
+        \fi%
+        %
+        \ifnum\value{tnsana@gso@nb@a@constraints}=1\else%
+            \PackageError{tnsana}{one single constraint for a with lines is needed for graphSign}%
+                                 {Number of constraints for a given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+        \fi%
+    }{%
+    % Parabola need only one constraint for a and also one for d.
+        \IfStrEq{\tnsana@gso@function}{parabola}{%
+            \ifnum\value{tnsana@gso@nb@d@constraints}=1\else%
+                \PackageError{tnsana}{one single constraint for d with parabolas is needed for graphSign}%
+                                     {Number of constraints for d given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+            \fi%
+            %
+            \ifnum\value{tnsana@gso@nb@a@constraints}=1\else%
+                \PackageError{tnsana}{one single constraint for a with lines is needed for graphSign}%
+                                     {Number of constraints for a given to graphSign = \thetnsana@gso@nb@a@constraints. This is illegal !}%
+            \fi%
+        %
+        }{%
+    % No constraint for reference function
+            \ifnum\value{tnsana@gso@nb@a@constraints}=0\else%
+                \PackageError{tnsana}{one constraint for a with reference function are nonsense for graphSign}%
+                                     {Reference functions for graphSign don't need any constraint.}%
+            \fi%
+            \ifnum\value{tnsana@gso@nb@d@constraints}=0\else%
+                \PackageError{tnsana}{one constraint for d with reference function are nonsense for graphSign}%
+                                     {Reference functions for graphSign don't need any constraint.}%
+            \fi%
+        }%
+    }%
+    % Call of the good function
+    \csname  tnsana@sign@\tnsana@gso@function\tnsana@gso@a@constraints\tnsana@gso@d@constraints\endcsname{#1}{#2}
+    % Looking for invalid options 
+    % Everything is ok.
+}
+
+
+
+% AXES
+%
+%    #1 : color
+%    #2 : start
+%    #3 : end
+
+\newcommand\tnsana@abstract@axes[3]{
+	\draw[->, -Latex, #1] (#2) --+ (#3);
+}
+
+
+% LINES
+%
+% ax+b , ap  -->  \tnsana@sign@line@ap
+% ax+b , an  -->  \tnsana@sign@line@an
+
+
+% Abstraction for the lines
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+%    #4 : 1st ordinate
+%    #5 : 2nd ordinate
+%    #6 : 1st sign
+%    #7 : 2nd sign
+%    #8 : 1st shifts
+%    #9 : 2nd shifts
+\newcommand\tnsana@abstract@sign@line[9]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \tnsana@abstract@axes{#1}{-0.1,0}{0:2.7}
+                % Plot of the function with the signs.
+                \draw[#1, thick]
+                    (0, #4)   node[xshift = -1.5mm, yshift =#8]
+                              {\CircledText{\scriptsize#6}}
+                    --
+                    (2.5, #5) node[xshift = -4.5mm, yshift = #9]
+                              {\CircledText{\scriptsize#7}};
+                % 1 root
+                \path (1.25,0) node[above, #1]{\footnotesize#3};
+        }
+    };
+}
+
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+\newcommand\tnsana@sign@line@an[3]{
+    \tnsana@abstract@sign@line{#1}{#2}{#3}  %
+                              {.65} {-.65}  % 1st and 2nd ordinates
+                              {$+$} {$-$}   % 1st and 2nd signs
+                              {-4mm}{3.5mm} % 1st and 2nd y shifts
+}
+
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+\newcommand\tnsana@sign@line@ap[3]{
+    \tnsana@abstract@sign@line{#1}{#2}{#3}   %
+                              {-.65}{.65}    % 1st and 2nd ordinates
+                              {$-$} {$+$}    % 1st and 2nd signs
+                              {4mm} {-3.5mm} % 1st and 2nd y shifts
+}
+
+
+
+% PARABOLAS
+
+% ax2+bx+c , ap , dp  -->  \tnsana@sign@parabola@ap@dp
+% ax2+bx+c , ap , dn  -->  \tnsana@sign@parabola@ap@dn
+% ax2+bx+c , ap , dz  -->  \tnsana@sign@parabola@ap@dz
+% ...etc
+
+
+% a > 0 and delta > 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : smaller root
+%    #4 : bigger root
+\newcommand\tnsana@sign@parabola@ap@dp[4]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \tnsana@abstract@axes{#1}{-0.1,0}{0:2.7}
+                % Plot of the function.
+                \draw[#1, thick] (0.25,.6) parabola bend (1.25,-.6) (2.25,.6);
+                % The signs.
+                \path (.4,.3)     node[left, #1]
+                                  {\CircledText{\scriptsize$+$}};
+                \path (1.25,0.03) node[below, #1]
+                                  {\CircledText{\scriptsize$-$}};
+                \path (2.1,.3)    node[right, #1]
+                                  {\CircledText{\scriptsize$+$}};
+                % 2 roots
+                \path (.32,0)  node[below, #1]
+                               {\footnotesize#3};
+                \path (2.18,0) node[below, #1]
+                               {\footnotesize#4};
+            }
+        };
+}
+
+
+% a < 0 and delta > 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : smaller root
+%    #4 : bigger root
+\newcommand\tnsana@sign@parabola@an@dp[4]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \tnsana@abstract@axes{#1}{-0.1,0}{0:2.7}
+                % Plot of the function.
+                \draw[#1, thick] (0.25,-.6) parabola bend (1.25,.6) (2.25,-.6);
+                % The signs.
+                \path (.4,-.3)     node[left, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                \path (1.25,-0.03) node[above, #1]
+                                   {\CircledText{\scriptsize$+$}};
+                \path (2.1,-.3)    node[right, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                % 2 roots
+                \path (.32,0)  node[above, #1]
+                               {\footnotesize#3};
+                \path (2.18,0) node[above, #1]
+                               {\footnotesize#4};
+            }
+        };
+}
+
+
+% Abstraction for the parabolas with delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : the root
+%    #4 : y shift
+%    #5 : 1st ordinate
+%    #6 : 2nd ordinate
+%    #7 : sign
+%    #8 : position
+\newcommand\tnsana@abstract@sign@parabola@dz[8]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \tnsana@abstract@axes{#1}{-0.1,#6}{0:2.7}
+                % Plot of the function.
+                \draw[#1, thick] (0.25,#5) parabola bend (1.25,#6) (2.25,#5);
+                % The signs.
+                \path (.5,#8) node[left, #1]
+                              {\CircledText{\scriptsize#7}};
+                \path (2,#8)  node[right, #1]
+                              {\CircledText{\scriptsize#7}};
+                % 1 root
+                \path (1.25,#6) node[yshift = #4, #1]
+                                {\footnotesize#3};
+            }
+        };
+}
+
+
+% a > 0 and delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : root
+\newcommand\tnsana@sign@parabola@ap@dz[3]{
+    \tnsana@abstract@sign@parabola@dz{#1}{#2}         %
+                                     {#3}{0mm, above} % The root and its y shift
+                                     {.6}{-.6}        % 1st and 2nd ordinates
+                                     {$+$}{-.3}       % The sign and its position
+}
+
+
+% a < 0 and delta = 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : root
+\newcommand\tnsana@sign@parabola@an@dz[3]{
+    \tnsana@abstract@sign@parabola@dz{#1}{#2}           %
+                                     {#3}{-.1mm, below} % The root and its y shift
+                                     {-.6}{.6}          % 1st and 2nd ordinates
+                                     {$-$}{.3}          % The sign and its position
+}
+
+
+% Abstraction for the parabolas with delta < 0
+%
+%    #1 : color
+%    #2 : nb of the line
+%    #3 : y of the axe
+%    #4 : 1st ordinate
+%    #5 : 2nd ordinate
+%    #6 : sign
+%    #7 : ordinate
+%    #8 : position
+\newcommand\tnsana@abstract@sign@parabola@dn[8]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axe of abscisses
+                \tnsana@abstract@axes{#1}{-0.1,#3}{0:2.7}
+                % Plot of the function.
+                \draw[#1, thick] (0.35,#4) parabola bend (1.25,#5) (2.15,#4);
+                % The sign.
+                \path (1.25,#7) node[#8, #1]
+                                {\CircledText{\scriptsize#6}};
+            }
+        };
+}
+
+
+% a > 0 and delta < 0
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@parabola@ap@dn[2]{
+    \tnsana@abstract@sign@parabola@dn{#1}{#2}         %
+                                     {-.55}           % y of the axe
+                                     {.57}{-.4}       % 1st and 2nd ordinates
+                                     {$+$}{.3}{below} % The sign, its ordinate and its position
+}
+
+
+
+\newcommand\tnsana@sign@parabola@an@dn[2]{
+    \tnsana@abstract@sign@parabola@dn{#1}{#2}          %
+                                     {.55}             % y of the axe
+                                     {-.57}{.4}        % 1st and 2nd ordinates
+                                     {$-$}{-.3}{above} % The sign, its ordinate and its position
+}
+
+
+% REFERENCE
+
+% x2    -->  \tnsana@sign@square
+% srqt  -->  \tnsana@sign@square@root
+% 1/x   -->  \tnsana@sign@inv
+% abs   -->  \tnsana@sign@abs
+%
+% exp   -->  \tnsana@sign@exp
+% ln    -->  \tnsana@sign@ln
+
+
+% x^2
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@square[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,-0.4}{0:2.7}
+                \tnsana@abstract@axes{#1}{1.25,-.6}{90:1.257}
+                % Plot of the function.
+                \draw[#1, thick] (0.25,.6) parabola bend (1.25,-.4) (2.25,.6);
+                % The signs.
+                \path (.5,-.1) node[left, #1]
+                               {\CircledText{\scriptsize$+$}};
+                \path (2,-.1)  node[right, #1]
+                               {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% abs x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@abs[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,-0.4}{0:2.7}
+                \tnsana@abstract@axes{#1}{1.25,-.6}{90:1.257}
+                % Plot of the function.
+                \draw[#1, thick] (0.1,.6) --++ (1.15,-1) --+ (1.15,1);
+                % The signs.
+                \path (.5,-.1) node[left, #1]
+                               {\CircledText{\scriptsize$+$}};
+                \path (2,-.1)  node[right, #1]
+                               {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% sqrt x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@sqrt[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,-0.4}{0:2.7}
+                \tnsana@abstract@axes{#1}{0.1,-.6}{90:1.25}
+                % Plot of the function.
+                \draw[#1, thick, domain = 0.1:2.5] 
+                    % 2.5**-.5 = 0.63
+                    plot ({\x}, {.6*sqrt(\x - .1) - .4});
+                % The signs.
+                \path (.9125,-0.1) node[right, #1]
+                                   {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% 1/x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@inv[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,0}{0:2.7}
+                \tnsana@abstract@axes{#1}{1.25,-.6}{90:1.25}
+                % Plot of the function.
+                \draw[#1, thick, domain = 1.35:2.35]
+                    % .1*.6 * 1.25 = .075
+                    %
+                    % .065 / (x - 1.25) = .6  <==>  x - 1.25 = .065/.6
+                    %                         <==>  x = 1.25 + .065/.6 = 1.358 
+                    plot ({\x}, {.065 / (\x - 1.25)});
+                \draw[#1, thick, domain = 0.1:1.15]
+                    plot ({\x}, {.065 / (\x - 1.25)});
+                % The signs.
+                    % Cf. parabolas : (1.25 + 2.1)/2 = 1.675
+                \path (1.5,.425) node[right, #1]
+                                 {\CircledText{\scriptsize$+$}};
+                \path (1,-.425)  node[left, #1]
+                                 {\CircledText{\scriptsize$-$}};
+            }
+        };
+}
+
+
+% exp x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@exp[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,-0.4}{0:2.7}
+                \tnsana@abstract@axes{#1}{1.25,-.6}{90:1.25}
+                % Plot of the function.
+                \draw[#1, thick, domain = -0.1:1.645] 
+                    %       .3*exp(3*(x - 1.25)) - .35 = .6
+                    % <==>  .3*exp(3*(x - 1.25)) = .95
+                    % <==>  x = 1.25 + ln(9.5/3)/3 = 1.634
+                    plot ({\x}, {.3*exp(3*(\x - 1.25)) - .35});
+                % The signs.
+                \path (1,.1) node[left, #1]
+                             {\CircledText{\scriptsize$+$}};
+            }
+        };
+}
+
+
+% ln x
+%
+%    #1 : color
+%    #2 : nb of the line
+\newcommand\tnsana@sign@ln[2]{
+    \@tkzdeco@node@middle{#2};
+    \path
+        (M.east) + (.75,0) pic[right]{%
+            code = {
+                % Axes
+                \tnsana@abstract@axes{#1}{-0.1,0}{0:2.7}
+                \tnsana@abstract@axes{#1}{0.1,-.6}{90:1.25}
+                \draw[->, -Latex, #1] (-0.1,0) --+ (0:2.7);
+                \draw[->, -Latex, #1] (0.1,-.6) --+ (90:1.25);
+                % Plot of the function.
+                \draw[#1, thick, domain = 0.225:2.55]
+                    plot ({\x}, {.3*ln((\x - .1))});
+                % The signs.
+                \path (1.25,.4)    node[right, #1]
+                                   {\CircledText{\scriptsize$+$}};
+                \path (1.05,-.475) node[left, #1]
+                                   {\CircledText{\scriptsize$-$}};
+                % 1 root
+                \path (1.05,0) node[#1,above]
+                               {\footnotesize$1$};
+            }
+        };
+}
+
+
+
+

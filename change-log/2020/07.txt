@@ -1,3 +1,10 @@
+==========
+2020-07-29
+==========
+
+**Internal machinery for the documentation:** the ¨python file path::``build-01-dep[slow].py`` updates automatically a ¨tex file with all the packages used by ¨tnsmath.
+
+
 // Added : 2020-07-25 [16:18:34]
 ==========
 2020-07-25
@@ -28,7 +35,7 @@ warning::
 
     1) The printing uses now ¨macroenvsign the new version of ¨cbdevtools (this tool is still in alpha version).
 
-    1) The import of of all the sub parts can be forced via the ¨cli option term::``-f`` or term::``--force``.
+    1) The import of all the sub parts can be forced via the ¨cli option term::``-f`` or term::``--force``.
 
 
 // Added : 2020-07-22 [11:10:50]

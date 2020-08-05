@@ -1,75 +1,21 @@
-% ---------------------- %
-% -- IMPORTS REQUIRED -- %
-% ---------------------- %
-
-% A
-\RequirePackage{amssymb}
-% B
-\RequirePackage{bm}
-% C
-\RequirePackage{centernot}
-\RequirePackage{circledsteps}
-\RequirePackage{commado}
-% D
-\RequirePackage{dsfont}
-% E
-\RequirePackage{esvect}
-\PassOptionsToPackage{f}{esvect}
-% F
-\RequirePackage{forest}
-\RequirePackage{forloop}
-% I
-\RequirePackage{ifmtarg}
-% L
-\RequirePackage{longtable}
-% M
-\RequirePackage{mathrsfs}
-\RequirePackage{mathtools}
-% N
-\RequirePackage{nicematrix}
-% P
-\RequirePackage{pgfplots}
-% R
-\RequirePackage{relsize}
-% S
-\RequirePackage{simplekv}
-\RequirePackage{stackengine}
-\RequirePackage{stmaryrd}
-% T
-\RequirePackage{tkz-tab}
-\RequirePackage{tnscom}
-\RequirePackage{trimspaces}
-% U
-\RequirePackage{upgreek}
-\PassOptionsToPackage{Symbolsmallscale}{upgreek}
-% W
-\RequirePackage{witharrows}
-% X
-\RequirePackage{xstring}
-% Y
-\RequirePackage{yhmath}
-
-% TikZ libraries
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{babel}
-\usetikzlibrary{backgrounds}
-\usetikzlibrary{calc}
-
-
-
-
 % == PACKAGES USED == %
 
+\RequirePackage{tnscom}
+
 \RequirePackage{forest}
-\usetikzlibrary{calc}
-\usetikzlibrary{babel}
+\usetikzlibrary{calc, babel}
+
+\RequirePackage{trimspaces}
+\RequirePackage{xparse}
+\RequirePackage{xstring}
 
 
 % == DEFINITIONS == %
 
 \useforestlibrary{linguistics}
 
-% Global settings
+
+% -- Global settings -- %
 
 \forestset{
     declare count = {connections}{1}, 
@@ -93,12 +39,22 @@
 }
 
 
+
 % Sources
+%    * https://stackoverflow.com/a/1873617/4589608
 %    * ???? (all settings)
 %    * https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
 %    * https://tex.stackexchange.com/questions/554843/tikz-forest-align-pcomment*-contents-added-on-the-right-of-the-final-nodes/554855#554855
 
+\newenvironment{probatree}{%
+	\startprobatree%
+}{}
+
+\def\startprobatree#1\end{\tnsproba@tree{#1}\end}
+
+
 \newcommand\tnsproba@tree[1]{
+% Into the tree...
     \begin{forest}
         for tree = {%
             sn edges,
@@ -159,29 +115,58 @@
 				\node [draw, ##1, thick, rounded corners,fit to=tree]{};
 			}
 		},
-		pcomment/.style={
-		    tikz+={
-		        \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
-	    	},
-		},
+%		pcomment/.style={
+%		    tikz+={
+%		        \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
+%	    	},
+%		},
 		tikz+={
-    		\coordinate (pcomment coord) at (current bounding box.east);
-		}
+    		\coordinate (ptreecomment coord) at (current bounding box.east);
+		},
         #1
     \end{forest}
 }
 
-% Source: https://stackoverflow.com/a/1873617/4589608
-\newenvironment{probatree}{\startprobatree}{}
-\def\startprobatree#1\end{\tnsproba@tree{#1}\end}
+
 
 \newenvironment{probatree*}{
-    \forestset{pweight/.style={}}
+    \forestset{
+    	pweight/.style={},
+    	apweight/.style={},
+    	bpweight/.style={},
+	}
     \begin{probatree}
 }{
     \end{probatree}
 }
 
+
+
+% -- Comments -- %
+
+% #1 : color
+%
+% #2 : node
+% #3 : comment
+\newcommand\ptreeComment{\@ifstar{\ptree@comment@star}{\ptree@comment@no@star}}
+
+\newcommand\ptree@comment@no@star[3][black]{
+	\node [anchor=mid west, xshift=.5cm, yshift=0cm] at (#2.mid -| ptreecomment coord) {%
+		\textcolor{#1}{#3}%
+	};
+}
+
+
+
+\newcommand\ptree@comment@star[3][black]{
+	\node [anchor=mid west, xshift=.75cm, yshift=0cm] at (#2.mid) {%
+		\textcolor{#1}{#3}%
+	};
+}
+
+
+
+% -- Frames -- %
 
 % #1 : color
 % #2 : left start corner
@@ -192,4 +177,98 @@
           thick,
           rounded corners,
           fit = (#2)(#3)(#4)] {};
+}
+
+
+
+% -- Focus -- %
+
+\newcommand\ptreeFocus{\@ifstar{\tnsproba@ptree@focus@star}{\tnsproba@ptree@focus@no@star}}
+
+\newcommand\tnsproba@ptree@focus@star{\@ifstar{\tnsproba@ptree@focus@star@star}{\tnsproba@ptree@focus@star@no@star}}
+
+
+\newcommand\tnsproba@ptree@focus@color{blue}
+
+
+% #1 : node
+\newcommand\tnsproba@ptree@focus@abstract@node[1]{
+	\node[draw       = \tnsproba@ptree@focus@color,
+          line width = 2pt,
+          inner sep  = 0pt,
+          rounded corners,
+          fit = (\trim@spaces{#1})(\trim@spaces{#1})(\trim@spaces{#1})] {};
+}
+
+
+% #1 : node
+\newcommand\tnsproba@ptree@focus@abstract@node@nostart[1]{
+	\ifnum\value{tns@multi@apply@each@position}=1\else
+    	\tnsproba@ptree@focus@abstract@node{#1}
+    \fi
+}
+
+
+% #1 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@abstract@multi@nodes[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node}%
+		                 {#1}
+}
+
+
+\newcommand\tnsproba@ptree@focus@abstract@multi@nodes@nostart[1]{
+	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node@nostart}%
+		                 {#1}
+}
+
+
+
+% #1 : start of the edge
+% #2 : end   of the edge
+\newcommand\tnsproba@ptree@focus@abstract@edge[2]{
+    \draw[\tnsproba@ptree@focus@color,
+          line cap   = round,
+          line width = 2.5pt] 
+    	(\trim@spaces{#1}.parent anchor)
+	 -- (\trim@spaces{#2}.child anchor);
+}
+
+
+% #1 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@abstract@multi@edges[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@couple{\tnsproba@ptree@focus@abstract@edge}%
+	                       {#1}
+}
+
+
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@star@no@star[2][blue]{
+	\renewcommand\tnsproba@ptree@focus@color{#1}
+	\tnsproba@ptree@focus@abstract@multi@edges{#2}
+	\tnsproba@ptree@focus@abstract@multi@nodes@nostart{#2}
+}
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@no@star[2][blue]{
+	\renewcommand\tnsproba@ptree@focus@color{#1}
+	\tnsproba@ptree@focus@abstract@multi@edges{#2}
+	\tnsproba@ptree@focus@abstract@multi@nodes{#2}
+}
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@star@star[2][blue]{
+	\renewcommand\tnsproba@ptree@focus@color{#1}
+	\tnsproba@ptree@focus@abstract@multi@edges{#2}
 }

@@ -2,6 +2,7 @@
 
 \makeatletter
     \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
 
     \usepackage{01-tree}
 \makeatother
@@ -14,11 +15,18 @@
 
 \section{Arbres pondérés}
 
-\subsection{Que se passe-t-il en coulisse ?}
+\subsection{Au commencement était la forêt...}
 
-Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+. On peut donc faire appel à la machinerie de ce dernier et obtenir des choses sympathiques comme ci-dessous à moindre coût neuronal.
+Le gros du travail est fait par le package \verb+forest+ qui s'appuie \verb+TikZ+ dont on peut utiliser toute la machinerie afin d'obtenir des choses sympathiques comme ci-dessous et ceci à moindre coût neuronal comme vont le montrer les explications données dans les sections suivantes.
 
-\inputlatexexcodeafter{tikz/probatree-showcase.tkz}
+\inputlatexexcodeafter{TikZ/probatree-showcase.tkz}
+
+
+\begin{remark}
+	Jusqu'à la section \ref{tnsproba-autonum-forest} page \pageref{tnsproba-autonum-forest}, nous nommerons à la main les noeuds des arbres via \verb#name = ...# lorsque cela sera nécessaire.
+	Dans la section indiquée nous verrons comment utiliser les noms automatiques donnés par le package \verb#forest#.
+\end{remark}
+
 
 
 % ---------------------- %
@@ -31,7 +39,7 @@ Le gros du travail est fait par le package \verb+forest+ qui utilise \verb+TiKz+
 Commençons par un arbre nu pour voir comment utiliser l'environnement \verb+probatree+ qui s'appuie en coulisse sur celui nommé \verb+forest+ du package éponyme.
 L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de l'arbre qui sont propres à \verb+probatree+.
 
-\inputlatexex{tikz/probatree-undecorated.tkz}
+\inputlatexex{TikZ/probatree-undecorated.tkz}
 
 
 % ---------------------- %
@@ -39,13 +47,16 @@ L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de 
 
 \newparaexample{Ajouter des pondérations}
 
-Dans le code suivant, ce sont les styles spéciaux supplémentaires \verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches
+Dans le code suivant, ce sont les clés
 \footnote{
-    \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
-    Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
-}.
+	En fait du point de vue de TikZ, ce sont des styles.
+}
+\verb+pweight+, \verb+apweight+ et \verb+bpweight+ qui facilitent l'écriture des pondérations sur les branches.
+Indiquons que \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
+Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
 
-\inputlatexex{tikz/probatree-weight-placement.tkz}
+
+\inputlatexex{TikZ/probatree-weight-placement.tkz}
 
 
 % ---------------------- %
@@ -55,7 +66,7 @@ Dans le code suivant, ce sont les styles spéciaux supplémentaires \verb+pweigh
 
 On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX{} \emph{(ceci peut être utile lors de la rédaction d'exercices)}.
 
-\inputlatexex{tikz/probatree-weight-hide-all.tkz}
+\inputlatexex{TikZ/probatree-weight-hide-all.tkz}
 
 
 % ---------------------- %
@@ -63,22 +74,22 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
+Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous \emph{(ceci aussi peut servir à rédiger des exercices)}.
 
-\inputlatexex{tikz/probatree-weight-hide-locally.tkz}
-
-
-% ---------------------- %
+\inputlatexex{TikZ/probatree-weight-hide-locally.tkz}
 
 
-\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
-
-Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
-\footnote{
-	Ces deux symboles font partie de la syntaxe TikZ.
-}.
-Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
-
-\inputlatexex{tikz/probatree-weight-coma-equal.tkz}
-
+%% ---------------------- %
+%
+%
+%\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
+%
+%Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
+%\footnote{
+%	Ces deux symboles font partie de la syntaxe TikZ.
+%}.
+%Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
+%
+%\inputlatexex{TikZ/probatree-weight-coma-equal.tkz}
+%
 \end{document}

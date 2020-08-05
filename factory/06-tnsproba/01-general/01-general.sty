@@ -5,7 +5,7 @@
 
 % == DEFINITIONS == %
 
-% Semantic probability
+% -- Semantic probability -- %
 
 \newcommand\proba[2][p]{%
     \mathchoice{% * Display style
@@ -20,7 +20,7 @@
 }
 
 
-% Conditional probability
+% -- Conditional probability -- %
 
 \newcommand\tnsproba@abstract@proba@cond[4]{%
     #1{\proba[#2]{#3 \cap #4}}{\proba[#2]{#4}}%
@@ -49,14 +49,14 @@
 }
 
 
-% "Not" event
+% -- "Not" event -- %
 
 \newcommand\nevent[1]{%
     \overline{\kern.15ex#1\vphantom{#1^{x}}\kern.15ex}%
 }
 
 
-% Expected value - Variance - Standard deviation
+% -- Expected value - Variance - Standard deviation -- %
 
 \newcommand\expval[2][\mathrm{E}]{%
     \proba[#1]{#2}%

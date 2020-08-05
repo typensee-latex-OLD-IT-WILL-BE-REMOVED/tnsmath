@@ -1,0 +1,156 @@
+Nouvelle version mineure \verb+1.7.0-beta+.
+
+
+% -------------- %
+% -- tnsana -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.6.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic{Définition explicite d'une fonction}
+    \begin{itemize}[itemsep=.5em]
+        \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+
+        \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+    \end{itemize}
+
+% ------------------------ %
+
+    \item \topic*{Fonctions avec un paramètre}
+          les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+
+% ------------------------ %
+
+    \item \topic*{Dérivation partielle}
+          \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+          
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Analyse [0.7.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Définition explicite d'une fonction}
+          les macros \macro{funcdef} et \macro{txtfuncdef} ont été déplacées dans \verb#tnssets# qui est disponible sur \url{https://github.com/typensee-latex/tnssets.git}.
+    
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsgeo -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Géométrie [0.2.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Critère de colinéarité}
+          ajout de la macro \macro{colicriteria}.
+
+	% -------------- %
+
+    \item \topic*{Produit vectoriel} changement de l'API.
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{vcalccrossprod*} devient \macro{vcalccrossprod**}.
+
+        \item \macro{vcalccrossprod*} dessine des produits en croix à la place des boucles.
+    \end{itemize}
+
+	% -------------- %
+
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsproba -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Probabilité [0.4.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Arbre}
+    	  possibilité de mettre en valeur un chemin via \macro{ptreeFocus},  \macro{ptreeFocus*} ou \macro{ptreeFocus**}.
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Probabilité [0.5.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic{Arbre de probabilités}
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{ptreeFocus}, \macro{ptreeFocus*} et \macro{ptreeFocus**} fonctionnent avec un multi-argument pour pourvoir indiquer un chemin sur plusieurs noeuds.
+        
+        \item Suppression de la clé \macro{pcomment}.
+        
+        \item Ajout des macros \macro{ptreeComment} et \macro{ptreeComment*} qui simplifient la saisie.
+    \end{itemize}
+\end{itemize}
+
+
+\separation
+
+
+% ------------- %
+% -- tnssets -- %
+% ------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Théorie générale des ensembles [0.2.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic{Composition d'applications}
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{compo} est un opérateur de composition de deux applications.
+
+        \item \macro{multicomp} permet d'indiquer des compositions successives d'une application par elle-même.
+    \end{itemize}
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Théorie générale des ensembles [0.3.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Définition explicite d'une fonction}
+          intégration de deux macros proposées avant par \verb#tnsana# disponible sur \url{https://github.com/typensee-latex/tnsana.git}.
+
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{funcdef} peut produire trois versions symboliques.
+
+        \item \macro{txtfuncdef} produit une version textuelle courte.
+    \end{itemize}
+
+
+    \item \topic{Fonctions spéciales}
+
+    \begin{itemize}[itemsep=.5em]
+        \item Ajout de \macro{id} pour la fonction identité.
+
+        \item Ajout de \macro{caract} et \macro{caractone} pour deux versions de la fonction caratéristque d'un ensemble.
+    \end{itemize}
+\end{itemize}
+
+
+\separation

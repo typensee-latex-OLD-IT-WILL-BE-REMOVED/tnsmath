@@ -1,0 +1,18 @@
+\begin{probatree}
+    [{}
+        [$A$
+            [$B$]
+            [$C$]
+            [$D$
+                [$E$
+                    [$G$]
+                    [$H$]
+                ]
+                [$F$]
+            ]
+        ]
+        [$I$]
+    ]
+    %
+    \ptreeFocusAll*[red]{!1312}
+\end{probatree}

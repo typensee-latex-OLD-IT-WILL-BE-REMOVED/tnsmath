@@ -1,0 +1,26 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[french]{babel}
+
+\makeatletter
+	\input{../../config/header[fr].sty}
+	
+	\usepackage{tnscom}
+\makeatother
+
+
+\begin{document}
+
+\chapter{Géométrie}
+
+\section{Utiliser des unités S.I.}
+
+Comme l'excellent package \verb#siunitx# est chargé par \verb+tnscom+, il devient facile de travailler avec des unités de mesure tout en respectant \textbf{les conventions d'écriture sont françaises dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}} comme c'est le cas pour cette documentation.
+
+\begin{latexex}
+$\ang{180} = \SI{\pi}{\radian}$
+et
+$\SI{1}{km} = \SI{1e3}{m}$
+\end{latexex}
+
+\end{document}

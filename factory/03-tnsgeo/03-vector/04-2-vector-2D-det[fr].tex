@@ -1,0 +1,200 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+
+    \usepackage{04-vector-2D-coli-det}
+\makeatother
+
+
+% == EXTRA == %
+
+\usepackage[f]{esvect}
+\usepackage{relsize}
+\usepackage{yhmath}
+\usepackage{xstring}
+
+
+\makeatletter
+    \newcommand\pt[1]{\mathrm{#1}}
+
+    \newcommand\@no@point[1]{%
+        \IfStrEq{#1}{i}{%
+            \imath%
+      }{%
+            \IfStrEq{#1}{j}{%
+                \jmath%
+          }{%
+                #1
+          }%
+      }%
+  }
+
+    \newcommand\vect{\@ifstar{\@vect@star}{\@vect@no@star}}
+    \newcommand*\@vect@star[1]{\vv*{\@no@point{#1}}}
+    \newcommand*\@vect@no@star[1]{\vv{\@no@point{#1}}}
+\makeatother
+
+
+
+\begin{document}
+
+%\section{Vecteurs}
+
+\subsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+
+\newparaexample{Version décorée}
+
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler}.
+
+\begin{latexex}
+$\calcdetplane{\vect{u}}{x}{y}%
+              {\vect{v}}{x'}{y'}$
+ou
+$\calcdetplane{\vect{AB}}%
+              {x_B - x_A}{y_B - y_A}%
+              {\vect{CD}}%
+              {x_D - x_C}{y_D - y_C}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version non décorée}
+
+\begin{latexex}
+$\calcdetplane*{\vect{u}}{x}{y}%
+               {\vect{v}}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Rédaction raccourcie pour les vecteurs}
+
+\begin{latexex}
+$\vcalcdetplane{u}{x}{y}%
+               {v}{x'}{y'}
+ =
+ \vcalcdetplane*{u}{x}{y}%
+                {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Versions sans les vecteurs}
+
+\begin{latexex}
+ $\vcalcdetplane[novec] {u}{x}{y}%
+                        {v}{x'}{y'}
+= \vcalcdetplane*[novec]{u}{x}{y}%
+                        {v}{x'}{y'}$
+\end{latexex}
+
+
+\begin{remark}
+	Ce qui précède marche aussi avec les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Calcul développé}
+
+Grâce à l'argument optionnel de \macro{calcdetplane} ou de \macro{vcalcdetplane} il est aussi possible d'obtenir le résultat développé du calcul comme ci-après
+où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
+Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+
+\begin{latexex}
+$\vcalcdetplane[exp]{u}{x}{y}%
+                    {v}{x'}{y'}$
+
+$\vcalcdetplane[cexp]{u}{x}{y}%
+                     {v}{x'}{y'}$
+
+$\vcalcdetplane[texp]{u}{x}{y}%
+                     {v}{x'}{y'}$
+\end{latexex}
+
+
+\begin{remark}
+	Ce qui précède marche aussi avec les versions étoilées.
+\end{remark}
+
+
+\textbf{Attention !}
+Le développement effectué est stupide. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle qui suit.
+    
+\begin{latexex}
+$\vcalcdetplane[exp]{AB}%
+                    {x_B - x_A}%
+                    {y_B - y_A}%
+                    {CD}%
+                    {x_D - x_C}%
+                    {y_D - y_C}$
+\end{latexex}
+
+Ici nous n'avons pas d'autre choix que de régler le problème à la main. Ce genre de situation n'est pas rare dans la vraie vie mathématique.
+    
+\begin{latexex}
+$\vcalcdetplane[exp]{AB}%
+                    {(x_B - x_A)}%
+                    {(y_B - y_A)}%
+                    {CD}%
+                    {(x_D - x_C)}%
+                    {(y_D - y_C)}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
+
+\IDmacro{calcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
+
+\IDmacro{calcdetplane*}{1}{6}
+
+
+\IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
+\begin{enumerate}
+	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+
+	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+
+	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+
+	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+\end{enumerate}
+
+
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{2..3} les coordonnées du 1\ier{} vecteur.
+
+\IDarg{4} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
+
+\IDargs{5..6} les coordonnées du 2\ieme{} vecteur.
+
+
+\separation
+
+
+\IDmacro{vcalcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
+                                   et \mwhyprefix{v}{ector}
+
+\IDmacro{vcalcdetplane*}{1}{6}
+
+
+\IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+
+\IDargs{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+
+\end{document}
