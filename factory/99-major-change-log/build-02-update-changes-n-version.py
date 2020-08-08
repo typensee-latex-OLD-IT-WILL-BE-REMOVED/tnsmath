@@ -85,17 +85,13 @@ for ppath in allppaths:
     ) as f:
         firstline = True
 
-        content.append("\\begin{description}")
-
         for line in f.readlines():
             if firstline:
-                # line = f"\\medskip\n{DECO_SPACE}" \
-                line = f"\\item[{ppath.parent.stem}-{ppath.stem}] {line}"
+                line = f"\\medskip\n{DECO_SPACE}" \
+                     + f"\\item[{ppath.parent.stem}-{ppath.stem}] {line}"
                 firstline = False
 
             content.append(DECO_SPACE + line)
-
-        content.append("\\end{description}")
 
         content.append(DECO_SEP)
 

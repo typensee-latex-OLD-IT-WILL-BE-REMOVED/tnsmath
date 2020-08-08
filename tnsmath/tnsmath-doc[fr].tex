@@ -40,10 +40,11 @@
 
 % Sections numbering
 
-\renewcommand\thechapter{\Roman{chapter}.}
-\renewcommand\thesection{\Alph{section}.}
+\renewcommand\thechapter{\Alph{chapter}.}
+\renewcommand\thesection{\Roman{section}.}
 \renewcommand\thesubsection{\arabic{subsection}.}
 \renewcommand\thesubsubsection{\roman{subsubsection}.}
+
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -274,7 +275,7 @@ Avec \verb+tnsmath+, vous pouvez écrire le code suivant.
 \begin{latexex-alone}
 Sachant que $\sder{f}(x) = cos(x^2)$ sur $\intervalC{a}{b}$, nous avons :
 
-$\dintegrate*{a}{b}{cos(x^2)}{x} = \hook{a}{b}{f(x)}{x}$.
+$\dintegrate*{cos(x^2)}{x}{a}{b} = \hook{f(x)}{x}{a}{b}$.
 \end{latexex-alone}
 
 
@@ -302,9 +303,9 @@ Le choix a été fait de fournir des exemples comme documentation du package et 
 Les exemples se présentent comme ci-dessous et sont généralement très courts.
 
 \begin{latexex}
-$\dintegrate*{a}{b}{cos(x^2)}{x}
+$\dintegrate*{cos(x^2)}{x}{a}{b}
  =
- \hook*{a}{b}{f(x)}{x}$
+ \hook*{f(x)}{x}{a}{b}$
 \end{latexex}
 \section{A propos des macros}
 
@@ -456,7 +457,7 @@ $\setgene{1 ; 3 ; 5}$ .
 Dans l'exemple suivant on utilise l'option \prefix{sb} pour \whyprefix{s}{mall} \whyprefix{b}{races} soit \inenglish{petites accolades}.
 
 \begin{latexex}
-$\setgene {\dfrac{1}{3} ; \dfrac{5}{7} ; 
+$\setgene {\dfrac{1}{3} ; \dfrac{5}{7} ;
            \dfrac{9}{11}}$
 
 $\setgene*{\dfrac{1}{3} ; \dfrac{5}{7} ;
@@ -467,7 +468,7 @@ $\setgene*{\dfrac{1}{3} ; \dfrac{5}{7} ;
 % ---------------------- %
 
 
-\subsection{Ensembles pour la géométrie} \label{set-geo}
+\subsection{Ensembles pour la géométrie} \label{tnssets-geo-sets}
 
 \newparaexample{}
 
@@ -497,6 +498,7 @@ $\setgeo*{C}{2}$
 
 
 \subsection{Ensembles probabilistes}
+\label{tnssets-proba-sets}
 
 \newparaexample{}
 
@@ -524,7 +526,7 @@ $\setproba*{E}{2}$
 % ---------------------- %
 
 
-\subsection{Ensembles pour l'algèbre générale}
+\subsection{Ensembles pour l'algèbre générale} \label{tnssets-algebra-sets}
 
 \newparaexample{}
 
@@ -553,7 +555,7 @@ $\setalge*{k}{1}$ ou $\setalge*{k}{2}$
 % ---------------------- %
 
 
-\subsection{Ensembles classiques en mathématiques et en informatique théorique} 
+\subsection{Ensembles classiques en mathématiques et en informatique théorique} \label{tnssets-classical-sets}
 
 \subsubsection{La liste complète}
 
@@ -581,10 +583,10 @@ $\FF$
 
 \subsubsection{Ensembles classiques suffixés}
 
-L'ensemble $\RR$ nous permet de voir tous les cas possibles. 
+L'ensemble $\RR$ nous permet de voir tous les cas possibles.
 
 \begin{latexex}
-$\RRn$ , $\RRp$ , $\RRs$ 
+$\RRn$ , $\RRp$ , $\RRs$
 
 $\RRsn$ , $\RRsp$
 \end{latexex}
@@ -2027,14 +2029,25 @@ Un tableau devant utiliser plusieurs pages sera scindé comme ci-dessous sans pe
 %\section{Détailler un raisonnement}
 \chapter{Géométrie}
 
+\section{Ensembles géométriques}
+
+Se reporter à la section \ref{tnssets-geo-sets} page \pageref{tnssets-geo-sets} où est présentée la macro \macro{setgeo} pour indiquer des ensembles géométriques.
 \section{Utiliser des unités S.I.}
 
-Comme l'excellent package \verb#siunitx# est chargé par \verb+tnscom+, il devient facile de travailler avec des unités de mesure tout en respectant \textbf{les conventions d'écriture sont françaises dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}} comme c'est le cas pour cette documentation.
+Comme l'excellent package \verb#siunitx# est chargé en coulisse, il devient facile de travailler avec des unités de mesure tout en respectant
+\textbf{%
+les conventions d'écriture sont françaises
+	\footnote{
+		Notez dans l'exemple l'écriture de $\num{1230}$ n'utilise pas d'espace contrairement à celle de $\num{12300}$.
+	}
+dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}%
+} comme c'est le cas pour cette documentation.
+Notez que les espaces dans \verb#\num{123 000}# et \verb#\num{1230 * 100}# sont inutiles mais ils facilitent la relecture du code.
 
 \begin{latexex}
-$\ang{180} = \SI{\pi}{\radian}$
-et
-$\SI{1}{km} = \SI{1e3}{m}$
+$\ang{180} = \SI{\pi}{\radian}$ ,
+$\SI{1}{km} = \SI{1e3}{m}$ avec aussi
+$\num{123 000} = \num{1230 * 100}$
 \end{latexex}
 \section{Points et lignes}
 
@@ -4094,6 +4107,11 @@ $f(n) = \bigtheta{g(n)}$
 % ---------------------- %
 \chapter{Probabilité}
 
+\section{Ensembles classiques de nombres}
+
+Se reporter à la section
+\ref{tnssets-proba-sets} page \pageref{tnssets-proba-sets}
+où est présentée la  macro \macro{setproba} pour indiquer des ensembles de type probabiliste.
 \section{Généralités}
 
 \subsection{Probabilité \og simple \fg}
@@ -4474,6 +4492,9 @@ On comprend alors la logique utilisée.
 %\section{Arbres pondérés}
 \chapter{Arithmétique}
 
+\section{Ensembles classiques}
+
+Se reporter à la section \ref{tnssets-classical-sets} page \pageref{tnssets-classical-sets} où sont présentées les macros \macro{NN}, \macro{ZZ}, \macro{QQ} ainsi que \macro{PP} pour indiquer l'ensemble des naturels, celui des entiers relatifs, celui des fractions rationnelles et enfin celui des nombres premiers.
 \section{Opérateurs de base}
 
 Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{ndivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+. Un opérateur \macro{nequiv} a été aussi ajouté.
@@ -4497,7 +4518,6 @@ $a \nequiv b \modulo p
 %\newparaexample*{}
 
 Deux fonctions nommées \macro{pgcd} et \macro{ppcm} utiles au francophone ont été ajoutées ainsi que la fonction \macro{lcm} pour les anglophones car cette dernière n'est pas disponible par défaut.
-La liste complète des fonctions nommées est donnée ci-dessous dans la section \ref{tnsarith-all-named-functions}.
 
 \begin{latexex}
 $\pgcd x = \gcd x$ et $\ppcm x = \lcm x$
@@ -4766,6 +4786,13 @@ $(a_{ij})_{1 \leq i \leq 3 ,
 % ---------------------- %
 \chapter{Polynômes et séries formelles}
 
+\section{Ensembles classiques de nombres}
+
+Se reporter aux sections
+\ref{tnssets-algebra-sets} page \pageref{tnssets-algebra-sets}
+et
+\ref{tnssets-classical-sets} page \pageref{tnssets-classical-sets}
+où sont présentées diverses macros pour indiquer des ensembles classiques en algèbre.
 \section{Polynômes}
 
 \newparaexample{Polynômes}
@@ -5946,7 +5973,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Ensembles pour la géométrie} \label{set-geo}
+\subsection{Ensembles}
+
+\subsubsection{Ensembles pour la géométrie} 
 
 
 
@@ -5967,6 +5996,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % ---------------------- %
 
+
+\subsection{Ensembles}
 
 \subsubsection{Ensembles probabilistes}
 
@@ -5990,7 +6021,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-\subsubsection{Ensembles pour l'algèbre générale}
+\subsection{Ensembles}
+
+\subsubsection{Ensembles pour l'algèbre générale} 
 
 
 
@@ -6012,6 +6045,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
+\subsection{Ensembles}
+
 \subsubsection{Ensembles classiques en mathématiques et en informatique théorique} 
 
 \paragraph{Ensembles classiques suffixés}
@@ -6022,49 +6057,49 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \foreach \k in {NN, NNs}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {PP}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {ZZ, ZZn, ZZp, ZZs, ZZsn, ZZsp}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {DD, DDn, DDp, DDs, DDsn, DDsp}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {QQ, QQn, QQp, QQs, QQsn, QQsp}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {RR, RRn, RRp, RRs, RRsn, RRsp}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {CC, CCs}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {HH, HHs}{
     \IDope{\k} \quad
 }
-                
+
 \separation
 
 \foreach \k in {OO, OOs}{
@@ -6075,6 +6110,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % ---------------------- %
 
+
+\subsection{Ensembles}
+
+\subsubsection{Ensembles classiques en mathématiques et en informatique théorique} 
 
 \paragraph{Des suffixes à la carte}
 
@@ -6153,6 +6192,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
+\subsection{Intervalles}
+
 \subsubsection{Intervalles réels -- Notation américaine}
 
 
@@ -6202,6 +6243,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 % ---------------------- %
 
+
+\subsection{Intervalles}
 
 \subsubsection{Intervalles discrets d'entiers}
 
@@ -6294,6 +6337,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDope{im}
 
 
+\subsection{Applications}
+
 \subsubsection{Application totale, partielle, injective, surjective et/ou bijective}
 
 
@@ -6318,6 +6363,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \end{multicols}
 
 
+\subsection{Applications}
+
 \subsubsection{Fonction identité}
 
 
@@ -6328,6 +6375,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 % ---------------------- %
 
 
+\subsection{Applications}
+
 \subsubsection{Fonction caractéristique}
 
 
@@ -6336,6 +6385,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDope{caractone}
 
+
+\subsection{Applications}
 
 \subsubsection{Définition explicite d'une fonction}
 
@@ -6373,6 +6424,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 \IDargs{1..5} voir les explications données ci-dessus pour la macro \macro{funcdef}.
 
+
+\subsection{Applications}
 
 \subsubsection{Composition}
 
@@ -6569,6 +6622,8 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 
 % ---------------------- %
 
+
+\subsection{Équivalences et implications}
 
 \subsubsection{Équivalences et implications verticales}
 
@@ -6838,6 +6893,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
+
+
+
 \section{Géométrie}
 
 \subsection{Points et lignes}
@@ -6863,6 +6921,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+
+\subsection{Points et lignes}
 
 \subsubsection{Lignes}
 
@@ -6900,6 +6960,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
+\subsection{Points et lignes}
+
 \subsubsection{Droites parallèles ou non}
 
 
@@ -6936,6 +6998,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
 
 
+\subsection{Vecteurs}
+
 \subsubsection{Norme}
 
 
@@ -6959,6 +7023,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDarg{} le nom du vecteur sur lequel appliquer la norme.
 
+
+\subsection{Vecteurs}
 
 \subsubsection{Produit scalaire}
 
@@ -7009,6 +7075,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
+\subsection{Vecteurs}
+
 \subsubsection{3D -- Produit vectoriel}
 
 \paragraph{Écriture symbolique}
@@ -7045,6 +7113,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+
+\subsection{Vecteurs}
+
+\subsubsection{3D -- Produit vectoriel}
 
 \paragraph{Explication du mode de calcul}
 
@@ -7091,6 +7163,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+\subsection{Vecteurs}
+
+\subsubsection{3D -- Produit vectoriel}
+
 \paragraph{Les coordonnées}
 
 
@@ -7132,6 +7208,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDargs{4..6} les coordonnées du 2\ieme{} vecteur.
 
 
+\subsection{Vecteurs}
+
 \subsubsection{2D -- Critère de colinéarité de deux vecteurs}
 
 
@@ -7167,7 +7245,9 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDargs{1..6} voir les indications données pour la macro \macro{colicriteria}.
 
 
-\subsubsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+\subsection{Vecteurs}
+
+\subsubsection{2D -- Déterminant de deux vecteurs} 
 
 
 
@@ -7215,7 +7295,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsection{Géométrie cartésienne}
 
-\subsubsection{Coordonnées} \label{tnsgeo-coordinates}
+\subsubsection{Coordonnées} 
 
 
 
@@ -7290,6 +7370,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \IDarg{2} voir les indications données pour l'unique argument obligatoire de la macro \macro{coord}.
 
+
+\subsection{Géométrie cartésienne}
 
 \subsubsection{Nommer un repère}
 
@@ -7387,6 +7469,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} un texte indiquant $down$ dans le nom $\anglein*{up}{down}$ d'un angle intérieur.
 
 
+\subsection{Angles}
+
 \subsubsection{Angles orientés de vecteurs}
 
 
@@ -7446,6 +7530,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+
+\subsection{Constantes et paramètres}
 
 \subsubsection{Constantes latines personnelles}
 
@@ -7528,6 +7614,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+
+\subsection{Fonctions nommées spéciales}
 
 \subsubsection{Avec un paramètre}
 
@@ -7640,7 +7728,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsubsection{Dérivations totales d'une fonction -- Version courte sans variable} \label{tnsana-short-der}
+\subsubsection{Dérivations totales d'une fonction -- Version courte sans variable} 
 
 
 
@@ -7656,7 +7744,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsubsection{L'opérateur de dérivation totale} \label{tnsana-ope-total-der}
+\subsubsection{L'opérateur de dérivation totale} 
 
 
 
@@ -7709,7 +7797,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
-\subsubsection{L'opérateur de dérivation partielle} \label{tnsana-ope-partial-der}
+\subsubsection{L'opérateur de dérivation partielle} 
 
 
 
@@ -7834,6 +7922,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 % ---------------------- %
 
 
+\subsection{Calcul intégral}
+
 \subsubsection{Un opérateur d'intégration clés en main}
 
 
@@ -7861,6 +7951,8 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 % ---------------------- %
 
+
+\subsection{Calcul intégral}
 
 \subsubsection{L'opérateur \og crochet \fg}
 
@@ -7983,6 +8075,9 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 \IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
 
 
+
+
+
 \section{Probabilité}
 
 \subsection{Généralités}
@@ -8000,6 +8095,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 % ---------------------- %
 
+
+\subsection{Généralités}
 
 \subsubsection{Probabilité conditionnelle}
 
@@ -8023,6 +8120,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 \IDarg{2} l'ensemble dont on veut calculer la probabilité.
 
 
+\subsection{Généralités}
+
 \subsubsection{Évènement contraire}
 
 
@@ -8031,6 +8130,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDarg{} l'ensemble dont on veut indiquer le contraire.
 
+
+\subsection{Généralités}
 
 \subsubsection{Espérance, variance et écart-type}
 
@@ -8137,6 +8238,9 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 \IDarg{} les noms des noeuds dans le bon ordre et séparés par des barres verticales \verb#|#.
 
 
+
+
+
 \section{Arithmétique}
 
 \subsection{Opérateurs de base}
@@ -8193,6 +8297,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 % ---------------------- %
 
 
+\subsection{Fractions continuées}
+
 \subsubsection{Fractions continuées généralisées}
 
 
@@ -8207,6 +8313,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 % ---------------------- %
 
 
+\subsection{Fractions continuées}
+
 \subsubsection{Comme une fraction continuée isolée}
 
 
@@ -8220,6 +8328,8 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 % ---------------------- %
 
+
+\subsection{Fractions continuées}
 
 \subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
                            {L'opérateur K}}
@@ -8243,7 +8353,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \subsection{Matrices via \texttt{nicematrix}}
 
 \subsubsection{\texorpdfstring{Calculs expliqués des déterminants $2 \times 2$}%
-                           {Calculs expliqués des déterminants 2x2}} \label{tnslinalg-2D-det}
+                           {Calculs expliqués des déterminants 2x2}} 
 
 
 
@@ -8346,6 +8456,9 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 %
 %\IDarg{9} l'entrée à la position $(3, 3)$
 %
+
+
+
 
 
 \section{Polynômes et séries formelles}

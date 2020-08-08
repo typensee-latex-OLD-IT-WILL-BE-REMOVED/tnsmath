@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 
 import argparse
 
@@ -16,9 +15,10 @@ THIS_DIR = PPath(__file__).parent
 
 PROJECT_NAME = "tnsmath"
 
+PARTS_DIR = THIS_DIR.parent.parent / f"{PROJECT_NAME}-parts"
 
-PARTS_DIR = THIS_DIR.parent.parent / "tnsmath-parts"
 
+SPECIFIC_DOC_SUFFIX = f"{PROJECT_NAME}-nodoc"
 
 TOCDOC_FILE = THIS_DIR / f"tocdoc[fr].txt"
 
@@ -70,6 +70,20 @@ ARGS = parser.parse_args()
 # ----------- #
 # -- TOOLS -- #
 # ----------- #
+
+def ignorethisfile(ppath):
+    return (
+        not (SPECIFIC_DOC_SUFFIX in srcpath.stem)
+        and
+        (
+            "nodoc" in srcpath.stem
+            or
+            srcpath.parent.stem in ["00-intro", "99-major-change-log", "config"]
+            or
+            srcpath.parent.parent.parent.stem == "99-major-change-log"
+        )
+    )
+
 
 def extractcontent(ppath):
     with ppath.open(
@@ -160,12 +174,20 @@ for partname, versions in MAIN_INFOS.items():
 
     for ext in ['tex', 'sty'] + list(EXT_FOR_EXTRA):
         for srcpath in partdirfactory.walk(f"file::**.{ext}"):
-            if "nodoc" in srcpath.stem \
-            or srcpath.parent.stem in ["00-intro", "99-major-change-log", "config"] \
-            or srcpath.parent.parent.parent.stem == "99-major-change-log":
+            if ignorethisfile(srcpath):
                 continue
 
-            destpath = destdir / (srcpath - partdirfactory)
+            if SPECIFIC_DOC_SUFFIX in srcpath.stem:
+                destpath = srcpath.parent / srcpath.name.replace(
+                    SPECIFIC_DOC_SUFFIX,
+                    "specific-doc"
+                )
+
+                destpath = destdir / (destpath - partdirfactory)
+
+            else:
+                destpath = destdir / (srcpath - partdirfactory)
+
 
             srcpath.copy_to(destpath)
 

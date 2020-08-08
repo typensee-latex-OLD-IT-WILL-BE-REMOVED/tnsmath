@@ -6,11 +6,11 @@
 
 
 \newcommand\dintegrate[5]{%
-  \int_{#2}^{#3} #4 d#5%
+  \int_{#4}^{#5} #2 d#3%
 }
 
 \newcommand\hook[5]{%
-	\left[ #4 \right]_{#5=#2}^{#5=#3}%
+	\left[ #2 \right]_{#3=#4}^{#3=#5}%
 }
 
 
@@ -23,9 +23,9 @@ Le choix a été fait de fournir des exemples comme documentation du package et 
 Les exemples se présentent comme ci-dessous et sont généralement très courts.
 
 \begin{latexex}
-$\dintegrate*{a}{b}{cos(x^2)}{x}
+$\dintegrate*{cos(x^2)}{x}{a}{b}
  =
- \hook*{a}{b}{f(x)}{x}$
+ \hook*{f(x)}{x}{a}{b}$
 \end{latexex}
 
 

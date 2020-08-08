@@ -136,22 +136,31 @@ def extracttechtitle(level, latexfile):
             f"    * {latexfile}"
         )
 
-    content_tiles = []
+    content_titles = []
 
     for i in range(goodpos+1):
         if LAST_HUMAN_SECS[i][0]:
             latex, title = LAST_HUMAN_SECS[i]
 
-            content_tiles += [
+# We have to take care of labels.
+            title = title.split("\n")
+
+            for i, part in enumerate(title):
+                if "\\label" in part:
+                    title[i] = part[:part.index("\\label")]
+
+            title = "\n".join(title)
+
+            content_titles += [
                 f"{latex}{title}",
                 ""
             ]
 
             LAST_HUMAN_SECS[i] = ('', '')
 
-    content_tiles = "\n".join(content_tiles)
+    content_titles = "\n".join(content_titles)
 
-    return content_tiles
+    return content_titles
 
 
 # ------------ #
@@ -307,6 +316,7 @@ print(f"{DECO}* Update of << {DOC_PATH.name} >> done.")
 # ------------------------------- #
 # -- COMPILE ALL THE DOCS FILE -- #
 # ------------------------------- #
+
 nbrepeat = 3
 
 for latexpath in DIR_DOC_PATH.walk(f"file::*.tex"):

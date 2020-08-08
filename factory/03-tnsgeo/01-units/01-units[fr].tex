@@ -11,16 +11,22 @@
 
 \begin{document}
 
-\chapter{Géométrie}
-
 \section{Utiliser des unités S.I.}
 
-Comme l'excellent package \verb#siunitx# est chargé par \verb+tnscom+, il devient facile de travailler avec des unités de mesure tout en respectant \textbf{les conventions d'écriture sont françaises dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}} comme c'est le cas pour cette documentation.
+Comme l'excellent package \verb#siunitx# est chargé en coulisse, il devient facile de travailler avec des unités de mesure tout en respectant
+\textbf{%
+les conventions d'écriture sont françaises
+	\footnote{
+		Notez dans l'exemple l'écriture de $\num{1230}$ n'utilise pas d'espace contrairement à celle de $\num{12300}$.
+	}
+dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}%
+} comme c'est le cas pour cette documentation.
+Notez que les espaces dans \verb#\num{123 000}# et \verb#\num{1230 * 100}# sont inutiles mais ils facilitent la relecture du code.
 
 \begin{latexex}
-$\ang{180} = \SI{\pi}{\radian}$
-et
-$\SI{1}{km} = \SI{1e3}{m}$
+$\ang{180} = \SI{\pi}{\radian}$ ,
+$\SI{1}{km} = \SI{1e3}{m}$ avec aussi
+$\num{123 000} = \num{1230 * 100}$
 \end{latexex}
 
 \end{document}
