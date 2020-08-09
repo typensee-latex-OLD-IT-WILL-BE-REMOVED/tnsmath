@@ -53,8 +53,8 @@
 
 % TikZ libraries
 \usetikzlibrary{babel}
-\usetikzlibrary{calc}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 
 
@@ -303,6 +303,18 @@
 \newcommand\dcap{\@display@this{.05em}{0.8}{\bigcap}}
 
 
+% -------------------------- %
+% -- SPECIAL APPLICATIONS -- %
+% -------------------------- %
+
+% Classical functions - START
+
+\DeclareMathOperator*{\id}{\operatorname{Id}}
+
+\DeclareMathOperator{\caract}{\chi}
+\DeclareMathOperator{\caractone}{\mathds{1}}
+
+
 % ---------------- %
 % -- IMAGE N CO -- %
 % ---------------- %
@@ -336,18 +348,6 @@
 \newcommand\ponetoone{\tnsgeo@partial@deco{0ex}{0ex}{\onetoone}}
 \newcommand\ponto{\tnsgeo@partial@deco{-0.3ex}{0ex}{\onto}}
 \newcommand\pbiject{\tnsgeo@partial@deco{-0.25ex}{0ex}{\biject}}
-
-
-% ------------- %
-% -- SPECIAL -- %
-% ------------- %
-
-% Classical functions - START
-
-\DeclareMathOperator*{\id}{\operatorname{Id}}
-
-\DeclareMathOperator{\caract}{\chi}
-\DeclareMathOperator{\caractone}{\mathds{1}}
 
 
 % ---------------- %
@@ -498,27 +498,27 @@
 % Settable texts
 \@ifpackagewith{babel}{french}{
 % == Decorations - FRENCH - START == %
-    \newcommand\textopappli{appli}
-    \newcommand\textopchoice{choix}
-    \newcommand\textopcond{cond}
-    \newcommand\textopcons{cons}
-    \newcommand\textopdef{déf}
-    \newcommand\textopplot{graph}
-    \newcommand\textophyp{hyp}
-    \newcommand\textopid{id}
-    \newcommand\textoptest{?}
+    \newcommand\txtopappli{appli}
+    \newcommand\txtopchoice{choix}
+    \newcommand\txtopcond{cond}
+    \newcommand\txtopcons{cons}
+    \newcommand\txtopdef{déf}
+    \newcommand\txtopplot{graph}
+    \newcommand\txtophyp{hyp}
+    \newcommand\txtopid{id}
+    \newcommand\txtoptest{?}
 % == Decorations - FRENCH - END == %
 }{
 % == Decorations - ENGLISH - START == %
-    \newcommand\textopappli{appli}
-    \newcommand\textopchoice{choice}
-    \newcommand\textopcond{cond}
-    \newcommand\textopcons{cons}
-    \newcommand\textopdef{def}
-    \newcommand\textopplot{plot}
-    \newcommand\textophyp{hyp}
-    \newcommand\textopid{id}
-    \newcommand\textoptest{?}
+    \newcommand\txtopappli{appli}
+    \newcommand\txtopchoice{choice}
+    \newcommand\txtopcond{cond}
+    \newcommand\txtopcons{cons}
+    \newcommand\txtopdef{def}
+    \newcommand\txtopplot{plot}
+    \newcommand\txtophyp{hyp}
+    \newcommand\txtopid{id}
+    \newcommand\txtoptest{?}
 % == Decorations - ENGLISH - END == %
 }
 
@@ -526,93 +526,93 @@
 % == Decorated versions - START == %
 
 \newcommand\eqdef{\@ifstar{\tnslog@eqdef@star}{\tnslog@eqdef@no@star}}
-\newcommand\tnslog@eqdef@no@star{\tns@over@math@symbol{\textopdef}{=}}
+\newcommand\tnslog@eqdef@no@star{\tns@over@math@symbol{\txtopdef}{=}}
 \newcommand\tnslog@eqdef@star{\coloneqq}
 
 \newcommand\eqid{\@ifstar{\tnslog@eqid@star}{\tnslog@eqid@no@star}}
-\newcommand\tnslog@eqid@no@star{\tns@over@math@symbol{\textopid}{=}}
+\newcommand\tnslog@eqid@no@star{\tns@over@math@symbol{\txtopid}{=}}
 \newcommand\tnslog@eqid@star{\rightleftharpoons}
 
-\newcommand\eqplot{\tns@over@math@symbol{\textopplot}{=}}
-\newcommand\eqappli{\tns@over@math@symbol{\textopappli}{=}}
-\newcommand\eqchoice{\tns@over@math@symbol{\textopchoice}{=}}
-\newcommand\eqcond{\tns@over@math@symbol{\textopcond}{=}}
-\newcommand\eqcons{\tns@over@math@symbol{\textopcons}{=}}
-\newcommand\eqhyp{\tns@over@math@symbol{\textophyp}{=}}
-\newcommand\eqtest{\tns@over@math@symbol{\textoptest}{=}}
+\newcommand\eqplot{\tns@over@math@symbol{\txtopplot}{=}}
+\newcommand\eqappli{\tns@over@math@symbol{\txtopappli}{=}}
+\newcommand\eqchoice{\tns@over@math@symbol{\txtopchoice}{=}}
+\newcommand\eqcond{\tns@over@math@symbol{\txtopcond}{=}}
+\newcommand\eqcons{\tns@over@math@symbol{\txtopcons}{=}}
+\newcommand\eqhyp{\tns@over@math@symbol{\txtophyp}{=}}
+\newcommand\eqtest{\tns@over@math@symbol{\txtoptest}{=}}
 
-\newcommand\neqid{\tns@over@math@symbol{\textopid}{\neq}}
-\newcommand\neqplot{\tns@over@math@symbol{\textopplot}{\neq}}
-\newcommand\neqappli{\tns@over@math@symbol{\textopappli}{\neq}}
-\newcommand\neqchoice{\tns@over@math@symbol{\textopchoice}{\neq}}
-\newcommand\neqcond{\tns@over@math@symbol{\textopcond}{\neq}}
-\newcommand\neqcons{\tns@over@math@symbol{\textopcons}{\neq}}
-\newcommand\neqhyp{\tns@over@math@symbol{\textophyp}{\neq}}
-\newcommand\neqtest{\tns@over@math@symbol{\textoptest}{\neq}}
+\newcommand\neqid{\tns@over@math@symbol{\txtopid}{\neq}}
+\newcommand\neqplot{\tns@over@math@symbol{\txtopplot}{\neq}}
+\newcommand\neqappli{\tns@over@math@symbol{\txtopappli}{\neq}}
+\newcommand\neqchoice{\tns@over@math@symbol{\txtopchoice}{\neq}}
+\newcommand\neqcond{\tns@over@math@symbol{\txtopcond}{\neq}}
+\newcommand\neqcons{\tns@over@math@symbol{\txtopcons}{\neq}}
+\newcommand\neqhyp{\tns@over@math@symbol{\txtophyp}{\neq}}
+\newcommand\neqtest{\tns@over@math@symbol{\txtoptest}{\neq}}
 
-\newcommand\lessplot{\tns@over@math@symbol{\textopplot}{<}}
-\newcommand\lessappli{\tns@over@math@symbol{\textopappli}{<}}
-\newcommand\lesschoice{\tns@over@math@symbol{\textopchoice}{<}}
-\newcommand\lesscond{\tns@over@math@symbol{\textopcond}{<}}
-\newcommand\lesscons{\tns@over@math@symbol{\textopcons}{<}}
-\newcommand\lesshyp{\tns@over@math@symbol{\textophyp}{<}}
-\newcommand\lesstest{\tns@over@math@symbol{\textoptest}{<}}
+\newcommand\lessplot{\tns@over@math@symbol{\txtopplot}{<}}
+\newcommand\lessappli{\tns@over@math@symbol{\txtopappli}{<}}
+\newcommand\lesschoice{\tns@over@math@symbol{\txtopchoice}{<}}
+\newcommand\lesscond{\tns@over@math@symbol{\txtopcond}{<}}
+\newcommand\lesscons{\tns@over@math@symbol{\txtopcons}{<}}
+\newcommand\lesshyp{\tns@over@math@symbol{\txtophyp}{<}}
+\newcommand\lesstest{\tns@over@math@symbol{\txtoptest}{<}}
 
-\newcommand\nlessplot{\tns@over@math@symbol{\textopplot}{\nless}}
-\newcommand\nlessappli{\tns@over@math@symbol{\textopappli}{\nless}}
-\newcommand\nlesschoice{\tns@over@math@symbol{\textopchoice}{\nless}}
-\newcommand\nlesscond{\tns@over@math@symbol{\textopcond}{\nless}}
-\newcommand\nlesscons{\tns@over@math@symbol{\textopcons}{\nless}}
-\newcommand\nlesshyp{\tns@over@math@symbol{\textophyp}{\nless}}
-\newcommand\nlesstest{\tns@over@math@symbol{\textoptest}{\nless}}
+\newcommand\nlessplot{\tns@over@math@symbol{\txtopplot}{\nless}}
+\newcommand\nlessappli{\tns@over@math@symbol{\txtopappli}{\nless}}
+\newcommand\nlesschoice{\tns@over@math@symbol{\txtopchoice}{\nless}}
+\newcommand\nlesscond{\tns@over@math@symbol{\txtopcond}{\nless}}
+\newcommand\nlesscons{\tns@over@math@symbol{\txtopcons}{\nless}}
+\newcommand\nlesshyp{\tns@over@math@symbol{\txtophyp}{\nless}}
+\newcommand\nlesstest{\tns@over@math@symbol{\txtoptest}{\nless}}
 
-\newcommand\leqplot{\tns@over@math@symbol{\textopplot}{\leq}}
-\newcommand\leqappli{\tns@over@math@symbol{\textopappli}{\leq}}
-\newcommand\leqchoice{\tns@over@math@symbol{\textopchoice}{\leq}}
-\newcommand\leqcond{\tns@over@math@symbol{\textopcond}{\leq}}
-\newcommand\leqcons{\tns@over@math@symbol{\textopcons}{\leq}}
-\newcommand\leqhyp{\tns@over@math@symbol{\textophyp}{\leq}}
-\newcommand\leqtest{\tns@over@math@symbol{\textoptest}{\leq}}
+\newcommand\leqplot{\tns@over@math@symbol{\txtopplot}{\leq}}
+\newcommand\leqappli{\tns@over@math@symbol{\txtopappli}{\leq}}
+\newcommand\leqchoice{\tns@over@math@symbol{\txtopchoice}{\leq}}
+\newcommand\leqcond{\tns@over@math@symbol{\txtopcond}{\leq}}
+\newcommand\leqcons{\tns@over@math@symbol{\txtopcons}{\leq}}
+\newcommand\leqhyp{\tns@over@math@symbol{\txtophyp}{\leq}}
+\newcommand\leqtest{\tns@over@math@symbol{\txtoptest}{\leq}}
 
-\newcommand\nleqplot{\tns@over@math@symbol{\textopplot}{\nleq}}
-\newcommand\nleqappli{\tns@over@math@symbol{\textopappli}{\nleq}}
-\newcommand\nleqchoice{\tns@over@math@symbol{\textopchoice}{\nleq}}
-\newcommand\nleqcond{\tns@over@math@symbol{\textopcond}{\nleq}}
-\newcommand\nleqcons{\tns@over@math@symbol{\textopcons}{\nleq}}
-\newcommand\nleqhyp{\tns@over@math@symbol{\textophyp}{\nleq}}
-\newcommand\nleqtest{\tns@over@math@symbol{\textoptest}{\nleq}}
+\newcommand\nleqplot{\tns@over@math@symbol{\txtopplot}{\nleq}}
+\newcommand\nleqappli{\tns@over@math@symbol{\txtopappli}{\nleq}}
+\newcommand\nleqchoice{\tns@over@math@symbol{\txtopchoice}{\nleq}}
+\newcommand\nleqcond{\tns@over@math@symbol{\txtopcond}{\nleq}}
+\newcommand\nleqcons{\tns@over@math@symbol{\txtopcons}{\nleq}}
+\newcommand\nleqhyp{\tns@over@math@symbol{\txtophyp}{\nleq}}
+\newcommand\nleqtest{\tns@over@math@symbol{\txtoptest}{\nleq}}
 
-\newcommand\gtrplot{\tns@over@math@symbol{\textopplot}{>}}
-\newcommand\gtrappli{\tns@over@math@symbol{\textopappli}{>}}
-\newcommand\gtrchoice{\tns@over@math@symbol{\textopchoice}{>}}
-\newcommand\gtrcond{\tns@over@math@symbol{\textopcond}{>}}
-\newcommand\gtrcons{\tns@over@math@symbol{\textopcons}{>}}
-\newcommand\gtrhyp{\tns@over@math@symbol{\textophyp}{>}}
-\newcommand\gtrtest{\tns@over@math@symbol{\textoptest}{>}}
+\newcommand\gtrplot{\tns@over@math@symbol{\txtopplot}{>}}
+\newcommand\gtrappli{\tns@over@math@symbol{\txtopappli}{>}}
+\newcommand\gtrchoice{\tns@over@math@symbol{\txtopchoice}{>}}
+\newcommand\gtrcond{\tns@over@math@symbol{\txtopcond}{>}}
+\newcommand\gtrcons{\tns@over@math@symbol{\txtopcons}{>}}
+\newcommand\gtrhyp{\tns@over@math@symbol{\txtophyp}{>}}
+\newcommand\gtrtest{\tns@over@math@symbol{\txtoptest}{>}}
 
-\newcommand\ngtrplot{\tns@over@math@symbol{\textopplot}{\ngtr}}
-\newcommand\ngtrappli{\tns@over@math@symbol{\textopappli}{\ngtr}}
-\newcommand\ngtrchoice{\tns@over@math@symbol{\textopchoice}{\ngtr}}
-\newcommand\ngtrcond{\tns@over@math@symbol{\textopcond}{\ngtr}}
-\newcommand\ngtrcons{\tns@over@math@symbol{\textopcons}{\ngtr}}
-\newcommand\ngtrhyp{\tns@over@math@symbol{\textophyp}{\ngtr}}
-\newcommand\ngtrtest{\tns@over@math@symbol{\textoptest}{\ngtr}}
+\newcommand\ngtrplot{\tns@over@math@symbol{\txtopplot}{\ngtr}}
+\newcommand\ngtrappli{\tns@over@math@symbol{\txtopappli}{\ngtr}}
+\newcommand\ngtrchoice{\tns@over@math@symbol{\txtopchoice}{\ngtr}}
+\newcommand\ngtrcond{\tns@over@math@symbol{\txtopcond}{\ngtr}}
+\newcommand\ngtrcons{\tns@over@math@symbol{\txtopcons}{\ngtr}}
+\newcommand\ngtrhyp{\tns@over@math@symbol{\txtophyp}{\ngtr}}
+\newcommand\ngtrtest{\tns@over@math@symbol{\txtoptest}{\ngtr}}
 
-\newcommand\geqplot{\tns@over@math@symbol{\textopplot}{\geq}}
-\newcommand\geqappli{\tns@over@math@symbol{\textopappli}{\geq}}
-\newcommand\geqchoice{\tns@over@math@symbol{\textopchoice}{\geq}}
-\newcommand\geqcond{\tns@over@math@symbol{\textopcond}{\geq}}
-\newcommand\geqcons{\tns@over@math@symbol{\textopcons}{\geq}}
-\newcommand\geqhyp{\tns@over@math@symbol{\textophyp}{\geq}}
-\newcommand\geqtest{\tns@over@math@symbol{\textoptest}{\geq}}
+\newcommand\geqplot{\tns@over@math@symbol{\txtopplot}{\geq}}
+\newcommand\geqappli{\tns@over@math@symbol{\txtopappli}{\geq}}
+\newcommand\geqchoice{\tns@over@math@symbol{\txtopchoice}{\geq}}
+\newcommand\geqcond{\tns@over@math@symbol{\txtopcond}{\geq}}
+\newcommand\geqcons{\tns@over@math@symbol{\txtopcons}{\geq}}
+\newcommand\geqhyp{\tns@over@math@symbol{\txtophyp}{\geq}}
+\newcommand\geqtest{\tns@over@math@symbol{\txtoptest}{\geq}}
 
-\newcommand\ngeqplot{\tns@over@math@symbol{\textopplot}{\ngeq}}
-\newcommand\ngeqappli{\tns@over@math@symbol{\textopappli}{\ngeq}}
-\newcommand\ngeqchoice{\tns@over@math@symbol{\textopchoice}{\ngeq}}
-\newcommand\ngeqcond{\tns@over@math@symbol{\textopcond}{\ngeq}}
-\newcommand\ngeqcons{\tns@over@math@symbol{\textopcons}{\ngeq}}
-\newcommand\ngeqhyp{\tns@over@math@symbol{\textophyp}{\ngeq}}
-\newcommand\ngeqtest{\tns@over@math@symbol{\textoptest}{\ngeq}}
+\newcommand\ngeqplot{\tns@over@math@symbol{\txtopplot}{\ngeq}}
+\newcommand\ngeqappli{\tns@over@math@symbol{\txtopappli}{\ngeq}}
+\newcommand\ngeqchoice{\tns@over@math@symbol{\txtopchoice}{\ngeq}}
+\newcommand\ngeqcond{\tns@over@math@symbol{\txtopcond}{\ngeq}}
+\newcommand\ngeqcons{\tns@over@math@symbol{\txtopcons}{\ngeq}}
+\newcommand\ngeqhyp{\tns@over@math@symbol{\txtophyp}{\ngeq}}
+\newcommand\ngeqtest{\tns@over@math@symbol{\txtoptest}{\ngeq}}
 
 % == Decorated versions - END == %
 
@@ -643,47 +643,47 @@
 \newcommand\liesimp{\mathrel{\Longleftarrow}}
 \newcommand\nliesimp{\centernot\liesimp}
 
-\newcommand\iffappli{\tns@over@math@symbol{\textopappli}{\iff}}
-\newcommand\iffchoice{\tns@over@math@symbol{\textopchoice}{\iff}}
-\newcommand\iffcond{\tns@over@math@symbol{\textopcond}{\iff}}
-\newcommand\iffcons{\tns@over@math@symbol{\textopcons}{\iff}}
-\newcommand\iffhyp{\tns@over@math@symbol{\textophyp}{\iff}}
-\newcommand\ifftest{\tns@over@math@symbol{\textoptest}{\iff}}
+\newcommand\iffappli{\tns@over@math@symbol{\txtopappli}{\iff}}
+\newcommand\iffchoice{\tns@over@math@symbol{\txtopchoice}{\iff}}
+\newcommand\iffcond{\tns@over@math@symbol{\txtopcond}{\iff}}
+\newcommand\iffcons{\tns@over@math@symbol{\txtopcons}{\iff}}
+\newcommand\iffhyp{\tns@over@math@symbol{\txtophyp}{\iff}}
+\newcommand\ifftest{\tns@over@math@symbol{\txtoptest}{\iff}}
 
-\newcommand\niffappli{\tns@over@math@symbol{\textopappli}{\niff}}
-\newcommand\niffchoice{\tns@over@math@symbol{\textopchoice}{\niff}}
-\newcommand\niffcond{\tns@over@math@symbol{\textopcond}{\niff}}
-\newcommand\niffcons{\tns@over@math@symbol{\textopcons}{\niff}}
-\newcommand\niffhyp{\tns@over@math@symbol{\textophyp}{\niff}}
-\newcommand\nifftest{\tns@over@math@symbol{\textoptest}{\niff}}
+\newcommand\niffappli{\tns@over@math@symbol{\txtopappli}{\niff}}
+\newcommand\niffchoice{\tns@over@math@symbol{\txtopchoice}{\niff}}
+\newcommand\niffcond{\tns@over@math@symbol{\txtopcond}{\niff}}
+\newcommand\niffcons{\tns@over@math@symbol{\txtopcons}{\niff}}
+\newcommand\niffhyp{\tns@over@math@symbol{\txtophyp}{\niff}}
+\newcommand\nifftest{\tns@over@math@symbol{\txtoptest}{\niff}}
 
-\newcommand\impliesappli{\tns@over@math@symbol{\textopappli}{\implies}}
-\newcommand\implieschoice{\tns@over@math@symbol{\textopchoice}{\implies}}
-\newcommand\impliescond{\tns@over@math@symbol{\textopcond}{\implies}}
-\newcommand\impliescons{\tns@over@math@symbol{\textopcons}{\implies}}
-\newcommand\implieshyp{\tns@over@math@symbol{\textophyp}{\implies}}
-\newcommand\impliestest{\tns@over@math@symbol{\textoptest}{\implies}}
+\newcommand\impliesappli{\tns@over@math@symbol{\txtopappli}{\implies}}
+\newcommand\implieschoice{\tns@over@math@symbol{\txtopchoice}{\implies}}
+\newcommand\impliescond{\tns@over@math@symbol{\txtopcond}{\implies}}
+\newcommand\impliescons{\tns@over@math@symbol{\txtopcons}{\implies}}
+\newcommand\implieshyp{\tns@over@math@symbol{\txtophyp}{\implies}}
+\newcommand\impliestest{\tns@over@math@symbol{\txtoptest}{\implies}}
 
-\newcommand\nimpliesappli{\tns@over@math@symbol{\textopappli}{\nimplies}}
-\newcommand\nimplieschoice{\tns@over@math@symbol{\textopchoice}{\nimplies}}
-\newcommand\nimpliescond{\tns@over@math@symbol{\textopcond}{\nimplies}}
-\newcommand\nimpliescons{\tns@over@math@symbol{\textopcons}{\nimplies}}
-\newcommand\nimplieshyp{\tns@over@math@symbol{\textophyp}{\nimplies}}
-\newcommand\nimpliestest{\tns@over@math@symbol{\textoptest}{\nimplies}}
+\newcommand\nimpliesappli{\tns@over@math@symbol{\txtopappli}{\nimplies}}
+\newcommand\nimplieschoice{\tns@over@math@symbol{\txtopchoice}{\nimplies}}
+\newcommand\nimpliescond{\tns@over@math@symbol{\txtopcond}{\nimplies}}
+\newcommand\nimpliescons{\tns@over@math@symbol{\txtopcons}{\nimplies}}
+\newcommand\nimplieshyp{\tns@over@math@symbol{\txtophyp}{\nimplies}}
+\newcommand\nimpliestest{\tns@over@math@symbol{\txtoptest}{\nimplies}}
 
-\newcommand\liesimpappli{\tns@over@math@symbol{\textopappli}{\liesimp}}
-\newcommand\liesimpchoice{\tns@over@math@symbol{\textopchoice}{\liesimp}}
-\newcommand\liesimpcond{\tns@over@math@symbol{\textopcond}{\liesimp}}
-\newcommand\liesimpcons{\tns@over@math@symbol{\textopcons}{\liesimp}}
-\newcommand\liesimphyp{\tns@over@math@symbol{\textophyp}{\liesimp}}
-\newcommand\liesimptest{\tns@over@math@symbol{\textoptest}{\liesimp}}
+\newcommand\liesimpappli{\tns@over@math@symbol{\txtopappli}{\liesimp}}
+\newcommand\liesimpchoice{\tns@over@math@symbol{\txtopchoice}{\liesimp}}
+\newcommand\liesimpcond{\tns@over@math@symbol{\txtopcond}{\liesimp}}
+\newcommand\liesimpcons{\tns@over@math@symbol{\txtopcons}{\liesimp}}
+\newcommand\liesimphyp{\tns@over@math@symbol{\txtophyp}{\liesimp}}
+\newcommand\liesimptest{\tns@over@math@symbol{\txtoptest}{\liesimp}}
 
-\newcommand\nliesimpappli{\tns@over@math@symbol{\textopappli}{\nliesimp}}
-\newcommand\nliesimpchoice{\tns@over@math@symbol{\textopchoice}{\nliesimp}}
-\newcommand\nliesimpcond{\tns@over@math@symbol{\textopcond}{\nliesimp}}
-\newcommand\nliesimpcons{\tns@over@math@symbol{\textopcons}{\nliesimp}}
-\newcommand\nliesimphyp{\tns@over@math@symbol{\textophyp}{\nliesimp}}
-\newcommand\nliesimptest{\tns@over@math@symbol{\textoptest}{\nliesimp}}
+\newcommand\nliesimpappli{\tns@over@math@symbol{\txtopappli}{\nliesimp}}
+\newcommand\nliesimpchoice{\tns@over@math@symbol{\txtopchoice}{\nliesimp}}
+\newcommand\nliesimpcond{\tns@over@math@symbol{\txtopcond}{\nliesimp}}
+\newcommand\nliesimpcons{\tns@over@math@symbol{\txtopcons}{\nliesimp}}
+\newcommand\nliesimphyp{\tns@over@math@symbol{\txtophyp}{\nliesimp}}
+\newcommand\nliesimptest{\tns@over@math@symbol{\txtoptest}{\nliesimp}}
 
 % == Decorated versions - END == %
 
@@ -1021,16 +1021,16 @@
 
 %    * Texts used
 
-\newcommand\textdemoID{Réf.}
-\newcommand\textdemoKNOWN{Je sais que...}
-\newcommand\textdemoPROP{Propriété ou fait utilisé}
-\newcommand\textdemoCONS{Conséquence}
+\newcommand\txtdemoID{Réf.}
+\newcommand\txtdemoKNOWN{Je sais que...}
+\newcommand\txtdemoPROP{Propriété ou fait utilisé}
+\newcommand\txtdemoCONS{Conséquence}
 
-\newcommand\textdemoHYPS{Démonstration sous les hypothèses}
-\newcommand\textdemoHYP{Démonstration sous l'hypothèse}
-\newcommand\textdemoCCL{Conclusion}
+\newcommand\txtdemoHYPS{Démonstration sous les hypothèses}
+\newcommand\txtdemoHYP{Démonstration sous l'hypothèse}
+\newcommand\txtdemoCCL{Conclusion}
 
-\newcommand\textdemoNEXTPAGE{Suite de la démo. page suivante...}
+\newcommand\txtdemoNEXTPAGE{Suite de la démo. page suivante...}
 
 
 %    * Common tools
@@ -1110,11 +1110,11 @@
     \fi
     %
     \if\relax\hyps\relax\else%
-        \underline{\textdemoHYPS\vphantom{p\textdemoCCL}} : \hyps
+        \underline{\txtdemoHYPS\vphantom{p\txtdemoCCL}} : \hyps
         \vspace{-.25em}
     \fi
     \if\relax\hyp\relax\else%
-        \underline{\textdemoHYP\vphantom{p\textdemoCCL}} : \hyp
+        \underline{\txtdemoHYP\vphantom{p\txtdemoCCL}} : \hyp
         \vspace{-.25em}
     \fi
     \booltrue{tnslog@start@demo@explain}
@@ -1122,7 +1122,7 @@
         \multicolumn{3}{c}{}
         \\[-.5em]
         \multicolumn{3}{c}{%
-            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+            \textit{\tnslog@demo@extra{\txtdemoNEXTPAGE}}%
         }
         \endfoot
         \endlastfoot
@@ -1130,7 +1130,7 @@
     \end{longtable}
     \if\relax\ccl\relax\else%
         \vspace{-.25em}
-        \underline{\textdemoCCL\vphantom{\textdemoHYPS}} : \ccl
+        \underline{\txtdemoCCL\vphantom{\txtdemoHYPS}} : \ccl
     \fi
 }
 
@@ -1191,24 +1191,24 @@
     \small
     \renewcommand{\arraystretch}{1.5}
     \begin{longtable}{c|p{0.29\linewidth}|p{0.29\linewidth}|p{0.29\linewidth}}
-        \textbf{\tnslog@demo@extra{\textdemoID}}
-            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
-            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
-            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \textbf{\tnslog@demo@extra{\txtdemoID}}
+            & \textbf{\tnslog@demo@extra{\txtdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\txtdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\txtdemoCONS}}
         \\ \hline
         \endfirsthead
         %
-        \textbf{\tnslog@demo@extra{\textdemoID}}
-            & \textbf{\tnslog@demo@extra{\textdemoKNOWN}}
-            & \textbf{\tnslog@demo@extra{\textdemoPROP}}
-            & \textbf{\tnslog@demo@extra{\textdemoCONS}}
+        \textbf{\tnslog@demo@extra{\txtdemoID}}
+            & \textbf{\tnslog@demo@extra{\txtdemoKNOWN}}
+            & \textbf{\tnslog@demo@extra{\txtdemoPROP}}
+            & \textbf{\tnslog@demo@extra{\txtdemoCONS}}
         \\ \hline
         \endhead
         %
         \multicolumn{3}{c}{}
         \\[-1.25em]
         \multicolumn{4}{c}{%
-            \textit{\tnslog@demo@extra{\textdemoNEXTPAGE}}%
+            \textit{\tnslog@demo@extra{\txtdemoNEXTPAGE}}%
         }
         \\
         \endfoot
@@ -3457,13 +3457,21 @@
 % -- SEQUENCES -- %
 % --------------- %
 
+% #1 .. #5 : here are the arguments will be printed.
+%
+%    #5    #4
+%       #1
+%    #2    #3
+
 \newcommand\seqsuprageo[5]{%
 	\prescript{#5}{#2}{#1}_{#3}^{#4}%
 }
 
+
 \newcommand\seqhypergeo[3]{%
     \seqsuprageo{#1}{#2}{#3}{}{}%
 }
+
 
 \newcommand\seqplus[3]{%
     \seqsuprageo{#1}{}{#2}{#3}{}%
@@ -3482,55 +3490,24 @@
 % -- BIG SMALL O N CO -- %
 % ---------------------- %
 
-% Sources :
-%     1) http://forum.mathematex.net/latex-f6/bonnes-commandes-de-base-t12278.html
-%     2) http://tex.stackexchange.com/questions/30944/mathcalo-and-font-size
-%     3) https://tex.stackexchange.com/a/53091/6880
+\DeclareMathOperator{\bigomega}{\bm{\Omega}}
 
-\newcommand\tnsseq@big@asympto@ope[2]{%
-    \ensuremath{%
-        \if\relax\detokenize{#2}\relax
-            #1%
-        \else
-            \mathop{}\mathopen{}#1\mathopen{}\left( #2 \right)%
-        \fi
-    }%
-}
+\DeclareMathOperator{\bigtheta}{\bm{\Theta}}
 
-\newcommand\bigomega[1]{%
-    \tnsseq@big@asympto@ope{\bm{\Omega}}{#1}%
-}
+\DeclareMathOperator{\bigO}{\mathcal{O}}
 
-\newcommand\bigtheta[1]{%
-    \tnsseq@big@asympto@ope{\bm{\Theta}}{#1}%
-}
-
-\newcommand\bigO[1]{%
-    \tnsseq@big@asympto@ope{\mathcal{O}}{#1}%
-}
-
-\newcommand\smallO[1]{%
-    \if\relax\detokenize{#1}\relax
-        \mathchoice{% * Display style
-            {\scriptstyle\mathcal{O}}%
-        }{%           * Text style
-            {\scriptstyle\mathcal{O}}%
-        }{%           * Script style
-            {\scriptscriptstyle\mathcal{O}}%
-        }{%           * Script script style
-            %\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}%
-        }
-    \else
-        \mathchoice{% * Display style
-            \operatorname{\scriptstyle\mathcal{O}}\!\left(#1\right)%
-        }{%           * Text style
-            \operatorname{\scriptstyle\mathcal{O}}\!\left(#1\right)%
-        }{%           * Script style
-            \operatorname{\scriptscriptstyle\mathcal{O}}\left(#1\right)%
-        }{%           * Script script style
-            \operatorname{\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}}\left(#1\right)%
-        }
-    \fi
+% Source :
+%     * https://tex.stackexchange.com/a/30950/6880
+\newcommand\smallO{%
+	\mathchoice{% * Display style
+        \operatorname{\scriptstyle\mathcal{O}}%
+    }{%           * Text style
+        \operatorname{\scriptstyle\mathcal{O}}%
+    }{%           * Script style
+        \operatorname{\scriptscriptstyle\mathcal{O}}%
+    }{%           * Script script style
+        \operatorname{\scalebox{0.8}{$\scriptscriptstyle\mathcal{O}$}}%
+    }
 }
 
 
@@ -3551,6 +3528,7 @@
         #1\left( #2 \right)%
     }
 }
+
 
 
 % -- Conditional probability -- %
@@ -3582,11 +3560,13 @@
 }
 
 
+
 % -- "Not" event -- %
 
 \newcommand\nevent[1]{%
     \overline{\kern.15ex#1\vphantom{#1^{x}}\kern.15ex}%
 }
+
 
 
 % -- Expected value - Variance - Standard deviation -- %
@@ -3604,9 +3584,9 @@
 }
 
 
-% ---------- %
-% -- TREE -- %
-% ---------- %
+% ----------- %
+% -- BASIC -- %
+% ----------- %
 
 \useforestlibrary{linguistics}
 
@@ -3618,20 +3598,22 @@
 	%
     apweight/.style = {
     	edge label = {
-				node[pos=.5,sloped,above, fill=white]{#1}
-			}
-		},
+			node[pos=.5,sloped,above, fill=white]{#1}
+		}
+	},
     bpweight/.style = {
     	edge label = {
-				node[pos=.5,sloped,below, fill=white]{#1}
-			}
-		},
+			node[pos=.5,sloped,below, fill=white]{#1}
+		}
+	},
     pweight/.style = {
     	edge label={
-				node[midway, fill=white]{#1}
-			}
-		},
+			node[midway, fill=white]{#1}
+		}
+	},
     pweight*/.style = {},
+    apweight*/.style = {},
+    bpweight*/.style = {},
 }
 
 
@@ -3708,9 +3690,12 @@
         %
         pframe/.style = {
         	tikz = {
-				\node [draw, ##1, thick, rounded corners,fit to=tree]{};
+				\node [draw, ##1, line width = 1.5pt, rounded corners,fit to=tree]{};
 			}
 		},
+		%
+% USEFUL - TO KEEP 8
+%
 %		pcomment/.style={
 %		    tikz+={
 %		        \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
@@ -3722,7 +3707,6 @@
         #1
     \end{forest}
 }
-
 
 
 \newenvironment{probatree*}{
@@ -3737,8 +3721,41 @@
 }
 
 
+\newenvironment{probatree**}{
+    \forestset{
+        apweight*/.style = {
+        	edge label = {
+    			node[pos=.5,sloped,above, fill=white]{##1}
+    		}
+    	},
+        bpweight*/.style = {
+        	edge label = {
+    			node[pos=.5,sloped,below, fill=white]{##1}
+    		}
+    	},
+        pweight*/.style = {
+        	edge label={
+    			node[midway, fill=white]{##1}
+    		}
+    	},
+    }
+    \begin{probatree}
+}{
+    \end{probatree}
+}
+
+
+% ------------ %
+% -- COMENT -- %
+% ------------ %
 
 % -- Comments -- %
+
+\setKVdefault[tnsproba@comment@keys]{%
+    col = black,
+    dx  = 0cm,
+    dy  = 0cm
+}
 
 % #1 : color
 %
@@ -3746,36 +3763,60 @@
 % #3 : comment
 \newcommand\ptreeComment{\@ifstar{\ptree@comment@star}{\ptree@comment@no@star}}
 
-\newcommand\ptree@comment@no@star[3][black]{
-	\node [anchor=mid west, xshift=.5cm, yshift=0cm] at (#2.mid -| ptreecomment coord) {%
-		\textcolor{#1}{#3}%
+\newcommand\ptree@comment@no@star[3][]{
+    \useKVdefault[tnsproba@comment@keys]%
+    \setKV[tnsproba@comment@keys]{#1}%
+    \edef\col{\useKV[tnsproba@comment@keys]{col}}%
+    \edef\dx{\useKV[tnsproba@comment@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@comment@keys]{dy}}%
+	\node [anchor=mid west, xshift=.5cm+\dx, yshift=\dy] at (#2.mid -| ptreecomment coord) {%
+		\textcolor{\col}{#3}%
 	};
 }
 
 
 
-\newcommand\ptree@comment@star[3][black]{
-	\node [anchor=mid west, xshift=.75cm, yshift=0cm] at (#2.mid) {%
-		\textcolor{#1}{#3}%
+\newcommand\ptree@comment@star[3][]{
+    \useKVdefault[tnsproba@comment@keys]%
+    \setKV[tnsproba@comment@keys]{#1}%
+    \edef\col{\useKV[tnsproba@comment@keys]{col}}%
+    \edef\dx{\useKV[tnsproba@comment@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@comment@keys]{dy}}%
+	\node [anchor=mid west, xshift=.825cm, yshift=0cm] at (#2.mid) {%
+		\textcolor{\col}{#3}%
 	};
 }
 
 
+% ----------- %
+% -- FRAME -- %
+% ----------- %
 
 % -- Frames -- %
+
+\setKVdefault[tnsproba@frame@keys]{%
+    col = blue
+}
+
 
 % #1 : color
 % #2 : left start corner
 % #3 : right up   corner
 % #4 : right down corner
-\newcommand\ptreeFrame[4][blue]{
-    \node[draw = #1,
-          thick,
+\newcommand\ptreeFrame[4][]{%
+    \useKVdefault[tnsproba@frame@keys]%
+    \setKV[tnsproba@frame@keys]{#1}%
+    \edef\col{\useKV[tnsproba@frame@keys]{col}}%
+    \node[draw = \col,
+          line width = 1.5pt,
           rounded corners,
           fit = (#2)(#3)(#4)] {};
 }
 
 
+% ---------------- %
+% -- FOCUS EDGE -- %
+% ---------------- %
 
 % -- Focus -- %
 
@@ -3787,20 +3828,22 @@
 \newcommand\tnsproba@ptree@focus@color{blue}
 
 
-% #1 : node
-\newcommand\tnsproba@ptree@focus@abstract@node[1]{
+% #1 : number of the node
+% #2 : the node
+\newcommand\tnsproba@ptree@focus@abstract@node[2]{
 	\node[draw       = \tnsproba@ptree@focus@color,
-          line width = 2pt,
+          line width = 1.5pt,
           inner sep  = 0pt,
           rounded corners,
-          fit = (\trim@spaces{#1})(\trim@spaces{#1})(\trim@spaces{#1})] {};
+          fit = (#2)(#2)(#2)] {};
 }
 
 
-% #1 : node
-\newcommand\tnsproba@ptree@focus@abstract@node@nostart[1]{
-	\ifnum\value{tns@multi@apply@each@position}=1\else
-    	\tnsproba@ptree@focus@abstract@node{#1}
+% #1 : number of the node
+% #2 : the node
+\newcommand\tnsproba@ptree@focus@abstract@node@nostart[2]{
+	\ifnum#1=1\else
+    	\tnsproba@ptree@focus@abstract@node{#1}{#2}
     \fi
 }
 
@@ -3823,14 +3866,14 @@
 
 
 
-% #1 : start of the edge
-% #2 : end   of the edge
-\newcommand\tnsproba@ptree@focus@abstract@edge[2]{
+% #1 : number of the couple of nodes
+% #2 : start of the edge
+% #3 : end   of the edge
+\newcommand\tnsproba@ptree@focus@abstract@edge[3]{
     \draw[\tnsproba@ptree@focus@color,
           line cap   = round,
-          line width = 2.5pt] 
-    	(\trim@spaces{#1}.parent anchor)
-	 -- (\trim@spaces{#2}.child anchor);
+          line width = 1.5pt] 
+    	 (#2.parent anchor) -- (#3.child anchor);
 }
 
 
@@ -3846,27 +3889,179 @@
 
 
 
+\setKVdefault[tnsproba@focus@keys]{%
+    col = blue
+}
+
 % #1 : color
 % #2 : node1 | node2 | ...
-\newcommand\tnsproba@ptree@focus@star@no@star[2][blue]{
-	\renewcommand\tnsproba@ptree@focus@color{#1}
+\newcommand\tnsproba@ptree@focus@star@no@star[2][]{
+    \useKVdefault[tnsproba@focus@keys]%
+    \setKV[tnsproba@focus@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
 	\tnsproba@ptree@focus@abstract@multi@edges{#2}
 	\tnsproba@ptree@focus@abstract@multi@nodes@nostart{#2}
 }
 
 % #1 : color
 % #2 : node1 | node2 | ...
-\newcommand\tnsproba@ptree@focus@no@star[2][blue]{
-	\renewcommand\tnsproba@ptree@focus@color{#1}
+\newcommand\tnsproba@ptree@focus@no@star[2][]{
+    \useKVdefault[tnsproba@focus@keys]%
+    \setKV[tnsproba@focus@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
 	\tnsproba@ptree@focus@abstract@multi@edges{#2}
 	\tnsproba@ptree@focus@abstract@multi@nodes{#2}
 }
 
 % #1 : color
 % #2 : node1 | node2 | ...
-\newcommand\tnsproba@ptree@focus@star@star[2][blue]{
-	\renewcommand\tnsproba@ptree@focus@color{#1}
+\newcommand\tnsproba@ptree@focus@star@star[2][]{
+    \useKVdefault[tnsproba@focus@keys]%
+    \setKV[tnsproba@focus@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
 	\tnsproba@ptree@focus@abstract@multi@edges{#2}
+}
+
+
+% -------------- %
+% -- AUTO NUM -- %
+% -------------- %
+
+% -- Comments with auto numbering -- %
+
+% #1 : color
+%
+% #2 : node
+% #3 : comment
+\newcommand\aptreeComment{\@ifstar{\aptree@comment@star}{\aptree@comment@no@star}}
+
+\newcommand\aptree@comment@no@star[3][]{
+	\ptree@comment@no@star[#1]{!#2}{#3}
+}
+
+
+
+\newcommand\aptree@comment@star[3][]{
+	\ptree@comment@star[#1]{!#2}{#3}
+}
+
+
+
+% -- Frames with auto numbering -- %
+
+% #1 : color
+% #2 : left start corner
+% #3 : right up   corner
+% #4 : right down corner
+\newcommand\aptreeFrame[4][]{%
+    \ptreeFrame[#1]{!#2}{!#3}{!#4}%
+}
+
+
+
+% -- Focus with auto numbering -- %
+
+\newcommand\aptreeFocus{\@ifstar{\tnsproba@ptree@focus@auto@star}{\tnsproba@ptree@focus@auto@no@star}}
+
+\newcommand\tnsproba@ptree@focus@auto@star{\@ifstar{\tnsproba@ptree@focus@auto@star@star}{\tnsproba@ptree@focus@auto@star@no@star}}
+
+% #1 : one node
+\newcommand\tnsproba@ptree@focus@auto@abstract@node[2]{
+	\node[draw       = \tnsproba@ptree@focus@color,
+          line width = 1.5pt,
+          inner sep  = 0pt,
+          rounded corners,
+          fit = (!#2)(!#2)(!#2)] {};
+}
+
+
+% #1 : number of the node
+% #2 : the node
+\newcommand\tnsproba@ptree@focus@auto@abstract@node@nostart[2]{
+	\ifnum#1=1\else
+    	\tnsproba@ptree@focus@auto@abstract@node{#1}{#2}
+    \fi
+}
+
+
+% #1 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@nodes[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@each{\tnsproba@ptree@focus@auto@abstract@node}%
+		                 {#1}
+}
+
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@nodes@nostart[1]{
+	\tns@multi@apply@each{\tnsproba@ptree@focus@auto@abstract@node@nostart}%
+		                 {#1}
+}
+
+
+
+% #1 : number of the couple of nodes
+% #2 : start of the edge
+% #3 : end   of the edge
+\newcommand\tnsproba@ptree@focus@auto@abstract@edge[3]{
+    \draw[\tnsproba@ptree@focus@color,
+          line cap   = round,
+          line width = 1.5pt] 
+    	 (!#2.parent anchor) -- (!#3.child anchor);
+}
+
+
+% #1 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@edges[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@couple{\tnsproba@ptree@focus@auto@abstract@edge}%
+	                       {#1}
+}
+
+
+
+\setKVdefault[tnsproba@focus@auto@keys]{%
+    col = blue
+}
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@auto@star@no@star[2][]{
+    \useKVdefault[tnsproba@focus@auto@keys]%
+    \setKV[tnsproba@focus@auto@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@auto@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
+	\tnsproba@ptree@focus@auto@abstract@multi@edges{#2}
+	\tnsproba@ptree@focus@auto@abstract@multi@nodes@nostart{#2}
+}
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@auto@no@star[2][]{
+    \useKVdefault[tnsproba@focus@auto@keys]%
+    \setKV[tnsproba@focus@auto@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@auto@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
+	\tnsproba@ptree@focus@auto@abstract@multi@edges{#2}
+	\tnsproba@ptree@focus@auto@abstract@multi@nodes{#2}
+}
+
+% #1 : color
+% #2 : node1 | node2 | ...
+\newcommand\tnsproba@ptree@focus@auto@star@star[2][]{
+    \useKVdefault[tnsproba@focus@auto@keys]%
+    \setKV[tnsproba@focus@auto@keys]{#1}%
+    \edef\col{\useKV[tnsproba@focus@auto@keys]{col}}%
+	\renewcommand\tnsproba@ptree@focus@color{\col}
+	\tnsproba@ptree@focus@auto@abstract@multi@edges{#2}
 }
 
 
@@ -3904,7 +4099,9 @@
 %    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
 %    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
 
-% Operator
+
+% -- Operator -- %
+
 \newcommand\contfracope{%
     \operatornamewithlimits{%
         \mathchoice{% * Display style
@@ -3919,7 +4116,10 @@
     }
 }
 
-% Single continued fraction (useful ?)
+
+
+% -- Single continued fraction (useful ?) -- %
+
 \newcommand\singlecontfrac[2]{%
     \begin{array}{@{}c@{}}%
         \multicolumn{1}{c|}{#1}%
@@ -3929,69 +4129,82 @@
     \end{array}%
 }
 
-% Standard continued fraction
+
+
+% -- Standard continued fraction -- %
+
 \newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
 
 \newcommand\tnsarith@contfrac@no@star[1]{%
     \tnsarith@contfrac@no@star@recu@#1|\@nil%
 }
+
 \def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
-    }%
+    \fi%
 }
+
 
 \newcommand\tnsarith@contfrac@star[1]{%
     \tnsarith@contfrac@star@before@#1|\@nil%
 }
+
 \def\tnsarith@contfrac@star@before@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 \tnsarith@contfrac@star@recu@#2\@nil%
-    }%
-}
-\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
-        + \singlecontfrac{1}{#1}%
-    }{%
-        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
-    }%
+    \fi%
 }
 
-% Generalized continued fraction
+\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
+    \if\relax\detokenize{#2}\relax%
+        + \singlecontfrac{1}{#1}%
+    \else%
+        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
+    \fi%
+}
+
+
+
+% -- Generalized continued fraction -- %
+
 \newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
 
 \newcommand\tnsarith@contfracgene@no@star[1]{%
     \tnsarith@contfracgene@no@star@recu@#1||\@nil%
 }
+
 \def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
-    }%
+    \fi%
 }
 
 
 \newcommand\tnsarith@contfracgene@star[1]{%
     \tnsarith@contfracgene@star@before@#1|\@nil%
 }
+
 \def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 \tnsarith@contfracgene@star@recu@#2\@nil%
-    }%
+    \fi%
 }
+
 \def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
-    \@ifmtarg{#3}{%
+    \if\relax\detokenize{#3}\relax%
         + \singlecontfrac{#1}{#2}%
-    }{%
+    \else%
         + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
-    }%
+    \fi%
 }
 
 
@@ -4097,11 +4310,12 @@
 % -- POLYNOMIAL AND CO -- %
 % ----------------------- %
 
-% Argument 1: the set
-% Argument 2: the variable(s)
-% Argument 3: the 1st decorator
-% Argument 4: the 2nd decorator
-% Argument 5: the number of decorators
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+% #3 : the 1st decorator
+% #4 : the 2nd decorator
+% #5 : the number of decorators
+
 \newcommand\tnspoly@set@special@algebra[5]{%
     \ensuremath{%
         #1 \! %
@@ -4120,29 +4334,48 @@
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setpoly[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{[}{]}{1}%
 }
 
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setpolyfrac[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{(}{)}{1}%
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setserie[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{[}{]}{2}%
 }
 
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setseriefrac[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{(}{)}{2}%
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setpolylaurent[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{1}%
 }
+
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setserielaurent[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{2}%

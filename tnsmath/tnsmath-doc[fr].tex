@@ -12,6 +12,20 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+% Source
+%	* https://tex.stackexchange.com/a/558025/6880
+\usepackage{tocbasic}[2020/07/22]% needs KOMA-Script version 3.31
+\DeclareTOCStyleEntries[
+  raggedentrytext,
+  linefill=\hfill,
+  indent=0pt,
+  dynindent,
+  numwidth=0pt,
+  numsep=1ex,
+  dynnumwidth
+]{tocline}{chapter,section,subsection,subsubsection,paragraph,subparagraph}
+\DeclareTOCStyleEntry[indentfollows=chapter]{tocline}{section}
+
 \usepackage{multicol}
 
 \usepackage{makecell}
@@ -26,6 +40,7 @@
     urlcolor=black
 }
 
+\usepackage[numbered]{bookmark}
 \usepackage{amsthm}
 
 \usepackage{tcolorbox}
@@ -236,10 +251,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.7.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.8.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-08-06}{{
+\date{2020-08-09}{{
 
 \maketitle
 
@@ -351,6 +366,15 @@ Les macros évitant d'avoir à taper \macro{displaystyle} auront un nom préfix�
 % ---------------------- %
 
 
+\subsubsection{Les macros \og textuelles \fg}
+
+Certains macros produisent du contenu de type texte. Ces dernières seront toutes préfixées par \prefix{txt}.
+Par exemple \macro{txtopdef} est un texte utilisé pour décorer le signe égal, ou aussi \macro{texfuncdef} permet de saisir rapidement la définition explicite d'une fonction pour l'avoir directement dans du texte et non dans une formule.
+
+
+% ---------------------- %
+
+
 \subsubsection{Les macros standards redéfinies}
 
 Certaines macros comme \verb+\frac+ sont un peu revues par \verb+tnsmath+.
@@ -457,7 +481,7 @@ $\setgene{1 ; 3 ; 5}$ .
 Dans l'exemple suivant on utilise l'option \prefix{sb} pour \whyprefix{s}{mall} \whyprefix{b}{races} soit \inenglish{petites accolades}.
 
 \begin{latexex}
-$\setgene {\dfrac{1}{3} ; \dfrac{5}{7} ;
+$\setgene {\dfrac{1}{3} ; \dfrac{5}{7} ; 
            \dfrac{9}{11}}$
 
 $\setgene*{\dfrac{1}{3} ; \dfrac{5}{7} ;
@@ -497,8 +521,7 @@ $\setgeo*{C}{2}$
 % ---------------------- %
 
 
-\subsection{Ensembles probabilistes}
-\label{tnssets-proba-sets}
+\subsection{Ensembles probabilistes} \label{tnssets-proba-sets}
 
 \newparaexample{}
 
@@ -583,10 +606,10 @@ $\FF$
 
 \subsubsection{Ensembles classiques suffixés}
 
-L'ensemble $\RR$ nous permet de voir tous les cas possibles.
+L'ensemble $\RR$ nous permet de voir tous les cas possibles. 
 
 \begin{latexex}
-$\RRn$ , $\RRp$ , $\RRs$
+$\RRn$ , $\RRp$ , $\RRs$ 
 
 $\RRsn$ , $\RRsp$
 \end{latexex}
@@ -777,6 +800,41 @@ $\displaystyle%
 
 
 % ---------------------- %
+\section{Des applications très spéciales}
+
+\subsection{Fonction identité}
+
+\begin{latexex}
+$\id_A$ vérifie par définition
+$\forall x \in A$, $\id(x) = x$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fonction caractéristique}
+
+\newparaexample{Version très utilisée}
+
+\begin{latexex}
+$\caract_A$ vérifie par définition
+$\forall x \in A$, $\caract_A(x) = 1$ et
+$\forall x \notin A$, $\caract_A(x) = 0$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version alternative}
+
+\begin{latexex}
+$\caractone_A = \caract_A$
+\end{latexex}
+
+
+% ---------------------- %
 \section{Applications}
 
 \subsection{Cardinal, image et compagnie}
@@ -845,41 +903,6 @@ $s: E \ponto F$ est une application partielle surjective.
 
 $b: G \pbiject H$ est une application partielle bijective.
 \end{latexex-flat}
-
-
-% ---------------------- %
-%\section{Applications}
-
-\subsection{Fonction identité}
-
-\begin{latexex}
-$\id_A$ vérifie par définition
-$\forall x \in A$, $\id(x) = x$.
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsection{Fonction caractéristique}
-
-\newparaexample{Version très utilisée}
-
-\begin{latexex}
-$\caract_A$ vérifie par définition
-$\forall x \in A$, $\caract_A(x) = 1$ et
-$\forall x \notin A$, $\caract_A(x) = 0$.
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Version alternative}
-
-\begin{latexex}
-$\caractone_A = \caract_A$
-\end{latexex}
 
 
 % ---------------------- %
@@ -1031,7 +1054,7 @@ Bien entendu on tord les règles de typographie avec ce type de pratique mais c'
 
 \subsection{Définir quelque chose}
 
-L'exemple suivant montre deux façons de rédiger une égalité signifiant une définition \emph{(la section \ref{tnslog-texts-for-opes} explique comment est défini le texte \emph{\og \textopdef \fg})}.
+L'exemple suivant montre deux façons de rédiger une égalité signifiant une définition \emph{(la section \ref{tnslog-texts-for-opes} explique comment est défini le texte \emph{\og \txtopdef \fg})}.
 
 \begin{latexex}
 $f(x) \eqdef x^3 + 1$
@@ -1045,7 +1068,7 @@ $f(x) \eqdef* x^3 + 1$
 
 \subsection{Indiquer une identité}
 
-L'exemple suivant montre deux façons de rédiger des identités avec une notation symbolique non standard \emph{(la section \ref{tnslog-texts-for-opes} explique comment est défini le texte \emph{\og \textopid \fg})}.
+L'exemple suivant montre deux façons de rédiger des identités avec une notation symbolique non standard \emph{(la section \ref{tnslog-texts-for-opes} explique comment est défini le texte \emph{\og \txtopid \fg})}.
 
 \begin{latexex}
 $(a + b)^2 \eqid a^2 + b^2 + 2 a b$
@@ -1059,7 +1082,7 @@ $(a + b)^2 \eqid* a^2 + b^2 + 2 a b$
 
 \subsection{Une égalité à vérifier ou non, une hypothèse, une condition}
 
-Se reporter à la section \ref{tnslog-texts-for-opes} pour savoir comment sont définis les textes \emph{\og \textopcons \fg} , \emph{\og \textopcond \fg} et \emph{\og \textophyp \fg}.
+Se reporter à la section \ref{tnslog-texts-for-opes} pour savoir comment sont définis les textes \emph{\og \txtopcons \fg} , \emph{\og \txtopcond \fg} et \emph{\og \txtophyp \fg}.
 
 \begin{latexex}
 $(a + b)^3 \eqtest a^3 + b^3 + 3 a b$
@@ -1077,7 +1100,7 @@ $x \eqcons 0$
 
 \subsection{Une égalité indiquant le choix d'une valeur ou l'application d'une relation}
 
-La section \ref{tnslog-texts-for-opes} permet de savoir comment les textes \emph{\og \textopchoice \fg} et \emph{\og \textopappli \fg} sont définis.
+La section \ref{tnslog-texts-for-opes} permet de savoir comment les textes \emph{\og \txtopchoice \fg} et \emph{\og \txtopappli \fg} sont définis.
 
 \begin{latexex}
 $x \geqcond 4$ implique
@@ -1093,7 +1116,7 @@ $123^2 \geqappli 16$.
 
 \subsection{Une égalité indiquant l'équation d'une courbe}
 
-La section \ref{tnslog-texts-for-opes} permet de savoir comment les texte \emph{\og \textopplot \fg} est défini.
+La section \ref{tnslog-texts-for-opes} permet de savoir comment les texte \emph{\og \txtopplot \fg} est défini.
 
 \begin{latexex}
 $M \in C: y \eqplot x^2 + 3$
@@ -1150,15 +1173,15 @@ Voici les macros définissant les textes utilisés qui tiennent compte de l'util
 \begin{center}
 	\begin{tabular}{l@{\kern1ex}l@{\kern2cm}l@{\kern1ex}l}
 % == All texts - START == %
-        \macro{textopappli\{\}} & donne \emph{\og \textopappli \fg}
-        & \macro{textopchoice\{\}} & donne \emph{\og \textopchoice \fg} \\
-        \macro{textopcond\{\}} & donne \emph{\og \textopcond \fg}
-        & \macro{textopcons\{\}} & donne \emph{\og \textopcons \fg} \\
-        \macro{textopdef\{\}} & donne \emph{\og \textopdef \fg}
-        & \macro{textophyp\{\}} & donne \emph{\og \textophyp \fg} \\
-        \macro{textopid\{\}} & donne \emph{\og \textopid \fg}
-        & \macro{textopplot\{\}} & donne \emph{\og \textopplot \fg} \\
-        \macro{textoptest\{\}} & donne \emph{\og \textoptest \fg}
+        \macro{txtopappli\{\}} & donne \emph{\og \txtopappli \fg}
+        & \macro{txtopchoice\{\}} & donne \emph{\og \txtopchoice \fg} \\
+        \macro{txtopcond\{\}} & donne \emph{\og \txtopcond \fg}
+        & \macro{txtopcons\{\}} & donne \emph{\og \txtopcons \fg} \\
+        \macro{txtopdef\{\}} & donne \emph{\og \txtopdef \fg}
+        & \macro{txtophyp\{\}} & donne \emph{\og \txtophyp \fg} \\
+        \macro{txtopid\{\}} & donne \emph{\og \txtopid \fg}
+        & \macro{txtopplot\{\}} & donne \emph{\og \txtopplot \fg} \\
+        \macro{txtoptest\{\}} & donne \emph{\og \txtoptest \fg}
         & & \\
 % == All texts - END == %
 	\end{tabular}
@@ -4028,7 +4051,7 @@ Voici un exemple.
 % ---------------------- %
 \section{Comparaison asymptotique de suites et de fonctions}
 
-\subsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%                           {Les notations "grand O" et "petit O"}}
+\subsection{\texorpdfstring{Les notations $\bigO$ et $\smallO$}%                           {Les notations "grand O" et "petit O"}}
                            {Les notations "grand O" et "petit O"}}
 
 \newparaexample{}
@@ -4036,7 +4059,7 @@ Voici un exemple.
 Les notations suivantes sont dues à Landau.
 
 \begin{latexex}
-$\bigO{}$ ou $\smallO{}$
+$\bigO$ ou $\smallO$
 \end{latexex}
 
 
@@ -4046,15 +4069,15 @@ $\bigO{}$ ou $\smallO{}$
 \newparaexample{}
 
 \begin{latexex}
-$\bigO{x} \neq \smallO{x}$ ou
-$e^{t + \smallO{t}} = e^{\bigO{t}}$
+$\bigO(x) \neq \smallO(x)$ ou
+$e^{t + \smallO(t)} = e^{\bigO(t)}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{La notation $\bigomega{}$}%                           {La notation "grand Omega"}}
+\subsection{\texorpdfstring{La notation $\bigomega$}%                           {La notation "grand Omega"}}
                            {La notation "grand Omega"}}
 
 \newparaexample{}
@@ -4062,7 +4085,7 @@ $e^{t + \smallO{t}} = e^{\bigO{t}}$
 La notation suivante est due à Hardy et Littlewood.
 
 \begin{latexex}
-$\bigomega{}$
+$\bigomega$
 \end{latexex}
 
 
@@ -4071,24 +4094,24 @@ $\bigomega{}$
 
 \newparaexample{}
 
-Dans l'exemple suivant, $f(n) = \bigomega{g(n)}$ signifie :
+Dans l'exemple suivant, $f(n) = \bigomega(g(n))$ signifie :
 $\exists (m, n_0)$ tel que $n \geq n_0$ implique $f(n) \geq m g(n)$.
 
 \begin{latexex}
-$f(n) = \bigomega{g(n)}$
+$f(n) = \bigomega(g(n))$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{La notation $\bigtheta{}$}%                           {La notation "grand Theta"}}
+\subsection{\texorpdfstring{La notation $\bigtheta$}%                           {La notation "grand Theta"}}
                            {La notation "grand Theta"}}
 
 \newparaexample{}
 
 \begin{latexex}
-$\bigtheta{}$
+$\bigtheta$
 \end{latexex}
 
 
@@ -4097,10 +4120,10 @@ $\bigtheta{}$
 
 \newparaexample{}
 
-Dans l'exemple suivant, $f(n) = \bigtheta{g(n)}$ signifie : $\exists (m, M, n_0)$ tel que $m g(n) \leq f(n) \leq M g(n)$ dès que $n \geq n_0$.
+Dans l'exemple suivant, $f(n) = \bigtheta(g(n))$ signifie : $\exists (m, M, n_0)$ tel que $m g(n) \leq f(n) \leq M g(n)$ dès que $n \geq n_0$.
 
 \begin{latexex}
-$f(n) = \bigtheta{g(n)}$
+$f(n) = \bigtheta(g(n))$
 \end{latexex}
 
 
@@ -4247,11 +4270,7 @@ Le gros du travail est fait par le package \verb+forest+ qui s'appuie \verb+TikZ
 	Jusqu'à la section \ref{tnsproba-autonum-forest} page \pageref{tnsproba-autonum-forest}, nous nommerons à la main les noeuds des arbres via \verb#name = ...# lorsque cela sera nécessaire.
 	Dans la section indiquée nous verrons comment utiliser les noms automatiques donnés par le package \verb#forest#.
 \end{remark}
-
-
-
-% ---------------------- %
-
+%\section{Arbres pondérés}
 
 \subsection{Les bases}
 
@@ -4300,22 +4319,32 @@ Pour ne cacher que certains poids afin de produire par exemple un arbre à compl
 \inputlatexex{TikZ/probatree-weight-hide-locally.tkz}
 
 
-%% ---------------------- %
-%
-%
-%\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
-%
-%Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
-%\footnote{
-%	Ces deux symboles font partie de la syntaxe TikZ.
-%}.
-%Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
-%
-%\inputlatexex{TikZ/probatree-weight-coma-equal.tkz}
-%
+% ---------------------- %
+
+
+\newparaexample{Forcer l'affichage des poids cachés localement}
+
+Imaginons que nous voulions donner l'arbre précédent avec tous ses poids.
+Il suffit dans ce cas de passer via l'environnement doublement étoilé \verb+probatree**+ qui affichera absolument tous les poids \emph{(on tape une fois et on réutilise le même code dans deux contextes différents)}.
+
+\inputlatexex{TikZ/probatree-weight-show-all.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Un signe $=$ et/ou une virgule dans les étiquettes}
+
+Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les étiquettes des branches
+\footnote{
+	Ces deux symboles font partie de la syntaxe TikZ.
+}.
+Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
+
+\inputlatexex{TikZ/probatree-weight-coma-equal.tkz}
 %\section{Arbres pondérés}
 
-\subsection{Commenter les racines}
+\subsection{Commenter les feuilles}
 
 \newparaexample{Tout aligner}
 
@@ -4325,6 +4354,8 @@ Que ce soit pour expliquer un arbre de probabilité, ou bien pour raisonner sur 
 	L'auteur du présent package trouve bien plus efficace à l'usage de ne pas toucher au code minimal d'un arbre.
 	Ceci explique donc le choix retenu de donner les décorations supplémentaires après le code de l'arbre.
 }.
+Noter l'utilisation possible de la clé \verb#col# pour \whyprefix{col}{or} afin d'indiquer une couleur au format TikZ.
+La couleur oar défaut est le noir. 
 
 
 \inputlatexexflat{tikz/probatree-comment.tkz}
@@ -4336,6 +4367,8 @@ Que ce soit pour expliquer un arbre de probabilité, ou bien pour raisonner sur 
 \end{remark}
 
 
+% ---------------------- %
+
 
 \newparaexample{Coller au plus près}
 
@@ -4345,6 +4378,45 @@ Avec l'exemple précédent on obtient la mise en forme qui suit.
 \medskip
 
 \input{tikz/probatree-comment-leftmost.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Décalages horizontal et vertical -- Avec des variables aléatoires}
+
+Grâce aux clés \verb#dx# et \verb#dy# il est possible d'ajouter des décalages horizontal et vertical. Ceci permet d'obtenir ce qui suit sans trop se fatiguer les méninges.
+
+\input{tikz/probatree-comment-dx-dy.tkz}
+
+
+Le code utilisé est le suivant.
+Notez qu'ici il y a des réglages à faire au doigt mouillé.
+Dans l'exemple suivant nous allons voir comment se passer des horribles copier-coller.
+
+\inputlatexexalone{tikz/probatree-comment-dx-dy-short.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Commenter via une boucle -- Avec des variables aléatoires}
+
+Dans le code précédent nous avons dû faire des copier-coller. La macro \macro{foreach} de TikZ permet d'éviter cela afin d'obtenir un code très facile à maintenir et à comprendre comme celui ci-après. Ceci étant indiqué, il y a des pièges à éviter comme nous l'expliquons juste après.
+
+% -- DEBUG - TO KEEP ! - START -- %
+%\input{tikz/probatree-comment-foreach.tkz}
+% -- DEBUG - TO KEEP ! - END -- %
+
+\inputlatexexalone{tikz/probatree-comment-foreach-short.tkz}
+
+Voici les pièges à éviter.
+
+\begin{enumerate}
+	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nb /$1$# au lieu de  \verb#nb/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
+
+	\item Les noms \macro{color}, \macro{col}, \macro{dx} et \macro{dy} sont utilisés en coulisse donc vous ne pourrez pas les utiliser dans votre boucle.
+\end{enumerate}
 %\section{Arbres pondérés}
 
 \subsection{Avec des cadres}
@@ -4365,8 +4437,11 @@ Dans l'exemple ci-après nous utilisons la bidouille \verb+{},s sep = 1.3cm+ qui
 
 
 \begin{remark}
-	La clé \verb#pframe# est un cas particulier car tous les autres décorations se font en dehors de la définition de l'arbre
+	La clé \verb#pframe# est un cas particulier de décoration car les autres décorations se font en dehors de la définition de l'arbre
 \end{remark}
+%\begin{remark}
+%	La clé \verb#pframe# est l'un des deux cas particuliers de décoration car la majorité des décorations se font en dehors de la définition de l'arbre
+%\end{remark}
 
 
 % ---------------------- %
@@ -4380,11 +4455,6 @@ Voici un exemple où la macro \macro{ptreeFrame} attend les noms de la racine et
 
 \inputlatexex{tikz/probatree-frame-not-final.tkz}
 %\section{Arbres pondérés}
-
-
-
-
-
 
 \subsection{Mettre en valeur des chemins}
 
@@ -4404,8 +4474,16 @@ Voici ce qu'il faut retenir.
 
 	\item \macro{ptreeFocus**} n'encadre aucun des noeuds.
 	
-	\item La couleur peut être changée via l'argument optionnel en utilisant les couelurs de type TikZ. Par défaut le bleu est utilisé.
+	\item La couleur peut être changée via l'argument optionnel en utilisant les couleurs de type TikZ. Par défaut le bleu est utilisé.
 \end{enumerate}
+
+
+\begin{remark}
+	Le fonctionnement interne de \verb#forest# empêche une coloration automatique des noeuds.
+	Si vous souhaitez obtenir cet effet il faudra ajouter les couleurs à la main pour chaque noeud comme dans l'exemple qui suit.
+
+	\inputlatexex{tikz/probatree-focus-edge-color-nodes.tkz}
+\end{remark}
 
 
 % ---------------------- %
@@ -4421,7 +4499,6 @@ Rien de bien compliqué à condition de bien respecter l'ordre de saisie des noe
 Avec \macro{ptreeFocus} on obtient l'arbre suivant où le mini disque initial
 \footnote{
 	Ce disque est en fait un carré aux coins arrondis autour d'un texte vide.
-	\macro{ptreeFocus} sera utile si l'univers est indiqué au départ de l'arbre.
 }
 n'est pas forcément souhaité.
 
@@ -4433,24 +4510,26 @@ Avec \macro{ptreeFocus**} on obtient l'arbre ci-dessous.
 \input{tikz/probatree-focus-edge-long-star-star.tkz}
 
 
-%% ---------------------- %
-%
-%
+% ---------------------- %
+
+
 %\newparaexample{De la racine à un noeud}
-%
-%Comme il est très courant de vouloir indiquer un chemin de la racine à une feuille, cette fonctionnalité est proposé par le package via les macros \macro{ptreeFocusAll},  \macro{ptreeFocusAll*} et  \macro{ptreeFocusAll**} qui prennent comme unique argument obligatoire le noeud final du chemin
+
+%Comme il est très courant de vouloir indiquer un chemin de la racine à une feuille, cette fonctionnalité est proposée par le package via les macros \macro{aptreeFocusAll},  \macro{aptreeFocusAll*} et \macro{aptreeFocusAll**} qui prennent comme unique argument obligatoire le noeud final du chemin
 %\footnote{
 %	Rien n'interdit de prendre un noeud interne au lieu d'u racine même si cela ne semble pas très utile a priori.
 %}
 %indiqué via le nom automatique fourni par \verb#forest#.
 %On peut alors utiliser le code suivant très rapide à taper : voir la section \ref{tnsproba-autonum-forest} page \pageref{tnsproba-autonum-forest} où est expliqué d'où vient le nom \verb#!xxxxx# utilisé ci-après.
 %
+
 %\inputlatexexflat{tikz/probatree-focus-edge-all.tkz}
+%\splitit{1312}
 
 
-% TESTING !!!
-%\ptreeFocusAll[red]{!1312}
-%\inputlatexexflat{tikz/probatree-focus-edge-all.tkz}
+%\begin{remark}
+%	La clé \verb#pfocus# est le 2\iem{} cas particulier de décoration avec \verb#pframe# car les autres décorations se font en dehors de la définition de l'arbre.
+%\end{remark}
 %\section{Arbres pondérés}
 
 \subsection{Utiliser les noms automatiques donnés par \texttt{forest}} \label{tnsproba-autonum-forest}
@@ -4463,14 +4542,20 @@ Voyons comment obtenir le résultat suivant en indiquant tous les noeuds via les
 \inputlatexexcodeafter{tikz/probatree-autonum.tkz}
 
 
-On comprend alors la logique utilisée.
+Voici comment s'y prendre.
 
 \begin{enumerate}
-	\item Chaque nom automatique commence par \texttt{!} .
+	\item On utilise \macro{aptreeFocus} au lieu de \macro{ptreeFocus} où le préfixe \prefix{a} est pour \whyprefix{a}{uto}.
+	      De façon similaire il existe les macros  \macro{aptreeComment} et  \macro{aptreeFrame}.
 
-	\item La racine est nommée \texttt{!} .
 
-	\item Pour voir ce qu'il faut faire pour un noeud autre que la racine, considérons par exemple \texttt{!1321}. On indique en fait le chemin à suivre en partant de la racine \fbox{\texttt{!}} pour arriver au noeud voulu.
+	\item Chaque nom automatique fabriqué par \verb#forest# commence par \texttt{!} . Ce caractère spécial n'est pas à indiquer car il sera ajouté automatiquement en coulisse.
+
+	
+	\item La racine est nommée \texttt{!} par \verb#forest# d'où le \verb#|# seul au début de l'argument de \macro{aptreeFocus*} ci-dessus afin d'indiquer un texte vide comme tout premier noeud.
+
+	
+	\item Pour voir ce qu'il faut faire pour un noeud autre que la racine, considérons par exemple \texttt{1321}. On indique en fait le chemin à suivre après la racine pour arriver au noeud voulu.
 	\begin{itemize}
 		\item Aller d'abord au \fbox{1}\,\ier{} noeud du niveau 1 qui ici est $A$.
 
@@ -4478,7 +4563,7 @@ On comprend alors la logique utilisée.
 
 		\item Aller après au \fbox{2}\,\ieme{} noeud du niveau 3 qui ici est $F$.
 		
-		\item Aller enfin au \fbox{1}\,\ier{} noeud du niveau 4 qui ici est $G$. C'est notre noeud nommé \fbox{\texttt{!1321}}.
+		\item Aller enfin au \fbox{1}\,\ier{} noeud du niveau 4 qui ici est $G$. C'est notre noeud nommé \fbox{\texttt{1321}}.
 	\end{itemize}
 \end{enumerate}
 
@@ -4486,6 +4571,7 @@ On comprend alors la logique utilisée.
 \begin{remark}
 	Utilisez de préférence les noms automatiques car cela facilitera la maintenance de vos arbres sur le long terme.
 	Si on reprend le tout premier exemple d'arbre décoré, il est bien plus simple de faire comme suit car on ne touche pas à la structure minimale du code de l'arbre.
+	A titre illustratif on a utilisé \macro{ptreeFrame} au lieu de la clé \verb#pframe# directement dans l'arbre.
 	
 	\inputlatexexflat{tikz/probatree-showcase-autonum.tkz}
 \end{remark}
@@ -4885,10 +4971,92 @@ de \verb+tnsmath+
 à destination de l'utilisateur principalement.
 Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+tnsmath+ sur \verb+github+.
 
-
+\begin{description}
 % Changes shown - START
 
-\begin{description}    \item[2020-08-06] Nouvelle version mineure \verb+1.7.0-beta+.
+    \medskip
+    \item[2020-08-09] Nouvelle version mineure \verb+1.8.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnslog -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Méthodes formelles en logique [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Macros \og textuelles \fg}
+              le préfixe \verb#txt# remplace l'ancien \verb#text#.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.6.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre de probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{aptreeFocus}, \macro{aptreeFocus*} et \macro{aptreeFocus**} permettent d'utiliser le système de nommage automatique des noeuds proposé par \verb#forest#.
+            
+            \item Il en va de même pour \macro{aptreeComment} et \macro{aptreeFrame}.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.7.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre de probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item Utilisation obligatoire de \verb#col=...# pour indiquer une couleur à toutes les macros de décoration.
+            
+            \item Les macros \macro{ptreeComment}, \macro{ptreeComment*}, 
+                  \macro{aptreeComment} et \macro{aptreeComment*}
+                  ont deux clés \verb#dx# et \verb#dy# pour indiquer un décalage relatif.
+            
+            \item Ajout de l'environnement \env{probatree**} qui force l'affichage de tous les poids !
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsseq -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Suites [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Comparaison asymptotique}
+              ce sont de vrais opérateurs mathématiques qui sont définis en coulisse \emph{(du coup les macros \macro{bigO}, \macro{smallO}, \macro{bigOmega} et \macro{bigTheta} n'ont plus d'argument)}.   
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
+
+    \medskip
+    \item[2020-08-06] Nouvelle version mineure \verb+1.7.0-beta+.
     
     
     % -------------- %
@@ -5044,10 +5212,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
+    \medskip
+    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
     
     
     % -------------- %
@@ -5072,10 +5241,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
+    \medskip
+    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
     
     
     % -------------- %
@@ -5096,10 +5266,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
+    \medskip
+    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
     
     
     % -------------- %
@@ -5157,10 +5328,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
+    \medskip
+    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
     
     
     % -------------- %
@@ -5430,18 +5602,20 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     
     
     \separation
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
+    \medskip
+    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Tableaux de signe et de variation}
               il est maintenant possible d'ajouter des graphiques expliquant le signe d'une fonction affine ou d'une fonction trinômiale du 2\ieme{} degré.
-    \end{itemize}\end{description}
+    \end{itemize}
 % ------------------------ %
 
-\begin{description}    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+    \medskip
+    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Logique}
@@ -5466,10 +5640,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
+    \medskip
+    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item Le changement vers une nouvelle version majeure se justifie par de nouvelles règles strictes pour définir les signatures des macros. À l'avenir ces règles seront appliquées tout le temps sauf dans de très rares cas.
@@ -5649,10 +5824,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \end{itemize}
     \end{itemize}
     
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
+    \medskip
+    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -5712,10 +5888,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     		\item Le comportement de \macro{probacond} a été modifié pour le rendre plus logique.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+    \medskip
+    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Analyse}
@@ -5758,10 +5935,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+    \medskip
+    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Algèbre}
@@ -5779,10 +5957,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+    \medskip
+    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic{Ensembles}
@@ -5818,10 +5997,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
                   La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
+    \medskip
+    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Ensembles}
@@ -5852,10 +6032,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
+    \medskip
+    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Arithmétique}
@@ -5894,10 +6075,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
             \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
         \end{itemize}
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-\begin{description}    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
+    \medskip
+    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
     
     \begin{itemize}[itemsep=.5em]
         \item \topic*{Algèbre linéaire}
@@ -5918,10 +6100,11 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
               différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
     
     \end{itemize}
-\end{description}
+
 % ------------------------ %
 
-% Changes shown - END
+% Changes shown - END 
+\end{description}
 
 
 \newpage
@@ -5999,7 +6182,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsection{Ensembles}
 
-\subsubsection{Ensembles probabilistes}
+\subsubsection{Ensembles probabilistes} 
 
 
 
@@ -6057,49 +6240,49 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \foreach \k in {NN, NNs}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {PP}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {ZZ, ZZn, ZZp, ZZs, ZZsn, ZZsp}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {DD, DDn, DDp, DDs, DDsn, DDsp}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {QQ, QQn, QQp, QQs, QQsn, QQsp}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {RR, RRn, RRp, RRs, RRsn, RRsp}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {CC, CCs}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {HH, HHs}{
     \IDope{\k} \quad
 }
-
+                
 \separation
 
 \foreach \k in {OO, OOs}{
@@ -6316,6 +6499,29 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \IDope{dsqcup}
 
 
+\subsection{Des applications très spéciales}
+
+\subsubsection{Fonction identité}
+
+
+
+\IDope{id}
+
+
+% ---------------------- %
+
+
+\subsection{Des applications très spéciales}
+
+\subsubsection{Fonction caractéristique}
+
+
+
+\IDope{caract}
+
+\IDope{caractone}
+
+
 \subsection{Applications}
 
 \subsubsection{Cardinal, image et compagnie}
@@ -6361,29 +6567,6 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
     
     \IDope{pbiject}
 \end{multicols}
-
-
-\subsection{Applications}
-
-\subsubsection{Fonction identité}
-
-
-
-\IDope{id}
-
-
-% ---------------------- %
-
-
-\subsection{Applications}
-
-\subsubsection{Fonction caractéristique}
-
-
-
-\IDope{caract}
-
-\IDope{caractone}
 
 
 \subsection{Applications}
@@ -6475,7 +6658,7 @@ Pour toutes les macros ci-dessous, la version non étoilée produit des délimit
 \begin{multicols}{4}
 % == Technical infos - Texts - START == %
 
-\foreach \k in {textopappli, textopchoice, textopcond, textopcons, textopdef, textophyp, textopid, textopplot, textoptest}{
+\foreach \k in {txtopappli, txtopchoice, txtopcond, txtopcons, txtopdef, txtophyp, txtopid, txtopplot, txtoptest}{
 
 	\IDmacro[n]{\k}
 
@@ -6869,25 +7052,25 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{Détailler un \og vrai \fg{} raisonnement via un tableau - Textes utilisés}
 
-\IDmacro[n]{textdemoID}     \hfill \mwhyprefix{ID}{entifier}
+\IDmacro[n]{txtdemoID}     \hfill \mwhyprefix{ID}{entifier}
 
-\IDmacro[n]{textdemoKNOWN}
+\IDmacro[n]{txtdemoKNOWN}
 
-\IDmacro[n]{textdemoPROP}   \hfill \mwhyprefix{PROP}{osition}
+\IDmacro[n]{txtdemoPROP}   \hfill \mwhyprefix{PROP}{osition}
 
-\IDmacro[n]{textdemoCONS}   \hfill \mwhyprefix{CONS}{equence}
-
-\extraspace
-
-\IDmacro[n]{textdemoHYPS}   \hfill \prefix{HYPS = HYP-othesis (S-everal ones)} 
-
-\IDmacro[n]{textdemoHYP}    \hfill \prefix{HYP = HYP-othesis (just one)}
-
-\IDmacro[n]{textdemoCCL}    \hfill \prefix{CCL = C-on-CL-usion}
+\IDmacro[n]{txtdemoCONS}   \hfill \mwhyprefix{CONS}{equence}
 
 \extraspace
 
-\IDmacro[n]{textdemoNEXTPAGE}
+\IDmacro[n]{txtdemoHYPS}   \hfill \prefix{HYPS = HYP-othesis (S-everal ones)} 
+
+\IDmacro[n]{txtdemoHYP}    \hfill \prefix{HYP = HYP-othesis (just one)}
+
+\IDmacro[n]{txtdemoCCL}    \hfill \prefix{CCL = C-on-CL-usion}
+
+\extraspace
+
+\IDmacro[n]{txtdemoNEXTPAGE}
 
 
 
@@ -8037,42 +8220,36 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \subsection{Comparaison asymptotique de suites et de fonctions}
 
-\subsubsection{\texorpdfstring{Les notations $\bigO{}$ et $\smallO{}$}%
+\subsubsection{\texorpdfstring{Les notations $\bigO$ et $\smallO$}%
                            {Les notations "grand O" et "petit O"}}
 
 
 
-\IDmacro[a]{bigO  }{1}
+\IDope{bigO}
 
-\IDmacro[a]{smallO}{1}
-
-\IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigO{}$ ou $\smallO{}$.
+\IDope{smallO}
 
 
 % ---------------------- %
 
 
-\subsubsection{\texorpdfstring{La notation $\bigomega{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigomega$}%
                            {La notation "grand Omega"}}
 
 
 
-\IDmacro[a]{bigomega}{1}
-
-\IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigomega{}$.
+\IDope{bigomega}
 
 
 % ---------------------- %
 
 
-\subsubsection{\texorpdfstring{La notation $\bigtheta{}$}%
+\subsubsection{\texorpdfstring{La notation $\bigtheta$}%
                            {La notation "grand Theta"}}
 
 
 
-\IDmacro[a]{bigtheta}{1}
-
-\IDarg{} un argument vide est ignoré, sinon il est mis entre des parenthèses après $\bigtheta{}$.
+\IDope{bigtheta}
 
 
 
@@ -8179,6 +8356,9 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 
 
+
+
+
 \subsection{Arbres pondérés}
 
 
@@ -8187,7 +8367,9 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDenv[n]{probatree*}
 
-\Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb+forest+.
+\IDenv[n]{probatree**}
+
+\Content{} un arbre codé en utilisant la syntaxe supportée par le package \verb#forest#.
 
 \extraspace
 
@@ -8199,6 +8381,17 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \extraspace
 
+\IDkey{pweight*} pour indiquer un poids sans l'imprimer.
+Dans l'environnement \env{probatree**}, le poids sera affiché comme si on avait utilisé \verb#pweight#.
+
+\IDkey{apweight*} pour indiquer un poids sans l'imprimer.
+Dans l'environnement \env{probatree**}, le poids sera affiché comme si on avait utilisé \verb#apweight#.
+
+\IDkey{bpweight*} pour indiquer un poids sans l'imprimer.
+Dans l'environnement \env{probatree**}, le poids sera affiché comme si on avait utilisé \verb#bpweight#.
+
+\extraspace
+
 \IDkey{pframe} pour encadrer un sous-arbre depuis un noeud vers toutes les feuilles de celui-ci.
 
 
@@ -8207,9 +8400,25 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDmacro{ptreeFrame}{1}{3} \hfill \mwhyprefix{p}{robabilty}
 
-\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+\IDoption{} un système de type \texttt{clé=valeur}.
 
-\IDargs{1..3} noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite). En fait l'ordre n'est pas important ici.
+\begin{enumerate}
+	\item \verb#col# : une couleur au format TikZ. La valeur par défaut est \verb#blue#.
+\end{enumerate}
+
+
+\IDargs{1..3} les noms de la sous-racine (à gauche), du noeud final en haut (à droite) et du noeud final en bas (à droite) tous indiqués via \verb#name = ...# \emph{(en fait l'ordre n'est pas important ici)}.
+
+
+\separation
+
+
+\IDmacro{aptreeFrame}{1}{3} \hfill \mwhyprefix{a}{auto}
+
+\extraspace
+\extraspace
+
+Voir les indications précédentes excepté qu'ici on utilise le système de nommage automatisé dérivé de celui de \verb#forest#.
 
 
 \separation
@@ -8217,11 +8426,30 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDmacro{ptreeComment}{1}{2}
 
-\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#black#.
+\IDoption{} un système de type \texttt{clé=valeur}.
+
+\begin{enumerate}
+	\item \verb#col# : une couleur au format TikZ. La valeur par défaut est \verb#black#.
+
+	\item \verb#dx# : une distance horizontale relative de décalage. La valeur par défaut est \verb#0cm#.
+
+	\item \verb#dy# : une distance verticale relative de décalage. La valeur par défaut est \verb#0cm#.
+\end{enumerate}
 
 \IDarg{1} le nom de la feuille.
 
 \IDarg{2} le texte du commentaire.
+
+
+\separation
+
+
+\IDmacro{aptreeComment}{1}{2}
+
+\extraspace
+\extraspace
+
+Voir les indications précédentes excepté qu'ici on utilise le système de nommage automatisé dérivé de celui de \verb#forest#.
 
 
 \separation
@@ -8233,9 +8461,28 @@ Les opérateurs suivants ont un comportement spécifique vis à vis des mises en
 
 \IDmacro{ptreeFocus**}{1}{1}
 
-\IDoption{} la couleur au format TikZ. La valeur par défaut est \verb#blue#.
+\IDoption{} un système de type \texttt{clé=valeur}.
 
-\IDarg{} les noms des noeuds dans le bon ordre et séparés par des barres verticales \verb#|#.
+\begin{enumerate}
+	\item \verb#col# : une couleur au format TikZ. La valeur par défaut est \verb#blue#.
+\end{enumerate}
+
+\IDarg{} les noms des noeuds indiqués via \verb#name = ...# à fournir dans le bon ordre et à séparer par des barres verticales \verb#|#.
+
+
+\separation
+
+
+\IDmacro{aptreeFocus  }{1}{1}
+
+\IDmacro{aptreeFocus* }{1}{1}
+
+\IDmacro{aptreeFocus**}{1}{1}
+
+\extraspace
+\extraspace
+
+Voir les indications précédentes excepté qu'ici on utilise le système de nommage automatisé dérivé de celui de \verb#forest#.
 
 
 

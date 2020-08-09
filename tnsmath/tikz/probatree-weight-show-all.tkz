@@ -1,0 +1,9 @@
+\begin{probatree**}
+    [
+        [$A$, pweight = $a$
+            [$B$, apweight* = $b$]
+            [$C$, bpweight* = $c$]
+        ]
+        [$D$, pweight* = $d$]
+    ]
+\end{probatree**}

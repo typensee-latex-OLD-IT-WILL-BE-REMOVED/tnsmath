@@ -1,0 +1,34 @@
+\begin{probatree}
+    [
+        [$A$
+            [$B$, name = nB]
+            [$C$, name = nC]
+        ]
+        [$D$
+            [$E$, name = nE]
+            [$F$, name = nF]
+        ]
+    ]
+    % Valeurs de X
+    \ptreeComment[col=blue, dx=-.25em, dy=1cm]%
+                 {nB}{$X$}
+    \foreach \name/\val in {
+        nB/$1$,
+        nC/$3$,
+        nE/$3$,
+        nF/$5$
+    }{
+        \ptreeComment[col=blue]{\name}{\val}
+    }
+    % Valeurs de Y
+    \ptreeComment[col=orange, dx=2em+.5em, dy=1cm]%
+                 {nB}{$Y$}
+    \foreach \name/\val in {
+        nB/$-5$,
+        nC/$-2$,
+        nE/$-1$,
+        nF/$\phantom{-}0$
+    }{
+        \ptreeComment[col=orange, dx=2em]{\name}{\val}
+    }
+\end{probatree}

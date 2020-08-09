@@ -1,0 +1,27 @@
+% == PACKAGES USED == %
+
+\RequirePackage{simplekv}
+
+
+% == DEFINITIONS == %
+
+% -- Frames -- %
+
+\setKVdefault[tnsproba@frame@keys]{%
+    col = blue
+}
+
+
+% #1 : color
+% #2 : left start corner
+% #3 : right up   corner
+% #4 : right down corner
+\newcommand\ptreeFrame[4][]{%
+    \useKVdefault[tnsproba@frame@keys]%
+    \setKV[tnsproba@frame@keys]{#1}%
+    \edef\col{\useKV[tnsproba@frame@keys]{col}}%
+    \node[draw = \col,
+          line width = 1.5pt,
+          rounded corners,
+          fit = (#2)(#3)(#4)] {};
+}

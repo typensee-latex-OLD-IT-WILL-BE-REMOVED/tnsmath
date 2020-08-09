@@ -1,0 +1,10 @@
+\begin{probatree}
+    [
+        [$A$, name = nA, red
+            [$B$, name = nB, red]
+            [$C$]
+        ]
+    ]
+    %
+    \ptreeFocus[col=red]{nA | nB}
+\end{probatree}

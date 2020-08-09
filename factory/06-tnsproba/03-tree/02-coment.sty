@@ -1,0 +1,44 @@
+% == PACKAGES USED == %
+
+\RequirePackage{simplekv}
+
+
+% == DEFINITIONS == %
+
+% -- Comments -- %
+
+\setKVdefault[tnsproba@comment@keys]{%
+    col = black,
+    dx  = 0cm,
+    dy  = 0cm
+}
+
+% #1 : color
+%
+% #2 : node
+% #3 : comment
+\newcommand\ptreeComment{\@ifstar{\ptree@comment@star}{\ptree@comment@no@star}}
+
+\newcommand\ptree@comment@no@star[3][]{
+    \useKVdefault[tnsproba@comment@keys]%
+    \setKV[tnsproba@comment@keys]{#1}%
+    \edef\col{\useKV[tnsproba@comment@keys]{col}}%
+    \edef\dx{\useKV[tnsproba@comment@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@comment@keys]{dy}}%
+	\node [anchor=mid west, xshift=.5cm+\dx, yshift=\dy] at (#2.mid -| ptreecomment coord) {%
+		\textcolor{\col}{#3}%
+	};
+}
+
+
+
+\newcommand\ptree@comment@star[3][]{
+    \useKVdefault[tnsproba@comment@keys]%
+    \setKV[tnsproba@comment@keys]{#1}%
+    \edef\col{\useKV[tnsproba@comment@keys]{col}}%
+    \edef\dx{\useKV[tnsproba@comment@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@comment@keys]{dy}}%
+	\node [anchor=mid west, xshift=.825cm, yshift=0cm] at (#2.mid) {%
+		\textcolor{\col}{#3}%
+	};
+}

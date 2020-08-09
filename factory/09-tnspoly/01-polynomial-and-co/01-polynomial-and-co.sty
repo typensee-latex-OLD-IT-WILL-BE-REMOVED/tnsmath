@@ -3,14 +3,14 @@
 \RequirePackage{tnscom}
 
 
-
 % == DEFINITIONS == %
 
-% Argument 1: the set
-% Argument 2: the variable(s)
-% Argument 3: the 1st decorator
-% Argument 4: the 2nd decorator
-% Argument 5: the number of decorators
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+% #3 : the 1st decorator
+% #4 : the 2nd decorator
+% #5 : the number of decorators
+
 \newcommand\tnspoly@set@special@algebra[5]{%
     \ensuremath{%
         #1 \! %
@@ -29,29 +29,48 @@
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setpoly[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{[}{]}{1}%
 }
 
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setpolyfrac[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{(}{)}{1}%
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setserie[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{[}{]}{2}%
 }
 
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setseriefrac[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{(}{)}{2}%
 }
 
 
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
+
 \newcommand\setpolylaurent[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{1}%
 }
+
+
+% #1 : the set
+% #2 : a multi-argument for the variable(s)
 
 \newcommand\setserielaurent[2]{%
     \tnspoly@set@special@algebra{#1}{#2}{\{}{\}}{2}%

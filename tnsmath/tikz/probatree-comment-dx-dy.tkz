@@ -1,0 +1,27 @@
+\begin{probatree}
+    [
+        [$A$
+            [$B$, name = nB]
+            [$C$, name = nC]
+        ]
+        [$D$
+            [$E$, name = nE]
+            [$F$, name = nF]
+        ]
+    ]
+    % Valeurs de X
+    \ptreeComment[col=blue, dx=-.25em, dy=1cm]%
+                 {nB}{$X$}
+    \ptreeComment[col=blue]{nB}{$1$}
+    \ptreeComment[col=blue]{nC}{$3$}
+    \ptreeComment[col=blue]{nE}{$3$}
+    \ptreeComment[col=blue]{nF}{$5$}
+    %
+    % Valeurs de Y
+    \ptreeComment[col=orange, dx=2em+.5em, dy=1cm]%
+                 {nB}{$Y$}
+    \ptreeComment[col=orange, dx=2em]{nB}{$-5$}
+    \ptreeComment[col=orange, dx=2em]{nC}{$-2$}
+    \ptreeComment[col=orange, dx=2em]{nE}{$-1$}
+    \ptreeComment[col=orange, dx=2em]{nF}{$\phantom{-}0$}
+\end{probatree}

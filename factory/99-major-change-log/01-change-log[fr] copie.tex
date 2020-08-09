@@ -1,0 +1,1061 @@
+\documentclass[12pt,a4paper]{book}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\chapter{Historique}
+
+Nous ne donnons ici qu'un très bref historique récent
+\footnote{
+	On ne va pas au-delà de un an depuis la dernière version.
+}
+de \verb+tnsmath+
+\footnote{
+	Ce package remplace l'ancien \texttt{lymath}.
+}
+à destination de l'utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+tnsmath+ sur \verb+github+.
+
+
+% Changes shown - START
+
+\begin{description}    \item[2020-08-06] Nouvelle version mineure \verb+1.7.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.6.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Définition explicite d'une fonction}
+        \begin{itemize}[itemsep=.5em]
+            \item Une nouvelle macro \macro{txfuncdef} produit une version textuelle courte.
+    
+            \item Omission possible des ensembles, via des arguments vides, quand on utilise \macro{funcdef[h]} ou \macro{txfuncdef}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+        \item \topic*{Fonctions avec un paramètre}
+              les macros \macro{expb} et \macro{logb} ont été remplacées par \macro{exp} et \macro{log} qui ont un argument optionnel pour indiquer éventuellement une base.
+    
+    % ------------------------ %
+    
+        \item \topic*{Dérivation partielle}
+              \macro{pder[ei]} fonctionne maintenant aussi avec des variables indexées.
+              
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.7.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              les macros \macro{funcdef} et \macro{txtfuncdef} ont été déplacées dans \verb#tnssets# qui est disponible sur \url{https://github.com/typensee-latex/tnssets.git}.
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Critère de colinéarité}
+              ajout de la macro \macro{colicriteria}.
+    
+    	% -------------- %
+    
+        \item \topic*{Produit vectoriel} changement de l'API.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{vcalccrossprod*} devient \macro{vcalccrossprod**}.
+    
+            \item \macro{vcalccrossprod*} dessine des produits en croix à la place des boucles.
+        \end{itemize}
+    
+    	% -------------- %
+    
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.4.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre}
+        	  possibilité de mettre en valeur un chemin via \macro{ptreeFocus},  \macro{ptreeFocus*} ou \macro{ptreeFocus**}.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.5.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre de probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{ptreeFocus}, \macro{ptreeFocus*} et \macro{ptreeFocus**} fonctionnent avec un multi-argument pour pourvoir indiquer un chemin sur plusieurs noeuds.
+            
+            \item Suppression de la clé \macro{pcomment}.
+            
+            \item Ajout des macros \macro{ptreeComment} et \macro{ptreeComment*} qui simplifient la saisie.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % ------------- %
+    % -- tnssets -- %
+    % ------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Composition d'applications}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{compo} est un opérateur de composition de deux applications.
+    
+            \item \macro{multicomp} permet d'indiquer des compositions successives d'une application par elle-même.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              intégration de deux macros proposées avant par \verb#tnsana# disponible sur \url{https://github.com/typensee-latex/tnsana.git}.
+    
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{funcdef} peut produire trois versions symboliques.
+    
+            \item \macro{txtfuncdef} produit une version textuelle courte.
+        \end{itemize}
+    
+    
+        \item \topic{Fonctions spéciales}
+    
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout de \macro{id} pour la fonction identité.
+    
+            \item Ajout de \macro{caract} et \macro{caractone} pour deux versions de la fonction caratéristque d'un ensemble.
+        \end{itemize}
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-25] Nouvelle version mineure \verb+1.6.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Arbre}
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout du style \prefix{pcomment} pour placer du texte à la droite d'une feuille.
+    
+            \item Le style \prefix{frame} a été renommé \prefix{pframe}.
+        \end{itemize}
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-23] Nouvelle version mineure \verb+1.5.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre}
+              ajout de la macro \macro{ptreeFrame} pour tracer facilement des sous cadres non \og finaux \fg.
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-22] Nouvelle version mineure \verb+1.4.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.5.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Définition explicite d'une fonction}
+              ajout de \macro{funcdef}.
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Probabilité conditionnelle}
+              \macro{probacondexp} renommée en  \macro{eprobacond}.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{Évènement contraire}
+              ajout de \macro{nevent}.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{variance et écart-type}
+              ajout de \macro{var} et \macro{stddev}.
+    
+    % ------------------------ %
+    
+        
+    
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-21] Nouvelle version mineure \verb+1.3.0-beta+ : passage de \verb#lymath# à \verb#tnsmath#.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions nommées} \macro{ppcm} et \macro{pgcd} ont été déplacées dans \texttt{tnsarith} disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Symboles} les nouvelles macros \macro{symvar} et \macro{symvar*} produisent un disque plein et un carré plein permettant par exemple d'indiquer symboliquement une ou des variables.
+        
+        
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Dérivation}
+        \begin{itemize}[itemsep=.5em]
+            \item Dérivation pointée à la physicienne via \verb+d+ et \verb+bd+ deux nouvelles options de \macro{der}.
+    
+            \item Dérivation partielle indexée du type $u_{xxy}$ à la physicienne via \verb+ei+ une nouvelle option de \macro{pder}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+    
+        
+    
+    
+        \item \topic{Tableaux de signe et de variation}
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout de \macro{backLine} pour changer la couleur de fond d'une ou plusieurs lignes.
+    
+    
+            \item \macro{graphSign} propose des fonctions de référence \emph{(sans paramètre)}.
+        \end{itemize}
+    
+    % ------------------------ %
+    
+    
+        
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.4.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Limite}
+              ajout de \macro{limit} pour l'écriture de limites de fonctions à une seule variable.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{Dérivation}
+              par souci de cohérence, il faudra taper \verb#\der{f}{x}{n}# au lieu de l'ancien \verb#\der{f}{n}{x}#.
+    
+    % ------------------------ %
+    
+        
+    
+        \item \topic*{Intégration}
+              par souci de cohérence, il faudra taper \verb#\integrate{f}{x}{a}{b}# au lieu de l'ancien \verb#\integrate{a}{b}{f}{x}#.
+              Il en va de même pour \macro{hook}.
+    
+    % ------------------------ %
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsarith -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Arithmétique [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Arithmétique [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions nommées} ajout de \macro{pgcd}, \macro{ppcm} et \macro{lcm}.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.1.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Produit scalaire}
+              trois nouvelles options pour \macro{dotprod} et \macro{vdotprod}.
+        \begin{itemize}[itemsep=.5em]
+            \item \verb+p+ et \verb+sp+ donnent une écriture parenthésée.
+    
+            \item \verb+b+ utilise une puce au lieu d'un point.
+        \end{itemize}
+    
+    
+    	
+    
+    
+        \item \topic*{Produit vectoriel}
+              un nouvel argument optionnel pour \macro{crossprod} et \macro{vcrossprod} afin d'obtenir aussi une mise en forme avec le symbole $\times$ .
+    
+    
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnslinalg -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Algèbre linéaire [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnslog -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Méthode formelle en logique [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnspoly -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Polynômes et séries formelles [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsseq -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Suites [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnssets -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Théorie générale des ensembles [0.0.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Simple migration depuis l'ancien code de \verb+lymath+.
+    \end{itemize}
+    
+    
+    \separation
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-07-05] Nouvelle version mineure \verb+1.2.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Tableaux de signe et de variation}
+              il est maintenant possible d'ajouter des graphiques expliquant le signe d'une fonction affine ou d'une fonction trinômiale du 2\ieme{} degré.
+    \end{itemize}\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-06-27] Nouvelle version mineure \verb+1.1.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item Suppression des environnements \env{aexplain} et \env{aexplain*}.
+    
+                  \smallskip
+    
+                  Leurs mises en forme restent accessibles respectivement via les options \verb+style = ar+ et \verb+style = sar+ de l'environnement \env{explain}.
+    
+    
+            \item L'environnement \env{explain} propose des options de type \texttt{clé-valeur}.
+    
+    
+            \item Ajout de petits commentaires pour les étapes via \macro{comthis} et si besoin \macro{comthis*}.
+    
+    
+            \item Modification de \macro{explnext*} pour le mode universitaire sans flèche via l'ajout de \macro{exptxtupdown} qui gère la mise en forme de deux explications non vides.
+                  Ceci a pour effet l'alignement du rendu avec l'opérateur.
+    
+    
+            \item Les environnements \env{demoexplain} et \env{demoexplain*} utilisent \env{longtable} en coulisse afin de pouvoir écrire un tableau sur plusieurs pages.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-06-21] Nouvelle version majeure \verb+1.0.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item Le changement vers une nouvelle version majeure se justifie par de nouvelles règles strictes pour définir les signatures des macros. À l'avenir ces règles seront appliquées tout le temps sauf dans de très rares cas.
+        \begin{center}
+    		\bfseries\itshape
+    		Ceci a créé beaucoup de nouvelles façons de rédiger.
+        \end{center}
+    
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic*{Algèbre linéaire}
+              \macro{calcdettwo} est un outil pédagogique pour expliquer le calcul d'un déterminant $2\times2$.
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic{Analyse}
+        \begin{itemize}[itemsep=.5em]
+            \item Calcul intégral.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item \macro{integrate} et \macro{dintegrate} servent à rédiger des intégrales simples.
+    
+                \item \macro{hook} s'utilise différemment : on doit taper \macro{hook\{a\}\{b\}\{F(x)\}\{x\}} avec l'obligation de donner la variable.
+                
+                \item \macro{hook} marche avec des options.
+                      Du coup \macro{vhook} and \macro{vhook*} ont été supprimées mais les mises en forme correspondantes existent toujours via \macro{hook[r]} et \macro{hook[sr]}.
+    	    \end{itemize}
+    	    
+    	    % :::::::::::::::::::::::: %
+            
+            \item Dérivées totales.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item Il ne reste plus que trois macros : \macro{sder}, \macro{der} et \macro{derope}.
+    
+                \item \macro{sder} et \macro{sder[e]} remplacent \macro{derpow*} et \macro{derpow} avec en plus la possibilité d'ajout automatique de parenthèses pour faire comme avec \macro{derpar*}, \macro{derpar}, \macro{sderpar*} et \macro{sderpar} avant.
+    
+    
+                \item \macro{der} s'utilise en indiquant la variable de dérivation. Cette macro propose différentes options pour différentes mises en forme 
+                      \emph{(on peut toujours obtenir la même chose que ce que proposaient \macro{derfrac}, \macro{derfrac*} et \macro{dersub})}.
+    
+                \item \macro{derope} sert à écrire un opérateur fonctionnel.
+    	    \end{itemize}
+    
+    	    % :::::::::::::::::::::::: %
+    
+            \item Dérivées partielles.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item Il ne reste plus que deux macros : \macro{pder} et \macro{pderope}.
+    
+                \item \macro{pder} possède des options permettant d'obtenir le même résultat qu'avec les anciennes macros \macro{partialfrac} et \macro{partialsub}.
+    
+                \item La mise en forme proposée par \macro{partialprime} n'a pas été gardée.
+    
+                \item \macro{pderope} sert à écrire un opérateur fonctionnel.
+    	    \end{itemize}
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic{Arithmétique}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{notdivides} a été renommée \macro{ndivides}.
+    
+            \item Ajout de \macro{nequiv}.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic{Géométrie}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{calcdetplane}, \macro{calcdetplane*}, \macro{vcalcdetplane} et \macro{vcalcdetplane*} permettent de détailler le calcul du déterminant de deux vecteurs en dimension $2$ \emph{(utile pour le critère de colinéarité)}.
+    
+    	    % :::::::::::::::::::::::: %
+    
+            \item \macro{calccrossprod}, \macro{calccrossprod*}, \macro{vcalccrossprod} et \macro{vcalccrossprod*} permettent de détailler le calcul du produit vectoriel de deux vecteurs en dimension $3$.
+    
+            \item \macro{coordcrossprod} permet d'obtenir formellement les coordonnées d'un produit vectoriel avec des formats du type $(y z' - z y' , z x' - x z ' , x y' - y x')$.
+    
+    		% :::::::::::::::::::::::: %
+    
+            \item Angles orientés.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item \macro{angleorient} devient l'unique macro pour rédiger des angles orientés de différentes façons via des options.
+                
+                \item \macro{angleorient*}  a été remplacée par \macro{angleorient[sp]}.
+                
+                \item \macro{hangleorient}  a été remplacée par \macro{dotprod[h]}.
+                      
+                \item \macro{hangleorient*} a été remplacée par \macro{dotprod[sh]}.
+    	    \end{itemize}
+    
+    	    % :::::::::::::::::::::::: %
+    
+            \item Produit scalaire.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item \macro{dotprod} devient l'unique macro pour rédiger des produits scalaires de différentes façons grâce à des options.
+                
+                \item \macro{adotprod}  a été remplacée par \macro{dotprod[a]}.
+    
+                \item \macro{adotprod*} a été remplacée par \macro{dotprod[sa]}.
+    	    \end{itemize}
+    
+    	    % :::::::::::::::::::::::: %
+    
+            \item Coordonnées.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item Il faut passer via l'une des macros : \macro{coord}, \macro{pcoord}, \macro{pcoord*}, \macro{vcoord} et \macro{vcoord*}.
+                      Toutes ces macros proposent des options pour choisir la mise en forme : des parenthèse en mode horizontal, des crochets en mode vertical...
+    
+                \item \macro{coord} est pour des coordonnées seules.
+    
+                \item \macro{pcoord} et \macro{pcoord*} sont pour un point avec ses coordonnées.
+    
+                \item \macro{vcoord} et \macro{vcoord*} sont pour un vecteur avec ses coordonnées.
+    
+                \item La version étoilée \macro{coord*} a été supprimée. 
+    	    \end{itemize}
+    
+    
+    
+            \item Norme.
+            
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item \macro{norm} fonctionne maintenant avec des options.
+                      Du coup \macro{norm*} a été supprimée mais la mise en forme correspondante existe toujours via \macro{norm[s]}.
+    
+    			\item \macro{vnorm} évite d'avoir à utiliser \macro{vect} pour des vecteurs juste nommés.
+    	    \end{itemize}
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item La macro \macro{explain} a été supprimée pour être remplacée par l'environnement \env{explain} qui est redoutable d'efficacité pour détailler un calcul ou un raisonnement simple.
+            
+            \item \env{explain} est complété par les deux environnements \env{aexplain} et \env{aexplain*} qui utilisent des flèches pour les indications.
+    
+            \item Les environnements \env{demoexplain} et \env{demoexplain*} permettent de rédiger de \emph{\og vraies \fg} démonstrations via des tableaux efficaces.
+    
+            \item Toutes les macros négatives avec pour préfixe \prefix{not} auparavant utilisent maintenant juste le préfixe \prefix{n}.
+    
+            \item Tous les opérateurs de comparaison ont une version négative.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \separation
+        \item \topic{Probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{probacond**} et \macro{dprobacond**} sont devenues \macro{probacondexp*} et \macro{probacondexp} respectivement.
+            
+            \item \macro{expval} est une nouvelle macro pour l'écriture symbolique de l'espérance d'une  variable aléatoire.
+        \end{itemize}
+    \end{itemize}
+    
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2020-06-08] Nouvelle version mineure \verb+0.7.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Analyse}
+        \begin{itemize}[itemsep=.5em]
+            \item Pour éviter des conflits avec d'autres packages les renommages suivants ont dû être faits.
+            \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
+                \item \macro{ch} et \macro{ach} sont devenus \macro{fch} et \macro{afch} où \prefix{f} est pour \whyprefix{f}{rench}.
+    
+                \item \macro{sh} et \macro{ash} sont devenus \macro{fsh} et \macro{afsh}.
+    
+                \item \macro{th} et \macro{ath} sont devenus \macro{fth} et \macro{afth}.
+            \end{itemize}
+    
+    		\item Les macros \macro{acosh}, \macro{asinh} et \macro{atanh} ont été ajoutées.
+    
+     		\item \macro{derpar} et \macro{derpar*} servent à rédiger des dérivées avec des parenthèses extensibles. En coulisse, \macro{derpow} et \macro{derpow*} sont appelées.
+    
+            Pour utiliser des parenthèses non extensibles, on passera par \macro{sderpar} et \macro{sderpar*} où \prefix{s} est pour \whyprefix{s}{mall}.
+    
+    		\item Ajout de \macro{stdint} pour rendre public l'opérateur intégral proposé par défaut par \LaTeX.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Géométrie}
+        \begin{itemize}[itemsep=.5em]
+            \item La macro \macro{pts} a été supprimée car sans signification sémantique puisqu'un point peut être nommé avec deux lettres.
+    
+            \item Les macros \macro{gline} et \macro{pgline} servent à indiquer des droites définies par deux points.
+    
+            \item La macro \macro{hgline}, avec \prefix{h} pour \whyprefix{h}{alf}, est pour les demi-droites définies par deux points.
+    
+            \item La macro \macro{segment} est utile pour les segments définis par deux points.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item Pour les inégalités, on peut maintenant utiliser le décorateur \verb+plot+.
+    
+    		\item Ajout des versions négatives des opérateurs logiques verticaux.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item Ajout de \macro{proba} pour écrire des probabilités.
+    
+    		\item Le comportement de \macro{probacond} a été modifié pour le rendre plus logique.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-10-21] Nouvelle version sous-mineure \verb+0.6.3-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Analyse}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{hypergeo} est devenu \macro{seqhypergeo}.
+    
+            \item \macro{suprageo} est devenu \macro{seqsuprageo}.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Ensembles}
+              \macro{CSinterval} a été déplacée dans le package \verb+lyalgo+ disponible à l'adresse \url{https://github.com/bc-latex/ly-algo}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Géométrie}
+              \macro{notparallel} est devenu \macro{nparallel}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{eqdef**} a été supprimé. Voir la macro \macro{Store*} du package \verb+lyalgo+.
+    
+            \item Différentes versions de l'opérateur $\exists$ via \macro{existsone} et \macro{existmulti} avec leurs versions négatives \macro{nexistsone} et \macro{nexistmulti}.
+    
+            \item Deux nouvelles macros \macro{eqplot} et \macro{eqappli} pour indiquer une équation de courbe et l'application d'une identité à des variables. Ceci s'accompagne de l'ajout des macros \macro{textopplot} et \macro{textopappli}.
+    
+            \item Ajout des formes négatives \macro{niff}, \macro{nimplies} et \macro{nliesimp}.
+    
+            \item Les décorations \verb+cons+, \verb+appli+ et \verb+choice+ sont utilisables avec les opérateurs \macro{iff}, \macro{implies} et \macro{liesimp} et leurs formes négatives.
+    
+            \item Une macro \macro{textoptest} a été ajoutée afin de rendre personnalisable tous les textes décorant les symboles.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Algèbre}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{polyset} est devenu \macro{setpoly}.
+    
+            \item \macro{polyfracset} est devenu \macro{setpolyfrac}.
+    
+            \item \macro{serieset} est devenu \macro{setserie}.
+    
+            \item \macro{seriefracset} est devenu \macro{setseriefrac}.
+    
+            \item \macro{polylaurentset} est devenu \macro{setpolylaurent}.
+    
+            \item \macro{serielaurentset} est devenu \macro{setserielaurent}.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic{Ensembles}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{algeset} est devenu \macro{setalge}.
+    
+            \item \macro{geoset} est devenu \macro{setgeo}.
+    
+            \item \macro{geneset} est devenu \macro{setgene}.
+    
+            \item \macro{probaset} est devenu \macro{setproba}.
+    
+            \item \macro{specialset} est devenu \macro{setspecial}.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Logique}
+    	      la macro \macro{explain} possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole.
+              Ceci s'accompagne de la suppression des macros obsolètes \macro{explain*} et \macro{textexplainspacebefore}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Probabilité}
+        \begin{itemize}[itemsep=.5em]
+            \item Les macros \macro{probacond} et \macro{probacond*} n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \macro{probacond**} ou \macro{dprobacond**}.
+    
+            \item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
+                  La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Ensembles}
+        	  pour l'informatique théorique la macro \macro{CSinterval} permet d'obtenir quelque chose comme \verb+a..b+.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Géométrie}
+              la macro \macro{notparallel} a été rajoutée.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Logique}
+              il y a deux nouvelles macros sémantiques \macro{neqid} et \macro{eqchoice}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Probabilités}
+        \begin{itemize}[itemsep=.5em]
+            \item Les macros \macro{probacond} et \macro{probacond*} servent à écrire des probabilités conditionnelles.
+    
+            \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arithmétique}
+              ajout des opérateurs \macro{divides}, \macro{notdivides} et \macro{modulo}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Divers}
+               ajout des macros \macro{dsum} et \macro{dprod} qui sont vis à vis de \macro{sum} et \macro{prod} des équivalents de \macro{dfrac} pour \macro{frac}.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Géométrie}
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{pts} permet d'indiquer plusieurs points.
+    
+            \item \macro{parallel} utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+        \end{itemize}
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic{Logique}
+        \begin{itemize}[itemsep=.5em]
+            \item La version doublement étoilée \macro{eqdef**} donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+    
+            \item Ajout de \macro{liesimp} comme alias de \macro{Longleftarrow}.
+    
+            \item Les macros \macro{vimplies}, \macro{viff} et \macro{vliesimp} sont des versions verticales de \macro{implies}, \macro{iff} et \macro{liesimp}.
+    
+            \item Comme pour les égalités, il existe les macros \macro{impliestest}, \macro{iffhyp} ... etc.
+        \end{itemize}
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+\begin{description}    \item[2019-09-06] Nouvelle version mineure \verb+0.4.0-beta+.
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Algèbre linéaire}
+              intégration du package \verb+nicematrix+ pour écrire des matrices.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Analyse}
+              intégration du package \verb+tkz-tab+ pour rédiger des tableaux de variations et de signes.
+    
+    
+    % ------------------------ %
+    
+    
+        \item \topic*{Logique et fondements}
+              différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
+    
+    \end{itemize}
+\end{description}
+% ------------------------ %
+
+% Changes shown - END 
+
+\end{document}
