@@ -2,6 +2,7 @@
 
 \makeatletter
 	\input{../../config/header[fr].sty}
+	\input{../02-point-n-line/01-point-n-line.sty}
 
 	\usepackage{01-vector}
 \makeatother
@@ -16,7 +17,7 @@
 \newparaexample{}
 
 \begin{latexex}
-$\vect{ABCDEF}$  ,
+$\vect{UnNomLong}$  ,
 $\vect*{e}{rot}$ ou
 $\vect{e_{rot}}$
 \end{latexex}
@@ -25,11 +26,21 @@ $\vect{e_{rot}}$
 % ---------------------- %
 
 
-\newparaexample{}
+\newparaexample{Sans point disgracieux}
 
 \begin{latexex}
 $\vect{i}$ ou
 $\vect*{j}{2}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Se passer de la macro \macro{pt}}
+
+\begin{latexex}
+$\pvect{A}{B} = \vect{\pt{A}\pt{B}}$. 
 \end{latexex}
 
 
@@ -51,5 +62,15 @@ $\vect*{j}{2}$
 \IDarg{1} un texte indiquant $up$ dans le nom $\vect*{up}{down}$ d'un vecteur.
 
 \IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
+
+
+\separation
+
+
+\IDmacro[a]{pvect}{2}
+
+\IDarg{1} le nom du 1\ier{} point qui sera mis en forme via la macro \macro{pt}.
+
+\IDarg{2} le nom du 2\ieme{} point qui sera mis en forme via la macro \macro{pt}.
 
 \end{document}

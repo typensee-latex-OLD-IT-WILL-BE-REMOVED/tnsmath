@@ -85,7 +85,7 @@ Dans le code précédent nous avons dû faire des copier-coller. La macro \macro
 Voici les pièges à éviter.
 
 \begin{enumerate}
-	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nb /$1$# au lieu de  \verb#nb/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
+	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nB /$1$# au lieu de  \verb#nB/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
 
 	\item Les noms \macro{color}, \macro{col}, \macro{dx} et \macro{dy} sont utilisés en coulisse donc vous ne pourrez pas les utiliser dans votre boucle.
 \end{enumerate}

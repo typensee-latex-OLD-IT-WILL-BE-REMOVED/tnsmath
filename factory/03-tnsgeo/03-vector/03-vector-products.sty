@@ -11,7 +11,7 @@
 
 % == DEFINITIONS == %
 
-% DOT PRODUCT
+% -- DOT PRODUCT -- %
 
 %    #1 : 1st delimiter
 %    #2 : 1st vector
@@ -91,8 +91,7 @@
 
 
 
-
-% CROSS PRODUCT
+% -- CROSS PRODUCT - OPERATOR -- %
 
 %    #1 : option for the operator
 %    #2 : 1st vector
@@ -118,20 +117,7 @@
 
 
 
-% Stupid coordinates of the cross product
-
-\newbool{tnsgeo@crossprod@option@p}   % Default.
-\newbool{tnsgeo@crossprod@option@sp}
-\newbool{tnsgeo@crossprod@option@vp}
-
-\newbool{tnsgeo@crossprod@option@b}
-\newbool{tnsgeo@crossprod@option@sb}
-\newbool{tnsgeo@crossprod@option@vb}
-
-\newbool{tnsgeo@crossprod@option@space}   % Default.
-\newbool{tnsgeo@crossprod@option@times}
-\newbool{tnsgeo@crossprod@option@cdot}
-
+% -- CROSS PRODUCT - CALCULATE -- %
 
 % Coordinates given like that.
 %
@@ -143,7 +129,8 @@
 %
 % #8 : one of the macro \coord, \vcoord or \vcoord*.
 %
-% #9 : one of the the option p, sp, vp, b, sb or vb. 
+% #9 : one of the the option p, sp, vp, b, sb or vb.
+
 \newcommand\tnsgeo@apply@coord@crossprod[9]{%
     #8[#9]{%
     	\tns@prop@prod{#7}{#2}{#5}%
@@ -156,166 +143,183 @@
 }
 
 
-\newcommand\tnsgeo@validate@crossprod@option[1]{
+\newbool{tnsgeo@calc@crossprod@option@vec}   % Default.
+\newbool{tnsgeo@calc@crossprod@option@novec}
+
+\newbool{tnsgeo@calc@crossprod@option@loop}   % Default.
+\newbool{tnsgeo@calc@crossprod@option@arrows}
+\newbool{tnsgeo@calc@crossprod@option@cross}
+\newbool{tnsgeo@calc@crossprod@option@nodeco}
+
+
+\newbool{tnsgeo@calc@crossprod@option@p}   % Default if exp is used.
+\newbool{tnsgeo@calc@crossprod@option@sp}
+\newbool{tnsgeo@calc@crossprod@option@vp}
+
+\newbool{tnsgeo@calc@crossprod@option@b}
+\newbool{tnsgeo@calc@crossprod@option@sb}
+\newbool{tnsgeo@calc@crossprod@option@vb}
+
+\newbool{tnsgeo@calc@crossprod@option@exp}
+\newbool{tnsgeo@calc@crossprod@option@cexp}
+\newbool{tnsgeo@calc@crossprod@option@texp}
+
+
+\newcommand\tnsgeo@validate@calc@crossprod@option[1]{
     \IfEqCase{#1}{%
-        {p}{\booltrue{tnsgeo@crossprod@option@p}}%
-        {sp}{\booltrue{tnsgeo@crossprod@option@sp}}
-        {vp}{\booltrue{tnsgeo@crossprod@option@vp}}
+        {vec}{\booltrue{tnsgeo@calc@crossprod@option@vec}}
+        {novec}{\booltrue{tnsgeo@calc@crossprod@option@novec}}
         %
-        {b}{\booltrue{tnsgeo@crossprod@option@b}}
-        {sb}{\booltrue{tnsgeo@crossprod@option@sb}}
-        {vb}{\booltrue{tnsgeo@crossprod@option@vb}}
+        {loop}{\booltrue{tnsgeo@calc@crossprod@option@loop}}
+        {arrows}{\booltrue{tnsgeo@calc@crossprod@option@arrows}}
+        {cross}{\booltrue{tnsgeo@calc@crossprod@option@cross}}
+        {nodeco}{\booltrue{tnsgeo@calc@crossprod@option@nodeco}}
         %
-        {s}{\booltrue{tnsgeo@crossprod@option@space}}%
-        {t}{\booltrue{tnsgeo@crossprod@option@times}}
-        {c}{\booltrue{tnsgeo@crossprod@option@cdot}}
+        {exp}{\booltrue{tnsgeo@calc@crossprod@option@exp}}
+        {cexp}{\booltrue{tnsgeo@calc@crossprod@option@cexp}}
+        {texp}{\booltrue{tnsgeo@calc@crossprod@option@texp}}
+        %
+        {p}{\booltrue{tnsgeo@calc@crossprod@option@p}}
+        {sp}{\booltrue{tnsgeo@calc@crossprod@option@sp}}
+        {vp}{\booltrue{tnsgeo@calc@crossprod@option@vp}}
+        %
+        {b}{\booltrue{tnsgeo@calc@crossprod@option@b}}
+        {sb}{\booltrue{tnsgeo@calc@crossprod@option@sb}}
+        {vb}{\booltrue{tnsgeo@calc@crossprod@option@vb}}
     }[%
         \PackageError{tnsgeo}{unknown option}%
-                             {You can use p, sp, vp, b, sb, vb, s, t or c.}%
+                             {You can use vec, novec, loop, arrows, cross, nodeco, exp, cexp, texp, p, sp, vp, b, sb or vb.}%
     ]
 }
 
 
-\newcommand\coordcrossprod[7][p,s]{%
-    \boolfalse{tnsgeo@crossprod@option@p}
-    \boolfalse{tnsgeo@crossprod@option@sp}
-    \boolfalse{tnsgeo@crossprod@option@vp}
-    \boolfalse{tnsgeo@crossprod@option@b}
-    \boolfalse{tnsgeo@crossprod@option@sb}
-    \boolfalse{tnsgeo@crossprod@option@vb}
-    \boolfalse{tnsgeo@crossprod@option@space}
-    \boolfalse{tnsgeo@crossprod@option@times}
-    \boolfalse{tnsgeo@crossprod@option@cdot}
-    %
-    \def\@coord@option{NOTHING}%
-    \def\@exp@symbol{NOTHING}%
-    %
-    \DoWithCSL\tnsgeo@validate@crossprod@option{#1}
-    %
-    \ifbool{tnsgeo@crossprod@option@p}{%
-        \def\@coord@option{p}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sp}{%
-        \def\@coord@option{sp}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@vp}{%
-        \def\@coord@option{vp}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@b}{%
-        \def\@coord@option{b}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sb}{%
-        \def\@coord@option{sb}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@vb}{%
-        \def\@coord@option{vb}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@space}{%
-        \def\@exp@symbol{\,}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@times}{%
-        \def\@exp@symbol{\times}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@cdot}{%
-        \def\@exp@symbol{\cdot}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sp}{}{%
-        \ifbool{tnsgeo@crossprod@option@vp}{}{%
-            \ifbool{tnsgeo@crossprod@option@b}{}{%
-                \ifbool{tnsgeo@crossprod@option@sb}{}{%
-                    \ifbool{tnsgeo@crossprod@option@vb}{}{%
-                        \def\@coord@option{p}% Default
-                    }%
-                }%
-            }%
-        }%
-    }%
-    %
-    \ifbool{tnsgeo@crossprod@option@times}{}{%
-        \ifbool{tnsgeo@crossprod@option@cdot}{}{%
-            \def\@exp@symbol{\,}% Default
-        }%
-    }%
-    %
-    \tnsgeo@apply@coord@crossprod{#2}{#3}{#4}% Vector 1
-                                 {#5}{#6}{#7}% Vector 2
-                                 {\@exp@symbol}%
-                                 {\coord}{\@coord@option}%
-}
-
-
-% Abstraction
-
-% Source
-%    * https://tex.stackexchange.com/a/548662/6880
-
-\newcommand\tnsgeo@calc@crossprod@label[1]{%
-    {\tiny$\substack{-\\#1}$}%
-}
-
-
-\newcommand\calccrossprod{\@ifstar{\tnsgeo@calc@crossprod@star}{\tnsgeo@calc@crossprod@no@star}}
-
-\newcommand\tnsgeo@calc@crossprod@star{\@ifstar{\tnsgeo@calc@crossprod@star@star}{\tnsgeo@calc@crossprod@star@no@star}}
-
-
-%   #1 : vector or not
+%   #1 : option for the formatting
 %
-%   #2  #6        u  v
+%   #2  #6		u  v
 %   
-%   #3  #7        x  x'
-%   #4  #8        y  y'
-%   #5  #9        z  z'
+%   #3  #7		x  x'
+%   #4  #8      y  y'
+%   #5  #9      z  z'
 
-\newcommand\tnsgeo@calc@crossprod@no@star[9][vec]{%
-    \tns@cross@prod@deco@loop{#1}%
-                             {#2}{#3}{#4}{#5}%
-                             {#6}{#7}{#8}{#9}%
+\newcommand\calccrossprod[9][vec,loop]{%
+    \boolfalse{tnsgeo@calc@crossprod@option@vec}
+    \boolfalse{tnsgeo@calc@crossprod@option@novec}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@loop}
+    \boolfalse{tnsgeo@calc@crossprod@option@arrows}
+    \boolfalse{tnsgeo@calc@crossprod@option@cross}
+    \boolfalse{tnsgeo@calc@crossprod@option@nodeco}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@exp}
+    \boolfalse{tnsgeo@calc@crossprod@option@cexp}
+    \boolfalse{tnsgeo@calc@crossprod@option@texp}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@p}
+    \boolfalse{tnsgeo@calc@crossprod@option@sp}
+    \boolfalse{tnsgeo@calc@crossprod@option@vp}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@b}
+    \boolfalse{tnsgeo@calc@crossprod@option@sb}
+    \boolfalse{tnsgeo@calc@crossprod@option@vb}
+    %
+    \DoWithCSL\tnsgeo@validate@calc@crossprod@option{#1}
+    %
+    \ifboolexpr{
+		(
+			bool{tnsgeo@calc@crossprod@option@exp}
+			or
+			bool{tnsgeo@calc@crossprod@option@cexp}
+			or
+			bool{tnsgeo@calc@crossprod@option@texp}
+		)
+		and
+		(
+			bool{tnsgeo@calc@crossprod@option@loop}
+			or
+			bool{tnsgeo@calc@crossprod@option@arrows}
+			or
+			bool{tnsgeo@calc@crossprod@option@cross}
+			or
+			bool{tnsgeo@calc@crossprod@option@nodeco}
+		)
+	}{%
+        \PackageError{tnsgeo}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnsgeo@calc@crossprod@option@exp}
+		or
+		bool{tnsgeo@calc@crossprod@option@cexp}
+		or
+		bool{tnsgeo@calc@crossprod@option@texp}
+	}{
+    % Default values
+        \def\coordoption{p}%
+        \def\expsymbol{\,}%
+    %
+        \ifbool{tnsgeo@calc@crossprod@option@sp}{%
+            \def\coordoption{sp}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@vp}{%
+            \def\coordoption{vp}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@b}{%
+            \def\coordoption{b}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@sb}{%
+            \def\coordoption{sb}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@vb}{%
+            \def\coordoption{vb}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@texp}{%
+            \def\expsymbol{\times}%    
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@cexp}{%
+            \def\expsymbol{\cdot}%    
+        }{}%
+        %
+        \tnsgeo@apply@coord@crossprod{#3}{#4}{#5}% Vector 1
+                                     {#7}{#8}{#9}% Vector 2
+                                     {\expsymbol}%
+                                     {\coord}{\coordoption}%
+	}{
+    % No expansion
+	    % Default values
+	    \def\vecoption{vec}%
+    	\def\tocall{\tns@cross@prod@deco@loop}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@novec}{%
+            \def\vecoption{novec}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@arrows}{%
+            \def\tocall{\tns@cross@prod@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@cross}{%
+            \def\tocall{\tns@cross@prod@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@nodeco}{%
+            \def\tocall{\tns@cross@prod@no@deco}%  
+        }{}%
+        \tocall{\vecoption}%
+               {#2}{#3}{#4}{#5}%
+               {#6}{#7}{#8}{#9}%
+	}
 }
 
 
-\newcommand\tnsgeo@calc@crossprod@star@no@star[9][vec]{%
-    \tns@cross@prod@deco@cross{#1}%
-                              {#2}{#3}{#4}{#5}%
-                              {#6}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@calc@crossprod@star@star[9][vec]{%
-    \tns@cross@prod@no@deco{#1}%
-                           {#2}{#3}{#4}{#5}%
-                           {#6}{#7}{#8}{#9}%
-}
-
-
-\newcommand\vcalccrossprod{\@ifstar{\tnsgeo@vcalc@crossprod@star}{\tnsgeo@vcalc@crossprod@no@star}}
-
-\newcommand\tnsgeo@vcalc@crossprod@star{\@ifstar{\tnsgeo@vcalc@crossprod@star@star}{\tnsgeo@vcalc@crossprod@star@no@star}}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@no@star[9][vec]{%
+\newcommand\vcalccrossprod[9][vec,loop]{%
     \calccrossprod[#1]{\vect{#2}}{#3}{#4}{#5}%
                       {\vect{#6}}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@star@no@star[9][vec]{%
-    \calccrossprod*[#1]{\vect{#2}}{#3}{#4}{#5}
-                       {\vect{#6}}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@star@star[9][vec]{%
-    \calccrossprod**[#1]{\vect{#2}}{#3}{#4}{#5}
-                        {\vect{#6}}{#7}{#8}{#9}%
 }
 

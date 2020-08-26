@@ -41,20 +41,49 @@
 
 %\section{Vecteurs}
 
-\subsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+\subsection{2D -- Déterminant de deux vecteurs}
 
-\newparaexample{Version décorée}
+\newparaexample{Version décorée avec une boucle}
 
-Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler}.
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} quant à \prefix{v} est pour \whyprefix{v}{ecteur} pour une rédaction raccourcie pour les vecteurs.
 
 \begin{latexex}
 $\calcdetplane{\vect{u}}{x}{y}%
               {\vect{v}}{x'}{y'}$
 ou
-$\calcdetplane{\vect{AB}}%
-              {x_B - x_A}{y_B - y_A}%
-              {\vect{CD}}%
-              {x_D - x_C}{y_D - y_C}$
+$\vcalcdetplane{AB}%
+               {x_B - x_A}{y_B - y_A}%
+               {CD}%
+               {x_D - x_C}{y_D - y_C}$
+\end{latexex}
+
+
+\begin{remark}
+    Tous les exemples suivants se feront avec \macro{vcalcdetplane} mais bien entendu ils restent adaptables directement à \macro{calcdetplane}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version décorée avec une croix fléchée}
+
+L'argument optionnel de \macro{calcdetplane} ou \macro{vcalcdetplane} permet d'obtenir une croix fléchée au lieu d'une boucle.
+
+\begin{latexex}
+$\vcalcdetplane[arrows]{u}{x}{y}%
+                       {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version décorée avec une croix non fléchée}
+
+\begin{latexex}
+$\vcalcdetplane[cross]{u}{x}{y}%
+                      {v}{x'}{y'}$
 \end{latexex}
 
 
@@ -64,51 +93,31 @@ $\calcdetplane{\vect{AB}}%
 \newparaexample{Version non décorée}
 
 \begin{latexex}
-$\calcdetplane*{\vect{u}}{x}{y}%
-               {\vect{v}}{x'}{y'}$
+$\vcalcdetplane[nodeco]{u}{x}{y}%
+                       {v}{x'}{y'}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\newparaexample{Rédaction raccourcie pour les vecteurs}
+\newparaexample{Sans les vecteurs}
 
 \begin{latexex}
-$\vcalcdetplane{u}{x}{y}%
-               {v}{x'}{y'}
- =
- \vcalcdetplane*{u}{x}{y}%
-                {v}{x'}{y'}$
+ $\vcalcdetplane[novec]%
+                {u}{x}{y} {v}{x'}{y'}
+= \vcalcdetplane[novec,cross]%
+                {u}{x}{y} {v}{x'}{y'}$
 \end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Versions sans les vecteurs}
-
-\begin{latexex}
- $\vcalcdetplane[novec] {u}{x}{y}%
-                        {v}{x'}{y'}
-= \vcalcdetplane*[novec]{u}{x}{y}%
-                        {v}{x'}{y'}$
-\end{latexex}
-
-
-\begin{remark}
-	Ce qui précède marche aussi avec les macros \macro{calcdetplane} et \macro{calcdetplane*}.
-\end{remark}
-
-
-% ---------------------- %
 
 
 \newparaexample{Calcul développé}
 
 Grâce à l'argument optionnel de \macro{calcdetplane} ou de \macro{vcalcdetplane} il est aussi possible d'obtenir le résultat développé du calcul comme ci-après
-où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
-Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}
+\footnote{
+	Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+}.
 
 \begin{latexex}
 $\vcalcdetplane[exp]{u}{x}{y}%
@@ -123,7 +132,7 @@ $\vcalcdetplane[texp]{u}{x}{y}%
 
 
 \begin{remark}
-	Ce qui précède marche aussi avec les versions étoilées.
+    Ce qui précède marche aussi avec les versions étoilées.
 \end{remark}
 
 
@@ -156,23 +165,35 @@ $\vcalcdetplane[exp]{AB}%
 
 \subsection{Fiche technique}
 
-\IDmacro{calcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
-
-\IDmacro{calcdetplane*}{1}{6}
+\IDmacro{calcdetplane}{1}{6} \hfill \mwhyprefix{calc}{ulate}
 
 
-\IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
+\IDoption{} la valeur par défaut est \verb+vec,loop+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+    \item \verb+vec+ : les vecteurs sont affichés si besoin.
 
-	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+    \item \verb+novec+ : les vecteurs ne sont jamais affichés.
 
-	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+    \medskip
+    
+    \item \verb+arrows+ : des croix fléchées indiquent comment effectuer les calculs.
 
-	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+    \item \verb+cross + : des croix non fléchées indiquent comment effectuer les calculs.
 
-	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+    \item \verb+loop  + : des boucles indiquent comment effectuer les calculs.
+
+    \item \verb+nodeco+ : rien n'indique comment effectuer les calculs.
+
+    \medskip
+
+    \item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+
+    \item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+    \item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
 \end{enumerate}
+
+            On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+vec,loop+ la valeur par défaut de l'option.
 
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
@@ -187,14 +208,15 @@ $\vcalcdetplane[exp]{AB}%
 \separation
 
 
-\IDmacro{vcalcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
-                                   et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane}{1}{6} \hfill \mwhyprefix{calc}{ulate}
+                                  et \mwhyprefix{v}{ector}
 
-\IDmacro{vcalcdetplane*}{1}{6}
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
+\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+\medskip
 
-\IDargs{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
-
+Pour le reste, voir les indications données ci-dessus pour \macro{calcdetplane}.
+%
 \end{document}

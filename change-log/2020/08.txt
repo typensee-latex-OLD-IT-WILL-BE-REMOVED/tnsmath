@@ -1,3 +1,23 @@
+// Added : 2020-08-26 [23:38:21]
+==========
+2020-08-26
+==========
+
+**New minor version version::``1.9.0-beta``:** see the changes below.
+
+
+**¨tnsana:** addition of the version version::``0.8.0-beta`` published at date::``2020-08-23``.
+
+
+**¨tnsarith:** addition of the version version::``0.2.0-beta`` published at date::``2020-08-26``.
+
+
+**¨tnsgeo:** addition of the version version::``0.3.0-beta`` published at date::``2020-08-25``.
+
+
+**¨tnsproba:** addition of the version version::``0.8.0-beta`` published at date::``2020-08-10``.
+
+
 ==========
 2020-08-09
 ==========

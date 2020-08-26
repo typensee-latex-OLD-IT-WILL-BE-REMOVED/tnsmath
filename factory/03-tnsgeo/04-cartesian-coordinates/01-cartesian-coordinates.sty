@@ -18,20 +18,20 @@
 % ARG 4  = Between  : ;
 % ARG 5  = After    : nothing here
 % OPTION = Ornament : macro to apply to each item
-                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                 \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
              \, \right)%
         }{sp}{%
-            (\tns@multi@args{|}{#2}{}{\tnsmathsep}{})%
+            (\tns@multi@wrap{|}{#2}{}{\tnsmathsep}{})%
         }{b}{%
             \left[ \,%
-                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                 \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
              \, \right]%
         }{sb}{%
-            [\tns@multi@args{|}{#2}{}{\tnsmathsep}{}]%
+            [\tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}]%
         }{vp}{%
-            \tns@multi@args{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+            \tns@multi@wrap{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
         }{vb}{%
-            \tns@multi@args{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+            \tns@multi@wrap{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
         }%
     }[
         \PackageError{ynsgeo}{unknown option}%

@@ -1,15 +1,13 @@
 \begin{probatree}
     [
-        [$A$
-            [$B$, name = nB]
-            [$C$, name = nC]
+        [A
+            [B, name = nB]
+            [C, name = nC]
         ]
-        [$D$, name = nD]
+        [D, name = nD]
     ]
     %
-    \ptreeComment*{nB}{$\leftarrow \proba{A \cap B} = ...$}
-    \ptreeComment*[col=red]%
-                  {nC}{$\leftarrow \proba{A \cap C} = ...$}
-    \ptreeComment*[col=blue]%
-                  {nD}{$\leftarrow \proba{D} = ...$}
+    \ptreeComment*            {nB}{$\leftarrow \proba{A \cap B} = ...$}
+    \ptreeComment*[col = red] {nC}{$\leftarrow \proba{A \cap C} = ...$}
+    \ptreeComment*[col = blue]{nD}{$\leftarrow \proba{D} = ...$}
 \end{probatree}

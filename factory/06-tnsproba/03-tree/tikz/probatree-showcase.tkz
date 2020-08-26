@@ -1,26 +1,26 @@
 \begin{probatree}
     [{}, name = nU                % Noeud racine sans texte via {} mais avec un nom.
-        [$A$, apweight = $a$,
-              name     = nA,
-              pframe   = blue
-            [$B$, name     = nB,
-                  apweight = $b$]
-            [$C$, bpweight = $c$]  % Pas besion de nommer ce noeud.
+        [A, apweight = a,
+            name     = nA,
+            pframe   = blue
+            [B, name     = nB,
+                apweight = b]
+            [C, bpweight = c]  % Pas besion de nommer ce noeud.
         ]
-        [$D$, bpweight = $d$,
-              name     = nD
-            [$E$, apweight = $e$,
-                  name     = nE]
-            [$F$, bpweight = $f$]  % Pas besion de nommer ce noeud.
+        [D, bpweight = d,
+            name     = nD
+            [E, apweight = e,
+                name     = nE]
+            [F, bpweight = f]  % Pas besion de nommer ce noeud.
         ]
     ]
     %
-    \ptreeFocus[col=gray]{nA | nB}
+    \ptreeFocus[col = gray]{nA | nB}
     %
-    \ptreeComment[col=blue]%
+    \ptreeComment[col = blue]%
                  {nA}{$\leftarrow$ Un sous-arbre \og conditionnel \fg}
     %
-    \ptreeFocus*[col=red]{nU | nD | nE}
-    \ptreeComment[col=red]%
+    \ptreeFocus*[col = red]{nU | nD | nE}
+    \ptreeComment[col = red]%
                  {nE}{$\leftarrow \proba{D \cap E} = d \cdot e$}
 \end{probatree}

@@ -1,9 +1,15 @@
 % == PACKAGES USED == %
 
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+\RequirePackage{xstring}
+
 \RequirePackage{tnscom}
 
 
 % == DEFINITIONS == %
+
+% -- CRITERIA OF COLINEARITY -- %
 
 %   #1 : option for the formatting
 %
@@ -20,9 +26,9 @@
     	\PackageError{tnsgeo}{unknown option}%
                              {You can use vec (default) or novec.}
     ]%
-    \tns@det@plane@deco@cross{#1}%
-                             {#2}{#3}{#4}%
-                             {#5}{#6}{#7}%
+    \tns@det@plane@deco@arrows{#1}%
+                              {#2}{#3}{#4}%
+                              {#5}{#6}{#7}%
 }
 
 
@@ -33,55 +39,37 @@
 
 
 
-%   #1 : option for the formatting
-%
-%   #2  #5		u  v
-%   
-%   #3  #6		x  x'
-%   #4  #7      y  y'
+% -- 2D DETERMINANT -- %
 
-\newcommand\calcdetplane{\@ifstar{\tnsgeo@calc@detplane@star}{\tnsgeo@calc@detplane@no@star}}
+\newbool{tnsgeo@calc@detplane@option@vec}   % Default.
+\newbool{tnsgeo@calc@detplane@option@novec}
+
+\newbool{tnsgeo@calc@detplane@option@loop}   % Default.
+\newbool{tnsgeo@calc@detplane@option@arrows}
+\newbool{tnsgeo@calc@detplane@option@cross}
+\newbool{tnsgeo@calc@detplane@option@nodeco}
+
+\newbool{tnsgeo@calc@detplane@option@exp}   % Default.
+\newbool{tnsgeo@calc@detplane@option@cexp}
+\newbool{tnsgeo@calc@detplane@option@texp}
 
 
-%   #1 : option for the formatting
-%
-%   #2  #5		u  v
-%   
-%   #3  #6		x  x'
-%   #4  #7      y  y'
-
-\newcommand\tnsgeo@calc@detplane@no@star[7][vec]{%
+\newcommand\tnsgeo@validate@calc@detplane@option[1]{
     \IfEqCase{#1}{%
-% WARNING !
-%   
-%   #1 : symbol for the product
-%
-%   #2  #3		x  x'
-%   #4  #5      y  y'
-        {exp}{%
-            \tns@prop@prod{\,}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{cexp}{%
-            \tns@prop@prod{\cdot}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{texp}{%
-            \tns@prop@prod{\times}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{vec}{%
-            \tns@det@plane@deco@loop{#1}%
-                                    {#2}{#3}{#4}%
-                                    {#5}{#6}{#7}%
-        }{novec}{%
-            \tns@det@plane@deco@loop{#1}%
-                                    {#2}{#3}{#4}%
-                                    {#5}{#6}{#7}%
-        }%
-    }[
-    	\PackageError{tnsgeo}{unknown option}%
-                             {You can use vec (default), novec, exp, cexp or texp.}
+        {vec}{\booltrue{tnsgeo@calc@detplane@option@vec}}
+        {novec}{\booltrue{tnsgeo@calc@detplane@option@novec}}
+        %
+        {loop}{\booltrue{tnsgeo@calc@detplane@option@loop}}
+        {arrows}{\booltrue{tnsgeo@calc@detplane@option@arrows}}
+        {cross}{\booltrue{tnsgeo@calc@detplane@option@cross}}
+        {nodeco}{\booltrue{tnsgeo@calc@detplane@option@nodeco}}
+        %
+        {exp}{\booltrue{tnsgeo@calc@detplane@option@exp}}
+        {cexp}{\booltrue{tnsgeo@calc@detplane@option@cexp}}
+        {texp}{\booltrue{tnsgeo@calc@detplane@option@texp}}
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use exp, cexp, texp, vec, novec, loop, arrows, cross or nodeco.}%
     ]%
 }
 
@@ -93,52 +81,94 @@
 %   #3  #6		x  x'
 %   #4  #7      y  y'
 
-\newcommand\tnsgeo@calc@detplane@star[7][vec]{%
-% WARNING !
-%   
-%   #1 : symbol for the product
-%
-%   #2  #3		x  x'
-%   #4  #5      y  y'
-    \IfEqCase{#1}{%
-        {exp}{%
-            \tns@prop@prod{\,}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{cexp}{%
-            \tns@prop@prod{\cdot}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{texp}{%
-            \tns@prop@prod{\times}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{vec}{%
-            \tns@det@plane@no@deco{#1}%
-                                  {#2}{#3}{#4}%
-                                  {#5}{#6}{#7}%
-        }{novec}{%
-            \tns@det@plane@no@deco{#1}%
-                                  {#2}{#3}{#4}%
-                                  {#5}{#6}{#7}%
-        }%
-    }[
-    	\PackageError{tnsgeo}{unknown option}%
-                             {You can use vec (default), novec, exp, cexp or texp.}
-    ]%
+\newcommand\calcdetplane[7][vec,loop]{%
+    \boolfalse{tnsgeo@calc@detplane@option@vec}
+    \boolfalse{tnsgeo@calc@detplane@option@novec}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@loop}
+    \boolfalse{tnsgeo@calc@detplane@option@arrows}
+    \boolfalse{tnsgeo@calc@detplane@option@cross}
+    \boolfalse{tnsgeo@calc@detplane@option@nodeco}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@exp}
+    \boolfalse{tnsgeo@calc@detplane@option@cexp}
+    \boolfalse{tnsgeo@calc@detplane@option@texp}
+    %
+    \DoWithCSL\tnsgeo@validate@calc@detplane@option{#1}%
+    %
+    \ifboolexpr{
+		(
+			bool{tnsgeo@calc@detplane@option@exp}
+			or
+			bool{tnsgeo@calc@detplane@option@cexp}
+			or
+			bool{tnsgeo@calc@detplane@option@texp}
+		)
+		and
+		(
+			bool{tnsgeo@calc@detplane@option@loop}
+			or
+			bool{tnsgeo@calc@detplane@option@arrows}
+			or
+			bool{tnsgeo@calc@detplane@option@cross}
+			or
+			bool{tnsgeo@calc@detplane@option@nodeco}
+		)
+	}{%
+        \PackageError{tnsgeo}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnsgeo@calc@detplane@option@exp}
+		or
+		bool{tnsgeo@calc@detplane@option@cexp}
+		or
+		bool{tnsgeo@calc@detplane@option@texp}
+	}{
+        \def\expsymbol{\,}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cexp}{%
+            \def\expsymbol{\cdot}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@texp}{%
+            \def\expsymbol{\times}%
+        }{}%
+        %
+        \tns@prop@prod{\expsymbol}%
+                      {#3}{#4}%
+                      {#6}{#7}%
+	}{
+    % No expansion
+        % Default values
+        \def\vecoption{vec}%
+        \def\tocall{\tns@det@plane@deco@loop}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@novec}{%
+            \def\vecoption{novec}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@arrows}{%
+            \def\tocall{\tns@det@plane@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cross}{%
+            \def\tocall{\tns@det@plane@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@nodeco}{%
+            \def\tocall{\tns@det@plane@no@deco}%  
+        }{}%
+        %
+        \tocall{\vecoption}%
+               {#2}{#3}{#4}%
+               {#5}{#6}{#7}%
+	}
 }
 
 
-\newcommand\vcalcdetplane{\@ifstar{\tnsgeo@vcalc@detplane@star}{\tnsgeo@vcalc@detplane@no@star}}
-
-
-\newcommand\tnsgeo@vcalc@detplane@star[7][vec]{%
-    \tnsgeo@calc@detplane@star[#1]{\vect{#2}}{#3}{#4}%
-                                  {\vect{#5}}{#6}{#7}%
-}
-
-
-\newcommand\tnsgeo@vcalc@detplane@no@star[7][vec]{%
-    \tnsgeo@calc@detplane@no@star[#1]{\vect{#2}}{#3}{#4}%
-                                     {\vect{#5}}{#6}{#7}%
+\newcommand\vcalcdetplane[7][vec,loop]{%
+    \calcdetplane[#1]{\vect{#2}}{#3}{#4}%
+                     {\vect{#5}}{#6}{#7}%
 }

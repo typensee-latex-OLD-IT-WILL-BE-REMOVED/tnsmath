@@ -25,18 +25,34 @@
 
 \let\stdexp\exp
 \renewcommand\exp[1][]{%
-	\stdexp%
-	\if\relax\detokenize{#1}\relax\else%
-		_{#1}%
-	\fi%
+    \stdexp%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
+}
+
+\let\stdlg\lg
+\renewcommand\lg[1][]{%
+    \stdlg%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
+}
+
+\let\stdln\ln
+\renewcommand\ln[1][]{%
+    \stdln%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
 }
 
 \let\stdlog\log
 \renewcommand\log[1][]{%
-	\stdlog%
-	\if\relax\detokenize{#1}\relax\else%
-		_{#1}%
-	\fi%
+    \stdlog%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
 }
 
 % Classical functions - END

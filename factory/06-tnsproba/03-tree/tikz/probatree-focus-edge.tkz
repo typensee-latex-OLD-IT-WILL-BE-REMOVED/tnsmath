@@ -1,13 +1,13 @@
 \begin{probatree}
     [{}, name = nU
-        [$A$, name = nA
-            [$B$, name = nB]
-            [$C$, name = nC]
+        [A, name = nA
+            [B, name = nB]
+            [C, name = nC]
         ]
-        [$D$]
+        [D]
     ]
     %
-    \ptreeFocus* [col=red]  {nA | nC}
-    \ptreeFocus**[col=olive]{nU | nA}
-    \ptreeFocus             {nA | nB}
+    \ptreeFocus* [col = red]  {nA | nC}
+    %\ptreeFocus**[col = olive]{nU | nA}
+    %\ptreeFocus               {nA | nB}
 \end{probatree}

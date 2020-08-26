@@ -1,6 +1,6 @@
 \begin{probatree}
     [
-        [$A$, apweight = {$a = 0,1$}]
-        [$B$, bpweight = $b$]
+        [A, apweight = {a = 0,1}]
+        [B, bpweight = b]
     ]
 \end{probatree}

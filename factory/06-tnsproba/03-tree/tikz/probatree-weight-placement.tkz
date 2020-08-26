@@ -1,12 +1,12 @@
 \begin{probatree}
     [
-        [$A$, pweight = $a$
-            [$B$, pweight = $b$]
-            [$C$, pweight = $c$]
+        [A, pweight = a
+            [B, pweight = b]
+            [C, pweight = c]
         ]
-        [$D$, bpweight = $d$
-            [$E$, apweight = $e$]
-            [$F$, bpweight = $f$]
+        [D, bpweight = d
+            [E, apweight = e]
+            [F, bpweight = f]
         ]
     ]
 \end{probatree}

@@ -3,238 +3,277 @@
 
 \makeatletter % Technical doc - START
 
+% ---------------------- %
+% -- GENERAL SETTINGS -- %
+% ---------------------- %
+
+\usepackage[
+	top    = 2cm,
+	bottom = 2cm,
+	left   = 1.5cm,
+	right  = 1.5cm
+]{geometry}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 
 \usepackage[french]{babel,varioref}
 
-\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
-\usepackage{enumitem}
-
-% Source
-%	* https://tex.stackexchange.com/a/558025/6880
-\usepackage{tocbasic}[2020/07/22]% needs KOMA-Script version 3.31
-\DeclareTOCStyleEntries[
-  raggedentrytext,
-  linefill=\hfill,
-  indent=0pt,
-  dynindent,
-  numwidth=0pt,
-  numsep=1ex,
-  dynnumwidth
-]{tocline}{chapter,section,subsection,subsubsection,paragraph,subparagraph}
-\DeclareTOCStyleEntry[indentfollows=chapter]{tocline}{section}
-
-\usepackage{multicol}
-
-\usepackage{makecell}
-
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
+    citecolor = black,
+    filecolor = black,
+    linkcolor = black,
+    urlcolor  = black
 }
-
 \usepackage[numbered]{bookmark}
-\usepackage{amsthm}
 
-\usepackage{tcolorbox}
-\tcbuselibrary{listingsutf8}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{makecell}
 
-\usepackage{ifplatform}
-
-\usepackage{ifthen}
-
-\usepackage{macroenvsign}
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
 
 
-% Sections numbering
 
-\renewcommand\thechapter{\Alph{chapter}.}
+% --------------- %
+% -- TOC & Co. -- %
+% --------------- %
+
+\usepackage[raggedright]{titlesec}
+
+%\renewcommand\thechapter{\Alph{chapter}.}
 \renewcommand\thesection{\Roman{section}.}
 \renewcommand\thesubsection{\arabic{subsection}.}
 \renewcommand\thesubsubsection{\roman{subsubsection}.}
 
 
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{3}
-
-
-% MISC
-
-\newtcblisting{latexex}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing side text
-}
-
-\newtcbinputlisting{\inputlatexex}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing side text
-}
-
-
-\newtcblisting{latexex-flat}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-}
-
-\newtcbinputlisting{\inputlatexexflat}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-}
-
-
-\newtcblisting{latexex-alone}{%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing only
-}
-
-\newtcbinputlisting{\inputlatexexalone}[2][]{%
-	listing file={#2},%
-	sharp corners,%
-	left=1mm, right=1mm,%
-	bottom=1mm, top=1mm,%
-	colupper=red!75!blue,%
-	listing only
-}
-
-
-\newcommand\inputlatexexcodeafter[1]{%
-	\begin{center}
-		\input{#1}
-	\end{center}
-
-	\vspace{-.5em}
-	
-	Le rendu précédent a été obtenu via le code suivant.
-	
-	\inputlatexexalone{#1}
-}
-
-
-\newcommand\inputlatexexcodebefore[1]{%
-	\inputlatexexalone{#1}
-	\vspace{-.75em}
-	\begin{center}
-		\textit{\footnotesize Rendu du code précédent}
-		
-		\medskip
-		
-		\input{#1}
-	\end{center}
-}
-
-
-\newcommand\env[1]{\texttt{#1}}
-\newcommand\macro[1]{\env{\textbackslash{}#1}}
-
-
-
-\setlength{\parindent}{0cm}
-\setlist{noitemsep}
-
-\theoremstyle{definition}
-\newtheorem*{remark}{Remarque}
-
-\usepackage[raggedright]{titlesec}
-
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
 
 
+% Source
+%    * https://tex.stackexchange.com/a/558025/6880
+\usepackage{tocbasic}[2020/07/22]% needs KOMA-Script version 3.31
+
+\DeclareTOCStyleEntries[
+    raggedentrytext,
+    linefill = \hfill,
+    indent   = 0pt,
+    dynindent,
+    numwidth = 0pt,
+    numsep   = 1ex,
+    dynnumwidth
+]{tocline}{
+	chapter,
+	section,
+	subsection,
+	subsubsection,
+	paragraph,
+	subparagraph
+}
+
+\DeclareTOCStyleEntry[indentfollows = chapter]{tocline}{section}
+
+
+
+% ----------- %
+% -- TOOLS -- %
+% ----------- %
+
+\usepackage{ifplatform}
+\usepackage{ifthen}
+\usepackage{macroenvsign}
+\usepackage{pgffor}
+
+
+
+% ------------------------- %
+% -- SPECIAL FORMATTINGS -- %
+% ------------------------- %
+
+\usepackage{amsthm}
+
+\usepackage{tcolorbox}
+
+
+% -- LISTINGS -- %
+
+%\tcbuselibrary{listingsutf8}
+\tcbuselibrary{minted, breakable}
+
+\newtcblisting{latexex}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing side text
+}
+
+\newtcbinputlisting{\inputlatexex}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing side text
+}
+
+
+\newtcblisting{latexex-flat}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+}
+
+\newtcbinputlisting{\inputlatexexflat}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+}
+
+
+\newtcblisting{latexex-alone}{%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing only
+}
+
+\newtcbinputlisting{\inputlatexexalone}[2][]{%
+    listing file={#2},%
+    breakable,
+    sharp corners,%
+    left   = 1mm, right = 1mm,%
+    bottom = 1mm, top   = 1mm,%
+    %colupper = red!75!blue,%
+    listing only
+}
+
+
+\newcommand\inputlatexexcodeafter[1]{%
+    \begin{center}
+        \input{#1}
+    \end{center}
+
+    \vspace{-.5em}
+    
+    Le rendu précédent a été obtenu via le code suivant.
+    
+    \inputlatexexalone{#1}
+}
+
+
+\newcommand\inputlatexexcodebefore[1]{%
+    \inputlatexexalone{#1}
+    \vspace{-.75em}
+    \begin{center}
+        \textit{\footnotesize Rendu du code précédent}
+        
+        \medskip
+        
+        \input{#1}
+    \end{center}
+}
+
+
+% -- REMARK -- %
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+
+% -- EXAMPLE -- %
+
+\newcounter{paraexample}[subsubsection]
+
+\newcommand\@newexample@abstract[2]{%
+    \paragraph{%
+        #1%
+        \if\relax\detokenize{#2}\relax\else {} -- #2\fi%
+    }%
+}
+
+\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
+
+\newcommand\@newparaexample@no@star[1]{%
+    \refstepcounter{paraexample}%
+    \@newexample@abstract{Exemple \theparaexample}{#1}%
+}
+
+\newcommand\@newparaexample@star[1]{%
+    \@newexample@abstract{Exemple}{#1}%
+}
+
+
+% -- CHANGE LOG -- %
+
+\newcommand\topic{\@ifstar{\@topic@star}{\@topic@no@star}}
+
+\newcommand\@topic@no@star[1]{%
+    \textbf{\textsc{#1}.}%
+}
+
+\newcommand\@topic@star[1]{%
+    \textbf{\textsc{#1} :}%
+}
+
+
+% -- ABOUT MACROS & Co. -- %
+
+\newcommand\env[1]{\texttt{#1}}
+\newcommand\macro[1]{\env{\textbackslash{}#1}}
+
 \newcommand\separation{
-	\medskip
-	\hfill\rule{0.5\textwidth}{0.75pt}\hfill
-	\medskip
+    \medskip
+    \hfill\rule{0.5\textwidth}{0.75pt}\hfill
+    \medskip
 }
 
 
 \newcommand\extraspace{
-	\vspace{0.25em}
+    \vspace{0.25em}
 }
 
 
 \newcommand\whyprefix[2]{%
-	\textbf{\prefix{#1}}-#2%
+    \textbf{\prefix{#1}}-#2%
 }
 
 \newcommand\mwhyprefix[2]{%
-	\texttt{#1 = #1-#2}%
+    \texttt{#1 = #1-#2}%
 }
 
 \newcommand\prefix[1]{%
-	\texttt{#1}%
+    \texttt{#1}%
 }
 
 
 \newcommand\inenglish{\@ifstar{\@inenglish@star}{\@inenglish@no@star}}
 
 \newcommand\@inenglish@star[1]{%
-	\emph{\og #1 \fg}%
+    \emph{\og #1 \fg}%
 }
 
 \newcommand\@inenglish@no@star[1]{%
-	\@inenglish@star{#1} en anglais%
+    \@inenglish@star{#1} en anglais%
 }
 
 
 \newcommand\ascii{\texttt{ASCII}}
-
-
-% Example
-\newcounter{paraexample}[subsubsection]
-
-\newcommand\@newexample@abstract[2]{%
-	\paragraph{%
-		#1%
-		\if\relax\detokenize{#2}\relax\else {} -- #2\fi%
-	}%
-}
-
-
-
-\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
-
-\newcommand\@newparaexample@no@star[1]{%
-	\refstepcounter{paraexample}%
-	\@newexample@abstract{Exemple \theparaexample}{#1}%
-}
-
-\newcommand\@newparaexample@star[1]{%
-	\@newexample@abstract{Exemple}{#1}%
-}
-
-
-% Change log
-\newcommand\topic{\@ifstar{\@topic@star}{\@topic@no@star}}
-
-\newcommand\@topic@no@star[1]{%
-	\textbf{\textsc{#1}.}%
-}
-
-\newcommand\@topic@star[1]{%
-	\textbf{\textsc{#1} :}%
-}
 
 \makeatother % Technical doc - END
 
@@ -251,10 +290,10 @@
 	Le package \texttt{tnsmath}:\\%
 	des formules plus sémantiques\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsmath.git}.}\\%
-{\footnotesize Version \texttt{1.8.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{1.9.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-08-09}{{
+\date{2020-08-26}{{
 
 \maketitle
 
@@ -664,7 +703,7 @@ $\setspecial*{\setproba{P}}{n}$
 % ---------------------- %
 \section{Intervalles}
 
-\subsection{Intervalles réels - Notation française (?\,)}
+\subsection{Intervalles réels -- Notation française (?\,)}
 
 \newparaexample{}
 
@@ -972,7 +1011,11 @@ $\funcdef[h]{f}{x}{x^2}{}{}$
 \newparaexample{Écriture textuelle}
 
 On peut enfin obtenir une version \emph{\og textuelle \fg} via la macro \macro{txtfuncdef} où \prefix{txt} est pour \prefix{texte}.
-Cette macro  ne s'utilise pas en mode mathématique et elle accepte l'omission des ensembles.
+Cette macro ne s'utilise qu'en mode texte
+\footnote{
+	Logic ! Isn't it ?
+}
+et elle accepte l'omission de l'un ou des deux ensembles.
 
 \begin{latexex}
 \txtfuncdef{f}{x}{x^2}{I}{J}
@@ -1976,9 +2019,10 @@ Un tableau devant utiliser plusieurs pages sera scindé comme ci-dessous sans pe
 	Tout le travail est fait par l'environnement \env{longtable} du package éponyme.
 }.
 
-\begin{center}
+\begin{figure}[hbt!]
+	\centering
 	\frame{\includegraphics[scale = .5]{images/demo-explained-univ-broken[fr].png}}
-\end{center}
+\end{figure}
 %\section{Détailler un \og vrai \fg{} raisonnement}
 
 \subsection{Un tableau pour le collège et le lycée} \label{tnslog-explain-hard-proof-for-youngs}
@@ -2046,9 +2090,10 @@ Un tableau devant utiliser plusieurs pages sera scindé comme ci-dessous sans pe
 	Tout le travail est fait par l'environnement \env{longtable} du package éponyme.
 }.
 
-\begin{center}
+\begin{figure}[hbt!]
+	\centering
 	\frame{\includegraphics[scale = .5]{images/demo-explained-middleschool-broken[fr].png}}
-\end{center}
+\end{figure}
 %\section{Détailler un raisonnement}
 \chapter{Géométrie}
 
@@ -2057,15 +2102,15 @@ Un tableau devant utiliser plusieurs pages sera scindé comme ci-dessous sans pe
 Se reporter à la section \ref{tnssets-geo-sets} page \pageref{tnssets-geo-sets} où est présentée la macro \macro{setgeo} pour indiquer des ensembles géométriques.
 \section{Utiliser des unités S.I.}
 
-Comme l'excellent package \verb#siunitx# est chargé en coulisse, il devient facile de travailler avec des unités de mesure tout en respectant
+Comme l'excellent package \verb#siunitx# est chargé en coulisse il devient facile de travailler avec des unités de mesure tout en respectant
 \textbf{%
-les conventions d'écriture sont françaises
+les conventions d'écriture qui seront françaises
 	\footnote{
 		Notez dans l'exemple l'écriture de $\num{1230}$ n'utilise pas d'espace contrairement à celle de $\num{12300}$.
 	}
 dès lors que vous aurez chargé \texttt{babel} avec l'option \texttt{french}%
 } comme c'est le cas pour cette documentation.
-Notez que les espaces dans \verb#\num{123 000}# et \verb#\num{1230 * 100}# sont inutiles mais ils facilitent la relecture du code.
+Notez que les espaces dans \verb#\num{123 000}# et \verb#\num{1230 * 100}# sont inutiles mais qu'ils facilitent la relecture du code.
 
 \begin{latexex}
 $\ang{180} = \SI{\pi}{\radian}$ ,
@@ -2186,7 +2231,7 @@ $\pgline{E}{F}
 \newparaexample{}
 
 \begin{latexex}
-$\vect{ABCDEF}$  ,
+$\vect{UnNomLong}$  ,
 $\vect*{e}{rot}$ ou
 $\vect{e_{rot}}$
 \end{latexex}
@@ -2195,11 +2240,21 @@ $\vect{e_{rot}}$
 % ---------------------- %
 
 
-\newparaexample{}
+\newparaexample{Sans point disgracieux}
 
 \begin{latexex}
 $\vect{i}$ ou
 $\vect*{j}{2}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Se passer de la macro \macro{pt}}
+
+\begin{latexex}
+$\pvect{A}{B} = \vect{\pt{A}\pt{B}}$. 
 \end{latexex}
 
 
@@ -2367,7 +2422,9 @@ $\vcrossprod[t]{i}{j}$
 
 \subsubsection{Explication du mode de calcul}
 
-Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
+\newparaexample{}
+
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} quant à \prefix{v} est pour \whyprefix{v}{ecteur} pour une rédaction raccourcie pour les vecteurs.
 
 \begin{latexex}
 $\calccrossprod{\vect{u}}{x}{y}{z}%
@@ -2382,29 +2439,24 @@ $\vcalccrossprod{AB}{x_B - x_A}%
 \end{latexex}
 
 
-Avec un public averti on peut juste proposer des croix voir juste les coordonnées sans les décorations comme ci-après via les versions simplement et doublement étoilées de \macro{vcalccrossprod} \emph{(ceci fonctionne aussi avec \macro{calccrossprod})}.
+\begin{remark}
+    Tous les exemples suivants se feront avec \macro{vcalccrossprod} mais bien entendu ils restent adaptables directement à \macro{calccrossprod}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Pour un public averti}
+
+On peut juste proposer des croix fléchées ou non, voir juste les coordonnées \og augmentées \fg{} sans les décorations comme ci-après via l'argument optionnel de \macro{calccrossprod} ou \macro{vcalccrossprod}.
 
 \begin{latexex}
-$\vcalccrossprod* {u}{x}{y}{z}%
-                  {v}{x'}{y'}{z'}
- =
- \vcalccrossprod**{u}{x}{y}{z}%
-                  {v}{x'}{y'}{z'}$
-\end{latexex}
-
-
-Enfin si les vecteurs vous gênent il suffira d'utiliser l'option \verb+novec+ pour \verb+no+ \whyprefix{vec}{tor} soit \inenglish{pas de vecteur} comme ci-après.
-Ceci fonctionne aussi pour la macro \macro{calccrossprod}.
-Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
-
-\begin{latexex}
-$\vcalccrossprod[novec]  {u}{x}{y}{z}%
+$ \vcalccrossprod[arrows]{u}{x}{y}{z}%
                          {v}{x'}{y'}{z'}
- =
- \vcalccrossprod*[novec] {u}{x}{y}{z}%
+= \vcalccrossprod[cross] {u}{x}{y}{z}%
                          {v}{x'}{y'}{z'}
- =
- \vcalccrossprod**[novec]{u}{x}{y}{z}%
+= \vcalccrossprod[nodeco]{u}{x}{y}{z}%
                          {v}{x'}{y'}{z'}$
 \end{latexex}
 
@@ -2412,31 +2464,56 @@ $\vcalccrossprod[novec]  {u}{x}{y}{z}%
 % ---------------------- %
 
 
-\subsubsection{Les coordonnées}
+\newparaexample{Sans les vecteurs}
+
+Si les vecteurs vous gênent il suffira d'utiliser l'option \verb+novec+ pour \verb+no+ \whyprefix{vec}{tor} soit \inenglish{pas de vecteur}.
+Voici deux cas d'utilisation
+\footnote{
+	Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
+}.
+
+
+\begin{latexex}
+$ \vcalccrossprod[novec]
+      {u}{x}{y}{z}{v}{x'}{y'}{z'}
+= \vcalccrossprod[novec,cross]
+      {u}{x}{y}{z}{v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+
+% ---------------------- %
+
 
 \newparaexample{Les coordonnées \og développées \fg}
 
-Pour avoir le détail directement dans des coordonnées vous pouvez faire appel à \macro{coordcrossprod} où le préfixe \prefix{coord} fait référence à \whyprefix{coord}{onnée}
+Parmi les options proposées par \macro{calccrossprod} et \macro{vcalccrossprod}, il y en existe quelques unes fournissant des coordonnées
 \footnote{
-	En coulisse on utilise la macro \macro{coord} présentée dans la section \ref{tnsgeo-coordinates} page \pageref{tnsgeo-coordinates}. 
+	En coulisse on utilise la macro \macro{coord} présentée dans la section \ref{tnsgeo-coordinates} page \pageref{tnsgeo-coordinates} dont on reprend les options de mise en forme. 
+}
+détaillant les calculs. Indiquons que \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}
+\footnote{
+	De nouveau on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
 }.
-On peut utiliser des options pour choisir certains paramètres de mise en forme.
+
 
 \begin{latexex}
-$\coordcrossprod{\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
+$\vcalccrossprod[exp]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
 
-$\coordcrossprod[vb]%
-                {\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
+$\vcalccrossprod[cexp,vb]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
 
-$\coordcrossprod[sp,c]%
-                {\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
+$\vcalccrossprod[texp,sp]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
 \end{latexex}
 
 
 \medskip
+
 
 Voici les options disponibles. Nous expliquons ensuite comment les utiliser.
 \begin{enumerate}
@@ -2452,17 +2529,12 @@ Voici les options disponibles. Nous expliquons ensuite comment les utiliser.
 
 	\medskip
 
-	\item \prefix{s} tout seul demande d'utiliser un espace pour séparer les facteurs de chaque produit.
+	\item \prefix{exp} tout seul demande d'utiliser un espace pour séparer les facteurs de chaque produit.
 
-	\item \prefix{t} tout seul demande d'utiliser \macro{times} comme opérateur de multiplication.
+	\item \prefix{texp} tout seul demande d'utiliser \macro{times} comme opérateur de multiplication.
 
-	\item \prefix{c} tout seul demande d'utiliser \macro{cdot} comme opérateur de multiplication.
+	\item \prefix{cexp} tout seul demande d'utiliser \macro{cdot} comme opérateur de multiplication.
 \end{enumerate}
-
-
-On peut indiquer des options vis à vis du mode vertical ou horizontal avec des délimiteurs extensibles ou non éventuellement, ou bien sur le symbole pour les produits. On peut aussi combiner deux de ces typs de choix en les séparant par une virgule ce qui fait un total de $6\times3 = 18$ combinaisons possibles.
-La valeur par défaut est \verb+p,s+.
-
 
 \bigskip
 
@@ -2471,20 +2543,22 @@ La valeur par défaut est \verb+p,s+.
 Les produits sont rédigés stupidement. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle ci-dessous.
     
 \begin{latexex}
-$\coordcrossprod[vb]%
-         {x_B - x_A}{y_B - y_A}%
-         {z_B - z_A}{x_D - x_C}%
-         {y_D - y_C}{z_D - z_C}$
+$\vcalccrossprod[exp,vb]%
+ {AB}%
+ {x_B - x_A}{y_B - y_A}{z_B - z_A}%
+ {CD}%
+ {x_D - x_C}{y_D - y_C}{z_D - z_C}$
 \end{latexex}
 
 Ici nous n'avons pas d'autre choix que de corriger le tir nous-même.
 Ceci étant indiqué, ce genre de situation est très rare dans la vraie vie mathématique où l'on évite d'avoir à calculer un produit vectoriel avec des expressions compliquées.
     
 \begin{latexex}
-$\coordcrossprod[vb]%
-       {(x_B - x_A)}{(y_B - y_A)}%
-       {(z_B - z_A)}{(x_D - x_C)}%
-       {(y_D - y_C)}{(z_D - z_C)}$
+$\vcalccrossprod[exp,vb]%
+ {AB}%
+ {(x_B - x_A)}{(y_B - y_A)}{(z_B - z_A)}%
+ {CD}%
+ {(x_D - x_C)}{(y_D - y_C)}{(z_D - z_C)}$
 \end{latexex}
 
 
@@ -2539,20 +2613,49 @@ Dans l'exemple suivant, on utilise la valeur \verb+novec+ pour l'argument option
 % ---------------------- %
 %\section{Vecteurs}
 
-\subsection{2D -- Déterminant de deux vecteurs} \label{tnsgeo-colinearity-criteria}
+\subsection{2D -- Déterminant de deux vecteurs}
 
-\newparaexample{Version décorée}
+\newparaexample{Version décorée avec une boucle}
 
-Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler}.
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} quant à \prefix{v} est pour \whyprefix{v}{ecteur} pour une rédaction raccourcie pour les vecteurs.
 
 \begin{latexex}
 $\calcdetplane{\vect{u}}{x}{y}%
               {\vect{v}}{x'}{y'}$
 ou
-$\calcdetplane{\vect{AB}}%
-              {x_B - x_A}{y_B - y_A}%
-              {\vect{CD}}%
-              {x_D - x_C}{y_D - y_C}$
+$\vcalcdetplane{AB}%
+               {x_B - x_A}{y_B - y_A}%
+               {CD}%
+               {x_D - x_C}{y_D - y_C}$
+\end{latexex}
+
+
+\begin{remark}
+    Tous les exemples suivants se feront avec \macro{vcalcdetplane} mais bien entendu ils restent adaptables directement à \macro{calcdetplane}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version décorée avec une croix fléchée}
+
+L'argument optionnel de \macro{calcdetplane} ou \macro{vcalcdetplane} permet d'obtenir une croix fléchée au lieu d'une boucle.
+
+\begin{latexex}
+$\vcalcdetplane[arrows]{u}{x}{y}%
+                       {v}{x'}{y'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Version décorée avec une croix non fléchée}
+
+\begin{latexex}
+$\vcalcdetplane[cross]{u}{x}{y}%
+                      {v}{x'}{y'}$
 \end{latexex}
 
 
@@ -2562,51 +2665,31 @@ $\calcdetplane{\vect{AB}}%
 \newparaexample{Version non décorée}
 
 \begin{latexex}
-$\calcdetplane*{\vect{u}}{x}{y}%
-               {\vect{v}}{x'}{y'}$
+$\vcalcdetplane[nodeco]{u}{x}{y}%
+                       {v}{x'}{y'}$
 \end{latexex}
 
 
 % ---------------------- %
 
 
-\newparaexample{Rédaction raccourcie pour les vecteurs}
+\newparaexample{Sans les vecteurs}
 
 \begin{latexex}
-$\vcalcdetplane{u}{x}{y}%
-               {v}{x'}{y'}
- =
- \vcalcdetplane*{u}{x}{y}%
-                {v}{x'}{y'}$
+ $\vcalcdetplane[novec]%
+                {u}{x}{y} {v}{x'}{y'}
+= \vcalcdetplane[novec,cross]%
+                {u}{x}{y} {v}{x'}{y'}$
 \end{latexex}
-
-
-% ---------------------- %
-
-
-\newparaexample{Versions sans les vecteurs}
-
-\begin{latexex}
- $\vcalcdetplane[novec] {u}{x}{y}%
-                        {v}{x'}{y'}
-= \vcalcdetplane*[novec]{u}{x}{y}%
-                        {v}{x'}{y'}$
-\end{latexex}
-
-
-\begin{remark}
-	Ce qui précède marche aussi avec les macros \macro{calcdetplane} et \macro{calcdetplane*}.
-\end{remark}
-
-
-% ---------------------- %
 
 
 \newparaexample{Calcul développé}
 
 Grâce à l'argument optionnel de \macro{calcdetplane} ou de \macro{vcalcdetplane} il est aussi possible d'obtenir le résultat développé du calcul comme ci-après
-où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}.
-Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+où \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}
+\footnote{
+	Même si les vecteurs ne sont pas utilisés pour la mise en forme, on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+}.
 
 \begin{latexex}
 $\vcalcdetplane[exp]{u}{x}{y}%
@@ -2621,7 +2704,7 @@ $\vcalcdetplane[texp]{u}{x}{y}%
 
 
 \begin{remark}
-	Ce qui précède marche aussi avec les versions étoilées.
+    Ce qui précède marche aussi avec les versions étoilées.
 \end{remark}
 
 
@@ -2830,7 +2913,7 @@ $\axes{\pt{O} | \vect{i} | \vect{j}}$
 \newparaexample{}
 
 \begin{latexex}
-$\circarc{ABCDEF}$ ,
+$\circarc{UnNomLong}$ ,
 $\circarc*{A}{rot}$ ou
 $\circarc{A_{rot}}$
 \end{latexex}
@@ -2857,11 +2940,9 @@ $\circarc*{j}{2}$
 \newparaexample{}
 
 \begin{latexex}
-$\anglein {ABCDEF}$
-
-$\anglein* {A}{rot}$
-
-$\anglein {A_{rot}}$
+$\anglein{UnNomLong}$ ,
+$\anglein*{A}{rot}$ ou
+$\anglein{A_{rot}}$
 \end{latexex}
 
 
@@ -2871,7 +2952,7 @@ $\anglein {A_{rot}}$
 \newparaexample{Cacher les points du i et du j}
 
 \begin{latexex}
-$\anglein{i}$ et
+$\anglein{i}$ ou
 $\anglein*{j}{2}$
 \end{latexex}
 
@@ -2976,9 +3057,9 @@ $a x^2 + b x + c$
 Le package \verb+tnscom+, chargé en coulisse, propose la macro \macro{symvar} qui produit différents symboles donnés ci-dessous.
 
 \begin{latexex}
-$\symvar = \symvar[1]$ ou
-$\symvar[2]$ ou
-$\symvar[3]$
+$\symvar = \symvar[1]$ ou $\symvar[2]$
+
+$\symvar[3]$ ou $\symvar[4]$
 \end{latexex}
 
 Le nom \prefix{symvar} vient de \whyprefix{symb}{olic} \whyprefix{var}{iable} soit \inenglish{variable symbolique}.
@@ -3020,11 +3101,12 @@ $\fch x = \cosh x$ ou $\acos x$
 
 \subsection{Avec un paramètre}
 
-Pour le moment il y a juste deux fonctions utilisables avec un paramètre optionnel. Les voici.
+Voici des fonctions utilisables avec un paramètre optionnel.
 
 \begin{latexex}
-$\log[2] x = \lg x$ ou
-$\exp[6] y = 6^y$
+$\exp[6] y = 6^y$   ,
+$\log[2] x = \lg x$ ,
+$\lg[3] x$ et $\ln[4] x$
 \end{latexex}
 
 
@@ -3070,6 +3152,14 @@ $\exp[6] y = 6^y$
     \macro{exp x} : $\exp x$
 
     \macro{exp[p] x} : $\exp[p] x$
+
+    \macro{lg x} : $\lg x$
+
+    \macro{lg[p] x} : $\lg[p] x$
+
+    \macro{ln x} : $\ln x$
+
+    \macro{ln[p] x} : $\ln[p] x$
 
     \macro{log x} : $\log x$
 
@@ -3517,81 +3607,7 @@ Bien noter l'usage de valeurs utiles \og vides \fg{} de $x$ ainsi que les mystiq
 
 Voici un autre exemple s'utilisant la machinerie TikZ afin d'indiquer dans les variations la convexité et la concavité via des flèches incurvées \emph{(cette convention est proposée dans la sous-section \emph{\og Exemple utilisant l'option \macro{help} \fg} de la section \emph{\og Gallerie \fg}  de la documentation de \prefix{tkz-tab})}.
 
-\begin{center}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 3,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$   / 0.75 ,
-        $f''$ / 1    ,
-        $f'$  / 2    ,
-        $f$   / 3
-    }{
-                $-\infty$          , $0$          , $+\infty$
-    }
-    \tkzTabLine{               , - , z        , + ,              }
-    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
-
-    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
-    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
-
-    \begin{scope}[->, > = triangle 60]
-        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
-        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
-        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
-        \path (N13) -- (N23) node[midway,below=6pt](N){};
-        %
-        \draw ([above=6pt]Middle1)
-              to [bend left=45] ([left=1pt]N);
-        \draw ([right=3pt]N)
-              to [bend left=45] ([above=6pt]Middle2) ;
-        \draw ([below right=3pt]Middle2)
-              to [bend left=-45] ([above=6pt]M24) ;
-        \draw ([above right=6pt]M24)
-              to [bend right=40] ([below left=6pt]Middle3);
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-
-Le code utilisé est le suivant.
-
-\begin{latexex-alone}
-\begin{tikzpicture}
-    \tkzTabInit[
-        espcl = 3,
-%        help       % <-- Pour voir les noms des noeuds.
-    ]{
-        $x$   / 0.75 ,
-        $f''$ / 1    ,
-        $f'$  / 2    ,
-        $f$   / 3
-    }{
-                $-\infty$          , $0$          , $+\infty$
-    }
-    \tkzTabLine{               , - , z        , + ,              }
-    \tkzTabVar {+ / $+\infty$      , - / $-2$     , + / $+\infty$}
-
-    \tkzTabVal[draw]{1}{2}{.5}{$x_1$}{$0$}
-    \tkzTabVal[draw]{2}{3}{.5}{$x_2$}{$0$}
-
-    \begin{scope}[->, > = triangle 60]
-        \coordinate (Middle1) at ($(N13)!0.5!(N14)$);
-        \coordinate (Middle2) at ($(N23)!0.5!(N24)$);
-        \coordinate (Middle3) at ($(N33)!0.5!(N34)$);
-        \path (N13) -- (N23) node[midway,below=6pt](N){};
-        %
-        \draw ([above=6pt]Middle1)
-              to [bend left=45] ([left=1pt]N);
-        \draw ([right=3pt]N)
-              to [bend left=45] ([above=6pt]Middle2) ;
-        \draw ([below right=3pt]Middle2)
-              to [bend left=-45] ([above=6pt]M24) ;
-        \draw ([above right=6pt]M24)
-              to [bend right=40] ([below left=6pt]Middle3);
-    \end{scope}
-\end{tikzpicture}
-\end{latexex-alone}
+\inputlatexexcodeafter{tikz/tabsignvar-convex.tkz}
 %% \section{Analysis}
 %
 %\section{Tableaux de variation et de signe}
@@ -3649,7 +3665,7 @@ il a fallu ajouter les lignes données ci-dessous où sont utilisées les macros
 % ---------------------- %
 
 
-\subsubsection{Ajouter une couleur de fond à une ligne}
+\subsubsection{\macro{backLine} -- Ajouter une couleur de fond à une ligne}
 
 La modification de la couleur de fond d'une ligne se fait via la macro \macro{backLine}
 \footnote{
@@ -3679,7 +3695,7 @@ Cette macro possède un argument optionnel et un obligatoire.
 % ---------------------- %
 
 
-\subsubsection{Commenter une ligne}
+\subsubsection{\macro{comLine} -- Commenter une ligne}
 
 L'ajout de commentaires courts se fait via la macro \macro{comLine} pour \whyprefix{com}{ment a} \prefix{line} soit \inenglish{commenter une ligne}.
 Cette macro possède un argument optionnel et deux obligatoires.
@@ -3707,13 +3723,13 @@ Cette macro possède un argument optionnel et deux obligatoires.
 % ---------------------- %
 
 
-\subsubsection{Graphiques pour expliquer des signes}
+\subsubsection{\macro{graphSign} -- Graphiques pour expliquer des signes}
 
 Pour le moment, la macro \macro{graphSign} propose différents types de graphiques de fonctions dites de référence.
 Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$ pour numéro de la toute 1\iere{} ligne contenant les valeurs utiles de la variable.
 
 \begin{enumerate}
-    \item \textbf{\itshape Fonctions affines non constantes avec une contrainte.}
+    \item \textbf{\itshape Fonctions affines $a x + b$.}
           
           \smallskip
 
@@ -3752,7 +3768,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 
 
     \bigskip
-    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré avec deux contraintes.}
+    \item \textbf{\itshape Fonctions trinômiales du 2\ieme{} degré  $a x^2 + b x + c$.}
           
           \smallskip
 
@@ -3800,7 +3816,7 @@ Avant de voir ce qui est proposé rappelons que la convention est de prendre $0$
 
 
     \bigskip
-    \item \textbf{\itshape Fonctions sans contrainte.}
+    \item \textbf{\itshape Fonctions de référence.}
           
           \smallskip
 
@@ -4295,8 +4311,18 @@ Dans le code suivant, ce sont les clés
 Indiquons que \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
 Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
 
-
 \inputlatexex{TikZ/probatree-weight-placement.tkz}
+
+
+\begin{remark}
+	Notez que le mode mathématique est activé par défaut pour les noms des noeuds et les poids comme le montre l'exemple improbable
+	\footnote{
+		Quoique...
+	}
+	ci-dessous.
+
+	\inputlatexex{TikZ/probatree-math-mode.tkz}
+\end{remark}
 
 
 % ---------------------- %
@@ -4314,7 +4340,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 \newparaexample{Des poids cachés localement}
 
-Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous \emph{(ceci aussi peut servir à rédiger des exercices)}.
+Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
 \inputlatexex{TikZ/probatree-weight-hide-locally.tkz}
 
@@ -4413,7 +4439,7 @@ Dans le code précédent nous avons dû faire des copier-coller. La macro \macro
 Voici les pièges à éviter.
 
 \begin{enumerate}
-	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nb /$1$# au lieu de  \verb#nb/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
+	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nB /$1$# au lieu de  \verb#nB/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
 
 	\item Les noms \macro{color}, \macro{col}, \macro{dx} et \macro{dy} sont utilisés en coulisse donc vous ne pourrez pas les utiliser dans votre boucle.
 \end{enumerate}
@@ -4615,7 +4641,7 @@ $\pgcd x = \gcd x$ et $\ppcm x = \lcm x$
 
 \subsection{Fractions continuées standard}
 
-%\newparaexample*{}
+\newparaexample{Version longue}
 
 Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
@@ -4628,9 +4654,22 @@ Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringshe
 % ---------------------- %
 
 
+\newparaexample{Version Courte}
+
+Les macros \macro{scontfrac} et \macro{scontfrac*} donnent directement la fraction. Le \prefix{s} est pour \whyprefix{s}{hort} soit \inenglish{court}.
+
+\begin{latexex-flat}
+ $\scontfrac {u_0 | u_1 | u_2 | \dots | u_n}
+= \scontfrac*{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
 \subsection{Fractions continuées généralisées}
 
-%\newparaexample*{}
+\newparaexample{Version longue}
 
 Voici comment écrire une fraction continuée généralisée.
 
@@ -4644,9 +4683,21 @@ Voici comment écrire une fraction continuée généralisée.
 % ---------------------- %
 
 
-\subsection{Comme une fraction continuée isolée}
+\newparaexample{Version courte}
 
-%\newparaexample*{}
+Les macros \macro{scontfracgene} et \macro{scontfracgene*} donnent directement la fraction. Le \prefix{s} est de nouveau pour \whyprefix{s}{hort}.
+
+\begin{latexex-flat}
+ $\displaystyle
+  \scontfracgene {a | b | c | d | e | \dots | y | z}
+= \scontfracgene*{a | b | c | d | e | \dots | y | z}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsection{Comme une fraction continuée isolée}
 
 La raison d'être de la macro ci-dessous vient juste de son usage en interne.
 
@@ -4669,13 +4720,12 @@ La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
 \begin{latexex-flat}
  $\displaystyle
   \contfracope_{k=1}^{n} (b_k:c_k)
-= \cfrac{b_1}%
-        {\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+= \scontfracgene{b_1 | c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}$
 \end{latexex-flat}
 
 
 \begin{remark}
-    La lettre $\contfracope $vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
+    La lettre $\contfracope$ vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
 \end{remark}
 
 
@@ -4973,6 +5023,98 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \begin{description}
 % Changes shown - START
+
+    \medskip
+    \item[2020-08-26] Nouvelle version mineure \verb+1.9.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.8.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions avec un paramètre optionnel}
+              les macros \macro{lg} et \macro{ln} peuvent s'utiliser avec une base.
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsarith -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Arithmétique [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fractions continuées}
+        	  ajout de \macro{scontfrac}, \macro{scontfrac*}, \macro{scontfracgene} et \macro{scontfracgene*} qui donnent juste la partie fractionnaire.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Vecteur}
+              ajout de la macro \macro{pvect} pour ne pas avoir à taper \macro{pt}.
+    
+    	% -------------- %
+    
+        \item \topic*{Produit vectoriel et déterminant de deux vecteurs} nouveau changement de l'API.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{calccrossprod}, \macro{vcalccrossprod}, \macro{calcdetplane} et \macro{vcalcdetplane} permettent de tracer une croix fléchée ou non à la place de la boucle fléchée.
+    
+            \item \macro{coordcrossprod} a été supprimé. Il faut à la place utiliser l'une des options \verb#exp#, \verb#texp# et \verb#cexp# de \macro{vcalccrossprod} et \macro{calccrossprod}.
+    
+            \item Plus aucune version étoilée simple ou double pour \macro{calccrossprod}, \macro{vcalccrossprod}, \macro{calcdetplane} et \macro{vcalcdetplane}.
+        \end{itemize}
+    
+    	% -------------- %
+    
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.8.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre de probabilités}
+              le mode mathématique est activé par défaut pour les noms des noeuds et les poids \emph{(plus besoin de taper plein de \texttt{\$})}.
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
 
     \medskip
     \item[2020-08-09] Nouvelle version mineure \verb+1.8.0-beta+.
@@ -6313,7 +6455,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \subsection{Intervalles}
 
-\subsubsection{Intervalles réels - Notation française (?\,)}
+\subsubsection{Intervalles réels -- Notation française (?\,)}
 
 
 
@@ -7181,6 +7323,16 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} un texte indiquant $down$ dans le nom $\vect*{up}{down}$ d'un vecteur.
 
 
+\separation
+
+
+\IDmacro[a]{pvect}{2}
+
+\IDarg{1} le nom du 1\ier{} point qui sera mis en forme via la macro \macro{pt}.
+
+\IDarg{2} le nom du 2\ieme{} point qui sera mis en forme via la macro \macro{pt}.
+
+
 \subsection{Vecteurs}
 
 \subsubsection{Norme}
@@ -7262,8 +7414,6 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 \subsubsection{3D -- Produit vectoriel}
 
-\paragraph{Écriture symbolique}
-
 
 
 \IDmacro{crossprod}{1}{2}
@@ -7294,71 +7444,39 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
-% ---------------------- %
-
-
-\subsection{Vecteurs}
-
-\subsubsection{3D -- Produit vectoriel}
-
-\paragraph{Explication du mode de calcul}
-
-
-
-\IDmacro[a]{calccrossprod  }{9}  \hfill \mwhyprefix{calc}{ulate}
-
-\IDmacro[a]{calccrossprod* }{9}
-
-\IDmacro[a]{calccrossprod**}{9}
-
-
-\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
-
-\IDarg{2} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
-
-\IDarg{6} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
-
-
 \separation
 
 
-\IDmacro[a]{vcalccrossprod  }{8}  \hfill \mwhyprefix{calc}{ulate}
-                                     et \mwhyprefix{v}{ector}
-
-\IDmacro[a]{vcalccrossprod* }{8}
-
-\IDmacro[a]{vcalccrossprod**}{8}
-
-\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
-
-\IDarg{2} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
-
-\IDarg{6} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
+\IDmacro{calccrossprod}{1}{8}  \hfill \mwhyprefix{calc}{ulate}
 
 
-% ---------------------- %
-
-\subsection{Vecteurs}
-
-\subsubsection{3D -- Produit vectoriel}
-
-\paragraph{Les coordonnées}
-
-
-
-\IDmacro{coordcrossprod}{1}{6}  \hfill \mwhyprefix{coord}{inate}
-
-\IDoption{} la valeur par défaut est \verb+p,s+. 
-            Voici les différentes valeurs possibles pour la mise en forme des coordonnées uniquement \emph{(voir la section \ref{tnsgeo-coordinates-tech} page \pageref{tnsgeo-coordinates-tech})}.
+\IDoption{} la valeur par défaut est \verb+vec,loop+. 
+            Voici les différentes valeurs possibles.
 \begin{enumerate}
+	\item \verb+vec  + : pour afficher les vecteurs.
+
+	\item \verb+novec+ : pour ne pas afficher les vecteurs.
+
+	\medskip
+	
+	\item \verb+arrows+ : des croix fléchées indiquent comment effectuer les calculs.
+
+	\item \verb+cross + : des croix non fléchées indiquent comment effectuer les calculs.
+
+	\item \verb+loop  + : des boucles indiquent comment effectuer les calculs.
+
+	\item \verb+nodeco+ : rien n'indique comment effectuer les calculs.
+
+    \medskip
+
+    \item \verb+exp+ : ceci demande d'afficher les formules développées de chaque coordonnée en utilisant un espace pour séparer les facteurs de chaque produit.
+
+    \item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+    \item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+
+	\medskip
+	
 	\item \verb+p + : écriture horizontale avec des parenthèses extensibles.
 
 	\item \verb+sp+ : écriture horizontale avec des parenthèses non extensibles.
@@ -7374,21 +7492,31 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 	\item \verb+vb+ : écriture verticale avec des crochets.
 \end{enumerate}
 
-            Pour les produits, voici ce qui est proposé.
-\begin{enumerate}
-	\item \prefix{s} : un espace pour séparer les facteurs de chaque produit.
+            On peut combiner deux types de choix cohérents en les séparant par une virgule comme dans \verb+vec,loop+ la valeur par défaut de l'option.
+            
+            
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-	\item \prefix{t} : \macro{times} comme opérateur de multiplication.
+\IDargs{2..4} les coordonnées du 1\ier{} vecteur.
 
-	\item \prefix{c} : \macro{cdot} comme opérateur de multiplication.
-\end{enumerate}
+\IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-            On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+p,s+ la valeur par défaut de l'option.
+\IDargs{6..8} les coordonnées du 2\ieme{} vecteur.
 
 
-\IDargs{1..3} les coordonnées du 1\ier{} vecteur.
+\separation
 
-\IDargs{4..6} les coordonnées du 2\ieme{} vecteur.
+
+\IDmacro{vcalccrossprod}{1}{8}  \hfill \mwhyprefix{calc}{ulate}
+                                    et \mwhyprefix{v}{ector}
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\medskip
+
+Pour le reste, voir les indications données ci-dessus pour \macro{calccrossprod}.
 
 
 \subsection{Vecteurs}
@@ -7397,7 +7525,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 
 
 
-\IDmacro{colicriteria }{1}{6} \hfill \mwhyprefix{coli}{nearity}
+\IDmacro{colicriteria}{1}{6} \hfill \mwhyprefix{coli}{nearity}
 
 
 \IDoption{} la valeur par défaut est \verb+vec+. Voici les deux valeurs possibles.
@@ -7420,37 +7548,52 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcolicriteria }{1}{6} \hfill \mwhyprefix{v}{ector}
+\IDmacro{vcolicriteria}{1}{6} \hfill \mwhyprefix{v}{ector}
 
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDoption{} voir les indications données pour la macro \macro{colicriteria}.
+\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDargs{1..6} voir les indications données pour la macro \macro{colicriteria}.
+\medskip
+
+Pour le reste, voir les indications données ci-dessus pour \macro{colicriteria}.
 
 
 \subsection{Vecteurs}
 
-\subsubsection{2D -- Déterminant de deux vecteurs} 
+\subsubsection{2D -- Déterminant de deux vecteurs}
 
 
 
-\IDmacro{calcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
-
-\IDmacro{calcdetplane*}{1}{6}
+\IDmacro{calcdetplane}{1}{6} \hfill \mwhyprefix{calc}{ulate}
 
 
-\IDoption{} la valeur par défaut est \verb+vec+. Voici les différentes valeurs possibles.
+\IDoption{} la valeur par défaut est \verb+vec,loop+. Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \verb+vec+ : les vecteurs sont affichés si besoin.
+    \item \verb+vec+ : les vecteurs sont affichés si besoin.
 
-	\item \verb+novec+ : les vecteurs ne sont jamais affichés.
+    \item \verb+novec+ : les vecteurs ne sont jamais affichés.
 
-	\item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+    \medskip
+    
+    \item \verb+arrows+ : des croix fléchées indiquent comment effectuer les calculs.
 
-	\item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+    \item \verb+cross + : des croix non fléchées indiquent comment effectuer les calculs.
 
-	\item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
+    \item \verb+loop  + : des boucles indiquent comment effectuer les calculs.
+
+    \item \verb+nodeco+ : rien n'indique comment effectuer les calculs.
+
+    \medskip
+
+    \item \verb+exp+ : ceci demande d'afficher une formule développée en utilisant un espace pour séparer les facteurs de chaque produit.
+
+    \item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
+
+    \item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
 \end{enumerate}
+
+            On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+vec,loop+ la valeur par défaut de l'option.
 
 
 \IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
@@ -7465,15 +7608,17 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \separation
 
 
-\IDmacro{vcalcdetplane }{1}{6} \hfill \mwhyprefix{calc}{ulate}
-                                   et \mwhyprefix{v}{ector}
+\IDmacro{vcalcdetplane}{1}{6} \hfill \mwhyprefix{calc}{ulate}
+                                  et \mwhyprefix{v}{ector}
 
-\IDmacro{vcalcdetplane*}{1}{6}
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
 
+\IDarg{4} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
-\IDoption{} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+\medskip
 
-\IDargs{1..6} voir les indications données pour les macros \macro{calcdetplane} et \macro{calcdetplane*}.
+Pour le reste, voir les indications données ci-dessus pour \macro{calcdetplane}.
+%
 
 
 \subsection{Géométrie cartésienne}
@@ -7736,7 +7881,7 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 	\item \verb#1# donne $\symvar[1]$ .
 	\item \verb#2# donne $\symvar[2]$ .
 	\item \verb#3# donne $\symvar[3]$ .
-%	\item \verb#4# donne $\symvar[4]$ .
+	\item \verb#4# donne $\symvar[4]$ .
 \end{itemize}
 
 
@@ -7811,6 +7956,10 @@ Les macros suivantes sont juste utilisées par l'environnement \env{explain}.
 \IDoption{} la base de l'exponentielle
 
 \separation
+
+\IDmacro[o]{lg }{1}
+
+\IDmacro[o]{ln }{1}
 
 \IDmacro[o]{log}{1}
 
@@ -8534,11 +8683,15 @@ Voir les indications précédentes excepté qu'ici on utilise le système de nom
 
 
 
-\IDmacro[a]{contfrac }{1}
+\IDmacro[a]{contfrac  }{1}
 
-\IDmacro[a]{contfrac*}{1}
+\IDmacro[a]{contfrac* }{1}
 
-\IDarg{} tous les éléments de la fraction continuée séparés par des \verb+|+.
+\IDmacro[a]{scontfrac }{1}
+
+\IDmacro[a]{scontfrac*}{1}
+
+\IDarg{} tous les éléments de la fraction continuée \og courte \fg{} séparés par des \verb+|+.
 
 
 % ---------------------- %
@@ -8550,9 +8703,13 @@ Voir les indications précédentes excepté qu'ici on utilise le système de nom
 
 
 
-\IDmacro[a]{contfracgene }{1}
+\IDmacro[a]{contfracgene  }{1}
 
-\IDmacro[a]{contfracgene*}{1}
+\IDmacro[a]{contfracgene* }{1}
+
+\IDmacro[a]{scontfracgene }{1}
+
+\IDmacro[a]{scontfracgene*}{1}
 
 \IDarg{} tous les éléments de la fraction continuée généralisée séparés par des \verb+|+.
 
@@ -8583,7 +8740,7 @@ Voir les indications précédentes excepté qu'ici on utilise le système de nom
 
 
 
-La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
+La macro suivante sans argument se comporte comme $\sum$  vis à vis des mises en index et en exposant. 
 
 
 \separation

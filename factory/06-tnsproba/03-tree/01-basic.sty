@@ -21,22 +21,22 @@
 	%
     apweight/.style = {
     	edge label = {
-			node[pos=.5,sloped,above, fill=white]{#1}
+			node[pos=.5,sloped,above, fill=white]{$#1$}
 		}
 	},
     bpweight/.style = {
     	edge label = {
-			node[pos=.5,sloped,below, fill=white]{#1}
+			node[pos=.5,sloped,below, fill=white]{$#1$}
 		}
 	},
     pweight/.style = {
     	edge label={
-			node[midway, fill=white]{#1}
+			node[midway, fill=white]{$#1$}
 		}
 	},
-    pweight*/.style = {},
     apweight*/.style = {},
     bpweight*/.style = {},
+    pweight*/.style = {},
 }
 
 
@@ -63,53 +63,56 @@
             l      = 2.5cm,
             s sep  = 1.2cm,
             anchor = parent,
+            math content
         },
-        before typesetting nodes = {%
-            where connections = 1{}{%
-                if = {isodd(connections())}{%
-                    edge path' = {%
-                        foreach \i [
-                            count    = \j from 0,
-                            evaluate = \noexpand\j
-                            as \noexpand\k
-                            using \noexpand {
-                                (\j == 0) ?
-                                0pt :
-                                ((isodd(\j)) ?
-                                (\j*4pt) :
-                                ((-\j + 1)*4pt))
-                            }
-                        ]
-                        in {%
-                            1, ..., \foresteoption{connections}
-                        }{
-                            (!u.parent anchor)
-                            --
-                            ([yshift = \noexpand\k].child anchor)
-                        }
-                    },
-                }{%
-                    edge path' = {%
-                        foreach \i [
-                            count    = \j,
-                            evaluate = \noexpand\j
-                            as \noexpand\k
-                            using {
-                                (isodd(\j)) ?
-                                (\j*4pt) :
-                                ((-\j + 1)*4pt)
-                            }
-                        ]
-                        in {1,...,\foresteoption{connections}}
-                        {
-                            (!u.parent anchor)
-                            --
-                            ([yshift = \noexpand\k].child anchor)
-                        }
-                    },
-                },
-            },
-        },
+% TO KEEP ! Personnalisation des chemins
+%
+%        before typesetting nodes = {%
+%            where connections = 1{}{%
+%                if = {isodd(connections())}{%
+%                    edge path' = {%
+%                        foreach \i [
+%                            count    = \j from 0,
+%                            evaluate = \noexpand\j
+%                            as \noexpand\k
+%                            using \noexpand {
+%                                (\j == 0) ?
+%                                0pt :
+%                                ((isodd(\j)) ?
+%                                (\j*4pt) :
+%                                ((-\j + 1)*4pt))
+%                            }
+%                        ]
+%                        in {%
+%                            1, ..., \foresteoption{connections}
+%                        }{
+%                            (!u.parent anchor)
+%                            --
+%                            ([yshift = \noexpand\k].child anchor)
+%                        }
+%                    },
+%                }{%
+%                    edge path' = {%
+%                        foreach \i [
+%                            count    = \j,
+%                            evaluate = \noexpand\j
+%                            as \noexpand\k
+%                            using {
+%                                (isodd(\j)) ?
+%                                (\j*14pt) :
+%                                ((-\j + 1)*4pt)
+%                            }
+%                        ]
+%                        in {1,...,\foresteoption{connections}}
+%                        {
+%                            (!u.parent anchor)
+%                            --
+%                            ([yshift = \noexpand\k].child anchor)
+%                        }
+%                    },
+%                },
+%            },
+%        },
         %
         pframe/.style = {
         	tikz = {
@@ -148,17 +151,17 @@
     \forestset{
         apweight*/.style = {
         	edge label = {
-    			node[pos=.5,sloped,above, fill=white]{##1}
+    			node[pos=.5,sloped,above, fill=white]{$##1$}
     		}
     	},
         bpweight*/.style = {
         	edge label = {
-    			node[pos=.5,sloped,below, fill=white]{##1}
+    			node[pos=.5,sloped,below, fill=white]{$##1$}
     		}
     	},
         pweight*/.style = {
         	edge label={
-    			node[midway, fill=white]{##1}
+    			node[midway, fill=white]{$##1$}
     		}
     	},
     }

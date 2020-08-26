@@ -5,8 +5,6 @@
 
 % == DEFINITIONS == %
 
-% -- Focus -- %
-
 \newcommand\ptreeFocus{\@ifstar{\tnsproba@ptree@focus@star}{\tnsproba@ptree@focus@no@star}}
 
 \newcommand\tnsproba@ptree@focus@star{\@ifstar{\tnsproba@ptree@focus@star@star}{\tnsproba@ptree@focus@star@no@star}}
@@ -41,14 +39,16 @@
 %
 %    #1 : macro to apply
 %    #2 : multi-args
-	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node}%
-		                 {#1}
+	\tns@multi@apply@each%
+	    {\tnsproba@ptree@focus@abstract@node}%
+	    {#1}
 }
 
 
 \newcommand\tnsproba@ptree@focus@abstract@multi@nodes@nostart[1]{
-	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node@nostart}%
-		                 {#1}
+	\tns@multi@apply@each%
+	    {\tnsproba@ptree@focus@abstract@node@nostart}%
+	    {#1}
 }
 
 
@@ -70,8 +70,9 @@
 %
 %    #1 : macro to apply
 %    #2 : multi-args
-	\tns@multi@apply@couple{\tnsproba@ptree@focus@abstract@edge}%
-	                       {#1}
+	\tns@multi@apply@overlapping@couples%
+	    {\tnsproba@ptree@focus@abstract@edge}%
+	    {#1}
 }
 
 

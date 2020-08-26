@@ -80,7 +80,152 @@ $\vcrossprod[t]{i}{j}$
 % ---------------------- %
 
 
-\subsubsection{Fiche technique}
+\subsubsection{Explication du mode de calcul}
+
+\newparaexample{}
+
+Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} quant à \prefix{v} est pour \whyprefix{v}{ecteur} pour une rédaction raccourcie pour les vecteurs.
+
+\begin{latexex}
+$\calccrossprod{\vect{u}}{x}{y}{z}%
+               {\vect{v}}{x'}{y'}{z'}$
+ou
+$\vcalccrossprod{AB}{x_B - x_A}%
+                    {y_B - y_A}%
+                    {z_B - z_A}%
+                {CD}{x_D - x_C}%
+                    {y_D - y_C}%
+                    {z_D - z_C}$
+\end{latexex}
+
+
+\begin{remark}
+    Tous les exemples suivants se feront avec \macro{vcalccrossprod} mais bien entendu ils restent adaptables directement à \macro{calccrossprod}.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Pour un public averti}
+
+On peut juste proposer des croix fléchées ou non, voir juste les coordonnées \og augmentées \fg{} sans les décorations comme ci-après via l'argument optionnel de \macro{calccrossprod} ou \macro{vcalccrossprod}.
+
+\begin{latexex}
+$ \vcalccrossprod[arrows]{u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}
+= \vcalccrossprod[cross] {u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}
+= \vcalccrossprod[nodeco]{u}{x}{y}{z}%
+                         {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Sans les vecteurs}
+
+Si les vecteurs vous gênent il suffira d'utiliser l'option \verb+novec+ pour \verb+no+ \whyprefix{vec}{tor} soit \inenglish{pas de vecteur}.
+Voici deux cas d'utilisation
+\footnote{
+	Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
+}.
+
+
+\begin{latexex}
+$ \vcalccrossprod[novec]
+      {u}{x}{y}{z}{v}{x'}{y'}{z'}
+= \vcalccrossprod[novec,cross]
+      {u}{x}{y}{z}{v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+
+% ---------------------- %
+
+
+\newparaexample{Les coordonnées \og développées \fg}
+
+Parmi les options proposées par \macro{calccrossprod} et \macro{vcalccrossprod}, il y en existe quelques unes fournissant des coordonnées
+\footnote{
+	En coulisse on utilise la macro \macro{coord} présentée dans la section \ref{tnsgeo-coordinates} page \pageref{tnsgeo-coordinates} dont on reprend les options de mise en forme. 
+}
+détaillant les calculs. Indiquons que \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}, \prefix{c} pour \macro{cdot} et enfin \prefix{t} pour \macro{times}
+\footnote{
+	De nouveau on obtient ici une méthode très pratique à l'usage car elle permet de faire des copier-coller.
+}.
+
+
+\begin{latexex}
+$\vcalccrossprod[exp]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
+
+$\vcalccrossprod[cexp,vb]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
+
+$\vcalccrossprod[texp,sp]%
+                {u}{\dfrac{1}{2}x}{y}{z}%
+                {v}{x'}{y'}{z'}$
+\end{latexex}
+
+
+\medskip
+
+
+Voici les options disponibles. Nous expliquons ensuite comment les utiliser.
+\begin{enumerate}
+	\item \prefix{p} vient de \whyprefix{p}{arenthèses}. Ceci donnera une écriture horizontale.
+
+	\item \prefix{b} vient de \whyprefix{b}{rackets} soit \inenglish{crochets}. Ceci donnera une écriture horizontale.
+
+	\item \prefix{sp} et \prefix{sb} produisent des délimiteurs non extensibles en mode horizontal.
+	      Ici \prefix{s} vient de \whyprefix{s}{mall} soit \inenglish{petit}.
+
+	\item \prefix{vp} et \prefix{vb} produisent des écritures verticales.
+	      Ici \prefix{v} vient de \whyprefix{v}{ertical}.
+
+	\medskip
+
+	\item \prefix{exp} tout seul demande d'utiliser un espace pour séparer les facteurs de chaque produit.
+
+	\item \prefix{texp} tout seul demande d'utiliser \macro{times} comme opérateur de multiplication.
+
+	\item \prefix{cexp} tout seul demande d'utiliser \macro{cdot} comme opérateur de multiplication.
+\end{enumerate}
+
+\bigskip
+
+
+\textbf{Attention !}
+Les produits sont rédigés stupidement. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle ci-dessous.
+    
+\begin{latexex}
+$\vcalccrossprod[exp,vb]%
+ {AB}%
+ {x_B - x_A}{y_B - y_A}{z_B - z_A}%
+ {CD}%
+ {x_D - x_C}{y_D - y_C}{z_D - z_C}$
+\end{latexex}
+
+Ici nous n'avons pas d'autre choix que de corriger le tir nous-même.
+Ceci étant indiqué, ce genre de situation est très rare dans la vraie vie mathématique où l'on évite d'avoir à calculer un produit vectoriel avec des expressions compliquées.
+    
+\begin{latexex}
+$\vcalccrossprod[exp,vb]%
+ {AB}%
+ {(x_B - x_A)}{(y_B - y_A)}{(z_B - z_A)}%
+ {CD}%
+ {(x_D - x_C)}{(y_D - y_C)}{(z_D - z_C)}$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Fiche technique}
 
 \IDmacro{crossprod}{1}{2}
 
@@ -110,185 +255,39 @@ $\vcrossprod[t]{i}{j}$
 \IDarg{2} le nom du 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
 
 
-% ---------------------- %
-
-
-\subsubsection{Explication du mode de calcul}
-
-Dans l'exemple suivant, le préfixe \prefix{calc} est pour \whyprefix{calc}{uler} et \prefix{v} pour \whyprefix{v}{ecteur}.
-
-\begin{latexex}
-$\calccrossprod{\vect{u}}{x}{y}{z}%
-               {\vect{v}}{x'}{y'}{z'}$
-ou
-$\vcalccrossprod{AB}{x_B - x_A}%
-                    {y_B - y_A}%
-                    {z_B - z_A}%
-                {CD}{x_D - x_C}%
-                    {y_D - y_C}%
-                    {z_D - z_C}$
-\end{latexex}
-
-
-Avec un public averti on peut juste proposer des croix voir juste les coordonnées sans les décorations comme ci-après via les versions simplement et doublement étoilées de \macro{vcalccrossprod} \emph{(ceci fonctionne aussi avec \macro{calccrossprod})}.
-
-\begin{latexex}
-$\vcalccrossprod* {u}{x}{y}{z}%
-                  {v}{x'}{y'}{z'}
- =
- \vcalccrossprod**{u}{x}{y}{z}%
-                  {v}{x'}{y'}{z'}$
-\end{latexex}
-
-
-Enfin si les vecteurs vous gênent il suffira d'utiliser l'option \verb+novec+ pour \verb+no+ \whyprefix{vec}{tor} soit \inenglish{pas de vecteur} comme ci-après.
-Ceci fonctionne aussi pour la macro \macro{calccrossprod}.
-Il peut sembler un peu lourd d'avoir des arguments pour des vecteurs non affichés mais ce choix permet à l'usage de faire des copier-coller redoutables d'efficacité !
-
-\begin{latexex}
-$\vcalccrossprod[novec]  {u}{x}{y}{z}%
-                         {v}{x'}{y'}{z'}
- =
- \vcalccrossprod*[novec] {u}{x}{y}{z}%
-                         {v}{x'}{y'}{z'}
- =
- \vcalccrossprod**[novec]{u}{x}{y}{z}%
-                         {v}{x'}{y'}{z'}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiche technique}
-
-\IDmacro[a]{calccrossprod  }{9}  \hfill \mwhyprefix{calc}{ulate}
-
-\IDmacro[a]{calccrossprod* }{9}
-
-\IDmacro[a]{calccrossprod**}{9}
-
-
-\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
-
-\IDarg{2} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
-
-\IDarg{6} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
-
-\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
-
-
 \separation
 
 
-\IDmacro[a]{vcalccrossprod  }{8}  \hfill \mwhyprefix{calc}{ulate}
-                                     et \mwhyprefix{v}{ector}
-
-\IDmacro[a]{vcalccrossprod* }{8}
-
-\IDmacro[a]{vcalccrossprod**}{8}
-
-\IDarg{1} \verb+vec+ ou \verb+novec+ suivant que l'on veut afficher ou non les vecteurs. 
-
-\IDarg{2} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDargs{3..5} les coordonnées du 1\ier{} vecteur.
-
-\IDarg{6} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
-
-\IDargs{7..9} les coordonnées du 2\ieme{} vecteur.
+\IDmacro{calccrossprod}{1}{8}  \hfill \mwhyprefix{calc}{ulate}
 
 
-% ---------------------- %
-
-\subsubsection{Les coordonnées}
-
-\newparaexample{Les coordonnées \og développées \fg}
-
-Pour avoir le détail directement dans des coordonnées vous pouvez faire appel à \macro{coordcrossprod} où le préfixe \prefix{coord} fait référence à \whyprefix{coord}{onnée}
-\footnote{
-	En coulisse on utilise la macro \macro{coord} présentée dans la section \ref{tnsgeo-coordinates} page \pageref{tnsgeo-coordinates}. 
-}.
-On peut utiliser des options pour choisir certains paramètres de mise en forme.
-
-\begin{latexex}
-$\coordcrossprod{\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
-
-$\coordcrossprod[vb]%
-                {\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
-
-$\coordcrossprod[sp,c]%
-                {\dfrac{1}{2}x}{y}{z}%
-                           {x'}{y'}{z'}$
-\end{latexex}
-
-
-\medskip
-
-Voici les options disponibles. Nous expliquons ensuite comment les utiliser.
+\IDoption{} la valeur par défaut est \verb+vec,loop+. 
+            Voici les différentes valeurs possibles.
 \begin{enumerate}
-	\item \prefix{p} vient de \whyprefix{p}{arenthèses}. Ceci donnera une écriture horizontale.
+	\item \verb+vec  + : pour afficher les vecteurs.
 
-	\item \prefix{b} vient de \whyprefix{b}{rackets} soit \inenglish{crochets}. Ceci donnera une écriture horizontale.
-
-	\item \prefix{sp} et \prefix{sb} produisent des délimiteurs non extensibles en mode horizontal.
-	      Ici \prefix{s} vient de \whyprefix{s}{mall} soit \inenglish{petit}.
-
-	\item \prefix{vp} et \prefix{vb} produisent des écritures verticales.
-	      Ici \prefix{v} vient de \whyprefix{v}{ertical}.
+	\item \verb+novec+ : pour ne pas afficher les vecteurs.
 
 	\medskip
+	
+	\item \verb+arrows+ : des croix fléchées indiquent comment effectuer les calculs.
 
-	\item \prefix{s} tout seul demande d'utiliser un espace pour séparer les facteurs de chaque produit.
+	\item \verb+cross + : des croix non fléchées indiquent comment effectuer les calculs.
 
-	\item \prefix{t} tout seul demande d'utiliser \macro{times} comme opérateur de multiplication.
+	\item \verb+loop  + : des boucles indiquent comment effectuer les calculs.
 
-	\item \prefix{c} tout seul demande d'utiliser \macro{cdot} comme opérateur de multiplication.
-\end{enumerate}
+	\item \verb+nodeco+ : rien n'indique comment effectuer les calculs.
 
+    \medskip
 
-On peut indiquer des options vis à vis du mode vertical ou horizontal avec des délimiteurs extensibles ou non éventuellement, ou bien sur le symbole pour les produits. On peut aussi combiner deux de ces typs de choix en les séparant par une virgule ce qui fait un total de $6\times3 = 18$ combinaisons possibles.
-La valeur par défaut est \verb+p,s+.
+    \item \verb+exp+ : ceci demande d'afficher les formules développées de chaque coordonnée en utilisant un espace pour séparer les facteurs de chaque produit.
 
+    \item \verb+cexp+ : comme \verb+exp+ mais avec le symbole $\cdot$ obtenu via \macro{cdot}.
 
-\bigskip
+    \item \verb+texp+ : comme \verb+exp+ mais avec le symbole $\times$.
 
-
-\textbf{Attention !}
-Les produits sont rédigés stupidement. Autrement dit ce sera à vous d'ajouter des parenthèses là où il y en aura besoin sinon vous obtiendrez des horreurs comme celle ci-dessous.
-    
-\begin{latexex}
-$\coordcrossprod[vb]%
-         {x_B - x_A}{y_B - y_A}%
-         {z_B - z_A}{x_D - x_C}%
-         {y_D - y_C}{z_D - z_C}$
-\end{latexex}
-
-Ici nous n'avons pas d'autre choix que de corriger le tir nous-même.
-Ceci étant indiqué, ce genre de situation est très rare dans la vraie vie mathématique où l'on évite d'avoir à calculer un produit vectoriel avec des expressions compliquées.
-    
-\begin{latexex}
-$\coordcrossprod[vb]%
-       {(x_B - x_A)}{(y_B - y_A)}%
-       {(z_B - z_A)}{(x_D - x_C)}%
-       {(y_D - y_C)}{(z_D - z_C)}$
-\end{latexex}
-
-
-% ---------------------- %
-
-
-\subsubsection{Fiche technique}
-
-\IDmacro{coordcrossprod}{1}{6}  \hfill \mwhyprefix{coord}{inate}
-
-\IDoption{} la valeur par défaut est \verb+p,s+. 
-            Voici les différentes valeurs possibles pour la mise en forme des coordonnées uniquement \emph{(voir la section \ref{tnsgeo-coordinates-tech} page \pageref{tnsgeo-coordinates-tech})}.
-\begin{enumerate}
+	\medskip
+	
 	\item \verb+p + : écriture horizontale avec des parenthèses extensibles.
 
 	\item \verb+sp+ : écriture horizontale avec des parenthèses non extensibles.
@@ -304,21 +303,30 @@ $\coordcrossprod[vb]%
 	\item \verb+vb+ : écriture verticale avec des crochets.
 \end{enumerate}
 
-            Pour les produits, voici ce qui est proposé.
-\begin{enumerate}
-	\item \prefix{s} : un espace pour séparer les facteurs de chaque produit.
+            On peut combiner deux types de choix cohérents en les séparant par une virgule comme dans \verb+vec,loop+ la valeur par défaut de l'option.
+            
+            
+\IDarg{1} le 1\ier{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-	\item \prefix{t} : \macro{times} comme opérateur de multiplication.
+\IDargs{2..4} les coordonnées du 1\ier{} vecteur.
 
-	\item \prefix{c} : \macro{cdot} comme opérateur de multiplication.
-\end{enumerate}
+\IDarg{5} le 2\ieme{} vecteur qu'il faut taper via la macro \macro{vect}.
 
-            On peut combiner deux types de choix en les séparant par une virgule comme dans \verb+p,s+ la valeur par défaut de l'option.
+\IDargs{6..8} les coordonnées du 2\ieme{} vecteur.
 
 
-\IDargs{1..3} les coordonnées du 1\ier{} vecteur.
+\separation
 
-\IDargs{4..6} les coordonnées du 2\ieme{} vecteur.
 
+\IDmacro{vcalccrossprod}{1}{8}  \hfill \mwhyprefix{calc}{ulate}
+                                    et \mwhyprefix{v}{ector}
+
+\IDarg{1} le 1\ier{} vecteur sans utiliser la macro \macro{vect}.
+
+\IDarg{5} le 2\ieme{} vecteur sans utiliser la macro \macro{vect}.
+
+\medskip
+
+Pour le reste, voir les indications données ci-dessus pour \macro{calccrossprod}. 
 
 \end{document}

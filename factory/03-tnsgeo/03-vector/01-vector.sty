@@ -18,5 +18,11 @@
 }
 
 \newcommand\vect{\@ifstar{\tnsgeo@vect@star}{\tnsgeo@vect@no@star}}
+
 \newcommand*\tnsgeo@vect@star[1]{\vv*{\tnsgeo@no@point{#1}}}
+
 \newcommand*\tnsgeo@vect@no@star[1]{\vv{\tnsgeo@no@point{#1}}}
+
+
+\newcommand\pvect[2]{\vect{\pt{#1}\pt{#2}}}
+

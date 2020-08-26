@@ -2,20 +2,20 @@
     [{}, s sep = 1.3cm
      % Espacment pour éviter que
      % les cadres se superposent.
-        [$A$, pweight = $a$,
-              pframe  = red
-            [$B$, pweight = $b$]
-            [$C$, pweight = $c$]
+        [A, pweight = a,
+            pframe  = red
+            [B, pweight = b]
+            [C, pweight = c]
         ]
-        [$D$, pweight = $d$,
-              pframe  = blue
-            [$E$, pweight = $e$
-                [$F$, pweight = $f$]
-                [$G$, pweight = $g$]
+        [D, pweight = d,
+            pframe  = blue
+            [E, pweight = e
+                [F, pweight = f]
+                [G, pweight = g]
             ]
-            [$H$, pweight = $h$
-                [$I$, pweight = $i$]
-                [$J$, pweight = $j$]
+            [H, pweight = h
+                [I, pweight = i]
+                [J, pweight = j]
             ]
         ]
     ]

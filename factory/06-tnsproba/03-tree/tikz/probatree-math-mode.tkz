@@ -1,0 +1,7 @@
+\begin{probatree}
+    [
+        [\frac{1}{7}, apweight = \cos 0
+            [a^b, bpweight = 10^0]
+        ]
+    ]
+\end{probatree}

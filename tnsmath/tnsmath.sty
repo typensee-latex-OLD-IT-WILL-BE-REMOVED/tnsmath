@@ -52,10 +52,10 @@
 \RequirePackage{yhmath}
 
 % TikZ libraries
-\usetikzlibrary{babel}
-\usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{babel}
+\usetikzlibrary{backgrounds}
 
 
 % ------------------ %
@@ -350,9 +350,9 @@
 \newcommand\pbiject{\tnsgeo@partial@deco{-0.25ex}{0ex}{\biject}}
 
 
-% ---------------- %
-% -- FORMAL DEF -- %
-% ---------------- %
+% ------------------ %
+% -- EXPLICIT DEF -- %
+% ------------------ %
 
 % Argument #1: option s or sp
 % Argument #2: function
@@ -396,37 +396,39 @@
 \newcommand\txtfuncdef[5]{%
 	$#1(#2) = #3$%
 	\if\relax\detokenize{#4}\relax\else%
-		\ pour $#2 \in #4$%
+		\space pour $#2 \in #4$%
 	\fi%
 	\if\relax\detokenize{#5}\relax\else%
-		\ \emph{(on sait que $#1(#2) \in #5$)}%
+		\space \emph{(on sait que $#1(#2) \in #5$%
+		\space est toujours vérifié)}%
 	\fi%
 }
 
 
-% Argument #1: function
+% Argument #1: separator after the colon
+% Argument #2: space after the separator
 %
-% Argument #2: function
-% Argument #3: variable
-% Argument #4: formula
-% Argument #5: initial set
-% Argument #6: final set
+% Argument #3: function
+% Argument #4: variable
+% Argument #5: formula
+% Argument #6: initial set
+% Argument #7: final set
 
-\newcommand\tnsana@func@def@vertabstract[6]{%
-	\begin{array}[t]{l@#1@{\kern.5ex}r@{\kern.5ex}c@{\;}l}
-		#2 \colon & #5 & \rightarrow & #6 \\
-			      & #3 & \mapsto     & #4%
+\newcommand\tnsana@func@def@vertabstract[7]{%
+	\begin{array}[t]{l@#1@{\kern#2}r@{\kern.5ex}c@{\;}l}
+		#3\kern.5ex\colon & #6 & \rightarrow & #7 \\
+			              & #4 & \mapsto     & #5%
 	\end{array}
 }
 
 
 \newcommand\tnsana@func@def@usual[5]{%
-	\tnsana@func@def@vertabstract{{\kern.4ex}|}{#1}{#2}{#3}{#4}{#5}%
+	\tnsana@func@def@vertabstract{{\kern.8ex}|}{.9ex}{#1}{#2}{#3}{#4}{#5}%
 }
 
 
 \newcommand\tnsana@func@def@no@vrule[5]{%
-	\tnsana@func@def@vertabstract{{\kern0ex}}{#1}{#2}{#3}{#4}{#5}%
+	\tnsana@func@def@vertabstract{{\kern0ex}}{.5ex}{#1}{#2}{#3}{#4}{#5}%
 }
 
 
@@ -1316,8 +1318,13 @@
 }
 
 \newcommand\vect{\@ifstar{\tnsgeo@vect@star}{\tnsgeo@vect@no@star}}
+
 \newcommand*\tnsgeo@vect@star[1]{\vv*{\tnsgeo@no@point{#1}}}
+
 \newcommand*\tnsgeo@vect@no@star[1]{\vv{\tnsgeo@no@point{#1}}}
+
+
+\newcommand\pvect[2]{\vect{\pt{#1}\pt{#2}}}
 
 
 % ----------------- %
@@ -1350,7 +1357,7 @@
 % -- VECTOR PRODUCTS -- %
 % --------------------- %
 
-% DOT PRODUCT
+% -- DOT PRODUCT -- %
 
 %    #1 : 1st delimiter
 %    #2 : 1st vector
@@ -1430,8 +1437,7 @@
 
 
 
-
-% CROSS PRODUCT
+% -- CROSS PRODUCT - OPERATOR -- %
 
 %    #1 : option for the operator
 %    #2 : 1st vector
@@ -1457,20 +1463,7 @@
 
 
 
-% Stupid coordinates of the cross product
-
-\newbool{tnsgeo@crossprod@option@p}   % Default.
-\newbool{tnsgeo@crossprod@option@sp}
-\newbool{tnsgeo@crossprod@option@vp}
-
-\newbool{tnsgeo@crossprod@option@b}
-\newbool{tnsgeo@crossprod@option@sb}
-\newbool{tnsgeo@crossprod@option@vb}
-
-\newbool{tnsgeo@crossprod@option@space}   % Default.
-\newbool{tnsgeo@crossprod@option@times}
-\newbool{tnsgeo@crossprod@option@cdot}
-
+% -- CROSS PRODUCT - CALCULATE -- %
 
 % Coordinates given like that.
 %
@@ -1482,7 +1475,8 @@
 %
 % #8 : one of the macro \coord, \vcoord or \vcoord*.
 %
-% #9 : one of the the option p, sp, vp, b, sb or vb. 
+% #9 : one of the the option p, sp, vp, b, sb or vb.
+
 \newcommand\tnsgeo@apply@coord@crossprod[9]{%
     #8[#9]{%
     	\tns@prop@prod{#7}{#2}{#5}%
@@ -1495,173 +1489,192 @@
 }
 
 
-\newcommand\tnsgeo@validate@crossprod@option[1]{
+\newbool{tnsgeo@calc@crossprod@option@vec}   % Default.
+\newbool{tnsgeo@calc@crossprod@option@novec}
+
+\newbool{tnsgeo@calc@crossprod@option@loop}   % Default.
+\newbool{tnsgeo@calc@crossprod@option@arrows}
+\newbool{tnsgeo@calc@crossprod@option@cross}
+\newbool{tnsgeo@calc@crossprod@option@nodeco}
+
+
+\newbool{tnsgeo@calc@crossprod@option@p}   % Default if exp is used.
+\newbool{tnsgeo@calc@crossprod@option@sp}
+\newbool{tnsgeo@calc@crossprod@option@vp}
+
+\newbool{tnsgeo@calc@crossprod@option@b}
+\newbool{tnsgeo@calc@crossprod@option@sb}
+\newbool{tnsgeo@calc@crossprod@option@vb}
+
+\newbool{tnsgeo@calc@crossprod@option@exp}
+\newbool{tnsgeo@calc@crossprod@option@cexp}
+\newbool{tnsgeo@calc@crossprod@option@texp}
+
+
+\newcommand\tnsgeo@validate@calc@crossprod@option[1]{
     \IfEqCase{#1}{%
-        {p}{\booltrue{tnsgeo@crossprod@option@p}}%
-        {sp}{\booltrue{tnsgeo@crossprod@option@sp}}
-        {vp}{\booltrue{tnsgeo@crossprod@option@vp}}
+        {vec}{\booltrue{tnsgeo@calc@crossprod@option@vec}}
+        {novec}{\booltrue{tnsgeo@calc@crossprod@option@novec}}
         %
-        {b}{\booltrue{tnsgeo@crossprod@option@b}}
-        {sb}{\booltrue{tnsgeo@crossprod@option@sb}}
-        {vb}{\booltrue{tnsgeo@crossprod@option@vb}}
+        {loop}{\booltrue{tnsgeo@calc@crossprod@option@loop}}
+        {arrows}{\booltrue{tnsgeo@calc@crossprod@option@arrows}}
+        {cross}{\booltrue{tnsgeo@calc@crossprod@option@cross}}
+        {nodeco}{\booltrue{tnsgeo@calc@crossprod@option@nodeco}}
         %
-        {s}{\booltrue{tnsgeo@crossprod@option@space}}%
-        {t}{\booltrue{tnsgeo@crossprod@option@times}}
-        {c}{\booltrue{tnsgeo@crossprod@option@cdot}}
+        {exp}{\booltrue{tnsgeo@calc@crossprod@option@exp}}
+        {cexp}{\booltrue{tnsgeo@calc@crossprod@option@cexp}}
+        {texp}{\booltrue{tnsgeo@calc@crossprod@option@texp}}
+        %
+        {p}{\booltrue{tnsgeo@calc@crossprod@option@p}}
+        {sp}{\booltrue{tnsgeo@calc@crossprod@option@sp}}
+        {vp}{\booltrue{tnsgeo@calc@crossprod@option@vp}}
+        %
+        {b}{\booltrue{tnsgeo@calc@crossprod@option@b}}
+        {sb}{\booltrue{tnsgeo@calc@crossprod@option@sb}}
+        {vb}{\booltrue{tnsgeo@calc@crossprod@option@vb}}
     }[%
         \PackageError{tnsgeo}{unknown option}%
-                             {You can use p, sp, vp, b, sb, vb, s, t or c.}%
+                             {You can use vec, novec, loop, arrows, cross, nodeco, exp, cexp, texp, p, sp, vp, b, sb or vb.}%
     ]
 }
 
 
-\newcommand\coordcrossprod[7][p,s]{%
-    \boolfalse{tnsgeo@crossprod@option@p}
-    \boolfalse{tnsgeo@crossprod@option@sp}
-    \boolfalse{tnsgeo@crossprod@option@vp}
-    \boolfalse{tnsgeo@crossprod@option@b}
-    \boolfalse{tnsgeo@crossprod@option@sb}
-    \boolfalse{tnsgeo@crossprod@option@vb}
-    \boolfalse{tnsgeo@crossprod@option@space}
-    \boolfalse{tnsgeo@crossprod@option@times}
-    \boolfalse{tnsgeo@crossprod@option@cdot}
-    %
-    \def\@coord@option{NOTHING}%
-    \def\@exp@symbol{NOTHING}%
-    %
-    \DoWithCSL\tnsgeo@validate@crossprod@option{#1}
-    %
-    \ifbool{tnsgeo@crossprod@option@p}{%
-        \def\@coord@option{p}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sp}{%
-        \def\@coord@option{sp}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@vp}{%
-        \def\@coord@option{vp}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@b}{%
-        \def\@coord@option{b}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sb}{%
-        \def\@coord@option{sb}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@vb}{%
-        \def\@coord@option{vb}%
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@space}{%
-        \def\@exp@symbol{\,}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@times}{%
-        \def\@exp@symbol{\times}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@cdot}{%
-        \def\@exp@symbol{\cdot}%    
-    }{}%
-    %
-    \ifbool{tnsgeo@crossprod@option@sp}{}{%
-        \ifbool{tnsgeo@crossprod@option@vp}{}{%
-            \ifbool{tnsgeo@crossprod@option@b}{}{%
-                \ifbool{tnsgeo@crossprod@option@sb}{}{%
-                    \ifbool{tnsgeo@crossprod@option@vb}{}{%
-                        \def\@coord@option{p}% Default
-                    }%
-                }%
-            }%
-        }%
-    }%
-    %
-    \ifbool{tnsgeo@crossprod@option@times}{}{%
-        \ifbool{tnsgeo@crossprod@option@cdot}{}{%
-            \def\@exp@symbol{\,}% Default
-        }%
-    }%
-    %
-    \tnsgeo@apply@coord@crossprod{#2}{#3}{#4}% Vector 1
-                                 {#5}{#6}{#7}% Vector 2
-                                 {\@exp@symbol}%
-                                 {\coord}{\@coord@option}%
-}
-
-
-% Abstraction
-
-% Source
-%    * https://tex.stackexchange.com/a/548662/6880
-
-\newcommand\tnsgeo@calc@crossprod@label[1]{%
-    {\tiny$\substack{-\\#1}$}%
-}
-
-
-\newcommand\calccrossprod{\@ifstar{\tnsgeo@calc@crossprod@star}{\tnsgeo@calc@crossprod@no@star}}
-
-\newcommand\tnsgeo@calc@crossprod@star{\@ifstar{\tnsgeo@calc@crossprod@star@star}{\tnsgeo@calc@crossprod@star@no@star}}
-
-
-%   #1 : vector or not
+%   #1 : option for the formatting
 %
-%   #2  #6        u  v
+%   #2  #6		u  v
 %   
-%   #3  #7        x  x'
-%   #4  #8        y  y'
-%   #5  #9        z  z'
+%   #3  #7		x  x'
+%   #4  #8      y  y'
+%   #5  #9      z  z'
 
-\newcommand\tnsgeo@calc@crossprod@no@star[9][vec]{%
-    \tns@cross@prod@deco@loop{#1}%
-                             {#2}{#3}{#4}{#5}%
-                             {#6}{#7}{#8}{#9}%
+\newcommand\calccrossprod[9][vec,loop]{%
+    \boolfalse{tnsgeo@calc@crossprod@option@vec}
+    \boolfalse{tnsgeo@calc@crossprod@option@novec}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@loop}
+    \boolfalse{tnsgeo@calc@crossprod@option@arrows}
+    \boolfalse{tnsgeo@calc@crossprod@option@cross}
+    \boolfalse{tnsgeo@calc@crossprod@option@nodeco}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@exp}
+    \boolfalse{tnsgeo@calc@crossprod@option@cexp}
+    \boolfalse{tnsgeo@calc@crossprod@option@texp}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@p}
+    \boolfalse{tnsgeo@calc@crossprod@option@sp}
+    \boolfalse{tnsgeo@calc@crossprod@option@vp}
+    %
+    \boolfalse{tnsgeo@calc@crossprod@option@b}
+    \boolfalse{tnsgeo@calc@crossprod@option@sb}
+    \boolfalse{tnsgeo@calc@crossprod@option@vb}
+    %
+    \DoWithCSL\tnsgeo@validate@calc@crossprod@option{#1}
+    %
+    \ifboolexpr{
+		(
+			bool{tnsgeo@calc@crossprod@option@exp}
+			or
+			bool{tnsgeo@calc@crossprod@option@cexp}
+			or
+			bool{tnsgeo@calc@crossprod@option@texp}
+		)
+		and
+		(
+			bool{tnsgeo@calc@crossprod@option@loop}
+			or
+			bool{tnsgeo@calc@crossprod@option@arrows}
+			or
+			bool{tnsgeo@calc@crossprod@option@cross}
+			or
+			bool{tnsgeo@calc@crossprod@option@nodeco}
+		)
+	}{%
+        \PackageError{tnsgeo}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnsgeo@calc@crossprod@option@exp}
+		or
+		bool{tnsgeo@calc@crossprod@option@cexp}
+		or
+		bool{tnsgeo@calc@crossprod@option@texp}
+	}{
+    % Default values
+        \def\coordoption{p}%
+        \def\expsymbol{\,}%
+    %
+        \ifbool{tnsgeo@calc@crossprod@option@sp}{%
+            \def\coordoption{sp}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@vp}{%
+            \def\coordoption{vp}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@b}{%
+            \def\coordoption{b}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@sb}{%
+            \def\coordoption{sb}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@vb}{%
+            \def\coordoption{vb}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@texp}{%
+            \def\expsymbol{\times}%    
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@cexp}{%
+            \def\expsymbol{\cdot}%    
+        }{}%
+        %
+        \tnsgeo@apply@coord@crossprod{#3}{#4}{#5}% Vector 1
+                                     {#7}{#8}{#9}% Vector 2
+                                     {\expsymbol}%
+                                     {\coord}{\coordoption}%
+	}{
+    % No expansion
+	    % Default values
+	    \def\vecoption{vec}%
+    	\def\tocall{\tns@cross@prod@deco@loop}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@novec}{%
+            \def\vecoption{novec}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@arrows}{%
+            \def\tocall{\tns@cross@prod@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@cross}{%
+            \def\tocall{\tns@cross@prod@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@crossprod@option@nodeco}{%
+            \def\tocall{\tns@cross@prod@no@deco}%  
+        }{}%
+        \tocall{\vecoption}%
+               {#2}{#3}{#4}{#5}%
+               {#6}{#7}{#8}{#9}%
+	}
 }
 
 
-\newcommand\tnsgeo@calc@crossprod@star@no@star[9][vec]{%
-    \tns@cross@prod@deco@cross{#1}%
-                              {#2}{#3}{#4}{#5}%
-                              {#6}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@calc@crossprod@star@star[9][vec]{%
-    \tns@cross@prod@no@deco{#1}%
-                           {#2}{#3}{#4}{#5}%
-                           {#6}{#7}{#8}{#9}%
-}
-
-
-\newcommand\vcalccrossprod{\@ifstar{\tnsgeo@vcalc@crossprod@star}{\tnsgeo@vcalc@crossprod@no@star}}
-
-\newcommand\tnsgeo@vcalc@crossprod@star{\@ifstar{\tnsgeo@vcalc@crossprod@star@star}{\tnsgeo@vcalc@crossprod@star@no@star}}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@no@star[9][vec]{%
+\newcommand\vcalccrossprod[9][vec,loop]{%
     \calccrossprod[#1]{\vect{#2}}{#3}{#4}{#5}%
                       {\vect{#6}}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@star@no@star[9][vec]{%
-    \calccrossprod*[#1]{\vect{#2}}{#3}{#4}{#5}
-                       {\vect{#6}}{#7}{#8}{#9}%
-}
-
-
-\newcommand\tnsgeo@vcalc@crossprod@star@star[9][vec]{%
-    \calccrossprod**[#1]{\vect{#2}}{#3}{#4}{#5}
-                        {\vect{#6}}{#7}{#8}{#9}%
 }
 
 
 % ------------------------ %
 % -- VECTOR 2D COLI DET -- %
 % ------------------------ %
+
+% -- CRITERIA OF COLINEARITY -- %
 
 %   #1 : option for the formatting
 %
@@ -1678,9 +1691,9 @@
     	\PackageError{tnsgeo}{unknown option}%
                              {You can use vec (default) or novec.}
     ]%
-    \tns@det@plane@deco@cross{#1}%
-                             {#2}{#3}{#4}%
-                             {#5}{#6}{#7}%
+    \tns@det@plane@deco@arrows{#1}%
+                              {#2}{#3}{#4}%
+                              {#5}{#6}{#7}%
 }
 
 
@@ -1691,55 +1704,37 @@
 
 
 
-%   #1 : option for the formatting
-%
-%   #2  #5		u  v
-%   
-%   #3  #6		x  x'
-%   #4  #7      y  y'
+% -- 2D DETERMINANT -- %
 
-\newcommand\calcdetplane{\@ifstar{\tnsgeo@calc@detplane@star}{\tnsgeo@calc@detplane@no@star}}
+\newbool{tnsgeo@calc@detplane@option@vec}   % Default.
+\newbool{tnsgeo@calc@detplane@option@novec}
+
+\newbool{tnsgeo@calc@detplane@option@loop}   % Default.
+\newbool{tnsgeo@calc@detplane@option@arrows}
+\newbool{tnsgeo@calc@detplane@option@cross}
+\newbool{tnsgeo@calc@detplane@option@nodeco}
+
+\newbool{tnsgeo@calc@detplane@option@exp}   % Default.
+\newbool{tnsgeo@calc@detplane@option@cexp}
+\newbool{tnsgeo@calc@detplane@option@texp}
 
 
-%   #1 : option for the formatting
-%
-%   #2  #5		u  v
-%   
-%   #3  #6		x  x'
-%   #4  #7      y  y'
-
-\newcommand\tnsgeo@calc@detplane@no@star[7][vec]{%
+\newcommand\tnsgeo@validate@calc@detplane@option[1]{
     \IfEqCase{#1}{%
-% WARNING !
-%   
-%   #1 : symbol for the product
-%
-%   #2  #3		x  x'
-%   #4  #5      y  y'
-        {exp}{%
-            \tns@prop@prod{\,}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{cexp}{%
-            \tns@prop@prod{\cdot}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{texp}{%
-            \tns@prop@prod{\times}%
-                          {#3}{#4}%
-                          {#6}{#7}%
-        }{vec}{%
-            \tns@det@plane@deco@loop{#1}%
-                                    {#2}{#3}{#4}%
-                                    {#5}{#6}{#7}%
-        }{novec}{%
-            \tns@det@plane@deco@loop{#1}%
-                                    {#2}{#3}{#4}%
-                                    {#5}{#6}{#7}%
-        }%
-    }[
-    	\PackageError{tnsgeo}{unknown option}%
-                             {You can use vec (default), novec, exp, cexp or texp.}
+        {vec}{\booltrue{tnsgeo@calc@detplane@option@vec}}
+        {novec}{\booltrue{tnsgeo@calc@detplane@option@novec}}
+        %
+        {loop}{\booltrue{tnsgeo@calc@detplane@option@loop}}
+        {arrows}{\booltrue{tnsgeo@calc@detplane@option@arrows}}
+        {cross}{\booltrue{tnsgeo@calc@detplane@option@cross}}
+        {nodeco}{\booltrue{tnsgeo@calc@detplane@option@nodeco}}
+        %
+        {exp}{\booltrue{tnsgeo@calc@detplane@option@exp}}
+        {cexp}{\booltrue{tnsgeo@calc@detplane@option@cexp}}
+        {texp}{\booltrue{tnsgeo@calc@detplane@option@texp}}
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use exp, cexp, texp, vec, novec, loop, arrows, cross or nodeco.}%
     ]%
 }
 
@@ -1751,54 +1746,96 @@
 %   #3  #6		x  x'
 %   #4  #7      y  y'
 
-\newcommand\tnsgeo@calc@detplane@star[7][vec]{%
-% WARNING !
-%   
-%   #1 : symbol for the product
-%
-%   #2  #3		x  x'
-%   #4  #5      y  y'
-    \IfEqCase{#1}{%
-        {exp}{%
-            \tns@prop@prod{\,}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{cexp}{%
-            \tns@prop@prod{\cdot}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{texp}{%
-            \tns@prop@prod{\times}%
-                          {#3}{#6}%
-                          {#4}{#7}%
-        }{vec}{%
-            \tns@det@plane@no@deco{#1}%
-                                  {#2}{#3}{#4}%
-                                  {#5}{#6}{#7}%
-        }{novec}{%
-            \tns@det@plane@no@deco{#1}%
-                                  {#2}{#3}{#4}%
-                                  {#5}{#6}{#7}%
-        }%
-    }[
-    	\PackageError{tnsgeo}{unknown option}%
-                             {You can use vec (default), novec, exp, cexp or texp.}
-    ]%
+\newcommand\calcdetplane[7][vec,loop]{%
+    \boolfalse{tnsgeo@calc@detplane@option@vec}
+    \boolfalse{tnsgeo@calc@detplane@option@novec}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@loop}
+    \boolfalse{tnsgeo@calc@detplane@option@arrows}
+    \boolfalse{tnsgeo@calc@detplane@option@cross}
+    \boolfalse{tnsgeo@calc@detplane@option@nodeco}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@exp}
+    \boolfalse{tnsgeo@calc@detplane@option@cexp}
+    \boolfalse{tnsgeo@calc@detplane@option@texp}
+    %
+    \DoWithCSL\tnsgeo@validate@calc@detplane@option{#1}%
+    %
+    \ifboolexpr{
+		(
+			bool{tnsgeo@calc@detplane@option@exp}
+			or
+			bool{tnsgeo@calc@detplane@option@cexp}
+			or
+			bool{tnsgeo@calc@detplane@option@texp}
+		)
+		and
+		(
+			bool{tnsgeo@calc@detplane@option@loop}
+			or
+			bool{tnsgeo@calc@detplane@option@arrows}
+			or
+			bool{tnsgeo@calc@detplane@option@cross}
+			or
+			bool{tnsgeo@calc@detplane@option@nodeco}
+		)
+	}{%
+        \PackageError{tnsgeo}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnsgeo@calc@detplane@option@exp}
+		or
+		bool{tnsgeo@calc@detplane@option@cexp}
+		or
+		bool{tnsgeo@calc@detplane@option@texp}
+	}{
+        \def\expsymbol{\,}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cexp}{%
+            \def\expsymbol{\cdot}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@texp}{%
+            \def\expsymbol{\times}%
+        }{}%
+        %
+        \tns@prop@prod{\expsymbol}%
+                      {#3}{#4}%
+                      {#6}{#7}%
+	}{
+    % No expansion
+        % Default values
+        \def\vecoption{vec}%
+        \def\tocall{\tns@det@plane@deco@loop}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@novec}{%
+            \def\vecoption{novec}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@arrows}{%
+            \def\tocall{\tns@det@plane@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cross}{%
+            \def\tocall{\tns@det@plane@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@nodeco}{%
+            \def\tocall{\tns@det@plane@no@deco}%  
+        }{}%
+        %
+        \tocall{\vecoption}%
+               {#2}{#3}{#4}%
+               {#5}{#6}{#7}%
+	}
 }
 
 
-\newcommand\vcalcdetplane{\@ifstar{\tnsgeo@vcalc@detplane@star}{\tnsgeo@vcalc@detplane@no@star}}
-
-
-\newcommand\tnsgeo@vcalc@detplane@star[7][vec]{%
-    \tnsgeo@calc@detplane@star[#1]{\vect{#2}}{#3}{#4}%
-                                  {\vect{#5}}{#6}{#7}%
-}
-
-
-\newcommand\tnsgeo@vcalc@detplane@no@star[7][vec]{%
-    \tnsgeo@calc@detplane@no@star[#1]{\vect{#2}}{#3}{#4}%
-                                     {\vect{#5}}{#6}{#7}%
+\newcommand\vcalcdetplane[7][vec,loop]{%
+    \calcdetplane[#1]{\vect{#2}}{#3}{#4}%
+                     {\vect{#5}}{#6}{#7}%
 }
 
 
@@ -1816,20 +1853,20 @@
 % ARG 4  = Between  : ;
 % ARG 5  = After    : nothing here
 % OPTION = Ornament : macro to apply to each item
-                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                 \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
              \, \right)%
         }{sp}{%
-            (\tns@multi@args{|}{#2}{}{\tnsmathsep}{})%
+            (\tns@multi@wrap{|}{#2}{}{\tnsmathsep}{})%
         }{b}{%
             \left[ \,%
-                 \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                 \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
              \, \right]%
         }{sb}{%
-            [\tns@multi@args{|}{#2}{}{\tnsmathsep}{}]%
+            [\tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}]%
         }{vp}{%
-            \tns@multi@args{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
+            \tns@multi@wrap{|}{#2}{\begin{pmatrix}}{\\}{\end{pmatrix}}%
         }{vb}{%
-            \tns@multi@args{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
+            \tns@multi@wrap{|}{#2}{\begin{bNiceMatrix}}{\\}{\end{bNiceMatrix}}%
         }%
     }[
         \PackageError{ynsgeo}{unknown option}%
@@ -2061,18 +2098,34 @@
 
 \let\stdexp\exp
 \renewcommand\exp[1][]{%
-	\stdexp%
-	\if\relax\detokenize{#1}\relax\else%
-		_{#1}%
-	\fi%
+    \stdexp%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
+}
+
+\let\stdlg\lg
+\renewcommand\lg[1][]{%
+    \stdlg%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
+}
+
+\let\stdln\ln
+\renewcommand\ln[1][]{%
+    \stdln%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
 }
 
 \let\stdlog\log
 \renewcommand\log[1][]{%
-	\stdlog%
-	\if\relax\detokenize{#1}\relax\else%
-		_{#1}%
-	\fi%
+    \stdlog%
+    \if\relax\detokenize{#1}\relax\else%
+        _{#1}%
+    \fi%
 }
 
 % Classical functions - END
@@ -2092,7 +2145,7 @@
 \newcommand\tnsana@limit@abstract[4]{%
     \lim\limits_{%
 		\scriptsize%
-		\tns@multi@args{|}%
+		\tns@multi@wrap{|}%
 		               {#3\kern0.25ex{\rightarrow}\kern0.25ex#4}%
 		               {\begin{NiceArray}{c}}%
 		               {\\ }%
@@ -2536,7 +2589,7 @@
 % ARG 3 = Before   : nothing here
 % ARG 4 = Between  : ;
 % ARG 5 = After    : nothing here
-        \tns@multi@args{|}{#3}{\partial}{\,\partial}{}%
+        \tns@multi@wrap{|}{#3}{\partial}{\,\partial}{}%
     }
 }
 
@@ -3598,22 +3651,22 @@
 	%
     apweight/.style = {
     	edge label = {
-			node[pos=.5,sloped,above, fill=white]{#1}
+			node[pos=.5,sloped,above, fill=white]{$#1$}
 		}
 	},
     bpweight/.style = {
     	edge label = {
-			node[pos=.5,sloped,below, fill=white]{#1}
+			node[pos=.5,sloped,below, fill=white]{$#1$}
 		}
 	},
     pweight/.style = {
     	edge label={
-			node[midway, fill=white]{#1}
+			node[midway, fill=white]{$#1$}
 		}
 	},
-    pweight*/.style = {},
     apweight*/.style = {},
     bpweight*/.style = {},
+    pweight*/.style = {},
 }
 
 
@@ -3640,53 +3693,56 @@
             l      = 2.5cm,
             s sep  = 1.2cm,
             anchor = parent,
+            math content
         },
-        before typesetting nodes = {%
-            where connections = 1{}{%
-                if = {isodd(connections())}{%
-                    edge path' = {%
-                        foreach \i [
-                            count    = \j from 0,
-                            evaluate = \noexpand\j
-                            as \noexpand\k
-                            using \noexpand {
-                                (\j == 0) ?
-                                0pt :
-                                ((isodd(\j)) ?
-                                (\j*4pt) :
-                                ((-\j + 1)*4pt))
-                            }
-                        ]
-                        in {%
-                            1, ..., \foresteoption{connections}
-                        }{
-                            (!u.parent anchor)
-                            --
-                            ([yshift = \noexpand\k].child anchor)
-                        }
-                    },
-                }{%
-                    edge path' = {%
-                        foreach \i [
-                            count    = \j,
-                            evaluate = \noexpand\j
-                            as \noexpand\k
-                            using {
-                                (isodd(\j)) ?
-                                (\j*4pt) :
-                                ((-\j + 1)*4pt)
-                            }
-                        ]
-                        in {1,...,\foresteoption{connections}}
-                        {
-                            (!u.parent anchor)
-                            --
-                            ([yshift = \noexpand\k].child anchor)
-                        }
-                    },
-                },
-            },
-        },
+% TO KEEP ! Personnalisation des chemins
+%
+%        before typesetting nodes = {%
+%            where connections = 1{}{%
+%                if = {isodd(connections())}{%
+%                    edge path' = {%
+%                        foreach \i [
+%                            count    = \j from 0,
+%                            evaluate = \noexpand\j
+%                            as \noexpand\k
+%                            using \noexpand {
+%                                (\j == 0) ?
+%                                0pt :
+%                                ((isodd(\j)) ?
+%                                (\j*4pt) :
+%                                ((-\j + 1)*4pt))
+%                            }
+%                        ]
+%                        in {%
+%                            1, ..., \foresteoption{connections}
+%                        }{
+%                            (!u.parent anchor)
+%                            --
+%                            ([yshift = \noexpand\k].child anchor)
+%                        }
+%                    },
+%                }{%
+%                    edge path' = {%
+%                        foreach \i [
+%                            count    = \j,
+%                            evaluate = \noexpand\j
+%                            as \noexpand\k
+%                            using {
+%                                (isodd(\j)) ?
+%                                (\j*14pt) :
+%                                ((-\j + 1)*4pt)
+%                            }
+%                        ]
+%                        in {1,...,\foresteoption{connections}}
+%                        {
+%                            (!u.parent anchor)
+%                            --
+%                            ([yshift = \noexpand\k].child anchor)
+%                        }
+%                    },
+%                },
+%            },
+%        },
         %
         pframe/.style = {
         	tikz = {
@@ -3725,17 +3781,17 @@
     \forestset{
         apweight*/.style = {
         	edge label = {
-    			node[pos=.5,sloped,above, fill=white]{##1}
+    			node[pos=.5,sloped,above, fill=white]{$##1$}
     		}
     	},
         bpweight*/.style = {
         	edge label = {
-    			node[pos=.5,sloped,below, fill=white]{##1}
+    			node[pos=.5,sloped,below, fill=white]{$##1$}
     		}
     	},
         pweight*/.style = {
         	edge label={
-    			node[midway, fill=white]{##1}
+    			node[midway, fill=white]{$##1$}
     		}
     	},
     }
@@ -3818,8 +3874,6 @@
 % -- FOCUS EDGE -- %
 % ---------------- %
 
-% -- Focus -- %
-
 \newcommand\ptreeFocus{\@ifstar{\tnsproba@ptree@focus@star}{\tnsproba@ptree@focus@no@star}}
 
 \newcommand\tnsproba@ptree@focus@star{\@ifstar{\tnsproba@ptree@focus@star@star}{\tnsproba@ptree@focus@star@no@star}}
@@ -3854,14 +3908,16 @@
 %
 %    #1 : macro to apply
 %    #2 : multi-args
-	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node}%
-		                 {#1}
+	\tns@multi@apply@each%
+	    {\tnsproba@ptree@focus@abstract@node}%
+	    {#1}
 }
 
 
 \newcommand\tnsproba@ptree@focus@abstract@multi@nodes@nostart[1]{
-	\tns@multi@apply@each{\tnsproba@ptree@focus@abstract@node@nostart}%
-		                 {#1}
+	\tns@multi@apply@each%
+	    {\tnsproba@ptree@focus@abstract@node@nostart}%
+	    {#1}
 }
 
 
@@ -3883,8 +3939,9 @@
 %
 %    #1 : macro to apply
 %    #2 : multi-args
-	\tns@multi@apply@couple{\tnsproba@ptree@focus@abstract@edge}%
-	                       {#1}
+	\tns@multi@apply@overlapping@couples%
+	    {\tnsproba@ptree@focus@abstract@edge}%
+	    {#1}
 }
 
 
@@ -4022,7 +4079,7 @@
 %
 %    #1 : macro to apply
 %    #2 : multi-args
-	\tns@multi@apply@couple{\tnsproba@ptree@focus@auto@abstract@edge}%
+	\tns@multi@apply@overlapping@couples{\tnsproba@ptree@focus@auto@abstract@edge}%
 	                       {#1}
 }
 
@@ -4100,7 +4157,7 @@
 %    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
 
 
-% -- Operator -- %
+% -- OPERATOR -- %
 
 \newcommand\contfracope{%
     \operatornamewithlimits{%
@@ -4118,7 +4175,7 @@
 
 
 
-% -- Single continued fraction (useful ?) -- %
+% -- SINGLE CONTINUED FRACTION (USEFUL ?) -- %
 
 \newcommand\singlecontfrac[2]{%
     \begin{array}{@{}c@{}}%
@@ -4131,79 +4188,152 @@
 
 
 
-% -- Standard continued fraction -- %
+% -- STANDARD CONTINUED FRACTION - LONG -- %
 
 \newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
 
+
+% Display style
+
 \newcommand\tnsarith@contfrac@no@star[1]{%
-    \tnsarith@contfrac@no@star@recu@#1|\@nil%
+    \tnsarith@contfrac@no@star@recu@{\cfrac}#1|\@nil%
 }
 
-\def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        #1%
+\def\tnsarith@contfrac@no@star@recu@#1#2|#3\@nil{%
+    \if\relax\detokenize{#3}\relax%
+        #2%
     \else%
-        #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
+        #2 + #1{1}{\tnsarith@contfrac@no@star@recu@#1#3\@nil}%
     \fi%
 }
 
+
+% Inline style
+
+\newcommand\tnsarith@single@contfrac@star@part[2]{%
+    \ifnum#1=1
+        #2%
+    \else%
+        + \singlecontfrac{1}{#2}%
+    \fi%
+}
 
 \newcommand\tnsarith@contfrac@star[1]{%
-    \tnsarith@contfrac@star@before@#1|\@nil%
+    \tns@multi@apply@each{\tnsarith@single@contfrac@star@part}{#1}
 }
 
-\def\tnsarith@contfrac@star@before@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        #1%
-    \else%
-        #1 \tnsarith@contfrac@star@recu@#2\@nil%
+
+
+% -- STANDARD CONTINUED FRACTION - SHORT -- %
+
+\newcommand\scontfrac{\@ifstar{\tnsarith@short@contfrac@star}{\tnsarith@short@contfrac@no@star}}
+
+
+% Display style
+
+\newcommand\tnsarith@short@contfrac@no@star[1]{%
+    \tnsarith@short@contfrac@no@star@recu@{\cfrac}#1|\@nil%
+}
+
+\def\tnsarith@short@contfrac@no@star@recu@#1#2|#3\@nil{%
+	#1{1}{%
+		\if\relax\detokenize{#3}\relax%
+            #2%
+        \else%
+            #2 + \tnsarith@short@contfrac@no@star@recu@#1#3\@nil%
+        \fi%
+	}%
+}
+
+
+% Inline style
+
+\newcommand\tnsarith@single@short@contfrac@star@part[2]{%
+    \ifnum#1=1\else%
+        +%
     \fi%
+    \singlecontfrac{1}{#2}%
 }
 
-\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        + \singlecontfrac{1}{#1}%
-    \else%
-        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
-    \fi%
+\newcommand\tnsarith@short@contfrac@star[1]{%
+    \tns@multi@apply@each{\tnsarith@single@short@contfrac@star@part}{#1}
 }
 
 
 
-% -- Generalized continued fraction -- %
+% -- GENERALIZED CONTINUED FRACTION - LONG -- %
 
 \newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
+
+
+% Display style
 
 \newcommand\tnsarith@contfracgene@no@star[1]{%
     \tnsarith@contfracgene@no@star@recu@#1||\@nil%
 }
 
 \def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
-    \if\relax\detokenize{#2}\relax%
+    \@ifmtarg{#2}{%
         #1%
-    \else%
+    }{%
         #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
-    \fi%
+    }%
 }
 
+
+% Inline style
 
 \newcommand\tnsarith@contfracgene@star[1]{%
     \tnsarith@contfracgene@star@before@#1|\@nil%
 }
-
 \def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
+    \@ifmtarg{#2}{%
         #1%
-    \else%
+    }{%
         #1 \tnsarith@contfracgene@star@recu@#2\@nil%
-    \fi%
+    }%
+}
+\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#3}{%
+        + \singlecontfrac{#1}{#2}%
+    }{%
+        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+    }%
 }
 
-\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
-    \if\relax\detokenize{#3}\relax%
-        + \singlecontfrac{#1}{#2}%
-    \else%
-        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+
+
+% -- GENERALIZED CONTINUED FRACTION - SHORT -- %
+
+\newcommand\scontfracgene{\@ifstar{\tnsarith@short@contfracgene@star}{\tnsarith@short@contfracgene@no@star}}
+
+
+% Display style
+
+\newcommand\tnsarith@short@contfracgene@no@star[1]{%
+    \tnsarith@short@contfracgene@no@star@recu@#1|\@nil%
+}
+
+\def\tnsarith@short@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+	\cfrac{#1}{%
+		#2
+		\if\relax\detokenize{#3}\relax\else%
+		+ \tnsarith@short@contfracgene@no@star@recu@#3\@nil%
+		\fi%
+	}
+}
+
+
+% Inline style
+
+\newcommand\tnsarith@short@contfracgene@star[1]{%
+    \tnsarith@short@contfracgene@star@recu@#1|\@nil%
+}
+
+\def\tnsarith@short@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \singlecontfrac{#1}{#2} %
+    \if\relax\detokenize{#3}\relax\else%
+        + \tnsarith@short@contfracgene@star@recu@#3\@nil%
     \fi%
 }
 
@@ -4321,12 +4451,12 @@
         #1 \! %
         \ifx1#5%
             \tns@generic@interval@semi@ext{#3}{}{%
-                \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
             }{\!}{#4}%
         \else%
             \tns@generic@interval@semi@ext{#3}{}{%
                 \tns@generic@interval@semi@ext{#3}{}{%
-                    \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                    \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
                 }{}{#4}\!%
             }{}{#4}%
         \fi

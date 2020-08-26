@@ -24,6 +24,98 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-08-26] Nouvelle version mineure \verb+1.9.0-beta+.
+    
+    
+    % -------------- %
+    % -- tnsana -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Analyse [0.8.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions avec un paramètre optionnel}
+              les macros \macro{lg} et \macro{ln} peuvent s'utiliser avec une base.
+        
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsarith -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Arithmétique [0.2.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fractions continuées}
+        	  ajout de \macro{scontfrac}, \macro{scontfrac*}, \macro{scontfracgene} et \macro{scontfracgene*} qui donnent juste la partie fractionnaire.
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsgeo -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Géométrie [0.3.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Vecteur}
+              ajout de la macro \macro{pvect} pour ne pas avoir à taper \macro{pt}.
+    
+    	% -------------- %
+    
+        \item \topic*{Produit vectoriel et déterminant de deux vecteurs} nouveau changement de l'API.
+        \begin{itemize}[itemsep=.5em]
+            \item \macro{calccrossprod}, \macro{vcalccrossprod}, \macro{calcdetplane} et \macro{vcalcdetplane} permettent de tracer une croix fléchée ou non à la place de la boucle fléchée.
+    
+            \item \macro{coordcrossprod} a été supprimé. Il faut à la place utiliser l'une des options \verb#exp#, \verb#texp# et \verb#cexp# de \macro{vcalccrossprod} et \macro{calccrossprod}.
+    
+            \item Plus aucune version étoilée simple ou double pour \macro{calccrossprod}, \macro{vcalccrossprod}, \macro{calcdetplane} et \macro{vcalcdetplane}.
+        \end{itemize}
+    
+    	% -------------- %
+    
+    \end{itemize}
+    
+    
+    \separation
+    
+    
+    % -------------- %
+    % -- tnsproba -- %
+    % -------------- %
+    
+    
+    \begin{center}
+        \textbf{\textsc{Probabilité [0.8.0-beta]}}
+    \end{center}
+    
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Arbre de probabilités}
+              le mode mathématique est activé par défaut pour les noms des noeuds et les poids \emph{(plus besoin de taper plein de \texttt{\$})}.
+    \end{itemize}
+    
+    
+    \separation
+
+% ------------------------ %
+
+    \medskip
     \item[2020-08-09] Nouvelle version mineure \verb+1.8.0-beta+.
     
     

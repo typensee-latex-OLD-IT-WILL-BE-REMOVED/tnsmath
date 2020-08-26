@@ -325,9 +325,10 @@ for latexpath in DIR_DOC_PATH.walk(f"file::*.tex"):
     )
 
     builder = Build(
-        ppath      = latexpath,
-        repeat     = nbrepeat,
-        showoutput = True
+        ppath       = latexpath,
+        repeat      = nbrepeat,
+        showoutput  = True,
+        shellescape = True
     )
     builder.pdf()
 

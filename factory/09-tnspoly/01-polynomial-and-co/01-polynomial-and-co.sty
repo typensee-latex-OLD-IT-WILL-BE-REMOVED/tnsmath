@@ -16,12 +16,12 @@
         #1 \! %
         \ifx1#5%
             \tns@generic@interval@semi@ext{#3}{}{%
-                \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
             }{\!}{#4}%
         \else%
             \tns@generic@interval@semi@ext{#3}{}{%
                 \tns@generic@interval@semi@ext{#3}{}{%
-                    \tns@multi@args{|}{#2}{}{\tnsmathsep}{}%
+                    \tns@multi@wrap{|}{#2}{}{\tnsmathsep}{}%
                 }{}{#4}\!%
             }{}{#4}%
         \fi
