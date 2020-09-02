@@ -1,0 +1,78 @@
+% == PACKAGES USED == %
+
+\RequirePackage{simplekv}
+
+
+% == DEFINITIONS == %
+
+% -- TEXT OF A NODE -- %
+
+% Source
+%    * https://tex.stackexchange.com/a/559441/6880
+
+\protected\def\tikz@fig@main#1{%
+    \expandafter\gdef\csname labeltextof@\tikz@fig@name\endcsname{#1}%
+    \iftikz@node@is@pic%
+        \tikz@node@is@picfalse%
+        \tikz@subpicture@handle{#1}%
+    \else%
+        \tikz@@fig@main#1\egroup%
+    \fi
+}
+
+
+%   #1 : name of the node
+
+\newcommand\ptreeTextOf[1]{\csname labeltextof@#1\endcsname}
+
+
+
+% -- COLORS OF A NODE -- %
+
+\setKVdefault[tnsproba@node@col@keys]{%
+    tcol = black,
+    bcol = white
+}
+
+%   #1 : name of the node
+%   #2 : options for the colors (text and/or backgorund}
+
+\newcommand\ptreeNodeColor[2]{
+    \useKVdefault[tnsproba@node@col@keys]%
+    \setKV[tnsproba@node@col@keys]{#2}%
+    \edef\tcol{\useKV[tnsproba@node@col@keys]{tcol}}%
+    \edef\bcol{\useKV[tnsproba@node@col@keys]{bcol}}%
+    %
+    \path (#1.center) node[rounded corners,
+                           \tcol,
+                           fill = \bcol] {\ptreeTextOf{#1}};
+}
+
+
+
+% -- NEW TEXT OF A NODE -- %
+
+\setKVdefault[tnsproba@node@new@txt@keys]{%
+    tcol = black,
+    bcol = white
+}
+
+%   #1 : options for the colors (text and/or backgorunds}
+%   #2 : name of the node
+%   #3 : new text
+
+\newcommand\ptreeNodeNewText[3][tcol=black, bcol=white]{
+    \useKVdefault[tnsproba@node@new@txt@keys]%
+    \setKV[tnsproba@node@new@txt@keys]{#1}%
+    \edef\tcol{\useKV[tnsproba@node@new@txt@keys]{tcol}}%
+    \edef\bcol{\useKV[tnsproba@node@new@txt@keys]{bcol}}%
+	% Hide the original node.
+    \path (#2.center) node[rounded corners,
+                           \bcol,
+                           fill = \bcol] {\ptreeTextOf{#2}};
+  	% Add the new node
+	\path (#2.center) node[rounded corners,
+	                       \tcol,
+	                       fill = \bcol] {#3};
+}
+

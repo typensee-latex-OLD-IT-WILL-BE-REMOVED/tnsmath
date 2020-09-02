@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-calculate-expval}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Calculer l'espérance -- Cas fini}
+
+\subsection{Pour un usage différé -- Notations par défaut} \label{tnsproba-calclexpval-name-n-reuse}
+
+Rien de bien compliqué à utiliser comme le montre l'exemple suivant. Notez bien qu'il faut indiquer un argument vide à la macro \macro{calcexpval} lors de la réutilisation.
+
+\begin{latexex-flat}
+Voici ma loi de dingue.
+
+\calcexpval[name = maloidedingue]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+Je dis des choses, bla, bla...
+
+Et puis finalement j'indique le calcul de l'espérance.
+
+\calcexpval[disp  = exp,
+            reuse = maloidedingue]{}
+\end{latexex-flat}
+
+
+\begin{remark}
+	Si cela vous convient, il est possible d'utiliser des noms de type \og chemin de fichiers \fg{} comme ci-après
+	\footnote{
+		Ceci permet d'utiliser des espaces de noms très pratiques à l'usage.
+	}.
+	
+\begin{latexex-flat}
+Définissons de façon cachée la loi... %
+\calcexpval[disp = none,
+            name = ma/loi/de/dingue]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}%
+Bla, bla... Affichons la loi.
+
+\calcexpval[disp  = table,
+            reuse = ma/loi/de/dingue]{}
+\end{latexex-flat}
+\end{remark}
+
+
+\end{document}

@@ -1,8 +1,8 @@
 \begin{probatree}
-    [{}, name = nU                % Noeud racine sans texte via {} mais avec un nom.
+    [{}, name = nU             % Noeud racine sans texte via {} mais avec un nom.
         [A, apweight = a,
             name     = nA,
-            pframe   = blue
+            pframe   = blue    % Encadrement d'ici à la fin.
             [B, name     = nB,
                 apweight = b]
             [C, bpweight = c]  % Pas besion de nommer ce noeud.
@@ -15,12 +15,13 @@
         ]
     ]
     %
-    \ptreeFocus[col = gray]{nA | nB}
+    \ptreeFocus[lcol  = gray,
+                frame = start]{nA | nB}
     %
-    \ptreeComment[col = blue]%
+    \ptreeComment[tcol = blue]%
                  {nA}{$\leftarrow$ Un sous-arbre \og conditionnel \fg}
     %
-    \ptreeFocus*[col = red]{nU | nD | nE}
-    \ptreeComment[col = red]%
+    \ptreeFocus  [lcol = red]{nU | nD | nE}
+    \ptreeComment[tcol = red]%
                  {nE}{$\leftarrow \proba{D \cap E} = d \cdot e$}
 \end{probatree}

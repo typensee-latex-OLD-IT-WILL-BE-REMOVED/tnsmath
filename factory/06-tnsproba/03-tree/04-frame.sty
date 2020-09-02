@@ -5,10 +5,8 @@
 
 % == DEFINITIONS == %
 
-% -- Frames -- %
-
 \setKVdefault[tnsproba@frame@keys]{%
-    col = blue
+    lcol = blue
 }
 
 
@@ -19,9 +17,10 @@
 \newcommand\ptreeFrame[4][]{%
     \useKVdefault[tnsproba@frame@keys]%
     \setKV[tnsproba@frame@keys]{#1}%
-    \edef\col{\useKV[tnsproba@frame@keys]{col}}%
-    \node[draw = \col,
+    \edef\lcol{\useKV[tnsproba@frame@keys]{lcol}}%
+    %
+    \node[rounded corners,
+          draw       = \lcol,
           line width = 1.5pt,
-          rounded corners,
-          fit = (#2)(#3)(#4)] {};
+          fit        = (#2)(#3)(#4)] {};
 }

@@ -15,5 +15,6 @@
         [I]
     ]
     %
-    \ptreeFocus*[col = red]{nU | nA | nC | nD | nF | nG}
+    \ptreeFocus[lcol  = red,
+                frame = start]{nU | nA | nC | nD | nF | nG}
 \end{probatree}

@@ -37,13 +37,11 @@
 
 \subsection{Norme}
 
-Ci-dessous l'argument optionnel de \macro{vnorm} vaut \prefix{b} par défaut pour \whyprefix{b}{ig} soit \inenglish{gros} mais l'on peut aussi utiliser \prefix{s} pour \whyprefix{s}{mall} soit \inenglish*{petit}. Par contre \macro{vnorm} n'a pas d'option.
-
 \begin{latexex}
  $\norm{\vect{i}} = \vnorm{i}$
 
- $\norm   {\dfrac{2}{7} \vect*{e}{k}}
-= \norm[s]{\dfrac{2}{7} \vect*{e}{k}}$
+ $\norm {\dfrac{2}{7} \vect*{e}{k}}
+= \norm*{\dfrac{2}{7} \vect*{e}{k}}$
 \end{latexex}
 
 
@@ -57,15 +55,9 @@ Ci-dessous l'argument optionnel de \macro{vnorm} vaut \prefix{b} par défaut pou
 
 \subsection{Fiche technique}
 
-\IDmacro{norm}{1}{1}
+\IDmacro[a]{norm }{1}
 
-\IDoption{} la valeur par défaut est \verb+b+. Deux options disponibles.
-\begin{enumerate}
-	\item \verb+b+ : des doubles barres extensibles sont utilisées.
-
-	\item \verb+s+ : des doubles barres non extensibles sont utilisées.
-\end{enumerate}
-
+\IDmacro[a]{norm*}{1}
 
 \IDarg{} le vecteur sur lequel appliquer la norme.
 

@@ -7,7 +7,7 @@
         [D, name = nD]
     ]
     %
-    \ptreeComment*            {nB}{$\leftarrow \proba{A \cap B} = ...$}
-    \ptreeComment*[col = red] {nC}{$\leftarrow \proba{A \cap C} = ...$}
-    \ptreeComment*[col = blue]{nD}{$\leftarrow \proba{D} = ...$}
+    \ptreeComment*             {nB}{$\leftarrow \proba{A \cap B} = ...$}
+    \ptreeComment*[tcol = red] {nC}{$\leftarrow \proba{A \cap C} = ...$}
+    \ptreeComment*[tcol = blue]{nD}{$\leftarrow \proba{D} = ...$}
 \end{probatree}

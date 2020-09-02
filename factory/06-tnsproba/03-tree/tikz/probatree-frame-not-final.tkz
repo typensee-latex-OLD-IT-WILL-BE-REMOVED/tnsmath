@@ -16,5 +16,5 @@
     ]
     %
     \ptreeFrame              {nU}{nA}{nG}
-    \ptreeFrame[col = orange]{nA}{nB}{nF}
+    \ptreeFrame[lcol = olive]{nA}{nB}{nF}
 \end{probatree}

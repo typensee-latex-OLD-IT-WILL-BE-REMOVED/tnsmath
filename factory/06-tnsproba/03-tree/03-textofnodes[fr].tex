@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-basic}
+    \usepackage{02-coment}
+    \usepackage{03-textofnodes}
+\makeatother
+
+
+% = =  EXTRAS = =  %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\subsection{Textes des noeuds}
+
+\newparaexample{Changer les couleurs}
+
+On peut a posteriori changer les couleurs du texte et du fond d'un noeud via \macro{ptreeNodeColor} présentée ci-dessous.
+
+\inputlatexexflat{tikz/probatree-txtnode-color.tkz}
+
+
+Voici ce qu'il faut retenir du code précédent.
+
+\begin{enumerate}
+	\item Par défaut le blanc sert de couleur de fond. Ceci se voit dans la mise en forme du noeud $A$ pour lequel \verb#tcol# change juste la couleur du texte qui par défaut sera le noir.
+	
+	\item Pour changer la couleur de fond, on passe via \verb#bcol#. Ceci permet d'avoir le rendu souhaité pour la mise en forme du noeud $B$
+	      \footnote{
+	      	Ainsi le fond du noeud et celui du cadre ont la même couleur.
+		   }.
+	
+	\item Les préfixes \prefix{t} et \prefix{b} de \verb#bcol# et \verb#tcol# sont pour \whyprefix{t}{exte} et \whyprefix{b}{ackground}, ce dernier mot signifiant \inenglish{fond}.
+	      Quant à \verb#col# c'est pour \whyprefix{col}{or} soit \inenglish{couleur}.
+\end{enumerate}
+
+
+
+\begin{remark}
+	Techniquement toutes les macros présentées dans cette section cachent l'ancien texte d'un noeud par superposition de ce texte en utilisant une couleur identique pour le texte et le fond.  
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Changer le texte}
+
+On peut a posteriori changer le texte d'un noeud, avec un choix des couleurs, via \macro{ptreeNodeNewText} présentée ci-après.
+Noter que les couleurs par défaut du texte et du fond restent le noir et le blanc respectivement.
+
+\inputlatexexflat{tikz/probatree-txtnode-changetxt.tkz}
+
+
+
+% ---------------------- %
+
+
+\newparaexample{Récupérer le texte d'un noeud}
+
+Considérons l'arbre un peu plat suivant.
+
+\inputlatexexflat{tikz/probatree-txtnode-txtafter.tkz}
+
+Une fois ce code inséré il est possible de récupérer \ptreeTextOf{nA} juste en tapant \verb#\ptreeTextOf{nA}#. Voici un exemple concret
+\footnote{
+	Mais pas forcément pertinent... L'exemple peut être intéressant dans le cadre de contenus produits de façon automatisée.
+}
+d'utilisation.
+
+\inputlatexexflat{tikz/probatree-txtnode-txtafter-comment.tkz}
+
+
+\begin{remark}
+	Comme la macro \macro{ptreeNodeNewText} utilise le dernier noeud rencontré, il faudra veiller à ne pas vouloir utiliser les textes de noeuds présents dans deux arbres différents et qui ont en même temps le même nom. 
+\end{remark}
+
+\end{document}
+

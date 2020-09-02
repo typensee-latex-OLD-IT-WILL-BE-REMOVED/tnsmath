@@ -37,9 +37,12 @@ $\expval[E_1]{X}$
 
 \newparaexample{Variance}
 
+Notez la possibilité d'utiliser \macro{mathit} pour obtenir des lettres en italique.
+
 \begin{latexex}
 $\var   {X}$ ou
-$\var[v]{X}$
+$\var[v]{X}$ ou
+$\var[\mathit{v}]{X}$
 \end{latexex}
 
 
@@ -49,9 +52,11 @@ $\var[v]{X}$
 \newparaexample{Écart-type}
 
 \macro{stddev} vient de \whyprefix{st}{andar-}\prefix{d} \whyprefix{dev}{iation} soit \inenglish{écart-type}.
+
 \begin{latexex}
 $\stddev   {X}$ ou
-$\stddev[s]{X}$
+$\stddev[s]{X}$ ou
+$\stddev[\mathit{s}]{X}$
 \end{latexex}
 
 
@@ -62,7 +67,7 @@ $\stddev[s]{X}$
 
 \IDmacro{expval}{1}{1}
 
-\IDoption{} le nom de la fonction espérance. La valeur par défaut est $\mathrm{E}$ obtenue via \verb#\mathrm{E}#.
+\IDoption{} le nom de la fonction espérance. valeur par défaut est \verb#E#.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'espérance.
 
@@ -72,7 +77,7 @@ $\stddev[s]{X}$
 
 \IDmacro{var}{1}{1}
 
-\IDoption{} le nom de la fonction variance. La valeur par défaut est $\mathrm{V}$ obtenue via \verb#\mathrm{V}#.
+\IDoption{} le nom de la fonction variance. valeur par défaut est \verb#V#.
 
 \IDarg{} la variable aléatoire dont on veut calculer la variance.
 
@@ -82,7 +87,7 @@ $\stddev[s]{X}$
 
 \IDmacro{stddev}{1}{1}
 
-\IDoption{} le nom de la fonction écart-type. La valeur par défaut est $\sigma$ obtenue via \verb#\sigma#.
+\IDoption{} le nom de la fonction écart-type. La valeur par défaut est \verb#\sigma#.
 
 \IDarg{} la variable aléatoire dont on veut calculer l'écart-type.
 

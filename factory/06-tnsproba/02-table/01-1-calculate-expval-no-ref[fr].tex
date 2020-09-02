@@ -1,0 +1,159 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-calculate-expval}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+\section{Calculer l'espérance -- Cas fini}
+
+Il est possible de définir facilement les valeurs d'une variable aléatoire finie (v.a.f.) et d'obtenir si souhaiter le calcul détaillé de son espérance
+\footnote{
+    Pour l'affichage une limitation importante est que le tableau et les calculs doivent tenir sur la largeur de la ligne.
+    Concrètement pour un usage pédagogique cette limitation ne devrait jamais poser de problème.
+}.
+
+
+% ---------------------- %
+
+
+\subsection{Pour un usage direct -- Notations par défaut}
+
+Dans la section \ref{tnsproba-calclexpval-name-n-reuse} page \pageref{tnsproba-calclexpval-name-n-reuse} nous verrons qu'il est possible de définir une loi à un endroit puis de la réutiliser à d'autres
+\footnote{
+    La réutilisation se fera avec un argument vide de \macro{calcexpval}. C'est pour cela qu'une macro est proposée et non un environnement.
+}.
+Nous verrons aussi dans la section \ref{tnsproba-calclexpval-notations} page \pageref{tnsproba-calclexpval-notations} que certaines notations sont modifiables.
+
+\medskip
+
+Dans la présente section nous reproduirons à chaque fois les paramètres de la v.a.f. même si ceci produit des exemples un peu lourds à lire.
+
+
+% ---------------------- %
+
+
+\newparaexample{Loi d'une v.a.f.}
+
+La définition de la loi d'une v.a.f. avec la macro \macro{calcexpval} se fait avec une syntaxe semblable à celle d'un tableau.
+Notez dans l'exemple suivant que par défaut un tableau centré est affiché ce qui correspond à l'option par  défaut \verb#disp = table#.
+Ce n'est pas le seul comportement possible comme vont le montrer les autres exemples à venir.
+
+\begin{latexex-flat}
+\calcexpval{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+
+
+\begin{remark}
+    Il est possible de ne rien afficher comme ci-dessous où \prefix{disp} est pour \whyprefix{disp}{lay} soit \inenglish{afficher}.
+    Cette option sera utile pour définir une loi à un endroit et l'utiliser à d'autres.
+
+\begin{latexex-flat}
+\calcexpval[disp = none]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Calculs expliqués et décorés de l'espérance d'une v.a.f.}
+
+La macro \macro{calcexpval} propose un système de clé valeur pour des réglages personnalisé. L'exemple ci-dessous montre comment obtenir un calcul détaillé et décoré de l'espérance.
+
+\begin{latexex-flat}
+\calcexpval[disp = all]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+
+
+L'exemple suivant montre qu'il est facile de changer le couleurs qui sont utilisées de façon cyclique \emph{(on peut indiquer une seule couleur)}.
+
+\begin{latexex-flat}
+\calcexpval[disp   = all,
+            colors = orange - olive]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Juste détailler les calculs de l'espérance d'une v.a.f.}
+
+Ci-dessous \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}. Cette option sera très utile de la réutilisation d'une loi définie précédemment.
+
+\begin{latexex-flat}
+\calcexpval[disp = exp]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Des bouts du calcul}
+
+Lors de la réutilisation d'une loi définie précédemment les deux options \prefix{formal} et \prefix{eval} peuvent rendre service.
+
+\begin{latexex-flat}
+Somme formelle :
+\calcexpval[disp = formal]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+Somme développée :
+\calcexpval[disp = eval]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{Calculs expliqués sans $\Sigma$}
+
+L'option \verb#nosigma# permet de ne pas afficher le symbole $\Sigma$ pour des raisons pédagogiques ou d'efficacité.
+
+\begin{latexex-flat}
+\calcexpval[disp = all,
+            nosigma]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+\medskip
+
+Juste les calculs :
+\calcexpval[disp = exp,
+            nosigma]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+} .
+\end{latexex-flat}
+
+\end{document}

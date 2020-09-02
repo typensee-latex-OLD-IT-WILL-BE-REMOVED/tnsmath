@@ -2,11 +2,12 @@
 
 \RequirePackage{tnscom}
 
-\RequirePackage{forest}
-\usetikzlibrary{calc, babel}
-
+\RequirePackage{etoolbox}
 \RequirePackage{xparse}
 \RequirePackage{xstring}
+
+\RequirePackage{forest}
+\usetikzlibrary{calc, babel}
 
 
 % == DEFINITIONS == %
@@ -14,158 +15,171 @@
 \useforestlibrary{linguistics}
 
 
-% -- Global settings -- %
-
 \forestset{
-    declare count = {connections}{1}, 
-	%
+    declare count = {connections}{1},
+    %
     apweight/.style = {
-    	edge label = {
-			node[pos=.5,sloped,above, fill=white]{$#1$}
-		}
-	},
+        edge label = {
+            node[sloped,
+                 above,
+                 pos  = .5,
+                 fill = white] {$#1$}
+        }
+    },
     bpweight/.style = {
-    	edge label = {
-			node[pos=.5,sloped,below, fill=white]{$#1$}
-		}
-	},
+        edge label = {
+            node[sloped,
+                 below,
+                 pos  = .5,
+                 fill = white] {$#1$}
+        }
+    },
     pweight/.style = {
-    	edge label={
-			node[midway, fill=white]{$#1$}
-		}
-	},
+        edge label={
+            node[midway,
+                 fill = white] {$#1$}
+        }
+    },
     apweight*/.style = {},
     bpweight*/.style = {},
     pweight*/.style = {},
 }
 
 
-
 % Sources
 %    * https://stackoverflow.com/a/1873617/4589608
-%    * ???? (all settings)
 %    * https://tex.stackexchange.com/a/511763/6880 (hide/show the weights)
 %    * https://tex.stackexchange.com/questions/554843/tikz-forest-align-pcomment*-contents-added-on-the-right-of-the-final-nodes/554855#554855
+%    * Option via <...> comes from "Apprendre à programmer en TeX" of Christian Tellechea
+
+\newbool{tnsproba@probatree@asit}
+\newbool{tnsproba@probatree@showall}
+\newbool{tnsproba@probatree@hideall}
+
+
+\def\tnsproba@def@new@token#1#2{\let#1= #2}
+\tnsproba@def@new@token\tnsproba@space@token{ }
+
+\def\tnsproba@if@next@tok#1#2#3{% #1=token #2=code vrai #3=code faux
+    \let\tnsproba@test@tok= #1% stocke le token � tester
+    \def\tnsproba@tok@true@code{#2}
+    \def\tnsproba@tok@false@code{#3}% et les codes � ex�cuter
+    \def\tnsproba@if@next@tok@BIS{\futurelet\nxttok\tnsproba@if@next@tok@ignore@spaces}%
+    \tnsproba@if@next@tok@BIS% l'ex�cuter
+}
+
+\def\tnsproba@if@next@tok@spaces@not@tested{% macro "normale" qui ne teste pas les espaces
+    \ifx\nxttok\tnsproba@test@tok
+        \expandafter\tnsproba@tok@true@code% ex�cuter le code vrai
+    \else
+        \expandafter\tnsproba@tok@false@code% sinon code faux
+    \fi
+}
+
+\def\tnsproba@if@next@tok@ignore@spaces{% macro qui ignore les espaces
+    \ifx\nxttok\tnsproba@space@token% si le prochain token est un espace
+        \def\donext{%
+            \afterassignment\tnsproba@if@next@tok@BIS% lire le token d'apr�s
+            \let\nxttok= % apr�s avoir absorb� l'espace
+        }%
+    \else
+        \let\donext\tnsproba@if@next@tok@spaces@not@tested% sinon, faire le test "normal"
+    \fi
+    \donext% faire l'action d�cid�e ci-dessus
+}
+
 
 \newenvironment{probatree}{%
-	\startprobatree%
+    \startprobatree%
 }{}
 
-\def\startprobatree#1\end{\tnsproba@tree{#1}\end}
+\def\startprobatree#1\end{\tnsproba@tree#1\relax\end}
 
 
-\newcommand\tnsproba@tree[1]{
+\long\def\tnsproba@tree{
+    \tnsproba@if@next@tok<% si la macro est suivie d'un crochet
+        {\tnsproba@tree@spe@options}% aller � la macro � arguments d�limit�s
+        {\tnsproba@tree@spe@options<asit>}% sinon, ajouter l'argument optionnel par d�faut entre crochets
+}
+
+
+\long\def\tnsproba@tree@spe@options<#1>#2\relax{%
+% Option choosen
+    \IfEqCase{#1}{%
+        {asit}{\booltrue{tnsproba@probatree@asit}}
+        {hideall}{\booltrue{tnsproba@probatree@hideall}}
+        {showall}{\booltrue{tnsproba@probatree@showall}}
+    }[%
+        \PackageError{tnsproba}{unknown option}%
+                               {You can use asit (default), hideall or showall.}%
+    ]%
+    %
+    \ifbool{tnsproba@probatree@hideall}{%
+        \forestset{
+            pweight/.style={},
+            apweight/.style={},
+            bpweight/.style={},
+        }
+    }{}%
+    %
+    \ifbool{tnsproba@probatree@showall}{%
+        \forestset{
+            apweight*/.style = {
+                edge label = {
+                    node[sloped,
+                         above, 
+                         pos  = .5,
+                         fill = white] {$##1$}
+                }
+            },
+            bpweight*/.style = {
+                edge label = {
+                    node[sloped,
+                         below, 
+                         pos  = .5,
+                         fill = white] {$##1$}
+                }
+            },
+            pweight*/.style = {
+                edge label={
+                    node[midway,
+                         fill = white] {$##1$}
+                }
+            },
+        }
+    }{}%
+    %
 % Into the tree...
     \begin{forest}
         for tree = {%
+            math content,
             sn edges,
             grow'  = 0,
             l      = 2.5cm,
             s sep  = 1.2cm,
-            anchor = parent,
-            math content
+            anchor = parent
         },
-% TO KEEP ! Personnalisation des chemins
-%
-%        before typesetting nodes = {%
-%            where connections = 1{}{%
-%                if = {isodd(connections())}{%
-%                    edge path' = {%
-%                        foreach \i [
-%                            count    = \j from 0,
-%                            evaluate = \noexpand\j
-%                            as \noexpand\k
-%                            using \noexpand {
-%                                (\j == 0) ?
-%                                0pt :
-%                                ((isodd(\j)) ?
-%                                (\j*4pt) :
-%                                ((-\j + 1)*4pt))
-%                            }
-%                        ]
-%                        in {%
-%                            1, ..., \foresteoption{connections}
-%                        }{
-%                            (!u.parent anchor)
-%                            --
-%                            ([yshift = \noexpand\k].child anchor)
-%                        }
-%                    },
-%                }{%
-%                    edge path' = {%
-%                        foreach \i [
-%                            count    = \j,
-%                            evaluate = \noexpand\j
-%                            as \noexpand\k
-%                            using {
-%                                (isodd(\j)) ?
-%                                (\j*14pt) :
-%                                ((-\j + 1)*4pt)
-%                            }
-%                        ]
-%                        in {1,...,\foresteoption{connections}}
-%                        {
-%                            (!u.parent anchor)
-%                            --
-%                            ([yshift = \noexpand\k].child anchor)
-%                        }
-%                    },
-%                },
-%            },
-%        },
         %
         pframe/.style = {
-        	tikz = {
-				\node [draw, ##1, line width = 1.5pt, rounded corners,fit to=tree]{};
-			}
-		},
-		%
-% USEFUL - TO KEEP 8
+            tikz = {
+                \node[rounded corners, 
+                      draw,
+                      ##1,
+                      fit to     = tree,
+                      line width = 1.5pt] {};
+            }
+        },
+        %
+% USEFUL - TO KEEP !
 %
-%		pcomment/.style={
-%		    tikz+={
-%		        \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
-%	    	},
-%		},
-		tikz+={
-    		\coordinate (ptreecomment coord) at (current bounding box.east);
-		},
-        #1
+%        pcomment/.style={
+%            tikz+={
+%                \node [anchor=mid west, xshift=.4cm] at (.mid -| pcomment coord) {##1};
+%            },
+%        },
+        tikz+={
+            \coordinate (ptreecomment coord) at (current bounding box.east);
+        },
+        #2
     \end{forest}
-}
-
-
-\newenvironment{probatree*}{
-    \forestset{
-    	pweight/.style={},
-    	apweight/.style={},
-    	bpweight/.style={},
-	}
-    \begin{probatree}
-}{
-    \end{probatree}
-}
-
-
-\newenvironment{probatree**}{
-    \forestset{
-        apweight*/.style = {
-        	edge label = {
-    			node[pos=.5,sloped,above, fill=white]{$##1$}
-    		}
-    	},
-        bpweight*/.style = {
-        	edge label = {
-    			node[pos=.5,sloped,below, fill=white]{$##1$}
-    		}
-    	},
-        pweight*/.style = {
-        	edge label={
-    			node[midway, fill=white]{$##1$}
-    		}
-    	},
-    }
-    \begin{probatree}
-}{
-    \end{probatree}
 }

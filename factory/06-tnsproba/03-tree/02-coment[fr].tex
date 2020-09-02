@@ -26,8 +26,8 @@ Que ce soit pour expliquer un arbre de probabilité, ou bien pour raisonner sur 
 	L'auteur du présent package trouve bien plus efficace à l'usage de ne pas toucher au code minimal d'un arbre.
 	Ceci explique donc le choix retenu de donner les décorations supplémentaires après le code de l'arbre.
 }.
-Noter l'utilisation possible de la clé \verb#col# pour \whyprefix{col}{or} afin d'indiquer une couleur au format TikZ.
-La couleur oar défaut est le noir. 
+Noter l'utilisation possible de la clé \verb#tcol# pour \whyprefix{t}{ext} et \whyprefix{col}{or} afin d'indiquer la couleur du texte au format TikZ.
+La couleur par défaut est le noir. 
 
 
 \inputlatexexflat{tikz/probatree-comment.tkz}
@@ -87,7 +87,7 @@ Voici les pièges à éviter.
 \begin{enumerate}
 	\item \macro{foreach} ignore les espace initiaux mais pas les finaux. Si vous utilisez \verb#nB /$1$# au lieu de  \verb#nB/$1$# alors la macro croira que le nom se finit par un espace et \verb#forest# ne pourra rien faire. 
 
-	\item Les noms \macro{color}, \macro{col}, \macro{dx} et \macro{dy} sont utilisés en coulisse donc vous ne pourrez pas les utiliser dans votre boucle.
+	\item Comme les noms \macro{color}, \macro{tcol}, \macro{dx} et \macro{dy} sont utilisés en coulisse, il n'est pas possible de les utiliser dans les boucles.
 \end{enumerate}
 
 \end{document}

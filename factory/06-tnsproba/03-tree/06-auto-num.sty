@@ -1,0 +1,148 @@
+% == PACKAGES USED == %
+
+\RequirePackage{simplekv}
+\RequirePackage{xstring}
+
+
+% == DEFINITIONS == %
+
+% -- COMMENTS WITH AUTO NUMBERING -- %
+
+% #1 : color
+%
+% #2 : node
+% #3 : comment
+\newcommand\aptreeComment{\@ifstar{\aptree@comment@star}{\aptree@comment@no@star}}
+
+\newcommand\aptree@comment@no@star[3][]{
+	\ptree@comment@no@star[#1]{!#2}{#3}
+}
+
+
+
+\newcommand\aptree@comment@star[3][]{
+	\ptree@comment@star[#1]{!#2}{#3}
+}
+
+
+
+% -- FRAMES WITH AUTO NUMBERING -- %
+
+% #1 : color
+% #2 : left start corner
+% #3 : right up   corner
+% #4 : right down corner
+\newcommand\aptreeFrame[4][]{%
+    \ptreeFrame[#1]{!#2}{!#3}{!#4}%
+}
+
+
+
+% -- FOCUS WITH AUTO NUMBERING -- %
+
+%    #1 : number of the node
+%    #2 : the node
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@node[2]{
+%    \aptreeNodeColor{!#2}{tcol = \tnsproba@ptree@focus@text@color, bcol = \tnsproba@ptree@focus@back@color}
+    %
+	\node[rounded corners,
+          draw       = \tnsproba@ptree@focus@line@color,
+          line width = 1.5pt,
+          inner sep  = 0pt,
+          fit        = (!#2)(!#2)(!#2)] {};
+}
+
+
+%    #1 : number of the node
+%    #2 : the node
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@node@nostart[2]{
+	\ifnum#1=1\else
+    	\tnsproba@ptree@focus@auto@abstract@node{#1}{#2}
+    \fi
+}
+
+
+%    #1 : node1 | node2 | ...
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@nodes[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@each%
+		{\tnsproba@ptree@focus@auto@abstract@node}%
+		{#1}
+}
+
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@nodes@nostart[1]{
+	\tns@multi@apply@each%
+		{\tnsproba@ptree@focus@auto@abstract@node@nostart}%
+		{#1}
+}
+
+
+%    #1 : number of the couple of nodes
+%    #2 : start of the edge
+%    #3 : end   of the edge
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@edge[3]{
+    \draw[\tnsproba@ptree@focus@line@color,
+          line cap   = round,
+          line width = 1.5pt]
+    	  (!#2.parent anchor) -- (!#3.child anchor);
+}
+
+
+%    #1 : node1 | node2 | ...
+
+\newcommand\tnsproba@ptree@focus@auto@abstract@multi@edges[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@overlapping@couples%
+		{\tnsproba@ptree@focus@auto@abstract@edge}%
+	    {#1}
+}
+
+
+% Options
+
+\setKVdefault[tnsproba@focus@auto@keys]{%
+%    tcol  = black,
+%    bcol  = white,
+    lcol  = blue,
+    frame = nostart
+}
+
+
+%    #1 : options
+%
+%    #2 : node1 | node2 | ...
+
+\newcommand\aptreeFocus[2][]{
+    \useKVdefault[tnsproba@focus@auto@keys]%
+    \setKV[tnsproba@focus@auto@keys]{#1}%
+    %
+    \renewcommand\tnsproba@ptree@focus@line@color{\useKV[tnsproba@focus@auto@keys]{lcol}}%
+%    \renewcommand\tnsproba@ptree@focus@text@color{\useKV[tnsproba@focus@auto@keys]{tcol}}%
+%    \renewcommand\tnsproba@ptree@focus@back@color{\useKV[tnsproba@focus@auto@keys]{bcol}}%
+    %
+    \edef\frame{\useKV[tnsproba@focus@auto@keys]{frame}}%
+    %
+	\tnsproba@ptree@focus@auto@abstract@multi@edges{#2}
+	%
+	\IfEqCase{\frame}{%
+		{nostart}{\let\tocall\tnsproba@ptree@focus@auto@abstract@multi@nodes@nostart}%
+		{start}{\let\tocall\tnsproba@ptree@focus@auto@abstract@multi@nodes}%
+		{none}{\let\tocall\tnsproba@ptree@do@nothing}%
+	}[%
+        \PackageError{tnsproba}{unknown option for frame of aptreeFocus}%
+                               {You can use nostart (default), start or none.}%
+    ]%
+	%
+	\tocall{#2}
+}

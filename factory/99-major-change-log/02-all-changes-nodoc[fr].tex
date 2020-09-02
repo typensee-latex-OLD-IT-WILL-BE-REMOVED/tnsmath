@@ -47,6 +47,150 @@
 
         \begin{description}
 \medskip
+\item[2020-09-02] Nouvelle version mineure \verb+1.10.0-beta+.
+
+
+% -------------- %
+% -- tnsgeo -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Géométrie [0.4.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Vecteur}
+          retour de la macro \macro{norm*}.
+
+	% -------------- %
+
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnslinalg -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Algèbre linéaire [0.1.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Déterminant $2 \times 2$} changement de l'API.
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{calcdettwo} sert à obtenir au choix les versions développée ou bien celles matricielles avec pour décorations supplémentaires une croix fléchée ou non.
+
+        \item Suppression de \macro{calcdettwo*}.
+    \end{itemize}
+
+	% -------------- %
+
+\end{itemize}
+
+
+\separation
+
+
+% -------------- %
+% -- tnsproba -- %
+% -------------- %
+
+
+\begin{center}
+    \textbf{\textsc{Probabilité [0.9.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic*{Calculs de l'espérance dans le cas fini}
+    	  \macro{calcexpval} rend facile la définition d'une variable aléatoire finie avec la possibilité de détailler le calcul de son espérance.
+
+
+% ---------------------- %
+
+
+    \item \topic*{Arbre de probabilités}
+    	  pas mal de changements dans l'API et quelques nouveautés.
+
+    \begin{itemize}[itemsep=.5em]
+        \item \verb#\begin{probatree}<hideall># \verb#...# \verb#\end{probatree}#  remplace l'usage de l'environnement \env{probatree*}.
+
+
+        \item \verb#\begin{probatree}<showall># \verb#...# \verb#\end{probatree}# remplace l'usage de l'environnement \env{probatree**}.
+
+
+        \item De nouvelles macros permettent d'agir sur le texte des noeuds.
+
+        \begin{enumerate}
+        	\item \macro{ptreeTextOf} renvoie le texte d'un noeud.
+
+        	\item \macro{ptreeNodeColor} change les couleurs du texte et/ou du fond d'un noeud.
+
+        	\item \macro{ptreeNodeNewText} change le texte en plus éventuellement  les couleurs du texte et/ou du fond d'un noeud.
+        \end{enumerate}
+
+
+        \item \macro{ptreeFocus} a évolué
+              \footnote{
+              		Malheureusement ces changements n'ont pas pu être faits pour \macro{aptreeFocus} principalement car l'équivalent automatique de \macro{ptreeTextOf} n'a pu être implémenté.
+			  }.
+
+        \begin{enumerate}
+        	\item \macro{ptreeFocus[frame = start]} remplace l'ancien \macro{ptreeFocus}.
+
+        	\item \macro{ptreeFocus[frame = none]} remplace \macro{ptreeFocus**} qui n'existe plus.
+
+        	\item \macro{ptreeFocus[frame = nostart]} est utilisé par défaut et remplace \macro{ptreeFocus*} qui n'existe plus. On obtient dans ce cas une mise en valeur encadrant tous les noeuds sauf le tout 1\ier{}.
+
+        	\item Les clés optionnelles \verb#lcol#, \verb#tcol# et \verb#bcol# permettent de choisir la couleur des arrêtes et des cadres, celle du texte et enfin celle du fond.
+        \end{enumerate}
+
+
+        \item \verb#tcol# remplace l'ancien \verb#col# de \macro{ptreeComment} et \macro{aptreeComment}.
+
+		\item \verb#lcol# remplace l'ancien \verb#col# de \macro{ptreeFrame}, \macro{aptreeFrame} et \macro{aptreeFocus}.
+
+
+
+    \end{itemize}
+\end{itemize}
+
+
+\begin{center}
+    \textbf{\textsc{Probabilité [0.10.0-beta]}}
+\end{center}
+
+\begin{itemize}[itemsep=.5em]
+    \item \topic{Généralités}
+
+    \begin{itemize}[itemsep=.5em]
+        \item $\mathrm{P}$ est le nom par défaut d'une probabilité.
+
+		\item Les noms des probabilités, des espérances, des variances et des écarts-types utilisent tous une police droite via \macro{mathrm} en coulisse.
+    \end{itemize}
+
+
+% ---------------------- %
+
+
+    \item \topic{Espérance d'une variable aléatoire finie}
+
+    \begin{itemize}[itemsep=.5em]
+        \item \macro{expval} est utilisée en coulisse pour rédiger les espérances dans les détails des calculs.
+        
+		\item L'ordre des produits dans le calcul numérique est le même que celui dans la somme formelle.
+    \end{itemize}
+\end{itemize}
+
+
+\separation
+
+\end{description}\begin{description}
+\medskip
 \item[2020-08-26] Nouvelle version mineure \verb+1.9.0-beta+.
 
 
@@ -902,9 +1046,9 @@
             
             \item \macro{angleorient*}  a été remplacée par \macro{angleorient[sp]}.
             
-            \item \macro{hangleorient}  a été remplacée par \macro{dotprod[h]}.
+            \item \macro{hangleorient}  a été remplacée par \macro{angleorient[h]}.
                   
-            \item \macro{hangleorient*} a été remplacée par \macro{dotprod[sh]}.
+            \item \macro{hangleorient*} a été remplacée par \macro{angleorient[sh]}.
 	    \end{itemize}
 
 	    % :::::::::::::::::::::::: %
@@ -925,7 +1069,7 @@
         
         \begin{itemize}[itemsep=.5em, label=$\rightarrow$]
             \item Il faut passer via l'une des macros : \macro{coord}, \macro{pcoord}, \macro{pcoord*}, \macro{vcoord} et \macro{vcoord*}.
-                  Toutes ces macros proposent des options pour choisir la mise en forme : des parenthèse en mode horizontal, des crochets en mode vertical...
+                  Toutes ces macros proposent des options pour choisir la mise en forme : des parenthèses en mode horizontal, des crochets en mode vertical...
 
             \item \macro{coord} est pour des coordonnées seules.
 

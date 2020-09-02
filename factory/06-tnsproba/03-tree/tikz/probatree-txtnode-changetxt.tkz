@@ -1,0 +1,14 @@
+\begin{probatree}
+    [
+        [A, name = nA
+            [B, name = nB]
+            [C, name = nC]
+        ]
+    ]
+    \ptreeNodeNewText{nA}{...}
+    \ptreeNodeNewText[tcol = red,
+                      bcol = yellow!30!white]%
+                     {nB}{...}
+    \ptreeNodeNewText[bcol = black!6!white]%
+                     {nC}{...}
+\end{probatree}

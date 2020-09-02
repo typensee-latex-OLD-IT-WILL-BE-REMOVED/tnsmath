@@ -1,0 +1,17 @@
+\begin{probatree}
+    [
+        [A, name = nA
+            [B, name = nB]
+        ]
+        [C, name = nC
+            [D, name = nD]
+        ]
+        [E, name = nE
+            [F, name = nF]
+        ]
+    ]
+    %
+    \ptreeFocus               {nA | nB}
+    \ptreeFocus[frame = start]{nC | nD}
+    \ptreeFocus[frame = none] {nE | nF}
+\end{probatree}

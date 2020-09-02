@@ -1,0 +1,20 @@
+\begin{probatree}
+    [{}, name = nU
+        [A, name = nA
+            [B]
+            [C, name = nC
+                [D, name = nD
+                    [E]
+                    [F, name = nF
+                        [G, name = nG]
+                        [H]
+                    ]
+                ]
+            ]
+        ]
+        [I]
+    ]
+    %
+    \ptreeFocus[lcol  = red,
+                frame = none]{nU | nA | nC | nD | nF | nG}
+\end{probatree}

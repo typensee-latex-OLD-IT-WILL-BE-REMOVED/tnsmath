@@ -1,8 +1,8 @@
-\begin{probatree*}
+\begin{probatree}<hideall>
     [
         [A, pweight = a
             [B, apweight = b]
             [C, bpweight = c]
         ]
     ]
-\end{probatree*}
+\end{probatree}

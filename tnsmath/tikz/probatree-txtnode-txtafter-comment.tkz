@@ -1,0 +1,13 @@
+\begin{probatree}
+    [
+        [A, name = nA
+            [B, name = nB]
+            [C, name = nC]
+        ]
+    ]
+    %
+    \ptreeComment{nB}%
+                 {$\leftarrow \proba{\ptreeTextOf{nA} \cap \ptreeTextOf{nB}}$}
+    \ptreeComment{nC}%
+                 {$\leftarrow \proba{\ptreeTextOf{nA} \cap \ptreeTextOf{nC}}$}
+\end{probatree}

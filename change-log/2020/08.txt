@@ -22,16 +22,12 @@
 2020-08-09
 ==========
 
-// No publication of this changes for the moment.
-
 **Backstage machinery:** the too old changelogs are managed automatically now.
 
 
 ==========
 2020-08-08
 ==========
-
-// No publication of this changes for the moment.
 
 **"Textual" macros:** this kind of macros will all use the prefix ``txt``.
 

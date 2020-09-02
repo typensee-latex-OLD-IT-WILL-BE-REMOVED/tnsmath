@@ -1,0 +1,76 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-calculate-expval}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Calculer l'espérance -- Cas fini}
+
+\subsection{Notations personnalisées} \label{tnsproba-calclexpval-notations}
+
+\newparaexample{Toutes les options}
+
+L'exemple ci-après utilise toutes les options liées à l'affichage textuel.
+Il faut noter que la clé \verb#com# sert juste à ajouter un court texte sur une seule ligne
+\footnote{
+	Si besoin utiliser séparément l'affichage par défaut avec \texttt{name = maloi} suivi d'un long texte puis enfin employer \texttt{disp = exp, reuse = maloi}.
+}.
+
+\begin{latexex-flat}
+\calcexpval[disp = all,
+            E    = Esp, X  = Y,
+            k    = i  , xk = y, pk = q,
+            com  = Le tableau précédent aboutit aux calculs suivants.,
+            ope  = \times]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\newparaexample{En réutilisant une loi définie précédemment}
+
+Lors de la création d'une loi nommée via la clé \verb#name# les options textuelles, autre que le commentaire court, sont mémorisées.
+Ceci est très utile comme le montre le 1\ier{} affichage de l'exemple suivant tout en étant modifiable à tout moment comme dans le dernier affichage ci-après.
+
+\begin{latexex-flat}
+DÉFINITION CACHÉE.
+\calcexpval[name = option/texte/loi,
+            disp = none,
+            E    = Esp, X  = Y,
+            k    = i  , xk = y, pk = q,
+            ope  = \times]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+\bigskip
+
+RÉUTILISATION DIRECTE.
+\calcexpval[reuse = option/texte/loi,
+            disp  = all]{}
+
+\bigskip
+
+RÉUTILISATION AVEC DES OPTIONS MODIFIÉES (E, k et ope = .).
+\calcexpval[reuse = option/texte/loi,
+            disp  = all,
+            E     = E,
+            k     = k,
+            com   = Le tableau précédent aboutit aux calculs suivants.,
+            ope   = \cdot]{}
+\end{latexex-flat}
+
+\end{document}

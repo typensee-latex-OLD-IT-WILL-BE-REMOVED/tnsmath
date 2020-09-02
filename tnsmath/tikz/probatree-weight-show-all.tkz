@@ -1,4 +1,4 @@
-\begin{probatree**}
+\begin{probatree}<showall>
     [
         [A, pweight = a
             [B, apweight* = b]
@@ -6,4 +6,4 @@
         ]
         [D, pweight* = d]
     ]
-\end{probatree**}
+\end{probatree}

@@ -22,7 +22,7 @@
 Commençons par un arbre nu pour voir comment utiliser l'environnement \verb+probatree+ qui s'appuie en coulisse sur celui nommé \verb+forest+ du package éponyme.
 L'exemple qui suit utilise juste les réglages spécifiques de mise en forme de l'arbre qui sont propres à \verb+probatree+.
 
-\inputlatexex{TikZ/probatree-undecorated.tkz}
+\inputlatexex{tikz/probatree-undecorated.tkz}
 
 
 % ---------------------- %
@@ -38,7 +38,7 @@ Dans le code suivant, ce sont les clés
 Indiquons que \prefix{pweight} vient de \whyprefix{p}{robability} et \prefix{weight} soit \inenglish*{probabilité} et \inenglish{poids}.
 Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{bpweight} respectivement, ils viennent de \whyprefix{a}{bove} et \whyprefix{b}{elow} soit \inenglish*{dessus} et \inenglish{dessous}.
 
-\inputlatexex{TikZ/probatree-weight-placement.tkz}
+\inputlatexex{tikz/probatree-weight-placement.tkz}
 
 
 \begin{remark}
@@ -48,7 +48,7 @@ Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{b
 	}
 	ci-dessous.
 
-	\inputlatexex{TikZ/probatree-math-mode.tkz}
+	\inputlatexex{tikz/probatree-math-mode.tkz}
 \end{remark}
 
 
@@ -57,9 +57,14 @@ Quant au \prefix{a} et au \prefix{b} au début de \prefix{apweight} et \prefix{b
 
 \newparaexample{Des poids cachés partout}
 
-On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ sans avoir à les effacer partout dans le code \LaTeX{} \emph{(ceci peut être utile lors de la rédaction d'exercices)}.
+On peut cacher tous les poids sans avoir à les effacer partout dans le code \LaTeX{} \emph{(ceci peut être utile lors de la rédaction d'exercices)}.
+Il suffit pour cela d'utiliser une option \verb#hideall# de l'environnement \verb+probatree+. Comme les codes des arbres utilisent des crochets, l'option s'indique via \verb#<hideall># et non le traditionnel \verb#[hideall]#
+\footnote{
+	Ceci a été rendu possible grâce à un code proposé dans l'excellent livre \emph{\og Apprendre à programmer en \TeX \fg} de Christian Tellechea.
+}.
+L'option utilisée par défaut est \verb#asit# qui demande de respecter les indications données pour les poids dans le code de l'arbre.
 
-\inputlatexex{TikZ/probatree-weight-hide-all.tkz}
+\inputlatexex{tikz/probatree-weight-hide-all.tkz}
 
 
 % ---------------------- %
@@ -69,7 +74,7 @@ On peut cacher tous les poids via l'environnement étoilé \verb+probatree*+ san
 
 Pour ne cacher que certains poids afin de produire par exemple un arbre à compléter, il faudra utiliser localement le style \verb+pweight*+ comme dans l'exemple ci-dessous.
 
-\inputlatexex{TikZ/probatree-weight-hide-locally.tkz}
+\inputlatexex{tikz/probatree-weight-hide-locally.tkz}
 
 
 % ---------------------- %
@@ -77,10 +82,10 @@ Pour ne cacher que certains poids afin de produire par exemple un arbre à compl
 
 \newparaexample{Forcer l'affichage des poids cachés localement}
 
-Imaginons que nous voulions donner l'arbre précédent avec tous ses poids.
-Il suffit dans ce cas de passer via l'environnement doublement étoilé \verb+probatree**+ qui affichera absolument tous les poids \emph{(on tape une fois et on réutilise le même code dans deux contextes différents)}.
+Imaginons que nous voulions donner l'arbre précédent avec tous ses poids visibles pour une correction par exemple.
+Il suffit dans ce cas de passer via l'option \verb#showall# de l'environnement \verb+probatree+ qui affichera absolument tous les poids \emph{(on tape une fois et on réutilise le même code dans deux contextes différents)}.
 
-\inputlatexex{TikZ/probatree-weight-show-all.tkz}
+\inputlatexex{tikz/probatree-weight-show-all.tkz}
 
 
 % ---------------------- %
@@ -94,6 +99,6 @@ Vous ne pouvez pas utiliser directement un signe $=$ ou une virgule dans les ét
 }.
 Pour contourner cette limitation, il suffit de mettre le contenu de l'étiquette entre des accolades.
 
-\inputlatexex{TikZ/probatree-weight-coma-equal.tkz}
+\inputlatexex{tikz/probatree-weight-coma-equal.tkz}
 
 \end{document}

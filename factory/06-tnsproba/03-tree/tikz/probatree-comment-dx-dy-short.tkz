@@ -3,18 +3,26 @@
     % -- Code de l'arbre seul non reproduit ici -- %
     % -------------------------------------------- %
     % Valeurs de X
-    \ptreeComment[col = blue,
-                  dx = -.25em, dy = 1cm]{nB}{$X$}
-    \ptreeComment[col = blue]           {nB}{$1$}
-    \ptreeComment[col = blue]           {nC}{$3$}
-    \ptreeComment[col = blue]           {nE}{$3$}
-    \ptreeComment[col = blue]           {nF}{$5$}
+    \ptreeComment[tcol = blue,
+                  dx   = -.25em,
+                  dy   = 1cm]{nB}{$X$}
+    %
+    \ptreeComment[tcol = blue]{nB}{$1$}
+    \ptreeComment[tcol = blue]{nC}{$3$}
+    \ptreeComment[tcol = blue]{nE}{$3$}
+    \ptreeComment[tcol = blue]{nF}{$5$}
     %
     % Valeurs de Y
-    \ptreeComment[col = orange,
-                  dx = 2em+.5em, dy = 1cm]{nB}{$Y$}
-    \ptreeComment[col = orange, dx = 2em] {nB}{$-5$}
-    \ptreeComment[col = orange, dx = 2em] {nC}{$-2$}
-    \ptreeComment[col = orange, dx = 2em] {nE}{$-1$}
-    \ptreeComment[col = orange, dx = 2em] {nF}{$\phantom{-}0$}
+    \ptreeComment[tcol = orange,
+                  dx   = 2em+.5em,
+                  dy   = 1cm]{nB}{$Y$}
+    %
+    \ptreeComment[tcol = orange,
+                  dx   = 2em]{nB}{$-5$}
+    \ptreeComment[tcol = orange,
+                  dx   = 2em]{nC}{$-2$}
+    \ptreeComment[tcol = orange,
+                  dx   = 2em]{nE}{$-1$}
+    \ptreeComment[tcol = orange,
+                  dx   = 2em]{nF}{$\phantom{-}0$}
 \end{probatree}

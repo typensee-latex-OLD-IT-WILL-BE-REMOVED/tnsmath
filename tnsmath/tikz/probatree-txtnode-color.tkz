@@ -1,0 +1,13 @@
+\begin{probatree}
+    [
+        [A, name = nA
+            [B, name = nB]
+            [C, name = nC]
+        ]
+    ]
+    \ptreeNodeColor{nA}{tcol = green!60!black}
+    \ptreeNodeColor{nB}{tcol = purple,
+                        bcol = black!6!white}
+    \ptreeNodeColor{nC}{tcol = white,
+                        bcol = black}
+\end{probatree}

@@ -1,0 +1,7 @@
+\begin{probatree}
+    [
+        [texte.de.A, name = nA
+            [B]
+        ]
+    ]
+\end{probatree}

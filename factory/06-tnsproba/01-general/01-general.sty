@@ -7,15 +7,16 @@
 
 % -- Semantic probability -- %
 
-\newcommand\proba[2][p]{%
+\newcommand\proba[2][P]{%
+	\def\name{\mathrm{#1}}%
     \mathchoice{% * Display style
-        #1\mskip-.65\medmuskip\left( #2 \right)%
+        \name{}\mskip-.65\medmuskip\left( #2 \right)%
     }{%           * Text style
-        #1\mskip-.65\medmuskip\left( #2 \right)%
+        \name{}\mskip-.65\medmuskip\left( #2 \right)%
     }{%           * Script style
-        #1\left( #2 \right)%
+        \name{}\left( #2 \right)%
     }{%           * Script script style
-        #1\left( #2 \right)%
+        \name{}\left( #2 \right)%
     }
 }
 
@@ -30,22 +31,22 @@
 
 \newcommand\probacond{\@ifstar{\tnsproba@proba@cond@star}{\tnsproba@proba@cond@no@star}}
 
-\newcommand\tnsproba@proba@cond@no@star[3][p]{%
+\newcommand\tnsproba@proba@cond@no@star[3][P]{%
     \proba[#1_{#2}]{#3}%
 }
 
-\newcommand\tnsproba@proba@cond@star[3][p]{%
+\newcommand\tnsproba@proba@cond@star[3][P]{%
     \proba[#1]{#3 \mid #2}%
 }
 
 
 \newcommand\eprobacond{\@ifstar{\tnsproba@proba@cond@exp@star}{\tnsproba@proba@cond@exp@no@star}}
 
-\newcommand\tnsproba@proba@cond@exp@star[3][p]{%
+\newcommand\tnsproba@proba@cond@exp@star[3][P]{%
     \tnsproba@abstract@proba@cond{\frac}{#1}{#3}{#2}
 }
 
-\newcommand\tnsproba@proba@cond@exp@no@star[3][p]{%
+\newcommand\tnsproba@proba@cond@exp@no@star[3][P]{%
     \tnsproba@abstract@proba@cond{\dfrac}{#1}{#3}{#2}
 }
 
@@ -61,11 +62,11 @@
 
 % -- Expected value - Variance - Standard deviation -- %
 
-\newcommand\expval[2][\mathrm{E}]{%
+\newcommand\expval[2][E]{%
     \proba[#1]{#2}%
 }
 
-\newcommand\var[2][\mathrm{V}]{%
+\newcommand\var[2][V]{%
     \proba[#1]{#2}%
 }
 

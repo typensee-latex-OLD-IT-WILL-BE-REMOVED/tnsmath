@@ -1,0 +1,19 @@
+\begin{probatree}
+    [
+        [A
+            [B]
+            [C]
+            [D
+                [E]
+                [F
+                    [G]
+                    [H]
+                ]
+            ]
+        ]
+        [I]
+    ]
+    %
+    \aptreeFocus[lcol  = red,
+                 frame = start]{ | 1 | 13 | 132 | 1321}
+\end{probatree}

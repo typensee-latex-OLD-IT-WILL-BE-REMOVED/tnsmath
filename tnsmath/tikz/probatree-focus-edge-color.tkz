@@ -1,0 +1,15 @@
+\begin{probatree}
+    [{}, name = nU
+        [A, name = nA
+            [B, name = nB]
+            [C, name = nC]
+        ]
+    ]
+    %
+    \ptreeFocus{nU | nA}
+    \ptreeFocus[tcol = red,
+                lcol = red]{nA | nC}
+    \ptreeFocus[tcol = white,
+                bcol = olive,
+                lcol = olive]{nA | nB}
+\end{probatree}

@@ -1,92 +1,124 @@
 % == PACKAGES USED == %
 
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+\RequirePackage{xstring}
+
 \RequirePackage{tnscom}
 
 
 % == DEFINITIONS == %
 
-% Abstraction
-%
-%   #1 : option for the formatting
-%   #2 : macro with deco or not for the formatting
-%
-%   #3  #4		a  b
-%   #5  #6		c  d
+% -- DETERMINANT 2x2 -- %
 
-\newcommand\tnslinalg@calc@det@two@abstract[6]{%
+\newbool{tnslinalg@calc@det@option@loop}   % Default.
+\newbool{tnslinalg@calc@det@option@arrows}
+\newbool{tnslinalg@calc@det@option@cross}
+\newbool{tnslinalg@calc@det@option@nodeco}
+
+\newbool{tnslinalg@calc@det@option@exp}   % Default.
+\newbool{tnslinalg@calc@det@option@cexp}
+\newbool{tnslinalg@calc@det@option@texp}
+
+
+\newcommand\tnslinalg@validate@calc@det@option[1]{
     \IfEqCase{#1}{%
-        {exp}{%
-            \def\ope{\,}%
-        }{cexp}{%
-            \def\ope{\cdot}%
-        }{texp}{%
-            \def\ope{\times}%
-        }{std}{%
-            #2{}{#3}{#5}%
-              {}{#4}{#6}%
-        }%
-    }[
-    	\PackageError{tnslinalg}{unknown option}%
-                                {You can use std (default), exp, cexp or sexp.}
+        {loop}{\booltrue{tnslinalg@calc@det@option@loop}}
+        {arrows}{\booltrue{tnslinalg@calc@det@option@arrows}}
+        {cross}{\booltrue{tnslinalg@calc@det@option@cross}}
+        {nodeco}{\booltrue{tnslinalg@calc@det@option@nodeco}}
+        %
+        {exp}{\booltrue{tnslinalg@calc@det@option@exp}}
+        {cexp}{\booltrue{tnslinalg@calc@det@option@cexp}}
+        {texp}{\booltrue{tnslinalg@calc@det@option@texp}}
+    }[%
+        \PackageError{tnslinalg}{unknown option}%
+                             {You can use exp, cexp, texp, loop, arrows, cross or nodeco.}%
     ]%
-    \IfStrEq{#1}{std}{}{%
-% WARNING !
-%   
-%   #1 : symbol for the product
+}
+
+
+%   #1 : option for the formatting
 %
 %   #2  #3		x  x'
 %   #4  #5      y  y'
-        \tns@prop@prod{\ope}%
-                      {#3}{#4}%
-                      {#5}{#6}%
-    }
+
+\newcommand\calcdettwo[5][nodeco]{%
+    \boolfalse{tnslinalg@calc@det@option@loop}
+    \boolfalse{tnslinalg@calc@det@option@arrows}
+    \boolfalse{tnslinalg@calc@det@option@cross}
+    \boolfalse{tnslinalg@calc@det@option@nodeco}
+    %
+    \boolfalse{tnslinalg@calc@det@option@exp}
+    \boolfalse{tnslinalg@calc@det@option@cexp}
+    \boolfalse{tnslinalg@calc@det@option@texp}
+    %
+    \DoWithCSL\tnslinalg@validate@calc@det@option{#1}%
+    %
+    \ifboolexpr{
+		(
+			bool{tnslinalg@calc@det@option@exp}
+			or
+			bool{tnslinalg@calc@det@option@cexp}
+			or
+			bool{tnslinalg@calc@det@option@texp}
+		)
+		and
+		(
+			bool{tnslinalg@calc@det@option@loop}
+			or
+			bool{tnslinalg@calc@det@option@arrows}
+			or
+			bool{tnslinalg@calc@det@option@cross}
+			or
+			bool{tnslinalg@calc@det@option@nodeco}
+		)
+	}{%
+        \PackageError{tnslinalg}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnslinalg@calc@det@option@exp}
+		or
+		bool{tnslinalg@calc@det@option@cexp}
+		or
+		bool{tnslinalg@calc@det@option@texp}
+	}{
+        \def\expsymbol{\,}%
+        %
+        \ifbool{tnslinalg@calc@det@option@cexp}{%
+            \def\expsymbol{\cdot}%
+        }{}%
+        %
+        \ifbool{tnslinalg@calc@det@option@texp}{%
+            \def\expsymbol{\times}%
+        }{}%
+        %
+        \tns@prop@prod{\expsymbol}%
+                      {#2}{#3}%
+                      {#4}{#5}%
+	}{
+    % No expansion
+        % Default values
+        \def\tocall{\tns@det@plane@no@deco}%
+        %
+        \ifbool{tnslinalg@calc@det@option@arrows}{%
+            \def\tocall{\tns@det@plane@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnslinalg@calc@det@option@cross}{%
+            \def\tocall{\tns@det@plane@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnslinalg@calc@det@option@loop}{%
+            \def\tocall{\tns@det@plane@deco@loop}%  
+        }{}%
+        %
+        \tocall{novec}%
+               {}{#2}{#4}%
+               {}{#3}{#5}%
+	}
 }
 
 
-
-\newcommand\calcdettwo{\@ifstar{\tnslinalg@calc@det@two@star}{\tnslinalg@calc@det@two@no@star}}
-
-
-% We use the macros for the colinearity.
-
-%   #1 : option for the formatting
-%
-%   #2  #3		a  b
-%   #4  #5		c  d
-
-\newcommand\tnslinalg@calc@det@two@no@star[5][std]{%
-    \tnslinalg@calc@det@two@abstract{#1}%
-                                    {\tns@det@plane@deco@loop{novec}}%
-                                    {#2}{#3}%
-                                    {#4}{#5}%
-}
-
-
-% We use the macros for the colinearity.
-
-%   #1 : option for the formatting
-%
-%   #2  #3		a  b
-%   #4  #5		c  d
-
-\newcommand\tnslinalg@calc@det@two@star[5][std]{%
-    \tnslinalg@calc@det@two@abstract{#1}%
-                                    {\tns@det@plane@no@deco{novec}}%
-                                    {#2}{#3}%
-                                    {#4}{#5}%
-}
-
-
-
-%\newcommand\cdetthree{\@ifstar{\@cdetthree@star}{\@cdetthree@no@star}}
-%
-%
-%\newcommand\@cdetthree@star[9]{%
-%	STAR
-%}
-%
-%
-%\newcommand\@cdetthree@no@star[9]{%
-%	NO STAR
-%}
-%

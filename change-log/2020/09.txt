@@ -1,0 +1,21 @@
+// Added : 2020-09-02 [15:11:10]
+==========
+2020-09-02
+==========
+
+**New minor version version::``1.10.0-beta``:** see the changes below.
+
+
+**¨tnsgeo:** addition of the version version::``0.4.0-beta`` published at date::``2020-09-02``.
+
+
+**¨tnslinalg:** addition of the version version::``0.1.0-beta`` published at date::``2020-08-27``.
+
+
+**¨tnsproba:** the folowing versions have been added.
+
+    1) Version version::``0.9.0-beta`` published at date::``2020-09-02``.
+    2) Version version::``0.10.0-beta`` published at date::``2020-09-03``.
+
+
+

@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\section{Fiches techniques}
+
+\IDmacro{calcexpval}{1}{1} \hfill \mwhyprefix{calc}{ulate}
+
+                           \hfill \prefix{expval = exp-ected val-ue}
+
+\IDoption{} un système de type \texttt{clé = valeur}.
+
+\begin{enumerate}
+    \item \verb#disp# indique ce qu'il faut afficher. La valeur par défaut est \verb#table#. Voici toutes les valeurs possibles.
+	\begin{enumerate}
+    	\item \verb#table # : un tableau donnant la loi est affiché seul.
+
+    	\item \verb#all   # : un tableau donnant la loi est affiché suivi du début du calcul de l'espérance.
+
+    	\item \verb#none  # : rien n'est affiché.
+	
+		\extraspace
+
+    	\item \verb#exp   # : le début du calcul de l'espérance sans le tableau donnant la loi.
+
+    	\item \verb#formal# : la formule avec $\Sigma$ .
+
+    	\item \verb#eval  # : la somme des produits du type $p_k \cdot x_k$ .
+	\end{enumerate}
+
+
+    \medskip
+
+    \item \verb#nosigma# : utilisée seule cette option demande de ne pas afficher la formule avec $\Sigma$ .
+
+
+    \medskip
+
+    \item \verb#E # : la macro utilisée pour écrire l'espérance.
+		  \hfill
+		  Par défaut \verb# E = \expval# .
+
+    \item \verb#X # : le nom de la variable aléatoire.
+		  \hfill
+		  Par défaut \verb# X = X# .\verb#      #
+
+    \item \verb#k # : l'indice.
+		  \hfill
+		  Par défaut \verb# k = k# .\verb#      #
+
+    \item \verb#xk# : la lettre à indicer pour les valeurs de la variable aléatoire.
+		  \hfill
+		  Par défaut \verb#xk = x# .\verb#      #
+
+    \item \verb#pk# : la lettre à indicer pour les valeurs des probabilités.
+		  \hfill
+		  Par défaut \verb#pk = p# .\verb#      #
+
+
+    \medskip
+
+    \item \verb#com# : un texte court éventuel à ajouter entre le tableau donnant la loi et le début du calcul de l'espérance.
+
+
+    \medskip
+
+    \item \verb#ope# : le symbole de multiplication.
+		  \hfill
+		  Par défaut \verb#ope = \cdot# .
+
+
+    \medskip
+
+    \item \verb#name # : un nom éventuel de la loi pour une utilisation ultérieure.
+
+    \item \verb#reuse# : un nom indiquant ce qui doit être réutilisé.
+
+
+    \medskip
+
+    \item \verb#colors# : le cycle des couleurs au format TikZ séparées par des tirets.
+		  
+		  \smallskip
+		  
+		  \hfill
+		  Par défaut \verb#colors = red - blue - orange - green!70!black# .
+\end{enumerate}
+%
+%
+\IDarg{} définition de la loi de la variable aléatoire finie avec une syntaxe semblable à celle d'un tableau.
+
+\end{document}
