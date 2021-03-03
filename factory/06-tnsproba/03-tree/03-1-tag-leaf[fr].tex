@@ -1,0 +1,69 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-basic}
+    \usepackage{02-coment}
+    \usepackage{03-tag}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\subsection{Décorer les feuilles}
+
+Il peut être utile de décorer de la même façon différents chemins pour indiquer des évènements étudiés.
+C'est la raison d'être de \macro{ptreeTagLeaf} et \macro{ptreeTagLeaf*} qui produisent le même commentaire pour différents noeuds.
+Notez dans les exemples que les noms des noeuds sont séparés par le symbole \verb+|+ avec la possibilité d'ajouter des espaces pour améliorer la lisibilité du code.
+
+
+\newparaexample{Décorer au même niveau}
+
+\inputlatexexflat{tikz/probatree-tag-leaf.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Décorer sur des niveaux décalés}
+
+La démo. suivante n'utilise que \verb#dx# mais bien entendu \verb#dy# est aussi disponible.
+
+\inputlatexexflat{tikz/probatree-tag-leaf-dx.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Décorer au plus près}
+
+Voici un exemple avec un arbre dissymétrique
+\footnote{
+	Est-ce vraiment pertinent comme usage ?
+}.
+
+\inputlatexexflat{tikz/probatree-tag-leaf-star.tkz}
+
+
+\begin{remark}
+	Sans utiliser la version étoilée de \macro{ptreeTagLeaf}, on obtient ce qui suit qui est mauvais.
+
+	\begin{center}
+		\input{tikz/probatree-tag-leaf-no-star-bad.tkz}
+	\end{center}
+	
+	Le package \verb#forest# propose \verb#fit = band# qui est très utile dans ce type de situation.
+	Voici comment utiliser ceci.
+	
+	\inputlatexexflat{tikz/probatree-tag-leaf-no-star-good.tkz} 
+\end{remark}
+ 
+\end{document}
+

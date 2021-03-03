@@ -9,15 +9,24 @@
             [F, bpweight = f]
         ]
     ]
-    %
-    \aptreeFocus[lcol  = gray,
-                 frame = start]{1 | 11}
-    %
+    % Étiquettes pour les niveaux.
+    \aptreeTagLevel[tcol = green!50!black, dy = .75mm]
+                   {1}{Choix 1}
+    \aptreeTagLevel[tcol = green!50!black, dy = .75mm]
+                   {11}{Choix 2}
+     % Mettre en valeur un chemin.
+    \aptreeFocus[lcol = gray,frame = start]
+                {1 | 11}
+   % Mettre en valeur un chemin et le commenter.
     \aptreeFrame{1}{11}{12}
     \aptreeComment[tcol = blue]%
                   {1}{$\leftarrow$ Un sous-arbre \og conditionnel \fg}
-    %
-    \aptreeFocus  [lcol = red]{ | 2 | 21}
-    \aptreeComment[tcol = red]%
+    % Comme avant.
+    \aptreeFocus[lcol = red]
+                { | 2 | 21}
+    \aptreeComment[tcol = red]
                   {21}{$\leftarrow \proba{D \cap E} = d \cdot e$}
+     % Décorer des feuilles.
+    \aptreeTagLeaf[tcol = orange]
+                  {12 | 22}{$\triangle \square$}
 \end{probatree}

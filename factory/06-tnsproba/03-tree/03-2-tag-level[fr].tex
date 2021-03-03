@@ -1,0 +1,47 @@
+
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../../config/header[fr].sty}
+    \input{../01-general/01-general.sty}
+
+    \usepackage{01-basic}
+    \usepackage{03-tag}
+\makeatother
+
+
+% == EXTRAS == %
+
+
+\begin{document}
+
+%\section{Arbres pondérés}
+
+\subsection{Expliquer les niveaux}
+
+Grâce aux deux sections précédentes les exemples devraient se suffire à eux-mêmes pour comprendre les fonctionnements de \macro{ptreeTagLevel} et \macro{ptreeTagLevel*}.
+
+
+\newparaexample{Expliquer au-dessus}
+
+\inputlatexexflat{tikz/probatree-tag-level-above.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Expliquer en dessous}
+
+\inputlatexexflat{tikz/probatree-tag-level-below.tkz}
+
+
+% ---------------------- %
+
+
+\newparaexample{Décalages horizontal et vertical}
+
+\inputlatexexflat{tikz/probatree-tag-level-dx-dy.tkz}
+
+\end{document}
+
+

@@ -1,0 +1,144 @@
+% == PACKAGES USED == %
+
+\RequirePackage{commado}
+\RequirePackage{etoolbox}
+\RequirePackage{xstring}
+
+\RequirePackage{tnscom}
+
+
+% == DEFINITIONS == %
+
+% -- 2D DETERMINANT -- %
+
+\newbool{tnsgeo@calc@detplane@option@vec}   % Default.
+\newbool{tnsgeo@calc@detplane@option@novec}
+
+\newbool{tnsgeo@calc@detplane@option@loop}   % Default.
+\newbool{tnsgeo@calc@detplane@option@arrows}
+\newbool{tnsgeo@calc@detplane@option@cross}
+\newbool{tnsgeo@calc@detplane@option@nodeco}
+
+\newbool{tnsgeo@calc@detplane@option@exp}   % Default.
+\newbool{tnsgeo@calc@detplane@option@cexp}
+\newbool{tnsgeo@calc@detplane@option@texp}
+
+
+\newcommand\tnsgeo@validate@calc@detplane@option[1]{
+    \IfEqCase{#1}{%
+        {vec}{\booltrue{tnsgeo@calc@detplane@option@vec}}
+        {novec}{\booltrue{tnsgeo@calc@detplane@option@novec}}
+        %
+        {loop}{\booltrue{tnsgeo@calc@detplane@option@loop}}
+        {arrows}{\booltrue{tnsgeo@calc@detplane@option@arrows}}
+        {cross}{\booltrue{tnsgeo@calc@detplane@option@cross}}
+        {nodeco}{\booltrue{tnsgeo@calc@detplane@option@nodeco}}
+        %
+        {exp}{\booltrue{tnsgeo@calc@detplane@option@exp}}
+        {cexp}{\booltrue{tnsgeo@calc@detplane@option@cexp}}
+        {texp}{\booltrue{tnsgeo@calc@detplane@option@texp}}
+    }[%
+        \PackageError{tnsgeo}{unknown option}%
+                             {You can use exp, cexp, texp, vec, novec, loop, arrows, cross or nodeco.}%
+    ]%
+}
+
+
+%   #1 : option for the formatting
+%
+%   #2  #5		u  v
+%   
+%   #3  #6		x  x'
+%   #4  #7      y  y'
+
+\newcommand\calcdetplane[7][vec,loop]{%
+    \boolfalse{tnsgeo@calc@detplane@option@vec}
+    \boolfalse{tnsgeo@calc@detplane@option@novec}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@loop}
+    \boolfalse{tnsgeo@calc@detplane@option@arrows}
+    \boolfalse{tnsgeo@calc@detplane@option@cross}
+    \boolfalse{tnsgeo@calc@detplane@option@nodeco}
+    %
+    \boolfalse{tnsgeo@calc@detplane@option@exp}
+    \boolfalse{tnsgeo@calc@detplane@option@cexp}
+    \boolfalse{tnsgeo@calc@detplane@option@texp}
+    %
+    \DoWithCSL\tnsgeo@validate@calc@detplane@option{#1}%
+    %
+    \ifboolexpr{
+		(
+			bool{tnsgeo@calc@detplane@option@exp}
+			or
+			bool{tnsgeo@calc@detplane@option@cexp}
+			or
+			bool{tnsgeo@calc@detplane@option@texp}
+		)
+		and
+		(
+			bool{tnsgeo@calc@detplane@option@loop}
+			or
+			bool{tnsgeo@calc@detplane@option@arrows}
+			or
+			bool{tnsgeo@calc@detplane@option@cross}
+			or
+			bool{tnsgeo@calc@detplane@option@nodeco}
+		)
+	}{%
+        \PackageError{tnsgeo}{illegal use of options}%
+                             {You can't use exp, cexp or texp with also loop, arrows, cross or nodeco.}%
+	}{}%
+    % Expansion
+    \ifboolexpr{
+		bool{tnsgeo@calc@detplane@option@exp}
+		or
+		bool{tnsgeo@calc@detplane@option@cexp}
+		or
+		bool{tnsgeo@calc@detplane@option@texp}
+	}{
+        \def\expsymbol{\,}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cexp}{%
+            \def\expsymbol{\cdot}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@texp}{%
+            \def\expsymbol{\times}%
+        }{}%
+        %
+        \tns@prop@prod{\expsymbol}%
+                      {#3}{#4}%
+                      {#6}{#7}%
+	}{
+    % No expansion
+        % Default values
+        \def\vecoption{vec}%
+        \def\tocall{\tns@det@plane@deco@loop}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@novec}{%
+            \def\vecoption{novec}%
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@arrows}{%
+            \def\tocall{\tns@det@plane@deco@arrows}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@cross}{%
+            \def\tocall{\tns@det@plane@deco@cross}%  
+        }{}%
+        %
+        \ifbool{tnsgeo@calc@detplane@option@nodeco}{%
+            \def\tocall{\tns@det@plane@no@deco}%  
+        }{}%
+        %
+        \tocall{\vecoption}%
+               {#2}{#3}{#4}%
+               {#5}{#6}{#7}%
+	}
+}
+
+
+\newcommand\vcalcdetplane[7][vec,loop]{%
+    \calcdetplane[#1]{\vect{#2}}{#3}{#4}%
+                     {\vect{#5}}{#6}{#7}%
+}

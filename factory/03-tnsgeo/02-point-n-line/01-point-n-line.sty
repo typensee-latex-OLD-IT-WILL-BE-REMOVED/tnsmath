@@ -46,17 +46,17 @@
     \leftdelim{} #2 #3 \rightdelim{}%
 }
 
-\newcommand\pgline[3][O]{%
+\newcommand\gpline[3][O]{%
     \gline[#1]{\pt{#2}}{\pt{#3}}%
 }
 
 
-\newcommand\hgline[2]{%
+\newcommand\ghline[2]{%
     \gline[CO]{#1}{#2}%
 }
 
-\newcommand\phgline[2]{%
-    \pgline[CO]{#1}{#2}%
+\newcommand\gphline[2]{%
+    \gpline[CO]{#1}{#2}%
 }
 
 
@@ -65,7 +65,7 @@
 }
 
 \newcommand\psegment[2]{%
-    \pgline[C]{#1}{#2}%
+    \gpline[C]{#1}{#2}%
 }
 
 

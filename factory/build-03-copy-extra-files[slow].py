@@ -15,8 +15,9 @@ DIR_FACTORY_PATH = PROJECT_PATH / "factory"
 DIR_DOC_PATH     = PROJECT_PATH / f"{PROJECT_NAME}"
 
 EXT_FOR_EXTRA = {
-    'png': "PNG images",
-    'tkz': "TikZ files",
+    'png'      : ["images"  , "PNG images"],
+    'tkz'      : ["tikz"    , "TikZ files"],
+    'extra.tex': ["examples", 'TeX "example" files'],
 }
 
 
@@ -27,22 +28,15 @@ DECO = " "*4
 # -- COPYING EXTRA FILES -- #
 # ------------------------- #
 
-for ext, desc in EXT_FOR_EXTRA.items():
+for ext, (reldir, desc) in EXT_FOR_EXTRA.items():
     print(f"{DECO}* Looking for {desc}.")
 
     for extfile in DIR_FACTORY_PATH.walk(f"file::**.{ext}"):
-        filename = extfile.stem
-
-        if filename.endswith("-nodoc"):
+        if extfile.stem.endswith("-nodoc"):
             continue
 
-        reldir = list((extfile - DIR_FACTORY_PATH).parents)
-        reldir = f"{reldir[-4] - reldir[-3]}/"
-
-        distpath = f"{reldir}{extfile.name}"
-
         extfile.copy_to(
-            dest     = DIR_DOC_PATH / distpath,
+            dest     = DIR_DOC_PATH / reldir / extfile.name,
             safemode = False
         )
 

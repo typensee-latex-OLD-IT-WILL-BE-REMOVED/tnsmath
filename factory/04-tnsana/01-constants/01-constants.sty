@@ -11,11 +11,13 @@
 % User's constants
 
 \newcommand\param[1]{%
-    \IfStrEqCase{#1}{%
-        {gamma}{\upgamma}%
+    \mathop{{}%
+        \IfStrEqCase{#1}{%
+            {gamma}{\upgamma}%
         {pi}{\uppi}%
         {tau}{\uptau}%
-    }[\text{\textbf{#1}}]
+        }[\text{\textbf{#1}}]%
+    }%
 }
 
 % Classical constants

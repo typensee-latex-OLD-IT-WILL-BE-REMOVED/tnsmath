@@ -1,0 +1,16 @@
+\begin{probatree}
+    [
+        [A
+            [B, name = nB]
+            [C,
+                [F, name = nF]
+                [G, name = nG]
+            ]
+        ]
+        [H, name = nH]
+    ]
+    \ptreeTagLeaf[tcol = red]
+                 {nF | nG}{$\triangle$}
+    \ptreeTagLeaf[tcol = blue]
+                 {nB | nH}{$\square$}
+\end{probatree}

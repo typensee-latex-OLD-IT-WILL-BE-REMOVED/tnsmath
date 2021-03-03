@@ -1,0 +1,139 @@
+% == PACKAGES USED == %
+
+\RequirePackage{simplekv}
+
+
+% == DEFINITIONS == %
+
+\setKVdefault[tnsproba@tag@keys]{%
+    tcol = black,
+    dx   = 0cm,
+    dy   = 0cm
+}
+
+
+\newcommand\tnsproba@ptree@tag@leaf@text{}
+\newcommand\tnsproba@ptree@tag@leaf@text@color{}
+
+\newcommand\tnsproba@ptree@tag@leaf@dx{}
+\newcommand\tnsproba@ptree@tag@leaf@dy{}
+
+
+% -- LEAF TAGS -- %
+
+%    #1 : number of the node
+%    #2 : the node
+
+\newcommand\tnsproba@tag@leaf@abstract@one@node@no@star[2]{
+	\ptreeComment[tcol = \tnsproba@ptree@tag@leaf@text@color,
+	              dx   = \tnsproba@ptree@tag@leaf@dx,
+	              dy   = \tnsproba@ptree@tag@leaf@dy]%
+	             {#2}%
+	             {\tnsproba@ptree@tag@leaf@text}
+}
+
+
+\newcommand\tnsproba@tag@leaf@abstract@one@node@star[2]{
+	\ptreeComment*[tcol = \tnsproba@ptree@tag@leaf@text@color,
+	               dx   = \tnsproba@ptree@tag@leaf@dx,
+	               dy   = \tnsproba@ptree@tag@leaf@dy]%
+	              {#2}%
+	              {\tnsproba@ptree@tag@leaf@text}
+}
+
+
+%    #1 : node1 | node2 | ...
+
+\newcommand\tnsproba@ptree@tag@leaf@abstract@multi@nodes@no@star[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@each%
+	    {\tnsproba@tag@leaf@abstract@one@node@no@star}%
+	    {#1}
+}
+
+
+\newcommand\tnsproba@ptree@tag@leaf@abstract@multi@nodes@star[1]{
+% Note
+%
+%    #1 : macro to apply
+%    #2 : multi-args
+	\tns@multi@apply@each%
+	    {\tnsproba@tag@leaf@abstract@one@node@star}%
+	    {#1}
+}
+
+%    #1 : color
+%
+%    #2 : names of the nodes separated by |
+%    #3 : tag
+
+\newcommand\ptreeTagLeaf{\@ifstar{\ptree@tag@leaf@star}{\ptree@tag@leaf@no@star}}
+
+
+%    #4 : the macro to print the special comments.
+
+\newcommand\ptree@tag@leaf@star@no@star[4]{
+    \useKVdefault[tnsproba@tag@keys]%
+    \setKV[tnsproba@tag@keys]{#1}%
+    \renewcommand\tnsproba@ptree@tag@leaf@text@color{\useKV[tnsproba@tag@keys]{tcol}}%
+    \renewcommand\tnsproba@ptree@tag@leaf@dx{\useKV[tnsproba@tag@keys]{dx}}%
+    \renewcommand\tnsproba@ptree@tag@leaf@dy{\useKV[tnsproba@tag@keys]{dy}}%
+	%
+	\renewcommand\tnsproba@ptree@tag@leaf@text{#3}%
+	%
+	#4{#2}
+}
+
+
+\newcommand\ptree@tag@leaf@no@star[3][]{
+    \ptree@tag@leaf@star@no@star{#1}{#2}{#3}%
+                                {\tnsproba@ptree@tag@leaf@abstract@multi@nodes@no@star}
+}
+
+
+\newcommand\ptree@tag@leaf@star[3][]{
+    \ptree@tag@leaf@star@no@star{#1}{#2}{#3}%
+                                {\tnsproba@ptree@tag@leaf@abstract@multi@nodes@star}
+}
+
+
+
+% -- LEVEL TAGS -- %
+
+%    #1 : color
+%
+%    #2 : name of a node at the level wanted
+%    #3 : tag
+
+\newcommand\ptreeTagLevel{\@ifstar{\ptree@tag@level@star}{\ptree@tag@level@no@star}}
+
+
+\newcommand\ptree@tag@level@no@star[3][]{
+    \useKVdefault[tnsproba@tag@keys]%
+    \setKV[tnsproba@tag@keys]{#1}%
+    \edef\tcol{\useKV[tnsproba@tag@keys]{tcol}}%
+    \edef\dx{\useKV[tnsproba@tag@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@tag@keys]{dy}}%
+	%
+	\node[anchor = north,
+	      xshift = \dx,
+	      yshift = \dy + .75cm]
+	at (#2.mid |- ptreetag coord) {\textcolor{\tcol}{#3}};
+}
+
+
+\newcommand\ptree@tag@level@star[3][]{
+    \useKVdefault[tnsproba@tag@keys]%
+    \setKV[tnsproba@tag@keys]{#1}%
+    \edef\tcol{\useKV[tnsproba@tag@keys]{tcol}}%
+    \edef\dx{\useKV[tnsproba@tag@keys]{dx}}%
+    \edef\dy{\useKV[tnsproba@tag@keys]{dy}}%
+	%
+	\node[anchor = south,
+	      xshift = \dx,
+	      yshift = \dy - .75cm]
+	at (#2.mid |- ptreetag* coord) {\textcolor{\tcol}{#3}};
+}

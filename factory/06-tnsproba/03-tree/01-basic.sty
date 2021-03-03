@@ -16,8 +16,6 @@
 
 
 \forestset{
-    declare count = {connections}{1},
-    %
     apweight/.style = {
         edge label = {
             node[sloped,
@@ -179,6 +177,8 @@
 %        },
         tikz+={
             \coordinate (ptreecomment coord) at (current bounding box.east);
+            \coordinate (ptreetag coord) at (current bounding box.north);;
+            \coordinate (ptreetag* coord) at (current bounding box.south);
         },
         #2
     \end{forest}

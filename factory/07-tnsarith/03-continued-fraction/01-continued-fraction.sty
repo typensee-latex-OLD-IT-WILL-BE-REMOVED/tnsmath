@@ -32,9 +32,9 @@
 
 
 
-% -- SINGLE CONTINUED FRACTION (USEFUL ?) -- %
+% -- SINGLE CONTINUED FRACTION -- %
 
-\newcommand\singlecontfrac[2]{%
+\newcommand\tnsarith@single@contfrac[2]{%
     \begin{array}{@{}c@{}}%
         \multicolumn{1}{c|}{#1}%
         \\%
@@ -71,7 +71,7 @@
     \ifnum#1=1
         #2%
     \else%
-        + \singlecontfrac{1}{#2}%
+        + \tnsarith@single@contfrac{1}{#2}%
     \fi%
 }
 
@@ -109,7 +109,7 @@
     \ifnum#1=1\else%
         +%
     \fi%
-    \singlecontfrac{1}{#2}%
+    \tnsarith@single@contfrac{1}{#2}%
 }
 
 \newcommand\tnsarith@short@contfrac@star[1]{%
@@ -152,9 +152,9 @@
 }
 \def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
     \@ifmtarg{#3}{%
-        + \singlecontfrac{#1}{#2}%
+        + \tnsarith@single@contfrac{#1}{#2}%
     }{%
-        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+        + \tnsarith@single@contfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
     }%
 }
 
@@ -188,7 +188,7 @@
 }
 
 \def\tnsarith@short@contfracgene@star@recu@#1|#2|#3\@nil{%
-    \singlecontfrac{#1}{#2} %
+    \tnsarith@single@contfrac{#1}{#2} %
     \if\relax\detokenize{#3}\relax\else%
         + \tnsarith@short@contfracgene@star@recu@#3\@nil%
     \fi%

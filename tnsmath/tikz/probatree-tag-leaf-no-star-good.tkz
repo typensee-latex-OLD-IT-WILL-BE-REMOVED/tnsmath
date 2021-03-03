@@ -1,0 +1,17 @@
+\begin{probatree}
+    [, s sep = 0.35cm     % <-- Un peu de design aux doigts mouillés. 
+        [A
+            [B, name = nB]
+            [C,
+                [F, name = nF]
+                [G, name = nG]
+            ]
+        ]
+        [H, name = nH,
+            fit  = band]  % <-- Pour placer H seul sur son niveau.
+    ]
+    \ptreeTagLeaf[tcol = red]
+                 {nF | nG}{$\triangle$}
+    \ptreeTagLeaf[tcol = blue]
+                 {nB | nH}{$\square$}
+\end{probatree}

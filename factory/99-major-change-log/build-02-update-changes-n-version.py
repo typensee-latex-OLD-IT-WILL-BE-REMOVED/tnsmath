@@ -55,7 +55,7 @@ with lastppath.open(
         lastversion, _ = lastversion.split("+", maxsplit = 1)
         break
 
-
+print(lastppath)
 # ------------------------------------ #
 # -- UPDATING THE CHANGE LATEX CODE -- #
 # ------------------------------------ #

@@ -1,0 +1,13 @@
+\begin{probatree}
+    [
+        [A, name = nA]
+        [B
+            [C, name = nC,
+                blue]
+            [D, blue]
+        ]
+    ]
+    %
+    \ptreeTagLevel*           {nA}{Niv.1}
+    \ptreeTagLevel*[tcol=blue]{nC}{Niv.2}
+\end{probatree}

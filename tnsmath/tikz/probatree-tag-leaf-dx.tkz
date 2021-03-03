@@ -1,0 +1,18 @@
+\begin{probatree}
+    [
+        [A
+            [B, name = nB]
+            [C, name = nC]
+        ]
+        [D
+            [E, name = nE]
+            [F, name = nF]
+        ]
+    ]
+    %
+    \ptreeTagLeaf[tcol = red]
+                 {nB | nC | nF}{$\triangle$}
+    \ptreeTagLeaf[tcol = blue,
+                  dx   = 1cm]
+                 {nB | nE}{$\square$}
+\end{probatree}

@@ -5,23 +5,34 @@
             pframe   = blue    % Encadrement d'ici à la fin.
             [B, name     = nB,
                 apweight = b]
-            [C, bpweight = c]  % Pas besion de nommer ce noeud.
+            [C, name     = nC,
+                bpweight = c]  % Pas besion de nommer ce noeud.
         ]
         [D, bpweight = d,
             name     = nD
             [E, apweight = e,
                 name     = nE]
-            [F, bpweight = f]  % Pas besion de nommer ce noeud.
+            [F, name     = nF,
+                bpweight = f]  % Pas besion de nommer ce noeud.
         ]
     ]
-    %
-    \ptreeFocus[lcol  = gray,
-                frame = start]{nA | nB}
-    %
-    \ptreeComment[tcol = blue]%
+    % Étiquettes pour les niveaux.
+    \ptreeTagLevel[tcol = green!50!black, dy = .75mm]
+                  {nA}{Choix 1}
+    \ptreeTagLevel[tcol = green!50!black, dy = .75mm]
+                  {nB}{Choix 2}
+    % Mettre en valeur un chemin.
+    \ptreeFocus[lcol = gray, frame = start]
+               {nA | nB}
+    % Mettre en valeur un chemin et le commenter.
+    \ptreeComment[tcol = blue]
                  {nA}{$\leftarrow$ Un sous-arbre \og conditionnel \fg}
-    %
-    \ptreeFocus  [lcol = red]{nU | nD | nE}
-    \ptreeComment[tcol = red]%
+    % Comme avant.
+    \ptreeFocus[lcol = red]
+               {nU | nD | nE}
+    \ptreeComment[tcol = red]
                  {nE}{$\leftarrow \proba{D \cap E} = d \cdot e$}
+    % Décorer des feuilles.
+    \ptreeTagLeaf[tcol = orange]
+                 {nC | nF}{$\triangle \square$}
 \end{probatree}

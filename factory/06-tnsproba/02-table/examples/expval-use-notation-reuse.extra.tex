@@ -1,0 +1,25 @@
+DÉFINITION CACHÉE.
+\calcexpval[name = option/texte/loi,
+            disp = none,
+            E    = Esp, X  = Y,
+            k    = i  , xk = y, pk = q,
+            ope  = \times]{
+    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
+    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
+}
+
+\bigskip
+
+RÉUTILISATION DIRECTE.
+\calcexpval[reuse = option/texte/loi,
+            disp  = all]{}
+
+\bigskip
+
+RÉUTILISATION AVEC DES OPTIONS MODIFIÉES (E, k et ope = $\cdot$).
+\calcexpval[reuse = option/texte/loi,
+            disp  = all,
+            E     = E,
+            k     = k,
+            com   = Le tableau précédent aboutit aux calculs suivants.,
+            ope   = \cdot]{}

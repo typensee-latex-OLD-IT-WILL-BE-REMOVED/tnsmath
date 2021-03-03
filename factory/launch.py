@@ -95,7 +95,6 @@ allpaths = [
 
 allpaths.sort()
 
-
 for onepath in allpaths:
     filename = (onepath - THIS_DIR).stem
 

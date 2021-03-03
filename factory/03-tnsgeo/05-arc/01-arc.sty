@@ -1,9 +1,14 @@
 % == PACKAGES USED == %
 
-\RequirePackage{yhmath}
-
-
 % == DEFINITIONS == %
+
+% Pris dans le source de yhmath
+\DeclareSymbolFont{yhlargesymbols}{OMX}{yhex}{m}{n}
+
+%\DeclareMathAccent{\widetilde}{\mathord}{yhlargesymbols}{"65}
+%\DeclareMathAccent{\widehat}{\mathord}{yhlargesymbols}{"62}
+%\DeclareMathAccent{\widetriangle}{\mathord}{yhlargesymbols}{"E6}
+\DeclareMathAccent{\wideparen}{\mathord}{yhlargesymbols}{"F3}
 
 \newcommand\circarc{\@ifstar{\tnsgeo@circ@arc@star}{\tnsgeo@circ@arc@no@star}}
 

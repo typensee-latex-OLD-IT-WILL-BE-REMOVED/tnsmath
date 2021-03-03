@@ -47,24 +47,14 @@ La définition de la loi d'une v.a.f. avec la macro \macro{calcexpval} se fait a
 Notez dans l'exemple suivant que par défaut un tableau centré est affiché ce qui correspond à l'option par  défaut \verb#disp = table#.
 Ce n'est pas le seul comportement possible comme vont le montrer les autres exemples à venir.
 
-\begin{latexex-flat}
-\calcexpval{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-default.extra.tex}
 
 
 \begin{remark}
     Il est possible de ne rien afficher comme ci-dessous où \prefix{disp} est pour \whyprefix{disp}{lay} soit \inenglish{afficher}.
     Cette option sera utile pour définir une loi à un endroit et l'utiliser à d'autres.
 
-\begin{latexex-flat}
-\calcexpval[disp = none]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-\end{latexex-flat}
+	\inputlatexexflat{examples/expval-basic-disp-none.extra.tex}
 \end{remark}
 
 
@@ -75,23 +65,12 @@ Ce n'est pas le seul comportement possible comme vont le montrer les autres exem
 
 La macro \macro{calcexpval} propose un système de clé valeur pour des réglages personnalisé. L'exemple ci-dessous montre comment obtenir un calcul détaillé et décoré de l'espérance.
 
-\begin{latexex-flat}
-\calcexpval[disp = all]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-disp-all.extra.tex}
 
 
 L'exemple suivant montre qu'il est facile de changer le couleurs qui sont utilisées de façon cyclique \emph{(on peut indiquer une seule couleur)}.
 
-\begin{latexex-flat}
-\calcexpval[disp   = all,
-            colors = orange - olive]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-disp-all-colors.extra.tex}
 
 
 % ---------------------- %
@@ -99,14 +78,9 @@ L'exemple suivant montre qu'il est facile de changer le couleurs qui sont utilis
 
 \newparaexample{Juste détailler les calculs de l'espérance d'une v.a.f.}
 
-Ci-dessous \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}. Cette option sera très utile de la réutilisation d'une loi définie précédemment.
+Ci-dessous \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développer}. Cette option sera très utile lors de la réutilisation d'une loi définie précédemment.
 
-\begin{latexex-flat}
-\calcexpval[disp = exp]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-disp-exp.extra.tex}
 
 
 % ---------------------- %
@@ -116,20 +90,7 @@ Ci-dessous \prefix{exp} est pour \whyprefix{exp}{and} soit \inenglish{développe
 
 Lors de la réutilisation d'une loi définie précédemment les deux options \prefix{formal} et \prefix{eval} peuvent rendre service.
 
-\begin{latexex-flat}
-Somme formelle :
-\calcexpval[disp = formal]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-
-Somme développée :
-\calcexpval[disp = eval]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-disp-pieces.extra.tex}
 
 
 % ---------------------- %
@@ -139,21 +100,6 @@ Somme développée :
 
 L'option \verb#nosigma# permet de ne pas afficher le symbole $\Sigma$ pour des raisons pédagogiques ou d'efficacité.
 
-\begin{latexex-flat}
-\calcexpval[disp = all,
-            nosigma]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-}
-
-\medskip
-
-Juste les calculs :
-\calcexpval[disp = exp,
-            nosigma]{
-    0      & 1   & 2   & 3    & 4    & 5   & 6   \\
-    0.2000 & 0.1 & 0.2 & 0.05 & 0.15 & 0.1 & 0.2
-} .
-\end{latexex-flat}
+\inputlatexexflat{examples/expval-basic-disp-no-sigma.extra.tex}
 
 \end{document}

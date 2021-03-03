@@ -59,12 +59,15 @@ $\pt*{I}{2}$
 
 \newparaexample{Les droites}
 
-Dans l'exemple suivant, le préfixe \prefix{g} est pour \whyprefix{g}{éometrie} tandis que \prefix{p} est pour \whyprefix{p}{oint}.
+Dans l'exemple suivant, le préfixe \prefix{g} est pour \whyprefix{g}{éometrie} tandis que \prefix{p} est pour \whyprefix{p}{oint}
+\footnote{
+	Comme la macro \macro{line} est proposée par \LaTeX, il a fallu ajouter le préfixe \texttt{g}.
+}.
 
 \begin{latexex}
 $\gline{A}{B}$ ,
 $\gline{\pt{A}}{\pt{B}}$ ou
-$\pgline{A}{B}$
+$\gpline{A}{B}$
 \end{latexex}
 
 
@@ -73,7 +76,7 @@ $\pgline{A}{B}$
 
 \newparaexample{Les segments}
 
-Les macros \macro{segment} et \macro{psegment} ont un comportement similaire à \macro{gline} et \macro{pgline}.
+Les macros \macro{segment} et \macro{psegment} ont un comportement similaire à \macro{gline} et \macro{gpline}.
 
 \begin{latexex}
 $\segment{A}{B}$ ,
@@ -90,9 +93,9 @@ $\psegment{A}{B}$
 Dans l'exemple suivant, le préfixe \prefix{h} est pour \whyprefix{h}{alf}  soit \inenglish{moitié}.
 
 \begin{latexex}
-$\hgline{A}{B}$ ,
-$\hgline{\pt{A}}{\pt{B}}$ ou
-$\phgline{A}{B}$
+$\ghline{A}{B}$ ,
+$\ghline{\pt{A}}{\pt{B}}$ ou
+$\gphline{A}{B}$
 \end{latexex}
 
 
@@ -101,12 +104,12 @@ $\phgline{A}{B}$
 
 \newparaexample{D'autres demi-droites}
 
-Ce qui suit nécessite d'utilise l'argument optionnel de \macro{gline} et \macro{pgline}. La valeur \prefix{OC} provient de \whyprefix{O}{pened} -- \whyprefix{C}{losed} soit \inenglish{ouvert -- fermé}.
+Ce qui suit nécessite d'utiliser l'argument optionnel de \macro{gline} et \macro{gpline}. La valeur \prefix{OC} provient de \whyprefix{O}{pened} -- \whyprefix{C}{losed} soit \inenglish{ouvert -- fermé}.
 
 \begin{latexex}
 $\gline[OC]{A}{B}$ ,
 $\gline[OC]{\pt{A}}{\pt{B}}$ ou
-$\pgline[OC]{A}{B}$
+$\gpline[OC]{A}{B}$
 \end{latexex}
 
 
@@ -123,7 +126,7 @@ $\pgline[OC]{A}{B}$
 
 \IDmacro{gline }{1}{2}  \hfill \mwhyprefix{g}{eometry}
 
-\IDmacro{pgline}{1}{2}  \hfill \mwhyprefix{p}{oint}
+\IDmacro{gpline}{1}{2}  \hfill \mwhyprefix{p}{oint}
 
 \IDoption{} pour indiquer les parenthèses ou crochets à utiliser, les valeurs possibles étant \prefix{O}, valeur par défaut, \prefix{C}, \prefix{CO} et \prefix{OC}.
 
@@ -135,9 +138,9 @@ $\pgline[OC]{A}{B}$
 \separation
 
 
-\IDmacro[a]{hgline  }{2}  \hfill \mwhyprefix{h}{alf}
+\IDmacro[a]{ghline  }{2}  \hfill \mwhyprefix{h}{alf}
 
-\IDmacro[a]{phgline }{2}  \hfill \prefix{phg = p + h + g}
+\IDmacro[a]{gphline }{2}  \hfill \prefix{gph = g + p + h}
 
 \extraspace
 
@@ -158,15 +161,15 @@ $\pgline[OC]{A}{B}$
 Les opérateurs \macro{parallel} et \macro{nparallel} utilisent des obliques au lieu de barres verticales comme le montre l'exemple qui suit où \macro{stdnparallel} est un alias de \macro{nparallel} fourni par le package \verb+amssymb+, et \macro{stdparallel} est un alias de la version standard de \macro{parallel} proposée par \LaTeX{}.
 
 \begin{latexex}
-$\pgline{A}{B} \parallel \pgline{C}{D}$
+$\gpline{A}{B} \parallel \gpline{C}{D}$
 au lieu de
-$\pgline{A}{B}
- \stdparallel \pgline{C}{D}$
+$\gpline{A}{B}
+ \stdparallel \gpline{C}{D}$
 
-$\pgline{E}{F} \nparallel \pgline{G}{H}$
+$\gpline{E}{F} \nparallel \gpline{G}{H}$
 au lieu de
-$\pgline{E}{F}
- \stdnparallel \pgline{G}{H}$
+$\gpline{E}{F}
+ \stdnparallel \gpline{G}{H}$
 \end{latexex}
 
 
